@@ -12,7 +12,8 @@ const { raw } = readContentDir(CONTENT);
 test("indexContent builds every Map from the seed content", () => {
   const c = indexContent(raw);
   assert.equal(c.contentVersion, raw.manifest.contentVersion);
-  assert.equal(c.sentences.size, 100);
+  assert.equal(c.sentences.size, raw.sentences.filter((x) => !x.retired).length);
+  assert.ok(c.sentences.size >= 300);
   assert.equal(c.patterns.size, 18);
   assert.ok(c.lexemes.has("aux-perf") && c.lexemes.has("nu"));
   assert.ok(c.levels.has("A1"));
@@ -20,10 +21,9 @@ test("indexContent builds every Map from the seed content", () => {
 
 test("indexes by pattern, situation and lexeme", () => {
   const c = indexContent(raw);
-  assert.deepEqual(
-    ["standup", "me", "meta", "table"].map((s) => c.sentencesBySituation.get(s).length),
-    [30, 30, 20, 20],
-  );
+  for (const sit of ["standup", "decisions", "coaching", "domain", "table", "me", "getting-to-know", "news", "meta"]) {
+    assert.ok(c.sentencesBySituation.get(sit).length >= 10, `${sit} has at least 10 sentences`);
+  }
   assert.ok(c.sentencesByPattern.get("perfect-compus").includes("s-a1-standup-0003"));
   // the n-am cluster contributes both of its units
   assert.ok(c.sentencesByLexeme.get("nu").includes("s-a1-standup-0003"));
@@ -62,8 +62,9 @@ test("loadContent fetches the manifest then every pack", async () => {
   try {
     const c = await loadContent();
     assert.equal(requested[0], "./content/manifest.json");
-    assert.equal(requested.length, 1 + 1 + 1 + 4 + 1); // manifest, patterns, lexemes, 4 sentence packs, levels
-    assert.equal(c.sentences.size, 100);
+    const { packs, levels } = raw.manifest;
+    assert.equal(requested.length, 1 + 1 + packs.lexemes.length + packs.sentences.length + levels.length);
+    assert.equal(c.sentences.size, raw.sentences.length);
   } finally {
     globalThis.fetch = realFetch;
   }

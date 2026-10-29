@@ -2257,5 +2257,1863 @@
         ]
       }
     ]
+  },
+  {
+    "id": "s-a1-standup-0031",
+    "ro": "Lucrăm la același task.",
+    "en": "We're working on the same task.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Lucrăm",
+        "units": [
+          {
+            "lex": "lucra",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "același",
+        "units": [
+          {
+            "lex": "acelasi",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "task.",
+        "units": [
+          {
+            "lex": "task",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu lucrăm la același task.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1pl>3sg",
+        "ro": "Lucrează la același task.",
+        "en": "He/She is working on the same task.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0032",
+    "ro": "Avem două bug-uri.",
+    "en": "We have two bugs.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "have-pres",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Avem",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres1pl",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "două",
+        "units": [
+          {
+            "lex": "doua",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "bug-uri.",
+        "units": [
+          {
+            "lex": "bug",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Avem un bug.",
+        "en": "We have one bug.",
+        "targetTokens": [
+          1,
+          2
+        ]
+      },
+      {
+        "op": "negate",
+        "ro": "Nu avem două bug-uri.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0033",
+    "ro": "Task-urile sunt gata.",
+    "en": "The tasks are done.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "def-pl",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Task-urile",
+        "units": [
+          {
+            "lex": "task",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3pl",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "gata.",
+        "units": [
+          {
+            "lex": "gata",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Taskul e gata.",
+        "en": "The task is done.",
+        "targetTokens": [
+          0,
+          1
+        ]
+      },
+      {
+        "op": "negate",
+        "ro": "Task-urile nu sunt gata.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0034",
+    "ro": "Bug-urile sunt critice.",
+    "en": "The bugs are critical.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "def-pl",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Bug-urile",
+        "units": [
+          {
+            "lex": "bug",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3pl",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "critice.",
+        "units": [
+          {
+            "lex": "critic",
+            "form": "fpl"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Bug-ul e critic.",
+        "en": "The bug is critical.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0035",
+    "ro": "O să termin task-ul azi.",
+    "en": "I'll finish the task today.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "fut-o-sa",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "termin",
+        "units": [
+          {
+            "lex": "termina",
+            "form": "subj1sg",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "task-ul",
+        "units": [
+          {
+            "lex": "task",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "azi.",
+        "units": [
+          {
+            "lex": "azi",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu o să termin task-ul azi.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "tense:fut>perf",
+        "ro": "Am terminat task-ul azi.",
+        "en": "I finished the task today.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0036",
+    "ro": "O să verific codul mâine.",
+    "en": "I'll check the code tomorrow.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "fut-o-sa",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "sa"
+      },
+      {
+        "t": "verific",
+        "units": [
+          {
+            "lex": "verifica",
+            "form": "subj1sg",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "codul",
+        "units": [
+          {
+            "lex": "cod",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mâine.",
+        "units": [
+          {
+            "lex": "maine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>2sg",
+        "ro": "O să verifici codul mâine.",
+        "en": "You'll check the code tomorrow.",
+        "targetTokens": [
+          2
+        ]
+      },
+      {
+        "op": "negate",
+        "ro": "Nu o să verific codul mâine.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0037",
+    "ro": "Mâine o să lucrez la review.",
+    "en": "Tomorrow I'll work on the review.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "fut-o-sa"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mâine",
+        "units": [
+          {
+            "lex": "maine",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "lucrez",
+        "units": [
+          {
+            "lex": "lucra",
+            "form": "subj1sg",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "review.",
+        "units": [
+          {
+            "lex": "review",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:fut>perf",
+        "ro": "Ieri am lucrat la review.",
+        "en": "Yesterday I worked on the review.",
+        "targetTokens": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0038",
+    "ro": "Îl repar acum.",
+    "en": "I'm fixing it now.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "clitic-acc",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îl",
+        "units": [
+          {
+            "lex": "pron-3sg-m",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "repar",
+        "units": [
+          {
+            "lex": "repara",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acum.",
+        "units": [
+          {
+            "lex": "acum",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu îl repar acum.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Îl repară acum.",
+        "en": "He/She is fixing it now.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0039",
+    "ro": "L-am reparat ieri.",
+    "en": "I fixed it yesterday.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "clitic-acc",
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "L-am",
+        "units": [
+          {
+            "lex": "pron-3sg-m",
+            "form": "accShort",
+            "pattern": "clitic-acc",
+            "head": true
+          },
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "reparat",
+        "units": [
+          {
+            "lex": "repara",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ieri.",
+        "units": [
+          {
+            "lex": "ieri",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu l-am reparat ieri.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "L-a reparat ieri.",
+        "en": "He/She fixed it yesterday.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0040",
+    "ro": "Ți-am trimis tichetul.",
+    "en": "I sent you the ticket.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "perfect-compus",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ți-am",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "datShort",
+            "pattern": "clitic-dat",
+            "head": true
+          },
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "trimis",
+        "units": [
+          {
+            "lex": "trimite",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "tichetul.",
+        "units": [
+          {
+            "lex": "tichet",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu ți-am trimis tichetul.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Ți-a trimis tichetul.",
+        "en": "He/She sent you the ticket.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0041",
+    "ro": "Îi scriu lui Mihai.",
+    "en": "I'm writing to Mihai.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îi",
+        "units": [
+          {
+            "lex": "pron-3sg-m",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "scriu",
+        "units": [
+          {
+            "lex": "scrie",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "lui",
+        "units": [
+          {
+            "lex": "lui",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Mihai.",
+        "units": [
+          {
+            "lex": "mihai",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu îi scriu lui Mihai.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Îi scrie lui Mihai.",
+        "en": "He/She is writing to Mihai.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0042",
+    "ro": "Ne trebuie mai mult timp.",
+    "en": "We need more time.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ne",
+        "units": [
+          {
+            "lex": "pron-1pl",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "trebuie",
+        "units": [
+          {
+            "lex": "trebui",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mai",
+        "units": [
+          {
+            "lex": "mai",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mult",
+        "units": [
+          {
+            "lex": "mult",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "timp.",
+        "units": [
+          {
+            "lex": "timp",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu ne trebuie mai mult timp.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0043",
+    "ro": "Mi-e greu să înțeleg codul ăsta.",
+    "en": "It's hard for me to understand this code.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "mi-e-construction",
+      "dem-colloq"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Mi-e",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "datShort",
+            "pattern": "mi-e-construction"
+          },
+          {
+            "lex": "fi",
+            "form": "pres3sg"
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "greu",
+        "units": [
+          {
+            "lex": "greu",
+            "form": "msg",
+            "pattern": "mi-e-construction",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "înțeleg",
+        "units": [
+          {
+            "lex": "intelege",
+            "form": "subj1sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "codul",
+        "units": [
+          {
+            "lex": "cod",
+            "form": "sgDef",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ăsta.",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "msg",
+            "pattern": "dem-colloq"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu mi-e greu să înțeleg codul ăsta.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0044",
+    "ro": "Ăsta e un bug serios.",
+    "en": "This is a serious bug.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "dem-colloq",
+      "be-pres"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Ăsta",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "msg",
+            "pattern": "dem-colloq"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "un",
+        "units": [
+          {
+            "lex": "un",
+            "form": "m"
+          }
+        ]
+      },
+      {
+        "t": "bug",
+        "units": [
+          {
+            "lex": "bug",
+            "form": "sg",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "serios.",
+        "units": [
+          {
+            "lex": "serios",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Ăsta nu e un bug serios.",
+        "targetTokens": [
+          1
+        ]
+      },
+      {
+        "op": "plural",
+        "ro": "Ăștia sunt bug-uri serioase.",
+        "en": "These are serious bugs.",
+        "targetTokens": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0045",
+    "ro": "Asta nu merge.",
+    "en": "This doesn't work.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "dem-colloq",
+      "neg-nu"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Asta",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "fsg",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "merge.",
+        "units": [
+          {
+            "lex": "merge",
+            "form": "inf"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Asta merge.",
+        "targetTokens": [
+          1
+        ]
+      },
+      {
+        "op": "tense:pres>perf",
+        "ro": "Asta n-a mers.",
+        "en": "This didn't work.",
+        "targetTokens": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0046",
+    "ro": "Cum rezolvăm problema?",
+    "en": "How do we solve the problem?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-full",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cum",
+        "units": [
+          {
+            "lex": "cum",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "rezolvăm",
+        "units": [
+          {
+            "lex": "rezolva",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "problema?",
+        "units": [
+          {
+            "lex": "problema",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1pl>1sg",
+        "ro": "Cum rezolv problema?",
+        "en": "How do I solve the problem?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0047",
+    "ro": "Testele rulează acum.",
+    "en": "The tests are running now.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "def-pl",
+      "pres-ez-esc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Testele",
+        "units": [
+          {
+            "lex": "test",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "rulează",
+        "units": [
+          {
+            "lex": "rula",
+            "form": "pres3pl",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acum.",
+        "units": [
+          {
+            "lex": "acum",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Testul rulează acum.",
+        "en": "The test is running now.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0048",
+    "ro": "Livrăm vineri.",
+    "en": "We're delivering on Friday.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "pres-ez-esc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Livrăm",
+        "units": [
+          {
+            "lex": "livra",
+            "form": "pres1pl",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "vineri.",
+        "units": [
+          {
+            "lex": "vineri",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>fut",
+        "ro": "O să livrăm vineri.",
+        "en": "We'll deliver on Friday.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "negate",
+        "ro": "Nu livrăm vineri.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0049",
+    "ro": "Implementez funcția acum.",
+    "en": "I'm implementing the function now.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "pres-ez-esc",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Implementez",
+        "units": [
+          {
+            "lex": "implementa",
+            "form": "pres1sg",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "funcția",
+        "units": [
+          {
+            "lex": "functie",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acum.",
+        "units": [
+          {
+            "lex": "acum",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Implementează funcția acum.",
+        "en": "He/She is implementing the function now.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "add-obj:acc-3sg-f",
+        "ro": "O implementez acum.",
+        "en": "I'm implementing it now.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0050",
+    "ro": "Trimit tichetul azi.",
+    "en": "I'm sending the ticket today.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Trimit",
+        "units": [
+          {
+            "lex": "trimite",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "tichetul",
+        "units": [
+          {
+            "lex": "tichet",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "azi.",
+        "units": [
+          {
+            "lex": "azi",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "add-obj:acc-3sg-m",
+        "ro": "Îl trimit azi.",
+        "en": "I'm sending it today.",
+        "targetTokens": [
+          1,
+          2
+        ]
+      },
+      {
+        "op": "add-dat:dat-2sg",
+        "ro": "Îți trimit tichetul azi.",
+        "en": "I'm sending you the ticket today.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0051",
+    "ro": "Primim feedback în fiecare zi.",
+    "en": "We get feedback every day.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "pres-ez-esc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Primim",
+        "units": [
+          {
+            "lex": "primi",
+            "form": "pres1pl",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "feedback",
+        "units": [
+          {
+            "lex": "feedback",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "fiecare",
+        "units": [
+          {
+            "lex": "fiecare",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "zi.",
+        "units": [
+          {
+            "lex": "zi",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu primim feedback în fiecare zi.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1pl>1sg",
+        "ro": "Primesc feedback în fiecare zi.",
+        "en": "I get feedback every day.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0052",
+    "ro": "Găsim erori în cod.",
+    "en": "We keep finding errors in the code.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "pres-ez-esc",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Găsim",
+        "units": [
+          {
+            "lex": "gasi",
+            "form": "pres1pl",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "erori",
+        "units": [
+          {
+            "lex": "eroare",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "cod.",
+        "units": [
+          {
+            "lex": "cod",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Găsim o eroare în cod.",
+        "en": "We find an error in the code.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0053",
+    "ro": "I-am sunat ieri.",
+    "en": "I called them yesterday.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "clitic-acc",
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "I-am",
+        "units": [
+          {
+            "lex": "pron-3pl-m",
+            "form": "accShort",
+            "pattern": "clitic-acc",
+            "head": true
+          },
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "sunat",
+        "units": [
+          {
+            "lex": "suna",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ieri.",
+        "units": [
+          {
+            "lex": "ieri",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu i-am sunat ieri.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "I-a sunat ieri.",
+        "en": "He/She called them yesterday.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0054",
+    "ro": "Am reparat-o ieri.",
+    "en": "I fixed it yesterday.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "perfect-compus",
+      "clitic-acc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "reparat-o",
+        "units": [
+          {
+            "lex": "repara",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          },
+          {
+            "lex": "pron-3sg-f",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "ieri.",
+        "units": [
+          {
+            "lex": "ieri",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-am reparat-o ieri.",
+        "accept": [
+          "Nu am reparat-o ieri."
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-standup-0055",
+    "ro": "Le spun mâine.",
+    "en": "I'll tell them tomorrow.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Le",
+        "units": [
+          {
+            "lex": "pron-3pl-m",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "spun",
+        "units": [
+          {
+            "lex": "spune",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mâine.",
+        "units": [
+          {
+            "lex": "maine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu le spun mâine.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Le spune mâine.",
+        "en": "He/She will tell them tomorrow.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
   }
 ]

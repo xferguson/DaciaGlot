@@ -1,0 +1,2464 @@
+[
+  {
+    "id": "s-a1-getting-to-know-0001",
+    "ro": "De unde ești?",
+    "en": "Where are you from?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "De",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "unde",
+        "units": [
+          {
+            "lex": "unde",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "ești?",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres2sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "De unde sunt?",
+        "en": "Where am I from?",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0002",
+    "ro": "Ești din Cluj?",
+    "en": "Are you from Cluj?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ești",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres2sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "din",
+        "units": [
+          {
+            "lex": "din",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Cluj?",
+        "units": [
+          {
+            "lex": "cluj",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>3sg",
+        "ro": "E din Cluj?",
+        "en": "Is he/she from Cluj?",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0003",
+    "ro": "Cum e în Iași?",
+    "en": "What's it like in Iași?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cum",
+        "units": [
+          {
+            "lex": "cum",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Iași?",
+        "units": [
+          {
+            "lex": "iasi",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Cum a fost în Iași?",
+        "en": "What was it like in Iași?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0004",
+    "ro": "Cum e mâncarea acolo?",
+    "en": "How's the food there?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "be-pres",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cum",
+        "units": [
+          {
+            "lex": "cum",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mâncarea",
+        "units": [
+          {
+            "lex": "mancare",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acolo?",
+        "units": [
+          {
+            "lex": "acolo",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Cum a fost mâncarea acolo?",
+        "en": "How was the food there?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0005",
+    "ro": "Ce mâncare e specifică acolo?",
+    "en": "What food is typical there?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "mâncare",
+        "units": [
+          {
+            "lex": "mancare",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "specifică",
+        "units": [
+          {
+            "lex": "specific",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acolo?",
+        "units": [
+          {
+            "lex": "acolo",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Ce mâncare a fost specifică acolo?",
+        "en": "What food was typical there?",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0006",
+    "ro": "Ce mănânci de Crăciun?",
+    "en": "What do you eat at Christmas?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "mănânci",
+        "units": [
+          {
+            "lex": "manca",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Crăciun?",
+        "units": [
+          {
+            "lex": "craciun",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce mănânc de Crăciun?",
+        "en": "What do I eat at Christmas?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0007",
+    "ro": "Ai mâncat mămăligă?",
+    "en": "Have you eaten polenta?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ai",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "2sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "mâncat",
+        "units": [
+          {
+            "lex": "manca",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mămăligă?",
+        "units": [
+          {
+            "lex": "mamaliga",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>3sg",
+        "ro": "A mâncat mămăligă?",
+        "en": "Has he/she eaten polenta?",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "negate",
+        "ro": "N-ai mâncat mămăligă?",
+        "accept": [
+          "Nu ai mâncat mămăligă?"
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0008",
+    "ro": "Unde locuiești acum?",
+    "en": "Where do you live now?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Unde",
+        "units": [
+          {
+            "lex": "unde",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "locuiești",
+        "units": [
+          {
+            "lex": "locui",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acum?",
+        "units": [
+          {
+            "lex": "acum",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>3sg",
+        "ro": "Unde locuiește acum?",
+        "en": "Where does he/she live now?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0009",
+    "ro": "Cine gătește acasă?",
+    "en": "Who cooks at home?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cine",
+        "units": [
+          {
+            "lex": "cine",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "gătește",
+        "units": [
+          {
+            "lex": "gati",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acasă?",
+        "units": [
+          {
+            "lex": "acasa",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Cine a gătit acasă?",
+        "en": "Who cooked at home?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0010",
+    "ro": "Ai o familie mare?",
+    "en": "Do you have a big family?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ai",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "familie",
+        "units": [
+          {
+            "lex": "familie",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mare?",
+        "units": [
+          {
+            "lex": "mare-adj",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Am o familie mare.",
+        "en": "I have a big family.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0011",
+    "ro": "Ce faci în weekend?",
+    "en": "What do you do on the weekend?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "faci",
+        "units": [
+          {
+            "lex": "face",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "weekend?",
+        "units": [
+          {
+            "lex": "weekend",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce fac în weekend?",
+        "en": "What do I do on the weekend?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0012",
+    "ro": "Ce hobby ai?",
+    "en": "What's your hobby?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "hobby",
+        "units": [
+          {
+            "lex": "hobby",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ai?",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce hobby am?",
+        "en": "What's my hobby?",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0013",
+    "ro": "Cine e din Brașov?",
+    "en": "Who's from Brașov?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cine",
+        "units": [
+          {
+            "lex": "cine",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "din",
+        "units": [
+          {
+            "lex": "din",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Brașov?",
+        "units": [
+          {
+            "lex": "brasov",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Cine nu e din Brașov?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0014",
+    "ro": "Ce sărbătoare e importantă la voi?",
+    "en": "Which holiday is important where you're from?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "sărbătoare",
+        "units": [
+          {
+            "lex": "sarbatoare",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "importantă",
+        "units": [
+          {
+            "lex": "important",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "voi?",
+        "units": [
+          {
+            "lex": "voi",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Ce sărbătoare a fost importantă la voi?",
+        "en": "Which holiday was important where you're from?",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0015",
+    "ro": "E frumos în Sibiu.",
+    "en": "It's beautiful in Sibiu.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "E",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "frumos",
+        "units": [
+          {
+            "lex": "frumos",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Sibiu.",
+        "units": [
+          {
+            "lex": "sibiu",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu e frumos în Sibiu.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "tense:pres>perf",
+        "ro": "A fost frumos în Sibiu.",
+        "en": "It was beautiful in Sibiu.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0016",
+    "ro": "Ce-ți place cel mai mult la Cluj?",
+    "en": "What do you like most about Cluj?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "clitic-dat",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce-ți",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          },
+          {
+            "lex": "pron-2sg",
+            "form": "datShort",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "place",
+        "units": [
+          {
+            "lex": "placea",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cel",
+        "units": [
+          {
+            "lex": "cel",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mai",
+        "units": [
+          {
+            "lex": "mai",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mult",
+        "units": [
+          {
+            "lex": "mult",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Cluj?",
+        "units": [
+          {
+            "lex": "cluj",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Ce ți-a plăcut cel mai mult la Cluj?",
+        "en": "What did you like most about Cluj?",
+        "targetTokens": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0017",
+    "ro": "Îți place Clujul?",
+    "en": "Do you like Cluj?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îți",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "place",
+        "units": [
+          {
+            "lex": "placea",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "Clujul?",
+        "units": [
+          {
+            "lex": "cluj",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu-ți place Clujul?",
+        "accept": [
+          "Nu îți place Clujul?"
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0018",
+    "ro": "Îți place să gătești?",
+    "en": "Do you like to cook?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îți",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "place",
+        "units": [
+          {
+            "lex": "placea",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "gătești?",
+        "units": [
+          {
+            "lex": "gati",
+            "form": "subj2sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu-ți place să gătești?",
+        "accept": [
+          "Nu îți place să gătești?"
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0019",
+    "ro": "Ce mâncare îți place cel mai mult?",
+    "en": "Which food do you like the most?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "clitic-dat",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "mâncare",
+        "units": [
+          {
+            "lex": "mancare",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "îți",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "place",
+        "units": [
+          {
+            "lex": "placea",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cel",
+        "units": [
+          {
+            "lex": "cel",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mai",
+        "units": [
+          {
+            "lex": "mai",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mult?",
+        "units": [
+          {
+            "lex": "mult",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce mâncare îmi place cel mai mult?",
+        "en": "Which food do I like the most?",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0020",
+    "ro": "Îți plac sarmalele?",
+    "en": "Do you like sarmale?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-full",
+      "def-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îți",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "plac",
+        "units": [
+          {
+            "lex": "placea",
+            "form": "pres3pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sarmalele?",
+        "units": [
+          {
+            "lex": "sarmale",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu-ți plac sarmalele?",
+        "accept": [
+          "Nu îți plac sarmalele?"
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0021",
+    "ro": "De Paște mergem acasă.",
+    "en": "At Easter we go home.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "De",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Paște",
+        "units": [
+          {
+            "lex": "paste",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mergem",
+        "units": [
+          {
+            "lex": "merge",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acasă.",
+        "units": [
+          {
+            "lex": "acasa",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>fut",
+        "ro": "De Paște o să mergem acasă.",
+        "en": "At Easter we'll go home.",
+        "targetTokens": [
+          2
+        ]
+      },
+      {
+        "op": "person:1pl>1sg",
+        "ro": "De Paște merg acasă.",
+        "en": "At Easter I go home.",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0022",
+    "ro": "Mergi acasă de sărbători?",
+    "en": "Are you going home for the holidays?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mergi",
+        "units": [
+          {
+            "lex": "merge",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acasă",
+        "units": [
+          {
+            "lex": "acasa",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "sărbători?",
+        "units": [
+          {
+            "lex": "sarbatoare",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Merg acasă de sărbători.",
+        "en": "I'm going home for the holidays.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0023",
+    "ro": "Ce obiceiuri aveți de Crăciun?",
+    "en": "What customs do you have at Christmas?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "noun-pl",
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "obiceiuri",
+        "units": [
+          {
+            "lex": "obicei",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "aveți",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2pl",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Crăciun?",
+        "units": [
+          {
+            "lex": "craciun",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2pl>1pl",
+        "ro": "Ce obiceiuri avem de Crăciun?",
+        "en": "What customs do we have at Christmas?",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0024",
+    "ro": "La noi mâncăm sarmale de Crăciun.",
+    "en": "Where I'm from, we eat sarmale at Christmas.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "pres-full",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "La",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "noi",
+        "units": [
+          {
+            "lex": "noi-pron",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mâncăm",
+        "units": [
+          {
+            "lex": "manca",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sarmale",
+        "units": [
+          {
+            "lex": "sarmale",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Crăciun.",
+        "units": [
+          {
+            "lex": "craciun",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "La noi nu mâncăm sarmale de Crăciun.",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0025",
+    "ro": "Bunicii gătesc bine.",
+    "en": "The grandparents cook well.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "def-pl",
+      "pres-ez-esc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Bunicii",
+        "units": [
+          {
+            "lex": "bunic",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "gătesc",
+        "units": [
+          {
+            "lex": "gati",
+            "form": "pres3pl",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "bine.",
+        "units": [
+          {
+            "lex": "bine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Bunicul gătește bine.",
+        "en": "The grandfather cooks well.",
+        "targetTokens": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0026",
+    "ro": "Câți frați ai?",
+    "en": "How many siblings do you have? (brothers)",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "noun-pl",
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Câți",
+        "units": [
+          {
+            "lex": "cati",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "frați",
+        "units": [
+          {
+            "lex": "frate",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ai?",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Câți frați am?",
+        "en": "How many brothers do I have?",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0027",
+    "ro": "Ce limbi vorbești acasă?",
+    "en": "What languages do you speak at home?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "noun-pl",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "limbi",
+        "units": [
+          {
+            "lex": "limba",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "vorbești",
+        "units": [
+          {
+            "lex": "vorbi",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acasă?",
+        "units": [
+          {
+            "lex": "acasa",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce limbi vorbesc acasă?",
+        "en": "What languages do I speak at home?",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0028",
+    "ro": "Ce faceți de Paște?",
+    "en": "What are you doing at Easter?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "faceți",
+        "units": [
+          {
+            "lex": "face",
+            "form": "pres2pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Paște?",
+        "units": [
+          {
+            "lex": "paste",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2pl>2sg",
+        "ro": "Ce faci de Paște?",
+        "en": "What are you doing at Easter?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0029",
+    "ro": "O să vin la Cluj.",
+    "en": "I'll come to Cluj.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "fut-o-sa"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "vin",
+        "units": [
+          {
+            "lex": "veni",
+            "form": "subj1sg",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Cluj.",
+        "units": [
+          {
+            "lex": "cluj",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu o să vin la Cluj.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0030",
+    "ro": "O să-ți arăt Clujul.",
+    "en": "I'll show you Cluj.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "fut-o-sa",
+      "clitic-dat",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să-ți",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          },
+          {
+            "lex": "pron-2sg",
+            "form": "datShort",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "arăt",
+        "units": [
+          {
+            "lex": "arata",
+            "form": "subj1sg",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "Clujul.",
+        "units": [
+          {
+            "lex": "cluj",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu o să-ți arăt Clujul.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0031",
+    "ro": "Cum te cheamă?",
+    "en": "What's your name?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "clitic-acc",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cum",
+        "units": [
+          {
+            "lex": "cum",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "te",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "cheamă?",
+        "units": [
+          {
+            "lex": "chema",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Cum mă cheamă?",
+        "en": "What's my name?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0032",
+    "ro": "Orașul ăsta e frumos.",
+    "en": "This city is beautiful.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "def-sg",
+      "dem-colloq",
+      "be-pres"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Orașul",
+        "units": [
+          {
+            "lex": "oras",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ăsta",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "msg",
+            "pattern": "dem-colloq"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "frumos.",
+        "units": [
+          {
+            "lex": "frumos",
+            "form": "msg",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Orașul ăsta nu e frumos.",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0033",
+    "ro": "Mâncarea asta e specifică.",
+    "en": "This food is typical.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "dem-colloq",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mâncarea",
+        "units": [
+          {
+            "lex": "mancare",
+            "form": "sgDef",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "asta",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "fsg",
+            "pattern": "dem-colloq"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "specifică.",
+        "units": [
+          {
+            "lex": "specific",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Mâncarea asta nu e specifică.",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0034",
+    "ro": "Ți-e dor de Iași?",
+    "en": "Do you miss Iași?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "mi-e-construction"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ți-e",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "datShort",
+            "pattern": "mi-e-construction"
+          },
+          {
+            "lex": "fi",
+            "form": "pres3sg"
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "dor",
+        "units": [
+          {
+            "lex": "dor",
+            "form": "sg",
+            "pattern": "mi-e-construction",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Iași?",
+        "units": [
+          {
+            "lex": "iasi",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu ți-e dor de Iași.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Mi-e dor de Iași.",
+        "en": "I miss Iași.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  }
+]

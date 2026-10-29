@@ -1,14 +1,20 @@
 {
-  "contentVersion": "2026.10.29-2",
+  "contentVersion": "2026.10.29-3",
   "packs": {
     "lexemes": [
-      "lexemes/core.json"
+      "lexemes/core.json",
+      "lexemes/batch-b.json"
     ],
     "sentences": [
       "sentences/A1-standup.json",
+      "sentences/A1-decisions.json",
+      "sentences/A1-coaching.json",
+      "sentences/A1-domain.json",
+      "sentences/A1-table.json",
       "sentences/A1-me.json",
-      "sentences/A1-meta.json",
-      "sentences/A1-table.json"
+      "sentences/A1-getting-to-know.json",
+      "sentences/A1-news.json",
+      "sentences/A1-meta.json"
     ]
   },
   "levels": [

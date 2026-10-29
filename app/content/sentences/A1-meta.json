@@ -1461,5 +1461,956 @@
     "canDo": [
       "A1-meta-repeat"
     ]
+  },
+  {
+    "id": "s-a1-meta-0021",
+    "ro": "Nu te aud bine.",
+    "en": "I can't hear you well.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "neg-nu",
+      "clitic-acc",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "te",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "aud",
+        "units": [
+          {
+            "lex": "auzi",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "bine.",
+        "units": [
+          {
+            "lex": "bine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Te aud bine.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0022",
+    "ro": "Nu te înțeleg.",
+    "en": "I don't understand you.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "neg-nu",
+      "clitic-acc",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "te",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "înțeleg.",
+        "units": [
+          {
+            "lex": "intelege",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Te înțeleg.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0023",
+    "ro": "Mă auzi?",
+    "en": "Can you hear me?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "clitic-acc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mă",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "auzi?",
+        "units": [
+          {
+            "lex": "auzi",
+            "form": "inf"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>3sg",
+        "ro": "Mă aude?",
+        "en": "Can he/she hear me?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0024",
+    "ro": "Poți să-mi spui din nou?",
+    "en": "Can you tell me again?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12",
+      "clitic-dat"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Poți",
+        "units": [
+          {
+            "lex": "putea",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să-mi",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          },
+          {
+            "lex": "pron-1sg",
+            "form": "datShort",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "spui",
+        "units": [
+          {
+            "lex": "spune",
+            "form": "subj2sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "din",
+        "units": [
+          {
+            "lex": "din",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "nou?",
+        "units": [
+          {
+            "lex": "nou",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Pot să-ți spun din nou?",
+        "en": "Can I tell you again?",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0025",
+    "ro": "Poți să-mi explici cuvântul ăsta?",
+    "en": "Can you explain this word to me?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12",
+      "clitic-dat",
+      "dem-colloq"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Poți",
+        "units": [
+          {
+            "lex": "putea",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să-mi",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          },
+          {
+            "lex": "pron-1sg",
+            "form": "datShort",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "explici",
+        "units": [
+          {
+            "lex": "explica",
+            "form": "subj2sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cuvântul",
+        "units": [
+          {
+            "lex": "cuvant",
+            "form": "sgDef",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ăsta?",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "msg",
+            "pattern": "dem-colloq"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Pot să-ți explic cuvântul ăsta?",
+        "en": "Can I explain this word to you?",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0026",
+    "ro": "Ce înseamnă cuvintele astea?",
+    "en": "What do these words mean?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "wh-q",
+      "meta-basic",
+      "def-pl",
+      "dem-colloq"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "înseamnă",
+        "units": [
+          {
+            "lex": "insemna",
+            "form": "pres3sg",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cuvintele",
+        "units": [
+          {
+            "lex": "cuvant",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "astea?",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "fpl",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Ce înseamnă cuvântul ăsta?",
+        "en": "What does this word mean?",
+        "targetTokens": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0027",
+    "ro": "Nu înțeleg cuvântul ăsta.",
+    "en": "I don't understand this word.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "neg-nu",
+      "pres-12-high",
+      "dem-colloq"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "înțeleg",
+        "units": [
+          {
+            "lex": "intelege",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cuvântul",
+        "units": [
+          {
+            "lex": "cuvant",
+            "form": "sgDef",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ăsta.",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "msg",
+            "pattern": "dem-colloq"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Înțeleg cuvântul ăsta.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0028",
+    "ro": "Ce fel de cuvânt e ăsta?",
+    "en": "What kind of word is this?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "wh-q",
+      "be-pres",
+      "dem-colloq"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "fel",
+        "units": [
+          {
+            "lex": "fel",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "cuvânt",
+        "units": [
+          {
+            "lex": "cuvant",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ăsta?",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "msg",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "plural",
+        "ro": "Ce fel de cuvinte sunt astea?",
+        "en": "What kind of words are these?",
+        "targetTokens": [
+          3,
+          4,
+          5
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0029",
+    "ro": "Cum se spune asta în română?",
+    "en": "How do you say this in Romanian?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "wh-q",
+      "meta-basic",
+      "dem-colloq"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Cum",
+        "units": [
+          {
+            "lex": "cum",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "se",
+        "units": [
+          {
+            "lex": "se",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "spune",
+        "units": [
+          {
+            "lex": "spune",
+            "form": "inf",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "asta",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "fsg",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "română?",
+        "units": [
+          {
+            "lex": "romana",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0030",
+    "ro": "O să repet mai încet.",
+    "en": "I'll repeat it more slowly.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "fut-o-sa"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "sa"
+      },
+      {
+        "t": "repet",
+        "units": [
+          {
+            "lex": "repeta",
+            "form": "subj1sg",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mai",
+        "units": [
+          {
+            "lex": "mai",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "încet.",
+        "units": [
+          {
+            "lex": "incet",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu o să repet mai încet.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0031",
+    "ro": "Îți explic altfel.",
+    "en": "I'll explain it to you differently.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îți",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "explic",
+        "units": [
+          {
+            "lex": "explica",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "altfel.",
+        "units": [
+          {
+            "lex": "altfel",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu-ți explic altfel.",
+        "accept": [
+          "Nu îți explic altfel."
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0032",
+    "ro": "Vă aud bine.",
+    "en": "I can hear you (all) well.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "clitic-acc",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vă",
+        "units": [
+          {
+            "lex": "pron-2pl",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "aud",
+        "units": [
+          {
+            "lex": "auzi",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "bine.",
+        "units": [
+          {
+            "lex": "bine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu vă aud bine.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0033",
+    "ro": "Ne auzi?",
+    "en": "Can you hear us?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "clitic-acc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ne",
+        "units": [
+          {
+            "lex": "pron-1pl",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "auzi?",
+        "units": [
+          {
+            "lex": "auzi",
+            "form": "inf"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>3sg",
+        "ro": "Ne aude?",
+        "en": "Can he/she hear us?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
   }
 ]
