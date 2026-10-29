@@ -19,13 +19,13 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [T13](tasks/T13-lists-focus-ui.md) | Situations / Patterns lists, Focus mode, lexeme detail | 2 | T11, T12 | todo | | |
 | [T14](tasks/T14-key-forms.md) | Key-forms cards and unlock chain | 2 | T08 | review | ccr-42dc906e-x3aoep | `cards.js` exports `FORM_LABELS`/`labelFor`, `newKfCards` (3 per lexeme, session cap 8 by freq), `exampleSentenceFor`; `buildSession` appends new `kf` cards in session mode; `unitsRequiredForCard` handles `kf`. Only 35 of 118 lexemes have `keyForms` — T17 should add them (and Q2 irregular paradigms). Not yet checked on a real phone. |
 | [T15](tasks/T15-transform-slot.md) | Transformation and slot-building cards | 2 | T08, T11 | todo | | |
-| [T16](tasks/T16-flagging.md) | Flag a sentence → GitHub issue | 2 | T07 | todo | | |
+| [T16](tasks/T16-flagging.md) | Flag a sentence → GitHub issue | 2 | T07 | review | ccr-6ab5b98b-20ltsk | Flag button is mounted by `session.js` (not in each card); `issueUrl(flag, sentence, contentVersion)` and `flagsMarkdown` are in `flag-button.js`. APP_VERSION bumped to 0.2.1. Not yet checked on a real device. |
 | [T17](tasks/T17-content-batch-b.md) | Content batch B: to ~300 sentences, all situations | 2 | T09 | todo | | |
 | [T18](tasks/T18-dashboard.md) | Progress dashboard | 3 | T11, T19 | todo | | |
 | [T19](tasks/T19-levels-cando.md) | A1 level manifest and can-do tracking | 3 | T11 | todo | | |
 | [T20](tasks/T20-en-ro-cards.md) | EN→RO cards | 3 | T08, T15 | todo | | |
 | [T21](tasks/T21-summary-reminders.md) | Session summary and export reminder | 3 | T11 | todo | | |
-| [T22](tasks/T22-coverage-report.md) | Content coverage report in CI | 3 | T02 | todo | | |
+| [T22](tasks/T22-coverage-report.md) | Content coverage report in CI | 3 | T02 | review | ccr-6f18b7e8-0f35w7 | `--coverage` prints Markdown tables (exports `computeCoverage`, `coverageReport`, `strictA1Failures`); `--strict-a1` is left commented out in `deploy-pages.yml` until T23 lands. Head-lexeme target skips `be-pres`, `have-pres`, `neg-nu`. |
 | [T23](tasks/T23-content-batch-c.md) | Content batch C: Stages 1–2 complete (400–600) | 3 | T17, T19, T22 | todo | | |
 
 ## Epics not yet broken into tasks

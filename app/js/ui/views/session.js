@@ -5,6 +5,8 @@ import { unitsRequiredForCard } from "../../core/units.js";
 import { renderCard as renderLr } from "./card-lr.js";
 import { renderCard as renderCz } from "./card-cloze.js";
 import { renderCard as renderKf } from "./card-keyform.js";
+import { toast } from "../components/toast.js";
+import { flagButton } from "../components/flag-button.js";
 
 const QUICK_MS = 5 * 60 * 1000;
 const RENDERERS = { lr: renderLr, cz: renderCz, kf: renderKf };
@@ -43,6 +45,7 @@ export function render(root, ctx) {
   function begin() {
     startedAt = Date.now();
     root.innerHTML = `<div class="progress" role="progressbar" aria-label="Session progress"><div class="progress-fill"></div></div>
+      <div data-flag style="display:flex;justify-content:flex-end"></div>
       <div data-card></div>`;
     next();
   }
@@ -68,6 +71,19 @@ export function render(root, ctx) {
     if ((!sentence && p.type !== "kf") || !draw) { pos++; return next(); }
     const slot = root.querySelector("[data-card]");
     slot.replaceChildren();
+    const flagSlot = root.querySelector("[data-flag]");
+    flagSlot.replaceChildren();
+    if (sentence) {
+      flagSlot.replaceChildren(flagButton({
+        sentenceId: sentence.id,
+        isFlagged: () => ctx.state.flags.some((f) => f.sentenceId === sentence.id),
+        onSave(flag) {
+          ctx.state = { ...ctx.state, flags: [...ctx.state.flags, flag] };
+          ctx.store.save(ctx.state);
+          toast("Flagged. See Settings to report it.");
+        },
+      }));
+    }
     cardCleanup = draw(slot, {
       card: item.cardId,
       sentence,

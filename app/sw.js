@@ -35,6 +35,7 @@ const PRECACHE = [
   "js/ui/components/banner.js",
   "js/ui/components/diacritic-bar.js",
   "js/ui/components/feedback.js",
+  "js/ui/components/flag-button.js",
   "js/ui/components/toast.js",
   "js/ui/views/card-cloze.js",
   "js/ui/views/card-keyform.js",
