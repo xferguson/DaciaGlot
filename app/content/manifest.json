@@ -1,0 +1,8 @@
+{
+  "contentVersion": "2026.10.29-1",
+  "packs": {
+    "lexemes": ["lexemes/core.json"],
+    "sentences": ["sentences/A1-seed.json"]
+  },
+  "levels": ["A1"]
+}

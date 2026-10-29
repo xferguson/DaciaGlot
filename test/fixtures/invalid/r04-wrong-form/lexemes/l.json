@@ -1,0 +1,29 @@
+[
+  {
+    "id": "aux-perf",
+    "lemma": "am",
+    "pos": "aux",
+    "gloss": "aux",
+    "freq": 3,
+    "forms": {
+      "1sg": "am"
+    }
+  },
+  {
+    "id": "termina",
+    "lemma": "a termina",
+    "pos": "verb",
+    "gloss": "finish",
+    "freq": 9,
+    "forms": {
+      "ppl": "terminam"
+    }
+  },
+  {
+    "id": "ieri",
+    "lemma": "ieri",
+    "pos": "adv",
+    "gloss": "yesterday",
+    "freq": 9
+  }
+]

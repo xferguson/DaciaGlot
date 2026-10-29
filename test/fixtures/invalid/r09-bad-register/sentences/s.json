@@ -1,0 +1,61 @@
+[
+  {
+    "id": "s-1",
+    "ro": "Ieri am terminat.",
+    "en": "I finished yesterday.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "standup"
+    ],
+    "patterns": [
+      "perfect-compus"
+    ],
+    "register": "slang",
+    "tokens": [
+      {
+        "t": "Ieri",
+        "units": [
+          {
+            "lex": "ieri",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "am",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ]
+      },
+      {
+        "t": "terminat.",
+        "units": [
+          {
+            "lex": "termina",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Ieri n-am terminat.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-x"
+    ]
+  }
+]
