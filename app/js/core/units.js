@@ -13,10 +13,11 @@ export function unitsForSentence(sentence) {
 
 /**
  * Units a card exercises, as `{u, lx}` (lx = head lexeme, see ARCHITECTURE §4.3).
- * `cz`: the target token's units plus the patterns those units realize. `lr` records exposure, not attempts.
+ * `kf`: the form unit `<lex>.<form>`. `cz`: the target token's units plus the patterns those units realize. `lr` records exposure, not attempts.
  */
 export function unitsRequiredForCard(cardId, content) {
   const p = parseCardId(cardId);
+  if (p.type === "kf") return [{ u: `${p.lexemeId}.${p.formKey}`, lx: p.lexemeId }];
   if (p.type !== "cz") return [];
   const token = content.sentences.get(p.sentenceId)?.tokens[p.tokenIndex];
   if (!token) return [];
