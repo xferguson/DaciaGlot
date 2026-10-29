@@ -2481,5 +2481,1532 @@
         ]
       }
     ]
+  },
+  {
+    "id": "s-a1-table-0040",
+    "ro": "Cât costă ciorba?",
+    "en": "How much is the ciorbă?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cât",
+        "units": [
+          {
+            "lex": "cat",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "costă",
+        "units": [
+          {
+            "lex": "costa",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ciorba?",
+        "units": [
+          {
+            "lex": "ciorba",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-table-pay"
+    ]
+  },
+  {
+    "id": "s-a1-table-0041",
+    "ro": "Cât costă un vin?",
+    "en": "How much is a wine?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cât",
+        "units": [
+          {
+            "lex": "cat",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "costă",
+        "units": [
+          {
+            "lex": "costa",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "un",
+        "units": [
+          {
+            "lex": "un",
+            "form": "m"
+          }
+        ]
+      },
+      {
+        "t": "vin?",
+        "units": [
+          {
+            "lex": "vin",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-table-pay"
+    ]
+  },
+  {
+    "id": "s-a1-table-0042",
+    "ro": "Ne aduci nota, te rog?",
+    "en": "Could you bring us the bill, please?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high",
+      "def-sg",
+      "meta-basic"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ne",
+        "units": [
+          {
+            "lex": "pron-1pl",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "aduci",
+        "units": [
+          {
+            "lex": "aduce",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "nota,",
+        "units": [
+          {
+            "lex": "nota",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "te",
+        "units": []
+      },
+      {
+        "t": "rog?",
+        "units": [
+          {
+            "lex": "te-rog",
+            "form": "base",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-table-pay"
+    ]
+  },
+  {
+    "id": "s-a1-table-0043",
+    "ro": "Plătesc eu desertul.",
+    "en": "I'm paying for the dessert.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Plătesc",
+        "units": [
+          {
+            "lex": "plati",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "eu",
+        "units": [
+          {
+            "lex": "eu",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "desertul.",
+        "units": [
+          {
+            "lex": "desert",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu plătesc eu desertul.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-table-pay"
+    ]
+  },
+  {
+    "id": "s-a1-table-0044",
+    "ro": "Plătim împreună?",
+    "en": "Shall we pay together?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Plătim",
+        "units": [
+          {
+            "lex": "plati",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "împreună?",
+        "units": [
+          {
+            "lex": "impreuna",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-table-pay"
+    ]
+  },
+  {
+    "id": "s-a1-table-0045",
+    "ro": "Pot să plătesc eu?",
+    "en": "Can I pay?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Pot",
+        "units": [
+          {
+            "lex": "putea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "plătesc",
+        "units": [
+          {
+            "lex": "plati",
+            "form": "subj1sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "eu?",
+        "units": [
+          {
+            "lex": "eu",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Poți să plătești tu?",
+        "en": "Can you pay?",
+        "targetTokens": [
+          0,
+          2
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-table-pay"
+    ]
+  },
+  {
+    "id": "s-a1-table-0046",
+    "ro": "Aveți ciorbă?",
+    "en": "Do you have ciorbă?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Aveți",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2pl",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "ciorbă?",
+        "units": [
+          {
+            "lex": "ciorba",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-table-ask"
+    ]
+  },
+  {
+    "id": "s-a1-table-0047",
+    "ro": "Aveți cartofi?",
+    "en": "Do you have potatoes?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "have-pres",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Aveți",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2pl",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "cartofi?",
+        "units": [
+          {
+            "lex": "cartof",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-table-ask"
+    ]
+  },
+  {
+    "id": "s-a1-table-0048",
+    "ro": "Aveți și desert?",
+    "en": "Do you have dessert too?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Aveți",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2pl",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "și",
+        "units": [
+          {
+            "lex": "si",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "desert?",
+        "units": [
+          {
+            "lex": "desert",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-table-ask"
+    ]
+  },
+  {
+    "id": "s-a1-table-0049",
+    "ro": "Aveți apă rece?",
+    "en": "Do you have cold water?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Aveți",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2pl",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "apă",
+        "units": [
+          {
+            "lex": "apa",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "rece?",
+        "units": [
+          {
+            "lex": "rece",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-table-ask"
+    ]
+  },
+  {
+    "id": "s-a1-table-0050",
+    "ro": "Cartofii sunt gata?",
+    "en": "Are the potatoes ready?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "def-pl",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cartofii",
+        "units": [
+          {
+            "lex": "cartof",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3pl",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "gata?",
+        "units": [
+          {
+            "lex": "gata",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Cartoful e gata?",
+        "en": "Is the potato ready?",
+        "targetTokens": [
+          0,
+          1
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-table-ask"
+    ]
+  },
+  {
+    "id": "s-a1-table-0051",
+    "ro": "Ți-e sete?",
+    "en": "Are you thirsty?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "mi-e-construction"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ți-e",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "datShort",
+            "pattern": "mi-e-construction"
+          },
+          {
+            "lex": "fi",
+            "form": "pres3sg"
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "sete?",
+        "units": [
+          {
+            "lex": "sete",
+            "form": "sg",
+            "pattern": "mi-e-construction",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Mi-e sete.",
+        "en": "I'm thirsty.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-table-ask"
+    ]
+  },
+  {
+    "id": "s-a1-table-0052",
+    "ro": "Mi-e foame.",
+    "en": "I'm hungry.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "mi-e-construction"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mi-e",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "datShort",
+            "pattern": "mi-e-construction"
+          },
+          {
+            "lex": "fi",
+            "form": "pres3sg"
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "foame.",
+        "units": [
+          {
+            "lex": "foame",
+            "form": "sg",
+            "pattern": "mi-e-construction",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu mi-e foame.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-table-order"
+    ]
+  },
+  {
+    "id": "s-a1-table-0053",
+    "ro": "Mi-e sete, vreau apă.",
+    "en": "I'm thirsty, I want water.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "mi-e-construction",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mi-e",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "datShort",
+            "pattern": "mi-e-construction"
+          },
+          {
+            "lex": "fi",
+            "form": "pres3sg"
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "sete,",
+        "units": [
+          {
+            "lex": "sete",
+            "form": "sg",
+            "pattern": "mi-e-construction",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "vreau",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "apă.",
+        "units": [
+          {
+            "lex": "apa",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-table-order"
+    ]
+  },
+  {
+    "id": "s-a1-table-0054",
+    "ro": "Vrem o masă pentru trei.",
+    "en": "We'd like a table for three.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vrem",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "masă",
+        "units": [
+          {
+            "lex": "masa",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "pentru",
+        "units": [
+          {
+            "lex": "pentru",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "trei.",
+        "units": [
+          {
+            "lex": "trei",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-table-order"
+    ]
+  },
+  {
+    "id": "s-a1-table-0055",
+    "ro": "Luăm desert?",
+    "en": "Shall we have dessert?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Luăm",
+        "units": [
+          {
+            "lex": "lua",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "desert?",
+        "units": [
+          {
+            "lex": "desert",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-table-order"
+    ]
+  },
+  {
+    "id": "s-a1-table-0056",
+    "ro": "Eu iau ciorbă.",
+    "en": "I'll have the ciorbă.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Eu",
+        "units": [
+          {
+            "lex": "eu",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "iau",
+        "units": [
+          {
+            "lex": "lua",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ciorbă.",
+        "units": [
+          {
+            "lex": "ciorba",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>3sg",
+        "ro": "El ia ciorbă.",
+        "en": "He's having the ciorbă.",
+        "targetTokens": [
+          0,
+          1
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-table-order"
+    ]
+  },
+  {
+    "id": "s-a1-table-0057",
+    "ro": "Cafeaua e prea rece.",
+    "en": "The coffee is too cold.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cafeaua",
+        "units": [
+          {
+            "lex": "cafea",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "prea",
+        "units": [
+          {
+            "lex": "prea",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "rece.",
+        "units": [
+          {
+            "lex": "rece",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-table-talk"
+    ]
+  },
+  {
+    "id": "s-a1-table-0058",
+    "ro": "Cafeaua nu e proastă.",
+    "en": "The coffee isn't bad.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "def-sg",
+      "neg-nu",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cafeaua",
+        "units": [
+          {
+            "lex": "cafea",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "proastă.",
+        "units": [
+          {
+            "lex": "prost",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-table-talk"
+    ]
+  },
+  {
+    "id": "s-a1-table-0059",
+    "ro": "Vinul e bun, dar scump.",
+    "en": "The wine is good, but expensive.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vinul",
+        "units": [
+          {
+            "lex": "vin",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "bun,",
+        "units": [
+          {
+            "lex": "bun",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "dar",
+        "units": [
+          {
+            "lex": "dar",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "scump.",
+        "units": [
+          {
+            "lex": "scump",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-table-talk"
+    ]
+  },
+  {
+    "id": "s-a1-table-0060",
+    "ro": "Vinul de casă e bun.",
+    "en": "The house wine is good.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vinul",
+        "units": [
+          {
+            "lex": "vin",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "casă",
+        "units": [
+          {
+            "lex": "casa",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "bun.",
+        "units": [
+          {
+            "lex": "bun",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-table-talk"
+    ]
+  },
+  {
+    "id": "s-a1-table-0061",
+    "ro": "Mămăliga e foarte bună.",
+    "en": "The polenta is very good.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mămăliga",
+        "units": [
+          {
+            "lex": "mamaliga",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "foarte",
+        "units": [
+          {
+            "lex": "foarte",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "bună.",
+        "units": [
+          {
+            "lex": "bun",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-table-talk"
+    ]
+  },
+  {
+    "id": "s-a1-table-0062",
+    "ro": "Te invit la masă.",
+    "en": "I'm treating you to dinner.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "clitic-acc",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Te",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "invit",
+        "units": [
+          {
+            "lex": "invita",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "masă.",
+        "units": [
+          {
+            "lex": "masa",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu te invit la masă.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-table-talk"
+    ]
+  },
+  {
+    "id": "s-a1-table-0063",
+    "ro": "Noroc, Andrei!",
+    "en": "Cheers, Andrei!",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Noroc,",
+        "units": [
+          {
+            "lex": "noroc",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "Andrei!",
+        "units": [
+          {
+            "lex": "andrei",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-table-talk"
+    ]
+  },
+  {
+    "id": "s-a1-table-0064",
+    "ro": "Nu mi-e foame.",
+    "en": "I'm not hungry.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "neg-nu",
+      "mi-e-construction"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "mi-e",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "datShort",
+            "pattern": "mi-e-construction"
+          },
+          {
+            "lex": "fi",
+            "form": "pres3sg"
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "foame.",
+        "units": [
+          {
+            "lex": "foame",
+            "form": "sg",
+            "pattern": "mi-e-construction",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-table-talk"
+    ]
+  },
+  {
+    "id": "s-a1-table-0065",
+    "ro": "Mi-e frig.",
+    "en": "I'm cold.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "mi-e-construction"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mi-e",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "datShort",
+            "pattern": "mi-e-construction"
+          },
+          {
+            "lex": "fi",
+            "form": "pres3sg"
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "frig.",
+        "units": [
+          {
+            "lex": "frig",
+            "form": "sg",
+            "pattern": "mi-e-construction",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu mi-e frig.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-table-talk"
+    ]
   }
 ]

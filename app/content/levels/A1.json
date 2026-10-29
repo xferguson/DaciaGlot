@@ -201,6 +201,101 @@
       "id": "A1-table-talk",
       "situation": "table",
       "text": "I can propose a toast, say what was good and what I ate or drank."
+    },
+    {
+      "id": "A1-decisions-propose",
+      "situation": "decisions",
+      "text": "I can propose something and ask what others think."
+    },
+    {
+      "id": "A1-decisions-agree",
+      "situation": "decisions",
+      "text": "I can say that I agree or disagree and that an idea is good."
+    },
+    {
+      "id": "A1-decisions-deadline",
+      "situation": "decisions",
+      "text": "I can ask about a deadline, agree on one and ask to postpone."
+    },
+    {
+      "id": "A1-decisions-prioritize",
+      "situation": "decisions",
+      "text": "I can say what comes first and choose between options."
+    },
+    {
+      "id": "A1-coaching-open",
+      "situation": "coaching",
+      "text": "I can ask open questions in a 1:1 and say that I'm listening."
+    },
+    {
+      "id": "A1-coaching-feedback",
+      "situation": "coaching",
+      "text": "I can give feedback and ask whether someone got it."
+    },
+    {
+      "id": "A1-coaching-goals",
+      "situation": "coaching",
+      "text": "I can ask about someone's goals and what they want to do."
+    },
+    {
+      "id": "A1-coaching-support",
+      "situation": "coaching",
+      "text": "I can encourage someone and ask whether they need help."
+    },
+    {
+      "id": "A1-domain-data",
+      "situation": "domain",
+      "text": "I can talk about data, sources and charts."
+    },
+    {
+      "id": "A1-domain-energy",
+      "situation": "domain",
+      "text": "I can talk about energy consumption and prices."
+    },
+    {
+      "id": "A1-domain-systems",
+      "situation": "domain",
+      "text": "I can say what a server, pipeline or model is doing."
+    },
+    {
+      "id": "A1-domain-forecast",
+      "situation": "domain",
+      "text": "I can talk about forecasts, the weather and what will happen."
+    },
+    {
+      "id": "A1-know-hometown",
+      "situation": "getting-to-know",
+      "text": "I can ask where someone is from and what their city is like."
+    },
+    {
+      "id": "A1-know-food",
+      "situation": "getting-to-know",
+      "text": "I can ask about local food and say what I like to eat."
+    },
+    {
+      "id": "A1-know-customs",
+      "situation": "getting-to-know",
+      "text": "I can ask about holidays and customs."
+    },
+    {
+      "id": "A1-know-hobbies",
+      "situation": "getting-to-know",
+      "text": "I can ask about hobbies, siblings and how someone spends their time."
+    },
+    {
+      "id": "A1-news-react",
+      "situation": "news",
+      "text": "I can ask about a news item and react to it."
+    },
+    {
+      "id": "A1-news-politics",
+      "situation": "news",
+      "text": "I can talk about elections, the government and politics."
+    },
+    {
+      "id": "A1-news-opinion",
+      "situation": "news",
+      "text": "I can ask for and give an opinion."
     }
   ]
 }

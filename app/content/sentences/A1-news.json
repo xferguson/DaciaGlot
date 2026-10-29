@@ -70,6 +70,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-react"
     ]
   },
   {
@@ -143,6 +146,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-react"
     ]
   },
   {
@@ -203,6 +209,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-politics"
     ]
   },
   {
@@ -294,6 +303,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-politics"
     ]
   },
   {
@@ -356,6 +368,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-react"
     ]
   },
   {
@@ -430,6 +445,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-react"
     ]
   },
   {
@@ -486,6 +504,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-react"
     ]
   },
   {
@@ -556,6 +577,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-opinion"
     ]
   },
   {
@@ -616,6 +640,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-opinion"
     ]
   },
   {
@@ -696,6 +723,9 @@
           4
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-opinion"
     ]
   },
   {
@@ -751,6 +781,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-politics"
     ]
   },
   {
@@ -834,6 +867,9 @@
           3
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-opinion"
     ]
   },
   {
@@ -916,6 +952,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-opinion"
     ]
   },
   {
@@ -979,6 +1018,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-politics"
     ]
   },
   {
@@ -1038,6 +1080,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-politics"
     ]
   },
   {
@@ -1110,6 +1155,9 @@
           3
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-opinion"
     ]
   },
   {
@@ -1204,6 +1252,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-react"
     ]
   },
   {
@@ -1266,6 +1317,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-politics"
     ]
   },
   {
@@ -1345,6 +1399,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-politics"
     ]
   },
   {
@@ -1419,6 +1476,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-politics"
     ]
   },
   {
@@ -1511,6 +1571,9 @@
           3
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-politics"
     ]
   },
   {
@@ -1575,6 +1638,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-opinion"
     ]
   },
   {
@@ -1652,6 +1718,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-react"
     ]
   },
   {
@@ -1718,6 +1787,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-react"
     ]
   },
   {
@@ -1807,6 +1879,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-opinion"
     ]
   },
   {
@@ -1895,6 +1970,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-politics"
     ]
   },
   {
@@ -1957,6 +2035,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-opinion"
     ]
   },
   {
@@ -2020,6 +2101,695 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-news-opinion"
+    ]
+  },
+  {
+    "id": "s-a1-news-0029",
+    "ro": "Politicianul vorbește mult.",
+    "en": "The politician talks a lot.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "def-sg",
+      "pres-ez-esc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Politicianul",
+        "units": [
+          {
+            "lex": "politician",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "vorbește",
+        "units": [
+          {
+            "lex": "vorbi",
+            "form": "pres3sg",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mult.",
+        "units": [
+          {
+            "lex": "mult",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-news-politics"
+    ]
+  },
+  {
+    "id": "s-a1-news-0030",
+    "ro": "Politicienii sunt serioși?",
+    "en": "Are the politicians serious?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "def-pl",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Politicienii",
+        "units": [
+          {
+            "lex": "politician",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3pl",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "serioși?",
+        "units": [
+          {
+            "lex": "serios",
+            "form": "mpl"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-news-politics"
+    ]
+  },
+  {
+    "id": "s-a1-news-0031",
+    "ro": "Opoziția are dreptate.",
+    "en": "The opposition is right.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "def-sg",
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Opoziția",
+        "units": [
+          {
+            "lex": "opozitie",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "are",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres3sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "dreptate.",
+        "units": [
+          {
+            "lex": "dreptate",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-news-politics"
+    ]
+  },
+  {
+    "id": "s-a1-news-0032",
+    "ro": "Mă interesează politica.",
+    "en": "Politics interests me.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "clitic-acc",
+      "pres-ez-esc",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mă",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "interesează",
+        "units": [
+          {
+            "lex": "interesa",
+            "form": "pres3sg",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "politica.",
+        "units": [
+          {
+            "lex": "politica",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-news-politics"
+    ]
+  },
+  {
+    "id": "s-a1-news-0033",
+    "ro": "Presa e critică.",
+    "en": "The press is critical.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Presa",
+        "units": [
+          {
+            "lex": "presa",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "critică.",
+        "units": [
+          {
+            "lex": "critic",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-news-react"
+    ]
+  },
+  {
+    "id": "s-a1-news-0034",
+    "ro": "Ce spune presa?",
+    "en": "What does the press say?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "wh-q",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "spune",
+        "units": [
+          {
+            "lex": "spune",
+            "form": "pres3sg"
+          }
+        ]
+      },
+      {
+        "t": "presa?",
+        "units": [
+          {
+            "lex": "presa",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-news-react"
+    ]
+  },
+  {
+    "id": "s-a1-news-0035",
+    "ro": "Vestea e bună?",
+    "en": "Is the news good?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vestea",
+        "units": [
+          {
+            "lex": "veste",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "bună?",
+        "units": [
+          {
+            "lex": "bun",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-news-react"
+    ]
+  },
+  {
+    "id": "s-a1-news-0036",
+    "ro": "Am citit un articol.",
+    "en": "I read an article.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "citit",
+        "units": [
+          {
+            "lex": "citi",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "un",
+        "units": [
+          {
+            "lex": "un",
+            "form": "m"
+          }
+        ]
+      },
+      {
+        "t": "articol.",
+        "units": [
+          {
+            "lex": "articol",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-am citit un articol.",
+        "accept": [
+          "Nu am citit un articol."
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-news-react"
+    ]
+  },
+  {
+    "id": "s-a1-news-0037",
+    "ro": "Articolul e important.",
+    "en": "The article is important.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Articolul",
+        "units": [
+          {
+            "lex": "articol",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "important.",
+        "units": [
+          {
+            "lex": "important",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-news-opinion"
+    ]
+  },
+  {
+    "id": "s-a1-news-0038",
+    "ro": "Salariul e mic.",
+    "en": "The salary is low.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Salariul",
+        "units": [
+          {
+            "lex": "salariu",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "mic.",
+        "units": [
+          {
+            "lex": "mic",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-news-opinion"
+    ]
+  },
+  {
+    "id": "s-a1-news-0039",
+    "ro": "Vreau un salariu mai mare.",
+    "en": "I want a higher salary.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vreau",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "un",
+        "units": [
+          {
+            "lex": "un",
+            "form": "m"
+          }
+        ]
+      },
+      {
+        "t": "salariu",
+        "units": [
+          {
+            "lex": "salariu",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mai",
+        "units": [
+          {
+            "lex": "mai",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mare.",
+        "units": [
+          {
+            "lex": "mare-adj",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-news-opinion"
+    ]
+  },
+  {
+    "id": "s-a1-news-0040",
+    "ro": "Nu sunt optimist.",
+    "en": "I'm not optimistic.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "neg-nu",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres1sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "optimist.",
+        "units": [
+          {
+            "lex": "optimist",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Sunt optimist.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-news-opinion"
     ]
   }
 ]

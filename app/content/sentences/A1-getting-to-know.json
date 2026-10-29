@@ -56,6 +56,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hometown"
     ]
   },
   {
@@ -113,6 +116,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hometown"
     ]
   },
   {
@@ -182,6 +188,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hometown"
     ]
   },
   {
@@ -254,6 +263,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-food"
     ]
   },
   {
@@ -333,6 +345,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-food"
     ]
   },
   {
@@ -402,6 +417,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-customs"
     ]
   },
   {
@@ -472,6 +490,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-food"
     ]
   },
   {
@@ -531,6 +552,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hometown"
     ]
   },
   {
@@ -590,6 +614,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-food"
     ]
   },
   {
@@ -657,6 +684,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hobbies"
     ]
   },
   {
@@ -726,6 +756,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hobbies"
     ]
   },
   {
@@ -786,6 +819,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hobbies"
     ]
   },
   {
@@ -854,6 +890,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hometown"
     ]
   },
   {
@@ -942,6 +981,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-customs"
     ]
   },
   {
@@ -1016,6 +1058,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hometown"
     ]
   },
   {
@@ -1123,6 +1168,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hometown"
     ]
   },
   {
@@ -1190,6 +1238,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hometown"
     ]
   },
   {
@@ -1264,6 +1315,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-food"
     ]
   },
   {
@@ -1366,6 +1420,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-food"
     ]
   },
   {
@@ -1433,6 +1490,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-food"
     ]
   },
   {
@@ -1507,6 +1567,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-customs"
     ]
   },
   {
@@ -1576,6 +1639,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-customs"
     ]
   },
   {
@@ -1658,6 +1724,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-customs"
     ]
   },
   {
@@ -1745,6 +1814,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-customs"
     ]
   },
   {
@@ -1806,6 +1878,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-food"
     ]
   },
   {
@@ -1869,6 +1944,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hobbies"
     ]
   },
   {
@@ -1941,6 +2019,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hobbies"
     ]
   },
   {
@@ -2010,6 +2091,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-customs"
     ]
   },
   {
@@ -2089,6 +2173,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hometown"
     ]
   },
   {
@@ -2170,6 +2257,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hometown"
     ]
   },
   {
@@ -2234,6 +2324,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hometown"
     ]
   },
   {
@@ -2308,6 +2401,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hometown"
     ]
   },
   {
@@ -2379,6 +2475,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-food"
     ]
   },
   {
@@ -2459,6 +2558,719 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-know-hometown"
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0035",
+    "ro": "Orașul e vechi și frumos.",
+    "en": "The city is old and beautiful.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Orașul",
+        "units": [
+          {
+            "lex": "oras",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "vechi",
+        "units": [
+          {
+            "lex": "vechi",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "și",
+        "units": [
+          {
+            "lex": "si",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "frumos.",
+        "units": [
+          {
+            "lex": "frumos",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-know-hometown"
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0036",
+    "ro": "E un oraș mare.",
+    "en": "It's a big city.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "E",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "un",
+        "units": [
+          {
+            "lex": "un",
+            "form": "m"
+          }
+        ]
+      },
+      {
+        "t": "oraș",
+        "units": [
+          {
+            "lex": "oras",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mare.",
+        "units": [
+          {
+            "lex": "mare-adj",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-know-hometown"
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0037",
+    "ro": "Cine locuiește aici?",
+    "en": "Who lives here?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-ez-esc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cine",
+        "units": [
+          {
+            "lex": "cine",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "locuiește",
+        "units": [
+          {
+            "lex": "locui",
+            "form": "pres3sg",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "aici?",
+        "units": [
+          {
+            "lex": "aici",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-know-hometown"
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0038",
+    "ro": "E un obicei vechi.",
+    "en": "It's an old custom.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "E",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "un",
+        "units": [
+          {
+            "lex": "un",
+            "form": "m"
+          }
+        ]
+      },
+      {
+        "t": "obicei",
+        "units": [
+          {
+            "lex": "obicei",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "vechi.",
+        "units": [
+          {
+            "lex": "vechi",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-know-customs"
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0039",
+    "ro": "Familia vine de Crăciun.",
+    "en": "The family comes for Christmas.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "def-sg",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Familia",
+        "units": [
+          {
+            "lex": "familie",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "vine",
+        "units": [
+          {
+            "lex": "veni",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Crăciun.",
+        "units": [
+          {
+            "lex": "craciun",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-know-customs"
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0040",
+    "ro": "Mulțumesc pentru invitație.",
+    "en": "Thank you for the invitation.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mulțumesc",
+        "units": [
+          {
+            "lex": "multumi",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "pentru",
+        "units": [
+          {
+            "lex": "pentru",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "invitație.",
+        "units": [
+          {
+            "lex": "invitatie",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-know-customs"
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0041",
+    "ro": "Am primit invitația.",
+    "en": "I got the invitation.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "perfect-compus",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "primit",
+        "units": [
+          {
+            "lex": "primi",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "invitația.",
+        "units": [
+          {
+            "lex": "invitatie",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-am primit invitația.",
+        "accept": [
+          "Nu am primit invitația."
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-know-customs"
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0042",
+    "ro": "Bunicul gătește mămăligă.",
+    "en": "Grandpa cooks polenta.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "def-sg",
+      "pres-ez-esc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Bunicul",
+        "units": [
+          {
+            "lex": "bunic",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "gătește",
+        "units": [
+          {
+            "lex": "gati",
+            "form": "pres3sg",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mămăligă.",
+        "units": [
+          {
+            "lex": "mamaliga",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-know-food"
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0043",
+    "ro": "Beau cafea dimineața.",
+    "en": "I drink coffee in the morning.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Beau",
+        "units": [
+          {
+            "lex": "bea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cafea",
+        "units": [
+          {
+            "lex": "cafea",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "dimineața.",
+        "units": [
+          {
+            "lex": "dimineata",
+            "form": "sgDef"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-know-food"
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0044",
+    "ro": "Îmi place ciorba.",
+    "en": "I like ciorbă.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îmi",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "place",
+        "units": [
+          {
+            "lex": "placea",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ciorba.",
+        "units": [
+          {
+            "lex": "ciorba",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-know-food"
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0045",
+    "ro": "Ai un hobby nou?",
+    "en": "Do you have a new hobby?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ai",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "un",
+        "units": [
+          {
+            "lex": "un",
+            "form": "m"
+          }
+        ]
+      },
+      {
+        "t": "hobby",
+        "units": [
+          {
+            "lex": "hobby",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "nou?",
+        "units": [
+          {
+            "lex": "nou",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-know-hobbies"
+    ]
+  },
+  {
+    "id": "s-a1-getting-to-know-0046",
+    "ro": "Hobby-ul ăsta e scump.",
+    "en": "This hobby is expensive.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "getting-to-know"
+    ],
+    "patterns": [
+      "def-sg",
+      "dem-colloq",
+      "be-pres"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Hobby-ul",
+        "units": [
+          {
+            "lex": "hobby",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ăsta",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "msg",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "scump.",
+        "units": [
+          {
+            "lex": "scump",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-know-hobbies"
     ]
   }
 ]

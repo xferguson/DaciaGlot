@@ -44,6 +44,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-open"
     ]
   },
   {
@@ -120,6 +123,9 @@
           3
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-open"
     ]
   },
   {
@@ -189,6 +195,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-open"
     ]
   },
   {
@@ -252,6 +261,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-open"
     ]
   },
   {
@@ -299,6 +311,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-open"
     ]
   },
   {
@@ -356,6 +371,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-open"
     ]
   },
   {
@@ -424,6 +442,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-feedback"
     ]
   },
   {
@@ -494,6 +515,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-feedback"
     ]
   },
   {
@@ -553,6 +577,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-feedback"
     ]
   },
   {
@@ -614,6 +641,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-open"
     ]
   },
   {
@@ -674,6 +704,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-goals"
     ]
   },
   {
@@ -752,6 +785,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-goals"
     ]
   },
   {
@@ -809,6 +845,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-feedback"
     ]
   },
   {
@@ -882,6 +921,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-support"
     ]
   },
   {
@@ -971,6 +1013,9 @@
           4
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-support"
     ]
   },
   {
@@ -1030,6 +1075,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-open"
     ]
   },
   {
@@ -1082,6 +1130,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-open"
     ]
   },
   {
@@ -1163,6 +1214,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-feedback"
     ]
   },
   {
@@ -1230,6 +1284,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-feedback"
     ]
   },
   {
@@ -1294,6 +1351,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-open"
     ]
   },
   {
@@ -1358,6 +1418,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-feedback"
     ]
   },
   {
@@ -1451,6 +1514,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-feedback"
     ]
   },
   {
@@ -1524,6 +1590,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-support"
     ]
   },
   {
@@ -1585,6 +1654,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-support"
     ]
   },
   {
@@ -1665,6 +1737,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-support"
     ]
   },
   {
@@ -1735,6 +1810,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-goals"
     ]
   },
   {
@@ -1821,6 +1899,9 @@
           3
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-goals"
     ]
   },
   {
@@ -1895,6 +1976,9 @@
           3
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-goals"
     ]
   },
   {
@@ -1958,6 +2042,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-goals"
     ]
   },
   {
@@ -2027,6 +2114,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-goals"
     ]
   },
   {
@@ -2095,6 +2185,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-goals"
     ]
   },
   {
@@ -2173,6 +2266,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-goals"
     ]
   },
   {
@@ -2237,6 +2333,969 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-coaching-feedback"
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0034",
+    "ro": "Sunt mândru de tine.",
+    "en": "I'm proud of you.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres1sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "mândru",
+        "units": [
+          {
+            "lex": "mandru",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "tine.",
+        "units": [
+          {
+            "lex": "tine",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>3sg",
+        "ro": "E mândru de tine.",
+        "en": "He's proud of you.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-coaching-support"
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0035",
+    "ro": "Suntem mândri de proiect.",
+    "en": "We're proud of the project.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Suntem",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres1pl",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "mândri",
+        "units": [
+          {
+            "lex": "mandru",
+            "form": "mpl"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "proiect.",
+        "units": [
+          {
+            "lex": "proiect",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1pl>1sg",
+        "ro": "Sunt mândru de proiect.",
+        "en": "I'm proud of the project.",
+        "targetTokens": [
+          0,
+          1
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-coaching-support"
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0036",
+    "ro": "Ai nevoie de ajutor?",
+    "en": "Do you need help?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ai",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "nevoie",
+        "units": [
+          {
+            "lex": "nevoie",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "ajutor?",
+        "units": [
+          {
+            "lex": "ajutor",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Am nevoie de ajutor.",
+        "en": "I need help.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-coaching-support"
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0037",
+    "ro": "Vreau să te ascult.",
+    "en": "I want to listen to you.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12",
+      "clitic-acc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vreau",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "te",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "ascult.",
+        "units": [
+          {
+            "lex": "asculta",
+            "form": "subj1sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu vreau să te ascult.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-coaching-open"
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0038",
+    "ro": "Ești optimist?",
+    "en": "Are you optimistic?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ești",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres2sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "optimist?",
+        "units": [
+          {
+            "lex": "optimist",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Sunt optimist.",
+        "en": "I'm optimistic.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-coaching-open"
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0039",
+    "ro": "Ce te interesează?",
+    "en": "What interests you?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "wh-q",
+      "clitic-acc",
+      "pres-ez-esc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "te",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "interesează?",
+        "units": [
+          {
+            "lex": "interesa",
+            "form": "pres3sg",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-coaching-open"
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0040",
+    "ro": "Primești feedback de la mine.",
+    "en": "You get feedback from me.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "pres-ez-esc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Primești",
+        "units": [
+          {
+            "lex": "primi",
+            "form": "pres2sg",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "feedback",
+        "units": [
+          {
+            "lex": "feedback",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mine.",
+        "units": [
+          {
+            "lex": "mine",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Primesc feedback de la tine.",
+        "en": "I get feedback from you.",
+        "targetTokens": [
+          0,
+          4
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-coaching-feedback"
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0041",
+    "ro": "Ai primit feedback?",
+    "en": "Have you got feedback?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ai",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "2sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "primit",
+        "units": [
+          {
+            "lex": "primi",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "feedback?",
+        "units": [
+          {
+            "lex": "feedback",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-ai primit feedback?",
+        "accept": [
+          "Nu ai primit feedback?"
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-coaching-feedback"
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0042",
+    "ro": "Îți arăt cum se face.",
+    "en": "I'll show you how it's done.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îți",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "arăt",
+        "units": [
+          {
+            "lex": "arata",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cum",
+        "units": [
+          {
+            "lex": "cum",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "se",
+        "units": [
+          {
+            "lex": "se",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "face.",
+        "units": [
+          {
+            "lex": "face",
+            "form": "pres3sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu-ți arăt cum se face.",
+        "accept": [
+          "Nu îți arăt cum se face."
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-coaching-feedback"
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0043",
+    "ro": "Îți aduc o veste bună.",
+    "en": "I've got good news for you.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îți",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "aduc",
+        "units": [
+          {
+            "lex": "aduce",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "veste",
+        "units": [
+          {
+            "lex": "veste",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "bună.",
+        "units": [
+          {
+            "lex": "bun",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu-ți aduc o veste bună.",
+        "accept": [
+          "Nu îți aduc o veste bună."
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-coaching-feedback"
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0044",
+    "ro": "Care e prima prioritate?",
+    "en": "Which is the first priority?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "wh-q",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Care",
+        "units": [
+          {
+            "lex": "care",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "prima",
+        "units": [
+          {
+            "lex": "prim",
+            "form": "fsg"
+          }
+        ]
+      },
+      {
+        "t": "prioritate?",
+        "units": [
+          {
+            "lex": "prioritate",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-coaching-goals"
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0045",
+    "ro": "Ești prea serios.",
+    "en": "You're too serious.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ești",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres2sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "prea",
+        "units": [
+          {
+            "lex": "prea",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "serios.",
+        "units": [
+          {
+            "lex": "serios",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Sunt prea serios.",
+        "en": "I'm too serious.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-coaching-support"
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0046",
+    "ro": "Îți promit că te ajut.",
+    "en": "I promise I'll help you.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îți",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "promit",
+        "units": [
+          {
+            "lex": "promite",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "că",
+        "units": [
+          {
+            "lex": "ca-conj",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "te",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "acc"
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "ajut.",
+        "units": [
+          {
+            "lex": "ajuta",
+            "form": "pres1sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-coaching-support"
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0047",
+    "ro": "Ți-e somn?",
+    "en": "Are you sleepy?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "mi-e-construction"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ți-e",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "datShort",
+            "pattern": "mi-e-construction"
+          },
+          {
+            "lex": "fi",
+            "form": "pres3sg"
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "somn?",
+        "units": [
+          {
+            "lex": "somn",
+            "form": "sg",
+            "pattern": "mi-e-construction",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Mi-e somn.",
+        "en": "I'm sleepy.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-coaching-support"
     ]
   }
 ]
