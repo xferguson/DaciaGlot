@@ -199,7 +199,7 @@ export function validateContent(raw, { fileOf = new Map(), phase = 1 } = {}) {
   return { errors, warnings };
 }
 
-/** Rule 11 — every file under app/js and app/css appears in the sw.js precache list. */
+/** Rule 11 — every file under app/js, app/css and app/icons appears in the sw.js precache list. */
 export function checkPrecache(appDir) {
   const swPath = join(appDir, "sw.js");
   if (!existsSync(swPath)) return { skipped: true, errors: [] };
@@ -218,6 +218,11 @@ export function checkPrecache(appDir) {
   };
   walk(join(appDir, "js"));
   walk(join(appDir, "css"));
+  walk(join(appDir, "icons"));
+  const ver = /APP_VERSION\s*=\s*"([^"]+)"/;
+  const swVer = sw.match(ver)?.[1];
+  const appVer = existsSync(join(appDir, "js/version.js")) ? readFileSync(join(appDir, "js/version.js"), "utf8").match(ver)?.[1] : null;
+  if (appVer && swVer !== appVer) errors.push({ file: "app/sw.js", id: "APP_VERSION", rule: 11, message: `sw.js APP_VERSION "${swVer}" does not match js/version.js "${appVer}"` });
   return { skipped: false, errors };
 }
 
