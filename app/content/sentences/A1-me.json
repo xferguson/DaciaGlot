@@ -3498,5 +3498,907 @@
         ]
       }
     ]
+  },
+  {
+    "id": "s-a1-me-0051",
+    "ro": "Mama locuiește în Timișoara.",
+    "en": "My mom lives in Timișoara.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "def-sg",
+      "pres-ez-esc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mama",
+        "units": [
+          {
+            "lex": "mama",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "locuiește",
+        "units": [
+          {
+            "lex": "locui",
+            "form": "pres3sg",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Timișoara.",
+        "units": [
+          {
+            "lex": "timisoara",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Mama nu locuiește în Timișoara.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-family"
+    ]
+  },
+  {
+    "id": "s-a1-me-0052",
+    "ro": "Avem o pisică acasă.",
+    "en": "We have a cat at home.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Avem",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres1pl",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "pisică",
+        "units": [
+          {
+            "lex": "pisica",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acasă.",
+        "units": [
+          {
+            "lex": "acasa",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1pl>1sg",
+        "ro": "Am o pisică acasă.",
+        "en": "I have a cat at home.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-family"
+    ]
+  },
+  {
+    "id": "s-a1-me-0053",
+    "ro": "Pisica mănâncă mult.",
+    "en": "The cat eats a lot.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "def-sg",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Pisica",
+        "units": [
+          {
+            "lex": "pisica",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mănâncă",
+        "units": [
+          {
+            "lex": "manca",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mult.",
+        "units": [
+          {
+            "lex": "mult",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-me-family"
+    ]
+  },
+  {
+    "id": "s-a1-me-0054",
+    "ro": "Familia e mare.",
+    "en": "The family is big.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Familia",
+        "units": [
+          {
+            "lex": "familie",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "mare.",
+        "units": [
+          {
+            "lex": "mare-adj",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "plural",
+        "ro": "Familiile sunt mari.",
+        "en": "The families are big.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-family"
+    ]
+  },
+  {
+    "id": "s-a1-me-0055",
+    "ro": "Casa e mică, dar caldă.",
+    "en": "The house is small, but warm.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Casa",
+        "units": [
+          {
+            "lex": "casa",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "mică,",
+        "units": [
+          {
+            "lex": "mic",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "dar",
+        "units": [
+          {
+            "lex": "dar",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "caldă.",
+        "units": [
+          {
+            "lex": "cald",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "plural",
+        "ro": "Casele sunt mici, dar calde.",
+        "en": "The houses are small, but warm.",
+        "targetTokens": [
+          0,
+          1,
+          2,
+          4
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-family"
+    ]
+  },
+  {
+    "id": "s-a1-me-0056",
+    "ro": "Programatorul lucrează acasă.",
+    "en": "The developer works from home.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "def-sg",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Programatorul",
+        "units": [
+          {
+            "lex": "programator",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "lucrează",
+        "units": [
+          {
+            "lex": "lucra",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acasă.",
+        "units": [
+          {
+            "lex": "acasa",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-family"
+    ]
+  },
+  {
+    "id": "s-a1-me-0057",
+    "ro": "Câți colegi ai?",
+    "en": "How many colleagues do you have?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "wh-q",
+      "noun-pl",
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Câți",
+        "units": [
+          {
+            "lex": "cati",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "colegi",
+        "units": [
+          {
+            "lex": "coleg",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ai?",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-family"
+    ]
+  },
+  {
+    "id": "s-a1-me-0058",
+    "ro": "Îi dau cartea lui Andrei.",
+    "en": "I'm giving the book to Andrei.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îi",
+        "units": [
+          {
+            "lex": "pron-3sg-m",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "glue": "clitic",
+        "cloze": true
+      },
+      {
+        "t": "dau",
+        "units": [
+          {
+            "lex": "da",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cartea",
+        "units": [
+          {
+            "lex": "carte",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "lui",
+        "units": [
+          {
+            "lex": "lui",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Andrei.",
+        "units": [
+          {
+            "lex": "andrei",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-family"
+    ]
+  },
+  {
+    "id": "s-a1-me-0059",
+    "ro": "Lucrăm la aceeași firmă.",
+    "en": "We work at the same company.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Lucrăm",
+        "units": [
+          {
+            "lex": "lucra",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "aceeași",
+        "units": [
+          {
+            "lex": "acelasi",
+            "form": "fsg"
+          }
+        ]
+      },
+      {
+        "t": "firmă.",
+        "units": [
+          {
+            "lex": "firma",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-me-family"
+    ]
+  },
+  {
+    "id": "s-a1-me-0060",
+    "ro": "Locuim în același oraș.",
+    "en": "We live in the same city.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Locuim",
+        "units": [
+          {
+            "lex": "locui",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "același",
+        "units": [
+          {
+            "lex": "acelasi",
+            "form": "msg"
+          }
+        ]
+      },
+      {
+        "t": "oraș.",
+        "units": [
+          {
+            "lex": "oras",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-me-origin"
+    ]
+  },
+  {
+    "id": "s-a1-me-0061",
+    "ro": "Noi suntem din Iași.",
+    "en": "We're from Iași.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Noi",
+        "units": [
+          {
+            "lex": "noi-pron",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "suntem",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres1pl",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "din",
+        "units": [
+          {
+            "lex": "din",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Iași.",
+        "units": [
+          {
+            "lex": "iasi",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-me-origin"
+    ]
+  },
+  {
+    "id": "s-a1-me-0062",
+    "ro": "Vorbim engleză la ședință.",
+    "en": "We speak English in the meeting.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vorbim",
+        "units": [
+          {
+            "lex": "vorbi",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "engleză",
+        "units": [
+          {
+            "lex": "engleza",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "ședință.",
+        "units": [
+          {
+            "lex": "sedinta",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-me-languages"
+    ]
+  },
+  {
+    "id": "s-a1-me-0063",
+    "ro": "Mergem la mare în weekend.",
+    "en": "We're going to the seaside at the weekend.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mergem",
+        "units": [
+          {
+            "lex": "merge",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mare",
+        "units": [
+          {
+            "lex": "mare",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "weekend.",
+        "units": [
+          {
+            "lex": "weekend",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-me-weekend"
+    ]
+  },
+  {
+    "id": "s-a1-me-0064",
+    "ro": "Stăm acasă în weekend.",
+    "en": "We stay home at the weekend.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Stăm",
+        "units": [
+          {
+            "lex": "sta",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acasă",
+        "units": [
+          {
+            "lex": "acasa",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "weekend.",
+        "units": [
+          {
+            "lex": "weekend",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1pl>1sg",
+        "ro": "Stau acasă în weekend.",
+        "en": "I stay home at the weekend.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-weekend"
+    ]
   }
 ]

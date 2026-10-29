@@ -65,6 +65,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-systems"
     ]
   },
   {
@@ -148,6 +151,9 @@
           3
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-forecast"
     ]
   },
   {
@@ -227,6 +233,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-energy"
     ]
   },
   {
@@ -297,6 +306,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-systems"
     ]
   },
   {
@@ -366,6 +378,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-energy"
     ]
   },
   {
@@ -426,6 +441,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-systems"
     ]
   },
   {
@@ -486,6 +504,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-data"
     ]
   },
   {
@@ -549,6 +570,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-energy"
     ]
   },
   {
@@ -612,6 +636,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-systems"
     ]
   },
   {
@@ -700,6 +727,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-forecast"
     ]
   },
   {
@@ -792,6 +822,9 @@
           3
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-systems"
     ]
   },
   {
@@ -893,6 +926,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-energy"
     ]
   },
   {
@@ -978,6 +1014,9 @@
           3
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-data"
     ]
   },
   {
@@ -1075,6 +1114,9 @@
           4
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-data"
     ]
   },
   {
@@ -1157,6 +1199,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-data"
     ]
   },
   {
@@ -1227,6 +1272,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-systems"
     ]
   },
   {
@@ -1303,6 +1351,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-data"
     ]
   },
   {
@@ -1373,6 +1424,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-data"
     ]
   },
   {
@@ -1436,6 +1490,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-forecast"
     ]
   },
   {
@@ -1499,6 +1556,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-data"
     ]
   },
   {
@@ -1564,6 +1624,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-energy"
     ]
   },
   {
@@ -1648,6 +1711,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-energy"
     ]
   },
   {
@@ -1734,6 +1800,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-forecast"
     ]
   },
   {
@@ -1813,6 +1882,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-forecast"
     ]
   },
   {
@@ -1890,6 +1962,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-forecast"
     ]
   },
   {
@@ -1963,6 +2038,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-forecast"
     ]
   },
   {
@@ -2023,6 +2101,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-systems"
     ]
   },
   {
@@ -2088,6 +2169,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-systems"
     ]
   },
   {
@@ -2162,6 +2246,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-data"
     ]
   },
   {
@@ -2235,6 +2322,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-forecast"
     ]
   },
   {
@@ -2310,6 +2400,9 @@
           3
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-data"
     ]
   },
   {
@@ -2385,6 +2478,9 @@
           3
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-data"
     ]
   },
   {
@@ -2443,6 +2539,1101 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-domain-systems"
+    ]
+  },
+  {
+    "id": "s-a1-domain-0034",
+    "ro": "Consumul de energie crește iarna.",
+    "en": "Energy consumption rises in winter.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Consumul",
+        "units": [
+          {
+            "lex": "consum",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "energie",
+        "units": [
+          {
+            "lex": "energie",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "crește",
+        "units": [
+          {
+            "lex": "creste",
+            "form": "pres3sg"
+          }
+        ]
+      },
+      {
+        "t": "iarna.",
+        "units": [
+          {
+            "lex": "iarna",
+            "form": "sgDef"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-domain-energy"
+    ]
+  },
+  {
+    "id": "s-a1-domain-0035",
+    "ro": "Noaptea, vântul e mai rece.",
+    "en": "At night, the wind is colder.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Noaptea,",
+        "units": [
+          {
+            "lex": "noapte",
+            "form": "sgDef"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "vântul",
+        "units": [
+          {
+            "lex": "vant",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "mai",
+        "units": [
+          {
+            "lex": "mai",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "rece.",
+        "units": [
+          {
+            "lex": "rece",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-domain-forecast"
+    ]
+  },
+  {
+    "id": "s-a1-domain-0036",
+    "ro": "Vântul e mic azi.",
+    "en": "The wind is light today.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vântul",
+        "units": [
+          {
+            "lex": "vant",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "mic",
+        "units": [
+          {
+            "lex": "mic",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "azi.",
+        "units": [
+          {
+            "lex": "azi",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Vântul nu e mic azi.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-domain-forecast"
+    ]
+  },
+  {
+    "id": "s-a1-domain-0037",
+    "ro": "Dimineața consumul crește.",
+    "en": "Consumption rises in the morning.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Dimineața",
+        "units": [
+          {
+            "lex": "dimineata",
+            "form": "sgDef"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "consumul",
+        "units": [
+          {
+            "lex": "consum",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "crește.",
+        "units": [
+          {
+            "lex": "creste",
+            "form": "pres3sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-domain-energy"
+    ]
+  },
+  {
+    "id": "s-a1-domain-0038",
+    "ro": "Noaptea consumul e mic.",
+    "en": "At night consumption is low.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Noaptea",
+        "units": [
+          {
+            "lex": "noapte",
+            "form": "sgDef"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "consumul",
+        "units": [
+          {
+            "lex": "consum",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "mic.",
+        "units": [
+          {
+            "lex": "mic",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Noaptea consumul nu e mic.",
+        "targetTokens": [
+          2
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-domain-energy"
+    ]
+  },
+  {
+    "id": "s-a1-domain-0039",
+    "ro": "Iarna prețurile sunt mari.",
+    "en": "In winter prices are high.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-pl",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Iarna",
+        "units": [
+          {
+            "lex": "iarna",
+            "form": "sgDef"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "prețurile",
+        "units": [
+          {
+            "lex": "pret",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3pl",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "mari.",
+        "units": [
+          {
+            "lex": "mare-adj",
+            "form": "mpl"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Iarna prețul e mare.",
+        "en": "In winter the price is high.",
+        "targetTokens": [
+          1,
+          2,
+          3
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-domain-energy"
+    ]
+  },
+  {
+    "id": "s-a1-domain-0040",
+    "ro": "Graficul arată consumul zilnic.",
+    "en": "The chart shows the daily consumption.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Graficul",
+        "units": [
+          {
+            "lex": "grafic",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "arată",
+        "units": [
+          {
+            "lex": "arata",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "consumul",
+        "units": [
+          {
+            "lex": "consum",
+            "form": "sgDef",
+            "pattern": "def-sg"
+          }
+        ]
+      },
+      {
+        "t": "zilnic.",
+        "units": [
+          {
+            "lex": "zilnic",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-domain-data"
+    ]
+  },
+  {
+    "id": "s-a1-domain-0041",
+    "ro": "Graficul e clar.",
+    "en": "The chart is clear.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Graficul",
+        "units": [
+          {
+            "lex": "grafic",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "clar.",
+        "units": [
+          {
+            "lex": "clar",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Graficul nu e clar.",
+        "targetTokens": [
+          1
+        ]
+      },
+      {
+        "op": "plural",
+        "ro": "Graficele sunt clare.",
+        "en": "The charts are clear.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-domain-data"
+    ]
+  },
+  {
+    "id": "s-a1-domain-0042",
+    "ro": "Sursa e stabilă.",
+    "en": "The source is stable.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Sursa",
+        "units": [
+          {
+            "lex": "sursa",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "stabilă.",
+        "units": [
+          {
+            "lex": "stabil",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Sursa nu e stabilă.",
+        "targetTokens": [
+          1
+        ]
+      },
+      {
+        "op": "plural",
+        "ro": "Sursele sunt stabile.",
+        "en": "The sources are stable.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-domain-data"
+    ]
+  },
+  {
+    "id": "s-a1-domain-0043",
+    "ro": "Analizăm sursele de date.",
+    "en": "We're analyzing the data sources.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "pres-ez-esc",
+      "def-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Analizăm",
+        "units": [
+          {
+            "lex": "analiza",
+            "form": "pres1pl",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sursele",
+        "units": [
+          {
+            "lex": "sursa",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "date.",
+        "units": [
+          {
+            "lex": "date",
+            "form": "pl"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Analizăm sursa de date.",
+        "en": "We're analyzing the data source.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-domain-data"
+    ]
+  },
+  {
+    "id": "s-a1-domain-0044",
+    "ro": "Serverul rulează funcția.",
+    "en": "The server runs the function.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg",
+      "pres-ez-esc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Serverul",
+        "units": [
+          {
+            "lex": "server",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "rulează",
+        "units": [
+          {
+            "lex": "rula",
+            "form": "pres3sg",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "funcția.",
+        "units": [
+          {
+            "lex": "functie",
+            "form": "sgDef",
+            "pattern": "def-sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-domain-systems"
+    ]
+  },
+  {
+    "id": "s-a1-domain-0045",
+    "ro": "Optimizăm modelul pentru energie.",
+    "en": "We're optimizing the model for energy.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "pres-ez-esc",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Optimizăm",
+        "units": [
+          {
+            "lex": "optimiza",
+            "form": "pres1pl",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "modelul",
+        "units": [
+          {
+            "lex": "model",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "pentru",
+        "units": [
+          {
+            "lex": "pentru",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "energie.",
+        "units": [
+          {
+            "lex": "energie",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Am optimizat modelul pentru energie.",
+        "en": "We optimized the model for energy.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-domain-energy"
+    ]
+  },
+  {
+    "id": "s-a1-domain-0046",
+    "ro": "Am optimizat pipeline-ul ieri.",
+    "en": "I optimized the pipeline yesterday.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "perfect-compus",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "optimizat",
+        "units": [
+          {
+            "lex": "optimiza",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "pipeline-ul",
+        "units": [
+          {
+            "lex": "pipeline",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ieri.",
+        "units": [
+          {
+            "lex": "ieri",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-am optimizat pipeline-ul ieri.",
+        "accept": [
+          "Nu am optimizat pipeline-ul ieri."
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-domain-systems"
+    ]
+  },
+  {
+    "id": "s-a1-domain-0047",
+    "ro": "Pipeline-ul pornește la zece.",
+    "en": "The pipeline starts at ten.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg",
+      "pres-ez-esc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Pipeline-ul",
+        "units": [
+          {
+            "lex": "pipeline",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "pornește",
+        "units": [
+          {
+            "lex": "porni",
+            "form": "pres3sg",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "zece.",
+        "units": [
+          {
+            "lex": "zece",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-domain-systems"
+    ]
+  },
+  {
+    "id": "s-a1-domain-0048",
+    "ro": "Avem trei servere.",
+    "en": "We have three servers.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "have-pres",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Avem",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres1pl",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "trei",
+        "units": [
+          {
+            "lex": "trei",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "servere.",
+        "units": [
+          {
+            "lex": "server",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Avem un server.",
+        "en": "We have one server.",
+        "targetTokens": [
+          1,
+          2
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-domain-systems"
+    ]
+  },
+  {
+    "id": "s-a1-domain-0049",
+    "ro": "Prognoza spune că e frig.",
+    "en": "The forecast says it's cold.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Prognoza",
+        "units": [
+          {
+            "lex": "prognoza",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "spune",
+        "units": [
+          {
+            "lex": "spune",
+            "form": "pres3sg"
+          }
+        ]
+      },
+      {
+        "t": "că",
+        "units": [
+          {
+            "lex": "ca-conj",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "frig.",
+        "units": [
+          {
+            "lex": "frig",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-domain-forecast"
     ]
   }
 ]
