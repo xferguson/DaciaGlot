@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Content integrity validator (CONTENT_GUIDE §4). Usage:
-//   node scripts/validate-content.mjs [--content <dir>] [--phase <n>] [--coverage]
+//   node scripts/validate-content.mjs [--content <dir>] [--phase <n>] [--coverage] [--strict-a1]
 import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
 import { join, relative, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -199,6 +199,83 @@ export function validateContent(raw, { fileOf = new Map(), phase = 1 } = {}) {
   return { errors, warnings };
 }
 
+export const TARGETS = { patternSentences: 10, patternHeads: 6, canDoSentences: 5, situationSentences: 10, lexemeSentences: 2 };
+/** Patterns whose head can only ever be one lexeme (T09), so the head-lexeme target does not apply. */
+const SINGLE_HEAD_PATTERNS = new Set(["be-pres", "have-pres", "neg-nu"]);
+
+/**
+ * Coverage statistics (CONTENT_GUIDE §4). Rows carry `low: true` when below target.
+ * @param {{patterns: object[], lexemes: object[], sentences: object[], levels: object[]}} raw
+ */
+export function computeCoverage({ patterns, lexemes, sentences, levels }) {
+  const patRows = patterns.map((p) => ({ id: p.id, sentences: 0, heads: new Set(), glueCloze: 0 }));
+  const patRow = new Map(patRows.map((r) => [r.id, r]));
+  const sitRows = new Map(SITUATIONS.map((id) => [id, { id, sentences: 0 }]));
+  const canDos = levels.flatMap((lv) => (lv.canDos ?? []).map((c) => ({ ...c, level: lv.id })));
+  const cdRows = new Map(canDos.map((c) => [c.id, { id: c.id, level: c.level, sentences: 0 }]));
+  const lexCount = new Map(lexemes.map((l) => [l.id, new Set()]));
+
+  for (const s of sentences) {
+    for (const p of s.patterns ?? []) if (patRow.has(p)) patRow.get(p).sentences++;
+    for (const sit of s.situations ?? []) if (sitRows.has(sit)) sitRows.get(sit).sentences++;
+    for (const c of s.canDo ?? []) if (cdRows.has(c)) cdRows.get(c).sentences++;
+    for (const tok of s.tokens ?? []) {
+      for (const u of tok.units ?? []) {
+        lexCount.get(u.lex)?.add(s.id);
+        const row = u.pattern && patRow.get(u.pattern);
+        if (!row) continue;
+        if (u.head) row.heads.add(u.lex);
+        if (tok.glue && tok.cloze) row.glueCloze++;
+      }
+    }
+  }
+  const patternsOut = patRows.map((r) => ({
+    id: r.id, sentences: r.sentences, heads: r.heads.size, glueCloze: r.glueCloze,
+    low: r.sentences < TARGETS.patternSentences || (!SINGLE_HEAD_PATTERNS.has(r.id) && r.heads.size < TARGETS.patternHeads),
+  }));
+  const situations = [...sitRows.values()].map((r) => ({ ...r, low: r.sentences < TARGETS.situationSentences }));
+  const canDosOut = [...cdRows.values()].map((r) => ({ ...r, low: r.sentences < TARGETS.canDoSentences }));
+  const thinLexemes = lexemes
+    .filter((l) => !l.retired && lexCount.get(l.id).size < TARGETS.lexemeSentences)
+    .map((l) => ({ id: l.id, sentences: lexCount.get(l.id).size }));
+  return { patterns: patternsOut, situations, canDos: canDosOut, thinLexemes };
+}
+
+/** Render the coverage statistics as Markdown tables; below-target rows are marked ⚠. */
+export function coverageReport(raw) {
+  const cov = computeCoverage(raw);
+  const mark = (r) => (r.low ? "⚠ " : "");
+  const table = (title, head, rows) => [`### ${title}`, "", `| ${head.join(" | ")} |`, `|${head.map(() => "---").join("|")}|`, ...rows.map((r) => `| ${r.join(" | ")} |`), ""].join("\n");
+  return [
+    "## Content coverage",
+    "",
+    table("Patterns", ["Pattern", "Sentences", "Head lexemes", "Glue clozes"], cov.patterns.map((r) => [mark(r) + r.id, r.sentences, r.heads, r.glueCloze])),
+    table("Situations", ["Situation", "Sentences"], cov.situations.map((r) => [mark(r) + r.id, r.sentences])),
+    table("Can-dos", ["Can-do", "Level", "Sentences"], cov.canDos.map((r) => [mark(r) + r.id, r.level, r.sentences])),
+    cov.thinLexemes.length
+      ? table(`Lexemes with < ${TARGETS.lexemeSentences} sentences (key-forms would never unlock)`, ["Lexeme", "Sentences"], cov.thinLexemes.map((r) => ["⚠ " + r.id, r.sentences]))
+      : `### Lexemes with < ${TARGETS.lexemeSentences} sentences\n\nNone.\n`,
+    `Targets: pattern ≥ ${TARGETS.patternSentences} sentences and ≥ ${TARGETS.patternHeads} head lexemes (not ${[...SINGLE_HEAD_PATTERNS].join(", ")}); situation ≥ ${TARGETS.situationSentences}; can-do ≥ ${TARGETS.canDoSentences}.`,
+    "",
+  ].join("\n");
+}
+
+/** `--strict-a1`: messages for A1 can-dos and required patterns that are below target. */
+export function strictA1Failures(raw) {
+  const cov = computeCoverage(raw);
+  const a1 = raw.levels.find((lv) => lv.id === "A1");
+  if (!a1) return ["no A1 level in the manifest"];
+  const out = [];
+  for (const c of cov.canDos) if (c.level === "A1" && c.sentences < TARGETS.canDoSentences) out.push(`can-do ${c.id}: ${c.sentences} sentence(s), need ≥ ${TARGETS.canDoSentences}`);
+  const byId = new Map(cov.patterns.map((p) => [p.id, p]));
+  for (const id of a1.requiredPatterns ?? []) {
+    const p = byId.get(id);
+    if (!p) out.push(`pattern ${id}: unknown`);
+    else if (p.low) out.push(`pattern ${id}: ${p.sentences} sentence(s), ${p.heads} head lexeme(s), below target`);
+  }
+  return out;
+}
+
 /** Rule 11 — every file under app/js, app/css and app/icons appears in the sw.js precache list. */
 export function checkPrecache(appDir) {
   const swPath = join(appDir, "sw.js");
@@ -274,7 +351,10 @@ function main(argv) {
     if (pre.skipped) console.log("notice: app/sw.js does not exist yet; skipping rule 11 (precache)");
     errors.push(...pre.errors);
   }
-  if (argv.includes("--coverage")) console.log("notice: --coverage is not implemented yet (T22)");
+  if (argv.includes("--coverage")) console.log(coverageReport(loaded.raw));
+  if (argv.includes("--strict-a1")) {
+    for (const m of strictA1Failures(loaded.raw)) errors.push({ file: "levels/A1.json", id: "strict-a1", rule: "strict-a1", message: m });
+  }
 
   for (const w of warnings) console.log(`warning: ${w.file}:${w.id}: ${w.message}`);
   for (const e of errors) console.error(`error: ${e.file}:${e.id}: [rule ${e.rule}] ${e.message}`);
