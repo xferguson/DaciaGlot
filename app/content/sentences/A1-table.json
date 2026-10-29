@@ -1,0 +1,1234 @@
+[
+  {
+    "id": "s-a1-table-0003",
+    "ro": "Noroc!",
+    "en": "Cheers!",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Noroc!",
+        "units": [
+          {
+            "lex": "noroc",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0013",
+    "ro": "Nota, te rog.",
+    "en": "The bill, please.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nota,",
+        "units": [
+          {
+            "lex": "nota",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "te",
+        "units": []
+      },
+      {
+        "t": "rog.",
+        "units": [
+          {
+            "lex": "te-rog",
+            "form": "base"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0008",
+    "ro": "Iau supa.",
+    "en": "I'll have the soup.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Iau",
+        "units": [
+          {
+            "lex": "lua",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "supa.",
+        "units": [
+          {
+            "lex": "supa",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Iei supa.",
+        "en": "You'll have the soup.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Ia supa.",
+        "en": "He/She will have the soup.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0001",
+    "ro": "Vreau o bere.",
+    "en": "I'd like a beer.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Vreau",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "bere.",
+        "units": [
+          {
+            "lex": "bere",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu vreau o bere.",
+        "en": "I don't want a beer.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Vrea o bere.",
+        "en": "He/She wants a beer.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0004",
+    "ro": "Vreau o apă.",
+    "en": "I'd like a water.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vreau",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "apă.",
+        "units": [
+          {
+            "lex": "apa",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu vreau o apă.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Vrea o apă.",
+        "en": "He/She wants a water.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0005",
+    "ro": "Vreau o cafea, te rog.",
+    "en": "I'd like a coffee, please.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vreau",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "cafea,",
+        "units": [
+          {
+            "lex": "cafea",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "te",
+        "units": []
+      },
+      {
+        "t": "rog.",
+        "units": [
+          {
+            "lex": "te-rog",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Vrea o cafea, te rog.",
+        "en": "He/She would like a coffee, please.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0006",
+    "ro": "Vrei o bere?",
+    "en": "Do you want a beer?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vrei",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "bere?",
+        "units": [
+          {
+            "lex": "bere",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu vrei o bere?",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0011",
+    "ro": "Vreau să plătesc.",
+    "en": "I'd like to pay.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vreau",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "plătesc.",
+        "units": [
+          {
+            "lex": "plati",
+            "form": "subj1sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu vreau să plătesc.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Vrei să plătești.",
+        "en": "You'd like to pay.",
+        "targetTokens": [
+          0,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0010",
+    "ro": "Pot să comand?",
+    "en": "Can I order?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Pot",
+        "units": [
+          {
+            "lex": "putea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa",
+        "cloze": true
+      },
+      {
+        "t": "comand?",
+        "units": [
+          {
+            "lex": "comanda",
+            "form": "subj1sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Poți să comanzi?",
+        "en": "Can you order?",
+        "targetTokens": [
+          0,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0002",
+    "ro": "Ce vrei să mănânci?",
+    "en": "What do you want to eat?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "vrei",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "mănânci?",
+        "units": [
+          {
+            "lex": "manca",
+            "form": "subj2sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce vreau să mănânc?",
+        "en": "What do I want to eat?",
+        "targetTokens": [
+          1,
+          3
+        ]
+      },
+      {
+        "op": "person:2sg>3sg",
+        "ro": "Ce vrea să mănânce?",
+        "en": "What does he/she want to eat?",
+        "targetTokens": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0007",
+    "ro": "Ce vrei să bei?",
+    "en": "What do you want to drink?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "vrei",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "bei?",
+        "units": [
+          {
+            "lex": "bea",
+            "form": "subj2sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce vreau să beau?",
+        "en": "What do I want to drink?",
+        "targetTokens": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0009",
+    "ro": "Ce iei de mâncare?",
+    "en": "What are you having to eat?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "iei",
+        "units": [
+          {
+            "lex": "lua",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mâncare?",
+        "units": [
+          {
+            "lex": "mancare",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce iau de mâncare?",
+        "en": "What am I having to eat?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0012",
+    "ro": "Cât costă berea?",
+    "en": "How much does the beer cost?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cât",
+        "units": [
+          {
+            "lex": "cat",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "costă",
+        "units": [
+          {
+            "lex": "costa",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "berea?",
+        "units": [
+          {
+            "lex": "bere",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0015",
+    "ro": "Berea e bună.",
+    "en": "The beer is good.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Berea",
+        "units": [
+          {
+            "lex": "bere",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "bună.",
+        "units": [
+          {
+            "lex": "bun",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Berea nu e bună.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0014",
+    "ro": "Mâncarea e foarte bună.",
+    "en": "The food is very good.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mâncarea",
+        "units": [
+          {
+            "lex": "mancare",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "foarte",
+        "units": [
+          {
+            "lex": "foarte",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "bună.",
+        "units": [
+          {
+            "lex": "bun",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Mâncarea nu e foarte bună.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0016",
+    "ro": "Vinul e bun.",
+    "en": "The wine is good.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vinul",
+        "units": [
+          {
+            "lex": "vin",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "bun.",
+        "units": [
+          {
+            "lex": "bun",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Vinul nu e bun.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0018",
+    "ro": "Ai mâncat?",
+    "en": "Have you eaten?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ai",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "2sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "mâncat?",
+        "units": [
+          {
+            "lex": "manca",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-ai mâncat?",
+        "accept": [
+          "Nu ai mâncat?"
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0020",
+    "ro": "Ce ai comandat?",
+    "en": "What did you order?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "wh-q",
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "ai",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "2sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux",
+        "cloze": true
+      },
+      {
+        "t": "comandat?",
+        "units": [
+          {
+            "lex": "comanda",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce am comandat?",
+        "en": "What did I order?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0017",
+    "ro": "Am mâncat bine.",
+    "en": "I ate well.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux",
+        "cloze": true
+      },
+      {
+        "t": "mâncat",
+        "units": [
+          {
+            "lex": "manca",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "bine.",
+        "units": [
+          {
+            "lex": "bine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-am mâncat bine.",
+        "accept": [
+          "Nu am mâncat bine."
+        ],
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "tense:perf>pres",
+        "ro": "Mănânc bine.",
+        "targetTokens": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-table-0019",
+    "ro": "Am băut o bere.",
+    "en": "I drank a beer.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "table"
+    ],
+    "patterns": [
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "băut",
+        "units": [
+          {
+            "lex": "bea",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "bere.",
+        "units": [
+          {
+            "lex": "bere",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>3sg",
+        "ro": "A băut o bere.",
+        "en": "He/She drank a beer.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  }
+]
