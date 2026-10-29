@@ -1,0 +1,2242 @@
+[
+  {
+    "id": "s-a1-coaching-0001",
+    "ro": "Cum merge?",
+    "en": "How's it going?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "wh-q"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cum",
+        "units": [
+          {
+            "lex": "cum",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "merge?",
+        "units": [
+          {
+            "lex": "merge",
+            "form": "inf"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Cum a mers?",
+        "en": "How did it go?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0002",
+    "ro": "Ce vrei să faci?",
+    "en": "What do you want to do?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "vrei",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "cloze": true,
+        "glue": "sa"
+      },
+      {
+        "t": "faci?",
+        "units": [
+          {
+            "lex": "face",
+            "form": "subj2sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce vreau să fac?",
+        "en": "What do I want to do?",
+        "targetTokens": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0003",
+    "ro": "De ce ai nevoie?",
+    "en": "What do you need?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "wh-q",
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "De",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "ai",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "nevoie?",
+        "units": [
+          {
+            "lex": "nevoie",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "De ce am nevoie?",
+        "en": "What do I need?",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0004",
+    "ro": "Poți să explici?",
+    "en": "Can you explain?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Poți",
+        "units": [
+          {
+            "lex": "putea",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "explici?",
+        "units": [
+          {
+            "lex": "explica",
+            "form": "subj2sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Pot să explic?",
+        "en": "Can I explain?",
+        "targetTokens": [
+          0,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0005",
+    "ro": "Ești gata?",
+    "en": "Are you ready?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ești",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres2sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "gata?",
+        "units": [
+          {
+            "lex": "gata",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Sunt gata?",
+        "en": "Am I ready?",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0006",
+    "ro": "Ai o idee?",
+    "en": "Do you have an idea?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ai",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "idee?",
+        "units": [
+          {
+            "lex": "idee",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>3sg",
+        "ro": "Are o idee?",
+        "en": "Does he/she have an idea?",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0007",
+    "ro": "Ai făcut bine.",
+    "en": "You did well.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ai",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "2sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "făcut",
+        "units": [
+          {
+            "lex": "face",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "bine.",
+        "units": [
+          {
+            "lex": "bine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-ai făcut bine.",
+        "accept": [
+          "Nu ai făcut bine."
+        ],
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Am făcut bine.",
+        "en": "I did well.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0008",
+    "ro": "Ai lucrat mult.",
+    "en": "You've worked a lot.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ai",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "2sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "lucrat",
+        "units": [
+          {
+            "lex": "lucra",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mult.",
+        "units": [
+          {
+            "lex": "mult",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-ai lucrat mult.",
+        "accept": [
+          "Nu ai lucrat mult."
+        ],
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:2sg>3sg",
+        "ro": "A lucrat mult.",
+        "en": "He/She worked a lot.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0009",
+    "ro": "Ai învățat repede.",
+    "en": "You learned quickly.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ai",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "2sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "învățat",
+        "units": [
+          {
+            "lex": "invata",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "repede.",
+        "units": [
+          {
+            "lex": "repede",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Am învățat repede.",
+        "en": "I learned quickly.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0010",
+    "ro": "Ce ai învățat?",
+    "en": "What did you learn?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "wh-q",
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "ai",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "2sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "învățat?",
+        "units": [
+          {
+            "lex": "invata",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce am învățat?",
+        "en": "What did I learn?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0011",
+    "ro": "Ce obiectiv ai?",
+    "en": "What goal do you have?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "wh-q",
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "obiectiv",
+        "units": [
+          {
+            "lex": "obiectiv",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ai?",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce obiectiv am?",
+        "en": "What goal do I have?",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0012",
+    "ro": "Obiectivul e clar.",
+    "en": "The goal is clear.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Obiectivul",
+        "units": [
+          {
+            "lex": "obiectiv",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "clar.",
+        "units": [
+          {
+            "lex": "clar",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Obiectivul nu e clar.",
+        "targetTokens": [
+          1
+        ]
+      },
+      {
+        "op": "tense:pres>perf",
+        "ro": "Obiectivul a fost clar.",
+        "en": "The goal was clear.",
+        "targetTokens": [
+          1
+        ]
+      },
+      {
+        "op": "plural",
+        "ro": "Obiectivele sunt clare.",
+        "en": "The goals are clear.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0013",
+    "ro": "Mulțumesc pentru feedback.",
+    "en": "Thanks for the feedback.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mulțumesc",
+        "units": [
+          {
+            "lex": "multumi",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "pentru",
+        "units": [
+          {
+            "lex": "pentru",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "feedback.",
+        "units": [
+          {
+            "lex": "feedback",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Mulțumește pentru feedback.",
+        "en": "He/She says thanks for the feedback.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0014",
+    "ro": "Sunt mândru de tine.",
+    "en": "I'm proud of you.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres1sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mândru",
+        "units": [
+          {
+            "lex": "mandru",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "tine.",
+        "units": [
+          {
+            "lex": "tine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu sunt mândru de tine.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "E mândru de tine.",
+        "en": "He's proud of you.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0015",
+    "ro": "Cum pot să te ajut?",
+    "en": "How can I help you?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high",
+      "modal-sa-12",
+      "clitic-acc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cum",
+        "units": [
+          {
+            "lex": "cum",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "pot",
+        "units": [
+          {
+            "lex": "putea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "te",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "ajut?",
+        "units": [
+          {
+            "lex": "ajuta",
+            "form": "subj1sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Cum poate să te ajute?",
+        "en": "How can he/she help you?",
+        "targetTokens": [
+          1,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0016",
+    "ro": "Te ascult.",
+    "en": "I'm listening.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "clitic-acc",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Te",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "ascult.",
+        "units": [
+          {
+            "lex": "asculta",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu te ascult.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Te ascultă.",
+        "en": "He/She is listening to you.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0017",
+    "ro": "Mă vezi?",
+    "en": "Can you see me?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "clitic-acc",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mă",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "vezi?",
+        "units": [
+          {
+            "lex": "vedea",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>3sg",
+        "ro": "Mă vede?",
+        "en": "Can he/she see me?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0018",
+    "ro": "Îți dau feedback mâine.",
+    "en": "I'll give you feedback tomorrow.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îți",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "dau",
+        "units": [
+          {
+            "lex": "da",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "feedback",
+        "units": [
+          {
+            "lex": "feedback",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mâine.",
+        "units": [
+          {
+            "lex": "maine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu-ți dau feedback mâine.",
+        "accept": [
+          "Nu îți dau feedback mâine."
+        ],
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Îți dă feedback mâine.",
+        "en": "He/She gives you feedback tomorrow.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0019",
+    "ro": "Îți place proiectul?",
+    "en": "Do you like the project?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îți",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "place",
+        "units": [
+          {
+            "lex": "placea",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "proiectul?",
+        "units": [
+          {
+            "lex": "proiect",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu-ți place proiectul?",
+        "accept": [
+          "Nu îți place proiectul?"
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0020",
+    "ro": "Ce îți trebuie?",
+    "en": "What do you need?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "wh-q",
+      "clitic-dat",
+      "pres-12-high"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "îți",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "trebuie?",
+        "units": [
+          {
+            "lex": "trebui",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce îmi trebuie?",
+        "en": "What do I need?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0021",
+    "ro": "Ți-am spus.",
+    "en": "I told you.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ți-am",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "datShort",
+            "pattern": "clitic-dat",
+            "head": true
+          },
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "spus.",
+        "units": [
+          {
+            "lex": "spune",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu ți-am spus.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Ți-a spus.",
+        "en": "He/She told you.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0022",
+    "ro": "Mi-ai dat o idee bună.",
+    "en": "You gave me a good idea.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mi-ai",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "datShort",
+            "pattern": "clitic-dat",
+            "head": true
+          },
+          {
+            "lex": "aux-perf",
+            "form": "2sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "dat",
+        "units": [
+          {
+            "lex": "da",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "idee",
+        "units": [
+          {
+            "lex": "idee",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "bună.",
+        "units": [
+          {
+            "lex": "bun",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu mi-ai dat o idee bună.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:2sg>3sg",
+        "ro": "Mi-a dat o idee bună.",
+        "en": "He/She gave me a good idea.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0023",
+    "ro": "Mi-e greu să explic.",
+    "en": "It's hard for me to explain.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "mi-e-construction"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mi-e",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "datShort",
+            "pattern": "mi-e-construction"
+          },
+          {
+            "lex": "fi",
+            "form": "pres3sg"
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "greu",
+        "units": [
+          {
+            "lex": "greu",
+            "form": "msg",
+            "pattern": "mi-e-construction",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "explic.",
+        "units": [
+          {
+            "lex": "explica",
+            "form": "subj1sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu mi-e greu să explic.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0024",
+    "ro": "Ți-e frică?",
+    "en": "Are you scared?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "mi-e-construction"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ți-e",
+        "units": [
+          {
+            "lex": "pron-2sg",
+            "form": "datShort",
+            "pattern": "mi-e-construction"
+          },
+          {
+            "lex": "fi",
+            "form": "pres3sg"
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "frică?",
+        "units": [
+          {
+            "lex": "frica",
+            "form": "sg",
+            "pattern": "mi-e-construction",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu ți-e frică.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Mi-e frică.",
+        "en": "I'm scared.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0025",
+    "ro": "O să fie bine.",
+    "en": "It'll be fine.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "fut-o-sa"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "sa"
+      },
+      {
+        "t": "fie",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "subj3",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "bine.",
+        "units": [
+          {
+            "lex": "bine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu o să fie bine.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "tense:fut>pres",
+        "ro": "E bine.",
+        "en": "It's fine.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0026",
+    "ro": "O să învățăm împreună.",
+    "en": "We'll learn together.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "fut-o-sa"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "învățăm",
+        "units": [
+          {
+            "lex": "invata",
+            "form": "subj1pl",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "împreună.",
+        "units": [
+          {
+            "lex": "impreuna",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu o să învățăm împreună.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0027",
+    "ro": "Cum o să rezolvi problema?",
+    "en": "How are you going to solve the problem?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "wh-q",
+      "fut-o-sa",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cum",
+        "units": [
+          {
+            "lex": "cum",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "rezolvi",
+        "units": [
+          {
+            "lex": "rezolva",
+            "form": "subj2sg",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "problema?",
+        "units": [
+          {
+            "lex": "problema",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Cum o să rezolv problema?",
+        "en": "How am I going to solve the problem?",
+        "targetTokens": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0028",
+    "ro": "Ce o să faci?",
+    "en": "What are you going to do?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "wh-q",
+      "fut-o-sa"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "sa"
+      },
+      {
+        "t": "faci?",
+        "units": [
+          {
+            "lex": "face",
+            "form": "subj2sg",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce o să fac?",
+        "en": "What am I going to do?",
+        "targetTokens": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0029",
+    "ro": "Obiectivele sunt clare?",
+    "en": "Are the goals clear?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "def-pl",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Obiectivele",
+        "units": [
+          {
+            "lex": "obiectiv",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3pl",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "clare?",
+        "units": [
+          {
+            "lex": "clar",
+            "form": "fpl"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Obiectivul e clar?",
+        "en": "Is the goal clear?",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0030",
+    "ro": "Ai două obiective?",
+    "en": "Do you have two goals?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "have-pres",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ai",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "două",
+        "units": [
+          {
+            "lex": "doua",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "obiective?",
+        "units": [
+          {
+            "lex": "obiectiv",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Ai un obiectiv?",
+        "en": "Do you have one goal?",
+        "targetTokens": [
+          1,
+          2
+        ]
+      },
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Am două obiective.",
+        "en": "I have two goals.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0031",
+    "ro": "Vorbim despre obiective.",
+    "en": "We're talking about goals.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "pres-full",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vorbim",
+        "units": [
+          {
+            "lex": "vorbi",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "despre",
+        "units": [
+          {
+            "lex": "despre",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "obiective.",
+        "units": [
+          {
+            "lex": "obiectiv",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Vorbim despre un obiectiv.",
+        "en": "We're talking about one goal.",
+        "targetTokens": [
+          2
+        ]
+      },
+      {
+        "op": "tense:pres>perf",
+        "ro": "Am vorbit despre obiective.",
+        "en": "We talked about goals.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0032",
+    "ro": "Ce vrem de la proiect?",
+    "en": "What do we want from the project?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "vrem",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "proiect?",
+        "units": [
+          {
+            "lex": "proiect",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1pl>1sg",
+        "ro": "Ce vreau de la proiect?",
+        "en": "What do I want from the project?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-coaching-0033",
+    "ro": "Dau feedback mâine.",
+    "en": "I'll give feedback tomorrow.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "coaching"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Dau",
+        "units": [
+          {
+            "lex": "da",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "feedback",
+        "units": [
+          {
+            "lex": "feedback",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mâine.",
+        "units": [
+          {
+            "lex": "maine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "add-dat:dat-2sg",
+        "ro": "Îți dau feedback mâine.",
+        "en": "I'll give you feedback tomorrow.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "negate",
+        "ro": "Nu dau feedback mâine.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  }
+]

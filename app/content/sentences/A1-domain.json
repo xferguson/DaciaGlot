@@ -1,0 +1,2448 @@
+[
+  {
+    "id": "s-a1-domain-0001",
+    "ro": "Modelul e gata.",
+    "en": "The model is ready.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Modelul",
+        "units": [
+          {
+            "lex": "model",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "gata.",
+        "units": [
+          {
+            "lex": "gata",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Modelul nu e gata.",
+        "targetTokens": [
+          1
+        ]
+      },
+      {
+        "op": "plural",
+        "ro": "Modelele sunt gata.",
+        "en": "The models are ready.",
+        "targetTokens": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0002",
+    "ro": "Prognoza nu e corectă.",
+    "en": "The forecast isn't correct.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg",
+      "neg-nu",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Prognoza",
+        "units": [
+          {
+            "lex": "prognoza",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "corectă.",
+        "units": [
+          {
+            "lex": "corect",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Prognoza e corectă.",
+        "targetTokens": [
+          1
+        ]
+      },
+      {
+        "op": "plural",
+        "ro": "Prognozele nu sunt corecte.",
+        "en": "The forecasts aren't correct.",
+        "targetTokens": [
+          0,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0003",
+    "ro": "Consumul e mare azi.",
+    "en": "Consumption is high today.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Consumul",
+        "units": [
+          {
+            "lex": "consum",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mare",
+        "units": [
+          {
+            "lex": "mare-adj",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "azi.",
+        "units": [
+          {
+            "lex": "azi",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Consumul nu e mare azi.",
+        "targetTokens": [
+          1
+        ]
+      },
+      {
+        "op": "plural",
+        "ro": "Consumurile sunt mari azi.",
+        "en": "Consumption figures are high today.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0004",
+    "ro": "Rețeaua e stabilă.",
+    "en": "The grid is stable.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Rețeaua",
+        "units": [
+          {
+            "lex": "retea",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "stabilă.",
+        "units": [
+          {
+            "lex": "stabil",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Rețeaua nu e stabilă.",
+        "targetTokens": [
+          1
+        ]
+      },
+      {
+        "op": "plural",
+        "ro": "Rețelele sunt stabile.",
+        "en": "The grids are stable.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0005",
+    "ro": "Energia e scumpă acum.",
+    "en": "Energy is expensive now.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Energia",
+        "units": [
+          {
+            "lex": "energie",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "scumpă",
+        "units": [
+          {
+            "lex": "scump",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acum.",
+        "units": [
+          {
+            "lex": "acum",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Energia nu e scumpă acum.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0006",
+    "ro": "Pipeline-ul nu merge.",
+    "en": "The pipeline isn't working.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg",
+      "neg-nu"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Pipeline-ul",
+        "units": [
+          {
+            "lex": "pipeline",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "merge.",
+        "units": [
+          {
+            "lex": "merge",
+            "form": "inf"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Pipeline-ul merge.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0007",
+    "ro": "Ce prezice modelul?",
+    "en": "What does the model predict?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "wh-q",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "prezice",
+        "units": [
+          {
+            "lex": "prezice",
+            "form": "inf"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "modelul?",
+        "units": [
+          {
+            "lex": "model",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Ce a prezis modelul?",
+        "en": "What did the model predict?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0008",
+    "ro": "Cât consumă firma?",
+    "en": "How much does the company consume?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cât",
+        "units": [
+          {
+            "lex": "cat",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "consumă",
+        "units": [
+          {
+            "lex": "consuma",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "firma?",
+        "units": [
+          {
+            "lex": "firma",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Cât a consumat firma?",
+        "en": "How much did the company consume?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0009",
+    "ro": "Când pornește pipeline-ul?",
+    "en": "When does the pipeline start?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Când",
+        "units": [
+          {
+            "lex": "cand",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "pornește",
+        "units": [
+          {
+            "lex": "porni",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "pipeline-ul?",
+        "units": [
+          {
+            "lex": "pipeline",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Când a pornit pipeline-ul?",
+        "en": "When did the pipeline start?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0010",
+    "ro": "Am verificat prognoza.",
+    "en": "I checked the forecast.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "perfect-compus",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "verificat",
+        "units": [
+          {
+            "lex": "verifica",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "prognoza.",
+        "units": [
+          {
+            "lex": "prognoza",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-am verificat prognoza.",
+        "accept": [
+          "Nu am verificat prognoza."
+        ],
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "A verificat prognoza.",
+        "en": "He/She checked the forecast.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "add-obj:acc-3sg-f",
+        "ro": "Am verificat-o.",
+        "en": "I checked it.",
+        "targetTokens": [
+          1
+        ]
+      },
+      {
+        "op": "indefinite",
+        "ro": "Am verificat o prognoză.",
+        "en": "I checked a forecast.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0011",
+    "ro": "Lucrez la un model nou.",
+    "en": "I'm working on a new model.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Lucrez",
+        "units": [
+          {
+            "lex": "lucra",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "un",
+        "units": [
+          {
+            "lex": "un",
+            "form": "m"
+          }
+        ]
+      },
+      {
+        "t": "model",
+        "units": [
+          {
+            "lex": "model",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "nou.",
+        "units": [
+          {
+            "lex": "nou",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu lucrez la un model nou.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Lucrează la un model nou.",
+        "en": "He/She is working on a new model.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "definite",
+        "ro": "Lucrez la modelul nou.",
+        "en": "I'm working on the new model.",
+        "targetTokens": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0012",
+    "ro": "Vreau să văd consumul de azi.",
+    "en": "I want to see today's consumption.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vreau",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "cloze": true,
+        "glue": "sa"
+      },
+      {
+        "t": "văd",
+        "units": [
+          {
+            "lex": "vedea",
+            "form": "subj1sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "consumul",
+        "units": [
+          {
+            "lex": "consum",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "azi.",
+        "units": [
+          {
+            "lex": "azi",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu vreau să văd consumul de azi.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "modal:putea",
+        "ro": "Pot să văd consumul de azi.",
+        "en": "I can see today's consumption.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0013",
+    "ro": "Poți să verifici prognoza?",
+    "en": "Can you check the forecast?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Poți",
+        "units": [
+          {
+            "lex": "putea",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "verifici",
+        "units": [
+          {
+            "lex": "verifica",
+            "form": "subj2sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "prognoza?",
+        "units": [
+          {
+            "lex": "prognoza",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Pot să verific prognoza?",
+        "en": "Can I check the forecast?",
+        "targetTokens": [
+          0,
+          2
+        ]
+      },
+      {
+        "op": "add-obj:acc-3sg-f",
+        "ro": "Poți s-o verifici?",
+        "en": "Can you check it?",
+        "targetTokens": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0014",
+    "ro": "Am nevoie de un model nou.",
+    "en": "I need a new model.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres1sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "nevoie",
+        "units": [
+          {
+            "lex": "nevoie",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "un",
+        "units": [
+          {
+            "lex": "un",
+            "form": "m"
+          }
+        ]
+      },
+      {
+        "t": "model",
+        "units": [
+          {
+            "lex": "model",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "nou.",
+        "units": [
+          {
+            "lex": "nou",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-am nevoie de un model nou.",
+        "accept": [
+          "Nu am nevoie de un model nou."
+        ],
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "definite",
+        "ro": "Am nevoie de modelul nou.",
+        "en": "I need the new model.",
+        "targetTokens": [
+          3,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0015",
+    "ro": "Datele vin din două surse.",
+    "en": "The data comes from two sources.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-pl",
+      "pres-full",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Datele",
+        "units": [
+          {
+            "lex": "date",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "vin",
+        "units": [
+          {
+            "lex": "veni",
+            "form": "pres3pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "din",
+        "units": [
+          {
+            "lex": "din",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "două",
+        "units": [
+          {
+            "lex": "doua",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "surse.",
+        "units": [
+          {
+            "lex": "sursa",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Datele au venit din două surse.",
+        "en": "The data came from two sources.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0016",
+    "ro": "Modelele rulează pe server.",
+    "en": "The models run on the server.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-pl",
+      "pres-ez-esc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Modelele",
+        "units": [
+          {
+            "lex": "model",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "rulează",
+        "units": [
+          {
+            "lex": "rula",
+            "form": "pres3pl",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "pe",
+        "units": [
+          {
+            "lex": "pe",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "server.",
+        "units": [
+          {
+            "lex": "server",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Modelul rulează pe server.",
+        "en": "The model runs on the server.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0017",
+    "ro": "Analizăm datele zilnic.",
+    "en": "We analyze the data daily.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "pres-ez-esc",
+      "def-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Analizăm",
+        "units": [
+          {
+            "lex": "analiza",
+            "form": "pres1pl",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "datele",
+        "units": [
+          {
+            "lex": "date",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "zilnic.",
+        "units": [
+          {
+            "lex": "zilnic",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1pl>1sg",
+        "ro": "Analizez datele zilnic.",
+        "en": "I analyze the data daily.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "negate",
+        "ro": "Nu analizăm datele zilnic.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "add-obj:acc-3pl-f",
+        "ro": "Le analizăm zilnic.",
+        "en": "We analyze them daily.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0018",
+    "ro": "Testăm trei modele.",
+    "en": "We're testing three models.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "pres-ez-esc",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Testăm",
+        "units": [
+          {
+            "lex": "testa",
+            "form": "pres1pl",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "trei",
+        "units": [
+          {
+            "lex": "trei",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "modele.",
+        "units": [
+          {
+            "lex": "model",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Testăm un model.",
+        "en": "We're testing one model.",
+        "targetTokens": [
+          1,
+          2
+        ]
+      },
+      {
+        "op": "add-obj:acc-3pl-f",
+        "ro": "Le testăm.",
+        "en": "We're testing them.",
+        "targetTokens": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0019",
+    "ro": "Prognozele sunt bune.",
+    "en": "The forecasts are good.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-pl",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Prognozele",
+        "units": [
+          {
+            "lex": "prognoza",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3pl",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "bune.",
+        "units": [
+          {
+            "lex": "bun",
+            "form": "fpl"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Prognoza e bună.",
+        "en": "The forecast is good.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0020",
+    "ro": "Rețelele sunt stabile.",
+    "en": "The grids are stable.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-pl",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Rețelele",
+        "units": [
+          {
+            "lex": "retea",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3pl",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "stabile.",
+        "units": [
+          {
+            "lex": "stabil",
+            "form": "fpl"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Rețeaua e stabilă.",
+        "en": "The grid is stable.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0021",
+    "ro": "Consumurile cresc iarna.",
+    "en": "Consumption goes up in winter.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-pl",
+      "pres-full",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Consumurile",
+        "units": [
+          {
+            "lex": "consum",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cresc",
+        "units": [
+          {
+            "lex": "creste",
+            "form": "pres3pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "iarna.",
+        "units": [
+          {
+            "lex": "iarna",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Consumul crește iarna.",
+        "en": "Consumption goes up in winter.",
+        "targetTokens": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0022",
+    "ro": "O să rulez modelul noaptea.",
+    "en": "I'll run the model at night.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "fut-o-sa",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "sa"
+      },
+      {
+        "t": "rulez",
+        "units": [
+          {
+            "lex": "rula",
+            "form": "subj1sg",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "modelul",
+        "units": [
+          {
+            "lex": "model",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "noaptea.",
+        "units": [
+          {
+            "lex": "noapte",
+            "form": "sgDef"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu o să rulez modelul noaptea.@-",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0023",
+    "ro": "O să prezică modelul consumul?",
+    "en": "Will the model predict consumption?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "fut-o-sa",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "prezică",
+        "units": [
+          {
+            "lex": "prezice",
+            "form": "subj3",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "modelul",
+        "units": [
+          {
+            "lex": "model",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "consumul?",
+        "units": [
+          {
+            "lex": "consum",
+            "form": "sgDef"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:fut>pres",
+        "ro": "Prezice modelul consumul?",
+        "en": "Does the model predict consumption?",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0024",
+    "ro": "O să fie vânt mâine.",
+    "en": "It'll be windy tomorrow.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "fut-o-sa"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "fie",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "subj3",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "vânt",
+        "units": [
+          {
+            "lex": "vant",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mâine.",
+        "units": [
+          {
+            "lex": "maine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu o să fie vânt mâine.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0025",
+    "ro": "O să crească prețul.",
+    "en": "The price will go up.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "fut-o-sa",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "sa"
+      },
+      {
+        "t": "crească",
+        "units": [
+          {
+            "lex": "creste",
+            "form": "subj3",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "prețul.",
+        "units": [
+          {
+            "lex": "pret",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:fut>pres",
+        "ro": "Crește prețul.",
+        "en": "The price is going up.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0026",
+    "ro": "Prognozele le verific mâine.",
+    "en": "I'll check the forecasts tomorrow.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-pl",
+      "clitic-acc",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Prognozele",
+        "units": [
+          {
+            "lex": "prognoza",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "le",
+        "units": [
+          {
+            "lex": "pron-3pl-f",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "verific",
+        "units": [
+          {
+            "lex": "verifica",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mâine.",
+        "units": [
+          {
+            "lex": "maine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Prognozele nu le verific mâine.",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0027",
+    "ro": "Îl rulez acum.",
+    "en": "I'm running it now.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "clitic-acc",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îl",
+        "units": [
+          {
+            "lex": "pron-3sg-m",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "rulez",
+        "units": [
+          {
+            "lex": "rula",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acum.",
+        "units": [
+          {
+            "lex": "acum",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu îl rulez acum.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0028",
+    "ro": "L-am testat ieri.",
+    "en": "I tested it yesterday.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "clitic-acc",
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "L-am",
+        "units": [
+          {
+            "lex": "pron-3sg-m",
+            "form": "accShort",
+            "pattern": "clitic-acc",
+            "head": true
+          },
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "testat",
+        "units": [
+          {
+            "lex": "testa",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ieri.",
+        "units": [
+          {
+            "lex": "ieri",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu l-am testat ieri.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0029",
+    "ro": "Ne trebuie date noi.",
+    "en": "We need new data.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ne",
+        "units": [
+          {
+            "lex": "pron-1pl",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "trebuie",
+        "units": [
+          {
+            "lex": "trebui",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "date",
+        "units": [
+          {
+            "lex": "date",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "noi.",
+        "units": [
+          {
+            "lex": "nou",
+            "form": "fpl"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu ne trebuie date noi.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0030",
+    "ro": "Prognoza asta e veche.",
+    "en": "This forecast is old.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "def-sg",
+      "dem-colloq",
+      "be-pres"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Prognoza",
+        "units": [
+          {
+            "lex": "prognoza",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "asta",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "fsg",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "veche.",
+        "units": [
+          {
+            "lex": "vechi",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Prognoza asta nu e veche.",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0031",
+    "ro": "Graficul ăsta e clar.",
+    "en": "This chart is clear.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "dem-colloq",
+      "be-pres"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Graficul",
+        "units": [
+          {
+            "lex": "grafic",
+            "form": "sgDef",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ăsta",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "msg",
+            "pattern": "dem-colloq"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "clar.",
+        "units": [
+          {
+            "lex": "clar",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "plural",
+        "ro": "Graficele astea sunt clare.",
+        "en": "These charts are clear.",
+        "targetTokens": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0032",
+    "ro": "Ce face modelul ăsta?",
+    "en": "What does this model do?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "wh-q",
+      "def-sg",
+      "dem-colloq"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "face",
+        "units": [
+          {
+            "lex": "face",
+            "form": "inf"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "modelul",
+        "units": [
+          {
+            "lex": "model",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ăsta?",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "msg",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "plural",
+        "ro": "Ce fac modelele astea?",
+        "en": "What do these models do?",
+        "targetTokens": [
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-domain-0033",
+    "ro": "Optimizăm modelul.",
+    "en": "We're optimizing the model.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "domain"
+    ],
+    "patterns": [
+      "pres-ez-esc",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Optimizăm",
+        "units": [
+          {
+            "lex": "optimiza",
+            "form": "pres1pl",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "modelul.",
+        "units": [
+          {
+            "lex": "model",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu optimizăm modelul.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1pl>1sg",
+        "ro": "Optimizez modelul.",
+        "en": "I'm optimizing the model.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  }
+]

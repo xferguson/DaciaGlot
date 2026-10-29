@@ -1,0 +1,2261 @@
+[
+  {
+    "id": "s-a1-decisions-0001",
+    "ro": "Hai să începem.",
+    "en": "Let's get started.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Hai",
+        "units": [
+          {
+            "lex": "hai",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "începem.",
+        "units": [
+          {
+            "lex": "incepe",
+            "form": "subj1pl",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Hai să nu începem.",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0002",
+    "ro": "Vreau să decidem azi.",
+    "en": "I want us to decide today.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vreau",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "decidem",
+        "units": [
+          {
+            "lex": "decide",
+            "form": "subj1pl",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "azi.",
+        "units": [
+          {
+            "lex": "azi",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu vreau să decidem azi.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "modal:trebui",
+        "ro": "Trebuie să decidem azi.",
+        "en": "We have to decide today.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0003",
+    "ro": "Trebuie să decidem până vineri.",
+    "en": "We have to decide by Friday.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Trebuie",
+        "units": [
+          {
+            "lex": "trebui",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "cloze": true,
+        "glue": "sa"
+      },
+      {
+        "t": "decidem",
+        "units": [
+          {
+            "lex": "decide",
+            "form": "subj1pl",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "până",
+        "units": [
+          {
+            "lex": "pana",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "vineri.",
+        "units": [
+          {
+            "lex": "vineri",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu trebuie să decidem până vineri.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0004",
+    "ro": "Care e prioritatea?",
+    "en": "Which is the priority?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "wh-q",
+      "be-pres",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Care",
+        "units": [
+          {
+            "lex": "care",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "prioritatea?",
+        "units": [
+          {
+            "lex": "prioritate",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Care a fost prioritatea?",
+        "en": "Which was the priority?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0005",
+    "ro": "Sunt de acord.",
+    "en": "I agree.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres1sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "acord.",
+        "units": [
+          {
+            "lex": "acord",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu sunt de acord.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "E de acord.",
+        "en": "He/She agrees.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0006",
+    "ro": "Nu sunt sigur.",
+    "en": "I'm not sure.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "neg-nu",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres1sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sigur.",
+        "units": [
+          {
+            "lex": "sigur",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Sunt sigur.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Nu ești sigur.",
+        "en": "You're not sure.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0007",
+    "ro": "Ai dreptate.",
+    "en": "You're right.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ai",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "dreptate.",
+        "units": [
+          {
+            "lex": "dreptate",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-ai dreptate.",
+        "accept": [
+          "Nu ai dreptate."
+        ],
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Am dreptate.",
+        "en": "I'm right.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0008",
+    "ro": "Cine decide?",
+    "en": "Who decides?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "wh-q"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cine",
+        "units": [
+          {
+            "lex": "cine",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "decide?",
+        "units": [
+          {
+            "lex": "decide",
+            "form": "inf"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Cine a decis?",
+        "en": "Who decided?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0009",
+    "ro": "Când e termenul?",
+    "en": "When is the deadline?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "wh-q",
+      "be-pres",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Când",
+        "units": [
+          {
+            "lex": "cand",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "termenul?",
+        "units": [
+          {
+            "lex": "termen",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Când a fost termenul?",
+        "en": "When was the deadline?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0010",
+    "ro": "Am nevoie de mai mult timp.",
+    "en": "I need more time.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres1sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "nevoie",
+        "units": [
+          {
+            "lex": "nevoie",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mai",
+        "units": [
+          {
+            "lex": "mai",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mult",
+        "units": [
+          {
+            "lex": "mult",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "timp.",
+        "units": [
+          {
+            "lex": "timp",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-am nevoie de mai mult timp.",
+        "accept": [
+          "Nu am nevoie de mai mult timp."
+        ],
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Are nevoie de mai mult timp.",
+        "en": "He/She needs more time.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0011",
+    "ro": "Vreau să vorbesc cu Mihai.",
+    "en": "I want to talk to Mihai.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vreau",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "vorbesc",
+        "units": [
+          {
+            "lex": "vorbi",
+            "form": "subj1sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cu",
+        "units": [
+          {
+            "lex": "cu",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Mihai.",
+        "units": [
+          {
+            "lex": "mihai",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu vreau să vorbesc cu Mihai.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Vrei să vorbești cu Mihai.",
+        "en": "You want to talk to Mihai.",
+        "targetTokens": [
+          0,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0012",
+    "ro": "Ce propui?",
+    "en": "What do you propose?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "propui?",
+        "units": [
+          {
+            "lex": "propune",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce propun?",
+        "en": "What do I propose?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0013",
+    "ro": "Am propus altceva.",
+    "en": "I proposed something else.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "propus",
+        "units": [
+          {
+            "lex": "propune",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "altceva.",
+        "units": [
+          {
+            "lex": "altceva",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-am propus altceva.",
+        "accept": [
+          "Nu am propus altceva."
+        ],
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "A propus altceva.",
+        "en": "He/She proposed something else.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0014",
+    "ro": "Nu am decis încă.",
+    "en": "I haven't decided yet.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "neg-nu",
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "am",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "decis",
+        "units": [
+          {
+            "lex": "decide",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "încă.",
+        "units": [
+          {
+            "lex": "inca",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Am decis deja.",
+        "en": "I've already decided.",
+        "targetTokens": [
+          0,
+          3
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Nu a decis încă.",
+        "en": "He/She hasn't decided yet.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0015",
+    "ro": "Merge pentru mine.",
+    "en": "That works for me.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Merge",
+        "units": [
+          {
+            "lex": "merge",
+            "form": "inf"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "pentru",
+        "units": [
+          {
+            "lex": "pentru",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mine.",
+        "units": [
+          {
+            "lex": "mine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu merge pentru mine.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0016",
+    "ro": "E o idee bună.",
+    "en": "It's a good idea.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "E",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "idee",
+        "units": [
+          {
+            "lex": "idee",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "bună.",
+        "units": [
+          {
+            "lex": "bun",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu e o idee bună.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "tense:pres>perf",
+        "ro": "A fost o idee bună.",
+        "en": "It was a good idea.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "plural",
+        "ro": "Sunt idei bune.",
+        "en": "They're good ideas.",
+        "targetTokens": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0017",
+    "ro": "Vrem să decidem azi.",
+    "en": "We want to decide today.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "pres-full",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vrem",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "decidem",
+        "units": [
+          {
+            "lex": "decide",
+            "form": "subj1pl",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "azi.",
+        "units": [
+          {
+            "lex": "azi",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu vrem să decidem azi.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "modal:putea",
+        "ro": "Putem să decidem azi.",
+        "en": "We can decide today.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0018",
+    "ro": "Putem să amânăm.",
+    "en": "We can postpone.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "pres-full",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Putem",
+        "units": [
+          {
+            "lex": "putea",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "cloze": true,
+        "glue": "sa"
+      },
+      {
+        "t": "amânăm.",
+        "units": [
+          {
+            "lex": "amana",
+            "form": "subj1pl",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu putem să amânăm.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "modal:trebui",
+        "ro": "Trebuie să amânăm.",
+        "en": "We have to postpone.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0019",
+    "ro": "Avem două opțiuni.",
+    "en": "We have two options.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "have-pres",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Avem",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres1pl",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "două",
+        "units": [
+          {
+            "lex": "doua",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "opțiuni.",
+        "units": [
+          {
+            "lex": "optiune",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Avem o opțiune.",
+        "en": "We have one option.",
+        "targetTokens": [
+          1,
+          2
+        ]
+      },
+      {
+        "op": "negate",
+        "ro": "Nu avem două opțiuni.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0020",
+    "ro": "Opțiunile sunt clare.",
+    "en": "The options are clear.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "def-pl",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Opțiunile",
+        "units": [
+          {
+            "lex": "optiune",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3pl",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "clare.",
+        "units": [
+          {
+            "lex": "clar",
+            "form": "fpl"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Opțiunea e clară.",
+        "en": "The option is clear.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "op": "negate",
+        "ro": "Opțiunile nu sunt clare.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0021",
+    "ro": "O să alegem prima opțiune.",
+    "en": "We'll choose the first option.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "fut-o-sa"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "sa"
+      },
+      {
+        "t": "alegem",
+        "units": [
+          {
+            "lex": "alege",
+            "form": "subj1pl",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "prima",
+        "units": [
+          {
+            "lex": "prim",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "opțiune.",
+        "units": [
+          {
+            "lex": "optiune",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu o să alegem prima opțiune.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0022",
+    "ro": "O să decid mâine.",
+    "en": "I'll decide tomorrow.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "fut-o-sa"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "decid",
+        "units": [
+          {
+            "lex": "decide",
+            "form": "subj1sg",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mâine.",
+        "units": [
+          {
+            "lex": "maine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>2sg",
+        "ro": "O să decizi mâine.",
+        "en": "You'll decide tomorrow.",
+        "targetTokens": [
+          2
+        ]
+      },
+      {
+        "op": "negate",
+        "ro": "Nu o să decid mâine.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0023",
+    "ro": "Ce o să facem?",
+    "en": "What are we going to do?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "wh-q",
+      "fut-o-sa"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "facem?",
+        "units": [
+          {
+            "lex": "face",
+            "form": "subj1pl",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:fut>pres",
+        "ro": "Ce facem?",
+        "en": "What are we doing?",
+        "targetTokens": [
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0024",
+    "ro": "O să fie greu.",
+    "en": "It'll be hard.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "fut-o-sa"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "sa"
+      },
+      {
+        "t": "fie",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "subj3",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "greu.",
+        "units": [
+          {
+            "lex": "greu",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu o să fie greu.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "tense:fut>pres",
+        "ro": "E greu.",
+        "en": "It's hard.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0025",
+    "ro": "Îl alegem.",
+    "en": "We're choosing it.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "clitic-acc",
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îl",
+        "units": [
+          {
+            "lex": "pron-3sg-m",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "alegem.",
+        "units": [
+          {
+            "lex": "alege",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu îl alegem.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1pl>1sg",
+        "ro": "Îl aleg.",
+        "en": "I'm choosing it.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0026",
+    "ro": "Nu o vreau.",
+    "en": "I don't want it.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "neg-nu",
+      "clitic-acc",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "pron-3sg-f",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "vreau.",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "O vreau.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0027",
+    "ro": "Ioana ne spune mâine.",
+    "en": "Ioana will tell us tomorrow.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "clitic-dat"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ioana",
+        "units": [
+          {
+            "lex": "ioana",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ne",
+        "units": [
+          {
+            "lex": "pron-1pl",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "spune",
+        "units": [
+          {
+            "lex": "spune",
+            "form": "inf"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mâine.",
+        "units": [
+          {
+            "lex": "maine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Ioana nu ne spune mâine.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0028",
+    "ro": "Îmi place ideea.",
+    "en": "I like the idea.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îmi",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "place",
+        "units": [
+          {
+            "lex": "placea",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ideea.",
+        "units": [
+          {
+            "lex": "idee",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu-mi place ideea.",
+        "accept": [
+          "Nu îmi place ideea."
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0029",
+    "ro": "Nu-ți place ideea?",
+    "en": "Don't you like the idea?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "neg-nu",
+      "clitic-dat",
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu-ți",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          },
+          {
+            "lex": "pron-2sg",
+            "form": "datShort",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "place",
+        "units": [
+          {
+            "lex": "placea",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ideea?",
+        "units": [
+          {
+            "lex": "idee",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Îți place ideea?",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0030",
+    "ro": "Ce zici de ideea asta?",
+    "en": "What do you say about this idea?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high",
+      "dem-colloq"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "zici",
+        "units": [
+          {
+            "lex": "zice",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "ideea",
+        "units": [
+          {
+            "lex": "idee",
+            "form": "sgDef",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "asta?",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "fsg",
+            "pattern": "dem-colloq"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Ce ai zis de ideea asta?",
+        "en": "What did you say about this idea?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0031",
+    "ro": "Variantele astea sunt scumpe.",
+    "en": "These options are expensive.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "def-pl",
+      "dem-colloq",
+      "be-pres"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Variantele",
+        "units": [
+          {
+            "lex": "varianta",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "astea",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "fpl",
+            "pattern": "dem-colloq"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3pl",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "scumpe.",
+        "units": [
+          {
+            "lex": "scump",
+            "form": "fpl",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Varianta asta e scumpă.",
+        "en": "This option is expensive.",
+        "targetTokens": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0032",
+    "ro": "Mi-e greu să aleg.",
+    "en": "It's hard for me to choose.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "mi-e-construction"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mi-e",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "datShort",
+            "pattern": "mi-e-construction"
+          },
+          {
+            "lex": "fi",
+            "form": "pres3sg"
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "greu",
+        "units": [
+          {
+            "lex": "greu",
+            "form": "msg",
+            "pattern": "mi-e-construction",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base"
+          }
+        ],
+        "cloze": true,
+        "glue": "sa"
+      },
+      {
+        "t": "aleg.",
+        "units": [
+          {
+            "lex": "alege",
+            "form": "subj1sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu mi-e greu să aleg.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  }
+]

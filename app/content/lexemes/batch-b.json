@@ -1,0 +1,2481 @@
+[
+  {
+    "id": "pron-1sg",
+    "lemma": "mă / îmi",
+    "pos": "pron",
+    "gloss": "me, to me",
+    "freq": 8,
+    "trivial": true,
+    "forms": {
+      "acc": "mă",
+      "accShort": "m-",
+      "dat": "îmi",
+      "datShort": "mi-"
+    }
+  },
+  {
+    "id": "pron-2sg",
+    "lemma": "te / îți",
+    "pos": "pron",
+    "gloss": "you, to you",
+    "freq": 8,
+    "trivial": true,
+    "forms": {
+      "acc": "te",
+      "accShort": "te-",
+      "dat": "îți",
+      "datShort": "ți-"
+    }
+  },
+  {
+    "id": "pron-3sg-m",
+    "lemma": "îl / îi",
+    "pos": "pron",
+    "gloss": "him, to him",
+    "freq": 8,
+    "trivial": true,
+    "forms": {
+      "acc": "îl",
+      "accShort": "l-",
+      "dat": "îi",
+      "datShort": "i-"
+    }
+  },
+  {
+    "id": "pron-3sg-f",
+    "lemma": "o / îi",
+    "pos": "pron",
+    "gloss": "her, to her",
+    "freq": 8,
+    "trivial": true,
+    "forms": {
+      "acc": "o",
+      "dat": "îi",
+      "datShort": "i-"
+    }
+  },
+  {
+    "id": "pron-1pl",
+    "lemma": "ne",
+    "pos": "pron",
+    "gloss": "us, to us",
+    "freq": 8,
+    "trivial": true,
+    "forms": {
+      "acc": "ne",
+      "accShort": "ne-",
+      "dat": "ne",
+      "datShort": "ne-"
+    }
+  },
+  {
+    "id": "pron-2pl",
+    "lemma": "vă",
+    "pos": "pron",
+    "gloss": "you (pl), to you (pl)",
+    "freq": 8,
+    "trivial": true,
+    "forms": {
+      "acc": "vă",
+      "accShort": "v-",
+      "dat": "vă",
+      "datShort": "v-"
+    }
+  },
+  {
+    "id": "pron-3pl-m",
+    "lemma": "îi / le",
+    "pos": "pron",
+    "gloss": "them (m), to them",
+    "freq": 8,
+    "trivial": true,
+    "forms": {
+      "acc": "îi",
+      "accShort": "i-",
+      "dat": "le",
+      "datShort": "le-"
+    }
+  },
+  {
+    "id": "pron-3pl-f",
+    "lemma": "le",
+    "pos": "pron",
+    "gloss": "them (f), to them",
+    "freq": 8,
+    "trivial": true,
+    "forms": {
+      "acc": "le",
+      "accShort": "le-",
+      "dat": "le",
+      "datShort": "le-"
+    }
+  },
+  {
+    "id": "aux-fut-o",
+    "lemma": "o (viitor)",
+    "pos": "aux",
+    "gloss": "future auxiliary (o să …)",
+    "freq": 6,
+    "trivial": true,
+    "forms": {
+      "base": "o"
+    }
+  },
+  {
+    "id": "asta",
+    "lemma": "ăsta",
+    "pos": "pron",
+    "gloss": "this (colloquial)",
+    "freq": 25,
+    "forms": {
+      "msg": "ăsta",
+      "fsg": "asta",
+      "mpl": "ăștia",
+      "fpl": "astea"
+    }
+  },
+  {
+    "id": "acelasi",
+    "lemma": "același",
+    "pos": "det",
+    "gloss": "the same",
+    "freq": 120,
+    "forms": {
+      "msg": "același",
+      "fsg": "aceeași"
+    }
+  },
+  {
+    "id": "hai",
+    "lemma": "hai",
+    "pos": "intj",
+    "gloss": "come on, let's",
+    "freq": 60,
+    "trivial": true
+  },
+  {
+    "id": "pana",
+    "lemma": "până",
+    "pos": "prep",
+    "gloss": "until, by",
+    "freq": 70,
+    "trivial": true
+  },
+  {
+    "id": "pentru",
+    "lemma": "pentru",
+    "pos": "prep",
+    "gloss": "for",
+    "freq": 18,
+    "trivial": true
+  },
+  {
+    "id": "cu",
+    "lemma": "cu",
+    "pos": "prep",
+    "gloss": "with",
+    "freq": 9,
+    "trivial": true
+  },
+  {
+    "id": "pe",
+    "lemma": "pe",
+    "pos": "prep",
+    "gloss": "on",
+    "freq": 12,
+    "trivial": true
+  },
+  {
+    "id": "despre",
+    "lemma": "despre",
+    "pos": "prep",
+    "gloss": "about",
+    "freq": 60,
+    "trivial": true
+  },
+  {
+    "id": "lui",
+    "lemma": "lui",
+    "pos": "particle",
+    "gloss": "(dative marker before a masculine name)",
+    "freq": 90,
+    "trivial": true
+  },
+  {
+    "id": "ca-conj",
+    "lemma": "că",
+    "pos": "conj",
+    "gloss": "that",
+    "freq": 6,
+    "trivial": true
+  },
+  {
+    "id": "cel",
+    "lemma": "cel",
+    "pos": "det",
+    "gloss": "the (most)",
+    "freq": 40,
+    "trivial": true
+  },
+  {
+    "id": "fiecare",
+    "lemma": "fiecare",
+    "pos": "det",
+    "gloss": "each, every",
+    "freq": 100,
+    "trivial": true
+  },
+  {
+    "id": "prea",
+    "lemma": "prea",
+    "pos": "adv",
+    "gloss": "too",
+    "freq": 80,
+    "trivial": true
+  },
+  {
+    "id": "acolo",
+    "lemma": "acolo",
+    "pos": "adv",
+    "gloss": "there",
+    "freq": 100,
+    "trivial": true
+  },
+  {
+    "id": "aici",
+    "lemma": "aici",
+    "pos": "adv",
+    "gloss": "here",
+    "freq": 85,
+    "trivial": true
+  },
+  {
+    "id": "mult",
+    "lemma": "mult",
+    "pos": "adv",
+    "gloss": "a lot, much",
+    "freq": 35
+  },
+  {
+    "id": "repede",
+    "lemma": "repede",
+    "pos": "adv",
+    "gloss": "quickly",
+    "freq": 400
+  },
+  {
+    "id": "altfel",
+    "lemma": "altfel",
+    "pos": "adv",
+    "gloss": "differently, otherwise",
+    "freq": 300
+  },
+  {
+    "id": "zilnic",
+    "lemma": "zilnic",
+    "pos": "adv",
+    "gloss": "daily",
+    "freq": 1500
+  },
+  {
+    "id": "impreuna",
+    "lemma": "împreună",
+    "pos": "adv",
+    "gloss": "together",
+    "freq": 200
+  },
+  {
+    "id": "vineri",
+    "lemma": "vineri",
+    "pos": "adv",
+    "gloss": "on Friday",
+    "freq": 600,
+    "trivial": true
+  },
+  {
+    "id": "altceva",
+    "lemma": "altceva",
+    "pos": "pron",
+    "gloss": "something else",
+    "freq": 300,
+    "trivial": true
+  },
+  {
+    "id": "mine",
+    "lemma": "mine",
+    "pos": "pron",
+    "gloss": "me (after a preposition)",
+    "freq": 40,
+    "trivial": true
+  },
+  {
+    "id": "tine",
+    "lemma": "tine",
+    "pos": "pron",
+    "gloss": "you (after a preposition)",
+    "freq": 80,
+    "trivial": true
+  },
+  {
+    "id": "eu",
+    "lemma": "eu",
+    "pos": "pron",
+    "gloss": "I",
+    "freq": 11,
+    "trivial": true
+  },
+  {
+    "id": "voi",
+    "lemma": "voi",
+    "pos": "pron",
+    "gloss": "you (pl)",
+    "freq": 45,
+    "trivial": true
+  },
+  {
+    "id": "noi-pron",
+    "lemma": "noi",
+    "pos": "pron",
+    "gloss": "we",
+    "freq": 35,
+    "trivial": true
+  },
+  {
+    "id": "care",
+    "lemma": "care",
+    "pos": "pron",
+    "gloss": "which, who",
+    "freq": 5,
+    "trivial": true
+  },
+  {
+    "id": "cati",
+    "lemma": "câți",
+    "pos": "adv",
+    "gloss": "how many (m)",
+    "freq": 130,
+    "trivial": true
+  },
+  {
+    "id": "doi",
+    "lemma": "doi",
+    "pos": "num",
+    "gloss": "two (m)",
+    "freq": 90,
+    "trivial": true
+  },
+  {
+    "id": "doua",
+    "lemma": "două",
+    "pos": "num",
+    "gloss": "two (f)",
+    "freq": 90,
+    "trivial": true
+  },
+  {
+    "id": "trei",
+    "lemma": "trei",
+    "pos": "num",
+    "gloss": "three",
+    "freq": 120,
+    "trivial": true
+  },
+  {
+    "id": "mihai",
+    "lemma": "Mihai",
+    "pos": "noun",
+    "gloss": "Mihai",
+    "freq": 5000
+  },
+  {
+    "id": "craciun",
+    "lemma": "Crăciun",
+    "pos": "noun",
+    "gloss": "Christmas",
+    "freq": 5000
+  },
+  {
+    "id": "paste",
+    "lemma": "Paște",
+    "pos": "noun",
+    "gloss": "Easter",
+    "freq": 5000
+  },
+  {
+    "id": "sigur",
+    "lemma": "sigur",
+    "pos": "adj",
+    "gloss": "sure, certain",
+    "freq": 160,
+    "forms": {
+      "msg": "sigur",
+      "fsg": "sigură",
+      "mpl": "siguri",
+      "fpl": "sigure"
+    }
+  },
+  {
+    "id": "mandru",
+    "lemma": "mândru",
+    "pos": "adj",
+    "gloss": "proud",
+    "freq": 900,
+    "forms": {
+      "msg": "mândru",
+      "fsg": "mândră",
+      "mpl": "mândri",
+      "fpl": "mândre"
+    }
+  },
+  {
+    "id": "clar",
+    "lemma": "clar",
+    "pos": "adj",
+    "gloss": "clear",
+    "freq": 300,
+    "forms": {
+      "msg": "clar",
+      "fsg": "clară",
+      "mpl": "clari",
+      "fpl": "clare"
+    }
+  },
+  {
+    "id": "corect",
+    "lemma": "corect",
+    "pos": "adj",
+    "gloss": "correct",
+    "freq": 350,
+    "forms": {
+      "msg": "corect",
+      "fsg": "corectă",
+      "mpl": "corecți",
+      "fpl": "corecte"
+    }
+  },
+  {
+    "id": "stabil",
+    "lemma": "stabil",
+    "pos": "adj",
+    "gloss": "stable",
+    "freq": 700,
+    "forms": {
+      "msg": "stabil",
+      "fsg": "stabilă",
+      "mpl": "stabili",
+      "fpl": "stabile"
+    }
+  },
+  {
+    "id": "scump",
+    "lemma": "scump",
+    "pos": "adj",
+    "gloss": "expensive",
+    "freq": 600,
+    "forms": {
+      "msg": "scump",
+      "fsg": "scumpă",
+      "mpl": "scumpi",
+      "fpl": "scumpe"
+    }
+  },
+  {
+    "id": "mare-adj",
+    "lemma": "mare",
+    "pos": "adj",
+    "gloss": "big, high",
+    "freq": 28,
+    "forms": {
+      "msg": "mare",
+      "fsg": "mare",
+      "mpl": "mari",
+      "fpl": "mari"
+    }
+  },
+  {
+    "id": "nou",
+    "lemma": "nou",
+    "pos": "adj",
+    "gloss": "new",
+    "freq": 60,
+    "forms": {
+      "msg": "nou",
+      "fsg": "nouă",
+      "mpl": "noi",
+      "fpl": "noi"
+    }
+  },
+  {
+    "id": "mic",
+    "lemma": "mic",
+    "pos": "adj",
+    "gloss": "small, low",
+    "freq": 75,
+    "forms": {
+      "msg": "mic",
+      "fsg": "mică",
+      "mpl": "mici",
+      "fpl": "mici"
+    }
+  },
+  {
+    "id": "vechi",
+    "lemma": "vechi",
+    "pos": "adj",
+    "gloss": "old",
+    "freq": 150,
+    "forms": {
+      "msg": "vechi",
+      "fsg": "veche",
+      "mpl": "vechi",
+      "fpl": "vechi"
+    }
+  },
+  {
+    "id": "frumos",
+    "lemma": "frumos",
+    "pos": "adj",
+    "gloss": "beautiful",
+    "freq": 140,
+    "forms": {
+      "msg": "frumos",
+      "fsg": "frumoasă",
+      "mpl": "frumoși",
+      "fpl": "frumoase"
+    }
+  },
+  {
+    "id": "greu",
+    "lemma": "greu",
+    "pos": "adj",
+    "gloss": "hard, heavy",
+    "freq": 110,
+    "forms": {
+      "msg": "greu",
+      "fsg": "grea",
+      "mpl": "grei",
+      "fpl": "grele"
+    }
+  },
+  {
+    "id": "critic",
+    "lemma": "critic",
+    "pos": "adj",
+    "gloss": "critical",
+    "freq": 900,
+    "forms": {
+      "msg": "critic",
+      "fsg": "critică",
+      "mpl": "critici",
+      "fpl": "critice"
+    }
+  },
+  {
+    "id": "serios",
+    "lemma": "serios",
+    "pos": "adj",
+    "gloss": "serious",
+    "freq": 500,
+    "forms": {
+      "msg": "serios",
+      "fsg": "serioasă",
+      "mpl": "serioși",
+      "fpl": "serioase"
+    }
+  },
+  {
+    "id": "cald",
+    "lemma": "cald",
+    "pos": "adj",
+    "gloss": "warm",
+    "freq": 400,
+    "forms": {
+      "msg": "cald",
+      "fsg": "caldă",
+      "mpl": "calzi",
+      "fpl": "calde"
+    }
+  },
+  {
+    "id": "rece",
+    "lemma": "rece",
+    "pos": "adj",
+    "gloss": "cold",
+    "freq": 600,
+    "forms": {
+      "msg": "rece",
+      "fsg": "rece",
+      "mpl": "reci",
+      "fpl": "reci"
+    }
+  },
+  {
+    "id": "specific",
+    "lemma": "specific",
+    "pos": "adj",
+    "gloss": "typical, specific",
+    "freq": 450,
+    "forms": {
+      "msg": "specific",
+      "fsg": "specifică",
+      "mpl": "specifici",
+      "fpl": "specifice"
+    }
+  },
+  {
+    "id": "important",
+    "lemma": "important",
+    "pos": "adj",
+    "gloss": "important",
+    "freq": 100,
+    "forms": {
+      "msg": "important",
+      "fsg": "importantă",
+      "mpl": "importanți",
+      "fpl": "importante"
+    }
+  },
+  {
+    "id": "adevarat",
+    "lemma": "adevărat",
+    "pos": "adj",
+    "gloss": "true",
+    "freq": 250,
+    "forms": {
+      "msg": "adevărat",
+      "fsg": "adevărată",
+      "mpl": "adevărați",
+      "fpl": "adevărate"
+    }
+  },
+  {
+    "id": "optimist",
+    "lemma": "optimist",
+    "pos": "adj",
+    "gloss": "optimistic",
+    "freq": 2500,
+    "forms": {
+      "msg": "optimist",
+      "fsg": "optimistă",
+      "mpl": "optimiști",
+      "fpl": "optimiste"
+    }
+  },
+  {
+    "id": "prost",
+    "lemma": "prost",
+    "pos": "adj",
+    "gloss": "bad, stupid",
+    "freq": 500,
+    "forms": {
+      "msg": "prost",
+      "fsg": "proastă",
+      "mpl": "proști",
+      "fpl": "proaste"
+    }
+  },
+  {
+    "id": "prim",
+    "lemma": "prim",
+    "pos": "adj",
+    "gloss": "first",
+    "freq": 50,
+    "forms": {
+      "msg": "prim",
+      "fsg": "prima",
+      "mpl": "primii",
+      "fpl": "primele"
+    }
+  },
+  {
+    "id": "acord",
+    "lemma": "acord",
+    "pos": "noun",
+    "gloss": "agreement",
+    "freq": 600,
+    "forms": {
+      "sg": "acord",
+      "sgDef": "acordul"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "dreptate",
+    "lemma": "dreptate",
+    "pos": "noun",
+    "gloss": "being right",
+    "freq": 900,
+    "forms": {
+      "sg": "dreptate",
+      "sgDef": "dreptatea"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "termen",
+    "lemma": "termen",
+    "pos": "noun",
+    "gloss": "deadline, term",
+    "freq": 500,
+    "forms": {
+      "sg": "termen",
+      "sgDef": "termenul",
+      "pl": "termene",
+      "plDef": "termenele"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "prioritate",
+    "lemma": "prioritate",
+    "pos": "noun",
+    "gloss": "priority",
+    "freq": 700,
+    "forms": {
+      "sg": "prioritate",
+      "sgDef": "prioritatea",
+      "pl": "priorități",
+      "plDef": "prioritățile"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "idee",
+    "lemma": "idee",
+    "pos": "noun",
+    "gloss": "idea",
+    "freq": 280,
+    "forms": {
+      "sg": "idee",
+      "sgDef": "ideea",
+      "pl": "idei",
+      "plDef": "ideile"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "ministru",
+    "lemma": "ministru",
+    "pos": "noun",
+    "gloss": "minister",
+    "freq": 500,
+    "forms": {
+      "sg": "ministru",
+      "sgDef": "ministrul",
+      "pl": "miniștri",
+      "plDef": "miniștrii"
+    },
+    "gender": "m"
+  },
+  {
+    "id": "guvern",
+    "lemma": "guvern",
+    "pos": "noun",
+    "gloss": "government",
+    "freq": 400,
+    "forms": {
+      "sg": "guvern",
+      "sgDef": "guvernul",
+      "pl": "guverne",
+      "plDef": "guvernele"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "optiune",
+    "lemma": "opțiune",
+    "pos": "noun",
+    "gloss": "option",
+    "freq": 900,
+    "forms": {
+      "sg": "opțiune",
+      "sgDef": "opțiunea",
+      "pl": "opțiuni",
+      "plDef": "opțiunile"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "varianta",
+    "lemma": "variantă",
+    "pos": "noun",
+    "gloss": "variant, option",
+    "freq": 800,
+    "forms": {
+      "sg": "variantă",
+      "sgDef": "varianta",
+      "pl": "variante",
+      "plDef": "variantele"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "obiectiv",
+    "lemma": "obiectiv",
+    "pos": "noun",
+    "gloss": "goal",
+    "freq": 700,
+    "forms": {
+      "sg": "obiectiv",
+      "sgDef": "obiectivul",
+      "pl": "obiective",
+      "plDef": "obiectivele"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "feedback",
+    "lemma": "feedback",
+    "pos": "noun",
+    "gloss": "feedback",
+    "freq": 3000,
+    "forms": {
+      "sg": "feedback",
+      "sgDef": "feedback-ul"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "proiect",
+    "lemma": "proiect",
+    "pos": "noun",
+    "gloss": "project",
+    "freq": 250,
+    "forms": {
+      "sg": "proiect",
+      "sgDef": "proiectul",
+      "pl": "proiecte",
+      "plDef": "proiectele"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "prognoza",
+    "lemma": "prognoză",
+    "pos": "noun",
+    "gloss": "forecast",
+    "freq": 2000,
+    "forms": {
+      "sg": "prognoză",
+      "sgDef": "prognoza",
+      "pl": "prognoze",
+      "plDef": "prognozele"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "consum",
+    "lemma": "consum",
+    "pos": "noun",
+    "gloss": "consumption",
+    "freq": 1200,
+    "forms": {
+      "sg": "consum",
+      "sgDef": "consumul",
+      "pl": "consumuri",
+      "plDef": "consumurile"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "model",
+    "lemma": "model",
+    "pos": "noun",
+    "gloss": "model",
+    "freq": 300,
+    "forms": {
+      "sg": "model",
+      "sgDef": "modelul",
+      "pl": "modele",
+      "plDef": "modelele"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "retea",
+    "lemma": "rețea",
+    "pos": "noun",
+    "gloss": "grid, network",
+    "freq": 600,
+    "forms": {
+      "sg": "rețea",
+      "sgDef": "rețeaua",
+      "pl": "rețele",
+      "plDef": "rețelele"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "energie",
+    "lemma": "energie",
+    "pos": "noun",
+    "gloss": "energy",
+    "freq": 500,
+    "forms": {
+      "sg": "energie",
+      "sgDef": "energia",
+      "pl": "energii",
+      "plDef": "energiile"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "pret",
+    "lemma": "preț",
+    "pos": "noun",
+    "gloss": "price",
+    "freq": 350,
+    "forms": {
+      "sg": "preț",
+      "sgDef": "prețul",
+      "pl": "prețuri",
+      "plDef": "prețurile"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "pipeline",
+    "lemma": "pipeline",
+    "pos": "noun",
+    "gloss": "pipeline",
+    "freq": 3000,
+    "forms": {
+      "sg": "pipeline",
+      "sgDef": "pipeline-ul",
+      "pl": "pipeline-uri",
+      "plDef": "pipeline-urile"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "server",
+    "lemma": "server",
+    "pos": "noun",
+    "gloss": "server",
+    "freq": 2500,
+    "forms": {
+      "sg": "server",
+      "sgDef": "serverul",
+      "pl": "servere",
+      "plDef": "serverele"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "grafic",
+    "lemma": "grafic",
+    "pos": "noun",
+    "gloss": "chart",
+    "freq": 1500,
+    "forms": {
+      "sg": "grafic",
+      "sgDef": "graficul",
+      "pl": "grafice",
+      "plDef": "graficele"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "sursa",
+    "lemma": "sursă",
+    "pos": "noun",
+    "gloss": "source",
+    "freq": 500,
+    "forms": {
+      "sg": "sursă",
+      "sgDef": "sursa",
+      "pl": "surse",
+      "plDef": "sursele"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "date",
+    "lemma": "date",
+    "pos": "noun",
+    "gloss": "data",
+    "freq": 300,
+    "forms": {
+      "pl": "date",
+      "plDef": "datele"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "vant",
+    "lemma": "vânt",
+    "pos": "noun",
+    "gloss": "wind",
+    "freq": 1100,
+    "forms": {
+      "sg": "vânt",
+      "sgDef": "vântul"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "iarna",
+    "lemma": "iarnă",
+    "pos": "noun",
+    "gloss": "winter",
+    "freq": 600,
+    "forms": {
+      "sg": "iarnă",
+      "sgDef": "iarna",
+      "pl": "ierni",
+      "plDef": "iernile"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "noapte",
+    "lemma": "noapte",
+    "pos": "noun",
+    "gloss": "night",
+    "freq": 260,
+    "forms": {
+      "sg": "noapte",
+      "sgDef": "noaptea",
+      "pl": "nopți",
+      "plDef": "nopțile"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "seara",
+    "lemma": "seară",
+    "pos": "noun",
+    "gloss": "evening",
+    "freq": 350,
+    "forms": {
+      "sg": "seară",
+      "sgDef": "seara",
+      "pl": "seri",
+      "plDef": "serile"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "dimineata",
+    "lemma": "dimineață",
+    "pos": "noun",
+    "gloss": "morning",
+    "freq": 400,
+    "forms": {
+      "sg": "dimineață",
+      "sgDef": "dimineața",
+      "pl": "dimineți",
+      "plDef": "diminețile"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "functie",
+    "lemma": "funcție",
+    "pos": "noun",
+    "gloss": "function",
+    "freq": 400,
+    "forms": {
+      "sg": "funcție",
+      "sgDef": "funcția",
+      "pl": "funcții",
+      "plDef": "funcțiile"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "desert",
+    "lemma": "desert",
+    "pos": "noun",
+    "gloss": "dessert",
+    "freq": 3000,
+    "forms": {
+      "sg": "desert",
+      "sgDef": "desertul",
+      "pl": "deserturi",
+      "plDef": "deserturile"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "cartof",
+    "lemma": "cartof",
+    "pos": "noun",
+    "gloss": "potato",
+    "freq": 3500,
+    "forms": {
+      "sg": "cartof",
+      "sgDef": "cartoful",
+      "pl": "cartofi",
+      "plDef": "cartofii"
+    },
+    "gender": "m"
+  },
+  {
+    "id": "sarmale",
+    "lemma": "sarmale",
+    "pos": "noun",
+    "gloss": "stuffed cabbage rolls",
+    "freq": 5000,
+    "forms": {
+      "pl": "sarmale",
+      "plDef": "sarmalele"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "politician",
+    "lemma": "politician",
+    "pos": "noun",
+    "gloss": "politician",
+    "freq": 1500,
+    "forms": {
+      "sg": "politician",
+      "sgDef": "politicianul",
+      "pl": "politicieni",
+      "plDef": "politicienii"
+    },
+    "gender": "m"
+  },
+  {
+    "id": "alegeri",
+    "lemma": "alegeri",
+    "pos": "noun",
+    "gloss": "elections",
+    "freq": 400,
+    "forms": {
+      "pl": "alegeri",
+      "plDef": "alegerile"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "stire",
+    "lemma": "știre",
+    "pos": "noun",
+    "gloss": "news item",
+    "freq": 600,
+    "forms": {
+      "sg": "știre",
+      "sgDef": "știrea",
+      "pl": "știri",
+      "plDef": "știrile"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "veste",
+    "lemma": "veste",
+    "pos": "noun",
+    "gloss": "(piece of) news",
+    "freq": 1200,
+    "forms": {
+      "sg": "veste",
+      "sgDef": "vestea"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "presa",
+    "lemma": "presă",
+    "pos": "noun",
+    "gloss": "press",
+    "freq": 700,
+    "forms": {
+      "sg": "presă",
+      "sgDef": "presa"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "parere",
+    "lemma": "părere",
+    "pos": "noun",
+    "gloss": "opinion",
+    "freq": 350,
+    "forms": {
+      "sg": "părere",
+      "sgDef": "părerea",
+      "pl": "păreri",
+      "plDef": "părerile"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "articol",
+    "lemma": "articol",
+    "pos": "noun",
+    "gloss": "article",
+    "freq": 800,
+    "forms": {
+      "sg": "articol",
+      "sgDef": "articolul",
+      "pl": "articole",
+      "plDef": "articolele"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "opozitie",
+    "lemma": "opoziție",
+    "pos": "noun",
+    "gloss": "opposition",
+    "freq": 1100,
+    "forms": {
+      "sg": "opoziție",
+      "sgDef": "opoziția"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "politica",
+    "lemma": "politică",
+    "pos": "noun",
+    "gloss": "politics, policy",
+    "freq": 250,
+    "forms": {
+      "sg": "politică",
+      "sgDef": "politica"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "salariu",
+    "lemma": "salariu",
+    "pos": "noun",
+    "gloss": "salary",
+    "freq": 1000,
+    "forms": {
+      "sg": "salariu",
+      "sgDef": "salariul",
+      "pl": "salarii",
+      "plDef": "salariile"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "limba",
+    "lemma": "limbă",
+    "pos": "noun",
+    "gloss": "language",
+    "freq": 200,
+    "forms": {
+      "sg": "limbă",
+      "sgDef": "limba",
+      "pl": "limbi",
+      "plDef": "limbile"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "coleg",
+    "lemma": "coleg",
+    "pos": "noun",
+    "gloss": "colleague",
+    "freq": 900,
+    "forms": {
+      "sg": "coleg",
+      "sgDef": "colegul",
+      "pl": "colegi",
+      "plDef": "colegii"
+    },
+    "gender": "m"
+  },
+  {
+    "id": "masa",
+    "lemma": "masă",
+    "pos": "noun",
+    "gloss": "table",
+    "freq": 200,
+    "forms": {
+      "sg": "masă",
+      "sgDef": "masa",
+      "pl": "mese",
+      "plDef": "mesele"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "casa",
+    "lemma": "casă",
+    "pos": "noun",
+    "gloss": "house, home",
+    "freq": 90,
+    "forms": {
+      "sg": "casă",
+      "sgDef": "casa",
+      "pl": "case",
+      "plDef": "casele"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "hobby",
+    "lemma": "hobby",
+    "pos": "noun",
+    "gloss": "hobby",
+    "freq": 4000,
+    "forms": {
+      "sg": "hobby",
+      "sgDef": "hobby-ul"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "familie",
+    "lemma": "familie",
+    "pos": "noun",
+    "gloss": "family",
+    "freq": 250,
+    "forms": {
+      "sg": "familie",
+      "sgDef": "familia",
+      "pl": "familii",
+      "plDef": "familiile"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "sarbatoare",
+    "lemma": "sărbătoare",
+    "pos": "noun",
+    "gloss": "holiday, celebration",
+    "freq": 600,
+    "forms": {
+      "sg": "sărbătoare",
+      "sgDef": "sărbătoarea",
+      "pl": "sărbători",
+      "plDef": "sărbătorile"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "obicei",
+    "lemma": "obicei",
+    "pos": "noun",
+    "gloss": "custom, habit",
+    "freq": 700,
+    "forms": {
+      "sg": "obicei",
+      "sgDef": "obiceiul",
+      "pl": "obiceiuri",
+      "plDef": "obiceiurile"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "mamaliga",
+    "lemma": "mămăligă",
+    "pos": "noun",
+    "gloss": "polenta",
+    "freq": 5000,
+    "forms": {
+      "sg": "mămăligă",
+      "sgDef": "mămăliga"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "bunic",
+    "lemma": "bunic",
+    "pos": "noun",
+    "gloss": "grandfather",
+    "freq": 1500,
+    "forms": {
+      "sg": "bunic",
+      "sgDef": "bunicul",
+      "pl": "bunici",
+      "plDef": "bunicii"
+    },
+    "gender": "m"
+  },
+  {
+    "id": "oras",
+    "lemma": "oraș",
+    "pos": "noun",
+    "gloss": "city",
+    "freq": 150,
+    "forms": {
+      "sg": "oraș",
+      "sgDef": "orașul",
+      "pl": "orașe",
+      "plDef": "orașele"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "zi",
+    "lemma": "zi",
+    "pos": "noun",
+    "gloss": "day",
+    "freq": 25,
+    "forms": {
+      "sg": "zi",
+      "sgDef": "ziua",
+      "pl": "zile",
+      "plDef": "zilele"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "invitatie",
+    "lemma": "invitație",
+    "pos": "noun",
+    "gloss": "invitation",
+    "freq": 1200,
+    "forms": {
+      "sg": "invitație",
+      "sgDef": "invitația"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "somn",
+    "lemma": "somn",
+    "pos": "noun",
+    "gloss": "sleep, sleepiness",
+    "freq": 1000,
+    "forms": {
+      "sg": "somn"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "foame",
+    "lemma": "foame",
+    "pos": "noun",
+    "gloss": "hunger",
+    "freq": 1700,
+    "forms": {
+      "sg": "foame"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "sete",
+    "lemma": "sete",
+    "pos": "noun",
+    "gloss": "thirst",
+    "freq": 3500,
+    "forms": {
+      "sg": "sete"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "frica",
+    "lemma": "frică",
+    "pos": "noun",
+    "gloss": "fear",
+    "freq": 900,
+    "forms": {
+      "sg": "frică",
+      "sgDef": "frica"
+    },
+    "gender": "f"
+  },
+  {
+    "id": "frig",
+    "lemma": "frig",
+    "pos": "noun",
+    "gloss": "cold (weather, feeling)",
+    "freq": 1800,
+    "forms": {
+      "sg": "frig"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "dor",
+    "lemma": "dor",
+    "pos": "noun",
+    "gloss": "longing",
+    "freq": 1500,
+    "forms": {
+      "sg": "dor"
+    },
+    "gender": "n"
+  },
+  {
+    "id": "decide",
+    "lemma": "a decide",
+    "pos": "verb",
+    "gloss": "to decide",
+    "freq": 220,
+    "forms": {
+      "inf": "a decide",
+      "pres1sg": "decid",
+      "pres2sg": "decizi",
+      "pres3sg": "decide",
+      "pres1pl": "decidem",
+      "pres2pl": "decideți",
+      "pres3pl": "decid",
+      "ppl": "decis",
+      "subj1sg": "să decid",
+      "subj2sg": "să decizi",
+      "subj3": "să decidă",
+      "subj1pl": "să decidem",
+      "subj2pl": "să decideți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "incepe",
+    "lemma": "a începe",
+    "pos": "verb",
+    "gloss": "to begin",
+    "freq": 130,
+    "forms": {
+      "inf": "a începe",
+      "pres1sg": "încep",
+      "pres2sg": "începi",
+      "pres3sg": "începe",
+      "pres1pl": "începem",
+      "pres2pl": "începeți",
+      "pres3pl": "încep",
+      "ppl": "început",
+      "subj1sg": "să încep",
+      "subj2sg": "să începi",
+      "subj3": "să înceapă",
+      "subj1pl": "să începem",
+      "subj2pl": "să începeți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "propune",
+    "lemma": "a propune",
+    "pos": "verb",
+    "gloss": "to propose",
+    "freq": 250,
+    "forms": {
+      "inf": "a propune",
+      "pres1sg": "propun",
+      "pres2sg": "propui",
+      "pres3sg": "propune",
+      "pres1pl": "propunem",
+      "pres2pl": "propuneți",
+      "pres3pl": "propun",
+      "ppl": "propus",
+      "subj1sg": "să propun",
+      "subj2sg": "să propui",
+      "subj3": "să propună",
+      "subj1pl": "să propunem",
+      "subj2pl": "să propuneți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "prezice",
+    "lemma": "a prezice",
+    "pos": "verb",
+    "gloss": "to predict",
+    "freq": 1500,
+    "forms": {
+      "inf": "a prezice",
+      "pres1sg": "prezic",
+      "pres2sg": "prezici",
+      "pres3sg": "prezice",
+      "pres1pl": "prezicem",
+      "pres2pl": "preziceți",
+      "pres3pl": "prezic",
+      "ppl": "prezis",
+      "subj1sg": "să prezic",
+      "subj2sg": "să prezici",
+      "subj3": "să prezică",
+      "subj1pl": "să prezicem",
+      "subj2pl": "să preziceți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "consuma",
+    "lemma": "a consuma",
+    "pos": "verb",
+    "gloss": "to consume",
+    "freq": 1100,
+    "forms": {
+      "inf": "a consuma",
+      "pres1sg": "consum",
+      "pres2sg": "consumi",
+      "pres3sg": "consumă",
+      "pres1pl": "consumăm",
+      "pres2pl": "consumați",
+      "pres3pl": "consumă",
+      "ppl": "consumat",
+      "subj1sg": "să consum",
+      "subj2sg": "să consumi",
+      "subj3": "să consume",
+      "subj1pl": "să consumăm",
+      "subj2pl": "să consumați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "porni",
+    "lemma": "a porni",
+    "pos": "verb",
+    "gloss": "to start, set off",
+    "freq": 500,
+    "forms": {
+      "inf": "a porni",
+      "pres1sg": "pornesc",
+      "pres2sg": "pornești",
+      "pres3sg": "pornește",
+      "pres1pl": "pornim",
+      "pres2pl": "porniți",
+      "pres3pl": "pornesc",
+      "ppl": "pornit",
+      "subj1sg": "să pornesc",
+      "subj2sg": "să pornești",
+      "subj3": "să pornească",
+      "subj1pl": "să pornim",
+      "subj2pl": "să porniți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ],
+    "class": "IV-esc"
+  },
+  {
+    "id": "vedea",
+    "lemma": "a vedea",
+    "pos": "verb",
+    "gloss": "to see",
+    "freq": 40,
+    "forms": {
+      "inf": "a vedea",
+      "pres1sg": "văd",
+      "pres2sg": "vezi",
+      "pres3sg": "vede",
+      "pres1pl": "vedem",
+      "pres2pl": "vedeți",
+      "pres3pl": "văd",
+      "ppl": "văzut",
+      "subj1sg": "să văd",
+      "subj2sg": "să vezi",
+      "subj3": "să vadă",
+      "subj1pl": "să vedem",
+      "subj2pl": "să vedeți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "explica",
+    "lemma": "a explica",
+    "pos": "verb",
+    "gloss": "to explain",
+    "freq": 250,
+    "forms": {
+      "inf": "a explica",
+      "pres1sg": "explic",
+      "pres2sg": "explici",
+      "pres3sg": "explică",
+      "pres1pl": "explicăm",
+      "pres2pl": "explicați",
+      "pres3pl": "explică",
+      "ppl": "explicat",
+      "subj1sg": "să explic",
+      "subj2sg": "să explici",
+      "subj3": "să explice",
+      "subj1pl": "să explicăm",
+      "subj2pl": "să explicați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "gati",
+    "lemma": "a găti",
+    "pos": "verb",
+    "gloss": "to cook",
+    "freq": 3000,
+    "forms": {
+      "inf": "a găti",
+      "pres1sg": "gătesc",
+      "pres2sg": "gătești",
+      "pres3sg": "gătește",
+      "pres1pl": "gătim",
+      "pres2pl": "gătiți",
+      "pres3pl": "gătesc",
+      "ppl": "gătit",
+      "subj1sg": "să gătesc",
+      "subj2sg": "să gătești",
+      "subj3": "să gătească",
+      "subj1pl": "să gătim",
+      "subj2pl": "să gătiți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ],
+    "class": "IV-esc"
+  },
+  {
+    "id": "castiga",
+    "lemma": "a câștiga",
+    "pos": "verb",
+    "gloss": "to win, earn",
+    "freq": 320,
+    "forms": {
+      "inf": "a câștiga",
+      "pres1sg": "câștig",
+      "pres2sg": "câștigi",
+      "pres3sg": "câștigă",
+      "pres1pl": "câștigăm",
+      "pres2pl": "câștigați",
+      "pres3pl": "câștigă",
+      "ppl": "câștigat",
+      "subj1sg": "să câștig",
+      "subj2sg": "să câștigi",
+      "subj3": "să câștige",
+      "subj1pl": "să câștigăm",
+      "subj2pl": "să câștigați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "crede",
+    "lemma": "a crede",
+    "pos": "verb",
+    "gloss": "to believe, think",
+    "freq": 70,
+    "forms": {
+      "inf": "a crede",
+      "pres1sg": "cred",
+      "pres2sg": "crezi",
+      "pres3sg": "crede",
+      "pres1pl": "credem",
+      "pres2pl": "credeți",
+      "pres3pl": "cred",
+      "ppl": "crezut",
+      "subj1sg": "să cred",
+      "subj2sg": "să crezi",
+      "subj3": "să creadă",
+      "subj1pl": "să credem",
+      "subj2pl": "să credeți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "vota",
+    "lemma": "a vota",
+    "pos": "verb",
+    "gloss": "to vote",
+    "freq": 1100,
+    "forms": {
+      "inf": "a vota",
+      "pres1sg": "votez",
+      "pres2sg": "votezi",
+      "pres3sg": "votează",
+      "pres1pl": "votăm",
+      "pres2pl": "votați",
+      "pres3pl": "votează",
+      "ppl": "votat",
+      "subj1sg": "să votez",
+      "subj2sg": "să votezi",
+      "subj3": "să voteze",
+      "subj1pl": "să votăm",
+      "subj2pl": "să votați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ],
+    "class": "I-ez"
+  },
+  {
+    "id": "veni",
+    "lemma": "a veni",
+    "pos": "verb",
+    "gloss": "to come",
+    "freq": 45,
+    "forms": {
+      "inf": "a veni",
+      "pres1sg": "vin",
+      "pres2sg": "vii",
+      "pres3sg": "vine",
+      "pres1pl": "venim",
+      "pres2pl": "veniți",
+      "pres3pl": "vin",
+      "ppl": "venit",
+      "subj1sg": "să vin",
+      "subj2sg": "să vii",
+      "subj3": "să vină",
+      "subj1pl": "să venim",
+      "subj2pl": "să veniți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "amana",
+    "lemma": "a amâna",
+    "pos": "verb",
+    "gloss": "to postpone",
+    "freq": 1500,
+    "forms": {
+      "inf": "a amâna",
+      "pres1sg": "amân",
+      "pres2sg": "amâni",
+      "pres3sg": "amână",
+      "pres1pl": "amânăm",
+      "pres2pl": "amânați",
+      "pres3pl": "amână",
+      "ppl": "amânat",
+      "subj1sg": "să amân",
+      "subj2sg": "să amâni",
+      "subj3": "să amâne",
+      "subj1pl": "să amânăm",
+      "subj2pl": "să amânați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "alege",
+    "lemma": "a alege",
+    "pos": "verb",
+    "gloss": "to choose",
+    "freq": 200,
+    "forms": {
+      "inf": "a alege",
+      "pres1sg": "aleg",
+      "pres2sg": "alegi",
+      "pres3sg": "alege",
+      "pres1pl": "alegem",
+      "pres2pl": "alegeți",
+      "pres3pl": "aleg",
+      "ppl": "ales",
+      "subj1sg": "să aleg",
+      "subj2sg": "să alegi",
+      "subj3": "să aleagă",
+      "subj1pl": "să alegem",
+      "subj2pl": "să alegeți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "rezolva",
+    "lemma": "a rezolva",
+    "pos": "verb",
+    "gloss": "to solve",
+    "freq": 350,
+    "forms": {
+      "inf": "a rezolva",
+      "pres1sg": "rezolv",
+      "pres2sg": "rezolvi",
+      "pres3sg": "rezolvă",
+      "pres1pl": "rezolvăm",
+      "pres2pl": "rezolvați",
+      "pres3pl": "rezolvă",
+      "ppl": "rezolvat",
+      "subj1sg": "să rezolv",
+      "subj2sg": "să rezolvi",
+      "subj3": "să rezolve",
+      "subj1pl": "să rezolvăm",
+      "subj2pl": "să rezolvați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "rula",
+    "lemma": "a rula",
+    "pos": "verb",
+    "gloss": "to run (a program)",
+    "freq": 2500,
+    "forms": {
+      "inf": "a rula",
+      "pres1sg": "rulez",
+      "pres2sg": "rulezi",
+      "pres3sg": "rulează",
+      "pres1pl": "rulăm",
+      "pres2pl": "rulați",
+      "pres3pl": "rulează",
+      "ppl": "rulat",
+      "subj1sg": "să rulez",
+      "subj2sg": "să rulezi",
+      "subj3": "să ruleze",
+      "subj1pl": "să rulăm",
+      "subj2pl": "să rulați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ],
+    "class": "I-ez"
+  },
+  {
+    "id": "livra",
+    "lemma": "a livra",
+    "pos": "verb",
+    "gloss": "to deliver",
+    "freq": 1800,
+    "forms": {
+      "inf": "a livra",
+      "pres1sg": "livrez",
+      "pres2sg": "livrezi",
+      "pres3sg": "livrează",
+      "pres1pl": "livrăm",
+      "pres2pl": "livrați",
+      "pres3pl": "livrează",
+      "ppl": "livrat",
+      "subj1sg": "să livrez",
+      "subj2sg": "să livrezi",
+      "subj3": "să livreze",
+      "subj1pl": "să livrăm",
+      "subj2pl": "să livrați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ],
+    "class": "I-ez"
+  },
+  {
+    "id": "implementa",
+    "lemma": "a implementa",
+    "pos": "verb",
+    "gloss": "to implement",
+    "freq": 3000,
+    "forms": {
+      "inf": "a implementa",
+      "pres1sg": "implementez",
+      "pres2sg": "implementezi",
+      "pres3sg": "implementează",
+      "pres1pl": "implementăm",
+      "pres2pl": "implementați",
+      "pres3pl": "implementează",
+      "ppl": "implementat",
+      "subj1sg": "să implementez",
+      "subj2sg": "să implementezi",
+      "subj3": "să implementeze",
+      "subj1pl": "să implementăm",
+      "subj2pl": "să implementați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ],
+    "class": "I-ez"
+  },
+  {
+    "id": "analiza",
+    "lemma": "a analiza",
+    "pos": "verb",
+    "gloss": "to analyze",
+    "freq": 1200,
+    "forms": {
+      "inf": "a analiza",
+      "pres1sg": "analizez",
+      "pres2sg": "analizezi",
+      "pres3sg": "analizează",
+      "pres1pl": "analizăm",
+      "pres2pl": "analizați",
+      "pres3pl": "analizează",
+      "ppl": "analizat",
+      "subj1sg": "să analizez",
+      "subj2sg": "să analizezi",
+      "subj3": "să analizeze",
+      "subj1pl": "să analizăm",
+      "subj2pl": "să analizați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ],
+    "class": "I-ez"
+  },
+  {
+    "id": "trimite",
+    "lemma": "a trimite",
+    "pos": "verb",
+    "gloss": "to send",
+    "freq": 190,
+    "forms": {
+      "inf": "a trimite",
+      "pres1sg": "trimit",
+      "pres2sg": "trimiți",
+      "pres3sg": "trimite",
+      "pres1pl": "trimitem",
+      "pres2pl": "trimiteți",
+      "pres3pl": "trimit",
+      "ppl": "trimis",
+      "subj1sg": "să trimit",
+      "subj2sg": "să trimiți",
+      "subj3": "să trimită",
+      "subj1pl": "să trimitem",
+      "subj2pl": "să trimiteți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "ajuta",
+    "lemma": "a ajuta",
+    "pos": "verb",
+    "gloss": "to help",
+    "freq": 230,
+    "forms": {
+      "inf": "a ajuta",
+      "pres1sg": "ajut",
+      "pres2sg": "ajuți",
+      "pres3sg": "ajută",
+      "pres1pl": "ajutăm",
+      "pres2pl": "ajutați",
+      "pres3pl": "ajută",
+      "ppl": "ajutat",
+      "subj1sg": "să ajut",
+      "subj2sg": "să ajuți",
+      "subj3": "să ajute",
+      "subj1pl": "să ajutăm",
+      "subj2pl": "să ajutați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "asculta",
+    "lemma": "a asculta",
+    "pos": "verb",
+    "gloss": "to listen",
+    "freq": 420,
+    "forms": {
+      "inf": "a asculta",
+      "pres1sg": "ascult",
+      "pres2sg": "asculți",
+      "pres3sg": "ascultă",
+      "pres1pl": "ascultăm",
+      "pres2pl": "ascultați",
+      "pres3pl": "ascultă",
+      "ppl": "ascultat",
+      "subj1sg": "să ascult",
+      "subj2sg": "să asculți",
+      "subj3": "să asculte",
+      "subj1pl": "să ascultăm",
+      "subj2pl": "să ascultați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "auzi",
+    "lemma": "a auzi",
+    "pos": "verb",
+    "gloss": "to hear",
+    "freq": 160,
+    "forms": {
+      "inf": "a auzi",
+      "pres1sg": "aud",
+      "pres2sg": "auzi",
+      "pres3sg": "aude",
+      "pres1pl": "auzim",
+      "pres2pl": "auziți",
+      "pres3pl": "aud",
+      "ppl": "auzit",
+      "subj1sg": "să aud",
+      "subj2sg": "să auzi",
+      "subj3": "să audă",
+      "subj1pl": "să auzim",
+      "subj2pl": "să auziți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "da",
+    "lemma": "a da",
+    "pos": "verb",
+    "gloss": "to give",
+    "freq": 12,
+    "forms": {
+      "inf": "a da",
+      "pres1sg": "dau",
+      "pres2sg": "dai",
+      "pres3sg": "dă",
+      "pres1pl": "dăm",
+      "pres2pl": "dați",
+      "pres3pl": "dau",
+      "ppl": "dat",
+      "subj1sg": "să dau",
+      "subj2sg": "să dai",
+      "subj3": "să dea",
+      "subj1pl": "să dăm",
+      "subj2pl": "să dați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "placea",
+    "lemma": "a plăcea",
+    "pos": "verb",
+    "gloss": "to be pleasing, to like",
+    "freq": 120,
+    "forms": {
+      "inf": "a plăcea",
+      "pres1sg": "plac",
+      "pres2sg": "plăci",
+      "pres3sg": "place",
+      "pres1pl": "plăcem",
+      "pres2pl": "plăceți",
+      "pres3pl": "plac",
+      "ppl": "plăcut",
+      "subj1sg": "să plac",
+      "subj2sg": "să plăci",
+      "subj3": "să placă",
+      "subj1pl": "să plăcem",
+      "subj2pl": "să plăceți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "aduce",
+    "lemma": "a aduce",
+    "pos": "verb",
+    "gloss": "to bring",
+    "freq": 150,
+    "forms": {
+      "inf": "a aduce",
+      "pres1sg": "aduc",
+      "pres2sg": "aduci",
+      "pres3sg": "aduce",
+      "pres1pl": "aducem",
+      "pres2pl": "aduceți",
+      "pres3pl": "aduc",
+      "ppl": "adus",
+      "subj1sg": "să aduc",
+      "subj2sg": "să aduci",
+      "subj3": "să aducă",
+      "subj1pl": "să aducem",
+      "subj2pl": "să aduceți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "invita",
+    "lemma": "a invita",
+    "pos": "verb",
+    "gloss": "to invite",
+    "freq": 800,
+    "forms": {
+      "inf": "a invita",
+      "pres1sg": "invit",
+      "pres2sg": "inviți",
+      "pres3sg": "invită",
+      "pres1pl": "invităm",
+      "pres2pl": "invitați",
+      "pres3pl": "invită",
+      "ppl": "invitat",
+      "subj1sg": "să invit",
+      "subj2sg": "să inviți",
+      "subj3": "să invite",
+      "subj1pl": "să invităm",
+      "subj2pl": "să invitați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "chema",
+    "lemma": "a chema",
+    "pos": "verb",
+    "gloss": "to call, to be named",
+    "freq": 350,
+    "forms": {
+      "inf": "a chema",
+      "pres1sg": "chem",
+      "pres2sg": "chemi",
+      "pres3sg": "cheamă",
+      "pres1pl": "chemăm",
+      "pres2pl": "chemați",
+      "pres3pl": "cheamă",
+      "ppl": "chemat",
+      "subj1sg": "să chem",
+      "subj2sg": "să chemi",
+      "subj3": "să cheme",
+      "subj1pl": "să chemăm",
+      "subj2pl": "să chemați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "suna",
+    "lemma": "a suna",
+    "pos": "verb",
+    "gloss": "to call (phone), ring",
+    "freq": 700,
+    "forms": {
+      "inf": "a suna",
+      "pres1sg": "sun",
+      "pres2sg": "suni",
+      "pres3sg": "sună",
+      "pres1pl": "sunăm",
+      "pres2pl": "sunați",
+      "pres3pl": "sună",
+      "ppl": "sunat",
+      "subj1sg": "să sun",
+      "subj2sg": "să suni",
+      "subj3": "să sune",
+      "subj1pl": "să sunăm",
+      "subj2pl": "să sunați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "creste",
+    "lemma": "a crește",
+    "pos": "verb",
+    "gloss": "to grow, rise",
+    "freq": 170,
+    "forms": {
+      "inf": "a crește",
+      "pres1sg": "cresc",
+      "pres2sg": "crești",
+      "pres3sg": "crește",
+      "pres1pl": "creștem",
+      "pres2pl": "creșteți",
+      "pres3pl": "cresc",
+      "ppl": "crescut",
+      "subj1sg": "să cresc",
+      "subj2sg": "să crești",
+      "subj3": "să crească",
+      "subj1pl": "să creștem",
+      "subj2pl": "să creșteți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "promite",
+    "lemma": "a promite",
+    "pos": "verb",
+    "gloss": "to promise",
+    "freq": 600,
+    "forms": {
+      "inf": "a promite",
+      "pres1sg": "promit",
+      "pres2sg": "promiți",
+      "pres3sg": "promite",
+      "pres1pl": "promitem",
+      "pres2pl": "promiteți",
+      "pres3pl": "promit",
+      "ppl": "promis",
+      "subj1sg": "să promit",
+      "subj2sg": "să promiți",
+      "subj3": "să promită",
+      "subj1pl": "să promitem",
+      "subj2pl": "să promiteți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "primi",
+    "lemma": "a primi",
+    "pos": "verb",
+    "gloss": "to receive",
+    "freq": 90,
+    "forms": {
+      "inf": "a primi",
+      "pres1sg": "primesc",
+      "pres2sg": "primești",
+      "pres3sg": "primește",
+      "pres1pl": "primim",
+      "pres2pl": "primiți",
+      "pres3pl": "primesc",
+      "ppl": "primit",
+      "subj1sg": "să primesc",
+      "subj2sg": "să primești",
+      "subj3": "să primească",
+      "subj1pl": "să primim",
+      "subj2pl": "să primiți"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ],
+    "class": "IV-esc"
+  },
+  {
+    "id": "optimiza",
+    "lemma": "a optimiza",
+    "pos": "verb",
+    "gloss": "to optimize",
+    "freq": 4000,
+    "forms": {
+      "inf": "a optimiza",
+      "pres1sg": "optimizez",
+      "pres2sg": "optimizezi",
+      "pres3sg": "optimizează",
+      "pres1pl": "optimizăm",
+      "pres2pl": "optimizați",
+      "pres3pl": "optimizează",
+      "ppl": "optimizat",
+      "subj1sg": "să optimizez",
+      "subj2sg": "să optimizezi",
+      "subj3": "să optimizeze",
+      "subj1pl": "să optimizăm",
+      "subj2pl": "să optimizați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ],
+    "class": "I-ez"
+  },
+  {
+    "id": "interesa",
+    "lemma": "a interesa",
+    "pos": "verb",
+    "gloss": "to interest",
+    "freq": 500,
+    "forms": {
+      "inf": "a interesa",
+      "pres1sg": "interesez",
+      "pres2sg": "interesezi",
+      "pres3sg": "interesează",
+      "pres1pl": "interesăm",
+      "pres2pl": "interesați",
+      "pres3pl": "interesează",
+      "ppl": "interesat",
+      "subj1sg": "să interesez",
+      "subj2sg": "să interesezi",
+      "subj3": "să intereseze",
+      "subj1pl": "să interesăm",
+      "subj2pl": "să interesați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ],
+    "class": "I-ez"
+  },
+  {
+    "id": "arata",
+    "lemma": "a arăta",
+    "pos": "verb",
+    "gloss": "to show, to look",
+    "freq": 150,
+    "forms": {
+      "inf": "a arăta",
+      "pres1sg": "arăt",
+      "pres2sg": "arăți",
+      "pres3sg": "arată",
+      "pres1pl": "arătăm",
+      "pres2pl": "arătați",
+      "pres3pl": "arată",
+      "ppl": "arătat",
+      "subj1sg": "să arăt",
+      "subj2sg": "să arăți",
+      "subj3": "să arate",
+      "subj1pl": "să arătăm",
+      "subj2pl": "să arătați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  }
+]

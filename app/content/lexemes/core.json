@@ -139,7 +139,11 @@
       "pres1pl": "suntem",
       "pres2pl": "sunteți",
       "pres3pl": "sunt",
-      "ppl": "fost"
+      "ppl": "fost",
+      "subj1sg": "să fiu",
+      "subj2sg": "să fii",
+      "subj3": "să fie",
+      "subj1pl": "să fim"
     },
     "keyForms": [
       "pres1sg",
@@ -181,7 +185,8 @@
       "pres1pl": "vrem",
       "pres2pl": "vreți",
       "pres3pl": "vor",
-      "ppl": "vrut"
+      "ppl": "vrut",
+      "subj1pl": "să vrem"
     },
     "keyForms": [
       "pres1sg",
@@ -203,7 +208,8 @@
       "pres1pl": "putem",
       "pres2pl": "puteți",
       "pres3pl": "pot",
-      "ppl": "putut"
+      "ppl": "putut",
+      "subj1pl": "să putem"
     },
     "keyForms": [
       "pres1sg",
@@ -246,7 +252,12 @@
       "ppl": "lucrat",
       "subj1sg": "să lucrez",
       "subj2sg": "să lucrezi",
-      "subj3": "să lucreze"
+      "subj3": "să lucreze",
+      "pres1pl": "lucrăm",
+      "pres2pl": "lucrați",
+      "pres3pl": "lucrează",
+      "subj1pl": "să lucrăm",
+      "subj2pl": "să lucrați"
     },
     "keyForms": [
       "pres1sg",
@@ -268,7 +279,12 @@
       "ppl": "terminat",
       "subj1sg": "să termin",
       "subj2sg": "să termini",
-      "subj3": "să termine"
+      "subj3": "să termine",
+      "pres1pl": "terminăm",
+      "pres2pl": "terminați",
+      "pres3pl": "termină",
+      "subj1pl": "să terminăm",
+      "subj2pl": "să terminați"
     },
     "keyForms": [
       "pres1sg",
@@ -290,7 +306,12 @@
       "ppl": "găsit",
       "subj1sg": "să găsesc",
       "subj2sg": "să găsești",
-      "subj3": "să găsească"
+      "subj3": "să găsească",
+      "pres1pl": "găsim",
+      "pres2pl": "găsiți",
+      "pres3pl": "găsesc",
+      "subj1pl": "să găsim",
+      "subj2pl": "să găsiți"
     },
     "keyForms": [
       "pres1sg",
@@ -313,7 +334,12 @@
       "ppl": "învățat",
       "subj1sg": "să învăț",
       "subj2sg": "să înveți",
-      "subj3": "să învețe"
+      "subj3": "să învețe",
+      "pres1pl": "învățăm",
+      "pres2pl": "învățați",
+      "pres3pl": "învață",
+      "subj1pl": "să învățăm",
+      "subj2pl": "să învățați"
     },
     "keyForms": [
       "pres1sg",
@@ -336,7 +362,11 @@
       "subj1sg": "să repet",
       "subj2sg": "să repeți",
       "subj3": "să repete",
-      "subj2pl": "să repetați"
+      "subj2pl": "să repetați",
+      "pres1pl": "repetăm",
+      "pres2pl": "repetați",
+      "pres3pl": "repetă",
+      "subj1pl": "să repetăm"
     },
     "keyForms": [
       "pres1sg",
@@ -358,7 +388,12 @@
       "ppl": "mâncat",
       "subj1sg": "să mănânc",
       "subj2sg": "să mănânci",
-      "subj3": "să mănânce"
+      "subj3": "să mănânce",
+      "pres1pl": "mâncăm",
+      "pres2pl": "mâncați",
+      "pres3pl": "mănâncă",
+      "subj1pl": "să mâncăm",
+      "subj2pl": "să mâncați"
     },
     "keyForms": [
       "pres1sg",
@@ -380,7 +415,12 @@
       "ppl": "spus",
       "subj1sg": "să spun",
       "subj2sg": "să spui",
-      "subj3": "să spună"
+      "subj3": "să spună",
+      "pres1pl": "spunem",
+      "pres2pl": "spuneți",
+      "pres3pl": "spun",
+      "subj1pl": "să spunem",
+      "subj2pl": "să spuneți"
     },
     "keyForms": [
       "pres1sg",
@@ -408,7 +448,9 @@
     "freq": 2000,
     "forms": {
       "sg": "bug",
-      "sgDef": "bug-ul"
+      "sgDef": "bug-ul",
+      "pl": "bug-uri",
+      "plDef": "bug-urile"
     },
     "gender": "n"
   },
@@ -420,7 +462,9 @@
     "freq": 700,
     "forms": {
       "sg": "soră",
-      "sgDef": "sora"
+      "sgDef": "sora",
+      "pl": "surori",
+      "plDef": "surorile"
     },
     "gender": "f"
   },
@@ -432,7 +476,9 @@
     "freq": 1700,
     "forms": {
       "sg": "bere",
-      "sgDef": "berea"
+      "sgDef": "berea",
+      "pl": "beri",
+      "plDef": "berile"
     },
     "gender": "f"
   },
@@ -453,7 +499,11 @@
     "lemma": "Cluj",
     "pos": "noun",
     "gloss": "Cluj",
-    "freq": 5000
+    "freq": 5000,
+    "forms": {
+      "base": "Cluj",
+      "sgDef": "Clujul"
+    }
   },
   {
     "id": "iasi",
@@ -673,7 +723,9 @@
       "ppl": "făcut",
       "subj1sg": "să fac",
       "subj2sg": "să faci",
-      "subj3": "să facă"
+      "subj3": "să facă",
+      "subj1pl": "să facem",
+      "subj2pl": "să faceți"
     },
     "keyForms": [
       "pres1sg",
@@ -698,7 +750,9 @@
       "ppl": "mers",
       "subj1sg": "să merg",
       "subj2sg": "să mergi",
-      "subj3": "să meargă"
+      "subj3": "să meargă",
+      "subj1pl": "să mergem",
+      "subj2pl": "să mergeți"
     },
     "keyForms": [
       "pres1sg",
@@ -723,7 +777,9 @@
       "ppl": "luat",
       "subj1sg": "să iau",
       "subj2sg": "să iei",
-      "subj3": "să ia"
+      "subj3": "să ia",
+      "subj1pl": "să luăm",
+      "subj2pl": "să luați"
     },
     "keyForms": [
       "pres1sg",
@@ -785,7 +841,12 @@
       "ppl": "citit",
       "subj1sg": "să citesc",
       "subj2sg": "să citești",
-      "subj3": "să citească"
+      "subj3": "să citească",
+      "pres1pl": "citim",
+      "pres2pl": "citiți",
+      "pres3pl": "citesc",
+      "subj1pl": "să citim",
+      "subj2pl": "să citiți"
     },
     "keyForms": [
       "pres1sg",
@@ -807,7 +868,12 @@
       "ppl": "scris",
       "subj1sg": "să scriu",
       "subj2sg": "să scrii",
-      "subj3": "să scrie"
+      "subj3": "să scrie",
+      "pres1pl": "scriem",
+      "pres2pl": "scrieți",
+      "pres3pl": "scriu",
+      "subj1pl": "să scriem",
+      "subj2pl": "să scrieți"
     },
     "keyForms": [
       "pres1sg",
@@ -851,7 +917,12 @@
       "ppl": "testat",
       "subj1sg": "să testez",
       "subj2sg": "să testezi",
-      "subj3": "să testeze"
+      "subj3": "să testeze",
+      "pres1pl": "testăm",
+      "pres2pl": "testați",
+      "pres3pl": "testează",
+      "subj1pl": "să testăm",
+      "subj2pl": "să testați"
     },
     "keyForms": [
       "pres1sg",
@@ -873,7 +944,12 @@
       "ppl": "reparat",
       "subj1sg": "să repar",
       "subj2sg": "să repari",
-      "subj3": "să repare"
+      "subj3": "să repare",
+      "pres1pl": "reparăm",
+      "pres2pl": "reparați",
+      "pres3pl": "repară",
+      "subj1pl": "să reparăm",
+      "subj2pl": "să reparați"
     },
     "keyForms": [
       "pres1sg",
@@ -895,7 +971,12 @@
       "ppl": "verificat",
       "subj1sg": "să verific",
       "subj2sg": "să verifici",
-      "subj3": "să verifice"
+      "subj3": "să verifice",
+      "pres1pl": "verificăm",
+      "pres2pl": "verificați",
+      "pres3pl": "verifică",
+      "subj1pl": "să verificăm",
+      "subj2pl": "să verificați"
     },
     "keyForms": [
       "pres1sg",
@@ -917,7 +998,12 @@
       "ppl": "plecat",
       "subj1sg": "să plec",
       "subj2sg": "să pleci",
-      "subj3": "să plece"
+      "subj3": "să plece",
+      "pres1pl": "plecăm",
+      "pres2pl": "plecați",
+      "pres3pl": "pleacă",
+      "subj1pl": "să plecăm",
+      "subj2pl": "să plecați"
     },
     "keyForms": [
       "pres1sg",
@@ -961,7 +1047,12 @@
       "ppl": "comandat",
       "subj1sg": "să comand",
       "subj2sg": "să comanzi",
-      "subj3": "să comande"
+      "subj3": "să comande",
+      "pres1pl": "comandăm",
+      "pres2pl": "comandați",
+      "pres3pl": "comandă",
+      "subj1pl": "să comandăm",
+      "subj2pl": "să comandați"
     },
     "keyForms": [
       "pres1sg",
@@ -983,7 +1074,12 @@
       "ppl": "plătit",
       "subj1sg": "să plătesc",
       "subj2sg": "să plătești",
-      "subj3": "să plătească"
+      "subj3": "să plătească",
+      "pres1pl": "plătim",
+      "pres2pl": "plătiți",
+      "pres3pl": "plătesc",
+      "subj1pl": "să plătim",
+      "subj2pl": "să plătiți"
     },
     "keyForms": [
       "pres1sg",
@@ -1005,7 +1101,12 @@
       "ppl": "locuit",
       "subj1sg": "să locuiesc",
       "subj2sg": "să locuiești",
-      "subj3": "să locuiască"
+      "subj3": "să locuiască",
+      "pres1pl": "locuim",
+      "pres2pl": "locuiți",
+      "pres3pl": "locuiesc",
+      "subj1pl": "să locuim",
+      "subj2pl": "să locuiți"
     },
     "keyForms": [
       "pres1sg",
@@ -1027,7 +1128,12 @@
       "ppl": "vorbit",
       "subj1sg": "să vorbesc",
       "subj2sg": "să vorbești",
-      "subj3": "să vorbească"
+      "subj3": "să vorbească",
+      "pres1pl": "vorbim",
+      "pres2pl": "vorbiți",
+      "pres3pl": "vorbesc",
+      "subj1pl": "să vorbim",
+      "subj2pl": "să vorbiți"
     },
     "keyForms": [
       "pres1sg",
@@ -1049,7 +1155,12 @@
       "ppl": "înțeles",
       "subj1sg": "să înțeleg",
       "subj2sg": "să înțelegi",
-      "subj3": "să înțeleagă"
+      "subj3": "să înțeleagă",
+      "pres1pl": "înțelegem",
+      "pres2pl": "înțelegeți",
+      "pres3pl": "înțeleg",
+      "subj1pl": "să înțelegem",
+      "subj2pl": "să înțelegeți"
     },
     "keyForms": [
       "pres1sg",
@@ -1071,7 +1182,12 @@
       "ppl": "întrebat",
       "subj1sg": "să întreb",
       "subj2sg": "să întrebi",
-      "subj3": "să întrebe"
+      "subj3": "să întrebe",
+      "pres1pl": "întrebăm",
+      "pres2pl": "întrebați",
+      "pres3pl": "întreabă",
+      "subj1pl": "să întrebăm",
+      "subj2pl": "să întrebați"
     },
     "keyForms": [
       "pres1sg",
@@ -1090,7 +1206,12 @@
       "pres1sg": "mulțumesc",
       "pres2sg": "mulțumești",
       "pres3sg": "mulțumește",
-      "ppl": "mulțumit"
+      "ppl": "mulțumit",
+      "pres1pl": "mulțumim",
+      "pres2pl": "mulțumiți",
+      "pres3pl": "mulțumesc",
+      "subj1pl": "să mulțumim",
+      "subj2pl": "să mulțumiți"
     },
     "keyForms": [
       "pres1sg",
@@ -1166,7 +1287,9 @@
     "freq": 2100,
     "forms": {
       "sg": "task",
-      "sgDef": "task-ul"
+      "sgDef": "task-ul",
+      "pl": "task-uri",
+      "plDef": "task-urile"
     },
     "gender": "n"
   },
@@ -1202,7 +1325,9 @@
     "freq": 600,
     "forms": {
       "sg": "test",
-      "sgDef": "testul"
+      "sgDef": "testul",
+      "pl": "teste",
+      "plDef": "testele"
     },
     "gender": "n"
   },
@@ -1226,7 +1351,9 @@
     "freq": 450,
     "forms": {
       "sg": "eroare",
-      "sgDef": "eroarea"
+      "sgDef": "eroarea",
+      "pl": "erori",
+      "plDef": "erorile"
     },
     "gender": "f"
   },
@@ -1310,7 +1437,9 @@
     "freq": 480,
     "forms": {
       "sg": "frate",
-      "sgDef": "fratele"
+      "sgDef": "fratele",
+      "pl": "frați",
+      "plDef": "frații"
     },
     "gender": "m"
   },
@@ -1334,7 +1463,9 @@
     "freq": 200,
     "forms": {
       "sg": "carte",
-      "sgDef": "cartea"
+      "sgDef": "cartea",
+      "pl": "cărți",
+      "plDef": "cărțile"
     },
     "gender": "f"
   },
@@ -1370,7 +1501,9 @@
     "freq": 1500,
     "forms": {
       "sg": "câine",
-      "sgDef": "câinele"
+      "sgDef": "câinele",
+      "pl": "câini",
+      "plDef": "câinii"
     },
     "gender": "m"
   },
@@ -1454,7 +1587,9 @@
     "freq": 160,
     "forms": {
       "sg": "cuvânt",
-      "sgDef": "cuvântul"
+      "sgDef": "cuvântul",
+      "pl": "cuvinte",
+      "plDef": "cuvintele"
     },
     "gender": "n"
   },
@@ -1597,7 +1732,9 @@
     "freq": 45,
     "forms": {
       "msg": "bun",
-      "fsg": "bună"
+      "fsg": "bună",
+      "mpl": "buni",
+      "fpl": "bune"
     }
   }
 ]

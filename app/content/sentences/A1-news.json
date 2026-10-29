@@ -1,0 +1,2025 @@
+[
+  {
+    "id": "s-a1-news-0001",
+    "ro": "Ai citit știrea?",
+    "en": "Have you read the story?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "perfect-compus",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ai",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "2sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "citit",
+        "units": [
+          {
+            "lex": "citi",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "știrea?",
+        "units": [
+          {
+            "lex": "stire",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-ai citit știrea?",
+        "accept": [
+          "Nu ai citit știrea?"
+        ],
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Am citit știrea.",
+        "en": "I read the story.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0002",
+    "ro": "Guvernul a decis ieri.",
+    "en": "The government decided yesterday.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "def-sg",
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Guvernul",
+        "units": [
+          {
+            "lex": "guvern",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "a",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "3sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "decis",
+        "units": [
+          {
+            "lex": "decide",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ieri.",
+        "units": [
+          {
+            "lex": "ieri",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Guvernul n-a decis ieri.",
+        "accept": [
+          "Guvernul nu a decis ieri."
+        ],
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0003",
+    "ro": "Ce spune ministrul?",
+    "en": "What does the minister say?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "wh-q",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "spune",
+        "units": [
+          {
+            "lex": "spune",
+            "form": "inf"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ministrul?",
+        "units": [
+          {
+            "lex": "ministru",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Ce a spus ministrul?",
+        "en": "What did the minister say?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0004",
+    "ro": "Nu sunt de acord cu guvernul.",
+    "en": "I don't agree with the government.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "neg-nu",
+      "be-pres",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres1sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "acord",
+        "units": [
+          {
+            "lex": "acord",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cu",
+        "units": [
+          {
+            "lex": "cu",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "guvernul.",
+        "units": [
+          {
+            "lex": "guvern",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Sunt de acord cu guvernul.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0005",
+    "ro": "Cine a câștigat?",
+    "en": "Who won?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "wh-q",
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cine",
+        "units": [
+          {
+            "lex": "cine",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "a",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "3sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "câștigat?",
+        "units": [
+          {
+            "lex": "castiga",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:perf>pres",
+        "ro": "Cine câștigă?",
+        "en": "Who's winning?",
+        "targetTokens": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0006",
+    "ro": "E o veste proastă.",
+    "en": "That's bad news.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "E",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "veste",
+        "units": [
+          {
+            "lex": "veste",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "proastă.",
+        "units": [
+          {
+            "lex": "prost",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu e o veste proastă.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "tense:pres>perf",
+        "ro": "A fost o veste proastă.",
+        "en": "It was bad news.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0007",
+    "ro": "Presa spune altceva.",
+    "en": "The press says something else.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Presa",
+        "units": [
+          {
+            "lex": "presa",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "spune",
+        "units": [
+          {
+            "lex": "spune",
+            "form": "inf"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "altceva.",
+        "units": [
+          {
+            "lex": "altceva",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Presa nu spune altceva.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0008",
+    "ro": "Crezi că e adevărat?",
+    "en": "Do you think it's true?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Crezi",
+        "units": [
+          {
+            "lex": "crede",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "că",
+        "units": [
+          {
+            "lex": "ca-conj",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "adevărat?",
+        "units": [
+          {
+            "lex": "adevarat",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Cred că e adevărat.",
+        "en": "I think it's true.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0009",
+    "ro": "Ce părere ai?",
+    "en": "What's your opinion?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "wh-q",
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "părere",
+        "units": [
+          {
+            "lex": "parere",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ai?",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce părere am?",
+        "en": "What's my opinion?",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0010",
+    "ro": "Nu am o părere încă.",
+    "en": "I don't have an opinion yet.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "neg-nu",
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "am",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres1sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "părere",
+        "units": [
+          {
+            "lex": "parere",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "încă.",
+        "units": [
+          {
+            "lex": "inca",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Am o părere.",
+        "en": "I have an opinion.",
+        "targetTokens": [
+          0,
+          4
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0011",
+    "ro": "Votezi duminică?",
+    "en": "Are you voting on Sunday?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Votezi",
+        "units": [
+          {
+            "lex": "vota",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "duminică?",
+        "units": [
+          {
+            "lex": "duminica",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Votez duminică?",
+        "en": "Am I voting on Sunday?",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "tense:pres>perf",
+        "ro": "Ai votat duminică?",
+        "en": "Did you vote on Sunday?",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0012",
+    "ro": "Vreau să citesc articolul.",
+    "en": "I want to read the article.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vreau",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "citesc",
+        "units": [
+          {
+            "lex": "citi",
+            "form": "subj1sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "articolul.",
+        "units": [
+          {
+            "lex": "articol",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu vreau să citesc articolul.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "add-obj:acc-3sg-m",
+        "ro": "Vreau să-l citesc.",
+        "en": "I want to read it.",
+        "targetTokens": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0013",
+    "ro": "Nu cred că e adevărat.",
+    "en": "I don't think it's true.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "neg-nu",
+      "pres-12-high",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "cred",
+        "units": [
+          {
+            "lex": "crede",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "că",
+        "units": [
+          {
+            "lex": "ca-conj",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "adevărat.",
+        "units": [
+          {
+            "lex": "adevarat",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Cred că e adevărat.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0014",
+    "ro": "Cine câștigă alegerile?",
+    "en": "Who's winning the elections?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high",
+      "def-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cine",
+        "units": [
+          {
+            "lex": "cine",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "câștigă",
+        "units": [
+          {
+            "lex": "castiga",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "alegerile?",
+        "units": [
+          {
+            "lex": "alegeri",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Cine a câștigat alegerile?",
+        "en": "Who won the elections?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0015",
+    "ro": "Alegerile sunt duminică.",
+    "en": "The elections are on Sunday.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "def-pl",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Alegerile",
+        "units": [
+          {
+            "lex": "alegeri",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3pl",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "duminică.",
+        "units": [
+          {
+            "lex": "duminica",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Alegerile nu sunt duminică.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0016",
+    "ro": "Știrile sunt prea optimiste.",
+    "en": "The news is too optimistic.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "def-pl",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Știrile",
+        "units": [
+          {
+            "lex": "stire",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3pl",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "prea",
+        "units": [
+          {
+            "lex": "prea",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "optimiste.",
+        "units": [
+          {
+            "lex": "optimist",
+            "form": "fpl"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Știrea e prea optimistă.",
+        "en": "The story is too optimistic.",
+        "targetTokens": [
+          0,
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0017",
+    "ro": "Citesc știrile în fiecare dimineață.",
+    "en": "I read the news every morning.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "def-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Citesc",
+        "units": [
+          {
+            "lex": "citi",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "știrile",
+        "units": [
+          {
+            "lex": "stire",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "fiecare",
+        "units": [
+          {
+            "lex": "fiecare",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "dimineață.",
+        "units": [
+          {
+            "lex": "dimineata",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu citesc știrile în fiecare dimineață.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Citește știrile în fiecare dimineață.",
+        "en": "He/She reads the news every morning.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "add-obj:acc-3pl-f",
+        "ro": "Le citesc în fiecare dimineață.",
+        "en": "I read them every morning.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0018",
+    "ro": "Politicienii promit mult.",
+    "en": "Politicians promise a lot.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "def-pl",
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Politicienii",
+        "units": [
+          {
+            "lex": "politician",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "promit",
+        "units": [
+          {
+            "lex": "promite",
+            "form": "pres3pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mult.",
+        "units": [
+          {
+            "lex": "mult",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Politicianul promite mult.",
+        "en": "The politician promises a lot.",
+        "targetTokens": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0019",
+    "ro": "O să votez duminică.",
+    "en": "I'll vote on Sunday.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "fut-o-sa"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "votez",
+        "units": [
+          {
+            "lex": "vota",
+            "form": "subj1sg",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "duminică.",
+        "units": [
+          {
+            "lex": "duminica",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu o să votez duminică.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "tense:fut>perf",
+        "ro": "Am votat duminică.",
+        "en": "I voted on Sunday.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0020",
+    "ro": "O să câștige opoziția?",
+    "en": "Will the opposition win?",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "fut-o-sa",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "sa"
+      },
+      {
+        "t": "câștige",
+        "units": [
+          {
+            "lex": "castiga",
+            "form": "subj3",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "opoziția?",
+        "units": [
+          {
+            "lex": "opozitie",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu o să câștige opoziția?",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0021",
+    "ro": "Guvernul o să decidă mâine.",
+    "en": "The government will decide tomorrow.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "def-sg",
+      "fut-o-sa"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Guvernul",
+        "units": [
+          {
+            "lex": "guvern",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "decidă",
+        "units": [
+          {
+            "lex": "decide",
+            "form": "subj3",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mâine.",
+        "units": [
+          {
+            "lex": "maine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Guvernul nu o să decidă mâine.",
+        "targetTokens": [
+          1
+        ]
+      },
+      {
+        "op": "tense:fut>pres",
+        "ro": "Guvernul decide mâine.",
+        "en": "The government decides tomorrow.",
+        "targetTokens": [
+          1,
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0022",
+    "ro": "Nu îl cred.",
+    "en": "I don't believe him.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "neg-nu",
+      "clitic-acc",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "îl",
+        "units": [
+          {
+            "lex": "pron-3sg-m",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "cred.",
+        "units": [
+          {
+            "lex": "crede",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Îl cred.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0023",
+    "ro": "Știrile le citesc seara.",
+    "en": "I read the news in the evening.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "def-pl",
+      "clitic-acc",
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Știrile",
+        "units": [
+          {
+            "lex": "stire",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "le",
+        "units": [
+          {
+            "lex": "pron-3pl-f",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "citesc",
+        "units": [
+          {
+            "lex": "citi",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "seara.",
+        "units": [
+          {
+            "lex": "seara",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Știrile nu le citesc seara.",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0024",
+    "ro": "Mi-a spus Andrei.",
+    "en": "Andrei told me.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mi-a",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "datShort",
+            "pattern": "clitic-dat",
+            "head": true
+          },
+          {
+            "lex": "aux-perf",
+            "form": "3sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "spus",
+        "units": [
+          {
+            "lex": "spune",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "Andrei.",
+        "units": [
+          {
+            "lex": "andrei",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu mi-a spus Andrei.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0025",
+    "ro": "Nu-mi place ce spune ministrul.",
+    "en": "I don't like what the minister says.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "neg-nu",
+      "clitic-dat",
+      "wh-q",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu-mi",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          },
+          {
+            "lex": "pron-1sg",
+            "form": "datShort",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "place",
+        "units": [
+          {
+            "lex": "placea",
+            "form": "pres3sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "spune",
+        "units": [
+          {
+            "lex": "spune",
+            "form": "inf"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ministrul.",
+        "units": [
+          {
+            "lex": "ministru",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Îmi place ce spune ministrul.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0026",
+    "ro": "Nu mă mai interesează politica.",
+    "en": "I'm not interested in politics anymore.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "neg-nu",
+      "clitic-acc",
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "mă",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "mai",
+        "units": [
+          {
+            "lex": "mai",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "interesează",
+        "units": [
+          {
+            "lex": "interesa",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "politica.",
+        "units": [
+          {
+            "lex": "politica",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Mă interesează politica.",
+        "en": "I'm interested in politics.",
+        "targetTokens": [
+          0,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0027",
+    "ro": "Prețurile cresc mult.",
+    "en": "Prices are rising a lot.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "def-pl",
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Prețurile",
+        "units": [
+          {
+            "lex": "pret",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cresc",
+        "units": [
+          {
+            "lex": "creste",
+            "form": "pres3pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mult.",
+        "units": [
+          {
+            "lex": "mult",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Prețul crește mult.",
+        "en": "The price is rising a lot.",
+        "targetTokens": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-news-0028",
+    "ro": "Salariile sunt mici.",
+    "en": "Salaries are low.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "news"
+    ],
+    "patterns": [
+      "def-pl",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Salariile",
+        "units": [
+          {
+            "lex": "salariu",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3pl",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mici.",
+        "units": [
+          {
+            "lex": "mic",
+            "form": "mpl"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Salariul e mic.",
+        "en": "The salary is low.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  }
+]

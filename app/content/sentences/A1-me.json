@@ -2117,5 +2117,1386 @@
     "canDo": [
       "A1-me-weekend"
     ]
+  },
+  {
+    "id": "s-a1-me-0031",
+    "ro": "Locuim în Cluj.",
+    "en": "We live in Cluj.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Locuim",
+        "units": [
+          {
+            "lex": "locui",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Cluj.",
+        "units": [
+          {
+            "lex": "cluj",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1pl>3pl",
+        "ro": "Locuiesc în Cluj.",
+        "en": "They live in Cluj.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "negate",
+        "ro": "Nu locuim în Cluj.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0032",
+    "ro": "Colegii locuiesc în Cluj.",
+    "en": "The colleagues live in Cluj.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "def-pl",
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Colegii",
+        "units": [
+          {
+            "lex": "coleg",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "locuiesc",
+        "units": [
+          {
+            "lex": "locui",
+            "form": "pres3pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Cluj.",
+        "units": [
+          {
+            "lex": "cluj",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Colegul locuiește în Cluj.",
+        "en": "My colleague lives in Cluj.",
+        "targetTokens": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0033",
+    "ro": "Am doi frați.",
+    "en": "I have two brothers.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "have-pres",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres1sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "doi",
+        "units": [
+          {
+            "lex": "doi",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "frați.",
+        "units": [
+          {
+            "lex": "frate",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Am un frate.",
+        "en": "I have one brother.",
+        "targetTokens": [
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0034",
+    "ro": "Am două surori.",
+    "en": "I have two sisters.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "have-pres",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres1sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "două",
+        "units": [
+          {
+            "lex": "doua",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "surori.",
+        "units": [
+          {
+            "lex": "sora",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Am o soră.",
+        "en": "I have one sister.",
+        "targetTokens": [
+          1,
+          2
+        ]
+      },
+      {
+        "op": "negate",
+        "ro": "N-am două surori.",
+        "accept": [
+          "Nu am două surori."
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0035",
+    "ro": "Lucrez cu doi colegi.",
+    "en": "I work with two colleagues.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Lucrez",
+        "units": [
+          {
+            "lex": "lucra",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cu",
+        "units": [
+          {
+            "lex": "cu",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "doi",
+        "units": [
+          {
+            "lex": "doi",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "colegi.",
+        "units": [
+          {
+            "lex": "coleg",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Lucrez cu un coleg.",
+        "en": "I work with one colleague.",
+        "targetTokens": [
+          2,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0036",
+    "ro": "Vorbesc două limbi.",
+    "en": "I speak two languages.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vorbesc",
+        "units": [
+          {
+            "lex": "vorbi",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "două",
+        "units": [
+          {
+            "lex": "doua",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "limbi.",
+        "units": [
+          {
+            "lex": "limba",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Vorbesc o limbă.",
+        "en": "I speak one language.",
+        "targetTokens": [
+          1,
+          2
+        ]
+      },
+      {
+        "op": "negate",
+        "ro": "Nu vorbesc două limbi.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0037",
+    "ro": "Cărțile sunt pe masă.",
+    "en": "The books are on the table.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "def-pl",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cărțile",
+        "units": [
+          {
+            "lex": "carte",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3pl",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "pe",
+        "units": [
+          {
+            "lex": "pe",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "masă.",
+        "units": [
+          {
+            "lex": "masa",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Cartea e pe masă.",
+        "en": "The book is on the table.",
+        "targetTokens": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0038",
+    "ro": "Citim mult.",
+    "en": "We read a lot.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-ez-esc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Citim",
+        "units": [
+          {
+            "lex": "citi",
+            "form": "pres1pl",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mult.",
+        "units": [
+          {
+            "lex": "mult",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu citim mult.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1pl>1sg",
+        "ro": "Citesc mult.",
+        "en": "I read a lot.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0039",
+    "ro": "Gătesc acasă.",
+    "en": "I cook at home.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-ez-esc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Gătesc",
+        "units": [
+          {
+            "lex": "gati",
+            "form": "pres1sg",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acasă.",
+        "units": [
+          {
+            "lex": "acasa",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Gătești acasă.",
+        "en": "You cook at home.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "negate",
+        "ro": "Nu gătesc acasă.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0040",
+    "ro": "O să plec vineri.",
+    "en": "I'm going to leave on Friday.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "fut-o-sa"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "plec",
+        "units": [
+          {
+            "lex": "pleca",
+            "form": "subj1sg",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "vineri.",
+        "units": [
+          {
+            "lex": "vineri",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu o să plec vineri.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "tense:fut>perf",
+        "ro": "Am plecat vineri.",
+        "en": "I left on Friday.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0041",
+    "ro": "O să fiu acasă weekendul ăsta.",
+    "en": "I'll be home this weekend.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "fut-o-sa",
+      "dem-colloq"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "O",
+        "units": [
+          {
+            "lex": "aux-fut-o",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "aux"
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "fut-o-sa"
+          }
+        ],
+        "cloze": true,
+        "glue": "sa"
+      },
+      {
+        "t": "fiu",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "subj1sg",
+            "pattern": "fut-o-sa",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acasă",
+        "units": [
+          {
+            "lex": "acasa",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "weekendul",
+        "units": [
+          {
+            "lex": "weekend",
+            "form": "sgDef",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ăsta.",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "msg",
+            "pattern": "dem-colloq"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu o să fiu acasă weekendul ăsta.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "O să fie acasă weekendul ăsta.",
+        "en": "He/She will be home this weekend.",
+        "targetTokens": [
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0042",
+    "ro": "Mi-e dor de casă.",
+    "en": "I miss home.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "mi-e-construction"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mi-e",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "datShort",
+            "pattern": "mi-e-construction"
+          },
+          {
+            "lex": "fi",
+            "form": "pres3sg"
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "dor",
+        "units": [
+          {
+            "lex": "dor",
+            "form": "sg",
+            "pattern": "mi-e-construction",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "casă.",
+        "units": [
+          {
+            "lex": "casa",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu mi-e dor de casă.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0043",
+    "ro": "Mi-e frică de câini.",
+    "en": "I'm scared of dogs.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "mi-e-construction",
+      "noun-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mi-e",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "datShort",
+            "pattern": "mi-e-construction"
+          },
+          {
+            "lex": "fi",
+            "form": "pres3sg"
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "frică",
+        "units": [
+          {
+            "lex": "frica",
+            "form": "sg",
+            "pattern": "mi-e-construction",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "câini.",
+        "units": [
+          {
+            "lex": "caine",
+            "form": "pl",
+            "pattern": "noun-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu mi-e frică de câini.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0044",
+    "ro": "Mă cheamă Andrei.",
+    "en": "My name is Andrei.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "clitic-acc",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mă",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "cheamă",
+        "units": [
+          {
+            "lex": "chema",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "Andrei.",
+        "units": [
+          {
+            "lex": "andrei",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "question",
+        "ro": "Cum te cheamă?",
+        "en": "What's your name?",
+        "targetTokens": [
+          0,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0045",
+    "ro": "Ioana mă ajută.",
+    "en": "Ioana helps me.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "clitic-acc",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ioana",
+        "units": [
+          {
+            "lex": "ioana",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mă",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "ajută.",
+        "units": [
+          {
+            "lex": "ajuta",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Ioana nu mă ajută.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0046",
+    "ro": "Colegii mă sună seara.",
+    "en": "My colleagues call me in the evening.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "def-pl",
+      "clitic-acc",
+      "pres-full",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Colegii",
+        "units": [
+          {
+            "lex": "coleg",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mă",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "acc",
+            "pattern": "clitic-acc",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "sună",
+        "units": [
+          {
+            "lex": "suna",
+            "form": "pres3pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "seara.",
+        "units": [
+          {
+            "lex": "seara",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Colegul mă sună seara.",
+        "en": "My colleague calls me in the evening.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0047",
+    "ro": "Îmi place sportul.",
+    "en": "I like sports.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îmi",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "place",
+        "units": [
+          {
+            "lex": "placea",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sportul.",
+        "units": [
+          {
+            "lex": "sport",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu-mi place sportul.",
+        "accept": [
+          "Nu îmi place sportul."
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0048",
+    "ro": "Îmi place să gătesc.",
+    "en": "I like to cook.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Îmi",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "place",
+        "units": [
+          {
+            "lex": "placea",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "gătesc.",
+        "units": [
+          {
+            "lex": "gati",
+            "form": "subj1sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu-mi place să gătesc.",
+        "accept": [
+          "Nu îmi place să gătesc."
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0049",
+    "ro": "Ne place muntele.",
+    "en": "We like the mountains.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "clitic-dat",
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ne",
+        "units": [
+          {
+            "lex": "pron-1pl",
+            "form": "dat",
+            "pattern": "clitic-dat",
+            "head": true
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "place",
+        "units": [
+          {
+            "lex": "placea",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "muntele.",
+        "units": [
+          {
+            "lex": "munte",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu ne place muntele.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0050",
+    "ro": "Mi-e somn.",
+    "en": "I'm sleepy.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "mi-e-construction"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mi-e",
+        "units": [
+          {
+            "lex": "pron-1sg",
+            "form": "datShort",
+            "pattern": "mi-e-construction"
+          },
+          {
+            "lex": "fi",
+            "form": "pres3sg"
+          }
+        ],
+        "cloze": true,
+        "glue": "clitic"
+      },
+      {
+        "t": "somn.",
+        "units": [
+          {
+            "lex": "somn",
+            "form": "sg",
+            "pattern": "mi-e-construction",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu mi-e somn.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Ți-e somn?",
+        "en": "Are you sleepy?",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
   }
 ]
