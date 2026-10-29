@@ -1,5 +1,7 @@
+import { dueCount } from "../../core/session.js";
+
 export function render(root, ctx) {
-  const due = ctx.state.dueCount ?? 0;
+  const due = ctx.content ? dueCount(ctx.state, ctx.content, Date.now()) : 0;
   root.innerHTML = `
     <h1>DaciaGlot</h1>
     <p class="muted" lang="ro">Hai să vorbim românește.</p>

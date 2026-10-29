@@ -141,3 +141,13 @@ a { color: var(--accent); }
 }
 .chip[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 .card .actions { margin-top: 8px; }
+
+/* Session (T08) */
+.progress { height: 8px; border-radius: 4px; background: var(--border); overflow: hidden; margin-bottom: var(--gap); }
+.progress-fill { height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+.settings label { display: block; margin: 12px 0 4px; font-weight: 600; }
+.settings select, .settings input[type="number"] { font: inherit; min-height: 44px; width: 100%; padding: 0 8px; background: var(--surface); color: var(--fg); border: 2px solid var(--border); border-radius: 8px; }
+.settings .check { display: flex; align-items: center; gap: 12px; min-height: 44px; }
+.settings .check input { width: 24px; height: 24px; }
+.dialog { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.5); padding: var(--gap); }
+.dialog > div { background: var(--surface); border-radius: var(--radius); padding: var(--gap); max-width: 420px; width: 100%; display: grid; gap: 8px; }

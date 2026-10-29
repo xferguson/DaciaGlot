@@ -20,7 +20,8 @@ export function tokenIndexOf(card) {
 }
 
 export function renderCard(root, { card, sentence, tts, settings = {}, onResult }) {
-  const speak = (text, opts) => tts?.speak?.(text, opts);
+  const rate = settings.ttsRate ?? 0.9;
+  const speak = (text, opts) => tts?.speak?.(text, { rate, ...opts });
   const idx = tokenIndexOf(card);
   const target = sentence.tokens[idx];
   const expected = target.t;
@@ -45,7 +46,7 @@ export function renderCard(root, { card, sentence, tts, settings = {}, onResult 
     if (i === idx) line.append(input);
     else line.append(t.t);
   });
-  root.querySelector(".audio-row").append(audioButton({ text: sentence.ro }));
+  root.querySelector(".audio-row").append(audioButton({ text: sentence.ro, rateNormal: rate }));
   root.querySelector(".bar-slot").append(diacriticBar(() => input));
   const hintLine = root.querySelector(".hint-line");
   const slot = root.querySelector(".feedback-slot");

@@ -43,7 +43,8 @@ export function pickDistractors(sentence, content, rng = Math.random, count = 3)
 }
 
 export function renderCard(root, { card, sentence, content, tts, settings = {}, onResult, rng = Math.random }) {
-  const speak = (text, opts) => tts?.speak?.(text, opts);
+  const rate = settings.ttsRate ?? 0.9;
+  const speak = (text, opts) => tts?.speak?.(text, { rate, ...opts });
   const options = shuffle([sentence, ...pickDistractors(sentence, content, rng)], rng);
   root.innerHTML = `
     <section class="card card-lr" data-card="${card?.id ?? card ?? ""}">
@@ -53,7 +54,7 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
       <div class="feedback-slot"></div>
       <div class="actions"></div>
     </section>`;
-  root.querySelector(".audio-row").append(audioButton({ text: sentence.ro }));
+  root.querySelector(".audio-row").append(audioButton({ text: sentence.ro, rateNormal: rate }));
   const optsEl = root.querySelector(".options");
   const slot = root.querySelector(".feedback-slot");
   const actions = root.querySelector(".actions");
