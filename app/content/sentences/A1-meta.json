@@ -2436,5 +2436,561 @@
         ]
       }
     ]
+  },
+  {
+    "id": "s-a1-meta-0034",
+    "ro": "Vorbești prea repede pentru mine.",
+    "en": "You speak too fast for me.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "pres-ez-esc"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vorbești",
+        "units": [
+          {
+            "lex": "vorbi",
+            "form": "pres2sg",
+            "pattern": "pres-ez-esc",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "prea",
+        "units": [
+          {
+            "lex": "prea",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "repede",
+        "units": [
+          {
+            "lex": "repede",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "pentru",
+        "units": [
+          {
+            "lex": "pentru",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mine.",
+        "units": [
+          {
+            "lex": "mine",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Vorbesc prea repede pentru tine.",
+        "en": "I speak too fast for you.",
+        "targetTokens": [
+          0,
+          4
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-meta-repeat"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0035",
+    "ro": "Repeți, te rog?",
+    "en": "Could you repeat, please?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "meta-basic"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Repeți,",
+        "units": [
+          {
+            "lex": "repeta",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "te",
+        "units": []
+      },
+      {
+        "t": "rog?",
+        "units": [
+          {
+            "lex": "te-rog",
+            "form": "base",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-meta-repeat"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0036",
+    "ro": "E ceva cald și bun.",
+    "en": "It's something warm and good.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "E",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "ceva",
+        "units": [
+          {
+            "lex": "ceva",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "cald",
+        "units": [
+          {
+            "lex": "cald",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "și",
+        "units": [
+          {
+            "lex": "si",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "bun.",
+        "units": [
+          {
+            "lex": "bun",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-meta-describe"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0037",
+    "ro": "E ceva mic și vechi.",
+    "en": "It's something small and old.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "E",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "ceva",
+        "units": [
+          {
+            "lex": "ceva",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mic",
+        "units": [
+          {
+            "lex": "mic",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "și",
+        "units": [
+          {
+            "lex": "si",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "vechi.",
+        "units": [
+          {
+            "lex": "vechi",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-meta-describe"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0038",
+    "ro": "Se mănâncă iarna.",
+    "en": "You eat it in winter.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Se",
+        "units": [
+          {
+            "lex": "se",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mănâncă",
+        "units": [
+          {
+            "lex": "manca",
+            "form": "pres3sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "iarna.",
+        "units": [
+          {
+            "lex": "iarna",
+            "form": "sgDef"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-meta-describe"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0039",
+    "ro": "Adică e ca o supă?",
+    "en": "So, it's like a soup?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "meta-basic",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Adică",
+        "units": [
+          {
+            "lex": "adica",
+            "form": "base",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "ca",
+        "units": [
+          {
+            "lex": "ca",
+            "form": "base",
+            "pattern": "meta-basic"
+          }
+        ]
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "supă?",
+        "units": [
+          {
+            "lex": "supa",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-meta-describe"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0040",
+    "ro": "E ca mămăliga, dar rece.",
+    "en": "It's like polenta, but cold.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "be-pres",
+      "meta-basic"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "E",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "ca",
+        "units": [
+          {
+            "lex": "ca",
+            "form": "base",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "mămăliga,",
+        "units": [
+          {
+            "lex": "mamaliga",
+            "form": "sgDef"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "dar",
+        "units": [
+          {
+            "lex": "dar",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "rece.",
+        "units": [
+          {
+            "lex": "rece",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-meta-describe"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0041",
+    "ro": "Pot să spun altfel?",
+    "en": "Can I say it differently?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Pot",
+        "units": [
+          {
+            "lex": "putea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "spun",
+        "units": [
+          {
+            "lex": "spune",
+            "form": "subj1sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "altfel?",
+        "units": [
+          {
+            "lex": "altfel",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-meta-howsay"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0042",
+    "ro": "E corect?",
+    "en": "Is that correct?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "E",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "corect?",
+        "units": [
+          {
+            "lex": "corect",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-meta-understand"
+    ]
   }
 ]

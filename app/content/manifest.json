@@ -1,5 +1,5 @@
 {
-  "contentVersion": "2026.10.29-3",
+  "contentVersion": "2026.10.29-4",
   "packs": {
     "lexemes": [
       "lexemes/core.json",

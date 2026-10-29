@@ -54,6 +54,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-propose"
     ]
   },
   {
@@ -132,6 +135,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-propose"
     ]
   },
   {
@@ -212,6 +218,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-deadline"
     ]
   },
   {
@@ -275,6 +284,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-prioritize"
     ]
   },
   {
@@ -339,6 +351,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-agree"
     ]
   },
   {
@@ -407,6 +422,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-agree"
     ]
   },
   {
@@ -465,6 +483,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-agree"
     ]
   },
   {
@@ -512,6 +533,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-propose"
     ]
   },
   {
@@ -575,6 +599,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-deadline"
     ]
   },
   {
@@ -671,6 +698,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-deadline"
     ]
   },
   {
@@ -760,6 +790,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-propose"
     ]
   },
   {
@@ -810,6 +843,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-propose"
     ]
   },
   {
@@ -878,6 +914,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-propose"
     ]
   },
   {
@@ -958,6 +997,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-deadline"
     ]
   },
   {
@@ -1009,6 +1051,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-agree"
     ]
   },
   {
@@ -1094,6 +1139,9 @@
           3
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-propose"
     ]
   },
   {
@@ -1172,6 +1220,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-propose"
     ]
   },
   {
@@ -1242,6 +1293,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-deadline"
     ]
   },
   {
@@ -1310,6 +1364,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-prioritize"
     ]
   },
   {
@@ -1380,6 +1437,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-prioritize"
     ]
   },
   {
@@ -1461,6 +1521,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-prioritize"
     ]
   },
   {
@@ -1538,6 +1601,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-deadline"
     ]
   },
   {
@@ -1613,6 +1679,9 @@
           3
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-propose"
     ]
   },
   {
@@ -1694,6 +1763,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-agree"
     ]
   },
   {
@@ -1753,6 +1825,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-prioritize"
     ]
   },
   {
@@ -1817,6 +1892,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-prioritize"
     ]
   },
   {
@@ -1884,6 +1962,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-deadline"
     ]
   },
   {
@@ -1951,6 +2032,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-agree"
     ]
   },
   {
@@ -2021,6 +2105,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-agree"
     ]
   },
   {
@@ -2104,6 +2191,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-propose"
     ]
   },
   {
@@ -2182,6 +2272,9 @@
           3
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-prioritize"
     ]
   },
   {
@@ -2256,6 +2349,936 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-decisions-prioritize"
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0033",
+    "ro": "Amân ședința până mâine.",
+    "en": "I'm postponing the meeting until tomorrow.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Amân",
+        "units": [
+          {
+            "lex": "amana",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ședința",
+        "units": [
+          {
+            "lex": "sedinta",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "până",
+        "units": [
+          {
+            "lex": "pana",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mâine.",
+        "units": [
+          {
+            "lex": "maine",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu amân ședința până mâine.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-decisions-deadline"
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0034",
+    "ro": "Termenul e important.",
+    "en": "The deadline is important.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Termenul",
+        "units": [
+          {
+            "lex": "termen",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "important.",
+        "units": [
+          {
+            "lex": "important",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Termenul nu e important.",
+        "targetTokens": [
+          1
+        ]
+      },
+      {
+        "op": "plural",
+        "ro": "Termenele sunt importante.",
+        "en": "The deadlines are important.",
+        "targetTokens": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-decisions-deadline"
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0035",
+    "ro": "Prima prioritate e serverul.",
+    "en": "The first priority is the server.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "be-pres",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Prima",
+        "units": [
+          {
+            "lex": "prim",
+            "form": "fsg"
+          }
+        ]
+      },
+      {
+        "t": "prioritate",
+        "units": [
+          {
+            "lex": "prioritate",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "serverul.",
+        "units": [
+          {
+            "lex": "server",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-decisions-prioritize"
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0036",
+    "ro": "Începem cu prioritățile.",
+    "en": "We start with the priorities.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "pres-full",
+      "def-pl"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Începem",
+        "units": [
+          {
+            "lex": "incepe",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cu",
+        "units": [
+          {
+            "lex": "cu",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "prioritățile.",
+        "units": [
+          {
+            "lex": "prioritate",
+            "form": "plDef",
+            "pattern": "def-pl",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "singular",
+        "ro": "Începem cu prioritatea.",
+        "en": "We start with the priority.",
+        "targetTokens": [
+          2
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-decisions-prioritize"
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0037",
+    "ro": "Nu ai dreptate.",
+    "en": "You're not right.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "neg-nu",
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "ai",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "dreptate.",
+        "units": [
+          {
+            "lex": "dreptate",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Ai dreptate.",
+        "en": "You're right.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Nu am dreptate.",
+        "en": "I'm not right.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-decisions-agree"
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0038",
+    "ro": "Sunt sigur că ai dreptate.",
+    "en": "I'm sure you're right.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "be-pres",
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres1sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "sigur",
+        "units": [
+          {
+            "lex": "sigur",
+            "form": "msg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "că",
+        "units": [
+          {
+            "lex": "ca-conj",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "ai",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "dreptate.",
+        "units": [
+          {
+            "lex": "dreptate",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu sunt sigur că ai dreptate.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-decisions-agree"
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0039",
+    "ro": "Varianta asta e corectă.",
+    "en": "This option is the right one.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "def-sg",
+      "dem-colloq",
+      "be-pres"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Varianta",
+        "units": [
+          {
+            "lex": "varianta",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "asta",
+        "units": [
+          {
+            "lex": "asta",
+            "form": "fsg",
+            "pattern": "dem-colloq",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "corectă.",
+        "units": [
+          {
+            "lex": "corect",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Varianta asta nu e corectă.",
+        "targetTokens": [
+          2
+        ]
+      },
+      {
+        "op": "plural",
+        "ro": "Variantele astea sunt corecte.",
+        "en": "These options are the right ones.",
+        "targetTokens": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-decisions-agree"
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0040",
+    "ro": "Alegem varianta mică.",
+    "en": "We pick the small option.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "pres-full",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Alegem",
+        "units": [
+          {
+            "lex": "alege",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "varianta",
+        "units": [
+          {
+            "lex": "varianta",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mică.",
+        "units": [
+          {
+            "lex": "mic",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:pres>perf",
+        "ro": "Am ales varianta mică.",
+        "en": "We picked the small option.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-decisions-propose"
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0041",
+    "ro": "Propun o variantă nouă.",
+    "en": "I'm proposing a new option.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Propun",
+        "units": [
+          {
+            "lex": "propune",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "variantă",
+        "units": [
+          {
+            "lex": "varianta",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "nouă.",
+        "units": [
+          {
+            "lex": "nou",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu propun o variantă nouă.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Propune o variantă nouă.",
+        "en": "He/She proposes a new option.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-decisions-propose"
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0042",
+    "ro": "Pot să amân termenul?",
+    "en": "Can I postpone the deadline?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Pot",
+        "units": [
+          {
+            "lex": "putea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "amân",
+        "units": [
+          {
+            "lex": "amana",
+            "form": "subj1sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "termenul?",
+        "units": [
+          {
+            "lex": "termen",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Poți să amâni termenul?",
+        "en": "Can you postpone the deadline?",
+        "targetTokens": [
+          0,
+          2
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-decisions-deadline"
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0043",
+    "ro": "Promit că terminăm vineri.",
+    "en": "I promise we'll finish on Friday.",
+    "level": "A1",
+    "stage": 2,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "pres-full"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Promit",
+        "units": [
+          {
+            "lex": "promite",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "că",
+        "units": [
+          {
+            "lex": "ca-conj",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "terminăm",
+        "units": [
+          {
+            "lex": "termina",
+            "form": "pres1pl",
+            "pattern": "pres-full",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "vineri.",
+        "units": [
+          {
+            "lex": "vineri",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu promit că terminăm vineri.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-decisions-deadline"
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0044",
+    "ro": "Care variantă e mai bună?",
+    "en": "Which option is better?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "wh-q",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Care",
+        "units": [
+          {
+            "lex": "care",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "variantă",
+        "units": [
+          {
+            "lex": "varianta",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "mai",
+        "units": [
+          {
+            "lex": "mai",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "bună?",
+        "units": [
+          {
+            "lex": "bun",
+            "form": "fsg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-decisions-propose"
+    ]
+  },
+  {
+    "id": "s-a1-decisions-0045",
+    "ro": "Hai să alegem acum.",
+    "en": "Let's choose now.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "decisions"
+    ],
+    "patterns": [
+      "modal-sa-12"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Hai",
+        "units": [
+          {
+            "lex": "hai",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "alegem",
+        "units": [
+          {
+            "lex": "alege",
+            "form": "subj1pl",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acum.",
+        "units": [
+          {
+            "lex": "acum",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-decisions-propose"
     ]
   }
 ]
