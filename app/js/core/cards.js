@@ -357,9 +357,51 @@ export function newTransformCards(state, content, { cap = XF_PER_SESSION, skip =
   return out;
 }
 
+export const ER_STABILITY_DAYS = 7;
+export const ER_PER_SESSION = 3;
+
+/** FR-D6: the sentence has cloze cards and every one of them has stability ≥ 7 days. */
+export function erUnlocked(sentence, state) {
+  let n = 0;
+  for (let i = 0; i < sentence.tokens.length; i++) {
+    if (!sentence.tokens[i].cloze) continue;
+    n++;
+    const c = state.cards[buildCardId("cz", sentence.id, i)];
+    if (!c || c.stability < ER_STABILITY_DAYS) return false;
+  }
+  return n > 0;
+}
+
+/** Units an `er` card exercises, as `{u, lx}`: every unit of each cloze token, plus the pattern of each head unit. */
+export function erUnits(sentence) {
+  const out = new Map();
+  for (const t of sentence.tokens) {
+    for (const u of t.units) {
+      if (t.cloze) out.set(`${u.lex}.${u.form}`, { u: `${u.lex}.${u.form}`, lx: u.lex });
+      if (u.pattern && u.head) out.set(`pat:${u.pattern}`, { u: `pat:${u.pattern}`, lx: u.lex });
+    }
+  }
+  return [...out.values()];
+}
+
+/** New `er` cards to introduce: seen sentences (oldest first) with `er` unlocked and not yet introduced; at most `cap`. */
+export function newErCards(state, content, { cap = ER_PER_SESSION, skip = new Set() } = {}) {
+  const seen = Object.entries(state.seenSentences)
+    .sort((a, b) => a[1] - b[1] || (a[0] < b[0] ? -1 : 1));
+  const out = [];
+  for (const [sid] of seen) {
+    if (out.length >= cap) break;
+    const s = content.sentences.get(sid);
+    const id = buildCardId("er", sid);
+    if (!s || skip.has(sid) || id in state.cards || !erUnlocked(s, state)) continue;
+    out.push(id);
+  }
+  return out;
+}
+
 /**
  * `lr` is always unlocked; `cz` once the sentence's `lr` card exists; `kf` once its lexeme was met in ≥2 sentences;
- * `xf` / `sb` per FR-D4 / D5.
+ * `xf` / `sb` per FR-D4 / D5; `er` per FR-D6.
  */
 export function isUnlocked(cardId, state, content) {
   let p;
@@ -376,5 +418,6 @@ export function isUnlocked(cardId, state, content) {
   }
   if (p.type === "xf") return xfUnlocked(sentence, p.transformIndex, state, content);
   if (p.type === "sb") return sbUnlocked(sentence, p.transformIndex, state, content);
+  if (p.type === "er") return erUnlocked(sentence, state);
   return false;
 }

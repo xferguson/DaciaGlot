@@ -1,6 +1,6 @@
 // Session building, grading and review application (ARCHITECTURE §8). Pure: `now` and `rng` are injected.
 import { newCard, review } from "./fsrs.js";
-import { parseCardId, cardsForSentence, isUnlocked, newKfCards, newTransformCards, pickPerSentence } from "./cards.js";
+import { parseCardId, cardsForSentence, isUnlocked, newKfCards, newTransformCards, newErCards, pickPerSentence } from "./cards.js";
 import { unitsForSentence, isKnown } from "./units.js";
 import { pickNewSentences } from "./select.js";
 
@@ -57,7 +57,7 @@ function chunk(list, parts) {
 
 /**
  * Quick: due cards only, capped at 15. Session: due cards plus new sentences (`lr`, then `cz`),
- * chosen by `select.js` (FR-S5; the FR-S4 interim order is the cold-start fallback), spread so two new sentences' `lr` cards are never adjacent, then newly unlocked `kf` (T14) and `xf`/`sb` (T15) cards. Due cards are thinned per sentence (FR-D9).
+ * chosen by `select.js` (FR-S5; the FR-S4 interim order is the cold-start fallback), spread so two new sentences' `lr` cards are never adjacent, then newly unlocked `kf` (T14), `xf`/`sb` (T15) and `er` (T20) cards. Due cards are thinned per sentence (FR-D9).
  * @returns {{queue: {cardId: string, isNew: boolean}[], estimateSec: number, blocked?: true, suggest?: {type: string, id: string}|null}}
  */
 export function buildSession({ mode, focus = null, state, content, now, rng, newSentenceIds }) {
@@ -93,8 +93,10 @@ export function buildSession({ mode, focus = null, state, content, now, rng, new
   }
   const busy = new Set(dueIds.map(parseCardId).filter((p) => p.type === "xf" || p.type === "sb").map((p) => p.sentenceId));
   const xf = newTransformCards(state, content, { skip: busy }).map((cardId) => ({ cardId, isNew: true }));
-  queue.push(...kf, ...xf);
-  return { queue, estimateSec: due.length * SEC_PER_REVIEW + (k + kf.length + xf.length) * SEC_PER_NEW };
+  const taken = new Set([...busy, ...xf.map((x) => parseCardId(x.cardId).sentenceId)]);
+  const er = newErCards(state, content, { skip: taken }).map((cardId) => ({ cardId, isNew: true }));
+  queue.push(...kf, ...xf, ...er);
+  return { queue, estimateSec: due.length * SEC_PER_REVIEW + (k + kf.length + xf.length + er.length) * SEC_PER_NEW };
 }
 
 export function dayKey(now) {
