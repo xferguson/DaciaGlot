@@ -9,7 +9,7 @@ DaciaGlot is an offline-first PWA for learning to **speak** Romanian. It is vani
 3. In your first commit, mark the task `in-progress` in `docs/STATUS.md` with your branch name.
 4. Build it. Stay inside the task's **Owns** file list. If you must touch another file, keep the change minimal and explain it in the PR.
 5. Before opening the PR:
-   - `node --test test/` passes.
+   - `node --test` passes.
    - `node scripts/validate-content.mjs` passes (once it exists).
    - Each of the task's acceptance criteria is met. Check them off in the PR description.
    - Set `docs/STATUS.md` to `done` (or `review`) and add a one-line note on anything the next task needs to know.
