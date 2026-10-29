@@ -5,11 +5,13 @@ import { unitsRequiredForCard } from "../../core/units.js";
 import { renderCard as renderLr } from "./card-lr.js";
 import { renderCard as renderCz } from "./card-cloze.js";
 import { renderCard as renderKf } from "./card-keyform.js";
+import { renderCard as renderXf } from "./card-transform.js";
+import { renderCard as renderSb } from "./card-slot.js";
 import { toast } from "../components/toast.js";
 import { flagButton } from "../components/flag-button.js";
 
 const QUICK_MS = 5 * 60 * 1000;
-const RENDERERS = { lr: renderLr, cz: renderCz, kf: renderKf };
+const RENDERERS = { lr: renderLr, cz: renderCz, kf: renderKf, xf: renderXf, sb: renderSb };
 
 export function render(root, ctx) {
   const mode = ctx.route?.params?.mode === "quick" ? "quick" : "session";
@@ -35,8 +37,9 @@ export function render(root, ctx) {
     const mins = Math.max(1, Math.round(estimateSec / 60));
     const fresh = queue.filter((q) => q.isNew && q.cardId.startsWith("lr:")).length;
     const forms = queue.filter((q) => q.isNew && q.cardId.startsWith("kf:")).length;
+    const drills = queue.filter((q) => q.isNew && /^(xf|sb):/.test(q.cardId)).length;
     root.innerHTML = `<h1>Session</h1>
-      <section class="card"><p>${queue.length} cards · ${fresh} new sentences${forms ? ` · ${forms} new forms` : ""}</p>
+      <section class="card"><p>${queue.length} cards · ${fresh} new sentences${forms ? ` · ${forms} new forms` : ""}${drills ? ` · ${drills} new drills` : ""}</p>
       <p class="muted">≈ ${mins} min</p>
       <button class="btn block" data-start>Start</button></section>${home}`;
     root.querySelector("[data-start]").addEventListener("click", begin);

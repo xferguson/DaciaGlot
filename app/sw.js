@@ -42,6 +42,8 @@ const PRECACHE = [
   "js/ui/views/card-cloze.js",
   "js/ui/views/card-keyform.js",
   "js/ui/views/card-lr.js",
+  "js/ui/views/card-slot.js",
+  "js/ui/views/card-transform.js",
   "js/ui/views/home.js",
   "js/ui/views/session.js",
   "js/ui/views/settings.js",
