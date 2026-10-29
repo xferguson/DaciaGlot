@@ -10,6 +10,7 @@ DaciaGlot is an offline-first PWA for learning to **speak** Romanian. It is vani
 4. Build it. Stay inside the task's **Owns** file list. If you must touch another file, keep the change minimal and explain it in the PR.
 5. Before opening the PR:
    - **Pull `origin/main` into your branch and resolve any conflicts**, in case there is new work to incorporate. Do this before running the checks below, and again before pushing if you have kept working.
+   - **Immediately before every `git push`, run `git fetch origin main && git merge origin/main` and read its output** (don't pipe it through `tail` or `-q`). A merge done at the start of the session doesn't count. After opening the PR, read its `mergeable_state`; if it is `dirty`, or no checks have appeared after a minute or so, fix the conflict before waiting on CI.
    - `node --test` passes.
    - `node scripts/validate-content.mjs` passes (once it exists).
    - Each of the task's acceptance criteria is met. Check them off in the PR description.
