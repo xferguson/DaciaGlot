@@ -4,7 +4,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 
 | Task | Title | Phase | Depends on | Status | Branch / PR | Notes |
 |---|---|---|---|---|---|---|
-| [T01](tasks/T01-app-shell.md) | App shell, router, design tokens | 1 | none | todo | | |
+| [T01](tasks/T01-app-shell.md) | App shell, router, design tokens | 1 | none | review | ccr-59c9c6c2-h0ddc5 | Router takes `routes` of `() => import()` loaders; unbuilt views (session, lists, dashboard, lexeme) are placeholders in `main.js` to replace. Toasts/banners mount into `#toasts`/`#banners` in index.html. |
 | [T02](tasks/T02-content-schema-validator.md) | Content loader, validator, seed content | 1 | none | todo | | |
 | [T03](tasks/T03-answer-checking.md) | Answer checking: normalize, equivalences, diff | 1 | none | todo | | |
 | [T04](tasks/T04-fsrs.md) | FSRS-5 scheduler | 1 | none | todo | | |
