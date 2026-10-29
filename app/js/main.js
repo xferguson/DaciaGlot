@@ -6,13 +6,6 @@ import { showBanner } from "./ui/components/banner.js";
 import { exportReminderDue } from "./ui/views/summary.js";
 import { toast } from "./ui/components/toast.js";
 
-const placeholder = (title) => async () => ({
-  render(root) {
-    root.innerHTML = `<h1></h1><p class="muted">Coming soon.</p><a class="btn secondary" href="#/home">Home</a>`;
-    root.querySelector("h1").textContent = title;
-  },
-});
-
 function registerServiceWorker() {
   if (!("serviceWorker" in navigator)) return;
   let shown = false;
@@ -111,7 +104,7 @@ async function boot() {
     settings: () => import("./ui/views/settings.js"),
     session: () => import("./ui/views/session.js"),
     lists: () => import("./ui/views/lists.js"),
-    dashboard: placeholder("Dashboard"),
+    dashboard: () => import("./ui/views/dashboard.js"),
     lexeme: () => import("./ui/views/lexeme.js"),
   }, ctx);
 }

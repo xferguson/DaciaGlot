@@ -1,4 +1,7 @@
 import { dueCount } from "../../core/session.js";
+import { levelProgress } from "../../core/mastery.js";
+import { ring } from "../components/ring.js";
+import { currentLevelId } from "./dashboard.js";
 import { renderList } from "./lists.js";
 
 let activeTab = "situations";
@@ -23,11 +26,24 @@ export function render(root, ctx) {
       </div>
       <div data-list></div>
     </section>
-    <section class="card" aria-label="Level progress">
-      <div class="ring" role="img" aria-label="Level progress placeholder">A1</div>
-      <p class="muted" style="text-align:center">Level progress coming soon</p>
-    </section>
+    <section class="card" aria-label="Level progress" data-level></section>
     <a class="btn secondary block" href="#/settings">Settings</a>`;
+  const levelSlot = root.querySelector("[data-level]");
+  if (ctx.content) {
+    const now = Date.now();
+    const progress = Object.fromEntries([...ctx.content.levels.keys()].map((id) => [id, levelProgress(id, ctx.state, ctx.content, now)]));
+    const id = currentLevelId(progress);
+    if (id) {
+      const link = document.createElement("a");
+      link.className = "ring-link";
+      link.href = "#/dashboard";
+      const note = document.createElement("span");
+      note.className = "muted";
+      note.textContent = `${Math.round(progress[id].percent)}% · see progress`;
+      link.append(ring({ percent: progress[id].percent, label: id }), note);
+      levelSlot.append(link);
+    }
+  }
   const slot = root.querySelector("[data-list]");
   const tabs = [...root.querySelectorAll("[data-tab]")];
   const show = (tab) => {
