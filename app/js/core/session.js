@@ -2,6 +2,7 @@
 import { newCard, review } from "./fsrs.js";
 import { parseCardId, cardsForSentence, isUnlocked, newKfCards } from "./cards.js";
 import { unitsForSentence, isKnown } from "./units.js";
+import { pickNewSentences } from "./select.js";
 
 export const QUICK_CAP = 15;
 export const SEC_PER_REVIEW = 12;
@@ -45,16 +46,24 @@ function chunk(list, parts) {
 
 /**
  * Quick: due cards only, capped at 15. Session: due cards plus new sentences (`lr`, then `cz`),
- * spread so two new sentences' `lr` cards are never adjacent, then newly unlocked `kf` cards (T14).
- * @returns {{queue: {cardId: string, isNew: boolean}[], estimateSec: number}}
+ * chosen by `select.js` (FR-S5; the FR-S4 interim order is the cold-start fallback), spread so two new sentences' `lr` cards are never adjacent, then newly unlocked `kf` cards (T14).
+ * @returns {{queue: {cardId: string, isNew: boolean}[], estimateSec: number, blocked?: true, suggest?: {type: string, id: string}|null}}
  */
-export function buildSession({ mode, state, content, now, rng: _rng, newSentenceIds }) {
+export function buildSession({ mode, focus = null, state, content, now, rng, newSentenceIds }) {
   const due = dueCards(state, content, now).map((cardId) => ({ cardId, isNew: false }));
   if (mode === "quick") {
     const queue = due.slice(0, QUICK_CAP);
     return { queue, estimateSec: queue.length * SEC_PER_REVIEW };
   }
-  const ids = newSentenceIds ?? interimNewSentences(state.settings.newPerSession, state, content);
+  let ids = newSentenceIds;
+  if (!ids) {
+    const pick = pickNewSentences(state.settings.newPerSession, { focus, state, content, now, rng });
+    if (pick.blocked) {
+      const queue = due.slice();
+      return { queue, estimateSec: queue.length * SEC_PER_REVIEW, blocked: true, suggest: pick.suggest };
+    }
+    ids = pick.sentences.length || focus ? pick.sentences : interimNewSentences(state.settings.newPerSession, state, content);
+  }
   const groups = ids
     .map((id) => content.sentences.get(id))
     .filter(Boolean)
