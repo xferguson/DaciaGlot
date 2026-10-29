@@ -132,6 +132,30 @@ export function sentenceMastered(id, state, content, now) {
   return false;
 }
 
+/** Every mastered sentence id in one pass over the cards and attempts (same rule as `sentenceMastered`, for dashboards). */
+export function masteredSentenceIds(state, content, now) {
+  const s = fold(state, now);
+  const cand = new Map(); // production card id → sentence id, for cards with stability ≥ 7 days
+  for (const [cid, c] of Object.entries(s.cards)) {
+    if (c.stability < MASTERED_DAYS) continue;
+    let p;
+    try { p = parseCardId(cid); } catch { continue; }
+    if (["cz", "xf", "er"].includes(p.type) && content.sentences.has(p.sentenceId)) cand.set(cid, p.sentenceId);
+  }
+  const last = new Map();
+  for (const a of s.attempts) {
+    if (!cand.has(a.card)) continue;
+    const cur = last.get(a.card);
+    if (!cur || a.t >= cur.t) last.set(a.card, a);
+  }
+  const out = new Set();
+  for (const [cid, sid] of cand) {
+    const a = last.get(cid);
+    if (a ? a.c === 1 : s.cards[cid].state === 2) out.add(sid);
+  }
+  return out;
+}
+
 /** ARCHITECTURE §7.3 + FR-P4: a can-do is checkable once it has linked sentences and all of them are mastered. */
 export function canDoCheckable(id, state, content, now) {
   const linked = canDoSentences(id, content);

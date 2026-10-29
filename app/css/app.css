@@ -78,14 +78,6 @@ a { color: var(--accent); }
 .row { display: flex; gap: var(--gap); }
 .row > .btn { flex: 1; }
 
-.ring {
-  width: 96px; height: 96px; margin: 0 auto;
-  border-radius: 50%;
-  border: 10px solid var(--border);
-  border-top-color: var(--accent);
-  display: grid; place-items: center;
-  font-weight: 700;
-}
 
 .banner {
   display: flex; align-items: center; gap: 12px;
@@ -173,3 +165,33 @@ a { color: var(--accent); }
 .dot.st-seen { background: var(--warn); border-color: var(--warn); }
 .dot.st-produced, .dot.st-stable { background: var(--ok); border-color: var(--ok); }
 .dot.st-stable { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ok); }
+
+/* Dashboard (T18) */
+.ring-svg { width: 96px; height: 96px; display: block; }
+.ring-track, .ring-arc { fill: none; stroke-width: 10; }
+.ring-track { stroke: var(--border); }
+.ring-arc { stroke: var(--accent); stroke-linecap: round; }
+.ring-label { fill: var(--fg); font-weight: 700; font-size: 22px; }
+.ring-link { display: flex; flex-direction: column; align-items: center; gap: 8px; min-height: 44px; color: var(--fg); text-decoration: none; }
+.ring-row { display: flex; flex-wrap: wrap; gap: var(--gap); }
+.ring-item { display: flex; flex-direction: column; align-items: center; }
+.ring-btn { display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 44px; min-width: 44px; padding: 4px; border: 0; background: transparent; color: var(--fg); font: inherit; cursor: pointer; }
+.breakdown { margin: 4px 0 0; font-size: .9rem; }
+.pattern-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.pat-chip { min-height: 44px; padding: 0 12px; }
+.pat-chip.st-seen { border-color: var(--warn); }
+.pat-chip.st-producing { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 18%, transparent); }
+.pat-chip.st-automatic { border-color: var(--ok); background: var(--ok); color: var(--bg); }
+.pat-chip.st-not-started { opacity: .6; border-style: dashed; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0; }
+.stat { display: flex; flex-direction: column-reverse; }
+.stat dd { margin: 0; font-size: 1.75rem; font-weight: 700; color: var(--accent); }
+.stat dt { font-size: .85rem; }
+.chart { width: 100%; height: auto; display: block; }
+.chart-grid { stroke: var(--border); stroke-width: 1; }
+.chart-bar { fill: var(--accent); }
+.chart-line { fill: none; stroke: var(--accent); stroke-width: 2; }
+.chart-dot { fill: var(--accent); }
+.chart-tick { fill: var(--muted); font-size: 10px; }
+.chart-axis { fill: var(--muted); font-size: 11px; }
+.trend { margin-top: var(--gap); }
