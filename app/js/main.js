@@ -3,6 +3,7 @@ import * as store from "./data/store.js";
 import { loadContent } from "./data/content.js";
 import * as tts from "./data/tts.js";
 import { showBanner } from "./ui/components/banner.js";
+import { toast } from "./ui/components/toast.js";
 
 const placeholder = (title) => async () => ({
   render(root) {
@@ -10,6 +11,37 @@ const placeholder = (title) => async () => ({
     root.querySelector("h1").textContent = title;
   },
 });
+
+function registerServiceWorker() {
+  if (!("serviceWorker" in navigator)) return;
+  let shown = false;
+  const offerUpdate = (reg) => {
+    if (shown || !reg.waiting) return;
+    shown = true;
+    toast("Update available — tap to refresh", {
+      ms: 60000,
+      action: { label: "Refresh", onClick: () => reg.waiting?.postMessage({ type: "SKIP_WAITING" }) },
+    });
+  };
+  let reloading = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (reloading) return;
+    reloading = true;
+    location.reload();
+  });
+  navigator.serviceWorker.register("./sw.js").then((reg) => {
+    offerUpdate(reg);
+    reg.addEventListener("updatefound", () => {
+      const sw = reg.installing;
+      sw?.addEventListener("statechange", () => {
+        if (sw.state === "installed" && navigator.serviceWorker.controller) offerUpdate(reg);
+      });
+    });
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible") reg.update().catch(() => {});
+    });
+  }).catch(() => {});
+}
 
 async function boot() {
   const ctx = {
@@ -76,3 +108,4 @@ async function boot() {
 }
 
 boot();
+registerServiceWorker();

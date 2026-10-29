@@ -88,3 +88,13 @@ test("rule 11: precache check is skipped without sw.js and flags missing files",
   assert.equal(res.skipped, false);
   assert.deepEqual(res.errors.map((e) => e.id), ["js/other.js"]);
 });
+
+test("rule 11: sw.js APP_VERSION must match js/version.js", () => {
+  const app = mkdtempSync(join(tmpdir(), "dg-app-"));
+  mkdirSync(join(app, "js"));
+  writeFileSync(join(app, "js/version.js"), 'export const APP_VERSION = "2.0.0";');
+  writeFileSync(join(app, "sw.js"), 'const APP_VERSION = "1.0.0"; const PRECACHE = ["js/version.js"];');
+  assert.deepEqual(checkPrecache(app).errors.map((e) => e.id), ["APP_VERSION"]);
+  writeFileSync(join(app, "sw.js"), 'const APP_VERSION = "2.0.0"; const PRECACHE = ["js/version.js"];');
+  assert.equal(checkPrecache(app).errors.length, 0);
+});
