@@ -199,6 +199,7 @@ Requirement IDs are referenced by tasks and tests.
 | Q2 | Full-paradigm key-forms cards for top irregulars (*fi, avea, vrea, putea, face, merge, da, sta, lua*) already in Stage 1? **Default: yes, present tense only.** | Phase 2 |
 | Q3 | Native-recorded audio for a core subset? | Phase 4 |
 | Q4 | Multi-device via manual export to Drive is enough? | After Phase 3 |
+| Q5 | **Redefine what A1/A2/B1 mean for this product.** The current mapping (Stages 1–2 = A1, CEFR-adapted can-dos, §6 and ARCHITECTURE §7.4) is provisional. The owner wants to revisit the level definitions before A2 content is planned. Keep level ids and manifests data-driven so they can change without code changes. | Before Phase 4 (revisit after Phase 3 data exists) |
 
 ## 10. Changes from PLAN v0 (verification findings)
 
