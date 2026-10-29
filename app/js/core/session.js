@@ -38,6 +38,17 @@ export function interimNewSentences(n, state, content) {
     .map((x) => x.s.id);
 }
 
+/** FR-S8: stable partition, cards whose sentence matches the focus first. `kf` cards have no sentence and keep their place after. */
+export function focusFirst(cardIds, focus, content) {
+  if (!focus) return cardIds;
+  const hit = (id) => {
+    const s = content.sentences.get(parseCardId(id).sentenceId);
+    return !!s && (focus.type === "pattern" ? (s.patterns ?? []) : (s.situations ?? [])).includes(focus.id);
+  };
+  const flags = cardIds.map(hit);
+  return [...cardIds.filter((_, i) => flags[i]), ...cardIds.filter((_, i) => !flags[i])];
+}
+
 function chunk(list, parts) {
   const out = Array.from({ length: parts }, () => []);
   list.forEach((x, i) => out[Math.min(parts - 1, Math.floor((i * parts) / list.length))].push(x));
@@ -50,7 +61,7 @@ function chunk(list, parts) {
  * @returns {{queue: {cardId: string, isNew: boolean}[], estimateSec: number, blocked?: true, suggest?: {type: string, id: string}|null}}
  */
 export function buildSession({ mode, focus = null, state, content, now, rng, newSentenceIds }) {
-  const dueIds = pickPerSentence(dueCards(state, content, now));
+  const dueIds = pickPerSentence(focusFirst(dueCards(state, content, now), focus, content));
   const due = dueIds.map((cardId) => ({ cardId, isNew: false }));
   if (mode === "quick") {
     const queue = due.slice(0, QUICK_CAP);

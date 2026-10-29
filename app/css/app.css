@@ -151,3 +151,25 @@ a { color: var(--accent); }
 .settings .check input { width: 24px; height: 24px; }
 .dialog { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.5); padding: var(--gap); }
 .dialog > div { background: var(--surface); border-radius: var(--radius); padding: var(--gap); max-width: 420px; width: 100%; display: grid; gap: 8px; }
+
+/* Lists, focus, lexeme (T13) */
+.tabs { gap: 8px; margin: 8px 0; }
+.tabs .chip { flex: 1; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; }
+.list h3 { margin: 16px 0 4px; }
+.list-row {
+  display: flex; flex-direction: column; gap: 4px; min-height: 44px; padding: 10px 12px; margin: 6px 0;
+  border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface);
+  color: var(--fg); text-decoration: none;
+}
+.list-row.dim { opacity: .55; }
+.list-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.bar { display: inline-block; width: 80px; height: 8px; border-radius: 4px; background: var(--border); overflow: hidden; }
+.bar > span { display: block; height: 100%; background: var(--accent); }
+.state-chip { padding: 0 8px; border-radius: 10px; border: 1px solid var(--border); font-size: .85rem; }
+.state-chip.st-producing, .state-chip.st-automatic { border-color: var(--ok); }
+.tok-link { color: inherit; text-decoration: underline dotted; text-underline-offset: 4px; padding: 6px 2px; }
+.form-row { display: flex; align-items: center; gap: 8px; min-height: 44px; margin: 0; }
+.dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--border); flex: none; }
+.dot.st-seen { background: var(--warn); border-color: var(--warn); }
+.dot.st-produced, .dot.st-stable { background: var(--ok); border-color: var(--ok); }
+.dot.st-stable { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ok); }
