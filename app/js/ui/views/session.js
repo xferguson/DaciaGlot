@@ -7,6 +7,7 @@ import { renderCard as renderCz } from "./card-cloze.js";
 import { renderCard as renderKf } from "./card-keyform.js";
 import { renderCard as renderXf } from "./card-transform.js";
 import { renderCard as renderSb } from "./card-slot.js";
+import { renderCard as renderEr } from "./card-enro.js";
 import { toast } from "../components/toast.js";
 import { flagButton } from "../components/flag-button.js";
 import { situationName } from "./lists.js";
@@ -14,7 +15,7 @@ import { allPatternStates } from "../../core/mastery.js";
 import { summarize, renderSummary } from "./summary.js";
 
 const QUICK_MS = 5 * 60 * 1000;
-const RENDERERS = { lr: renderLr, cz: renderCz, kf: renderKf, xf: renderXf, sb: renderSb };
+const RENDERERS = { lr: renderLr, cz: renderCz, kf: renderKf, xf: renderXf, sb: renderSb, er: renderEr };
 
 export function render(root, ctx) {
   const params = ctx.route?.params ?? {};
@@ -67,7 +68,7 @@ export function render(root, ctx) {
     const mins = Math.max(1, Math.round(estimateSec / 60));
     const fresh = queue.filter((q) => q.isNew && q.cardId.startsWith("lr:")).length;
     const forms = queue.filter((q) => q.isNew && q.cardId.startsWith("kf:")).length;
-    const drills = queue.filter((q) => q.isNew && /^(xf|sb):/.test(q.cardId)).length;
+    const drills = queue.filter((q) => q.isNew && /^(xf|sb|er):/.test(q.cardId)).length;
     root.innerHTML = `<h1>${focus ? "Focus: <span data-focus></span>" : "Session"}</h1>
       <section class="card"><p>${queue.length} cards · ${fresh} new sentences${forms ? ` · ${forms} new forms` : ""}${drills ? ` · ${drills} new drills` : ""}</p>
       <p class="muted">≈ ${mins} min</p>

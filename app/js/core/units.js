@@ -1,5 +1,5 @@
 // Learning units (ARCHITECTURE §6.1). Pure.
-import { parseCardId, transformUnits } from "./cards.js";
+import { parseCardId, transformUnits, erUnits } from "./cards.js";
 
 const unitId = (u) => `${u.lex}.${u.form}`;
 
@@ -13,7 +13,7 @@ export function unitsForSentence(sentence) {
 
 /**
  * Units a card exercises, as `{u, lx}` (lx = head lexeme, see ARCHITECTURE §4.3).
- * `kf`: the form unit `<lex>.<form>`. `xf`/`sb`: see `transformUnits`. `cz`: the target token's units plus the patterns those units realize. `lr` records exposure, not attempts.
+ * `kf`: the form unit `<lex>.<form>`. `xf`/`sb`: see `transformUnits`. `er`: see `erUnits`. `cz`: the target token's units plus the patterns those units realize. `lr` records exposure, not attempts.
  */
 export function unitsRequiredForCard(cardId, content) {
   const p = parseCardId(cardId);
@@ -22,6 +22,10 @@ export function unitsRequiredForCard(cardId, content) {
     const sentence = content.sentences.get(p.sentenceId);
     const t = sentence?.transforms?.[p.transformIndex];
     return t ? transformUnits(sentence, t, content) : [];
+  }
+  if (p.type === "er") {
+    const sentence = content.sentences.get(p.sentenceId);
+    return sentence ? erUnits(sentence) : [];
   }
   if (p.type !== "cz") return [];
   const token = content.sentences.get(p.sentenceId)?.tokens[p.tokenIndex];
