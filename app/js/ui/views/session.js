@@ -5,12 +5,16 @@ import { unitsRequiredForCard } from "../../core/units.js";
 import { renderCard as renderLr } from "./card-lr.js";
 import { renderCard as renderCz } from "./card-cloze.js";
 import { renderCard as renderKf } from "./card-keyform.js";
+import { renderCard as renderXf } from "./card-transform.js";
+import { renderCard as renderSb } from "./card-slot.js";
 import { toast } from "../components/toast.js";
 import { flagButton } from "../components/flag-button.js";
 import { situationName } from "./lists.js";
+import { allPatternStates } from "../../core/mastery.js";
+import { summarize, renderSummary } from "./summary.js";
 
 const QUICK_MS = 5 * 60 * 1000;
-const RENDERERS = { lr: renderLr, cz: renderCz, kf: renderKf };
+const RENDERERS = { lr: renderLr, cz: renderCz, kf: renderKf, xf: renderXf, sb: renderSb };
 
 export function render(root, ctx) {
   const params = ctx.route?.params ?? {};
@@ -27,6 +31,7 @@ export function render(root, ctx) {
   let startedAt = 0;
   const stats = { cards: 0, correct: 0, newSentences: 0 };
   const done = new Set();
+  const patternsBefore = allPatternStates(ctx.state, ctx.content, Date.now());
 
   const home = `<a class="btn secondary block" href="#/home">Home</a>`;
 
@@ -62,8 +67,9 @@ export function render(root, ctx) {
     const mins = Math.max(1, Math.round(estimateSec / 60));
     const fresh = queue.filter((q) => q.isNew && q.cardId.startsWith("lr:")).length;
     const forms = queue.filter((q) => q.isNew && q.cardId.startsWith("kf:")).length;
+    const drills = queue.filter((q) => q.isNew && /^(xf|sb):/.test(q.cardId)).length;
     root.innerHTML = `<h1>${focus ? "Focus: <span data-focus></span>" : "Session"}</h1>
-      <section class="card"><p>${queue.length} cards · ${fresh} new sentences${forms ? ` · ${forms} new forms` : ""}</p>
+      <section class="card"><p>${queue.length} cards · ${fresh} new sentences${forms ? ` · ${forms} new forms` : ""}${drills ? ` · ${drills} new drills` : ""}</p>
       <p class="muted">≈ ${mins} min</p>
       <button class="btn block" data-start>Start</button></section>${home}`;
     fillNames();
@@ -142,11 +148,10 @@ export function render(root, ctx) {
     ctx.state = addMinutes(ctx.state, minutes, Date.now());
     ctx.store.save(ctx.state);
     ctx.store.flush();
-    root.innerHTML = `<h1>Done!</h1>
-      <section class="card">
-        <p><strong>${stats.cards}</strong> cards reviewed · <strong>${stats.correct}</strong> correct</p>
-        <p>${stats.newSentences} new sentences</p>
-      </section>${home}`;
+    const summary = summarize({
+      before: patternsBefore, state: ctx.state, content: ctx.content, stats, startedAt, now: Date.now(),
+    });
+    renderSummary(root, { summary, content: ctx.content, onMore: () => ctx.navigate("#/session?mode=quick") });
     alive = false;
   }
 

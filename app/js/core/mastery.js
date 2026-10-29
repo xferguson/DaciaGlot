@@ -131,3 +131,58 @@ export function sentenceMastered(id, state, content, now) {
   }
   return false;
 }
+
+/** ARCHITECTURE §7.3 + FR-P4: a can-do is checkable once it has linked sentences and all of them are mastered. */
+export function canDoCheckable(id, state, content, now) {
+  const linked = canDoSentences(id, content);
+  return linked.length > 0 && linked.every((sid) => sentenceMastered(sid, state, content, now));
+}
+
+/** Ids of the (non-retired) sentences linked to a can-do. */
+export function canDoSentences(id, content) {
+  return [...content.sentences.values()].filter((s) => (s.canDo ?? []).includes(id)).map((s) => s.id);
+}
+
+/** `{done, total}` mastered sentences for a can-do (the "k / n" shown while it isn't checkable). */
+export function canDoMastery(id, state, content, now) {
+  const linked = canDoSentences(id, content);
+  return { done: linked.filter((sid) => sentenceMastered(sid, state, content, now)).length, total: linked.length };
+}
+
+const PRODUCED = new Set(["produced", "stable"]);
+const PRODUCING = new Set(["producing", "automatic"]);
+
+/** Unit ids (`lex.form`) a lexeme can appear as: its declared forms, plus `base` and any form used in a sentence. */
+function lexemeUnits(lexId, content) {
+  const forms = new Set(["base", ...Object.keys(content.lexemes.get(lexId)?.forms ?? {})]);
+  for (const sid of content.sentencesByLexeme.get(lexId) ?? []) {
+    for (const t of content.sentences.get(sid)?.tokens ?? []) for (const u of t.units) if (u.lex === lexId) forms.add(u.form);
+  }
+  return [...forms].map((f) => `${lexId}.${f}`);
+}
+
+/**
+ * ARCHITECTURE §7.4. `done` counts patterns at ≥ producing, checked can-dos, and target lexemes with ≥1 form
+ * at ≥ produced. Complete = all patterns done and can-dos and lexemes each ≥ 80%.
+ */
+export function levelProgress(levelId, state, content, now) {
+  const level = content.levels.get(levelId);
+  if (!level) throw new Error(`Unknown level: ${levelId}`);
+  const s = fold(state, now);
+  const required = level.requiredPatterns ?? [];
+  const canDos = level.canDos ?? [];
+  const lexemes = level.targetLexemes ?? [];
+  const patterns = {
+    done: required.filter((id) => PRODUCING.has(patternState(id, s, content, now))).length,
+    total: required.length,
+  };
+  const cd = { done: canDos.filter((c) => c.id in (s.canDoChecked ?? {})).length, total: canDos.length };
+  const lx = {
+    done: lexemes.filter((id) => lexemeUnits(id, content).some((u) => PRODUCED.has(unitState(u, s, content, now)))).length,
+    total: lexemes.length,
+  };
+  const ratio = (r) => (r.total ? r.done / r.total : 1);
+  const complete = patterns.done === patterns.total && ratio(cd) >= 0.8 && ratio(lx) >= 0.8;
+  const percent = ((ratio(patterns) + ratio(cd) + ratio(lx)) / 3) * 100;
+  return { patterns, canDos: cd, lexemes: lx, complete, percent };
+}

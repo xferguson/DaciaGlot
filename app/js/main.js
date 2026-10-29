@@ -3,6 +3,7 @@ import * as store from "./data/store.js";
 import { loadContent } from "./data/content.js";
 import * as tts from "./data/tts.js";
 import { showBanner } from "./ui/components/banner.js";
+import { exportReminderDue } from "./ui/views/summary.js";
 import { toast } from "./ui/components/toast.js";
 
 const placeholder = (title) => async () => ({
@@ -96,6 +97,14 @@ async function boot() {
       });
     }
   });
+
+  if (exportReminderDue(ctx.state, Date.now())) {
+    showBanner({
+      id: "export",
+      text: "It's time to back up your progress.",
+      action: { label: "Export", onClick: () => ctx.navigate("#/settings") },
+    });
+  }
 
   start({
     home: () => import("./ui/views/home.js"),
