@@ -117,6 +117,7 @@ Card ids are strings. `core/cards.js` exports `parseCardId`, `buildCardId`, and 
  * @property {number} reps
  * @property {number} lapses
  * @property {0|1|2|3} state       // New, Learning, Review, Relearning
+ * @property {number} step         // index into the learning/relearning steps (0 outside Learning/Relearning)
  * @property {number|null} lastReview
  */
 ```
@@ -270,7 +271,7 @@ review(card, grade, now, { w = DEFAULT_W, requestRetention = 0.9 } = {}) → Car
 retrievability(card, now) → number
 ```
 
-Same-day reviews use the FSRS-5 short-term stability formula. Intervals are rounded to whole days for Review state; Learning steps are 1 min and 10 min. Tests pin outputs for fixed inputs.
+Same-day reviews use the FSRS-5 short-term stability formula. Intervals are rounded to whole days for Review state; Learning steps are 1 min and 10 min; Relearning has a single 10 min step. `fuzz: true` (with `rng`) is off by default. Tests pin outputs for fixed inputs.
 
 ## 10. TTS (`data/tts.js`)
 
