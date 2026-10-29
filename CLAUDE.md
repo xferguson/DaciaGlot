@@ -29,7 +29,7 @@ DaciaGlot is an offline-first PWA for learning to **speak** Romanian. It is vani
 ## Commands
 
 ```bash
-node --test test/                      # unit tests
+node --test                            # unit tests
 node scripts/validate-content.mjs      # content integrity (add --coverage for the report)
 python3 -m http.server -d app 8080     # local preview at http://localhost:8080/
 ```

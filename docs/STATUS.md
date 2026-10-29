@@ -5,7 +5,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | Task | Title | Phase | Depends on | Status | Branch / PR | Notes |
 |---|---|---|---|---|---|---|
 | [T01](tasks/T01-app-shell.md) | App shell, router, design tokens | 1 | none | todo | | |
-| [T02](tasks/T02-content-schema-validator.md) | Content loader, validator, seed content | 1 | none | in-progress | ccr-b2141f61-3yv4kb | |
+| [T02](tasks/T02-content-schema-validator.md) | Content loader, validator, seed content | 1 | none | review | ccr-b2141f61-3yv4kb | Validator: `--content <dir>`, `--phase 2` enables the no-transforms warning. Added `levels/A1.json` (3 seed can-dos; T19 extends). Add `js/data/content.js` and `content/**` to the sw.js precache. Use `node --test` (Node 22 rejects the `test/` dir argument). |
 | [T03](tasks/T03-answer-checking.md) | Answer checking: normalize, equivalences, diff | 1 | none | todo | | |
 | [T04](tasks/T04-fsrs.md) | FSRS-5 scheduler | 1 | none | todo | | |
 | [T05](tasks/T05-store.md) | Persistence: store, migrations, export/import | 1 | none | todo | | |

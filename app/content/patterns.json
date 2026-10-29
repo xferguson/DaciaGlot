@@ -1,0 +1,186 @@
+[
+  {
+    "id": "be-pres",
+    "name": "Present of a fi",
+    "stage": 1,
+    "level": "A1",
+    "requires": [],
+    "minLexemesForProducing": 4,
+    "slotLabel": "am/is/are"
+  },
+  {
+    "id": "have-pres",
+    "name": "Present of a avea",
+    "stage": 1,
+    "level": "A1",
+    "requires": [],
+    "minLexemesForProducing": 4,
+    "slotLabel": "have"
+  },
+  {
+    "id": "neg-nu",
+    "name": "Negation with nu / n-",
+    "stage": 1,
+    "level": "A1",
+    "requires": [],
+    "minLexemesForProducing": 5,
+    "slotLabel": "not"
+  },
+  {
+    "id": "def-sg",
+    "name": "Definite article, singular",
+    "stage": 1,
+    "level": "A1",
+    "requires": [],
+    "minLexemesForProducing": 6,
+    "slotLabel": "the"
+  },
+  {
+    "id": "wh-q",
+    "name": "Question words",
+    "stage": 1,
+    "level": "A1",
+    "requires": [],
+    "minLexemesForProducing": 5,
+    "slotLabel": "question"
+  },
+  {
+    "id": "pres-12-high",
+    "name": "Present 1sg/2sg/3sg of high-frequency verbs",
+    "stage": 1,
+    "level": "A1",
+    "requires": [],
+    "minLexemesForProducing": 5,
+    "slotLabel": "I / you"
+  },
+  {
+    "id": "perfect-compus",
+    "name": "Past: aux + participle",
+    "stage": 1,
+    "level": "A1",
+    "requires": [
+      "have-pres"
+    ],
+    "minLexemesForProducing": 5,
+    "slotLabel": "past"
+  },
+  {
+    "id": "modal-sa-12",
+    "name": "vreau / pot / trebuie să + subjunctive",
+    "stage": 1,
+    "level": "A1",
+    "requires": [
+      "pres-12-high"
+    ],
+    "minLexemesForProducing": 5,
+    "slotLabel": "want to"
+  },
+  {
+    "id": "meta-basic",
+    "name": "Meta-language starters",
+    "stage": 1,
+    "level": "A1",
+    "requires": [],
+    "minLexemesForProducing": 4,
+    "slotLabel": "how to say"
+  },
+  {
+    "id": "pres-full",
+    "name": "Present, all persons",
+    "stage": 2,
+    "level": "A1",
+    "requires": [
+      "pres-12-high"
+    ],
+    "minLexemesForProducing": 6,
+    "slotLabel": "present"
+  },
+  {
+    "id": "pres-ez-esc",
+    "name": "-ez / -esc verb classes",
+    "stage": 2,
+    "level": "A1",
+    "requires": [
+      "pres-full"
+    ],
+    "minLexemesForProducing": 6,
+    "slotLabel": "present"
+  },
+  {
+    "id": "noun-pl",
+    "name": "Noun plurals, indefinite",
+    "stage": 2,
+    "level": "A1",
+    "requires": [
+      "def-sg"
+    ],
+    "minLexemesForProducing": 6,
+    "slotLabel": "plural"
+  },
+  {
+    "id": "def-pl",
+    "name": "Definite plural",
+    "stage": 2,
+    "level": "A1",
+    "requires": [
+      "noun-pl"
+    ],
+    "minLexemesForProducing": 6,
+    "slotLabel": "the (pl)"
+  },
+  {
+    "id": "fut-o-sa",
+    "name": "Future: o să + subjunctive",
+    "stage": 2,
+    "level": "A1",
+    "requires": [
+      "modal-sa-12"
+    ],
+    "minLexemesForProducing": 6,
+    "slotLabel": "future"
+  },
+  {
+    "id": "clitic-acc",
+    "name": "Direct-object clitics",
+    "stage": 2,
+    "level": "A1",
+    "requires": [
+      "perfect-compus"
+    ],
+    "minLexemesForProducing": 6,
+    "slotLabel": "them"
+  },
+  {
+    "id": "clitic-dat",
+    "name": "Indirect-object clitics",
+    "stage": 2,
+    "level": "A1",
+    "requires": [
+      "clitic-acc"
+    ],
+    "minLexemesForProducing": 6,
+    "slotLabel": "to him"
+  },
+  {
+    "id": "mi-e-construction",
+    "name": "mi-e foame / dor / frică / greu",
+    "stage": 2,
+    "level": "A1",
+    "requires": [
+      "clitic-dat"
+    ],
+    "minLexemesForProducing": 6,
+    "slotLabel": "I feel"
+  },
+  {
+    "id": "dem-colloq",
+    "name": "ăsta, asta, ăștia, astea",
+    "stage": 2,
+    "level": "A1",
+    "requires": [
+      "def-sg"
+    ],
+    "minLexemesForProducing": 6,
+    "slotLabel": "this"
+  }
+]

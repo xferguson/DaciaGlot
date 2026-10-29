@@ -1,0 +1,447 @@
+[
+  {
+    "id": "ieri",
+    "lemma": "ieri",
+    "pos": "adv",
+    "gloss": "yesterday",
+    "freq": 120,
+    "trivial": true
+  },
+  {
+    "id": "azi",
+    "lemma": "azi",
+    "pos": "adv",
+    "gloss": "today",
+    "freq": 150,
+    "trivial": true
+  },
+  {
+    "id": "inca",
+    "lemma": "încă",
+    "pos": "adv",
+    "gloss": "still, yet",
+    "freq": 90,
+    "trivial": true
+  },
+  {
+    "id": "aux-perf",
+    "lemma": "am (aux.)",
+    "pos": "aux",
+    "gloss": "past auxiliary",
+    "freq": 3,
+    "trivial": true,
+    "forms": {
+      "1sg": "am",
+      "2sg": "ai",
+      "3sg": "a",
+      "1pl": "am",
+      "2pl": "ați",
+      "3pl": "au"
+    }
+  },
+  {
+    "id": "nu",
+    "lemma": "nu",
+    "pos": "particle",
+    "gloss": "not",
+    "freq": 2,
+    "trivial": true,
+    "forms": {
+      "base": "nu",
+      "short": "n"
+    }
+  },
+  {
+    "id": "sa",
+    "lemma": "să",
+    "pos": "particle",
+    "gloss": "(subjunctive marker)",
+    "freq": 5,
+    "trivial": true,
+    "forms": {
+      "base": "să"
+    }
+  },
+  {
+    "id": "se",
+    "lemma": "se",
+    "pos": "particle",
+    "gloss": "(reflexive/passive)",
+    "freq": 8,
+    "trivial": true,
+    "forms": {
+      "base": "se"
+    }
+  },
+  {
+    "id": "la",
+    "lemma": "la",
+    "pos": "prep",
+    "gloss": "at, to",
+    "freq": 6,
+    "trivial": true
+  },
+  {
+    "id": "din",
+    "lemma": "din",
+    "pos": "prep",
+    "gloss": "from, out of",
+    "freq": 10,
+    "trivial": true
+  },
+  {
+    "id": "in",
+    "lemma": "în",
+    "pos": "prep",
+    "gloss": "in",
+    "freq": 4,
+    "trivial": true
+  },
+  {
+    "id": "cum",
+    "lemma": "cum",
+    "pos": "adv",
+    "gloss": "how",
+    "freq": 40
+  },
+  {
+    "id": "ce",
+    "lemma": "ce",
+    "pos": "pron",
+    "gloss": "what",
+    "freq": 12
+  },
+  {
+    "id": "un",
+    "lemma": "un",
+    "pos": "det",
+    "gloss": "a, an",
+    "freq": 9,
+    "trivial": true,
+    "forms": {
+      "m": "un",
+      "f": "o"
+    }
+  },
+  {
+    "id": "fi",
+    "lemma": "a fi",
+    "pos": "verb",
+    "gloss": "to be",
+    "freq": 1,
+    "class": "irreg",
+    "forms": {
+      "inf": "a fi",
+      "pres1sg": "sunt",
+      "pres2sg": "ești",
+      "pres3sg": "e",
+      "pres1pl": "suntem"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg"
+    ]
+  },
+  {
+    "id": "avea",
+    "lemma": "a avea",
+    "pos": "verb",
+    "gloss": "to have",
+    "freq": 7,
+    "class": "II",
+    "forms": {
+      "inf": "a avea",
+      "pres1sg": "am",
+      "pres2sg": "ai",
+      "pres3sg": "are",
+      "pres1pl": "avem"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg"
+    ]
+  },
+  {
+    "id": "vrea",
+    "lemma": "a vrea",
+    "pos": "verb",
+    "gloss": "to want",
+    "freq": 35,
+    "class": "irreg",
+    "forms": {
+      "inf": "a vrea",
+      "pres1sg": "vreau",
+      "pres2sg": "vrei",
+      "pres3sg": "vrea"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres2sg",
+      "pres3sg"
+    ]
+  },
+  {
+    "id": "putea",
+    "lemma": "a putea",
+    "pos": "verb",
+    "gloss": "to be able to, can",
+    "freq": 30,
+    "class": "III",
+    "forms": {
+      "inf": "a putea",
+      "pres1sg": "pot",
+      "pres2sg": "poți",
+      "pres3sg": "poate"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres2sg",
+      "pres3sg"
+    ]
+  },
+  {
+    "id": "sti",
+    "lemma": "a ști",
+    "pos": "verb",
+    "gloss": "to know (a fact)",
+    "freq": 28,
+    "class": "irreg",
+    "forms": {
+      "inf": "a ști",
+      "pres1sg": "știu",
+      "pres2sg": "știi",
+      "pres3sg": "știe"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg"
+    ]
+  },
+  {
+    "id": "lucra",
+    "lemma": "a lucra",
+    "pos": "verb",
+    "gloss": "to work",
+    "freq": 150,
+    "class": "I-ez",
+    "forms": {
+      "inf": "a lucra",
+      "pres1sg": "lucrez",
+      "pres2sg": "lucrezi",
+      "pres3sg": "lucrează"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg"
+    ]
+  },
+  {
+    "id": "termina",
+    "lemma": "a termina",
+    "pos": "verb",
+    "gloss": "to finish",
+    "freq": 260,
+    "class": "I",
+    "forms": {
+      "inf": "a termina",
+      "pres1sg": "termin",
+      "pres3sg": "termină",
+      "ppl": "terminat"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl"
+    ]
+  },
+  {
+    "id": "gasi",
+    "lemma": "a găsi",
+    "pos": "verb",
+    "gloss": "to find",
+    "freq": 412,
+    "class": "IV-esc",
+    "forms": {
+      "inf": "a găsi",
+      "pres1sg": "găsesc",
+      "pres2sg": "găsești",
+      "pres3sg": "găsește",
+      "ppl": "găsit",
+      "subj3": "să găsească"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "ppl",
+      "subj3"
+    ]
+  },
+  {
+    "id": "invata",
+    "lemma": "a învăța",
+    "pos": "verb",
+    "gloss": "to learn",
+    "freq": 210,
+    "class": "I",
+    "forms": {
+      "inf": "a învăța",
+      "pres1sg": "învăț",
+      "pres3sg": "învață",
+      "subj1sg": "să învăț",
+      "subj3": "să învețe"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "subj3"
+    ]
+  },
+  {
+    "id": "repeta",
+    "lemma": "a repeta",
+    "pos": "verb",
+    "gloss": "to repeat",
+    "freq": 600,
+    "class": "I",
+    "forms": {
+      "inf": "a repeta",
+      "pres1sg": "repet",
+      "pres3sg": "repetă",
+      "subj2sg": "să repeți",
+      "subj2pl": "să repetați"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "subj2sg"
+    ]
+  },
+  {
+    "id": "manca",
+    "lemma": "a mânca",
+    "pos": "verb",
+    "gloss": "to eat",
+    "freq": 330,
+    "class": "I",
+    "forms": {
+      "inf": "a mânca",
+      "pres1sg": "mănânc",
+      "pres2sg": "mănânci",
+      "pres3sg": "mănâncă",
+      "subj2sg": "să mănânci",
+      "subj3": "să mănânce"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg",
+      "subj3"
+    ]
+  },
+  {
+    "id": "spune",
+    "lemma": "a spune",
+    "pos": "verb",
+    "gloss": "to say",
+    "freq": 20,
+    "class": "III",
+    "forms": {
+      "inf": "a spune",
+      "pres1sg": "spun",
+      "pres3sg": "spune"
+    },
+    "keyForms": [
+      "pres1sg",
+      "pres3sg"
+    ]
+  },
+  {
+    "id": "sprint",
+    "lemma": "sprint",
+    "pos": "noun",
+    "gloss": "sprint",
+    "freq": 900,
+    "gender": "m",
+    "forms": {
+      "sg": "sprint",
+      "sgDef": "sprintul"
+    }
+  },
+  {
+    "id": "bug",
+    "lemma": "bug",
+    "pos": "noun",
+    "gloss": "bug",
+    "freq": 1200,
+    "gender": "m",
+    "forms": {
+      "sg": "bug",
+      "sgDef": "bug-ul"
+    }
+  },
+  {
+    "id": "sora",
+    "lemma": "soră",
+    "pos": "noun",
+    "gloss": "sister",
+    "freq": 800,
+    "gender": "f",
+    "forms": {
+      "sg": "soră",
+      "sgDef": "sora"
+    }
+  },
+  {
+    "id": "bere",
+    "lemma": "bere",
+    "pos": "noun",
+    "gloss": "beer",
+    "freq": 1500,
+    "gender": "f",
+    "forms": {
+      "sg": "bere",
+      "sgDef": "berea"
+    }
+  },
+  {
+    "id": "romana",
+    "lemma": "română",
+    "pos": "noun",
+    "gloss": "Romanian (language)",
+    "freq": 500,
+    "gender": "f",
+    "forms": {
+      "sg": "română",
+      "sgDef": "româna"
+    }
+  },
+  {
+    "id": "cluj",
+    "lemma": "Cluj",
+    "pos": "noun",
+    "gloss": "Cluj (city)",
+    "freq": 2000,
+    "forms": {
+      "base": "Cluj"
+    }
+  },
+  {
+    "id": "iasi",
+    "lemma": "Iași",
+    "pos": "noun",
+    "gloss": "Iași (city)",
+    "freq": 2100,
+    "forms": {
+      "base": "Iași"
+    }
+  },
+  {
+    "id": "te-rog",
+    "lemma": "te rog",
+    "pos": "phrase",
+    "gloss": "please",
+    "freq": 50,
+    "forms": {
+      "base": "te rog"
+    }
+  }
+]

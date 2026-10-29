@@ -1,0 +1,41 @@
+{
+  "id": "A1",
+  "requiredPatterns": [
+    "be-pres",
+    "have-pres",
+    "neg-nu",
+    "pres-12-high",
+    "perfect-compus",
+    "modal-sa-12",
+    "def-sg",
+    "wh-q",
+    "meta-basic",
+    "pres-full",
+    "pres-ez-esc",
+    "noun-pl",
+    "def-pl",
+    "fut-o-sa",
+    "clitic-acc",
+    "clitic-dat",
+    "mi-e-construction",
+    "dem-colloq"
+  ],
+  "targetLexemes": [],
+  "canDos": [
+    {
+      "id": "A1-standup-yesterday",
+      "situation": "standup",
+      "text": "I can say what I did yesterday and will do today."
+    },
+    {
+      "id": "A1-me-origin",
+      "situation": "me",
+      "text": "I can say where I'm from and talk about my family."
+    },
+    {
+      "id": "A1-meta-repeat",
+      "situation": "meta",
+      "text": "I can ask someone to repeat or ask how to say a word."
+    }
+  ]
+}

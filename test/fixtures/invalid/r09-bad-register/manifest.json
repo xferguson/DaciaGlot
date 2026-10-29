@@ -1,0 +1,14 @@
+{
+  "contentVersion": "test-1",
+  "packs": {
+    "lexemes": [
+      "lexemes/l.json"
+    ],
+    "sentences": [
+      "sentences/s.json"
+    ]
+  },
+  "levels": [
+    "A1"
+  ]
+}
