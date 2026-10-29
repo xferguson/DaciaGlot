@@ -8,7 +8,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [T02](tasks/T02-content-schema-validator.md) | Content loader, validator, seed content | 1 | none | todo | | |
 | [T03](tasks/T03-answer-checking.md) | Answer checking: normalize, equivalences, diff | 1 | none | done | ccr-1c0d311d-qepdz7 | API in ARCHITECTURE §5 implemented; also exports tokenKey (normalize.js) and canonicalize/EQUIVALENCE_SETS (equivalences.js). Pairs aligned as "wrong" are not in `extra`. |
 | [T04](tasks/T04-fsrs.md) | FSRS-5 scheduler | 1 | none | todo | | |
-| [T05](tasks/T05-store.md) | Persistence: store, migrations, export/import | 1 | none | todo | | |
+| [T05](tasks/T05-store.md) | Persistence: store, migrations, export/import | 1 | none | review | ccr-97b330b4-ffzlhz | `load()` never throws; on recovery `state._recovered` is a non-enumerable property. `importState` takes JSON text or a parsed object and returns a new state without saving it, so callers must `save()` it. `onError(fn)` returns an unsubscribe. `unitAggregates` merge keeps the larger `n`. Visibility flush hooks itself on first `save()`. |
 | [T06](tasks/T06-tts.md) | Text-to-speech wrapper | 1 | none | todo | | |
 | [T07](tasks/T07-card-ui.md) | Card UI: listen & recognize, cloze, diacritic bar, feedback | 1 | T01, T03, T06 | todo | | |
 | [T08](tasks/T08-session-loop.md) | Session engine and session view (Quick / Session) | 1 | T02, T04, T05 | todo | | |
