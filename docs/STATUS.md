@@ -20,7 +20,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [T14](tasks/T14-key-forms.md) | Key-forms cards and unlock chain | 2 | T08 | todo | | |
 | [T15](tasks/T15-transform-slot.md) | Transformation and slot-building cards | 2 | T08, T11 | todo | | |
 | [T16](tasks/T16-flagging.md) | Flag a sentence → GitHub issue | 2 | T07 | todo | | |
-| [T17](tasks/T17-content-batch-b.md) | Content batch B: to ~300 sentences, all situations | 2 | T09 | todo | | |
+| [T17](tasks/T17-content-batch-b.md) | Content batch B: to ~300 sentences, all situations | 2 | T09 | in-progress | ccr-1c1dbe9e-dgzf3g | |
 | [T18](tasks/T18-dashboard.md) | Progress dashboard | 3 | T11, T19 | todo | | |
 | [T19](tasks/T19-levels-cando.md) | A1 level manifest and can-do tracking | 3 | T11 | todo | | |
 | [T20](tasks/T20-en-ro-cards.md) | EN→RO cards | 3 | T08, T15 | todo | | |
