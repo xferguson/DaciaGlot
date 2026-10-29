@@ -25,7 +25,7 @@ Installable, fully offline app with a safe update path, plus the Phase 1 device 
 
 ## Spec
 
-- Manifest per FR-X8. Icons: generate simple, legible PNGs (a stylized "ă" on the accent color) at 192 and 512, plus maskable variants. A committed SVG source is fine, but PNGs are required.
+- Manifest per FR-X8. **Icons already exist in `app/icons/`. Use them; don't regenerate.** `icon-192.png` and `icon-512.png` (`purpose: "any"`), `icon-maskable-192.png` and `icon-maskable-512.png` (`purpose: "maskable"`), and `icon.svg` (`purpose: "any"`, `sizes: "any"`). `index.html` already links the favicon and apple-touch icon. Add every `app/icons/*` file to the precache list.
 - `sw.js`: precache the shell list (every file under `app/js`, `app/css`, plus `index.html`, the manifest and icons). Runtime cache for `content/*.json` (stale-while-revalidate). Delete old `dg-*` caches on activate. Don't call `skipWaiting` automatically. Post a message so the page shows the toast "Update available — tap to refresh"; on tap, send `SKIP_WAITING` and reload on `controllerchange`.
 - Enable validator rule 11 now that `sw.js` exists.
 - `docs/QA-phase1.md`: a checklist run on **Android + Brave** covering install, airplane-mode session, TTS voice, diacritic bar with Gboard, export to Drive and re-import, and update toast. Record results (the user may run it; leave checkboxes).
