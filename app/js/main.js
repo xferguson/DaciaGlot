@@ -101,9 +101,9 @@ async function boot() {
     home: () => import("./ui/views/home.js"),
     settings: () => import("./ui/views/settings.js"),
     session: () => import("./ui/views/session.js"),
-    lists: placeholder("Lists"),
+    lists: () => import("./ui/views/lists.js"),
     dashboard: placeholder("Dashboard"),
-    lexeme: placeholder("Word"),
+    lexeme: () => import("./ui/views/lexeme.js"),
   }, ctx);
 }
 

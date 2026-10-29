@@ -2,11 +2,15 @@
 
 /** Pure: build display parts for a full sentence from a checkAnswer diff over one token span. */
 export function partsFor(tokens, diff, tokenIndex = null) {
-  if (tokenIndex == null) return diff.map((d) => ({ token: d.token, status: d.status }));
+  const lexOf = (i) => tokens[i]?.units?.[0]?.lex;
+  if (tokenIndex == null) {
+    const linkable = diff.length === tokens.length;
+    return diff.map((d, i) => ({ token: d.token, status: d.status, ...(linkable && lexOf(i) ? { lex: lexOf(i) } : {}) }));
+  }
   const out = [];
   tokens.forEach((t, i) => {
     if (i === tokenIndex) out.push(...diff.map((d) => ({ token: d.token, status: d.status })));
-    else out.push({ token: t.t, status: "ok" });
+    else out.push({ token: t.t, status: "ok", ...(lexOf(i) ? { lex: lexOf(i) } : {}) });
   });
   return out;
 }
@@ -17,10 +21,14 @@ export function sentenceView(parts) {
   p.lang = "ro";
   parts.forEach((part, i) => {
     if (i) p.append(" ");
-    const s = document.createElement("span");
+    const s = document.createElement(part.lex ? "a" : "span");
     s.textContent = part.token;
+    if (part.lex) {
+      s.href = `#/lexeme/${encodeURIComponent(part.lex)}`;
+      s.className = "tok-link";
+    }
     if (part.status !== "ok") {
-      s.className = `tok tok-${part.status}`;
+      s.className = `${s.className} tok tok-${part.status}`.trim();
       s.dataset.status = part.status;
     }
     p.append(s);

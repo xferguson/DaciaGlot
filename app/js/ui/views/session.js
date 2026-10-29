@@ -7,14 +7,19 @@ import { renderCard as renderCz } from "./card-cloze.js";
 import { renderCard as renderKf } from "./card-keyform.js";
 import { toast } from "../components/toast.js";
 import { flagButton } from "../components/flag-button.js";
+import { situationName } from "./lists.js";
 
 const QUICK_MS = 5 * 60 * 1000;
 const RENDERERS = { lr: renderLr, cz: renderCz, kf: renderKf };
 
 export function render(root, ctx) {
-  const mode = ctx.route?.params?.mode === "quick" ? "quick" : "session";
-  const { queue, estimateSec } = buildSession({
-    mode, state: ctx.state, content: ctx.content, now: Date.now(), rng: Math.random,
+  const params = ctx.route?.params ?? {};
+  const mode = params.mode === "quick" ? "quick" : "session";
+  const focus = params.mode === "focus" && (params.type === "pattern" || params.type === "situation") && params.id
+    ? { type: params.type, id: params.id }
+    : null;
+  const { queue, estimateSec, blocked, suggest } = buildSession({
+    mode, focus, state: ctx.state, content: ctx.content, now: Date.now(), rng: Math.random,
   });
   let cardCleanup = null;
   let alive = true;
@@ -25,7 +30,29 @@ export function render(root, ctx) {
 
   const home = `<a class="btn secondary block" href="#/home">Home</a>`;
 
+  const focusName = () => (focus.type === "pattern" ? ctx.content.patterns.get(focus.id)?.name : situationName(focus.id)) ?? focus.id;
+
+  function blockedNote() {
+    if (!blocked) return "";
+    const href = suggest && `#/session?mode=focus&type=${suggest.type}&id=${encodeURIComponent(suggest.id)}`;
+    return `<section class="card"><p>No new sentences are ready for <strong data-focus></strong> yet.</p>
+      ${suggest ? `<a class="btn block" href="${href}">Study <span data-suggest></span> first</a>` : ""}</section>`;
+  }
+
+  function fillNames() {
+    const f = root.querySelector("[data-focus]");
+    if (f) f.textContent = focusName();
+    const s = root.querySelector("[data-suggest]");
+    if (s) s.textContent = suggest.type === "pattern" ? ctx.content.patterns.get(suggest.id)?.name ?? suggest.id : situationName(suggest.id);
+  }
+
   function start() {
+    if (blocked) {
+      root.innerHTML = `<h1>Focus</h1>${blockedNote()}${queue.length ? `<button class="btn secondary block" data-due>Review ${queue.length} due cards</button>` : ""}${home}`;
+      fillNames();
+      root.querySelector("[data-due]")?.addEventListener("click", begin);
+      return;
+    }
     if (!queue.length) {
       root.innerHTML = `<h1>${mode === "quick" ? "Quick" : "Session"}</h1>
         <p class="muted">Nothing to study right now.</p>${home}`;
@@ -35,10 +62,11 @@ export function render(root, ctx) {
     const mins = Math.max(1, Math.round(estimateSec / 60));
     const fresh = queue.filter((q) => q.isNew && q.cardId.startsWith("lr:")).length;
     const forms = queue.filter((q) => q.isNew && q.cardId.startsWith("kf:")).length;
-    root.innerHTML = `<h1>Session</h1>
+    root.innerHTML = `<h1>${focus ? "Focus: <span data-focus></span>" : "Session"}</h1>
       <section class="card"><p>${queue.length} cards · ${fresh} new sentences${forms ? ` · ${forms} new forms` : ""}</p>
       <p class="muted">≈ ${mins} min</p>
       <button class="btn block" data-start>Start</button></section>${home}`;
+    fillNames();
     root.querySelector("[data-start]").addEventListener("click", begin);
   }
 
