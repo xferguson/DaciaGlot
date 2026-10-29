@@ -1,12 +1,13 @@
 // Study loop: Quick / Session (PRD FR-S2…S9). Renders T07 cards one after another.
 import { buildSession, gradeFromResult, applyReview, addMinutes, requeueWrong } from "../../core/session.js";
-import { parseCardId } from "../../core/cards.js";
+import { parseCardId, exampleSentenceFor } from "../../core/cards.js";
 import { unitsRequiredForCard } from "../../core/units.js";
 import { renderCard as renderLr } from "./card-lr.js";
 import { renderCard as renderCz } from "./card-cloze.js";
+import { renderCard as renderKf } from "./card-keyform.js";
 
 const QUICK_MS = 5 * 60 * 1000;
-const RENDERERS = { lr: renderLr, cz: renderCz };
+const RENDERERS = { lr: renderLr, cz: renderCz, kf: renderKf };
 
 export function render(root, ctx) {
   const mode = ctx.route?.params?.mode === "quick" ? "quick" : "session";
@@ -31,8 +32,9 @@ export function render(root, ctx) {
     if (mode === "quick") return begin();
     const mins = Math.max(1, Math.round(estimateSec / 60));
     const fresh = queue.filter((q) => q.isNew && q.cardId.startsWith("lr:")).length;
+    const forms = queue.filter((q) => q.isNew && q.cardId.startsWith("kf:")).length;
     root.innerHTML = `<h1>Session</h1>
-      <section class="card"><p>${queue.length} cards · ${fresh} new sentences</p>
+      <section class="card"><p>${queue.length} cards · ${fresh} new sentences${forms ? ` · ${forms} new forms` : ""}</p>
       <p class="muted">≈ ${mins} min</p>
       <button class="btn block" data-start>Start</button></section>${home}`;
     root.querySelector("[data-start]").addEventListener("click", begin);
@@ -59,9 +61,11 @@ export function render(root, ctx) {
     progress();
     const item = queue[pos];
     const p = parseCardId(item.cardId);
-    const sentence = ctx.content.sentences.get(p.sentenceId);
+    const sentence = p.type === "kf"
+      ? exampleSentenceFor(p.lexemeId, p.formKey, ctx.state, ctx.content)
+      : ctx.content.sentences.get(p.sentenceId);
     const draw = RENDERERS[p.type];
-    if (!sentence || !draw) { pos++; return next(); }
+    if ((!sentence && p.type !== "kf") || !draw) { pos++; return next(); }
     const slot = root.querySelector("[data-card]");
     slot.replaceChildren();
     cardCleanup = draw(slot, {

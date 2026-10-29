@@ -1,6 +1,6 @@
 // Session building, grading and review application (ARCHITECTURE §8). Pure: `now` and `rng` are injected.
 import { newCard, review } from "./fsrs.js";
-import { parseCardId, cardsForSentence, isUnlocked } from "./cards.js";
+import { parseCardId, cardsForSentence, isUnlocked, newKfCards } from "./cards.js";
 import { unitsForSentence, isKnown } from "./units.js";
 
 export const QUICK_CAP = 15;
@@ -45,7 +45,7 @@ function chunk(list, parts) {
 
 /**
  * Quick: due cards only, capped at 15. Session: due cards plus new sentences (`lr`, then `cz`),
- * spread so two new sentences' `lr` cards are never adjacent.
+ * spread so two new sentences' `lr` cards are never adjacent, then newly unlocked `kf` cards (T14).
  * @returns {{queue: {cardId: string, isNew: boolean}[], estimateSec: number}}
  */
 export function buildSession({ mode, state, content, now, rng: _rng, newSentenceIds }) {
@@ -60,6 +60,7 @@ export function buildSession({ mode, state, content, now, rng: _rng, newSentence
     .filter(Boolean)
     .map((s) => cardsForSentence(s, content).map((cardId) => ({ cardId, isNew: true })));
   const k = groups.length;
+  const kf = newKfCards(state, content).map((cardId) => ({ cardId, isNew: true }));
   const queue = [];
   if (k === 0) queue.push(...due);
   else {
@@ -69,7 +70,8 @@ export function buildSession({ mode, state, content, now, rng: _rng, newSentence
       queue.push(g[0], ...slots[2 * i + 1], ...g.slice(1), ...slots[2 * i + 2]);
     });
   }
-  return { queue, estimateSec: due.length * SEC_PER_REVIEW + k * SEC_PER_NEW };
+  queue.push(...kf);
+  return { queue, estimateSec: due.length * SEC_PER_REVIEW + (k + kf.length) * SEC_PER_NEW };
 }
 
 export function dayKey(now) {
