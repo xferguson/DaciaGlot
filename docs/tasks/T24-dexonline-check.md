@@ -39,6 +39,10 @@ Every inflected form added in T17 (`lexemes/batch-b.json` plus the plural and `s
 
 Naturalness review of whole sentences, and any content beyond batch B.
 
+## Blocker (for later)
+
+The agent environment's network policy denies `dexonline.ro`, so the check has not started. The user needs to add `dexonline.ro` under Allowed domains in the cloud environment's network settings (cloud environment menu in the session title bar, then Edit; steps at https://code.claude.com/docs/en/cloud-environments#network-access). The user has said they will do this later. Do not fill in the results from memory.
+
 ## Results
 
 _(filled in as the check proceeds)_
