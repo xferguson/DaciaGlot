@@ -1,0 +1,1465 @@
+[
+  {
+    "id": "s-a1-meta-0003",
+    "ro": "Nu înțeleg.",
+    "en": "I don't understand.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "neg-nu",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "înțeleg.",
+        "units": [
+          {
+            "lex": "intelege",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Înțeleg.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-meta-repeat"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0004",
+    "ro": "Mai încet, te rog.",
+    "en": "Slower, please.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "meta-basic"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mai",
+        "units": [
+          {
+            "lex": "mai",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "încet,",
+        "units": [
+          {
+            "lex": "incet",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "te",
+        "units": []
+      },
+      {
+        "t": "rog.",
+        "units": [
+          {
+            "lex": "te-rog",
+            "form": "base",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-meta-repeat"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0002",
+    "ro": "Poți să repeți, te rog?",
+    "en": "Can you repeat that, please?",
+    "accept": [
+      "Poți să repeți, te rog."
+    ],
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "modal-sa-12",
+      "pres-12-high",
+      "meta-basic"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Poți",
+        "units": [
+          {
+            "lex": "putea",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "repeți,",
+        "units": [
+          {
+            "lex": "repeta",
+            "form": "subj2sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "te",
+        "units": []
+      },
+      {
+        "t": "rog?",
+        "units": [
+          {
+            "lex": "te-rog",
+            "form": "base",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>2pl",
+        "ro": "Puteți să repetați, vă rog?",
+        "en": "Can you (pl./formal) repeat that, please?",
+        "targetTokens": [
+          0,
+          2,
+          3,
+          4
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-meta-repeat"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0011",
+    "ro": "Poți să repeți?",
+    "en": "Can you repeat?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Poți",
+        "units": [
+          {
+            "lex": "putea",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa",
+        "cloze": true
+      },
+      {
+        "t": "repeți?",
+        "units": [
+          {
+            "lex": "repeta",
+            "form": "subj2sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>2pl",
+        "ro": "Puteți să repetați?",
+        "en": "Can you (pl./formal) repeat?",
+        "targetTokens": [
+          0,
+          2
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-meta-repeat"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0010",
+    "ro": "Poți să vorbești mai încet?",
+    "en": "Can you speak more slowly?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Poți",
+        "units": [
+          {
+            "lex": "putea",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "vorbești",
+        "units": [
+          {
+            "lex": "vorbi",
+            "form": "subj2sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mai",
+        "units": [
+          {
+            "lex": "mai",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "încet?",
+        "units": [
+          {
+            "lex": "incet",
+            "form": "base"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>2pl",
+        "ro": "Puteți să vorbiți mai încet?",
+        "en": "Can you (pl./formal) speak more slowly?",
+        "targetTokens": [
+          0,
+          2
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-meta-repeat"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0012",
+    "ro": "Pot să întreb ceva?",
+    "en": "Can I ask something?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Pot",
+        "units": [
+          {
+            "lex": "putea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "întreb",
+        "units": [
+          {
+            "lex": "intreba",
+            "form": "subj1sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "ceva?",
+        "units": [
+          {
+            "lex": "ceva",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Poți să întrebi ceva?",
+        "en": "Can you ask something?",
+        "targetTokens": [
+          0,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0014",
+    "ro": "Poți să scrii cuvântul?",
+    "en": "Can you write the word?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Poți",
+        "units": [
+          {
+            "lex": "putea",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "scrii",
+        "units": [
+          {
+            "lex": "scrie",
+            "form": "subj2sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cuvântul?",
+        "units": [
+          {
+            "lex": "cuvant",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0007",
+    "ro": "Ce înseamnă „sprint”?",
+    "en": "What does “sprint” mean?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "wh-q",
+      "meta-basic"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "înseamnă",
+        "units": [
+          {
+            "lex": "insemna",
+            "form": "pres3sg",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "„sprint”?",
+        "units": [
+          {
+            "lex": "sprint",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-meta-repeat"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0015",
+    "ro": "Ce vrei să spui?",
+    "en": "What do you mean?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "vrei",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa",
+        "cloze": true
+      },
+      {
+        "t": "spui?",
+        "units": [
+          {
+            "lex": "spune",
+            "form": "subj2sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce vreau să spun?",
+        "en": "What do I mean?",
+        "targetTokens": [
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0016",
+    "ro": "Adică ce vrei să spui?",
+    "en": "I mean, what do you want to say?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "meta-basic",
+      "wh-q",
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Adică",
+        "units": [
+          {
+            "lex": "adica",
+            "form": "base",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "vrei",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "spui?",
+        "units": [
+          {
+            "lex": "spune",
+            "form": "subj2sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0013",
+    "ro": "Cum se scrie cuvântul?",
+    "en": "How do you write the word?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "wh-q",
+      "meta-basic",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cum",
+        "units": [
+          {
+            "lex": "cum",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "se",
+        "units": [
+          {
+            "lex": "se",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "scrie",
+        "units": [
+          {
+            "lex": "scrie",
+            "form": "pres3sg",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cuvântul?",
+        "units": [
+          {
+            "lex": "cuvant",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0020",
+    "ro": "Nu știu cum se zice.",
+    "en": "I don't know how to say it.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "neg-nu",
+      "pres-12-high",
+      "meta-basic"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "știu",
+        "units": [
+          {
+            "lex": "sti",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cum",
+        "units": [
+          {
+            "lex": "cum",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "se",
+        "units": [
+          {
+            "lex": "se",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "zice.",
+        "units": [
+          {
+            "lex": "zice",
+            "form": "pres3sg",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Știu cum se zice.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-meta-repeat"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0001",
+    "ro": "Nu știu cum se spune în română.",
+    "en": "I don't know how to say it in Romanian.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "neg-nu",
+      "pres-12-high",
+      "meta-basic"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "știu",
+        "units": [
+          {
+            "lex": "sti",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cum",
+        "units": [
+          {
+            "lex": "cum",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "se",
+        "units": [
+          {
+            "lex": "se",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "spune",
+        "units": [
+          {
+            "lex": "spune",
+            "form": "pres3sg",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "română.",
+        "units": [
+          {
+            "lex": "romana",
+            "form": "sg"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Știu cum se spune în română.",
+        "en": "I know how to say it in Romanian.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Nu știe cum se spune în română.",
+        "en": "He/She doesn't know how to say it in Romanian.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-meta-repeat"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0005",
+    "ro": "Cum se spune „bug” în română?",
+    "en": "How do you say “bug” in Romanian?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "wh-q",
+      "meta-basic"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cum",
+        "units": [
+          {
+            "lex": "cum",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "se",
+        "units": [
+          {
+            "lex": "se",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "spune",
+        "units": [
+          {
+            "lex": "spune",
+            "form": "pres3sg",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "„bug”",
+        "units": [
+          {
+            "lex": "bug",
+            "form": "sg"
+          }
+        ]
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "română?",
+        "units": [
+          {
+            "lex": "romana",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-meta-repeat"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0006",
+    "ro": "Cum se zice „deploy” în română?",
+    "en": "How do you say “deploy” in Romanian?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "wh-q",
+      "meta-basic"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cum",
+        "units": [
+          {
+            "lex": "cum",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "se",
+        "units": [
+          {
+            "lex": "se",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "zice",
+        "units": [
+          {
+            "lex": "zice",
+            "form": "pres3sg",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "„deploy”",
+        "units": [
+          {
+            "lex": "deploy",
+            "form": "sg"
+          }
+        ]
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "română?",
+        "units": [
+          {
+            "lex": "romana",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-meta-repeat"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0017",
+    "ro": "N-am înțeles.",
+    "en": "I didn't understand.",
+    "accept": [
+      "Nu am înțeles."
+    ],
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "neg-nu",
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "N-am",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "short",
+            "pattern": "neg-nu",
+            "head": true
+          },
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "neg",
+        "cloze": true
+      },
+      {
+        "t": "înțeles.",
+        "units": [
+          {
+            "lex": "intelege",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "affirm",
+        "ro": "Am înțeles.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-meta-repeat"
+    ]
+  },
+  {
+    "id": "s-a1-meta-0018",
+    "ro": "Am înțeles, mulțumesc.",
+    "en": "Got it, thank you.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "perfect-compus",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "înțeles,",
+        "units": [
+          {
+            "lex": "intelege",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "mulțumesc.",
+        "units": [
+          {
+            "lex": "multumi",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0009",
+    "ro": "E ca o ciorbă.",
+    "en": "It's like a ciorbă.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "be-pres",
+      "meta-basic"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "E",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "ca",
+        "units": [
+          {
+            "lex": "ca",
+            "form": "base",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "ciorbă.",
+        "units": [
+          {
+            "lex": "ciorba",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0008",
+    "ro": "E un fel de supă.",
+    "en": "It's a kind of soup.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "be-pres",
+      "meta-basic"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "E",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "un",
+        "units": [
+          {
+            "lex": "un",
+            "form": "m"
+          }
+        ]
+      },
+      {
+        "t": "fel",
+        "units": [
+          {
+            "lex": "fel",
+            "form": "sg",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "supă.",
+        "units": [
+          {
+            "lex": "supa",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ]
+  },
+  {
+    "id": "s-a1-meta-0019",
+    "ro": "Nu știu cuvântul, dar e un fel de supă.",
+    "en": "I don't know the word, but it's a kind of soup.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "meta"
+    ],
+    "patterns": [
+      "neg-nu",
+      "pres-12-high",
+      "def-sg",
+      "be-pres",
+      "meta-basic"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Nu",
+        "units": [
+          {
+            "lex": "nu",
+            "form": "base",
+            "pattern": "neg-nu",
+            "head": true
+          }
+        ],
+        "glue": "neg"
+      },
+      {
+        "t": "știu",
+        "units": [
+          {
+            "lex": "sti",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "cuvântul,",
+        "units": [
+          {
+            "lex": "cuvant",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "dar",
+        "units": [
+          {
+            "lex": "dar",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "un",
+        "units": [
+          {
+            "lex": "un",
+            "form": "m"
+          }
+        ]
+      },
+      {
+        "t": "fel",
+        "units": [
+          {
+            "lex": "fel",
+            "form": "sg",
+            "pattern": "meta-basic",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "de",
+        "units": [
+          {
+            "lex": "de",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "supă.",
+        "units": [
+          {
+            "lex": "supa",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "canDo": [
+      "A1-meta-repeat"
+    ]
+  }
+]

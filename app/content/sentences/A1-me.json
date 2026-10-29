@@ -1,0 +1,2061 @@
+[
+  {
+    "id": "s-a1-me-0004",
+    "ro": "Sunt Andrei.",
+    "en": "I'm Andrei.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres1sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "Andrei.",
+        "units": [
+          {
+            "lex": "andrei",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu sunt Andrei.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "E Andrei.",
+        "en": "He is Andrei.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0012",
+    "ro": "Sunt programator.",
+    "en": "I'm a developer.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres1sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "programator.",
+        "units": [
+          {
+            "lex": "programator",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu sunt programator.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0001",
+    "ro": "Sunt din Cluj.",
+    "en": "I'm from Cluj.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Sunt",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres1sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "din",
+        "units": [
+          {
+            "lex": "din",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Cluj.",
+        "units": [
+          {
+            "lex": "cluj",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu sunt din Cluj.",
+        "en": "I'm not from Cluj.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "E din Cluj.",
+        "en": "He/She is from Cluj.",
+        "accept": [
+          "Este din Cluj."
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-origin"
+    ]
+  },
+  {
+    "id": "s-a1-me-0005",
+    "ro": "Ioana e din Timișoara.",
+    "en": "Ioana is from Timișoara.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ioana",
+        "units": [
+          {
+            "lex": "ioana",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "din",
+        "units": [
+          {
+            "lex": "din",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Timișoara.",
+        "units": [
+          {
+            "lex": "timisoara",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Ioana nu e din Timișoara.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-origin"
+    ]
+  },
+  {
+    "id": "s-a1-me-0027",
+    "ro": "Cine e Ioana?",
+    "en": "Who is Ioana?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "wh-q",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cine",
+        "units": [
+          {
+            "lex": "cine",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "Ioana?",
+        "units": [
+          {
+            "lex": "ioana",
+            "form": "base"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0026",
+    "ro": "Cine e acasă?",
+    "en": "Who is at home?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "wh-q",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Cine",
+        "units": [
+          {
+            "lex": "cine",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acasă?",
+        "units": [
+          {
+            "lex": "acasa",
+            "form": "base"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0025",
+    "ro": "Câinele e acasă.",
+    "en": "The dog is at home.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Câinele",
+        "units": [
+          {
+            "lex": "caine",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "acasă.",
+        "units": [
+          {
+            "lex": "acasa",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Câinele nu e acasă.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0006",
+    "ro": "Locuiesc în Cluj.",
+    "en": "I live in Cluj.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Locuiesc",
+        "units": [
+          {
+            "lex": "locui",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Cluj.",
+        "units": [
+          {
+            "lex": "cluj",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu locuiesc în Cluj.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Locuiești în Cluj.",
+        "en": "You live in Cluj.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-origin"
+    ]
+  },
+  {
+    "id": "s-a1-me-0007",
+    "ro": "Unde locuiești?",
+    "en": "Where do you live?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Unde",
+        "units": [
+          {
+            "lex": "unde",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "locuiești?",
+        "units": [
+          {
+            "lex": "locui",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Unde locuiesc?",
+        "en": "Where do I live?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-origin"
+    ]
+  },
+  {
+    "id": "s-a1-me-0010",
+    "ro": "Mama e în Sibiu.",
+    "en": "Mom is in Sibiu.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "def-sg",
+      "be-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Mama",
+        "units": [
+          {
+            "lex": "mama",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "e",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "pres3sg",
+            "pattern": "be-pres",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Sibiu.",
+        "units": [
+          {
+            "lex": "sibiu",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Mama nu e în Sibiu.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-origin"
+    ]
+  },
+  {
+    "id": "s-a1-me-0015",
+    "ro": "Duminică stau acasă.",
+    "en": "On Sunday I'm staying home.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Duminică",
+        "units": [
+          {
+            "lex": "duminica",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "stau",
+        "units": [
+          {
+            "lex": "sta",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acasă.",
+        "units": [
+          {
+            "lex": "acasa",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Duminică nu stau acasă.",
+        "targetTokens": [
+          1
+        ]
+      },
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Duminică stai acasă.",
+        "en": "On Sunday you're staying home.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0019",
+    "ro": "Vorbesc puțin română.",
+    "en": "I speak a little Romanian.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vorbesc",
+        "units": [
+          {
+            "lex": "vorbi",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "puțin",
+        "units": [
+          {
+            "lex": "putin",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "română.",
+        "units": [
+          {
+            "lex": "romana",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Vorbești puțin română.",
+        "en": "You speak a little Romanian.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Vorbește puțin română.",
+        "en": "He/She speaks a little Romanian.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-meta-repeat"
+    ]
+  },
+  {
+    "id": "s-a1-me-0020",
+    "ro": "Vorbesc engleză și puțin română.",
+    "en": "I speak English and a little Romanian.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vorbesc",
+        "units": [
+          {
+            "lex": "vorbi",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "engleză",
+        "units": [
+          {
+            "lex": "engleza",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "și",
+        "units": [
+          {
+            "lex": "si",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "puțin",
+        "units": [
+          {
+            "lex": "putin",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "română.",
+        "units": [
+          {
+            "lex": "romana",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Vorbești engleză și puțin română.",
+        "en": "You speak English and a little Romanian.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0021",
+    "ro": "Înțeleg foarte puțin.",
+    "en": "I understand very little.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Înțeleg",
+        "units": [
+          {
+            "lex": "intelege",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "foarte",
+        "units": [
+          {
+            "lex": "foarte",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "puțin.",
+        "units": [
+          {
+            "lex": "putin",
+            "form": "base"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0022",
+    "ro": "Învăț româna acum.",
+    "en": "I'm learning Romanian now.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "def-sg"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Învăț",
+        "units": [
+          {
+            "lex": "invata",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "româna",
+        "units": [
+          {
+            "lex": "romana",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "acum.",
+        "units": [
+          {
+            "lex": "acum",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu învăț româna acum.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Înveți româna acum.",
+        "en": "You're learning Romanian now.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-origin"
+    ]
+  },
+  {
+    "id": "s-a1-me-0028",
+    "ro": "Ce faci în weekend?",
+    "en": "What do you do on weekends?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "wh-q",
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ce",
+        "units": [
+          {
+            "lex": "ce",
+            "form": "base",
+            "pattern": "wh-q",
+            "head": true
+          }
+        ]
+      },
+      {
+        "t": "faci",
+        "units": [
+          {
+            "lex": "face",
+            "form": "pres2sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "weekend?",
+        "units": [
+          {
+            "lex": "weekend",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Ce fac în weekend?",
+        "en": "What do I do on weekends?",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0029",
+    "ro": "Fac sport în weekend.",
+    "en": "I play sports on weekends.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Fac",
+        "units": [
+          {
+            "lex": "face",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "sport",
+        "units": [
+          {
+            "lex": "sport",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "weekend.",
+        "units": [
+          {
+            "lex": "weekend",
+            "form": "sg"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Faci sport în weekend.",
+        "en": "You play sports on weekends.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "negate",
+        "ro": "Nu fac sport în weekend.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0003",
+    "ro": "Vreau să învăț româna.",
+    "en": "I want to learn Romanian.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12",
+      "def-sg"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Vreau",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "învăț",
+        "units": [
+          {
+            "lex": "invata",
+            "form": "subj1sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "româna.",
+        "units": [
+          {
+            "lex": "romana",
+            "form": "sgDef",
+            "pattern": "def-sg",
+            "head": true
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu vreau să învăț româna.",
+        "en": "I don't want to learn Romanian.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Vrea să învețe româna.",
+        "en": "He/She wants to learn Romanian.",
+        "targetTokens": [
+          0,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0013",
+    "ro": "Vreau să locuiesc în Cluj.",
+    "en": "I want to live in Cluj.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vreau",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa",
+        "cloze": true
+      },
+      {
+        "t": "locuiesc",
+        "units": [
+          {
+            "lex": "locui",
+            "form": "subj1sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Cluj.",
+        "units": [
+          {
+            "lex": "cluj",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu vreau să locuiesc în Cluj.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Vrea să locuiască în Cluj.",
+        "en": "He/She wants to live in Cluj.",
+        "targetTokens": [
+          0,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0030",
+    "ro": "Vreau să merg la mare.",
+    "en": "I want to go to the seaside.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-12-high",
+      "modal-sa-12"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Vreau",
+        "units": [
+          {
+            "lex": "vrea",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "să",
+        "units": [
+          {
+            "lex": "sa",
+            "form": "base",
+            "pattern": "modal-sa-12"
+          }
+        ],
+        "glue": "sa"
+      },
+      {
+        "t": "merg",
+        "units": [
+          {
+            "lex": "merge",
+            "form": "subj1sg",
+            "pattern": "modal-sa-12",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "mare.",
+        "units": [
+          {
+            "lex": "mare",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Nu vreau să merg la mare.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "modal:putea",
+        "ro": "Pot să merg la mare.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Vrea să meargă la mare.",
+        "en": "He/She wants to go to the seaside.",
+        "targetTokens": [
+          0,
+          2
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0011",
+    "ro": "Ioana lucrează la o firmă.",
+    "en": "Ioana works at a company.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ioana",
+        "units": [
+          {
+            "lex": "ioana",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "lucrează",
+        "units": [
+          {
+            "lex": "lucra",
+            "form": "pres3sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "firmă.",
+        "units": [
+          {
+            "lex": "firma",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Ioana nu lucrează la o firmă.",
+        "targetTokens": [
+          1
+        ]
+      },
+      {
+        "op": "person:3sg>1sg",
+        "ro": "Lucrez la o firmă.",
+        "en": "I work at a company.",
+        "targetTokens": [
+          0,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0008",
+    "ro": "Ai o soră?",
+    "en": "Do you have a sister?",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ai",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres2sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "soră?",
+        "units": [
+          {
+            "lex": "sora",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-ai o soră?",
+        "accept": [
+          "Nu ai o soră?"
+        ],
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:2sg>1sg",
+        "ro": "Am o soră?",
+        "en": "Do I have a sister?",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-origin"
+    ]
+  },
+  {
+    "id": "s-a1-me-0002",
+    "ro": "Am o soră în Iași.",
+    "en": "I have a sister in Iași.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "have-pres"
+    ],
+    "register": "colloquial",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres1sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "soră",
+        "units": [
+          {
+            "lex": "sora",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "în",
+        "units": [
+          {
+            "lex": "in",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Iași.",
+        "units": [
+          {
+            "lex": "iasi",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Are o soră în Iași.",
+        "en": "He/She has a sister in Iași.",
+        "targetTokens": [
+          0
+        ]
+      },
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Ai o soră în Iași.",
+        "en": "You have a sister in Iași.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-origin"
+    ]
+  },
+  {
+    "id": "s-a1-me-0023",
+    "ro": "Am o pisică.",
+    "en": "I have a cat.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres1sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "pisică.",
+        "units": [
+          {
+            "lex": "pisica",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-am pisică.",
+        "accept": [
+          "Nu am pisică."
+        ],
+        "targetTokens": [
+          0,
+          1
+        ]
+      },
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Ai o pisică.",
+        "en": "You have a cat.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0009",
+    "ro": "Am un frate.",
+    "en": "I have a brother.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres1sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "un",
+        "units": [
+          {
+            "lex": "un",
+            "form": "m"
+          }
+        ]
+      },
+      {
+        "t": "frate.",
+        "units": [
+          {
+            "lex": "frate",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Are un frate.",
+        "en": "He/She has a brother.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ],
+    "canDo": [
+      "A1-me-origin"
+    ]
+  },
+  {
+    "id": "s-a1-me-0024",
+    "ro": "Am un câine.",
+    "en": "I have a dog.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "have-pres"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "avea",
+            "form": "pres1sg",
+            "pattern": "have-pres",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "un",
+        "units": [
+          {
+            "lex": "un",
+            "form": "m"
+          }
+        ]
+      },
+      {
+        "t": "câine.",
+        "units": [
+          {
+            "lex": "caine",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-am câine.",
+        "accept": [
+          "Nu am câine."
+        ],
+        "targetTokens": [
+          0,
+          1
+        ]
+      },
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Ai un câine.",
+        "en": "You have a dog.",
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0014",
+    "ro": "Sâmbătă merg la munte.",
+    "en": "On Saturday I'm going to the mountains.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "pres-12-high"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Sâmbătă",
+        "units": [
+          {
+            "lex": "sambata",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "merg",
+        "units": [
+          {
+            "lex": "merge",
+            "form": "pres1sg",
+            "pattern": "pres-12-high",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "munte.",
+        "units": [
+          {
+            "lex": "munte",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Sâmbătă nu merg la munte.",
+        "targetTokens": [
+          1
+        ]
+      },
+      {
+        "op": "person:1sg>2sg",
+        "ro": "Sâmbătă mergi la munte.",
+        "en": "On Saturday you're going to the mountains.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0016",
+    "ro": "Sâmbătă am citit o carte.",
+    "en": "On Saturday I read a book.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Sâmbătă",
+        "units": [
+          {
+            "lex": "sambata",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "am",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "citit",
+        "units": [
+          {
+            "lex": "citi",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "o",
+        "units": [
+          {
+            "lex": "un",
+            "form": "f"
+          }
+        ]
+      },
+      {
+        "t": "carte.",
+        "units": [
+          {
+            "lex": "carte",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "tense:perf>pres",
+        "ro": "Sâmbătă citesc o carte.",
+        "targetTokens": [
+          1,
+          2
+        ]
+      },
+      {
+        "op": "person:1sg>3sg",
+        "ro": "Sâmbătă a citit o carte.",
+        "en": "On Saturday he/she read a book.",
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0017",
+    "ro": "Am fost la Brașov.",
+    "en": "I went to Brașov.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Am",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux",
+        "cloze": true
+      },
+      {
+        "t": "fost",
+        "units": [
+          {
+            "lex": "fi",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "Brașov.",
+        "units": [
+          {
+            "lex": "brasov",
+            "form": "base"
+          }
+        ]
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "N-am fost la Brașov.",
+        "accept": [
+          "Nu am fost la Brașov."
+        ],
+        "targetTokens": [
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "s-a1-me-0018",
+    "ro": "Ieri am mers la munte.",
+    "en": "Yesterday I went to the mountains.",
+    "level": "A1",
+    "stage": 1,
+    "situations": [
+      "me"
+    ],
+    "patterns": [
+      "perfect-compus"
+    ],
+    "register": "neutral",
+    "tokens": [
+      {
+        "t": "Ieri",
+        "units": [
+          {
+            "lex": "ieri",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "am",
+        "units": [
+          {
+            "lex": "aux-perf",
+            "form": "1sg",
+            "pattern": "perfect-compus"
+          }
+        ],
+        "glue": "aux"
+      },
+      {
+        "t": "mers",
+        "units": [
+          {
+            "lex": "merge",
+            "form": "ppl",
+            "pattern": "perfect-compus",
+            "head": true
+          }
+        ],
+        "cloze": true
+      },
+      {
+        "t": "la",
+        "units": [
+          {
+            "lex": "la",
+            "form": "base"
+          }
+        ]
+      },
+      {
+        "t": "munte.",
+        "units": [
+          {
+            "lex": "munte",
+            "form": "sg"
+          }
+        ],
+        "cloze": true
+      }
+    ],
+    "transforms": [
+      {
+        "op": "negate",
+        "ro": "Ieri n-am mers la munte.",
+        "accept": [
+          "Ieri nu am mers la munte."
+        ],
+        "targetTokens": [
+          1
+        ]
+      }
+    ]
+  }
+]

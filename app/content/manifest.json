@@ -1,8 +1,17 @@
 {
-  "contentVersion": "2026.10.29-1",
+  "contentVersion": "2026.10.29-2",
   "packs": {
-    "lexemes": ["lexemes/core.json"],
-    "sentences": ["sentences/A1-seed.json"]
+    "lexemes": [
+      "lexemes/core.json"
+    ],
+    "sentences": [
+      "sentences/A1-standup.json",
+      "sentences/A1-me.json",
+      "sentences/A1-meta.json",
+      "sentences/A1-table.json"
+    ]
   },
-  "levels": ["A1"]
+  "levels": [
+    "A1"
+  ]
 }
