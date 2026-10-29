@@ -45,4 +45,5 @@ python3 -m http.server -d app 8080     # local preview at http://localhost:8080/
 | `docs/ARCHITECTURE.md` | Module layout, data types, function contracts, algorithms |
 | `docs/CONTENT_GUIDE.md` | Content schemas, validator rules, pattern inventory, authoring rules |
 | `docs/STATUS.md` | Task board |
+| `docs/MANUAL.md` | Owner-only manual checks and settings, deferred ("later"); not agent work |
 | `docs/tasks/T##-*.md` | Self-contained work packages |
