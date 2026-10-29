@@ -19,7 +19,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [T13](tasks/T13-lists-focus-ui.md) | Situations / Patterns lists, Focus mode, lexeme detail | 2 | T11, T12 | todo | | |
 | [T14](tasks/T14-key-forms.md) | Key-forms cards and unlock chain | 2 | T08 | todo | | |
 | [T15](tasks/T15-transform-slot.md) | Transformation and slot-building cards | 2 | T08, T11 | todo | | |
-| [T16](tasks/T16-flagging.md) | Flag a sentence → GitHub issue | 2 | T07 | todo | | |
+| [T16](tasks/T16-flagging.md) | Flag a sentence → GitHub issue | 2 | T07 | review | ccr-6ab5b98b-20ltsk | Flag button is mounted by `session.js` (not in each card); `issueUrl(flag, sentence, contentVersion)` and `flagsMarkdown` are in `flag-button.js`. APP_VERSION bumped to 0.2.1. Not yet checked on a real device. |
 | [T17](tasks/T17-content-batch-b.md) | Content batch B: to ~300 sentences, all situations | 2 | T09 | todo | | |
 | [T18](tasks/T18-dashboard.md) | Progress dashboard | 3 | T11, T19 | todo | | |
 | [T19](tasks/T19-levels-cando.md) | A1 level manifest and can-do tracking | 3 | T11 | todo | | |
