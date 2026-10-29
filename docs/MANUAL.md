@@ -6,7 +6,7 @@ Status for every item: **later**.
 
 ## 1. Environment settings
 
-- [ ] **Allow `dexonline.ro`** under *Allowed domains* in the cloud environment's network settings (cloud environment menu in the session title bar, then Edit; see https://code.claude.com/docs/en/cloud-environments#network-access). This unblocks **T24** (verify batch B paradigms against Dexonline). Once done, tell a session to start T24 and mark it `todo` in `docs/STATUS.md`.
+- [ ] **Allow `dexonline.ro`** under *Allowed domains* in the cloud environment's network settings (cloud environment menu in the session title bar, then Edit; see https://code.claude.com/docs/en/cloud-environments#network-access). This unblocks **T24** (verify batch B paradigms against Dexonline). T24 now lives in epic E6 in `docs/STATUS.md` (off the task board). Once done, tell a session to add T24 back to the table as `todo` and start it.
 
 ## 2. Spot checks on a real phone (Android + Brave)
 

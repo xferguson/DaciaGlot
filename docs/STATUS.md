@@ -27,15 +27,17 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [T21](tasks/T21-summary-reminders.md) | Session summary and export reminder | 3 | T11 | done | ccr-d8a0c191-p843sy | Summary helpers (`diffPatternStates`, `formsProduced`, `exportReminderDue`) live in `ui/views/summary.js`; session.js calls `renderSummary` directly (no router route). Sessions are not recorded, so "after the 3rd session" = 3 days with ≥1 card. Export banner id `export`, hidden by settings on export. APP_VERSION 0.3.2. Not checked on a device. |
 | [T22](tasks/T22-coverage-report.md) | Content coverage report in CI | 3 | T02 | done | ccr-6f18b7e8-0f35w7 | `--coverage` prints Markdown tables (exports `computeCoverage`, `coverageReport`, `strictA1Failures`); `--strict-a1` is left commented out in `deploy-pages.yml` until T23 lands. Head-lexeme target skips `be-pres`, `have-pres`, `neg-nu`. |
 | [T23](tasks/T23-content-batch-c.md) | Content batch C: Stages 1–2 complete (400–600) | 3 | T17, T19, T22 | done | ccr-5c22eee3-nenxec | 470 sentences; every lexeme ≥2 sentences; 19 new can-dos for decisions/coaching/domain/getting-to-know/news (35 total, all ≥5); `--strict-a1` now runs in CI. ~70 new sentences have no `transforms` yet (warnings only under `--phase 2`), so xf/sb cards are thin for them. |
-| [T24](tasks/T24-dexonline-check.md) | Verify batch B paradigms against Dexonline | 2 | T17 | blocked | | **Waiting on the user** (see [MANUAL.md](MANUAL.md) §1, marked later): add `dexonline.ro` under Allowed domains in the cloud environment's network settings (the cloud environment menu in the session title bar, then Edit; see https://code.claude.com/docs/en/cloud-environments#network-access). The user will do this later. Then start the task; no check has been done yet. |
 
 ## Manual activities (later)
 
-Things only the owner can do (real-device checks, the Dexonline network allowlist for T24, the T20 `accept[]` check). They are collected in [`MANUAL.md`](MANUAL.md), marked **later**, to be done in one batch when the owner is ready. They don't block any task.
+Things only the owner can do (real-device checks, the Dexonline network allowlist for T24, the T20 `accept[]` check). They are collected in [`MANUAL.md`](MANUAL.md), marked **later**, and live in epic E6 below, outside the task board. They don't block any task.
 
 ## Epics not yet broken into tasks
 
 - **E4 · A2 pack (Phase 4):** Stage 3–4 patterns + `requires` edges, A2 manifest and can-dos, formal register (`register-formal`, PRD Q1), optional audio packs (PRD Q3). Write the tasks when Phase 3 is done.
+- **E6 · Owner-only work (later):** anything manual or waiting on the owner. It is not on the task board and no agent picks it up. Everything is listed in [`MANUAL.md`](MANUAL.md). When the owner is ready, a manual item that needs agent work becomes a task again:
+  - **Dexonline check of batch B paradigms** ([T24](tasks/T24-dexonline-check.md), kept as the work package): blocked until `dexonline.ro` is allowed in the environment's network settings (MANUAL §1). No check has been done yet. Then add it back to the table as `todo`.
+  - Real-device spot checks and the T20 `accept[]` check (MANUAL §2).
 - **E5 · Reading & personal (Phase 5):** reading mode with tap-to-gloss (lemma + form + unit state) feeding `lexemeSentences`/known units; user-added sentences with local tokenization assistance.
 
 ## Parallelism map
