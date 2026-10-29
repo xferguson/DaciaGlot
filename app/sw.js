@@ -21,6 +21,7 @@ const PRECACHE = [
   "js/core/check.js",
   "js/core/equivalences.js",
   "js/core/fsrs.js",
+  "js/core/mastery.js",
   "js/core/normalize.js",
   "js/core/session.js",
   "js/core/units.js",
