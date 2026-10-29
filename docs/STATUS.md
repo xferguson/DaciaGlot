@@ -27,6 +27,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [T21](tasks/T21-summary-reminders.md) | Session summary and export reminder | 3 | T11 | done | ccr-d8a0c191-p843sy | Summary helpers (`diffPatternStates`, `formsProduced`, `exportReminderDue`) live in `ui/views/summary.js`; session.js calls `renderSummary` directly (no router route). Sessions are not recorded, so "after the 3rd session" = 3 days with ≥1 card. Export banner id `export`, hidden by settings on export. APP_VERSION 0.3.2. Not checked on a device. |
 | [T22](tasks/T22-coverage-report.md) | Content coverage report in CI | 3 | T02 | done | ccr-6f18b7e8-0f35w7 | `--coverage` prints Markdown tables (exports `computeCoverage`, `coverageReport`, `strictA1Failures`); `--strict-a1` is left commented out in `deploy-pages.yml` until T23 lands. Head-lexeme target skips `be-pres`, `have-pres`, `neg-nu`. |
 | [T23](tasks/T23-content-batch-c.md) | Content batch C: Stages 1–2 complete (400–600) | 3 | T17, T19, T22 | todo | | |
+| [T24](tasks/T24-dexonline-check.md) | Verify batch B paradigms against Dexonline | 2 | T17 | in-progress | t24-dexonline-check | |
 
 ## Epics not yet broken into tasks
 
