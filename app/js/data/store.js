@@ -1,4 +1,5 @@
 import { CURRENT_SCHEMA_VERSION, migrate } from './migrations.js';
+import { compactAttempts } from '../core/mastery.js';
 
 export const STATE_KEY = 'dg:v1:state';
 const SAVE_DEBOUNCE_MS = 500;
@@ -154,7 +155,11 @@ export function load() {
     }
   } catch { /* fall through to recovery */ }
 
-  if (state) return state;
+  if (state) {
+    // FR-X5: fold old attempts into aggregates, at most once a day.
+    if (state.lastCompactionAt == null || now - state.lastCompactionAt >= 86400000) state = compactAttempts(state, now);
+    return state;
+  }
   backupCorrupt(raw, now);
   const fresh = defaultState(now);
   Object.defineProperty(fresh, '_recovered', { value: true, enumerable: false, writable: true, configurable: true });
