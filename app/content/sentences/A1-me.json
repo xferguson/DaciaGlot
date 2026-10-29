@@ -51,6 +51,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-origin"
     ]
   },
   {
@@ -98,6 +101,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-languages"
     ]
   },
   {
@@ -284,6 +290,9 @@
           }
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-family"
     ]
   },
   {
@@ -333,6 +342,9 @@
           }
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-family"
     ]
   },
   {
@@ -391,6 +403,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-family"
     ]
   },
   {
@@ -643,6 +658,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-weekend"
     ]
   },
   {
@@ -710,7 +728,7 @@
       }
     ],
     "canDo": [
-      "A1-meta-repeat"
+      "A1-me-languages"
     ]
   },
   {
@@ -787,6 +805,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-languages"
     ]
   },
   {
@@ -833,6 +854,9 @@
           }
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-languages"
     ]
   },
   {
@@ -902,7 +926,7 @@
       }
     ],
     "canDo": [
-      "A1-me-origin"
+      "A1-me-languages"
     ]
   },
   {
@@ -972,6 +996,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-weekend"
     ]
   },
   {
@@ -1045,6 +1072,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-weekend"
     ]
   },
   {
@@ -1129,6 +1159,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-languages"
     ]
   },
   {
@@ -1218,6 +1251,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-origin"
     ]
   },
   {
@@ -1314,6 +1350,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-weekend"
     ]
   },
   {
@@ -1397,6 +1436,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-family"
     ]
   },
   {
@@ -1466,7 +1508,7 @@
       }
     ],
     "canDo": [
-      "A1-me-origin"
+      "A1-me-family"
     ]
   },
   {
@@ -1552,7 +1594,7 @@
       }
     ],
     "canDo": [
-      "A1-me-origin"
+      "A1-me-family"
     ]
   },
   {
@@ -1621,6 +1663,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-family"
     ]
   },
   {
@@ -1680,7 +1725,7 @@
       }
     ],
     "canDo": [
-      "A1-me-origin"
+      "A1-me-family"
     ]
   },
   {
@@ -1749,6 +1794,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-family"
     ]
   },
   {
@@ -1822,6 +1870,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-weekend"
     ]
   },
   {
@@ -1907,6 +1958,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-weekend"
     ]
   },
   {
@@ -1977,6 +2031,9 @@
           0
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-weekend"
     ]
   },
   {
@@ -2056,6 +2113,9 @@
           1
         ]
       }
+    ],
+    "canDo": [
+      "A1-me-weekend"
     ]
   },
   {

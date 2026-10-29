@@ -5,7 +5,7 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { tmpdir } from "node:os";
-import { validateContent, readContentDir, checkPrecache, isValidOp } from "../scripts/validate-content.mjs";
+import { validateContent, readContentDir, checkPrecache, isValidOp, computeCoverage, coverageReport, strictA1Failures } from "../scripts/validate-content.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const FIXTURES = join(HERE, "fixtures");
@@ -97,4 +97,62 @@ test("rule 11: sw.js APP_VERSION must match js/version.js", () => {
   assert.deepEqual(checkPrecache(app).errors.map((e) => e.id), ["APP_VERSION"]);
   writeFileSync(join(app, "sw.js"), 'const APP_VERSION = "2.0.0"; const PRECACHE = ["js/version.js"];');
   assert.equal(checkPrecache(app).errors.length, 0);
+});
+
+// ---- T22: coverage report and --strict-a1 ----
+
+/** Fixture-derived content with `n` copies of the valid sentence, all linked to the A1-x can-do. */
+const withCopies = (n) => {
+  const { raw } = readContentDir(join(FIXTURES, "valid"));
+  const base = raw.sentences[0];
+  const sentences = Array.from({ length: n }, (_, i) => ({ ...structuredClone(base), id: `s-${i}`, canDo: ["A1-x"] }));
+  return { ...raw, sentences };
+};
+
+test("coverage: counts per pattern, situation and can-do, and flags rows below target", () => {
+  const raw = withCopies(5);
+  const cov = computeCoverage(raw);
+  const pat = cov.patterns.find((p) => p.id === "perfect-compus");
+  assert.equal(pat.sentences, 5);
+  assert.ok(pat.heads >= 1);
+  assert.equal(pat.low, true); // 5 < 10 sentences
+  assert.equal(cov.canDos.find((c) => c.id === "A1-x").sentences, 5);
+  assert.equal(cov.canDos.find((c) => c.id === "A1-x").low, false);
+  assert.equal(cov.situations.find((s) => s.id === "standup").sentences, 5);
+  assert.equal(cov.situations.find((s) => s.id === "news").low, true);
+  const report = coverageReport(raw);
+  assert.match(report, /\| ⚠ perfect-compus \|/);
+  assert.match(report, /### Can-dos/);
+});
+
+test("coverage: lexemes with fewer than 2 sentences are listed", () => {
+  const raw = withCopies(1);
+  const cov = computeCoverage(raw);
+  assert.ok(cov.thinLexemes.length > 0);
+  assert.ok(cov.thinLexemes.every((l) => l.sentences < 2));
+  assert.equal(computeCoverage(withCopies(2)).thinLexemes.length, 0);
+});
+
+test("--strict-a1 flags a can-do with < 5 sentences and patterns below target", () => {
+  const msgs = strictA1Failures(withCopies(4));
+  assert.ok(msgs.some((m) => /can-do A1-x: 4 sentence/.test(m)), msgs.join("\n"));
+  assert.ok(msgs.some((m) => /pattern perfect-compus/.test(m)));
+});
+
+test("--strict-a1 passes when every A1 can-do and required pattern meets target", () => {
+  const raw = withCopies(12);
+  // Give the single required pattern enough distinct head lexemes.
+  raw.sentences.forEach((s, i) => {
+    for (const tok of s.tokens) for (const u of tok.units) if (u.pattern === "perfect-compus" && u.head) u.lex = `h${i % 6}`;
+  });
+  assert.deepEqual(strictA1Failures(raw), []);
+});
+
+test("CLI: --strict-a1 exits 1 on thin fixture content and --coverage prints Markdown", () => {
+  const strict = spawnSync(process.execPath, [CLI, "--content", join(FIXTURES, "valid"), "--strict-a1"], { encoding: "utf8" });
+  assert.equal(strict.status, 1);
+  assert.match(strict.stderr, /strict-a1/);
+  const cov = spawnSync(process.execPath, [CLI, "--content", join(FIXTURES, "valid"), "--coverage"], { encoding: "utf8" });
+  assert.equal(cov.status, 0, cov.stderr);
+  assert.match(cov.stdout, /## Content coverage/);
 });

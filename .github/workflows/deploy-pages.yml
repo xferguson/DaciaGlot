@@ -1,9 +1,12 @@
 name: Deploy to GitHub Pages
 
 on:
+  # Markdown-only changes (docs, STATUS) don't run the pipeline.
   push:
     branches: [main]
+    paths-ignore: ["**.md"]
   pull_request:
+    paths-ignore: ["**.md"]
   workflow_dispatch:
 
 permissions:
@@ -28,6 +31,13 @@ jobs:
       - name: Validate content
         run: |
           if [ -f scripts/validate-content.mjs ]; then node scripts/validate-content.mjs; else echo "No content validator yet"; fi
+
+      - name: Content coverage report
+        run: |
+          if [ -f scripts/validate-content.mjs ]; then node scripts/validate-content.mjs --coverage | sed -n '/^## Content coverage/,$p' >> "$GITHUB_STEP_SUMMARY"; fi
+      # Enable once T23 lands (Stages 1-2 complete): fails if any A1 can-do or pattern is below target.
+      # - name: Strict A1 coverage
+      #   run: node scripts/validate-content.mjs --strict-a1
 
   deploy:
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'

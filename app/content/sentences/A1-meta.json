@@ -49,7 +49,7 @@
       }
     ],
     "canDo": [
-      "A1-meta-repeat"
+      "A1-meta-understand"
     ]
   },
   {
@@ -414,6 +414,9 @@
           2
         ]
       }
+    ],
+    "canDo": [
+      "A1-meta-howsay"
     ]
   },
   {
@@ -479,6 +482,9 @@
         ],
         "cloze": true
       }
+    ],
+    "canDo": [
+      "A1-meta-howsay"
     ]
   },
   {
@@ -531,7 +537,7 @@
       }
     ],
     "canDo": [
-      "A1-meta-repeat"
+      "A1-meta-howsay"
     ]
   },
   {
@@ -608,6 +614,9 @@
           3
         ]
       }
+    ],
+    "canDo": [
+      "A1-meta-understand"
     ]
   },
   {
@@ -684,6 +693,9 @@
         ],
         "cloze": true
       }
+    ],
+    "canDo": [
+      "A1-meta-understand"
     ]
   },
   {
@@ -746,6 +758,9 @@
         ],
         "cloze": true
       }
+    ],
+    "canDo": [
+      "A1-meta-howsay"
     ]
   },
   {
@@ -829,7 +844,7 @@
       }
     ],
     "canDo": [
-      "A1-meta-repeat"
+      "A1-meta-howsay"
     ]
   },
   {
@@ -940,7 +955,7 @@
       }
     ],
     "canDo": [
-      "A1-meta-repeat"
+      "A1-meta-howsay"
     ]
   },
   {
@@ -1020,7 +1035,7 @@
       }
     ],
     "canDo": [
-      "A1-meta-repeat"
+      "A1-meta-howsay"
     ]
   },
   {
@@ -1100,7 +1115,7 @@
       }
     ],
     "canDo": [
-      "A1-meta-repeat"
+      "A1-meta-howsay"
     ]
   },
   {
@@ -1162,7 +1177,7 @@
       }
     ],
     "canDo": [
-      "A1-meta-repeat"
+      "A1-meta-understand"
     ]
   },
   {
@@ -1215,6 +1230,9 @@
         ],
         "cloze": true
       }
+    ],
+    "canDo": [
+      "A1-meta-understand"
     ]
   },
   {
@@ -1273,6 +1291,9 @@
         ],
         "cloze": true
       }
+    ],
+    "canDo": [
+      "A1-meta-describe"
     ]
   },
   {
@@ -1341,6 +1362,9 @@
         ],
         "cloze": true
       }
+    ],
+    "canDo": [
+      "A1-meta-describe"
     ]
   },
   {
@@ -1459,7 +1483,7 @@
       }
     ],
     "canDo": [
-      "A1-meta-repeat"
+      "A1-meta-describe"
     ]
   },
   {

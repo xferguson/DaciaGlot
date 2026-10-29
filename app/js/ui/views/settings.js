@@ -1,5 +1,7 @@
 // Settings (PRD FR-N5, FR-X3). Reads ctx.state at render time; writes via ctx.store.
+import { issueUrl, flagsMarkdown } from "../components/flag-button.js";
 import { toast } from "../components/toast.js";
+import { hideBanner } from "../components/banner.js";
 import { defaultState, exportState, importState, ImportError } from "../../data/store.js";
 import { setVoiceURI, speak } from "../../data/tts.js";
 
@@ -33,6 +35,10 @@ export function render(root, ctx) {
       <input type="file" accept="application/json,.json" hidden data-file>
       <button class="btn secondary block" data-reset style="margin-top:12px">Reset all data</button>
     </section>
+    <section class="card">
+      <h2>Flagged sentences</h2>
+      <div data-flags></div>
+    </section>
     <a class="btn secondary block" href="#/home">Home</a>
     <div data-dialog></div>`;
 
@@ -62,6 +68,40 @@ export function render(root, ctx) {
   q("#autoplay").checked = s0.autoplay;
   q("#autoplay").addEventListener("change", (e) => update({ autoplay: e.target.checked }));
 
+  const esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  function renderFlags() {
+    const box = q("[data-flags]");
+    const flags = st().flags;
+    if (!flags.length) { box.innerHTML = `<p class="muted">No flags yet. Use the flag icon on a card.</p>`; return; }
+    box.innerHTML = flags.map((f, i) => {
+      const s = ctx.content?.sentences?.get(f.sentenceId);
+      return `<div class="flag-item" style="margin-bottom:12px">
+        <p lang="ro"><strong>${esc(s?.ro ?? f.sentenceId)}</strong></p>
+        <p class="muted">${esc(s?.en ?? "")}</p>
+        ${f.note ? `<p>${esc(f.note)}</p>` : ""}
+        <p class="muted">${new Date(f.ts).toISOString().slice(0, 10)}</p>
+        <div class="row"><a class="btn secondary" target="_blank" rel="noopener" data-open="${i}" href="${esc(issueUrl(f, s, ctx.content?.contentVersion))}">Open issue</a>
+        <button class="btn secondary" data-del="${i}">Delete</button></div></div>`;
+    }).join("") + `<button class="btn secondary block" data-copy>Copy all</button>`;
+    box.querySelectorAll("[data-open]").forEach((a) => a.addEventListener("click", () => {
+      const i = Number(a.dataset.open);
+      setTimeout(() => {
+        if (confirm("Delete this flag now that its issue is open?")) removeFlag(i);
+      }, 500);
+    }));
+    box.querySelectorAll("[data-del]").forEach((b) => b.addEventListener("click", () => removeFlag(Number(b.dataset.del))));
+    box.querySelector("[data-copy]").addEventListener("click", async () => {
+      try { await navigator.clipboard.writeText(flagsMarkdown(st().flags, ctx.content)); toast("Copied"); }
+      catch { toast("Couldn't copy"); }
+    });
+  }
+  function removeFlag(i) {
+    ctx.state = { ...ctx.state, flags: ctx.state.flags.filter((_, j) => j !== i) };
+    ctx.store.save(ctx.state);
+    renderFlags();
+  }
+  renderFlags();
+
   q("[data-export]").addEventListener("click", () => {
     const url = URL.createObjectURL(exportState(st()));
     const a = Object.assign(document.createElement("a"), { href: url, download: `daciaglot-backup-${dateStamp()}.json` });
@@ -70,6 +110,7 @@ export function render(root, ctx) {
     a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
     update({ lastExportAt: Date.now() });
+    hideBanner("export");
     toast("Backup downloaded");
   });
 
