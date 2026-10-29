@@ -177,7 +177,7 @@ Requirement IDs are referenced by tasks and tests.
 | Phase | Release criteria (all must hold) | Tasks |
 |---|---|---|
 | **0 · Foundations** ✅ | Plan, deploy workflow, placeholder live | — |
-| **1 · Core loop** | On Android/Brave: installs; a full Session runs offline with Romanian TTS; `lr` and `cz` cards work with diacritic leniency and highlighting; progress survives reload; export → reset → import round-trips; ≥100 valid sentences; CI green | T01–T10 |
+| **1 · Core loop** ✅ | On Android/Brave: installs; a full Session runs offline with Romanian TTS; `lr` and `cz` cards work with diacritic leniency and highlighting; progress survives reload; export → reset → import round-trips; ≥100 valid sentences; CI green | T01–T10 |
 | **2 · Building sentences** | Pattern focus yields known lexemes in the new pattern first (test); no new sentence has novelty > 2 (test); `kf`, `xf` and `sb` cards work; flags open GitHub issues; ≥300 sentences across all 9 situations | T11–T17 |
 | **3 · Progress** | Dashboard shows A1 completion from the real state; can-dos become checkable; `er` cards work; the coverage report runs in CI with every A1 can-do having ≥5 sentences; 400–600 sentences | T18–T23 |
 | **4 · A2 pack** | Stage 3–4 content and A2 manifest; formal register; optional audio packs | epic E4 (tasks written when Phase 3 lands) |
