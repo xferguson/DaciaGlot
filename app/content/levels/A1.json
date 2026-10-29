@@ -20,22 +20,187 @@
     "mi-e-construction",
     "dem-colloq"
   ],
-  "targetLexemes": [],
+  "targetLexemes": [
+    "fi",
+    "avea",
+    "nu",
+    "aux-perf",
+    "de",
+    "sa",
+    "un",
+    "si",
+    "la",
+    "in",
+    "ce",
+    "spune",
+    "face",
+    "ca",
+    "din",
+    "se",
+    "trebui",
+    "dar",
+    "putea",
+    "lua",
+    "mai",
+    "vrea",
+    "sti",
+    "cum",
+    "merge",
+    "bun",
+    "cand",
+    "foarte",
+    "timp",
+    "cine",
+    "acum",
+    "sta",
+    "unde",
+    "bine",
+    "cat",
+    "vorbi",
+    "ceva",
+    "fel",
+    "lucra",
+    "inca",
+    "manca",
+    "putin",
+    "zice",
+    "gasi",
+    "intelege",
+    "invata",
+    "ieri",
+    "scrie",
+    "maine",
+    "pleca",
+    "adica",
+    "intreba",
+    "azi",
+    "problema",
+    "termina",
+    "citi",
+    "cuvant",
+    "deschide",
+    "bea",
+    "carte",
+    "nevoie",
+    "zece",
+    "plati",
+    "apa",
+    "insemna",
+    "mama",
+    "ajutor",
+    "te-rog",
+    "locui",
+    "acasa",
+    "mare",
+    "mancare",
+    "gata",
+    "multumi",
+    "incet",
+    "costa",
+    "eroare",
+    "frate",
+    "repeta",
+    "sedinta",
+    "munte",
+    "verifica",
+    "test",
+    "testa",
+    "vin",
+    "noroc",
+    "repara",
+    "sora",
+    "nota",
+    "comanda",
+    "sport",
+    "cod",
+    "firma",
+    "sambata",
+    "duminica",
+    "romana",
+    "weekend",
+    "cafea",
+    "caine"
+  ],
   "canDos": [
     {
       "id": "A1-standup-yesterday",
       "situation": "standup",
-      "text": "I can say what I did yesterday and will do today."
+      "text": "I can say what I did yesterday and what I haven't finished."
+    },
+    {
+      "id": "A1-standup-today",
+      "situation": "standup",
+      "text": "I can say what I'm working on and will do today or tomorrow."
+    },
+    {
+      "id": "A1-standup-blockers",
+      "situation": "standup",
+      "text": "I can say I have a problem, need help or can't do something."
+    },
+    {
+      "id": "A1-standup-ask",
+      "situation": "standup",
+      "text": "I can ask about a task, a test or a meeting and who has time."
     },
     {
       "id": "A1-me-origin",
       "situation": "me",
-      "text": "I can say where I'm from and talk about my family."
+      "text": "I can say my name, where I'm from and where I live."
+    },
+    {
+      "id": "A1-me-family",
+      "situation": "me",
+      "text": "I can talk about my family, my pets and the people I know."
+    },
+    {
+      "id": "A1-me-weekend",
+      "situation": "me",
+      "text": "I can say what I do or did at the weekend and where I want to go."
+    },
+    {
+      "id": "A1-me-languages",
+      "situation": "me",
+      "text": "I can say which languages I speak and that I'm learning Romanian."
     },
     {
       "id": "A1-meta-repeat",
       "situation": "meta",
-      "text": "I can ask someone to repeat or ask how to say a word."
+      "text": "I can ask someone to repeat or to speak more slowly."
+    },
+    {
+      "id": "A1-meta-howsay",
+      "situation": "meta",
+      "text": "I can ask how to say or write a word, and what it means."
+    },
+    {
+      "id": "A1-meta-understand",
+      "situation": "meta",
+      "text": "I can say I don't understand and ask what someone means."
+    },
+    {
+      "id": "A1-meta-describe",
+      "situation": "meta",
+      "text": "I can describe a word I don't know as \"a kind of…\" or \"like…\"."
+    },
+    {
+      "id": "A1-table-order",
+      "situation": "table",
+      "text": "I can order food and drink and ask to order."
+    },
+    {
+      "id": "A1-table-ask",
+      "situation": "table",
+      "text": "I can ask what someone wants to eat or drink."
+    },
+    {
+      "id": "A1-table-pay",
+      "situation": "table",
+      "text": "I can ask for the bill, ask the price and say I want to pay."
+    },
+    {
+      "id": "A1-table-talk",
+      "situation": "table",
+      "text": "I can propose a toast, say what was good and what I ate or drank."
     }
   ]
 }
