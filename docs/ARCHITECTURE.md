@@ -254,13 +254,17 @@ A sentence is mastered when it has ≥1 production card (`cz`, `xf` or `er`) wit
 buildSession({ mode /* "quick"|"session"|"focus" */, focus, state, content, now, rng, newSentenceIds })
   → { queue: QueueItem[], estimateSec: number }
 gradeFromResult({ result, usedHint, attemptNo, tooEasy }) → 1|2|3|4     // PRD FR-S2
-applyReview(state, cardId, grade, unitsRequired, now) → AppState        // FSRS + attempts + history (pure; returns new state)
+applyReview(state, cardId, grade, unitsRequired /* {u,lx}[] */, now, content) → AppState  // FSRS + attempts + history (pure; returns new state). `content` is only used for `lr` exposure.
+dueCards(state, content, now) → string[]      // due + unlocked card ids, most overdue first
+dueCount(state, content, now) → number
+requeueWrong(queue, pos, item, rng) → number  // PRD FR-S9: splice a wrong card back 3–5 cards later
 ```
 
 `QueueItem = { cardId, isNew: boolean }`.
 
 - The caller gets `newSentenceIds` from `select.js` in Phase 2+, or from the FR-S4 interim order in Phase 1.
-- The UI re-queues a wrong card per FR-S9 by splicing the queue.
+- The UI re-queues a wrong card per FR-S9 by splicing the queue (`requeueWrong`).
+- `units.js` `unitsRequiredForCard(cardId, content) → {u, lx}[]` feeds `unitsRequired`.
 
 ## 9. FSRS (`core/fsrs.js`)
 
