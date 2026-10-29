@@ -18,7 +18,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [T12](tasks/T12-selection.md) | i+1 selection engine | 2 | T08, T11 | todo | | |
 | [T13](tasks/T13-lists-focus-ui.md) | Situations / Patterns lists, Focus mode, lexeme detail | 2 | T11, T12 | todo | | |
 | [T14](tasks/T14-key-forms.md) | Key-forms cards and unlock chain | 2 | T08 | done | ccr-42dc906e-x3aoep | `cards.js` exports `FORM_LABELS`/`labelFor`, `newKfCards` (3 per lexeme, session cap 8 by freq), `exampleSentenceFor`; `buildSession` appends new `kf` cards in session mode; `unitsRequiredForCard` handles `kf`. Only 35 of 118 lexemes have `keyForms` — T17 should add them (and Q2 irregular paradigms). Not yet checked on a real phone. |
-| [T15](tasks/T15-transform-slot.md) | Transformation and slot-building cards | 2 | T08, T11 | in-progress | t15 | |
+| [T15](tasks/T15-transform-slot.md) | Transformation and slot-building cards | 2 | T08, T11 | in-progress | ccr-d924d4ff-rjpbjn | |
 | [T16](tasks/T16-flagging.md) | Flag a sentence → GitHub issue | 2 | T07 | done | ccr-6ab5b98b-20ltsk | Flag button is mounted by `session.js` (not in each card); `issueUrl(flag, sentence, contentVersion)` and `flagsMarkdown` are in `flag-button.js`. APP_VERSION bumped to 0.2.1. Not yet checked on a real device. |
 | [T17](tasks/T17-content-batch-b.md) | Content batch B: to ~300 sentences, all situations | 2 | T09 | todo | | |
 | [T18](tasks/T18-dashboard.md) | Progress dashboard | 3 | T11, T19 | todo | | |
