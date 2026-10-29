@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
-  gradeFromResult, buildSession, applyReview, dueCards, requeueWrong, dayKey, interimNewSentences,
+  gradeFromResult, buildSession, applyReview, dueCards, requeueWrong, dayKey, interimNewSentences, mixPlan,
 } from "../app/js/core/session.js";
 import { newCard } from "../app/js/core/fsrs.js";
 import { makeContent, sentence, state, NOW } from "./helpers/mini-content.mjs";
@@ -92,4 +92,46 @@ test("requeueWrong inserts 3-5 cards later once", () => {
   assert.equal(requeueWrong(queue, 2, queue[2], () => 0.99), 7);
   const short = [{ cardId: "x" }];
   assert.equal(requeueWrong(short, 0, short[0], rng), 1);
+});
+
+test("mixPlan: new sentences fill the budget left after reviews", () => {
+  assert.deepEqual(mixPlan(0, 8), { newCount: 8, reviewPct: 0 });
+  assert.equal(mixPlan(20, 8).newCount, 8); // 720 - 240 = 480 s → 12, capped at 8
+  assert.equal(mixPlan(40, 8).newCount, 6);
+  assert.equal(mixPlan(50, 8).newCount, 3);
+  assert.equal(mixPlan(60, 8).newCount, 0);
+  assert.equal(mixPlan(60, 8).reviewPct, 100);
+  assert.equal(mixPlan(0, 0).reviewPct, 0);
+});
+
+test("Review: every due card, uncapped, nothing new", () => {
+  const st = withDue(20);
+  const { queue } = buildSession({ mode: "review", state: st, content, now: NOW, rng });
+  assert.equal(queue.length, 20);
+  assert.ok(queue.every((q) => !q.isNew));
+});
+
+test("Learn: new sentences only, no due cards", () => {
+  const st = withDue(10);
+  st.settings.newPerSession = 3;
+  const { queue } = buildSession({ mode: "learn", state: st, content, now: NOW, rng });
+  assert.ok(queue.length > 0);
+  assert.ok(queue.every((q) => q.isNew));
+  assert.equal(queue.filter((q) => q.cardId.startsWith("lr:")).length, 3);
+});
+
+test("Mix: fewer new sentences under a heavy review load, none when reviews fill the budget", () => {
+  const light = withDue(10);
+  const a = buildSession({ mode: "mix", state: light, content, now: NOW, rng });
+  assert.equal(a.plan.newCount, light.settings.newPerSession);
+  const heavy = withDue(25);
+  heavy.settings.newPerSession = 20;
+  const b = buildSession({ mode: "mix", state: heavy, content, now: NOW, rng });
+  assert.equal(b.plan.newCount, 10); // (720 - 25·12) / 40 = 10.5
+  assert.equal(b.queue.filter((q) => !q.isNew).length, 25);
+  assert.ok(b.queue.filter((q) => q.isNew && q.cardId.startsWith("lr:")).length <= 10);
+  const c = buildSession({ mode: "mix", state: withDue(60), content: makeContent(mk(70)), now: NOW, rng });
+  assert.equal(c.plan.newCount, 0);
+  assert.equal(c.queue.length, 60);
+  assert.ok(c.queue.every((q) => !q.isNew));
 });

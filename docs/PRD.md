@@ -111,6 +111,7 @@ Requirement IDs are referenced by tasks and tests.
 | FR-S5 | **i+1 selection** (`core/select.js`), exactly per ARCHITECTURE §6: candidate filter → novelty → score with cross-prioritization → pick with seeded tie-break randomness. It never returns a sentence with novelty > 2. If none are eligible for the focus, it returns `{ blocked: true, suggest: <patternId or situationId> }`. | 2 |
 | FR-S6 | **Quick mode:** only due cards, most overdue first. It stops at 15 cards or 5 minutes, whichever comes first. | 1 |
 | FR-S7 | **Session mode:** due cards plus N new sentences (`settings.newPerSession`, default 8), each new sentence introduced as `lr` then `cz`, interleaved so no two new sentences are adjacent. The time estimate is shown before starting (≈ 12 s per review, 40 s per new sentence). | 1 |
+| FR-S10 | **Learn, Review and Mix modes** (home screen, alongside Quick). **Learn:** new material only, with no due cards: `newPerSession` new sentences plus newly unlocked drills. **Review:** every due card, uncapped, nothing new. **Mix** (the default; old `mode=session` links open it): all due cards plus as many new sentences as fit a ≈12-minute budget after reviews (12 s each), at most `newPerSession`, 0 once reviews fill it (`mixPlan`). The preview shows the review/new split and why. | 3 |
 | FR-S8 | **Focus mode:** Session mode restricted to one situation or pattern, applied both to new selection and to the order of due cards (focus first). | 2 |
 | FR-S9 | A card answered wrong is re-queued once, 3–5 cards later in the same session. | 1 |
 
