@@ -1,6 +1,7 @@
 // Settings (PRD FR-N5, FR-X3). Reads ctx.state at render time; writes via ctx.store.
 import { issueUrl, flagsMarkdown } from "../components/flag-button.js";
 import { toast } from "../components/toast.js";
+import { hideBanner } from "../components/banner.js";
 import { defaultState, exportState, importState, ImportError } from "../../data/store.js";
 import { setVoiceURI, speak } from "../../data/tts.js";
 
@@ -109,6 +110,7 @@ export function render(root, ctx) {
     a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
     update({ lastExportAt: Date.now() });
+    hideBanner("export");
     toast("Backup downloaded");
   });
 
