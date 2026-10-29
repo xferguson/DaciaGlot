@@ -4,11 +4,11 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 
 | Task | Title | Phase | Depends on | Status | Branch / PR | Notes |
 |---|---|---|---|---|---|---|
-| [T01](tasks/T01-app-shell.md) | App shell, router, design tokens | 1 | none | todo | | |
+| [T01](tasks/T01-app-shell.md) | App shell, router, design tokens | 1 | none | done | ccr-59c9c6c2-h0ddc5 | Router takes `routes` of `() => import()` loaders; unbuilt views (session, lists, dashboard, lexeme) are placeholders in `main.js` to replace. Toasts/banners mount into `#toasts`/`#banners` in index.html. |
 | [T02](tasks/T02-content-schema-validator.md) | Content loader, validator, seed content | 1 | none | review | ccr-b2141f61-3yv4kb | Validator: `--content <dir>`, `--phase 2` enables the no-transforms warning. Added `levels/A1.json` (3 seed can-dos; T19 extends). Add `js/data/content.js` and `content/**` to the sw.js precache. Use `node --test` (Node 22 rejects the `test/` dir argument). |
-| [T03](tasks/T03-answer-checking.md) | Answer checking: normalize, equivalences, diff | 1 | none | todo | | |
+| [T03](tasks/T03-answer-checking.md) | Answer checking: normalize, equivalences, diff | 1 | none | done | ccr-1c0d311d-qepdz7 | API in ARCHITECTURE §5 implemented; also exports tokenKey (normalize.js) and canonicalize/EQUIVALENCE_SETS (equivalences.js). Pairs aligned as "wrong" are not in `extra`. |
 | [T04](tasks/T04-fsrs.md) | FSRS-5 scheduler | 1 | none | todo | | |
-| [T05](tasks/T05-store.md) | Persistence: store, migrations, export/import | 1 | none | todo | | |
+| [T05](tasks/T05-store.md) | Persistence: store, migrations, export/import | 1 | none | review | ccr-97b330b4-ffzlhz | `load()` never throws; on recovery `state._recovered` is a non-enumerable property. `importState` takes JSON text or a parsed object and returns a new state without saving it, so callers must `save()` it. `onError(fn)` returns an unsubscribe. `unitAggregates` merge keeps the larger `n`. Visibility flush hooks itself on first `save()`. |
 | [T06](tasks/T06-tts.md) | Text-to-speech wrapper | 1 | none | todo | | |
 | [T07](tasks/T07-card-ui.md) | Card UI: listen & recognize, cloze, diacritic bar, feedback | 1 | T01, T03, T06 | todo | | |
 | [T08](tasks/T08-session-loop.md) | Session engine and session view (Quick / Session) | 1 | T02, T04, T05 | todo | | |
