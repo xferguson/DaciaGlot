@@ -6,7 +6,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 |---|---|---|---|---|---|---|
 | [T01](tasks/T01-app-shell.md) | App shell, router, design tokens | 1 | none | todo | | |
 | [T02](tasks/T02-content-schema-validator.md) | Content loader, validator, seed content | 1 | none | todo | | |
-| [T03](tasks/T03-answer-checking.md) | Answer checking: normalize, equivalences, diff | 1 | none | todo | | |
+| [T03](tasks/T03-answer-checking.md) | Answer checking: normalize, equivalences, diff | 1 | none | in-progress | ccr-1c0d311d-qepdz7 | |
 | [T04](tasks/T04-fsrs.md) | FSRS-5 scheduler | 1 | none | todo | | |
 | [T05](tasks/T05-store.md) | Persistence: store, migrations, export/import | 1 | none | todo | | |
 | [T06](tasks/T06-tts.md) | Text-to-speech wrapper | 1 | none | todo | | |
