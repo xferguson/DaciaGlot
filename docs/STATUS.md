@@ -9,7 +9,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [T03](tasks/T03-answer-checking.md) | Answer checking: normalize, equivalences, diff | 1 | none | done | ccr-1c0d311d-qepdz7 | API in ARCHITECTURE §5 implemented; also exports tokenKey (normalize.js) and canonicalize/EQUIVALENCE_SETS (equivalences.js). Pairs aligned as "wrong" are not in `extra`. |
 | [T04](tasks/T04-fsrs.md) | FSRS-5 scheduler | 1 | none | todo | | |
 | [T05](tasks/T05-store.md) | Persistence: store, migrations, export/import | 1 | none | todo | | |
-| [T06](tasks/T06-tts.md) | Text-to-speech wrapper | 1 | none | in-progress | ccr-d5a849d3-rlouxk | |
+| [T06](tasks/T06-tts.md) | Text-to-speech wrapper | 1 | none | done | ccr-d5a849d3-rlouxk | `init({voiceURI})` also accepts the saved URI (plus `setVoiceURI`); exports `noVoiceHelp`, `splitText`, `DEFAULT_RATE`. `audioButton` styles inline (no app.css change). No `sw.js` yet, so T10 must precache `data/tts.js` and `ui/components/audio-button.js`. |
 | [T07](tasks/T07-card-ui.md) | Card UI: listen & recognize, cloze, diacritic bar, feedback | 1 | T01, T03, T06 | todo | | |
 | [T08](tasks/T08-session-loop.md) | Session engine and session view (Quick / Session) | 1 | T02, T04, T05 | todo | | |
 | [T09](tasks/T09-content-batch-a.md) | Content batch A: Stage 1, ~100 sentences | 1 | T02 | todo | | |
