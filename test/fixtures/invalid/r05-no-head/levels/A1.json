@@ -1,0 +1,14 @@
+{
+  "id": "A1",
+  "requiredPatterns": [
+    "perfect-compus"
+  ],
+  "targetLexemes": [],
+  "canDos": [
+    {
+      "id": "A1-x",
+      "situation": "standup",
+      "text": "x"
+    }
+  ]
+}

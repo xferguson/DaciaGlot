@@ -1,0 +1,35 @@
+[
+  {
+    "id": "have-pres",
+    "name": "have",
+    "stage": 1,
+    "level": "A1",
+    "requires": [
+      "perfect-compus"
+    ],
+    "minLexemesForProducing": 1,
+    "slotLabel": "have"
+  },
+  {
+    "id": "perfect-compus",
+    "name": "past",
+    "stage": 1,
+    "level": "A1",
+    "requires": [
+      "have-pres"
+    ],
+    "minLexemesForProducing": 1,
+    "slotLabel": "past"
+  },
+  {
+    "id": "clitic-acc",
+    "name": "acc",
+    "stage": 2,
+    "level": "A1",
+    "requires": [
+      "perfect-compus"
+    ],
+    "minLexemesForProducing": 1,
+    "slotLabel": "them"
+  }
+]
