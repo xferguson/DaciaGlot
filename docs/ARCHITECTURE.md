@@ -58,6 +58,8 @@ test/*.test.mjs              # node --test; import from ../app/js/core/*
  */
 ```
 
+`manifest.json` pack entries are paths relative to `baseUrl` (`"lexemes/core.json"`); each id in `levels` loads `levels/<id>.json`; `patterns.json` is always at the root. `indexContent(raw)` is the pure half: it takes `{ manifest, patterns, lexemes, sentences, levels }` (parsed JSON, packs flattened) and drops retired sentences only.
+
 The JSON shapes of `Sentence`, `Lexeme`, `Pattern` and `Level` are defined in CONTENT_GUIDE §2. They are not repeated here.
 
 ## 3. Cards

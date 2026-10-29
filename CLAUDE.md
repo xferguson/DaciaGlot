@@ -14,7 +14,7 @@ DaciaGlot is an offline-first PWA for learning to **speak** Romanian. It is vani
    - Each of the task's acceptance criteria is met. Check them off in the PR description.
    - Set `docs/STATUS.md` to `done` (or `review`) and add a one-line note on anything the next task needs to know.
 6. One task per PR. The PR title is `T## · <task title>`.
-7. **Merge policy:** once the PR's CI is green, it has no merge conflict and no unresolved review comments, merge it yourself without asking. If anything is outstanding, fix it first, or ask the user if it needs their call. After merging, the next session starts from the updated `main`.
+7. **Merge policy:** once the PR's CI is green, it has no merge conflict and no unresolved review comments, merge it yourself without asking. If anything is outstanding, fix it first, or ask the user if it needs their call. After merging, the next session starts from the updated `main`. **After any successful merge, flip the task's row in `docs/STATUS.md` from `review` to `done`** (if it isn't already) via a small follow-up PR from a fresh branch off `main`, titled `STATUS: mark T## done`, and merge that under the same policy.
 
 ## Ground rules
 
