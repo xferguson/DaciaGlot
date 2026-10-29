@@ -1,4 +1,6 @@
-# DaciaGlot — Product & Build Plan
+# DaciaGlot — Product & Build Plan (v0, superseded)
+
+> **Superseded by [docs/PRD.md](../PRD.md).** Kept for discovery context and rationale only. Where this file and the PRD disagree, the PRD wins.
 
 A lightweight, offline-first Progressive Web App for learning to **speak** Romanian, designed around one specific learner and the bottleneck uncovered in discovery. No backend; all state lives on the device.
 
