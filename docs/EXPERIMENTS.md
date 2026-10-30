@@ -49,7 +49,7 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
 
 ## EXP-01 · One schedule per word form · [T25](tasks/T25-per-form-schedule.md)
 
-- **Status:** planned
+- **Status:** live since 2026-10-30
 - **Complaint:** "I get tested on the word Cluj a lot", and the same form keeps coming back because it appears in several sentences.
 - **Hypothesis:** if each word form has exactly one schedule, shared by every sentence and by key-form drills, the owner stops meeting already-known forms just because a new sentence contains them, and each review shows the form in a *different* sentence, so it's a real test.
 - **Change:** `fm:<lex>:<form>` cards replace stored `cz`/`kf` schedules. When due, the form is blanked in a seen sentence not used for it recently, or shown as a bare key-form drill if none fits.
