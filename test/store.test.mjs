@@ -27,7 +27,7 @@ test('defaultState has every documented field', () => {
   assert.equal(s.createdAt, NOW);
   assert.deepEqual(s.settings, {
     newPerSession: 8, ttsRate: 0.9, voiceURI: null, autoplay: true,
-    registers: ['colloquial', 'neutral'], lastExportAt: null, ttsBannerDismissed: false,
+    registers: ['colloquial', 'neutral'], lastExportAt: null, ttsBannerDismissed: false, focus: null,
   });
 });
 

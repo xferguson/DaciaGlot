@@ -160,7 +160,15 @@ a { color: var(--accent); }
   border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface);
   color: var(--fg); text-decoration: none;
 }
+.list-row { font: inherit; text-align: left; width: 100%; cursor: pointer; }
+.list-row[aria-pressed="true"] { border: 2px solid var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
 .list-row.dim { opacity: .55; }
+.bar.stacked { display: inline-flex; }
+.bar.stacked > span { display: block; height: 100%; }
+.bar.stacked > .learned { background: var(--ok); }
+.bar.stacked > .learning { background: var(--accent); opacity: .6; }
+.focus-chip[hidden] { display: none; }
+.focus-chip { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 8px; }
 .list-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .bar { display: inline-block; width: 80px; height: 8px; border-radius: 4px; background: var(--border); overflow: hidden; }
 .bar > span { display: block; height: 100%; background: var(--accent); }

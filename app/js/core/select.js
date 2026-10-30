@@ -87,6 +87,7 @@ export function pickNewSentences(n, { focus = null, state, content, now, rng }) 
   const taken = new Set();
   for (const c of ordered) {
     if (picked.length >= n) break;
+    if (focus && !matchesFocus(c.s, focus)) continue; // FR-S8: a focus filters, it doesn't just rank
     if (c.unknown.some((u) => taken.has(u))) continue;
     picked.push(c.s.id);
     c.unknown.forEach((u) => taken.add(u));

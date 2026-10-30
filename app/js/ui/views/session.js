@@ -25,14 +25,14 @@ const RENDERERS = { lr: renderLr, cz: renderCz, kf: renderKf, xf: renderXf, sb: 
 
 export function render(root, ctx) {
   const params = ctx.route?.params ?? {};
-  // Old links (`mode=session`) open Mix; focus sessions keep the full `newPerSession` (FR-S8).
-  const mode = MODES.includes(params.mode) ? params.mode : params.mode === "focus" ? "session" : "mix";
-  const focus = params.mode === "focus" && (params.type === "pattern" || params.type === "situation") && params.id
+  // Old links (`mode=session`, `mode=focus`) open Mix. A focus (`type` + `id`) filters any mode (FR-S8).
+  const mode = MODES.includes(params.mode) ? params.mode : "mix";
+  const focus = (params.type === "pattern" || params.type === "situation") && params.id
     ? { type: params.type, id: params.id }
     : null;
   // An unfinished session for the same route resumes where it stopped (AppState.activeSession).
   const href = location.hash;
-  const key = focus ? `focus:${focus.type}:${focus.id}` : mode;
+  const key = focus ? `${mode}:${focus.type}:${focus.id}` : mode;
   const saved = resumable(ctx.state.activeSession, Date.now()) && ctx.state.activeSession.key === key ? ctx.state.activeSession : null;
   const { queue, blocked, suggest, plan } = saved
     ? { queue: saved.queue.map((q) => ({ ...q })) }
@@ -54,13 +54,12 @@ export function render(root, ctx) {
 
   function blockedNote() {
     if (!blocked) return "";
-    const href = suggest && `#/session?mode=focus&type=${suggest.type}&id=${encodeURIComponent(suggest.id)}`;
     return `<section class="card"><p>No new sentences are ready for <strong data-focus></strong> yet.</p>
-      ${suggest ? `<a class="btn block" href="${href}">Study <span data-suggest></span> first</a>` : ""}</section>`;
+      ${suggest ? `<button class="btn block" type="button" data-switch>Focus on <span data-suggest></span> first</button>` : ""}</section>`;
   }
 
   function title() {
-    return focus ? `Focus: ${focusName()}` : TITLES[mode];
+    return focus ? `${TITLES[mode]} · ${focusName()}` : TITLES[mode];
   }
 
   /** Keep the remaining queue in state so leaving mid-session doesn't lose the place. Caller saves. */
@@ -88,14 +87,19 @@ export function render(root, ctx) {
       return;
     }
     if (blocked) {
-      root.innerHTML = `<h1>Focus</h1>${blockedNote()}${queue.length ? `<button class="btn secondary block" data-due>Review ${queue.length} due cards</button>` : ""}${home}`;
+      root.innerHTML = `<h1>${TITLES[mode]}</h1>${blockedNote()}${queue.length ? `<button class="btn secondary block" data-due>Review ${queue.length} due cards</button>` : ""}${home}`;
       fillNames();
       root.querySelector("[data-due]")?.addEventListener("click", begin);
+      root.querySelector("[data-switch]")?.addEventListener("click", () => {
+        ctx.state = { ...ctx.state, settings: { ...ctx.state.settings, focus: suggest } };
+        ctx.store.save(ctx.state);
+        ctx.navigate(`#/session?mode=${mode}&type=${suggest.type}&id=${encodeURIComponent(suggest.id)}`);
+      });
       return;
     }
     if (!queue.length) {
       root.innerHTML = `<h1>${TITLES[mode]}</h1>
-        <p class="muted">${EMPTY[mode] ?? "Nothing to study right now."}</p>${home}`;
+        <p class="muted">${focus ? "Nothing in this focus right now. Clear the focus on Home or pick another topic." : EMPTY[mode] ?? "Nothing to study right now."}</p>${home}`;
       return;
     }
     begin();

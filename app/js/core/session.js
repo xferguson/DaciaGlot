@@ -104,6 +104,18 @@ export function interimNewSentences(n, state, content) {
     .map((x) => x.s.id);
 }
 
+/** FR-S8: does the card's sentence belong to the focus? `kf` cards (no sentence) never do. No focus → true. */
+export function inFocus(cardId, focus, content) {
+  if (!focus) return true;
+  const s = content.sentences.get(parseCardId(cardId).sentenceId);
+  return !!s && (focus.type === "pattern" ? (s.patterns ?? []) : (s.situations ?? [])).includes(focus.id);
+}
+
+/** Due cards, filtered to the focus when there is one (FR-S8). */
+export function dueInFocus(state, content, now, focus) {
+  return dueCards(state, content, now).filter((id) => inFocus(id, focus, content));
+}
+
 /** FR-S8: stable partition, cards whose sentence matches the focus first. `kf` cards have no sentence and keep their place after. */
 export function focusFirst(cardIds, focus, content) {
   if (!focus) return cardIds;
@@ -127,7 +139,9 @@ function chunk(list, parts) {
  * - `review`: every due card, nothing new.
  * - `learn`: new material only (no due cards): `newPerSession` new sentences plus newly unlocked drills.
  * - `mix`: all due cards plus as many new sentences as `mixPlan` allows; no new drills when it allows none.
- * - `session` (also used for focus): all due cards plus `newPerSession` new sentences.
+ * - `session` (legacy): all due cards plus `newPerSession` new sentences.
+ * Any mode takes a `focus`, which filters everything to that situation or pattern (FR-S8): due cards,
+ * new sentences and drills; `kf` cards are left out.
  * The queue is then spaced out (`spaceOut`) so related cards are not back to back.
  * New sentences (`lr`, then `cz`) are chosen by `select.js` (FR-S5; the FR-S4 interim order is the cold-start fallback), spread so two new sentences' `lr` cards are never adjacent, then newly unlocked `kf` (T14), `xf`/`sb` (T15) and `er` (T20) cards. Due cards are thinned per sentence (FR-D9).
  * @returns {{queue: {cardId: string, isNew: boolean}[], estimateSec: number, blocked?: true, suggest?: {type: string, id: string}|null, plan?: {newCount: number, reviewPct: number}}}
@@ -138,7 +152,7 @@ export function buildSession(opts) {
 }
 
 function composeSession({ mode, focus = null, state, content, now, rng, newSentenceIds }) {
-  const dueIds = pickPerSentence(focusFirst(dueCards(state, content, now), focus, content));
+  const dueIds = pickPerSentence(dueInFocus(state, content, now, focus));
   const allDue = dueIds.map((cardId) => ({ cardId, isNew: false }));
   if (mode === "quick" || mode === "review") {
     const queue = mode === "quick" ? allDue.slice(0, QUICK_CAP) : allDue;
@@ -164,7 +178,7 @@ function composeSession({ mode, focus = null, state, content, now, rng, newSente
     .filter(Boolean)
     .map((s) => cardsForSentence(s, content).map((cardId) => ({ cardId, isNew: true })));
   const k = groups.length;
-  const kf = newKfCards(state, content).map((cardId) => ({ cardId, isNew: true }));
+  const kf = focus ? [] : newKfCards(state, content).map((cardId) => ({ cardId, isNew: true }));
   const queue = [];
   if (k === 0) queue.push(...due);
   else {
@@ -175,9 +189,9 @@ function composeSession({ mode, focus = null, state, content, now, rng, newSente
     });
   }
   const busy = new Set(dueIds.map(parseCardId).filter((p) => p.type === "xf" || p.type === "sb").map((p) => p.sentenceId));
-  const xf = newTransformCards(state, content, { skip: busy }).map((cardId) => ({ cardId, isNew: true }));
+  const xf = newTransformCards(state, content, { skip: busy }).filter((id) => inFocus(id, focus, content)).map((cardId) => ({ cardId, isNew: true }));
   const taken = new Set([...busy, ...xf.map((x) => parseCardId(x.cardId).sentenceId)]);
-  const er = newErCards(state, content, { skip: taken }).map((cardId) => ({ cardId, isNew: true }));
+  const er = newErCards(state, content, { skip: taken }).filter((id) => inFocus(id, focus, content)).map((cardId) => ({ cardId, isNew: true }));
   queue.push(...kf, ...xf, ...er);
   const estimateSec = due.length * SEC_PER_REVIEW + (k + kf.length + xf.length + er.length) * SEC_PER_NEW;
   return plan ? { queue, estimateSec, plan } : { queue, estimateSec };

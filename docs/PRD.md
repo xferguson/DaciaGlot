@@ -114,7 +114,7 @@ Requirement IDs are referenced by tasks and tests.
 | FR-S10 | **Learn, Review and Mix modes** (home screen, alongside Quick). **Learn:** new material only, with no due cards: `newPerSession` new sentences plus newly unlocked drills. **Review:** every due card, uncapped, nothing new. **Mix** (the default; old `mode=session` links open it): all due cards plus as many new sentences as fit a ≈12-minute budget after reviews (12 s each), at most `newPerSession`, 0 once reviews fill it (`mixPlan`). When Mix holds back new sentences, a toast at the start says why. | 3 |
 | FR-S11 | **Spacing within a session:** cards that share a sentence or a target lexeme are kept at least 2 cards apart where the next 8 cards allow it (`spaceOut`); a sentence's cards keep their order (`lr` before `cz`), and a re-queued wrong card avoids landing next to a related card. | 3 |
 | FR-S12 | **Exit and resume:** the session screen has an × (Exit) button. The remaining queue is saved after every answer (`AppState.activeSession`), so reopening the same mode within 12 h continues where it stopped, and Home shows a "Continue" card. Leaving counts the minutes studied. | 3 |
-| FR-S8 | **Focus mode:** Session mode restricted to one situation or pattern, applied both to new selection and to the order of due cards (focus first). | 2 |
+| FR-S8 | **Focus as a filter:** the learner can pick one situation or pattern on Home (`settings.focus`, kept until cleared). While it is set, every mode (Mix, Quick, Learn, Review) uses only that topic: due cards whose sentence is in it, new sentences from it (selection skips the rest), and its drills; `kf` cards are left out. The mode buttons show the focused counts and times. | 2 |
 | FR-S9 | A card answered wrong is re-queued once, 3–5 cards later in the same session. | 1 |
 
 ### 4.5 Progress and measurement
@@ -134,7 +134,7 @@ Requirement IDs are referenced by tasks and tests.
 | ID | Requirement | Phase |
 |---|---|---|
 | FR-N1 | **Home:** due count, **Quick** and **Session** buttons, the current level ring (placeholder until Phase 3), and Situations/Patterns tabs (Phase 2). | 1 / 2 |
-| FR-N2 | **Situations / Patterns lists:** each row shows its state or mastery bar and the count of i+1-eligible sentences. Tapping a row starts a Focus session. | 2 |
+| FR-N2 | **Situations / Patterns lists:** each row shows a bar and counts of its sentences: **learned** (mastered, §7.3), **learning** (seen, not yet mastered) and **to learn** (unseen); patterns also show their state and any unmet prerequisite. Tapping a row toggles it as the focus (FR-S8); it doesn't start a session. | 2 |
 | FR-N3 | **Card screen:** prompt, input + diacritic bar, Check, Hint, replay, flag, and a session progress bar. | 1 |
 | FR-N4 | **Lexeme detail** (tap a word on a reviewed card): key forms, known sentences containing it, unit states. | 2 |
 | FR-N5 | **Settings:** new per session, TTS voice + rate, autoplay, register filter, export/import, flagged sentences, reset (with typed confirmation). | 1 / 2 |

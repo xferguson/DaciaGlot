@@ -1,9 +1,10 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readyCount, listRows } from "../app/js/ui/views/lists.js";
+import { readyCount, listRows, progressCounts } from "../app/js/ui/views/lists.js";
 import { lexemeModel } from "../app/js/ui/views/lexeme.js";
 import { pickNewSentences } from "../app/js/core/select.js";
-import { buildSession, focusFirst } from "../app/js/core/session.js";
+import { buildSession, focusFirst, inFocus } from "../app/js/core/session.js";
+import { newCard } from "../app/js/core/fsrs.js";
 import { partsFor } from "../app/js/ui/components/feedback.js";
 import { makeContent, sentence, state, NOW } from "./helpers/mini-content.mjs";
 
@@ -73,4 +74,32 @@ test("partsFor attaches lexeme ids for tapping", () => {
   const tokens = fixture().sentences.get("a2").tokens;
   const parts = partsFor(tokens, tokens.map((t) => ({ token: t.t, status: "ok" })));
   assert.deepEqual(parts.map((p) => p.lex), ["a", "b"]);
+});
+
+test("progressCounts: learned, learning, to learn", () => {
+  const st = state();
+  st.seenSentences = { a: 1, b: 1 };
+  assert.deepEqual(progressCounts(["a", "b", "c", "d"], st, new Set(["a"])), { learned: 1, learning: 1, toLearn: 2, total: 4 });
+});
+
+test("listRows: every row carries learned / learning / to learn", () => {
+  const st = state();
+  st.seenSentences.a1 = NOW - 1;
+  const me = listRows("situations", { state: st, content: fixture(), now: NOW }).find((r) => r.id === "me");
+  assert.deepEqual([me.learned, me.learning, me.toLearn, me.total], [0, 1, 1, 2]);
+  const p1 = listRows("patterns", { state: st, content: fixture(), now: NOW }).find((r) => r.id === "p1");
+  assert.equal(p1.learning + p1.toLearn + p1.learned, 2);
+});
+
+test("focus filters every mode: only its due cards, only its new sentences, no kf", () => {
+  const content = fixture();
+  const st = state();
+  for (const id of ["lr:a1", "lr:c1", "kf:a:base"]) st.cards[id] = { ...newCard(NOW), due: NOW - 1000 };
+  const focus = { type: "situation", id: "me" };
+  const review = buildSession({ mode: "review", focus, state: st, content, now: NOW, rng: () => 0.5 });
+  assert.deepEqual(review.queue.map((q) => q.cardId), ["lr:a1"]);
+  const learn = buildSession({ mode: "learn", focus, state: st, content, now: NOW, rng: () => 0.5 });
+  assert.ok(learn.queue.every((q) => inFocus(q.cardId, focus, content)));
+  assert.equal(inFocus("kf:a:base", focus, content), false);
+  assert.equal(inFocus("kf:a:base", null, content), true);
 });
