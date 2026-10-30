@@ -193,7 +193,7 @@ test("session mode appends new xf/sb cards; quick mode does not", () => {
   assert.deepEqual(quick.queue, []);
 });
 
-test("a due xf suppresses a due cz and any new card for the same sentence", () => {
+test("a due xf suppresses a due cz and any new card for the same sentence; one card per sentence per session (FR-R2)", () => {
   const st = seen("s1");
   const old = { ...newCard(NOW - 10 * 86400000), due: NOW - 1000 };
   st.cards["lr:s1"] = old;
@@ -201,7 +201,7 @@ test("a due xf suppresses a due cz and any new card for the same sentence", () =
   st.cards["xf:s1:0"] = old;
   const ids = buildSession({ mode: "session", state: st, content, now: NOW, rng: Math.random, newSentenceIds: [] })
     .queue.map((q) => q.cardId);
-  assert.ok(ids.includes("xf:s1:0") && ids.includes("lr:s1"));
+  assert.equal(ids.filter((id) => id.endsWith(":s1") || id.includes(":s1:")).length, 1, "siblings are buried");
   assert.ok(!ids.includes("cz:s1:2"));
   assert.equal(ids.filter((id) => id.endsWith(":s1:1") || id.startsWith("sb:s1")).length, 0);
 });

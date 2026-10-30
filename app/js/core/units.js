@@ -40,7 +40,7 @@ export function unitsRequiredForCard(cardId, content) {
 
 function hasCorrect(unit, state) {
   if ((state.unitAggregates[unit]?.correct ?? 0) >= 1) return true;
-  return state.attempts.some((a) => a.u === unit && a.c === 1);
+  return state.attempts.some((a) => a.u === unit && a.c === 1 && !a.enc);
 }
 
 function inSeenSentence(lex, form, state, content) {
@@ -66,7 +66,7 @@ export function isKnown(unit, state, content) {
   if (lexeme?.trivial && inSeenSentence(lex, null, state, content)) return true;
   // Seen in a recognized sentence, and another form of the same lexeme is already known.
   if (!inSeenSentence(lex, form, state, content)) return false;
-  const forms = new Set(state.attempts.filter((a) => a.u.startsWith(lex + ".")).map((a) => a.u));
+  const forms = new Set(state.attempts.filter((a) => !a.enc && a.u.startsWith(lex + ".")).map((a) => a.u));
   for (const k of Object.keys(state.unitAggregates)) if (k.startsWith(lex + ".")) forms.add(k);
   return [...forms].some((u) => u !== unit && hasCorrect(u, state));
 }

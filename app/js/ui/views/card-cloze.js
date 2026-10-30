@@ -19,7 +19,7 @@ export function tokenIndexOf(card) {
   return Number(id.split(":").pop());
 }
 
-export function renderCard(root, { card, sentence, tts, settings = {}, onResult }) {
+export function renderCard(root, { card, sentence, tts, settings = {}, onResult, check = false }) {
   const rate = settings.ttsRate ?? 0.9;
   const speak = (text, opts) => tts?.speak?.(text, { rate, ...opts });
   const idx = tokenIndexOf(card);
@@ -30,7 +30,7 @@ export function renderCard(root, { card, sentence, tts, settings = {}, onResult 
 
   root.innerHTML = `
     <section class="card card-cloze" data-card="${card?.id ?? card ?? ""}">
-      <p class="muted">Fill in the blank</p>
+      <p class="muted"></p>
       <p class="en"></p>
       <p class="cloze-line" lang="ro"></p>
       <div class="audio-row"></div>
@@ -39,6 +39,8 @@ export function renderCard(root, { card, sentence, tts, settings = {}, onResult 
       <div class="feedback-slot"></div>
       <div class="actions row"></div>
     </section>`;
+  // The immediate check of a new form (FR-R2): not scored yet, so no rating.
+  root.querySelector(".muted").textContent = check ? "Quick check · not scored, the real test is tomorrow" : "Fill in the blank";
   root.querySelector(".en").textContent = sentence.en ?? "";
   const line = root.querySelector(".cloze-line");
   sentence.tokens.forEach((t, i) => {
@@ -81,7 +83,7 @@ export function renderCard(root, { card, sentence, tts, settings = {}, onResult 
       en: sentence.en,
     });
     nextButtons(actions, {
-      canRate: result !== "wrong" && attempts === 1 && !usedHint,
+      canRate: !check && result !== "wrong" && attempts === 1 && !usedHint,
       onPick: (rating) => onResult({ result, usedHint, attemptNo: attempts, rating }),
     });
   }

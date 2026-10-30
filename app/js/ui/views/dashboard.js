@@ -30,7 +30,7 @@ export function productionStats(state, content, now) {
   const week = new Set();
   for (const [u, agg] of Object.entries(state.unitAggregates ?? {})) if (!u.startsWith("pat:") && agg.correct > 0) all.add(u);
   for (const a of state.attempts) {
-    if (a.c !== 1 || a.u.startsWith("pat:")) continue;
+    if (a.enc || a.c !== 1 || a.u.startsWith("pat:")) continue;
     all.add(a.u);
     if (a.t > now - 7 * DAY && a.t <= now) week.add(a.u);
   }
@@ -70,7 +70,7 @@ export function patternTrend(patternId, state, now) {
   const n = Array(WEEKS).fill(0);
   const ok = Array(WEEKS).fill(0);
   for (const a of state.attempts) {
-    if (a.u !== unit) continue;
+    if (a.u !== unit || a.enc) continue;
     const w = weekIndex(a.t, now);
     if (w < 0) continue;
     n[w]++;

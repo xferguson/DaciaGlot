@@ -2,7 +2,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   gradeFromResult, buildSession, applyReview, dueCards, requeueWrong, dayKey, interimNewSentences, mixPlan,
-  spaceOut, cardKeys, keepStarted, markDifficult, COLD_START_SEEN, ladderDays, claimForm, unclaimForm,
+  spaceOut, cardKeys, keepStarted, markDifficult, applyCheck, burySiblings, nextDayStart, newSentenceSec, COLD_START_SEEN, ladderDays,
+  claimForm, unclaimForm,
 } from "../app/js/core/session.js";
 import { newCard } from "../app/js/core/fsrs.js";
 import { makeContent, sentence, state, NOW } from "./helpers/mini-content.mjs";
@@ -60,7 +61,7 @@ test("Session: no two new lr cards adjacent; new fm follow their lr", () => {
     assert.ok(queue.findIndex((q) => q.cardId === `lr:${id}`) < queue.findIndex((q) => q.cardId === `fm:a${id.slice(1)}:base`));
   }
   assert.equal(queue.length, 10 + 8);
-  assert.equal(estimateSec, 10 * 12 + 4 * 40);
+  assert.equal(estimateSec, 10 * 12 + 4 * newSentenceSec(1));
 });
 
 test("Session uses interim order when newSentenceIds absent, honoring newPerSession", () => {
@@ -197,7 +198,7 @@ test("keepStarted: an introduced sentence's unreached fm cards come back as new 
     { cardId: "fm:a2:base", isNew: false }, // a due review, already in state elsewhere
   ], NOW);
   assert.deepEqual(Object.keys(out.cards).sort(), ["fm:a0:base", "lr:s00"]);
-  assert.equal(out.cards["fm:a0:base"].due, NOW);
+  assert.equal(out.cards["fm:a0:base"].due, nextDayStart(NOW));
   assert.equal(st.cards["fm:a0:base"], undefined); // input not mutated
 });
 
@@ -278,4 +279,57 @@ test("an EN→RO miss takes back the claims on the forms it tested; a hit keeps 
   assert.deepEqual(applyReview(st, "er:s00", 3, units, NOW, content).claimed, st.claimed);
   assert.deepEqual(applyReview(st, "fm:a0:base", 1, units, NOW, content).claimed, st.claimed);
   assert.deepEqual(applyReview(st, "er:s00", 1, units, NOW, content).claimed, { "b9.base": NOW });
+});
+
+test("new sentence: lr + a directly following check per unknown form; none unknown → lr only", () => {
+  const st = state();
+  st.cards["fm:a1:base"] = newCard(NOW); // a1 already has its schedule
+  const { queue, estimateSec } = buildSession({ mode: "learn", state: st, content, now: NOW, rng, newSentenceIds: ["s00", "s01"] });
+  const ids = queue.map((q) => q.cardId);
+  assert.deepEqual(ids.filter((id) => id.endsWith("s00") || id === "fm:a0:base"), ["lr:s00", "fm:a0:base"]);
+  assert.equal(ids.indexOf("fm:a0:base"), ids.indexOf("lr:s00") + 1, "check follows its lr directly");
+  assert.ok(queue.find((q) => q.cardId === "fm:a0:base").check);
+  assert.ok(!ids.includes("fm:a1:base"), "s01 has lr only");
+  assert.equal(estimateSec, newSentenceSec(1) + newSentenceSec(0));
+});
+
+test("applyCheck: enc attempts, fm card due next local midnight whatever the answer, no review", () => {
+  for (const ok of [true, false]) {
+    const st = applyCheck(state(), "fm:a0:base", ok, [{ u: "a0.base", lx: "a0" }], NOW, "cz:s00:0");
+    assert.deepEqual(st.attempts, [{ u: "a0.base", lx: "a0", c: ok ? 1 : 0, t: NOW, card: "cz:s00:0", enc: 1 }]);
+    assert.ok(st.cards["fm:a0:base"].due >= nextDayStart(NOW));
+    assert.ok(st.cards["fm:a0:base"].due - NOW <= 48 * 36e5);
+    assert.equal(st.cards["fm:a0:base"].reps, 0);
+  }
+  // a re-ask doesn't move an existing card
+  const once = applyCheck(state(), "fm:a0:base", false, [{ u: "a0.base", lx: "a0" }], NOW);
+  const twice = applyCheck(once, "fm:a0:base", true, [{ u: "a0.base", lx: "a0" }], NOW + 1000);
+  assert.equal(twice.cards["fm:a0:base"], once.cards["fm:a0:base"]);
+  assert.equal(twice.attempts.length, 2);
+});
+
+test("review queue: one due card per sentence and per head lexeme; the buried stay due", () => {
+  const c2 = makeContent([
+    sentence("t0", "x0 y0", [u("x"), u("y")]),
+    sentence("t1", "x1 y1", [u("x"), u("z")]), // shares lexeme x with t0
+    sentence("t2", "x2 y2", [u("w"), u("v")]),
+  ]);
+  const st = state();
+  st.seenSentences = { t0: NOW, t1: NOW, t2: NOW };
+  for (const [i, id] of ["cz:t0:0", "cz:t1:0", "cz:t2:0", "lr:t2"].entries()) {
+    st.cards[id] = { ...newCard(NOW), due: NOW - (10 - i) * 1000 };
+  }
+  for (const id of ["lr:t0", "lr:t1"]) st.cards[id] = { ...newCard(NOW), due: NOW + 1e9 }; // unlock the clozes
+  const ids = dueCards(st, c2, NOW);
+  assert.equal(ids.length, 4);
+  assert.deepEqual(burySiblings(ids, c2), ["cz:t0:0", "cz:t2:0"]); // t1 shares lexeme x, lr:t2 shares the sentence
+  const { queue } = buildSession({ mode: "review", state: st, content: c2, now: NOW, rng });
+  const seen = new Set();
+  for (const q of queue) for (const k of cardKeys(q, c2)) {
+    if (k === "new") continue;
+    assert.ok(!seen.has(k), `duplicate key ${k}`);
+    seen.add(k);
+  }
+  assert.ok(queue.length < ids.length);
+  assert.equal(dueCards(st, c2, NOW).length, 4, "buried cards are still due");
 });

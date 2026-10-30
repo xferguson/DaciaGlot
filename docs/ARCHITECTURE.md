@@ -153,6 +153,7 @@ The session view calls `resolveFm` at render time and passes the presented id to
  * @property {0|1} c       // correct
  * @property {number} t    // ms epoch
  * @property {string} card // id the card was presented as (`cz:…`/`kf:…` for an `fm`), so rotation can see its history
+ * @property {1} [enc]     // immediate check of a new form (T26, FR-R2): ignored by mastery, `isKnown`, compaction and the dashboard
  */
 /** @typedef {Object} UnitAggregate
  * @property {number} n          // total attempts folded
@@ -285,12 +286,16 @@ inFocus(cardId, focus, content, state?) → boolean      // FR-S8: card's senten
 dueInFocus(state, content, now, focus) → string[]  // dueCards filtered by inFocus
 cardKeys(item, content) → Set<string>          // "s:<sentence>" (also the `from` sentence of a new `fm`), "l:<target lexeme>", "new" for a new lr
 spaceOut(queue, content) → QueueItem[]        // PRD FR-S11; buildSession applies it to every queue
-keepStarted(state, remainingQueue, now) → AppState  // on leaving early: unreached new fm (with `from`) of an introduced sentence → new card due now
+applyCheck(state, cardId, correct, unitsRequired, now, presentedId = cardId) → AppState  // FR-R2: immediate check of a new form: `enc` attempts, creates the `fm` card due `nextDayStart(now)` whatever the answer; no FSRS review
+nextDayStart(now) → number                    // start of the next local day (ms)
+burySiblings(cardIds, content) → string[]     // FR-R2: at most one due card per `s:` and `l:` key (input order wins); applied to every mode's due cards
+newSentenceSec(forms) → number                // time estimate of a new sentence: SEC_PER_NEW × (1 + new forms) / 2
+keepStarted(state, remainingQueue, now) → AppState  // on leaving early: unreached new fm (with `from`) of an introduced sentence → new card due `nextDayStart(now)` (no check)
 markDifficult(state, cardId, now) → AppState  // FR-S9: second Hard/Again in a session
 ladderDays(prevGapDays, grade) → number       // FR-S1: Medium 1→4→16→64→256 d; Easy ×3, capped at 256
 ```
 
-`QueueItem = { cardId, isNew: boolean, from?: string }`. `from` is the sentence a new `fm` was created with; the view shows that sentence first.
+`QueueItem = { cardId, isNew: boolean, from?: string, check?: true }`. `from` is the sentence a new `fm` was created with; the view shows that sentence first. `check` marks the immediate check of a new form (T26): `buildSession` places it directly after its `lr`, the view shows the cloze with a muted "not scored" label and no rating, and a wrong answer is re-asked once at the end of the session (a queue item with `isNew: false`, `check: true`). Both answers go through `applyCheck`.
 
 - The caller gets `newSentenceIds` from `select.js` in Phase 2+, or from the FR-S4 interim order in Phase 1.
 - The UI re-queues a wrong card per FR-S9 by splicing the queue (`requeueWrong`).

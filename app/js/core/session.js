@@ -14,6 +14,8 @@ export const MIX_BUDGET_SEC = 12 * 60;
 export const MIX_OUTSIDE = 3;
 /** Below this many seen sentences, new sessions top up with the easiest sentences (FR-S4 order) when i+1 finds too few. */
 export const COLD_START_SEEN = 30;
+/** A new sentence costs `SEC_PER_NEW` for one `lr` plus one new form to check; each form more (or fewer) scales it (FR-R2). */
+export const newSentenceSec = (forms) => (SEC_PER_NEW * (1 + forms)) / 2;
 const SPACING_GAP = 2;
 const SPACING_WINDOW = 8;
 
@@ -59,9 +61,15 @@ export function spaceOut(queue, content) {
   return out.map((r) => r.item);
 }
 
+/** Start of the local day after `now` (ms): the earliest a form's first counted test is due (FR-R2). */
+export function nextDayStart(now) {
+  const d = new Date(now);
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1).getTime();
+}
+
 /**
  * Leaving a session early: new `fm` cards of a sentence that was already introduced (its `lr` reviewed, `from`) but
- * which weren't reached yet are created as new cards due now, so the next session picks them up.
+ * whose immediate check wasn't reached are created as new cards due the next local day, with no check (FR-R2).
  * `remaining` is the rest of the queue. Returns a new state.
  */
 export function keepStarted(state, remaining, now) {
@@ -69,7 +77,7 @@ export function keepStarted(state, remaining, now) {
   for (const { cardId, isNew, from } of remaining) {
     if (!isNew || cardId in cards) continue;
     const p = parseCardId(cardId);
-    if (p.type === "fm" && from && `lr:${from}` in cards) cards[cardId] = newCard(now);
+    if (p.type === "fm" && from && `lr:${from}` in cards) cards[cardId] = { ...newCard(now), due: nextDayStart(now) };
   }
   return { ...state, cards };
 }
@@ -181,6 +189,35 @@ export function focusFirst(cardIds, focus, content, state = null) {
   return [...cardIds.filter((_, i) => flags[i]), ...cardIds.filter((_, i) => !flags[i])];
 }
 
+/**
+ * FR-R2: keep at most one due card per sentence and per head lexeme (`cardKeys` `s:`/`l:`), in the order given
+ * (most overdue first). The buried cards stay due and come up in a later session.
+ */
+export function burySiblings(cardIds, content) {
+  const taken = new Set();
+  return cardIds.filter((cardId) => {
+    const keys = [...cardKeys({ cardId }, content)].filter((k) => k !== "new");
+    if (keys.some((k) => taken.has(k))) return false;
+    for (const k of keys) taken.add(k);
+    return true;
+  });
+}
+
+/** Put each new sentence's immediate checks (`check`, from `cardsForSentence`) straight after its `lr`. */
+function glueChecks(queue) {
+  const checks = queue.filter((q) => q.check);
+  if (!checks.length) return queue;
+  const out = queue.filter((q) => !q.check);
+  for (const c of checks) {
+    const at = out.findIndex((q) => q.cardId === `lr:${c.from}`);
+    if (at < 0) { out.push(c); continue; }
+    let i = at + 1;
+    while (out[i]?.check && out[i].from === c.from) i++;
+    out.splice(i, 0, c);
+  }
+  return out;
+}
+
 function chunk(list, parts) {
   const out = Array.from({ length: parts }, () => []);
   list.forEach((x, i) => out[Math.min(parts - 1, Math.floor((i * parts) / list.length))].push(x));
@@ -204,7 +241,7 @@ function chunk(list, parts) {
  */
 export function buildSession(opts) {
   const out = composeSession(opts);
-  return { ...out, queue: spaceOut(out.queue, opts.content) };
+  return { ...out, queue: glueChecks(spaceOut(out.queue, opts.content)) };
 }
 
 function composeSession({ mode, focus: rawFocus = null, state, content, now, rng, newSentenceIds }) {
@@ -214,7 +251,8 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
     const outside = dueCards(state, content, now).filter((id) => !inFocus(id, focus, content, state)).slice(0, MIX_OUTSIDE);
     focused = [...focused, ...outside];
   }
-  const dueIds = pickPerSentence(focused);
+  const duePicked = pickPerSentence(focused);
+  const dueIds = burySiblings(duePicked, content);
   const allDue = dueIds.map((cardId) => ({ cardId, isNew: false }));
   if (mode === "quick" || mode === "review") {
     const queue = mode === "quick" ? allDue.slice(0, QUICK_CAP) : allDue;
@@ -250,7 +288,7 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
     .filter(Boolean)
     .map((s) => cardsForSentence(s, content, state)
       .filter((cardId) => !isClaimedCard(cardId, state) && !claimed.has(cardId) && claimed.add(cardId))
-      .map((cardId) => (cardId.startsWith("fm:") ? { cardId, isNew: true, from: s.id } : { cardId, isNew: true })));
+      .map((cardId) => (cardId.startsWith("fm:") ? { cardId, isNew: true, from: s.id, check: true } : { cardId, isNew: true })));
   const k = groups.length;
   const kf = focus ? [] : newKfCards(state, content).filter((id) => !claimed.has(id) && !isClaimedCard(id, state)).map((cardId) => ({ cardId, isNew: true }));
   const queue = [];
@@ -262,12 +300,13 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
       queue.push(g[0], ...slots[2 * i + 1], ...g.slice(1), ...slots[2 * i + 2]);
     });
   }
-  const busy = new Set(dueIds.map(parseCardId).filter((p) => p.type === "xf" || p.type === "sb").map((p) => p.sentenceId));
+  const busy = new Set(duePicked.map(parseCardId).filter((p) => p.type === "xf" || p.type === "sb").map((p) => p.sentenceId));
   const xf = newTransformCards(state, content, { skip: busy }).filter((id) => inFocus(id, focus, content, state)).map((cardId) => ({ cardId, isNew: true }));
   const taken = new Set([...busy, ...xf.map((x) => parseCardId(x.cardId).sentenceId)]);
   const er = newErCards(state, content, { skip: taken }).filter((id) => inFocus(id, focus, content, state)).map((cardId) => ({ cardId, isNew: true }));
   queue.push(...kf, ...xf, ...er);
-  const estimateSec = due.length * SEC_PER_REVIEW + (k + kf.length + xf.length + er.length) * SEC_PER_NEW;
+  const estimateSec = due.length * SEC_PER_REVIEW + (kf.length + xf.length + er.length) * SEC_PER_NEW
+    + groups.reduce((sum, g) => sum + newSentenceSec(g.length - 1), 0);
   return plan ? { queue, estimateSec, plan } : { queue, estimateSec };
 }
 
@@ -333,6 +372,24 @@ export function applyReview(state, cardId, grade, unitsRequired, now, content, p
     d.cards += 1;
     if (isNewSentence) d.newSentences += 1;
   });
+  return next;
+}
+
+/**
+ * FR-R2: the immediate check of a new form. Records `enc` attempts (ignored by mastery and `isKnown`) and, if the
+ * `fm` card doesn't exist yet, creates it due the next local day whatever the answer; no FSRS review, no rating.
+ * Returns a new state; the input is not mutated.
+ */
+export function applyCheck(state, cardId, correct, unitsRequired, now, presentedId = cardId) {
+  const next = {
+    ...state,
+    attempts: [
+      ...state.attempts,
+      ...unitsRequired.map(({ u, lx }) => ({ u, lx, c: correct ? 1 : 0, t: now, card: presentedId, enc: 1 })),
+    ],
+  };
+  if (!(cardId in state.cards)) next.cards = { ...state.cards, [cardId]: { ...newCard(now), due: nextDayStart(now) } };
+  next.history = bumpDay(state.history, now, (d) => { d.cards += 1; });
   return next;
 }
 

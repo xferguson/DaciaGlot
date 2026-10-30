@@ -19,6 +19,7 @@ const patAttempts = (k, wrong = 0) => [
   ...Array.from({ length: k }, (_, i) => att("pat:p", `l${i}`, 1, NOW - DAY + i)),
   ...Array.from({ length: wrong }, (_, i) => att("pat:p", "l0", 0, NOW - DAY + 100 + i)),
 ];
+const enc = (a) => ({ ...a, enc: 1 });
 const card = (stability, extra = {}) => ({ due: NOW, stability, difficulty: 5, reps: 3, lapses: 0, state: 2, step: 0, lastReview: NOW - DAY, ...extra });
 
 test("patternState: not-started / seen", () => {
@@ -195,4 +196,14 @@ test("claims: the claimed form is stable, per form; a claimed cloze form counts 
   const only = { ...freshState(), seenSentences: { m1: NOW - DAY } };
   assert.equal(sentenceMastered("m1", only, c2, NOW), false);
   assert.equal(sentenceMastered("m1", claimForm(only, "a.x", NOW), c2, NOW), true);
+});
+
+test("enc attempts (immediate checks) are ignored by pattern state, unit state and compaction", () => {
+  assert.equal(patternState("p", st({ attempts: patAttempts(5).map(enc) }), content, NOW), "seen");
+  const mixed = [...patAttempts(5), ...patAttempts(5, 6).slice(5).map(enc)];
+  assert.equal(patternState("p", st({ attempts: mixed }), content, NOW), "producing", "enc misses don't count");
+  const old = enc(att("a.x", "a", 1, NOW - 100 * DAY));
+  const out = compactAttempts(st({ attempts: [old] }), NOW);
+  assert.equal(out.attempts.length, 0);
+  assert.equal(out.unitAggregates["a.x"], undefined);
 });
