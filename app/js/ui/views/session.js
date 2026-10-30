@@ -1,5 +1,5 @@
 // Study loop: Quick / Mix / Learn / Review / Focus (PRD FR-S2…S9). Renders T07 cards one after another.
-import { buildSession, gradeFromResult, applyReview, addMinutes, requeueWrong, keepStarted, markDifficult } from "../../core/session.js";
+import { buildSession, gradeFromResult, applyReview, applyCheck, addMinutes, requeueWrong, keepStarted, markDifficult } from "../../core/session.js";
 import { parseCardId, exampleSentenceFor } from "../../core/cards.js";
 import { unitsRequiredForCard } from "../../core/units.js";
 import { resolveFm } from "../../core/carrier.js";
@@ -118,7 +118,7 @@ export function render(root, ctx) {
     let shown = item.cardId;
     if (parseCardId(item.cardId).type === "fm") {
       const r = resolveFm(item.cardId, ctx.state, ctx.content, {
-        now: Date.now(), rng: Math.random, exclude: carriersUsed, prefer: item.isNew ? item.from : undefined,
+        now: Date.now(), rng: Math.random, exclude: carriersUsed, prefer: item.isNew || item.check ? item.from : undefined,
       });
       if (!r) { pos++; return next(); }
       shown = r.presentedId;
@@ -151,9 +151,11 @@ export function render(root, ctx) {
       content: ctx.content,
       tts: ctx.tts,
       settings: ctx.state.settings,
+      check: !!item.check,
       onResult(r) {
         const grade = gradeFromResult(r);
         const now = Date.now();
+        if (item.check) return onCheck(item, shown, grade, now);
         const seenBefore = Object.keys(ctx.state.seenSentences).length;
         ctx.state = applyReview(ctx.state, item.cardId, grade, unitsRequiredForCard(shown, ctx.content), now, ctx.content, shown);
         ctx.store.save(ctx.state);
@@ -175,6 +177,20 @@ export function render(root, ctx) {
         next();
       },
     });
+  }
+
+  /** FR-R2: an immediate check is uncounted. Wrong → asked once more at the end; the `fm` card is due tomorrow either way. */
+  function onCheck(item, shown, grade, now) {
+    ctx.state = applyCheck(ctx.state, item.cardId, grade > 1, unitsRequiredForCard(shown, ctx.content), now, shown);
+    ctx.store.save(ctx.state);
+    stats.cards++;
+    if (grade > 1) stats.correct++;
+    if (grade <= 1 && !struggled.has(item.cardId)) {
+      struggled.add(item.cardId);
+      queue.push({ cardId: item.cardId, isNew: false, from: item.from, check: true, requeued: true });
+    }
+    pos++;
+    next();
   }
 
   function finish() {

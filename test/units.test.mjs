@@ -59,3 +59,13 @@ test("isKnown: new form seen in a recognized sentence of a known lexeme", () => 
   assert.equal(isKnown("termina.inf", st, content), true);
   assert.equal(isKnown("termina.ppl", { ...st, attempts: [] }, content), false);
 });
+
+test("isKnown: an immediate-check (enc) correct answer does not make a unit known", async () => {
+  const { makeContent, sentence, state, NOW } = await import("./helpers/mini-content.mjs");
+  const c = makeContent([sentence("s9", "aa bb", [{ lex: "a", form: "x" }, { lex: "b", form: "x" }])]);
+  const st = state();
+  st.attempts.push({ u: "a.x", lx: "a", c: 1, t: NOW, card: "cz:s9:0", enc: 1 });
+  assert.equal(isKnown("a.x", st, c), false);
+  st.attempts.push({ u: "a.x", lx: "a", c: 1, t: NOW, card: "cz:s9:0" });
+  assert.equal(isKnown("a.x", st, c), true);
+});
