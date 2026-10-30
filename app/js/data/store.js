@@ -25,6 +25,7 @@ export function defaultState(now) {
       registers: ['colloquial', 'neutral'],
       lastExportAt: null,
       ttsBannerDismissed: false,
+      focus: null,
     },
     cards: {},
     seenSentences: {},
@@ -35,6 +36,7 @@ export function defaultState(now) {
     history: {},
     canDoChecked: {},
     lastCompactionAt: null,
+    activeSession: null,
   };
 }
 

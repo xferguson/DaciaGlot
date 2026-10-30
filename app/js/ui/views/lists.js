@@ -1,6 +1,6 @@
-// Situations / Patterns lists with live readiness (PRD P-9, FR-S8; ARCHITECTURE §6.2).
+// Situations / Patterns lists: learned · learning · to learn per topic; tapping a row sets the session focus (PRD P-9, FR-N2, FR-S8).
 import { pickNewSentences } from "../../core/select.js";
-import { allPatternStates } from "../../core/mastery.js";
+import { allPatternStates, masteredSentenceIds } from "../../core/mastery.js";
 
 export const SITUATION_NAMES = {
   standup: "Stand-up",
@@ -25,15 +25,24 @@ export function readyCount(focus, { state, content, now }) {
   return pick.sentences.filter((id) => matches(content.sentences.get(id), focus)).length;
 }
 
+/** Sentence progress for a topic: learned (mastered), learning (seen, not yet mastered), toLearn (unseen). */
+export function progressCounts(ids, state, mastered) {
+  let learned = 0;
+  let learning = 0;
+  for (const id of ids) {
+    if (mastered.has(id)) learned++;
+    else if (id in state.seenSentences) learning++;
+  }
+  return { learned, learning, toLearn: ids.length - learned - learning, total: ids.length };
+}
+
 /** Pure row model for both tabs. Patterns are ordered by stage; `needs` lists unmet prerequisite names. */
 export function listRows(tab, { state, content, now }) {
-  const ctx = { state, content, now };
+  const mastered = new Set(masteredSentenceIds(state, content, now));
   if (tab === "situations") {
-    return [...content.sentencesBySituation.keys()].map((id) => {
-      const ids = content.sentencesBySituation.get(id);
-      const seen = ids.filter((s) => s in state.seenSentences).length;
-      return { type: "situation", id, name: situationName(id), seen, total: ids.length, ready: readyCount({ type: "situation", id }, ctx) };
-    });
+    return [...content.sentencesBySituation.keys()].map((id) => ({
+      type: "situation", id, name: situationName(id), ...progressCounts(content.sentencesBySituation.get(id), state, mastered),
+    }));
   }
   const states = allPatternStates(state, content, now);
   const seen = (id) => (states[id] ?? "not-started") !== "not-started";
@@ -41,46 +50,69 @@ export function listRows(tab, { state, content, now }) {
     .sort((a, b) => a.stage - b.stage || (a.id < b.id ? -1 : 1))
     .map((p) => {
       const needs = (p.requires ?? []).filter((r) => !seen(r)).map((r) => content.patterns.get(r)?.name ?? r);
-      return { type: "pattern", id: p.id, name: p.name, stage: p.stage, state: states[p.id] ?? "not-started", needs, ready: readyCount({ type: "pattern", id: p.id }, ctx) };
+      return {
+        type: "pattern", id: p.id, name: p.name, stage: p.stage, state: states[p.id] ?? "not-started", needs,
+        ...progressCounts(content.sentencesByPattern.get(p.id) ?? [], state, mastered),
+      };
     });
 }
 
-function rowEl(r) {
-  const a = document.createElement("a");
-  a.className = "list-row" + (r.needs?.length ? " dim" : "");
-  a.href = `#/session?mode=focus&type=${r.type}&id=${encodeURIComponent(r.id)}`;
+const sameFocus = (a, b) => !!a && !!b && a.type === b.type && a.id === b.id;
+
+function rowEl(r, selected, onToggle) {
+  const row = document.createElement("button");
+  row.type = "button";
+  row.className = "list-row" + (r.needs?.length ? " dim" : "");
+  row.setAttribute("aria-pressed", String(selected));
+  row.addEventListener("click", () => onToggle(selected ? null : { type: r.type, id: r.id }));
   const name = document.createElement("span");
   name.className = "list-name";
   name.textContent = r.name;
-  const meta = document.createElement("span");
-  meta.className = "muted list-meta";
-  if (r.type === "situation") {
-    const bar = document.createElement("span");
-    bar.className = "bar";
-    bar.setAttribute("role", "img");
-    bar.setAttribute("aria-label", `${r.seen} of ${r.total} sentences seen`);
-    const fill = document.createElement("span");
-    fill.style.width = `${Math.round((r.seen / Math.max(r.total, 1)) * 100)}%`;
-    bar.append(fill);
-    meta.append(bar);
-  } else {
+  if (r.type === "pattern") {
     const chip = document.createElement("span");
     chip.className = `state-chip st-${r.state}`;
     chip.textContent = r.state.replace("-", " ");
-    meta.append(chip);
+    name.append(" ", chip);
   }
-  const ready = document.createElement("span");
-  ready.textContent = r.needs?.length ? `needs ${r.needs.join(", ")}` : `${r.ready} ready`;
-  meta.append(ready);
-  a.append(name, meta);
-  return a;
+  const meta = document.createElement("span");
+  meta.className = "muted list-meta";
+  const bar = document.createElement("span");
+  bar.className = "bar stacked";
+  bar.setAttribute("role", "img");
+  bar.setAttribute("aria-label", `${r.learned} learned, ${r.learning} learning, ${r.toLearn} to learn`);
+  for (const [cls, n] of [["learned", r.learned], ["learning", r.learning]]) {
+    const seg = document.createElement("span");
+    seg.className = cls;
+    seg.style.width = `${(n / Math.max(r.total, 1)) * 100}%`;
+    bar.append(seg);
+  }
+  const counts = document.createElement("span");
+  counts.textContent = `${r.learned} learned · ${r.learning} learning · ${r.toLearn} to learn`;
+  meta.append(bar, counts);
+  row.append(name, meta);
+  if (r.needs?.length) {
+    const needs = document.createElement("span");
+    needs.className = "muted list-meta";
+    needs.textContent = `needs ${r.needs.join(", ")} first`;
+    row.append(needs);
+  }
+  return row;
 }
 
-/** Render a tab's rows into `root` (no heading). Used by home and the #/lists route. */
-export function renderList(root, ctx, tab) {
+/**
+ * Render a tab's rows into `root` (no heading). Tapping a row toggles it as the session focus
+ * (`settings.focus`, saved) and calls `onChange(focus)`. Used by home and the #/lists route.
+ */
+export function renderList(root, ctx, tab, onChange = () => {}) {
   const rows = listRows(tab, { state: ctx.state, content: ctx.content, now: Date.now() });
   const list = document.createElement("div");
   list.className = "list";
+  const toggle = (focus) => {
+    ctx.state = { ...ctx.state, settings: { ...ctx.state.settings, focus } };
+    ctx.store.save(ctx.state);
+    renderList(root, ctx, tab, onChange);
+    onChange(focus);
+  };
   let stage = null;
   for (const r of rows) {
     if (tab === "patterns" && r.stage !== stage) {
@@ -89,7 +121,7 @@ export function renderList(root, ctx, tab) {
       h.textContent = `Stage ${stage}`;
       list.append(h);
     }
-    list.append(rowEl(r));
+    list.append(rowEl(r, sameFocus(ctx.state.settings.focus, r), toggle));
   }
   root.replaceChildren(list);
 }
@@ -97,6 +129,7 @@ export function renderList(root, ctx, tab) {
 export function render(root, ctx) {
   const tab = ctx.route?.params?.tab === "patterns" ? "patterns" : "situations";
   root.innerHTML = `<h1>Choose focus</h1>
+    <p class="muted">Tap a topic to focus your sessions on it; tap it again to clear.</p>
     <div class="row tabs" role="tablist">
       <a class="chip" role="tab" href="#/lists?tab=situations" aria-pressed="${tab === "situations"}" aria-selected="${tab === "situations"}">Situations</a>
       <a class="chip" role="tab" href="#/lists?tab=patterns" aria-pressed="${tab === "patterns"}" aria-selected="${tab === "patterns"}">Patterns</a>

@@ -2,6 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   gradeFromResult, buildSession, applyReview, dueCards, requeueWrong, dayKey, interimNewSentences, mixPlan,
+  spaceOut, cardKeys, resumable, RESUME_MS,
 } from "../app/js/core/session.js";
 import { newCard } from "../app/js/core/fsrs.js";
 import { makeContent, sentence, state, NOW } from "./helpers/mini-content.mjs";
@@ -30,6 +31,12 @@ test("gradeFromResult table", () => {
   assert.equal(g({ result: "correct", tooEasy: true }), 4);
   assert.equal(g({ result: "wrong" }), 1);
   assert.equal(g({ result: "wrong", tooEasy: true }), 1);
+  assert.equal(g({ result: "correct", rating: "hard" }), 2);
+  assert.equal(g({ result: "correct", rating: "medium" }), 3);
+  assert.equal(g({ result: "correct", rating: "easy" }), 4);
+  assert.equal(g({ result: "correct-diacritics", rating: "easy" }), 4);
+  assert.equal(g({ result: "wrong", rating: "easy" }), 1);
+  assert.equal(g({ result: "correct", usedHint: true, rating: "easy" }), 2);
 });
 
 test("Quick: most overdue first, capped at 15, only due", () => {
@@ -134,4 +141,51 @@ test("Mix: fewer new sentences under a heavy review load, none when reviews fill
   assert.equal(c.plan.newCount, 0);
   assert.equal(c.queue.length, 60);
   assert.ok(c.queue.every((q) => !q.isNew));
+});
+
+const related = (a, b, c) => [...cardKeys({ cardId: a.cardId }, c)].some((k) => cardKeys({ cardId: b.cardId }, c).has(k));
+
+test("spaceOut: same-sentence cards are spread out, lr stays before its cz", () => {
+  const q = [];
+  for (const id of ["s00", "s01", "s02", "s03"]) q.push({ cardId: `lr:${id}`, isNew: true }, { cardId: `cz:${id}:0`, isNew: true });
+  const out = spaceOut(q, content);
+  assert.equal(out.length, q.length);
+  for (let i = 1; i < out.length; i++) assert.ok(!related(out[i - 1], out[i], content), `${out[i - 1].cardId} next to ${out[i].cardId}`);
+  for (const id of ["s00", "s01", "s02", "s03"]) {
+    assert.ok(out.findIndex((x) => x.cardId === `lr:${id}`) < out.findIndex((x) => x.cardId === `cz:${id}:0`));
+  }
+});
+
+test("spaceOut: cards drilling the same word are not back to back", () => {
+  const shared = makeContent(["t0", "t1", "t2", "t3"].map((id, i) => sentence(id, `fi x${i}`, [u("fi"), u(`x${i}`)])).concat(mk(4)));
+  const q = [
+    { cardId: "cz:t0:0", isNew: false }, { cardId: "cz:t1:0", isNew: false },
+    { cardId: "cz:s00:0", isNew: false }, { cardId: "cz:s01:0", isNew: false },
+    { cardId: "cz:t2:0", isNew: false }, { cardId: "cz:s02:0", isNew: false },
+  ];
+  const out = spaceOut(q, shared);
+  assert.equal(out[0].cardId, "cz:t0:0"); // most overdue stays first
+  for (let i = 1; i < out.length; i++) assert.ok(!related(out[i - 1], out[i], shared));
+});
+
+test("spaceOut keeps the order when nothing is related", () => {
+  const q = ["s00", "s01", "s02"].map((id) => ({ cardId: `cz:${id}:0`, isNew: false }));
+  assert.deepEqual(spaceOut(q, content), q);
+});
+
+test("requeueWrong with content skips past a related neighbour", () => {
+  const mkq = () => ["cz:s01:0", "cz:s02:0", "cz:s03:0", "cz:s04:0", "lr:s00", "cz:s05:0", "cz:s06:0"].map((cardId) => ({ cardId, isNew: false }));
+  const wrong = { cardId: "cz:s00:0", isNew: false };
+  assert.equal(requeueWrong(mkq(), 0, wrong, () => 0, content), 3); // neighbours unrelated
+  const q = mkq();
+  assert.equal(requeueWrong(q, 1, wrong, () => 0, content), 6); // 4 and 5 touch lr:s00
+  assert.equal(q[6].cardId, "cz:s00:0");
+});
+
+test("resumable: needs cards left and a recent answer", () => {
+  const a = { queue: [{ cardId: "lr:s00" }, { cardId: "lr:s01" }], pos: 1, updatedAt: NOW };
+  assert.equal(resumable(a, NOW + 1000), true);
+  assert.equal(resumable({ ...a, pos: 2 }, NOW), false);
+  assert.equal(resumable(a, NOW + RESUME_MS + 1), false);
+  assert.equal(resumable(null, NOW), false);
 });

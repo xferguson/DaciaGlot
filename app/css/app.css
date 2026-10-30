@@ -77,8 +77,9 @@ a { color: var(--accent); }
 }
 .row { display: flex; gap: var(--gap); }
 .row > .btn { flex: 1; }
+.row.rate > .btn { padding: 0 8px; }
 .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.btn.mode { flex-direction: column; padding: 8px 12px; min-height: 60px; }
+.btn.mode { flex-direction: column; padding: 8px 12px; min-height: 72px; }
 .btn.mode small { font-weight: 400; font-size: .8rem; opacity: .85; }
 
 
@@ -139,6 +140,9 @@ a { color: var(--accent); }
 
 /* Session (T08) */
 .progress { height: 8px; border-radius: 4px; background: var(--border); overflow: hidden; margin-bottom: var(--gap); }
+.session-bar { display: flex; align-items: center; gap: 8px; margin-bottom: var(--gap); }
+.session-bar .progress { flex: 1; margin: 0; }
+.btn.icon { padding: 0; width: 44px; font-size: 1.5rem; line-height: 1; }
 .progress-fill { height: 100%; width: 0; background: var(--accent); transition: width .2s; }
 .settings label { display: block; margin: 12px 0 4px; font-weight: 600; }
 .settings select, .settings input[type="number"] { font: inherit; min-height: 44px; width: 100%; padding: 0 8px; background: var(--surface); color: var(--fg); border: 2px solid var(--border); border-radius: 8px; }
@@ -156,7 +160,15 @@ a { color: var(--accent); }
   border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface);
   color: var(--fg); text-decoration: none;
 }
+.list-row { font: inherit; text-align: left; width: 100%; cursor: pointer; }
+.list-row[aria-pressed="true"] { border: 2px solid var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
 .list-row.dim { opacity: .55; }
+.bar.stacked { display: inline-flex; }
+.bar.stacked > span { display: block; height: 100%; }
+.bar.stacked > .learned { background: var(--ok); }
+.bar.stacked > .learning { background: var(--accent); opacity: .6; }
+.focus-chip[hidden] { display: none; }
+.focus-chip { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 8px; }
 .list-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .bar { display: inline-block; width: 80px; height: 8px; border-radius: 4px; background: var(--border); overflow: hidden; }
 .bar > span { display: block; height: 100%; background: var(--accent); }

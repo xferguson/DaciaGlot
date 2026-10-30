@@ -1,5 +1,5 @@
 // Study loop: Quick / Mix / Learn / Review / Focus (PRD FR-S2…S9). Renders T07 cards one after another.
-import { buildSession, SEC_PER_REVIEW, gradeFromResult, applyReview, addMinutes, requeueWrong } from "../../core/session.js";
+import { buildSession, gradeFromResult, applyReview, addMinutes, requeueWrong, resumable } from "../../core/session.js";
 import { parseCardId, exampleSentenceFor } from "../../core/cards.js";
 import { unitsRequiredForCard } from "../../core/units.js";
 import { renderCard as renderLr } from "./card-lr.js";
@@ -25,21 +25,28 @@ const RENDERERS = { lr: renderLr, cz: renderCz, kf: renderKf, xf: renderXf, sb: 
 
 export function render(root, ctx) {
   const params = ctx.route?.params ?? {};
-  // Old links (`mode=session`) open Mix; focus sessions keep the full `newPerSession` (FR-S8).
-  const mode = MODES.includes(params.mode) ? params.mode : params.mode === "focus" ? "session" : "mix";
-  const focus = params.mode === "focus" && (params.type === "pattern" || params.type === "situation") && params.id
+  // Old links (`mode=session`, `mode=focus`) open Mix. A focus (`type` + `id`) filters any mode (FR-S8).
+  const mode = MODES.includes(params.mode) ? params.mode : "mix";
+  const focus = (params.type === "pattern" || params.type === "situation") && params.id
     ? { type: params.type, id: params.id }
     : null;
-  const { queue, estimateSec, blocked, suggest, plan } = buildSession({
-    mode, focus, state: ctx.state, content: ctx.content, now: Date.now(), rng: Math.random,
-  });
+  // An unfinished session for the same route resumes where it stopped (AppState.activeSession).
+  const href = location.hash;
+  const key = focus ? `${mode}:${focus.type}:${focus.id}` : mode;
+  const saved = resumable(ctx.state.activeSession, Date.now()) && ctx.state.activeSession.key === key ? ctx.state.activeSession : null;
+  const { queue, blocked, suggest, plan } = saved
+    ? { queue: saved.queue.map((q) => ({ ...q })) }
+    : buildSession({ mode, focus, state: ctx.state, content: ctx.content, now: Date.now(), rng: Math.random });
   let cardCleanup = null;
   let alive = true;
-  let pos = 0;
-  let startedAt = 0;
-  const stats = { cards: 0, correct: 0, newSentences: 0 };
-  const done = new Set();
-  const patternsBefore = allPatternStates(ctx.state, ctx.content, Date.now());
+  let pos = saved?.pos ?? 0;
+  let firstStartedAt = saved?.firstStartedAt ?? 0; // wall clock of the first start, for the summary
+  let elapsedMs = saved?.elapsedMs ?? 0;          // study time in earlier visits
+  let segmentStart = 0;                            // start of this visit
+  let finished = false;
+  const stats = saved ? { ...saved.stats } : { cards: 0, correct: 0, newSentences: 0 };
+  const done = new Set(saved?.done ?? []);
+  const patternsBefore = saved?.before ?? allPatternStates(ctx.state, ctx.content, Date.now());
 
   const home = `<a class="btn secondary block" href="#/home">Home</a>`;
 
@@ -47,9 +54,23 @@ export function render(root, ctx) {
 
   function blockedNote() {
     if (!blocked) return "";
-    const href = suggest && `#/session?mode=focus&type=${suggest.type}&id=${encodeURIComponent(suggest.id)}`;
     return `<section class="card"><p>No new sentences are ready for <strong data-focus></strong> yet.</p>
-      ${suggest ? `<a class="btn block" href="${href}">Study <span data-suggest></span> first</a>` : ""}</section>`;
+      ${suggest ? `<button class="btn block" type="button" data-switch>Focus on <span data-suggest></span> first</button>` : ""}</section>`;
+  }
+
+  function title() {
+    return focus ? `${TITLES[mode]} · ${focusName()}` : TITLES[mode];
+  }
+
+  /** Keep the remaining queue in state so leaving mid-session doesn't lose the place. Caller saves. */
+  function persist(now) {
+    ctx.state = {
+      ...ctx.state,
+      activeSession: {
+        key, href, title: title(), queue, pos, stats: { ...stats }, done: [...done], before: patternsBefore,
+        firstStartedAt, elapsedMs: elapsedMs + (now - segmentStart), updatedAt: now,
+      },
+    };
   }
 
   function fillNames() {
@@ -60,44 +81,50 @@ export function render(root, ctx) {
   }
 
   function start() {
+    if (saved) {
+      begin();
+      toast(`Picked up where you left off · ${queue.length - pos} cards to go`);
+      return;
+    }
     if (blocked) {
-      root.innerHTML = `<h1>Focus</h1>${blockedNote()}${queue.length ? `<button class="btn secondary block" data-due>Review ${queue.length} due cards</button>` : ""}${home}`;
+      root.innerHTML = `<h1>${TITLES[mode]}</h1>${blockedNote()}${queue.length ? `<button class="btn secondary block" data-due>Review ${queue.length} due cards</button>` : ""}${home}`;
       fillNames();
       root.querySelector("[data-due]")?.addEventListener("click", begin);
+      root.querySelector("[data-switch]")?.addEventListener("click", () => {
+        ctx.state = { ...ctx.state, settings: { ...ctx.state.settings, focus: suggest } };
+        ctx.store.save(ctx.state);
+        ctx.navigate(`#/session?mode=${mode}&type=${suggest.type}&id=${encodeURIComponent(suggest.id)}`);
+      });
       return;
     }
     if (!queue.length) {
       root.innerHTML = `<h1>${TITLES[mode]}</h1>
-        <p class="muted">${EMPTY[mode] ?? "Nothing to study right now."}</p>${home}`;
+        <p class="muted">${focus ? "Nothing in this focus right now. Clear the focus on Home or pick another topic." : EMPTY[mode] ?? "Nothing to study right now."}</p>${home}`;
       return;
     }
-    if (mode === "quick") return begin();
-    const mins = Math.max(1, Math.round(estimateSec / 60));
-    const fresh = queue.filter((q) => q.isNew && q.cardId.startsWith("lr:")).length;
-    const forms = queue.filter((q) => q.isNew && q.cardId.startsWith("kf:")).length;
-    const drills = queue.filter((q) => q.isNew && /^(xf|sb|er):/.test(q.cardId)).length;
-    const reviews = queue.filter((q) => !q.isNew).length;
-    root.innerHTML = `<h1>${focus ? "Focus: <span data-focus></span>" : TITLES[mode]}</h1>
-      <section class="card"><p>${queue.length} cards · ${mode === "learn" ? "" : `${reviews} reviews · `}${fresh} new sentence${fresh === 1 ? "" : "s"}${forms ? ` · ${forms} new forms` : ""}${drills ? ` · ${drills} new drills` : ""}</p>
-      ${plan ? `<p>${mixNote(plan, reviews, ctx.state.settings.newPerSession)}</p>` : ""}
-      <p class="muted">≈ ${mins} min</p>
-      <button class="btn block" data-start>Start</button></section>${home}`;
-    fillNames();
-    root.querySelector("[data-start]").addEventListener("click", begin);
+    begin();
+    const note = plan && mixNote(plan, ctx.state.settings.newPerSession);
+    if (note) toast(note);
   }
 
-  function mixNote({ newCount }, reviews, full) {
-    const reviewPct = Math.round((100 * reviews * SEC_PER_REVIEW) / Math.max(estimateSec, 1));
-    const split = `≈ ${reviewPct}% review · ${100 - reviewPct}% new.`;
-    if (newCount >= full) return `${split} Light review load, so up to ${full} new sentences.`;
-    if (newCount > 0) return `${split} ${reviews} reviews due, so only ${newCount} new sentences today.`;
-    return `All review today: ${reviews} cards are due. Catch up first, or use Learn for new material anyway.`;
+  /** Why Mix holds back new sentences; nothing to say when it gives the full set. */
+  function mixNote({ newCount }, full) {
+    const reviews = queue.filter((q) => !q.isNew).length;
+    if (newCount >= full) return "";
+    if (newCount > 0) return `${reviews} reviews due, so only ${newCount} new sentences today.`;
+    return `All review today: ${reviews} cards are due. Use Learn for new material anyway.`;
   }
 
   function begin() {
-    startedAt = Date.now();
-    root.innerHTML = `<div class="progress" role="progressbar" aria-label="Session progress"><div class="progress-fill"></div></div>
-      <div data-flag style="display:flex;justify-content:flex-end"></div>
+    segmentStart = Date.now();
+    if (!firstStartedAt) firstStartedAt = segmentStart;
+    persist(segmentStart);
+    ctx.store.save(ctx.state);
+    root.innerHTML = `<div class="session-bar">
+        <a class="btn secondary icon" href="#/home" aria-label="Exit session (progress is saved)" title="Exit">×</a>
+        <div class="progress" role="progressbar" aria-label="Session progress"><div class="progress-fill"></div></div>
+        <div data-flag></div>
+      </div>
       <div data-card></div>`;
     next();
   }
@@ -111,7 +138,7 @@ export function render(root, ctx) {
     if (!alive) return;
     if (typeof cardCleanup === "function") cardCleanup();
     cardCleanup = null;
-    const timeUp = mode === "quick" && Date.now() - startedAt >= QUICK_MS;
+    const timeUp = mode === "quick" && elapsedMs + Date.now() - segmentStart >= QUICK_MS;
     if (pos >= queue.length || timeUp) return finish();
     progress();
     const item = queue[pos];
@@ -153,21 +180,24 @@ export function render(root, ctx) {
         if (Object.keys(ctx.state.seenSentences).length > seenBefore) stats.newSentences++;
         if (grade === 1 && !done.has(item.cardId)) {
           done.add(item.cardId);
-          requeueWrong(queue, pos, item, Math.random);
+          requeueWrong(queue, pos, item, Math.random, ctx.content);
         }
         pos++;
+        persist(now);
+        ctx.store.save(ctx.state);
         next();
       },
     });
   }
 
   function finish() {
-    const minutes = (Date.now() - startedAt) / 60000;
-    ctx.state = addMinutes(ctx.state, minutes, Date.now());
+    finished = true;
+    const minutes = (Date.now() - segmentStart) / 60000;
+    ctx.state = { ...addMinutes(ctx.state, minutes, Date.now()), activeSession: null };
     ctx.store.save(ctx.state);
     ctx.store.flush();
     const summary = summarize({
-      before: patternsBefore, state: ctx.state, content: ctx.content, stats, startedAt, now: Date.now(),
+      before: patternsBefore, state: ctx.state, content: ctx.content, stats, startedAt: firstStartedAt, now: Date.now(),
     });
     renderSummary(root, { summary, content: ctx.content, onMore: () => ctx.navigate("#/session?mode=quick") });
     alive = false;
@@ -175,6 +205,14 @@ export function render(root, ctx) {
 
   start();
   return () => {
+    // Leaving mid-session (× or the back button): count the time and keep the place.
+    if (alive && segmentStart && !finished) {
+      const now = Date.now();
+      persist(now);
+      ctx.state = addMinutes(ctx.state, (now - segmentStart) / 60000, now);
+      ctx.store.save(ctx.state);
+      if (pos > 0) toast("Progress saved. Continue from Home.");
+    }
     alive = false;
     if (typeof cardCleanup === "function") cardCleanup();
     ctx.store.flush();
