@@ -54,6 +54,53 @@ export const FORM_LABELS = {
 
 export const labelFor = (formKey) => FORM_LABELS[formKey] ?? formKey;
 
+/** Leipzig gloss suffix per form key (EXP-06). An empty string means the form adds nothing (`base`). */
+export const LEIPZIG = {
+  inf: "INF",
+  pres1sg: "PRS.1SG", pres2sg: "PRS.2SG", pres3sg: "PRS.3SG",
+  pres1pl: "PRS.1PL", pres2pl: "PRS.2PL", pres3pl: "PRS.3PL",
+  ppl: "PTCP",
+  subj1sg: "SBJV.1SG", subj2sg: "SBJV.2SG", subj3: "SBJV.3",
+  subj1pl: "SBJV.1PL", subj2pl: "SBJV.2PL", subj3pl: "SBJV.3PL",
+  imp2sg: "IMP.2SG", imp2pl: "IMP.2PL",
+  impf1sg: "IMPF.1SG", impf2sg: "IMPF.2SG", impf3sg: "IMPF.3SG",
+  impf1pl: "IMPF.1PL", impf2pl: "IMPF.2PL", impf3pl: "IMPF.3PL",
+  ger: "GER",
+  sg: "SG", pl: "PL",
+  sgDef: "SG.DEF", plDef: "PL.DEF",
+  sgGenDat: "SG.DEF.GEN-DAT", plGenDat: "PL.DEF.GEN-DAT",
+  voc: "VOC",
+  msg: "M.SG", fsg: "F.SG", mpl: "M.PL", fpl: "F.PL",
+  acc: "ACC", accShort: "ACC.CL", dat: "DAT", datShort: "DAT.CL",
+  // Keys used by auxiliaries, particles and a few determiners (not shown on `kf` cards).
+  "1sg": "1SG", "2sg": "2SG", "3sg": "3SG", "1pl": "1PL", "2pl": "2PL", "3pl": "3PL",
+  m: "M", f: "F",
+  base: "", short: "",
+};
+
+const PRON_ID = /^pron-([123])(sg|pl)(?:-([mf]))?$/;
+
+/** The lemma part of a gloss: `lemmaGloss`, else the first word of `gloss` (without a leading "to "). */
+function glossBase(lexeme) {
+  if (lexeme.lemmaGloss) return lexeme.lemmaGloss;
+  const g = String(lexeme.gloss ?? lexeme.id);
+  if (!/[a-z]/.test(g)) return g; // already in small-caps style, e.g. "NEG"
+  const word = g.replace(/^\(/, "").replace(/^to /, "").split(/[\s,;/()]+/).find(Boolean);
+  return word ?? lexeme.id;
+}
+
+/** Leipzig-style gloss of one lexeme form, e.g. `be.PRS.2SG`, `2SG.ACC.CL`, `NEG`. */
+export function leipzigFor(lexeme, formKey) {
+  const suffix = LEIPZIG[formKey] ?? String(formKey).toUpperCase();
+  const pron = lexeme.pos === "pron" && PRON_ID.exec(lexeme.id);
+  if (pron) {
+    const person = `${pron[1]}${pron[2].toUpperCase()}${pron[3] ? `.${pron[3].toUpperCase()}` : ""}`;
+    return suffix ? `${person}.${suffix}` : person;
+  }
+  const base = glossBase(lexeme);
+  return suffix ? `${base}.${suffix}` : base;
+}
+
 export const KF_MIN_SENTENCES = 2;
 export const KF_PER_LEXEME = 3;
 export const KF_PER_SESSION = 8;
@@ -222,7 +269,8 @@ const lemmaOf = (lexeme, fallback) => {
 /**
  * Slots for an `sb` card. Result tokens that match a source token become plain lemmas; each run of changed
  * result tokens becomes one chip group of the slot labels of the patterns involved (op + changed source tokens).
- * @returns {Array<{type:"word", text:string} | {type:"slot", labels:string[], patterns:string[]}>}
+ * `gloss` holds one Leipzig label per resolved result token (`[]` when none resolve; `labels` is then the fallback).
+ * @returns {Array<{type:"word", text:string} | {type:"slot", labels:string[], gloss:string[], patterns:string[]}>}
  */
 export function slotsFor(sentence, transform, content) {
   const src = sentence.tokens.map((t) => t.t);
@@ -230,8 +278,10 @@ export function slotsFor(sentence, transform, content) {
   const matched = new Map(alignTokens(src, res).map(([i, j]) => [j, i]));
   const patterns = transformPatterns(sentence, transform, content);
   const labels = patterns.map((id) => content.patterns.get(id)?.slotLabel ?? id);
+  const hints = (transform.targetTokens ?? []).flatMap((i) => sentence.tokens[i]?.units ?? []);
   const out = [];
   let inRun = false;
+  let run = null;
   res.forEach((tok, j) => {
     if (matched.has(j)) {
       inRun = false;
@@ -240,10 +290,32 @@ export function slotsFor(sentence, transform, content) {
       out.push({ type: "word", text: lemmaOf(lex, st.t) });
     } else if (!inRun) {
       inRun = true;
-      out.push({ type: "slot", labels: labels.length ? labels : ["change"], patterns });
+      run = { type: "slot", labels: labels.length ? labels : ["change"], gloss: [], patterns };
+      out.push(run);
+    }
+    if (!matched.has(j)) {
+      for (const m of glossUnits(tok, content, hints)) {
+        const lex = content.lexemes.get(m.lex);
+        if (lex) run.gloss.push(leipzigFor(lex, m.form));
+      }
     }
   });
   return out;
+}
+
+/** `(lex, form)` units for a result token: the source target lexemes' own forms first, then the form index. */
+function glossUnits(tok, content, hints) {
+  const key = tokenKey(tok);
+  const own = [];
+  for (const h of hints) {
+    for (const [form, text] of Object.entries(content.lexemes.get(h.lex)?.forms ?? {})) {
+      if (tokenKey(text) === key && !own.some((m) => m.lex === h.lex && m.form === form)) own.push({ lex: h.lex, form });
+    }
+  }
+  const exact = own.filter((m) => hints.some((h) => h.lex === m.lex && h.form === m.form));
+  if (own.length === 1) return own;
+  if (exact.length === 1) return exact;
+  return lookupToken(tok, content, hints) ?? [];
 }
 
 const formIndexCache = new WeakMap();
