@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readyCount, listRows, progressCounts } from "../app/js/ui/views/lists.js";
+import { readyCount, listRows, progressCounts, parseFocusParam, focusParam, toggleFocus } from "../app/js/ui/views/lists.js";
 import { lexemeModel } from "../app/js/ui/views/lexeme.js";
 import { pickNewSentences } from "../app/js/core/select.js";
 import { buildSession, focusFirst, inFocus } from "../app/js/core/session.js";
@@ -102,4 +102,27 @@ test("focus filters every mode: only its due cards, only its new sentences, no k
   assert.ok(learn.queue.every((q) => inFocus(q.cardId, focus, content)));
   assert.equal(inFocus("kf:a:base", focus, content), false);
   assert.equal(inFocus("kf:a:base", null, content), true);
+});
+
+test("several focus topics: union of their cards; Mix adds a few overdue cards from outside", () => {
+  const content = fixture();
+  const st = state();
+  for (const id of ["lr:a1", "lr:c1"]) st.cards[id] = { ...newCard(NOW), due: NOW - 1000 };
+  const both = [{ type: "situation", id: "me" }, { type: "situation", id: "table" }];
+  const review = buildSession({ mode: "review", focus: both, state: st, content, now: NOW, rng: () => 0.5 });
+  assert.deepEqual(review.queue.map((q) => q.cardId).sort(), ["lr:a1", "lr:c1"]);
+  const me = [{ type: "situation", id: "me" }];
+  assert.deepEqual(buildSession({ mode: "review", focus: me, state: st, content, now: NOW, rng: () => 0.5 }).queue.map((q) => q.cardId), ["lr:a1"]);
+  const mix = buildSession({ mode: "mix", focus: me, state: st, content, now: NOW, rng: () => 0.5 });
+  assert.ok(mix.queue.some((q) => q.cardId === "lr:c1"), "overdue outside-focus card slipped in");
+});
+
+test("focus route params round-trip; toggleFocus adds and removes", () => {
+  const f = [{ type: "situation", id: "me" }, { type: "pattern", id: "p1" }];
+  const q = new URLSearchParams(focusParam(f).slice(1));
+  assert.deepEqual(parseFocusParam(Object.fromEntries(q)), f);
+  assert.deepEqual(parseFocusParam({ type: "pattern", id: "p1" }), [{ type: "pattern", id: "p1" }]);
+  assert.deepEqual(parseFocusParam({}), []);
+  assert.deepEqual(toggleFocus([f[0]], f[1]), f);
+  assert.deepEqual(toggleFocus(f, f[0]), [f[1]]);
 });

@@ -12,15 +12,24 @@ function shuffle(list, rng) {
   return list;
 }
 
-const matchesFocus = (s, focus) =>
-  !!focus && (focus.type === "pattern" ? (s.patterns ?? []).includes(focus.id) : (s.situations ?? []).includes(focus.id));
+/** A focus may be one `{type, id}`, a list of them, or null; always returns a list (FR-S8). */
+export function focusList(focus) {
+  if (!focus) return [];
+  return Array.isArray(focus) ? focus : [focus];
+}
+
+const matchesOne = (s, f) => (f.type === "pattern" ? (s.patterns ?? []) : (s.situations ?? [])).includes(f.id);
+/** The first focus topic the sentence belongs to, or undefined. */
+const matchedFocus = (s, focus) => focusList(focus).find((f) => matchesOne(s, f));
+const matchesFocus = (s, focus) => !!matchedFocus(s, focus);
 
 /**
  * @param {number} n
- * @param {{focus: {type: "situation"|"pattern", id: string}|null, state: object, content: object, now: number, rng: () => number}} opts
+ * @param {{focus: {type: "situation"|"pattern", id: string}|{type: string, id: string}[]|null, state: object, content: object, now: number, rng: () => number}} opts
  * @returns {{sentences: string[]} | {blocked: true, suggest: {type: string, id: string}|null}}
  */
-export function pickNewSentences(n, { focus = null, state, content, now, rng }) {
+export function pickNewSentences(n, { focus: rawFocus = null, state, content, now, rng }) {
+  const focus = focusList(rawFocus).length ? focusList(rawFocus) : null;
   const pstates = allPatternStates(state, content, now);
   const seenPattern = (id) => (pstates[id] ?? "not-started") !== "not-started";
   const patternStage = (id) => content.patterns.get(id)?.stage ?? 1;
@@ -55,9 +64,10 @@ export function pickNewSentences(n, { focus = null, state, content, now, rng }) 
 
   const score = ({ s, units, unknown }) => {
     let sc = unknown.length === 1 ? 100 : 40;
-    if (matchesFocus(s, focus)) {
+    const hit = matchedFocus(s, focus);
+    if (hit) {
       sc += 50;
-      if (focus.type === "pattern") {
+      if (hit.type === "pattern") {
         const lexemes = new Set(units.filter((u) => !u.startsWith("pat:") && known(u)).map((u) => u.slice(0, u.indexOf("."))));
         sc += Math.min(90, 30 * lexemes.size);
       } else if (unknown.every((u) => !u.startsWith("pat:"))) sc += 30;
@@ -106,7 +116,7 @@ function suggestFor(focus, blockedByPrereq, candidates, unmetFor) {
   const prereq = mostCommon(blockedByPrereq.filter((s) => matchesFocus(s, focus)).flatMap((s) => [...new Set(unmetFor(s))]));
   if (prereq) return { type: "pattern", id: prereq };
   const sit = mostCommon(
-    candidates.flatMap((c) => c.s.situations ?? []).filter((id) => !(focus.type === "situation" && id === focus.id)),
+    candidates.flatMap((c) => c.s.situations ?? []).filter((id) => !focus.some((f) => f.type === "situation" && f.id === id)),
   );
   return sit ? { type: "situation", id: sit } : null;
 }

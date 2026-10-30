@@ -1,5 +1,5 @@
 // Study loop: Quick / Mix / Learn / Review / Focus (PRD FR-S2…S9). Renders T07 cards one after another.
-import { buildSession, gradeFromResult, applyReview, addMinutes, requeueWrong, resumable } from "../../core/session.js";
+import { buildSession, gradeFromResult, applyReview, addMinutes, requeueWrong, keepStarted, markDifficult } from "../../core/session.js";
 import { parseCardId, exampleSentenceFor } from "../../core/cards.js";
 import { unitsRequiredForCard } from "../../core/units.js";
 import { renderCard as renderLr } from "./card-lr.js";
@@ -10,7 +10,7 @@ import { renderCard as renderSb } from "./card-slot.js";
 import { renderCard as renderEr } from "./card-enro.js";
 import { toast } from "../components/toast.js";
 import { flagButton } from "../components/flag-button.js";
-import { situationName } from "./lists.js";
+import { situationName, parseFocusParam } from "./lists.js";
 import { allPatternStates } from "../../core/mastery.js";
 import { summarize, renderSummary } from "./summary.js";
 
@@ -25,32 +25,25 @@ const RENDERERS = { lr: renderLr, cz: renderCz, kf: renderKf, xf: renderXf, sb: 
 
 export function render(root, ctx) {
   const params = ctx.route?.params ?? {};
-  // Old links (`mode=session`, `mode=focus`) open Mix. A focus (`type` + `id`) filters any mode (FR-S8).
+  // Old links (`mode=session`, `mode=focus`) open Mix. A focus (`f=type:id,…`, or old `type`+`id`) filters any mode (FR-S8).
   const mode = MODES.includes(params.mode) ? params.mode : "mix";
-  const focus = (params.type === "pattern" || params.type === "situation") && params.id
-    ? { type: params.type, id: params.id }
-    : null;
-  // An unfinished session for the same route resumes where it stopped (AppState.activeSession).
-  const href = location.hash;
-  const key = focus ? `${mode}:${focus.type}:${focus.id}` : mode;
-  const saved = resumable(ctx.state.activeSession, Date.now()) && ctx.state.activeSession.key === key ? ctx.state.activeSession : null;
-  const { queue, blocked, suggest, plan } = saved
-    ? { queue: saved.queue.map((q) => ({ ...q })) }
-    : buildSession({ mode, focus, state: ctx.state, content: ctx.content, now: Date.now(), rng: Math.random });
+  const focus = parseFocusParam(params);
+  const { queue, blocked, suggest, plan } = buildSession({
+    mode, focus, state: ctx.state, content: ctx.content, now: Date.now(), rng: Math.random,
+  });
   let cardCleanup = null;
   let alive = true;
-  let pos = saved?.pos ?? 0;
-  let firstStartedAt = saved?.firstStartedAt ?? 0; // wall clock of the first start, for the summary
-  let elapsedMs = saved?.elapsedMs ?? 0;          // study time in earlier visits
-  let segmentStart = 0;                            // start of this visit
+  let pos = 0;
+  let startedAt = 0;
   let finished = false;
-  const stats = saved ? { ...saved.stats } : { cards: 0, correct: 0, newSentences: 0 };
-  const done = new Set(saved?.done ?? []);
-  const patternsBefore = saved?.before ?? allPatternStates(ctx.state, ctx.content, Date.now());
+  const stats = { cards: 0, correct: 0, newSentences: 0, difficult: 0 };
+  const struggled = new Set(); // cards graded Hard or Again once already this session (FR-S9)
+  const patternsBefore = allPatternStates(ctx.state, ctx.content, Date.now());
 
   const home = `<a class="btn secondary block" href="#/home">Home</a>`;
 
-  const focusName = () => (focus.type === "pattern" ? ctx.content.patterns.get(focus.id)?.name : situationName(focus.id)) ?? focus.id;
+  const topicName = (f) => (f.type === "pattern" ? ctx.content.patterns.get(f.id)?.name : situationName(f.id)) ?? f.id;
+  const focusName = () => focus.map(topicName).join(" + ");
 
   function blockedNote() {
     if (!blocked) return "";
@@ -58,42 +51,22 @@ export function render(root, ctx) {
       ${suggest ? `<button class="btn block" type="button" data-switch>Focus on <span data-suggest></span> first</button>` : ""}</section>`;
   }
 
-  function title() {
-    return focus ? `${TITLES[mode]} · ${focusName()}` : TITLES[mode];
-  }
-
-  /** Keep the remaining queue in state so leaving mid-session doesn't lose the place. Caller saves. */
-  function persist(now) {
-    ctx.state = {
-      ...ctx.state,
-      activeSession: {
-        key, href, title: title(), queue, pos, stats: { ...stats }, done: [...done], before: patternsBefore,
-        firstStartedAt, elapsedMs: elapsedMs + (now - segmentStart), updatedAt: now,
-      },
-    };
-  }
-
   function fillNames() {
     const f = root.querySelector("[data-focus]");
     if (f) f.textContent = focusName();
     const s = root.querySelector("[data-suggest]");
-    if (s) s.textContent = suggest.type === "pattern" ? ctx.content.patterns.get(suggest.id)?.name ?? suggest.id : situationName(suggest.id);
+    if (s) s.textContent = topicName(suggest);
   }
 
   function start() {
-    if (saved) {
-      begin();
-      toast(`Picked up where you left off · ${queue.length - pos} cards to go`);
-      return;
-    }
     if (blocked) {
       root.innerHTML = `<h1>${TITLES[mode]}</h1>${blockedNote()}${queue.length ? `<button class="btn secondary block" data-due>Review ${queue.length} due cards</button>` : ""}${home}`;
       fillNames();
       root.querySelector("[data-due]")?.addEventListener("click", begin);
       root.querySelector("[data-switch]")?.addEventListener("click", () => {
-        ctx.state = { ...ctx.state, settings: { ...ctx.state.settings, focus: suggest } };
+        ctx.state = { ...ctx.state, settings: { ...ctx.state.settings, focus: [suggest] } };
         ctx.store.save(ctx.state);
-        ctx.navigate(`#/session?mode=${mode}&type=${suggest.type}&id=${encodeURIComponent(suggest.id)}`);
+        ctx.navigate(`#/session?mode=${mode}&f=${encodeURIComponent(`${suggest.type}:${suggest.id}`)}`);
       });
       return;
     }
@@ -116,12 +89,9 @@ export function render(root, ctx) {
   }
 
   function begin() {
-    segmentStart = Date.now();
-    if (!firstStartedAt) firstStartedAt = segmentStart;
-    persist(segmentStart);
-    ctx.store.save(ctx.state);
+    startedAt = Date.now();
     root.innerHTML = `<div class="session-bar">
-        <a class="btn secondary icon" href="#/home" aria-label="Exit session (progress is saved)" title="Exit">×</a>
+        <a class="btn secondary icon" href="#/home" aria-label="End session (answers so far are saved)" title="End session">×</a>
         <div class="progress" role="progressbar" aria-label="Session progress"><div class="progress-fill"></div></div>
         <div data-flag></div>
       </div>
@@ -138,7 +108,7 @@ export function render(root, ctx) {
     if (!alive) return;
     if (typeof cardCleanup === "function") cardCleanup();
     cardCleanup = null;
-    const timeUp = mode === "quick" && elapsedMs + Date.now() - segmentStart >= QUICK_MS;
+    const timeUp = mode === "quick" && Date.now() - startedAt >= QUICK_MS;
     if (pos >= queue.length || timeUp) return finish();
     progress();
     const item = queue[pos];
@@ -178,13 +148,18 @@ export function render(root, ctx) {
         stats.cards++;
         if (grade > 1) stats.correct++;
         if (Object.keys(ctx.state.seenSentences).length > seenBefore) stats.newSentences++;
-        if (grade === 1 && !done.has(item.cardId)) {
-          done.add(item.cardId);
-          requeueWrong(queue, pos, item, Math.random, ctx.content);
+        // FR-S9: Hard or wrong → back once, 3–5 cards later; a second time → off to the difficult list.
+        if (grade <= 2) {
+          if (!struggled.has(item.cardId)) {
+            struggled.add(item.cardId);
+            requeueWrong(queue, pos, item, Math.random, ctx.content);
+          } else if (!(item.cardId in ctx.state.difficult)) {
+            ctx.state = markDifficult(ctx.state, item.cardId, now);
+            stats.difficult++;
+          }
         }
-        pos++;
-        persist(now);
         ctx.store.save(ctx.state);
+        pos++;
         next();
       },
     });
@@ -192,12 +167,12 @@ export function render(root, ctx) {
 
   function finish() {
     finished = true;
-    const minutes = (Date.now() - segmentStart) / 60000;
-    ctx.state = { ...addMinutes(ctx.state, minutes, Date.now()), activeSession: null };
+    const minutes = (Date.now() - startedAt) / 60000;
+    ctx.state = addMinutes(ctx.state, minutes, Date.now());
     ctx.store.save(ctx.state);
     ctx.store.flush();
     const summary = summarize({
-      before: patternsBefore, state: ctx.state, content: ctx.content, stats, startedAt: firstStartedAt, now: Date.now(),
+      before: patternsBefore, state: ctx.state, content: ctx.content, stats, startedAt, now: Date.now(),
     });
     renderSummary(root, { summary, content: ctx.content, onMore: () => ctx.navigate("#/session?mode=quick") });
     alive = false;
@@ -205,13 +180,13 @@ export function render(root, ctx) {
 
   start();
   return () => {
-    // Leaving mid-session (× or the back button): count the time and keep the place.
-    if (alive && segmentStart && !finished) {
+    // Leaving mid-session (× or the back button) ends it. Every answer is already saved; count the
+    // time and make sure a half-introduced sentence's cloze cards come back next time.
+    if (alive && startedAt && !finished) {
       const now = Date.now();
-      persist(now);
-      ctx.state = addMinutes(ctx.state, (now - segmentStart) / 60000, now);
+      ctx.state = addMinutes(keepStarted(ctx.state, queue.slice(pos), now), (now - startedAt) / 60000, now);
       ctx.store.save(ctx.state);
-      if (pos > 0) toast("Progress saved. Continue from Home.");
+      if (stats.cards) toast(`Session ended. Your ${stats.cards} answer${stats.cards === 1 ? " is" : "s are"} saved.`);
     }
     alive = false;
     if (typeof cardCleanup === "function") cardCleanup();

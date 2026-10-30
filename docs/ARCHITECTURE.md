@@ -96,22 +96,9 @@ Card ids are strings. `core/cards.js` exports `parseCardId`, `buildCardId`, and 
  * @property {Record<string, DayStats>} history // "YYYY-MM-DD" → stats
  * @property {Record<string, number>} canDoChecked // canDoId → ts
  * @property {number|null} lastCompactionAt
- * @property {ActiveSession|null} activeSession // unfinished session, saved after every answer (PRD FR-S12)
+ * @property {Record<string, number>} difficult // cardId → ts: struggled with twice in one session (PRD FR-S9)
  */
 
-/** @typedef {Object} ActiveSession
- * @property {string} key            // mode, or "<mode>:<type>:<id>" with a focus; resumes only from the same route
- * @property {string} href           // route to reopen it
- * @property {string} title
- * @property {QueueItem[]} queue     // whole queue, including re-queued cards
- * @property {number} pos            // index of the next card
- * @property {{cards:number, correct:number, newSentences:number}} stats
- * @property {string[]} done         // cards already re-queued once (FR-S9)
- * @property {Record<string,string>} before // pattern states at the start, for the summary
- * @property {number} firstStartedAt
- * @property {number} elapsedMs      // study time so far (Quick's 5 minutes count across visits)
- * @property {number} updatedAt
- */
 
 /** @typedef {Object} Settings
  * @property {number} newPerSession   // default 8
@@ -121,7 +108,7 @@ Card ids are strings. `core/cards.js` exports `parseCardId`, `buildCardId`, and 
  * @property {string[]} registers     // default ["colloquial","neutral"]
  * @property {number|null} lastExportAt
  * @property {boolean} ttsBannerDismissed
- * @property {{type: "situation"|"pattern", id: string}|null} focus // Home focus filter (PRD FR-S8), default null
+ * @property {{type: "situation"|"pattern", id: string}[]} focus // Home focus filter, several topics allowed (PRD FR-S8), default []
  */
 ```
 
@@ -216,7 +203,7 @@ Diacritic-less input (*o sa*) is handled by the `correct-diacritics` path, not b
 ### 6.2 Algorithm
 
 ```js
-pickNewSentences(n, { focus /* {type:"situation"|"pattern", id}|null */, state, content, now, rng })
+pickNewSentences(n, { focus /* {type, id} | {type, id}[] | null; focusList() normalizes */, state, content, now, rng })
   → { sentences: string[] } | { blocked: true, suggest: { type, id } }
 ```
 
@@ -277,11 +264,12 @@ applyReview(state, cardId, grade, unitsRequired /* {u,lx}[] */, now, content) �
 dueCards(state, content, now) → string[]      // due + unlocked card ids, most overdue first
 dueCount(state, content, now) → number
 requeueWrong(queue, pos, item, rng, content?) → number  // PRD FR-S9: splice a wrong card back 3–5 cards later (with content: up to 3 more, away from related cards)
-inFocus(cardId, focus, content) → boolean      // FR-S8: card's sentence is in the focus (kf never; no focus → true)
+inFocus(cardId, focus, content) → boolean      // FR-S8: card's sentence is in any focus topic (kf never; empty focus → true). `focus` is one {type,id}, a list, or null everywhere.
 dueInFocus(state, content, now, focus) → string[]  // dueCards filtered by inFocus
 cardKeys(item, content) → Set<string>          // "s:<sentence>", "l:<target lexeme>", "new" for a new lr
 spaceOut(queue, content) → QueueItem[]        // PRD FR-S11; buildSession applies it to every queue
-resumable(activeSession, now) → boolean       // cards left and last answer within RESUME_MS (12 h)
+keepStarted(state, remainingQueue, now) → AppState  // on leaving early: unreached new cz of an introduced sentence → new card due now
+markDifficult(state, cardId, now) → AppState  // FR-S9: second Hard/Again in a session
 ```
 
 `QueueItem = { cardId, isNew: boolean }`.

@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   gradeFromResult, buildSession, applyReview, dueCards, requeueWrong, dayKey, interimNewSentences, mixPlan,
-  spaceOut, cardKeys, resumable, RESUME_MS,
+  spaceOut, cardKeys, keepStarted, markDifficult, COLD_START_SEEN,
 } from "../app/js/core/session.js";
 import { newCard } from "../app/js/core/fsrs.js";
 import { makeContent, sentence, state, NOW } from "./helpers/mini-content.mjs";
@@ -182,10 +182,31 @@ test("requeueWrong with content skips past a related neighbour", () => {
   assert.equal(q[6].cardId, "cz:s00:0");
 });
 
-test("resumable: needs cards left and a recent answer", () => {
-  const a = { queue: [{ cardId: "lr:s00" }, { cardId: "lr:s01" }], pos: 1, updatedAt: NOW };
-  assert.equal(resumable(a, NOW + 1000), true);
-  assert.equal(resumable({ ...a, pos: 2 }, NOW), false);
-  assert.equal(resumable(a, NOW + RESUME_MS + 1), false);
-  assert.equal(resumable(null, NOW), false);
+test("keepStarted: an introduced sentence's unreached cz cards come back as new cards", () => {
+  const st = state();
+  st.cards["lr:s00"] = newCard(NOW);
+  const out = keepStarted(st, [
+    { cardId: "cz:s00:0", isNew: true }, // lr reviewed → kept
+    { cardId: "lr:s01", isNew: true }, { cardId: "cz:s01:0", isNew: true }, // never started → dropped
+    { cardId: "cz:s02:0", isNew: false }, // a due review, already in state elsewhere
+  ], NOW);
+  assert.deepEqual(Object.keys(out.cards).sort(), ["cz:s00:0", "lr:s00"]);
+  assert.equal(out.cards["cz:s00:0"].due, NOW);
+  assert.equal(st.cards["cz:s00:0"], undefined); // input not mutated
+});
+
+test("markDifficult records the card", () => {
+  const st = state();
+  assert.deepEqual(markDifficult(st, "cz:s00:0", NOW).difficult, { "cz:s00:0": NOW });
+  assert.deepEqual(st.difficult, {});
+});
+
+test("new profile: Learn tops up to newPerSession with the easiest sentences", () => {
+  const st = state();
+  st.settings.newPerSession = 6;
+  const { queue } = buildSession({ mode: "learn", state: st, content, now: NOW, rng });
+  assert.equal(queue.filter((q) => q.cardId.startsWith("lr:")).length, 6);
+  for (let i = 0; i < COLD_START_SEEN; i++) st.seenSentences[`s${String(i).padStart(2, "0")}`] = NOW;
+  // Past the cold start: no top-up (all 30 seen here, so nothing new at all).
+  assert.equal(buildSession({ mode: "learn", state: st, content, now: NOW, rng }).queue.length, 0);
 });

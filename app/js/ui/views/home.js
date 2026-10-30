@@ -1,8 +1,8 @@
-import { dueInFocus, mixPlan, resumable, QUICK_CAP, SEC_PER_REVIEW, SEC_PER_NEW } from "../../core/session.js";
+import { dueInFocus, mixPlan, QUICK_CAP, SEC_PER_REVIEW, SEC_PER_NEW } from "../../core/session.js";
 import { levelProgress } from "../../core/mastery.js";
 import { ring } from "../components/ring.js";
 import { currentLevelId } from "./dashboard.js";
-import { renderList, readyCount, situationName } from "./lists.js";
+import { renderList, readyCount, situationName, focusParam } from "./lists.js";
 
 /** "≈ N min" for a session of `reviews` due cards and `fresh` new sentences (the PRD FR-S7 rates). */
 function minutes(reviews, fresh) {
@@ -15,14 +15,10 @@ export function render(root, ctx) {
   root.innerHTML = `
     <h1>DaciaGlot</h1>
     <p class="muted" lang="ro">Hai să vorbim românește.</p>
-    <section class="card" data-resume hidden>
-      <a class="btn block" data-resume-link></a>
-      <p class="muted" data-resume-left></p>
-    </section>
     <section class="card" data-modes></section>
     <section aria-label="Choose focus">
       <h2>Focus</h2>
-      <p class="muted">Tap a topic to keep your sessions on it. Tap it again to clear.</p>
+      <p class="muted">Tap topics to keep your sessions on them. Tap again to remove.</p>
       <div class="row tabs" role="tablist">
         <button class="chip" role="tab" data-tab="situations">Situations</button>
         <button class="chip" role="tab" data-tab="patterns">Patterns</button>
@@ -35,32 +31,32 @@ export function render(root, ctx) {
   // Mode buttons, filtered by `settings.focus` (FR-S8, FR-S10). Re-rendered when the focus changes.
   const modes = root.querySelector("[data-modes]");
   const renderModes = () => {
-    const focus = ctx.content ? ctx.state.settings.focus : null;
+    const focus = ctx.content ? ctx.state.settings.focus ?? [] : [];
     const now = Date.now();
     const due = ctx.content ? dueInFocus(ctx.state, ctx.content, now, focus).length : 0;
     const full = ctx.state.settings.newPerSession;
-    const avail = focus ? Math.min(full, readyCount(focus, { state: ctx.state, content: ctx.content, now })) : full;
+    const avail = focus.length ? Math.min(full, readyCount(focus, { state: ctx.state, content: ctx.content, now })) : full;
     const newCount = Math.min(avail, mixPlan(due, full).newCount);
     const mixSub = !newCount ? (due ? "all review" : "nothing yet") : due ? `${due} due + ${newCount} new` : `up to ${newCount} new`;
     const quickN = Math.min(due, QUICK_CAP);
-    const q = focus ? `&type=${focus.type}&id=${encodeURIComponent(focus.id)}` : "";
+    const q = focusParam(focus);
     modes.innerHTML = `
       <div class="focus-chip" data-focus-chip hidden><span>Focus: <strong data-focus-name></strong></span>
         <button class="btn secondary icon" type="button" data-clear aria-label="Clear focus">×</button></div>
-      <p><strong data-due>${due}</strong> cards due${focus ? " in this focus" : ""}</p>
+      <p><strong data-due>${due}</strong> cards due${focus.length ? " in this focus" : ""}</p>
       <div class="modes">
         <a class="btn mode" href="#/session?mode=mix${q}">Mix<small>${mixSub}</small><small>${due || newCount ? minutes(due, newCount) : "–"}</small></a>
         <a class="btn secondary mode" href="#/session?mode=quick${q}">Quick<small>${quickN ? `${quickN} due` : "nothing due"}</small><small>${quickN ? `≤ ${Math.min(5, Math.max(1, Math.round((quickN * SEC_PER_REVIEW) / 60)))} min` : "–"}</small></a>
         <a class="btn secondary mode" href="#/session?mode=learn${q}">Learn<small>${avail ? `up to ${avail} new` : "nothing new yet"}</small><small>${avail ? minutes(0, avail) : "–"}</small></a>
         <a class="btn secondary mode" href="#/session?mode=review${q}">Review<small>${due ? `all ${due} due` : "nothing due"}</small><small>${due ? minutes(due, 0) : "–"}</small></a>
       </div>`;
-    if (focus) {
+    if (focus.length) {
       modes.querySelector("[data-focus-chip]").hidden = false;
-      modes.querySelector("[data-focus-name]").textContent = focus.type === "pattern"
-        ? ctx.content.patterns.get(focus.id)?.name ?? focus.id
-        : situationName(focus.id);
+      modes.querySelector("[data-focus-name]").textContent = focus
+        .map((f) => (f.type === "pattern" ? ctx.content.patterns.get(f.id)?.name ?? f.id : situationName(f.id)))
+        .join(", ");
       modes.querySelector("[data-clear]").addEventListener("click", () => {
-        ctx.state = { ...ctx.state, settings: { ...ctx.state.settings, focus: null } };
+        ctx.state = { ...ctx.state, settings: { ...ctx.state.settings, focus: [] } };
         ctx.store.save(ctx.state);
         renderModes();
         show(activeTab);
@@ -68,14 +64,6 @@ export function render(root, ctx) {
     }
   };
 
-  const active = ctx.state.activeSession;
-  if (resumable(active, Date.now())) {
-    root.querySelector("[data-resume]").hidden = false;
-    root.querySelector("[data-resume-link]").href = active.href;
-    root.querySelector("[data-resume-link]").textContent = `Continue ${active.title}`;
-    const left = active.queue.length - active.pos;
-    root.querySelector("[data-resume-left]").textContent = `${left} card${left === 1 ? "" : "s"} to go · your progress is saved`;
-  }
   const levelSlot = root.querySelector("[data-level]");
   if (ctx.content) {
     const now = Date.now();
@@ -103,7 +91,7 @@ export function render(root, ctx) {
     if (ctx.content) renderList(slot, ctx, tab, renderModes);
   };
   for (const b of tabs) b.addEventListener("click", () => show(b.dataset.tab));
-  activeTab ??= ctx.state.settings.focus?.type === "pattern" ? "patterns" : "situations";
+  activeTab ??= ctx.state.settings.focus?.[0]?.type === "pattern" ? "patterns" : "situations";
   renderModes();
   show(activeTab);
 }
