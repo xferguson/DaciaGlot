@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
-  opInstruction, opPatterns, isUnlocked, slotsFor, transformUnits, pickPerSentence, newTransformCards,
+  FORM_LABELS, LEIPZIG, leipzigFor, opInstruction, opPatterns, isUnlocked, slotsFor, transformUnits, pickPerSentence, newTransformCards,
 } from "../app/js/core/cards.js";
 import { unitsRequiredForCard } from "../app/js/core/units.js";
 import { buildSession } from "../app/js/core/session.js";
@@ -129,7 +129,7 @@ test("slotsFor: negate with a clitic cluster", () => {
   const slots = slotsFor(s1, s1.transforms[0], content);
   assert.deepEqual(slots, [
     { type: "word", text: "ieri" },
-    { type: "slot", labels: ["not", "past"], patterns: ["neg-nu", "perfect-compus"].filter((p) => content.patterns.has(p)) },
+    { type: "slot", labels: ["not", "past"], gloss: ["nu", "aux-perf.1PL"], patterns: ["neg-nu", "perfect-compus"].filter((p) => content.patterns.has(p)) },
     { type: "word", text: "termina" },
     { type: "word", text: "sprint" },
   ]);
@@ -204,4 +204,42 @@ test("a due xf suppresses a due cz and any new card for the same sentence", () =
   assert.ok(ids.includes("xf:s1:0") && ids.includes("lr:s1"));
   assert.ok(!ids.includes("cz:s1:2"));
   assert.equal(ids.filter((id) => id.endsWith(":s1:1") || id.startsWith("sb:s1")).length, 0);
+});
+
+test("LEIPZIG covers every FORM_LABELS key", () => {
+  for (const k of Object.keys(FORM_LABELS)) assert.ok(k in LEIPZIG, k);
+  assert.equal(LEIPZIG.sgGenDat, "SG.DEF.GEN-DAT");
+  assert.equal(LEIPZIG.accShort, "ACC.CL");
+});
+
+test("leipzigFor: lemma gloss, lemmaGloss override, pronoun person first, small-caps used as is", () => {
+  assert.equal(leipzigFor({ id: "fi", pos: "verb", gloss: "to be" }, "pres2sg"), "be.PRS.2SG");
+  assert.equal(leipzigFor({ id: "locui", pos: "verb", gloss: "to live (somewhere)" }, "pres1sg"), "live.PRS.1SG");
+  assert.equal(leipzigFor({ id: "putea", pos: "verb", gloss: "to be able, can", lemmaGloss: "can" }, "inf"), "can.INF");
+  assert.equal(leipzigFor({ id: "nu", pos: "particle", gloss: "not", lemmaGloss: "NEG" }, "base"), "NEG");
+  assert.equal(leipzigFor({ id: "x", pos: "particle", gloss: "NEG" }, "short"), "NEG");
+  assert.equal(leipzigFor({ id: "pron-2sg", pos: "pron", gloss: "you" }, "accShort"), "2SG.ACC.CL");
+  assert.equal(leipzigFor({ id: "pron-3pl-f", pos: "pron", gloss: "them (f)" }, "datShort"), "3PL.F.DAT.CL");
+});
+
+test("slotsFor: a person change is glossed with the wanted form", () => {
+  const lx = [...lexemes, lex("fi", "a fi", { pres1sg: "sunt", pres2sg: "ești" }, { gloss: "to be" }), lex("cluj", "Cluj", { base: "Cluj" }, { pos: "noun" })];
+  const sent = {
+    id: "s3", ro: "Sunt din Cluj.", en: "I am from Cluj.", level: "A1", stage: 1, situations: ["x"], register: "neutral", patterns: [],
+    tokens: [tok("Sunt", [{ lex: "fi", form: "pres1sg" }]), tok("din", []), tok("Cluj.", [{ lex: "cluj", form: "base" }])],
+    transforms: [{ op: "person:1sg>2sg", ro: "Ești din Cluj.", targetTokens: [0] }],
+  };
+  const slots = slotsFor(sent, sent.transforms[0], makeContent([sent], lx, patterns));
+  assert.deepEqual(slots[0].gloss, ["be.PRS.2SG"]);
+});
+
+test("slotsFor: an unresolvable slot keeps the pattern label as the fallback", () => {
+  const sent = {
+    id: "s4", ro: "Am o problemă.", en: "I have a problem.", level: "A1", stage: 1, situations: ["x"], register: "neutral", patterns: ["have-pres"],
+    tokens: [tok("Am", [{ lex: "avea", form: "pres1sg", pattern: "have-pres", head: true }]), tok("o", [{ lex: "un", form: "f" }]), tok("problemă.", [{ lex: "problema", form: "sg" }])],
+    transforms: [{ op: "negate", ro: "Zzz o problemă.", targetTokens: [0] }],
+  };
+  const slots = slotsFor(sent, sent.transforms[0], makeContent([sent], lexemes, patterns));
+  assert.deepEqual(slots[0].gloss, []);
+  assert.deepEqual(slots[0].labels, ["not", "have"]);
 });

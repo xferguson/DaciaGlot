@@ -77,7 +77,7 @@ Card ids are strings. `core/cards.js` exports `parseCardId`, `buildCardId`, and 
 
 **Unlock rules** live in `cards.js` as `isUnlocked(cardId, state, content) → boolean` and follow PRD FR-D1…D6.
 
-`xf`/`sb` helpers in `cards.js`: `opInstruction(op)`, `transformPatterns(sentence, transform, content)` (the op's own pattern plus the patterns on `targetTokens`), `slotsFor(sentence, transform, content)`, `transformUnits(sentence, transform, content) → {u, lx}[]` (used by `unitsRequiredForCard` for both types), `newTransformCards(state, content, {cap, skip})`, and `pickPerSentence(cardIds)` (FR-D9: a sentence with a due `xf`/`sb` keeps only its best `xf` > `cz` > `sb` > `er` card).
+`xf`/`sb` helpers in `cards.js`: `opInstruction(op)`, `transformPatterns(sentence, transform, content)` (the op's own pattern plus the patterns on `targetTokens`), `slotsFor(sentence, transform, content)` (→ `{type:"word",text} | {type:"slot",labels,gloss,patterns}`; `gloss` has one Leipzig label per resolved result token via `leipzigFor(lexeme, formKey)`, `[]` when none resolve so the UI falls back to `labels`), `transformUnits(sentence, transform, content) → {u, lx}[]` (used by `unitsRequiredForCard` for both types), `newTransformCards(state, content, {cap, skip})`, and `pickPerSentence(cardIds)` (FR-D9: a sentence with a due `xf`/`sb` keeps only its best `xf` > `cz` > `sb` > `er` card).
 
 ## 4. Persisted state (`localStorage["dg:v1:state"]`)
 

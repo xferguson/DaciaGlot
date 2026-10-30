@@ -119,7 +119,8 @@
     "trivial": true,
     "forms": {
       "base": "o"
-    }
+    },
+    "lemmaGloss": "FUT"
   },
   {
     "id": "asta",
@@ -143,7 +144,8 @@
     "forms": {
       "msg": "același",
       "fsg": "aceeași"
-    }
+    },
+    "lemmaGloss": "same"
   },
   {
     "id": "hai",
@@ -199,7 +201,8 @@
     "pos": "particle",
     "gloss": "(dative marker before a masculine name)",
     "freq": 90,
-    "trivial": true
+    "trivial": true,
+    "lemmaGloss": "DAT"
   },
   {
     "id": "ca-conj",
@@ -620,7 +623,8 @@
       "fsg": "specifică",
       "mpl": "specifici",
       "fpl": "specifice"
-    }
+    },
+    "lemmaGloss": "specific"
   },
   {
     "id": "important",
@@ -709,7 +713,8 @@
       "sg": "dreptate",
       "sgDef": "dreptatea"
     },
-    "gender": "f"
+    "gender": "f",
+    "lemmaGloss": "right"
   },
   {
     "id": "termen",
@@ -1121,7 +1126,8 @@
       "pl": "sarmale",
       "plDef": "sarmalele"
     },
-    "gender": "f"
+    "gender": "f",
+    "lemmaGloss": "cabbage.roll"
   },
   {
     "id": "politician",
@@ -1173,7 +1179,8 @@
       "sg": "veste",
       "sgDef": "vestea"
     },
-    "gender": "f"
+    "gender": "f",
+    "lemmaGloss": "news"
   },
   {
     "id": "presa",
@@ -2203,7 +2210,8 @@
       "pres1sg",
       "pres3sg",
       "ppl"
-    ]
+    ],
+    "lemmaGloss": "like"
   },
   {
     "id": "aduce",

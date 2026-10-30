@@ -120,7 +120,7 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
 
 ## EXP-06 · Leipzig glosses on slot-building cards · [T30](tasks/T30-leipzig-slot-glosses.md)
 
-- **Status:** planned
+- **Status:** live since 2026-10-30
 - **Complaint:** `[I / you]` was read as a pronoun cue and the owner typed the form for *I* when *you* was wanted. "It's adding confusion by trying to make it easier."
 - **Hypothesis:** form-specific Leipzig glosses (`[be.PRS.2SG]`) remove wrong answers caused by an ambiguous label.
 - **Change:** slot labels come from the target form (`<gloss>.<LEIPZIG>`), falling back to the pattern label only when the form can't be resolved.
