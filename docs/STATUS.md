@@ -32,7 +32,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [T27](tasks/T27-whole-sentence-later.md) | Whole sentence later, with part-level credit | 3.5 | T25, T26 | todo | | EXP-03. `er` misses send only the wrong part back. |
 | [T28](tasks/T28-produce-claims.md) | "I can produce this" claims | 3.5 | T25 | todo | | EXP-04. Per form, trusted; EN→RO miss removes the claim. |
 | [T29](tasks/T29-sentence-families.md) | Sentence families: paradigm batch + one random probe | 3.5 | T25, T26 | todo | | EXP-05. |
-| [T30](tasks/T30-leipzig-slot-glosses.md) | Leipzig glosses on slot-building cards | 3.5 | none | review | ccr-089e3d24-6acdga | `cards.js` exports `LEIPZIG`, `leipzigFor`; `slotsFor` slots gained `gloss: string[]` (`[]` → UI falls back to `labels`). Optional `lemmaGloss` on lexemes (validator rule 12, also allows small-caps labels like `NEG`); set on 14 ambiguous/grammatical lexemes. CONTENT_GUIDE §9. APP_VERSION 0.8.1. Phone-width check done headless only. |
+| [T30](tasks/T30-leipzig-slot-glosses.md) | Leipzig glosses on slot-building cards | 3.5 | none | done | ccr-089e3d24-6acdga | `cards.js` exports `LEIPZIG`, `leipzigFor`; `slotsFor` slots gained `gloss: string[]` (`[]` → UI falls back to `labels`). Optional `lemmaGloss` on lexemes (validator rule 12, also allows small-caps labels like `NEG`); set on 14 ambiguous/grammatical lexemes. CONTENT_GUIDE §9. APP_VERSION 0.8.1. Phone-width check done headless only. |
 
 **Phase 3.5 · Less repetition.** Every T25–T30 task is a product experiment logged in [`EXPERIMENTS.md`](EXPERIMENTS.md). When its PR merges, set the experiment's status to `live since <date>`.
 
