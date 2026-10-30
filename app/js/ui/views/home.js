@@ -1,4 +1,4 @@
-import { dueCount } from "../../core/session.js";
+import { dueCount, mixPlan } from "../../core/session.js";
 import { levelProgress } from "../../core/mastery.js";
 import { ring } from "../components/ring.js";
 import { currentLevelId } from "./dashboard.js";
@@ -8,14 +8,19 @@ let activeTab = "situations";
 
 export function render(root, ctx) {
   const due = ctx.content ? dueCount(ctx.state, ctx.content, Date.now()) : 0;
+  const full = ctx.state.settings.newPerSession;
+  const { newCount } = mixPlan(due, full);
+  const mixSub = !newCount ? "all review today" : due ? `${due} due + up to ${newCount} new` : `up to ${newCount} new`;
   root.innerHTML = `
     <h1>DaciaGlot</h1>
     <p class="muted" lang="ro">Hai să vorbim românește.</p>
     <section class="card">
       <p><strong data-due>${due}</strong> cards due</p>
-      <div class="row">
-        <a class="btn" href="#/session?mode=quick">Quick</a>
-        <a class="btn secondary" href="#/session?mode=session">Session</a>
+      <div class="modes">
+        <a class="btn mode" href="#/session?mode=mix">Mix<small>${mixSub}</small></a>
+        <a class="btn secondary mode" href="#/session?mode=quick">Quick<small>≤ 15 due · 5 min</small></a>
+        <a class="btn secondary mode" href="#/session?mode=learn">Learn<small>up to ${full} new</small></a>
+        <a class="btn secondary mode" href="#/session?mode=review">Review<small>${due ? `all ${due} due` : "nothing due"}</small></a>
       </div>
     </section>
     <section aria-label="Choose focus">

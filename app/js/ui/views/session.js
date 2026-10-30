@@ -1,5 +1,5 @@
-// Study loop: Quick / Session (PRD FR-S2…S9). Renders T07 cards one after another.
-import { buildSession, gradeFromResult, applyReview, addMinutes, requeueWrong } from "../../core/session.js";
+// Study loop: Quick / Mix / Learn / Review / Focus (PRD FR-S2…S9). Renders T07 cards one after another.
+import { buildSession, SEC_PER_REVIEW, gradeFromResult, applyReview, addMinutes, requeueWrong } from "../../core/session.js";
 import { parseCardId, exampleSentenceFor } from "../../core/cards.js";
 import { unitsRequiredForCard } from "../../core/units.js";
 import { renderCard as renderLr } from "./card-lr.js";
@@ -15,15 +15,22 @@ import { allPatternStates } from "../../core/mastery.js";
 import { summarize, renderSummary } from "./summary.js";
 
 const QUICK_MS = 5 * 60 * 1000;
+const MODES = ["quick", "mix", "learn", "review"];
+const TITLES = { quick: "Quick", mix: "Mix", learn: "Learn", review: "Review", session: "Session" };
+const EMPTY = {
+  learn: "No new sentences are ready right now. Review what's due and they'll unlock.",
+  review: "Nothing is due. Nice work.",
+};
 const RENDERERS = { lr: renderLr, cz: renderCz, kf: renderKf, xf: renderXf, sb: renderSb, er: renderEr };
 
 export function render(root, ctx) {
   const params = ctx.route?.params ?? {};
-  const mode = params.mode === "quick" ? "quick" : "session";
+  // Old links (`mode=session`) open Mix; focus sessions keep the full `newPerSession` (FR-S8).
+  const mode = MODES.includes(params.mode) ? params.mode : params.mode === "focus" ? "session" : "mix";
   const focus = params.mode === "focus" && (params.type === "pattern" || params.type === "situation") && params.id
     ? { type: params.type, id: params.id }
     : null;
-  const { queue, estimateSec, blocked, suggest } = buildSession({
+  const { queue, estimateSec, blocked, suggest, plan } = buildSession({
     mode, focus, state: ctx.state, content: ctx.content, now: Date.now(), rng: Math.random,
   });
   let cardCleanup = null;
@@ -60,8 +67,8 @@ export function render(root, ctx) {
       return;
     }
     if (!queue.length) {
-      root.innerHTML = `<h1>${mode === "quick" ? "Quick" : "Session"}</h1>
-        <p class="muted">Nothing to study right now.</p>${home}`;
+      root.innerHTML = `<h1>${TITLES[mode]}</h1>
+        <p class="muted">${EMPTY[mode] ?? "Nothing to study right now."}</p>${home}`;
       return;
     }
     if (mode === "quick") return begin();
@@ -69,12 +76,22 @@ export function render(root, ctx) {
     const fresh = queue.filter((q) => q.isNew && q.cardId.startsWith("lr:")).length;
     const forms = queue.filter((q) => q.isNew && q.cardId.startsWith("kf:")).length;
     const drills = queue.filter((q) => q.isNew && /^(xf|sb|er):/.test(q.cardId)).length;
-    root.innerHTML = `<h1>${focus ? "Focus: <span data-focus></span>" : "Session"}</h1>
-      <section class="card"><p>${queue.length} cards · ${fresh} new sentences${forms ? ` · ${forms} new forms` : ""}${drills ? ` · ${drills} new drills` : ""}</p>
+    const reviews = queue.filter((q) => !q.isNew).length;
+    root.innerHTML = `<h1>${focus ? "Focus: <span data-focus></span>" : TITLES[mode]}</h1>
+      <section class="card"><p>${queue.length} cards · ${mode === "learn" ? "" : `${reviews} reviews · `}${fresh} new sentence${fresh === 1 ? "" : "s"}${forms ? ` · ${forms} new forms` : ""}${drills ? ` · ${drills} new drills` : ""}</p>
+      ${plan ? `<p>${mixNote(plan, reviews, ctx.state.settings.newPerSession)}</p>` : ""}
       <p class="muted">≈ ${mins} min</p>
       <button class="btn block" data-start>Start</button></section>${home}`;
     fillNames();
     root.querySelector("[data-start]").addEventListener("click", begin);
+  }
+
+  function mixNote({ newCount }, reviews, full) {
+    const reviewPct = Math.round((100 * reviews * SEC_PER_REVIEW) / Math.max(estimateSec, 1));
+    const split = `≈ ${reviewPct}% review · ${100 - reviewPct}% new.`;
+    if (newCount >= full) return `${split} Light review load, so up to ${full} new sentences.`;
+    if (newCount > 0) return `${split} ${reviews} reviews due, so only ${newCount} new sentences today.`;
+    return `All review today: ${reviews} cards are due. Catch up first, or use Learn for new material anyway.`;
   }
 
   function begin() {

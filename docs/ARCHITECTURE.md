@@ -253,8 +253,9 @@ A sentence is mastered when it has ≥1 production card (`cz`, `xf` or `er`) wit
 ## 8. Sessions (`core/session.js`)
 
 ```js
-buildSession({ mode /* "quick"|"session"|"focus" */, focus, state, content, now, rng, newSentenceIds })
-  → { queue: QueueItem[], estimateSec: number }
+buildSession({ mode /* "quick"|"review"|"learn"|"mix"|"session" */, focus, state, content, now, rng, newSentenceIds })
+  → { queue: QueueItem[], estimateSec: number, blocked?, suggest?, plan? /* mix only */ }
+mixPlan(due, newPerSession) → { newCount, reviewPct }  // PRD FR-S10: new sentences fill MIX_BUDGET_SEC (720) after due reviews
 gradeFromResult({ result, usedHint, attemptNo, tooEasy }) → 1|2|3|4     // PRD FR-S2
 applyReview(state, cardId, grade, unitsRequired /* {u,lx}[] */, now, content) → AppState  // FSRS + attempts + history (pure; returns new state). `content` is only used for `lr` exposure.
 dueCards(state, content, now) → string[]      // due + unlocked card ids, most overdue first

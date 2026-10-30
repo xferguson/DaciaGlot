@@ -7,6 +7,21 @@ import { pickNewSentences } from "./select.js";
 export const QUICK_CAP = 15;
 export const SEC_PER_REVIEW = 12;
 export const SEC_PER_NEW = 40;
+/** Mix aims for a session of about this long: due reviews first, new sentences fill what's left. */
+export const MIX_BUDGET_SEC = 12 * 60;
+
+/**
+ * Mix mode: how many new sentences to add given the review load. All due cards stay in; new
+ * sentences fill the rest of `MIX_BUDGET_SEC`, at most `newPerSession`, and drop to 0 once reviews fill it.
+ * `reviewPct` is the review share of the estimated time.
+ * @returns {{newCount: number, reviewPct: number}}
+ */
+export function mixPlan(due, newPerSession) {
+  const room = Math.floor((MIX_BUDGET_SEC - due * SEC_PER_REVIEW) / SEC_PER_NEW);
+  const newCount = Math.max(0, Math.min(newPerSession, room));
+  const total = due * SEC_PER_REVIEW + newCount * SEC_PER_NEW;
+  return { newCount, reviewPct: total ? Math.round((100 * due * SEC_PER_REVIEW) / total) : 0 };
+}
 
 /** PRD FR-S2. */
 export function gradeFromResult({ result, usedHint = false, attemptNo = 1, tooEasy = false }) {
@@ -56,25 +71,36 @@ function chunk(list, parts) {
 }
 
 /**
- * Quick: due cards only, capped at 15. Session: due cards plus new sentences (`lr`, then `cz`),
- * chosen by `select.js` (FR-S5; the FR-S4 interim order is the cold-start fallback), spread so two new sentences' `lr` cards are never adjacent, then newly unlocked `kf` (T14), `xf`/`sb` (T15) and `er` (T20) cards. Due cards are thinned per sentence (FR-D9).
- * @returns {{queue: {cardId: string, isNew: boolean}[], estimateSec: number, blocked?: true, suggest?: {type: string, id: string}|null}}
+ * Modes (PRD FR-S6, FR-S7, FR-S10):
+ * - `quick`: due cards only, capped at 15.
+ * - `review`: every due card, nothing new.
+ * - `learn`: new material only (no due cards): `newPerSession` new sentences plus newly unlocked drills.
+ * - `mix`: all due cards plus as many new sentences as `mixPlan` allows; no new drills when it allows none.
+ * - `session` (also used for focus): all due cards plus `newPerSession` new sentences.
+ * New sentences (`lr`, then `cz`) are chosen by `select.js` (FR-S5; the FR-S4 interim order is the cold-start fallback), spread so two new sentences' `lr` cards are never adjacent, then newly unlocked `kf` (T14), `xf`/`sb` (T15) and `er` (T20) cards. Due cards are thinned per sentence (FR-D9).
+ * @returns {{queue: {cardId: string, isNew: boolean}[], estimateSec: number, blocked?: true, suggest?: {type: string, id: string}|null, plan?: {newCount: number, reviewPct: number}}}
  */
 export function buildSession({ mode, focus = null, state, content, now, rng, newSentenceIds }) {
   const dueIds = pickPerSentence(focusFirst(dueCards(state, content, now), focus, content));
-  const due = dueIds.map((cardId) => ({ cardId, isNew: false }));
-  if (mode === "quick") {
-    const queue = due.slice(0, QUICK_CAP);
+  const allDue = dueIds.map((cardId) => ({ cardId, isNew: false }));
+  if (mode === "quick" || mode === "review") {
+    const queue = mode === "quick" ? allDue.slice(0, QUICK_CAP) : allDue;
     return { queue, estimateSec: queue.length * SEC_PER_REVIEW };
   }
+  const due = mode === "learn" ? [] : allDue;
+  const plan = mode === "mix" ? mixPlan(due.length, state.settings.newPerSession) : null;
+  if (plan && plan.newCount === 0 && !newSentenceIds) {
+    return { queue: due, estimateSec: due.length * SEC_PER_REVIEW, plan };
+  }
+  const want = plan ? plan.newCount : state.settings.newPerSession;
   let ids = newSentenceIds;
   if (!ids) {
-    const pick = pickNewSentences(state.settings.newPerSession, { focus, state, content, now, rng });
+    const pick = pickNewSentences(want, { focus, state, content, now, rng });
     if (pick.blocked) {
       const queue = due.slice();
       return { queue, estimateSec: queue.length * SEC_PER_REVIEW, blocked: true, suggest: pick.suggest };
     }
-    ids = pick.sentences.length || focus ? pick.sentences : interimNewSentences(state.settings.newPerSession, state, content);
+    ids = pick.sentences.length || focus ? pick.sentences : interimNewSentences(want, state, content);
   }
   const groups = ids
     .map((id) => content.sentences.get(id))
@@ -96,7 +122,8 @@ export function buildSession({ mode, focus = null, state, content, now, rng, new
   const taken = new Set([...busy, ...xf.map((x) => parseCardId(x.cardId).sentenceId)]);
   const er = newErCards(state, content, { skip: taken }).map((cardId) => ({ cardId, isNew: true }));
   queue.push(...kf, ...xf, ...er);
-  return { queue, estimateSec: due.length * SEC_PER_REVIEW + (k + kf.length + xf.length + er.length) * SEC_PER_NEW };
+  const estimateSec = due.length * SEC_PER_REVIEW + (k + kf.length + xf.length + er.length) * SEC_PER_NEW;
+  return plan ? { queue, estimateSec, plan } : { queue, estimateSec };
 }
 
 export function dayKey(now) {
