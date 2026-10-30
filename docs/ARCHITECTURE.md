@@ -64,26 +64,35 @@ The JSON shapes of `Sentence`, `Lexeme`, `Pattern` and `Level` are defined in CO
 
 ## 3. Cards
 
-Card ids are strings. `core/cards.js` exports `parseCardId`, `buildCardId`, and `cardsForSentence(sentence, content)`.
+Card ids are strings. `core/cards.js` exports `parseCardId`, `buildCardId`, and `cardsForSentence(sentence, content, state?)` (→ `lr:<sid>` plus an `fm` id for each lexeme-form unit of a `cloze: true` token that has no card in `state.cards`).
 
 | Type | Id format | Example |
 |---|---|---|
 | Listen & recognize | `lr:<sentenceId>` | `lr:s-a1-standup-0012` |
-| Cloze | `cz:<sentenceId>:<tokenIndex>` | `cz:s-a1-standup-0012:2` |
-| Key forms | `kf:<lexemeId>:<formKey>` | `kf:gasi:pres3sg` |
+| Word form | `fm:<lexemeId>:<formKey>` | `fm:fi:pres3sg` |
+| Cloze (presentation of `fm`) | `cz:<sentenceId>:<tokenIndex>` | `cz:s-a1-standup-0012:2` |
+| Key forms (presentation of `fm`) | `kf:<lexemeId>:<formKey>` | `kf:gasi:pres3sg` |
 | Transformation | `xf:<sentenceId>:<transformIndex>` | `xf:s-a1-standup-0012:0` |
 | Slot-building | `sb:<sentenceId>:<transformIndex>` | `sb:s-a1-standup-0012:0` |
 | EN→RO | `er:<sentenceId>` | `er:s-a1-standup-0012` |
 
+**One schedule per word form (T25).** `fm` is the only card stored in `state.cards` for a lexeme-form unit; `cz` and `kf` are never stored (schema ≥ 2) and exist only as ids on `attempt.card`. `core/carrier.js`:
+
+- `carriersFor(unitId, state, content) → {sentenceId, tokenIndex}[]`: seen sentences with a token carrying the unit (`cloze: true`, or the unit is the token's only unit).
+- `pickCarrier(unitId, state, content, {now, rng, exclude, recent = 3}) → {sentenceId, tokenIndex} | null`: skips sentences named in the unit's last 3 attempts and in `exclude`; prefers the fewest unknown other units, then the longest since the sentence was used, then `rng`.
+- `resolveFm(fmId, state, content, {now, rng, exclude, prefer}) → {type: "cz", presentedId, sentenceId, tokenIndex} | {type: "kf", presentedId} | null`: a cloze carrier (`prefer` = the sentence a new `fm` came from), else the key-form drill if the lexeme's `keyForms` has the form, else the least recent carrier, else `null`.
+
+The session view calls `resolveFm` at render time and passes the presented id to `applyReview` as the last argument.
+
 **Unlock rules** live in `cards.js` as `isUnlocked(cardId, state, content) → boolean` and follow PRD FR-D1…D6.
 
-`xf`/`sb` helpers in `cards.js`: `opInstruction(op)`, `transformPatterns(sentence, transform, content)` (the op's own pattern plus the patterns on `targetTokens`), `slotsFor(sentence, transform, content)`, `transformUnits(sentence, transform, content) → {u, lx}[]` (used by `unitsRequiredForCard` for both types), `newTransformCards(state, content, {cap, skip})`, and `pickPerSentence(cardIds)` (FR-D9: a sentence with a due `xf`/`sb` keeps only its best `xf` > `cz` > `sb` > `er` card).
+`xf`/`sb` helpers in `cards.js`: `opInstruction(op)`, `transformPatterns(sentence, transform, content)` (the op's own pattern plus the patterns on `targetTokens`), `slotsFor(sentence, transform, content)`, `transformUnits(sentence, transform, content) → {u, lx}[]` (used by `unitsRequiredForCard` for both types), `newTransformCards(state, content, {cap, skip})`, and `pickPerSentence(cardIds)` (FR-D9: a sentence with a due `xf`/`sb` keeps only its best `xf` > `cz` > `sb` > `er` card; an `fm` has no sentence until it is shown, so it is not thinned).
 
 ## 4. Persisted state (`localStorage["dg:v1:state"]`)
 
 ```js
 /** @typedef {Object} AppState
- * @property {1} schemaVersion
+ * @property {2} schemaVersion   // 1 → 2 (T25): `cz`/`kf` cards fold into `fm` cards
  * @property {string} contentVersion           // last content version seen
  * @property {number} createdAt
  * @property {Settings} settings
@@ -142,7 +151,7 @@ Card ids are strings. `core/cards.js` exports `parseCardId`, `buildCardId`, and 
  * @property {string} lx   // head lexeme id (for pattern units: the lexeme realizing it)
  * @property {0|1} c       // correct
  * @property {number} t    // ms epoch
- * @property {string} card // card id that produced it
+ * @property {string} card // id the card was presented as (`cz:…`/`kf:…` for an `fm`), so rotation can see its history
  */
 /** @typedef {Object} UnitAggregate
  * @property {number} n          // total attempts folded
@@ -152,7 +161,11 @@ Card ids are strings. `core/cards.js` exports `parseCardId`, `buildCardId`, and 
  */
 ```
 
-### 4.4 Store API (`data/store.js`)
+### 4.4 Migration 1 → 2
+
+`migrations[1]` (content-free) renames `kf:<lex>:<form>` cards and `difficult` keys to `fm:<lex>:<form>`. `foldClozeCards(state, content)` (`data/migrations.js`; run by `main.js` after the content loads and after a backup import) folds each `cz:<sid>:<i>` card into the `fm` of every lexeme-form unit of that token: per `fm`, the CardState with the highest `stability` wins (ties: latest `lastReview`), `lapses` are summed, `difficult` is remapped, a `cz` whose sentence is gone is dropped. `attempts` and `unitAggregates` are unchanged. It is idempotent and returns the same object when no `cz` card is left.
+
+### 4.5 Store API (`data/store.js`)
 
 ```js
 load() → AppState                 // runs migrations; handles corruption per PRD NFR-6
@@ -239,11 +252,11 @@ All functions are pure: `(state, content, now) → …`.
 | `unseen` | Never appeared in an introduced sentence |
 | `seen` | Appeared |
 | `produced` | ≥1 correct attempt |
-| `stable` | ≥1 card requiring it with stability ≥ 21 days and the last attempt correct |
+| `stable` | The unit's `fm` card (or another card requiring it) has stability ≥ 21 days and the last attempt was correct |
 
 ### 7.3 Sentence mastered
 
-A sentence is mastered when it has ≥1 production card (`cz`, `xf` or `er`) with stability ≥ 7 days, and that card's last review was correct.
+A sentence is mastered when every `cloze: true` unit's `fm` card has stability ≥ 7 days and the unit's last attempt was correct, **or** the sentence's `xf` or `er` card has stability ≥ 7 days and its last review was correct. (An attempt that was folded away falls back to the card being in the Review state.)
 
 ### 7.4 Level completion
 
@@ -260,20 +273,20 @@ buildSession({ mode /* "quick"|"review"|"learn"|"mix"|"session" */, focus /* fil
   → { queue: QueueItem[], estimateSec: number, blocked?, suggest?, plan? /* mix only */ }
 mixPlan(due, newPerSession) → { newCount, reviewPct }  // PRD FR-S10: new sentences fill MIX_BUDGET_SEC (720) after due reviews
 gradeFromResult({ result, usedHint, attemptNo, rating /* "hard"|"medium"|"easy"|null */ }) → 1|2|3|4     // PRD FR-S2
-applyReview(state, cardId, grade, unitsRequired /* {u,lx}[] */, now, content) → AppState  // FSRS + attempts + history (pure; returns new state). `content` is only used for `lr` exposure.
+applyReview(state, cardId, grade, unitsRequired /* {u,lx}[] */, now, content, presentedId = cardId) → AppState  // FSRS on `cardId` + attempts (recorded with `card: presentedId`) + history (pure; returns new state). `content` is only used for `lr` exposure.
 dueCards(state, content, now) → string[]      // due + unlocked card ids, most overdue first
 dueCount(state, content, now) → number
 requeueWrong(queue, pos, item, rng, content?) → number  // PRD FR-S9: splice a wrong card back 3–5 cards later (with content: up to 3 more, away from related cards)
-inFocus(cardId, focus, content) → boolean      // FR-S8: card's sentence is in any focus topic (kf never; empty focus → true). `focus` is one {type,id}, a list, or null everywhere.
+inFocus(cardId, focus, content, state?) → boolean      // FR-S8: card's sentence is in any focus topic; an `fm` is in focus if any seen carrier sentence is (needs `state`); legacy kf never; empty focus → true. `focus` is one {type,id}, a list, or null everywhere.
 dueInFocus(state, content, now, focus) → string[]  // dueCards filtered by inFocus
-cardKeys(item, content) → Set<string>          // "s:<sentence>", "l:<target lexeme>", "new" for a new lr
+cardKeys(item, content) → Set<string>          // "s:<sentence>" (also the `from` sentence of a new `fm`), "l:<target lexeme>", "new" for a new lr
 spaceOut(queue, content) → QueueItem[]        // PRD FR-S11; buildSession applies it to every queue
-keepStarted(state, remainingQueue, now) → AppState  // on leaving early: unreached new cz of an introduced sentence → new card due now
+keepStarted(state, remainingQueue, now) → AppState  // on leaving early: unreached new fm (with `from`) of an introduced sentence → new card due now
 markDifficult(state, cardId, now) → AppState  // FR-S9: second Hard/Again in a session
 ladderDays(prevGapDays, grade) → number       // FR-S1: Medium 1→4→16→64→256 d; Easy ×3, capped at 256
 ```
 
-`QueueItem = { cardId, isNew: boolean }`.
+`QueueItem = { cardId, isNew: boolean, from?: string }`. `from` is the sentence a new `fm` was created with; the view shows that sentence first.
 
 - The caller gets `newSentenceIds` from `select.js` in Phase 2+, or from the FR-S4 interim order in Phase 1.
 - The UI re-queues a wrong card per FR-S9 by splicing the queue (`requeueWrong`).

@@ -49,7 +49,7 @@ test("Quick: most overdue first, capped at 15, only due", () => {
   assert.equal(dueCards(st, content, NOW).length, 20);
 });
 
-test("Session: no two new lr cards adjacent; new cz follow their lr", () => {
+test("Session: no two new lr cards adjacent; new fm follow their lr", () => {
   const st = withDue(10);
   const ids = ["s20", "s21", "s22", "s23"];
   const { queue, estimateSec } = buildSession({ mode: "session", state: st, content, now: NOW, rng, newSentenceIds: ids });
@@ -57,7 +57,7 @@ test("Session: no two new lr cards adjacent; new cz follow their lr", () => {
   assert.equal(newLr.length, 4);
   for (let i = 1; i < newLr.length; i++) assert.ok(newLr[i] - newLr[i - 1] > 1);
   for (const id of ids) {
-    assert.ok(queue.findIndex((q) => q.cardId === `lr:${id}`) < queue.findIndex((q) => q.cardId === `cz:${id}:0`));
+    assert.ok(queue.findIndex((q) => q.cardId === `lr:${id}`) < queue.findIndex((q) => q.cardId === `fm:a${id.slice(1)}:base`));
   }
   assert.equal(queue.length, 10 + 8);
   assert.equal(estimateSec, 10 * 12 + 4 * 40);
@@ -69,6 +69,12 @@ test("Session uses interim order when newSentenceIds absent, honoring newPerSess
   assert.deepEqual(interimNewSentences(3, st, content), ["s00", "s01", "s02"]);
   const { queue } = buildSession({ mode: "session", state: st, content, now: NOW, rng });
   assert.equal(queue.filter((q) => q.cardId.startsWith("lr:")).length, 3);
+});
+
+test("applyReview: an fm card records attempts under the presented id", () => {
+  const st = applyReview(state(), "fm:a0:base", 3, [{ u: "a0.base", lx: "a0" }], NOW, content, "cz:s00:0");
+  assert.deepEqual(st.attempts, [{ u: "a0.base", lx: "a0", c: 1, t: NOW, card: "cz:s00:0" }]);
+  assert.ok(st.cards["fm:a0:base"] && !st.cards["cz:s00:0"]);
 });
 
 test("applyReview: cz records attempts, lr records exposure only", () => {
@@ -182,17 +188,17 @@ test("requeueWrong with content skips past a related neighbour", () => {
   assert.equal(q[6].cardId, "cz:s00:0");
 });
 
-test("keepStarted: an introduced sentence's unreached cz cards come back as new cards", () => {
+test("keepStarted: an introduced sentence's unreached fm cards come back as new cards", () => {
   const st = state();
   st.cards["lr:s00"] = newCard(NOW);
   const out = keepStarted(st, [
-    { cardId: "cz:s00:0", isNew: true }, // lr reviewed → kept
-    { cardId: "lr:s01", isNew: true }, { cardId: "cz:s01:0", isNew: true }, // never started → dropped
-    { cardId: "cz:s02:0", isNew: false }, // a due review, already in state elsewhere
+    { cardId: "fm:a0:base", isNew: true, from: "s00" }, // lr reviewed → kept
+    { cardId: "lr:s01", isNew: true }, { cardId: "fm:a1:base", isNew: true, from: "s01" }, // never started → dropped
+    { cardId: "fm:a2:base", isNew: false }, // a due review, already in state elsewhere
   ], NOW);
-  assert.deepEqual(Object.keys(out.cards).sort(), ["cz:s00:0", "lr:s00"]);
-  assert.equal(out.cards["cz:s00:0"].due, NOW);
-  assert.equal(st.cards["cz:s00:0"], undefined); // input not mutated
+  assert.deepEqual(Object.keys(out.cards).sort(), ["fm:a0:base", "lr:s00"]);
+  assert.equal(out.cards["fm:a0:base"].due, NOW);
+  assert.equal(st.cards["fm:a0:base"], undefined); // input not mutated
 });
 
 test("markDifficult records the card", () => {

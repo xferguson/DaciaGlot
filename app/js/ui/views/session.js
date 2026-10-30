@@ -2,6 +2,7 @@
 import { buildSession, gradeFromResult, applyReview, addMinutes, requeueWrong, keepStarted, markDifficult } from "../../core/session.js";
 import { parseCardId, exampleSentenceFor } from "../../core/cards.js";
 import { unitsRequiredForCard } from "../../core/units.js";
+import { resolveFm } from "../../core/carrier.js";
 import { renderCard as renderLr } from "./card-lr.js";
 import { renderCard as renderCz } from "./card-cloze.js";
 import { renderCard as renderKf } from "./card-keyform.js";
@@ -37,6 +38,7 @@ export function render(root, ctx) {
   let startedAt = 0;
   let finished = false;
   const stats = { cards: 0, correct: 0, newSentences: 0, difficult: 0 };
+  const carriersUsed = new Set(); // sentences an `fm` card was already shown in this session
   const struggled = new Set(); // cards graded Hard or Again once already this session (FR-S9)
   const patternsBefore = allPatternStates(ctx.state, ctx.content, Date.now());
 
@@ -112,7 +114,17 @@ export function render(root, ctx) {
     if (pos >= queue.length || timeUp) return finish();
     progress();
     const item = queue[pos];
-    const p = parseCardId(item.cardId);
+    // An `fm` card is the schedule of one word form; it is shown as a cloze in a fresh sentence, or as a key-form drill.
+    let shown = item.cardId;
+    if (parseCardId(item.cardId).type === "fm") {
+      const r = resolveFm(item.cardId, ctx.state, ctx.content, {
+        now: Date.now(), rng: Math.random, exclude: carriersUsed, prefer: item.isNew ? item.from : undefined,
+      });
+      if (!r) { pos++; return next(); }
+      shown = r.presentedId;
+      if (r.sentenceId) carriersUsed.add(r.sentenceId);
+    }
+    const p = parseCardId(shown);
     const sentence = p.type === "kf"
       ? exampleSentenceFor(p.lexemeId, p.formKey, ctx.state, ctx.content)
       : ctx.content.sentences.get(p.sentenceId);
@@ -134,7 +146,7 @@ export function render(root, ctx) {
       }));
     }
     cardCleanup = draw(slot, {
-      card: item.cardId,
+      card: shown,
       sentence,
       content: ctx.content,
       tts: ctx.tts,
@@ -143,7 +155,7 @@ export function render(root, ctx) {
         const grade = gradeFromResult(r);
         const now = Date.now();
         const seenBefore = Object.keys(ctx.state.seenSentences).length;
-        ctx.state = applyReview(ctx.state, item.cardId, grade, unitsRequiredForCard(item.cardId, ctx.content), now, ctx.content);
+        ctx.state = applyReview(ctx.state, item.cardId, grade, unitsRequiredForCard(shown, ctx.content), now, ctx.content, shown);
         ctx.store.save(ctx.state);
         stats.cards++;
         if (grade > 1) stats.correct++;

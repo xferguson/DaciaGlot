@@ -1,5 +1,5 @@
 // Mastery derivation and attempt compaction (ARCHITECTURE §7, PRD FR-P1/P2/X5). Pure: `now` is passed in.
-import { parseCardId } from "./cards.js";
+import { parseCardId, clozeUnitIds, fmIdForUnit } from "./cards.js";
 import { unitsRequiredForCard } from "./units.js";
 
 const DAY = 86400000;
@@ -58,11 +58,25 @@ function unitStats(unit, state) {
   return { n, accuracy: n ? correct / n : 0, lexemes: lexemes.size, everCorrect, raw };
 }
 
-/** Does a non-`lr`, non-`kf` card exercise `unit`? */
+/** Does an `fm` card's unit realize pattern `patternId` in any sentence token? */
+function fmCarriesPattern(lex, form, patternId, content) {
+  for (const sid of content.sentencesByLexeme.get(lex) ?? []) {
+    const s = content.sentences.get(sid);
+    if (s?.tokens.some((t) => t.units.some((u) => u.lex === lex && u.form === form && u.pattern === patternId))) return true;
+  }
+  return false;
+}
+
+/** Does a non-`lr`, non-`kf` card exercise `unit`? An `fm` card carries its own unit and the patterns that unit realizes. */
 function cardCarries(cardId, unit, content) {
   let p;
   try { p = parseCardId(cardId); } catch { return false; }
   if (p.type === "lr" || p.type === "kf") return false;
+  if (p.type === "fm") {
+    return unit.startsWith("pat:")
+      ? fmCarriesPattern(p.lexemeId, p.formKey, unit.slice(4), content)
+      : unit === `${p.lexemeId}.${p.formKey}`;
+  }
   if (p.type === "cz") return unitsRequiredForCard(cardId, content).some((r) => r.u === unit);
   const s = content.sentences.get(p.sentenceId);
   if (!s) return false;
@@ -116,43 +130,57 @@ export function unitState(unitId, state, content, now) {
   return "unseen";
 }
 
-/** ARCHITECTURE §7.3: a production card with stability ≥ 7 days whose last review was correct. */
-export function sentenceMastered(id, state, content, now) {
-  const s = fold(state, now);
-  for (const [cid, c] of Object.entries(s.cards)) {
-    let p;
-    try { p = parseCardId(cid); } catch { continue; }
-    if (p.sentenceId !== id || !["cz", "xf", "er"].includes(p.type)) continue;
-    if (c.stability < MASTERED_DAYS) continue;
-    let last = null;
-    for (const a of s.attempts) if (a.card === cid && (!last || a.t >= last.t)) last = a;
-    // No attempt left (folded away): a card still in Review (not Relearning) last passed.
-    if (last ? last.c === 1 : c.state === 2) return true;
+/** Latest attempt per card id and per unit id (ties go to the later one in the list). */
+function latestAttempts(s) {
+  const byCard = new Map();
+  const byUnit = new Map();
+  for (const a of s.attempts) {
+    const c = byCard.get(a.card);
+    if (!c || a.t >= c.t) byCard.set(a.card, a);
+    const u = byUnit.get(a.u);
+    if (!u || a.t >= u.t) byUnit.set(a.u, a);
   }
-  return false;
+  return { byCard, byUnit };
 }
 
-/** Every mastered sentence id in one pass over the cards and attempts (same rule as `sentenceMastered`, for dashboards). */
-export function masteredSentenceIds(state, content, now) {
-  const s = fold(state, now);
-  const cand = new Map(); // production card id → sentence id, for cards with stability ≥ 7 days
+/** A card with stability ≥ 7 days whose last attempt (`last`) was correct; with no attempt left, one still in Review. */
+const passed = (card, last) => !!card && card.stability >= MASTERED_DAYS && (last ? last.c === 1 : card.state === 2);
+
+/** Sentence ids with a passed whole-sentence production card (`xf`, `er`). */
+function wholeSentencePassed(s, latest) {
+  const out = new Set();
   for (const [cid, c] of Object.entries(s.cards)) {
     if (c.stability < MASTERED_DAYS) continue;
     let p;
     try { p = parseCardId(cid); } catch { continue; }
-    if (["cz", "xf", "er"].includes(p.type) && content.sentences.has(p.sentenceId)) cand.set(cid, p.sentenceId);
+    if ((p.type === "xf" || p.type === "er") && passed(c, latest.byCard.get(cid))) out.add(p.sentenceId);
   }
-  const last = new Map();
-  for (const a of s.attempts) {
-    if (!cand.has(a.card)) continue;
-    const cur = last.get(a.card);
-    if (!cur || a.t >= cur.t) last.set(a.card, a);
-  }
+  return out;
+}
+
+/** Every cloze unit's `fm` card is stable and last answered correctly, or the sentence has a passed `xf`/`er` card. */
+function isMastered(sentenceId, s, content, latest, whole) {
+  const sentence = content.sentences.get(sentenceId);
+  if (!sentence) return false;
+  const units = clozeUnitIds(sentence);
+  if (units.length && units.every((u) => passed(s.cards[fmIdForUnit(u)], latest.byUnit.get(u)))) return true;
+  return whole.has(sentenceId);
+}
+
+/** ARCHITECTURE §7.3: all cloze `fm` cards stable (≥ 7 days, last attempt correct), or an `xf`/`er` card of the sentence is. */
+export function sentenceMastered(id, state, content, now) {
+  const s = fold(state, now);
+  const latest = latestAttempts(s);
+  return isMastered(id, s, content, latest, wholeSentencePassed(s, latest));
+}
+
+/** Every mastered sentence id (same rule as `sentenceMastered`, for dashboards). */
+export function masteredSentenceIds(state, content, now) {
+  const s = fold(state, now);
+  const latest = latestAttempts(s);
+  const whole = wholeSentencePassed(s, latest);
   const out = new Set();
-  for (const [cid, sid] of cand) {
-    const a = last.get(cid);
-    if (a ? a.c === 1 : s.cards[cid].state === 2) out.add(sid);
-  }
+  for (const id of content.sentences.keys()) if (isMastered(id, s, content, latest, whole)) out.add(id);
   return out;
 }
 

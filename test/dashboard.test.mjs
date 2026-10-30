@@ -25,7 +25,7 @@ function loadReal() {
   });
 }
 
-/** Deterministic 3-month state: ~150 sentences seen over 90 days, cz attempts, reviewed cards, daily history. */
+/** Deterministic 3-month state: ~150 sentences seen over 90 days, cz attempts, one fm card per cloze unit, daily history. */
 function fixture(content) {
   let seed = 7;
   const rnd = () => ((seed = (seed * 1664525 + 1013904223) % 2 ** 32) / 2 ** 32);
@@ -39,7 +39,8 @@ function fixture(content) {
     s.tokens.forEach((tok, ti) => {
       if (!tok.cloze) return;
       const stability = 2 + rnd() * 40;
-      state.cards[`cz:${id}:${ti}`] = { due: NOW + Math.floor((rnd() * 30 - 5) * DAY), stability, difficulty: 5, reps: 4, lapses: 0, state: 2, step: 0, lastReview: t0 };
+      const fm = { due: NOW + Math.floor((rnd() * 30 - 5) * DAY), stability, difficulty: 5, reps: 4, lapses: 0, state: 2, step: 0, lastReview: t0 };
+      for (const u of tok.units) state.cards[`fm:${u.lex}:${u.form}`] ??= fm;
       for (let k = 0; k < 4; k++) {
         const t = t0 + k * 9 * DAY;
         if (t > NOW) break;

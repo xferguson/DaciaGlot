@@ -99,9 +99,13 @@ test("focus filters every mode: only its due cards, only its new sentences, no k
   const review = buildSession({ mode: "review", focus, state: st, content, now: NOW, rng: () => 0.5 });
   assert.deepEqual(review.queue.map((q) => q.cardId), ["lr:a1"]);
   const learn = buildSession({ mode: "learn", focus, state: st, content, now: NOW, rng: () => 0.5 });
-  assert.ok(learn.queue.every((q) => inFocus(q.cardId, focus, content)));
+  assert.ok(learn.queue.every((q) => q.cardId.startsWith("fm:") || inFocus(q.cardId, focus, content)));
   assert.equal(inFocus("kf:a:base", focus, content), false);
   assert.equal(inFocus("kf:a:base", null, content), true);
+  // an fm is in focus when any seen sentence that can carry it is
+  const seen = { ...st, seenSentences: { a1: NOW } };
+  assert.equal(inFocus("fm:a:base", focus, content, seen), true);
+  assert.equal(inFocus("fm:a:base", focus, content, { ...st, seenSentences: {} }), false);
 });
 
 test("several focus topics: union of their cards; Mix adds a few overdue cards from outside", () => {

@@ -36,26 +36,43 @@ test("unlock needs the lexeme met in two sentences", () => {
 
 test("per-lexeme cap and keyForms order", () => {
   const ids = newKfCards(met(["s1", "s2"]), content, { cap: 99 });
-  assert.deepEqual(ids.filter((i) => i.startsWith("kf:gasi")),
-    ["kf:gasi:pres1sg", "kf:gasi:pres3sg", "kf:gasi:ppl"]);
+  assert.deepEqual(ids.filter((i) => i.startsWith("fm:gasi")),
+    ["fm:gasi:pres1sg", "fm:gasi:pres3sg", "fm:gasi:ppl"]);
   assert.equal(KF_PER_LEXEME, 3);
   // already-introduced forms are skipped, so the next forms follow
   const st = met(["s1", "s2"]);
-  st.cards["kf:gasi:pres1sg"] = newCard(NOW);
-  assert.deepEqual(newKfCards(st, content, { cap: 99 }).filter((i) => i.startsWith("kf:gasi")),
-    ["kf:gasi:pres3sg", "kf:gasi:ppl", "kf:gasi:subj3"]);
+  st.cards["fm:gasi:pres1sg"] = newCard(NOW);
+  assert.deepEqual(newKfCards(st, content, { cap: 99 }).filter((i) => i.startsWith("fm:gasi")),
+    ["fm:gasi:pres3sg", "fm:gasi:ppl", "fm:gasi:subj3"]);
 });
 
 test("session cap and frequency ordering", () => {
-  assert.deepEqual(newKfCards(met(["s1", "s2"]), content, { cap: 2 }), ["kf:casa:sg", "kf:gasi:pres1sg"]);
+  assert.deepEqual(newKfCards(met(["s1", "s2"]), content, { cap: 2 }), ["fm:casa:sg", "fm:gasi:pres1sg"]);
 });
 
 test("session includes kf cards after a verb met in 2 sentences; quick does not", () => {
   const st = met(["s1", "s2"]);
   const { queue } = buildSession({ mode: "session", state: st, content, now: NOW, rng: Math.random, newSentenceIds: [] });
-  assert.ok(queue.some((q) => q.cardId === "kf:gasi:pres1sg" && q.isNew));
+  assert.ok(queue.some((q) => q.cardId === "fm:gasi:pres1sg" && q.isNew));
   const q2 = buildSession({ mode: "quick", state: st, content, now: NOW, rng: Math.random });
   assert.equal(q2.queue.length, 0);
+});
+
+test("a kf for a form that already has an fm card creates no second schedule", () => {
+  const st = met(["s1", "s2"]);
+  st.cards["fm:gasi:pres1sg"] = newCard(NOW);
+  st.cards["fm:casa:sg"] = newCard(NOW);
+  const ids = newKfCards(st, content, { cap: 99 });
+  assert.ok(!ids.includes("fm:gasi:pres1sg") && !ids.includes("fm:casa:sg"));
+  assert.ok(ids.every((i) => i.startsWith("fm:") && !(i in st.cards)));
+  assert.ok(!ids.some((i) => i.startsWith("kf:")), "kf ids are presentations, never stored");
+});
+
+test("fm unlocks while the lexeme has the form; attempts record <lex>.<form>", () => {
+  assert.equal(isUnlocked("fm:gasi:ppl", state(), content), true);
+  assert.equal(isUnlocked("fm:gasi:inf", state(), content), false);
+  assert.equal(isUnlocked("fm:nope:x", state(), content), false);
+  assert.deepEqual(unitsRequiredForCard("fm:gasi:pres3sg", content), [{ u: "gasi.pres3sg", lx: "gasi" }]);
 });
 
 test("attempts record <lex>.<form>", () => {

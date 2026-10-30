@@ -1,5 +1,6 @@
 import { start } from "./router.js";
 import * as store from "./data/store.js";
+import { foldClozeCards } from "./data/migrations.js";
 import { loadContent } from "./data/content.js";
 import * as tts from "./data/tts.js";
 import { showBanner } from "./ui/components/banner.js";
@@ -64,6 +65,12 @@ async function boot() {
   } catch (err) {
     document.getElementById("app").textContent = `Could not load content: ${err.message}`;
     return;
+  }
+  // Schema 1 → 2 (T25): old `cz` cards fold into per-form `fm` cards now that the content can resolve their tokens.
+  const folded = foldClozeCards(ctx.state, ctx.content);
+  if (folded !== ctx.state) {
+    ctx.state = folded;
+    store.save(ctx.state);
   }
   if (ctx.state.contentVersion !== ctx.content.contentVersion) {
     ctx.state = { ...ctx.state, contentVersion: ctx.content.contentVersion };

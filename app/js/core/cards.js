@@ -1,14 +1,17 @@
 // Card ids and unlock rules (ARCHITECTURE §3). Pure.
 import { tokenize, tokenKey } from "./normalize.js";
 
-export const CARD_TYPES = ["lr", "cz", "kf", "xf", "sb", "er"];
+export const CARD_TYPES = ["lr", "fm", "cz", "kf", "xf", "sb", "er"];
 
-/** `lr:<sid>` → {type, sentenceId}; `cz:<sid>:<i>` adds tokenIndex; `kf:<lex>:<form>` → {lexemeId, formKey}. */
+/**
+ * `lr:<sid>` → {type, sentenceId}; `cz:<sid>:<i>` adds tokenIndex; `fm:<lex>:<form>` and `kf:<lex>:<form>` → {lexemeId, formKey}.
+ * Only `fm` is a stored schedule for a word form; `cz` and `kf` are how an `fm` is presented (they appear in `attempt.card`).
+ */
 export function parseCardId(id) {
   const parts = String(id).split(":");
   const type = parts[0];
   if (!CARD_TYPES.includes(type)) throw new Error(`Bad card id: ${id}`);
-  if (type === "kf") return { type, lexemeId: parts[1], formKey: parts.slice(2).join(":") };
+  if (type === "kf" || type === "fm") return { type, lexemeId: parts[1], formKey: parts.slice(2).join(":") };
   const out = { type, sentenceId: parts[1] };
   if (type === "cz" || type === "xf" || type === "sb") {
     const n = Number(parts[2]);
@@ -23,12 +26,35 @@ export function buildCardId(type, ...parts) {
   return [type, ...parts].join(":");
 }
 
-/** Phase 1: one `lr` plus one `cz` per cloze token. */
-export function cardsForSentence(sentence, _content) {
+/** `<lex>.<form>` for each unit of each `cloze: true` token, in order, without repeats. */
+export function clozeUnitIds(sentence) {
+  const out = new Set();
+  for (const t of sentence.tokens) if (t.cloze) for (const u of t.units) out.add(`${u.lex}.${u.form}`);
+  return [...out];
+}
+
+/** The `fm` card id of a lexeme-form unit id `<lex>.<form>`. */
+export function fmIdForUnit(unitId) {
+  const dot = unitId.indexOf(".");
+  return buildCardId("fm", unitId.slice(0, dot), unitId.slice(dot + 1));
+}
+
+/** The lexeme-form unit id of an `fm` (or `kf`) card id. */
+export function unitIdOfFm(cardId) {
+  const p = parseCardId(cardId);
+  return `${p.lexemeId}.${p.formKey}`;
+}
+
+/**
+ * `lr:<sid>` plus an `fm` card for each lexeme-form unit of a `cloze: true` token that has none yet in
+ * `state.cards` (all of them when `state` is omitted). One schedule per word form (FR-D2).
+ */
+export function cardsForSentence(sentence, _content, state = null) {
   const ids = [buildCardId("lr", sentence.id)];
-  sentence.tokens.forEach((t, i) => {
-    if (t.cloze) ids.push(buildCardId("cz", sentence.id, i));
-  });
+  for (const unit of clozeUnitIds(sentence)) {
+    const id = fmIdForUnit(unit);
+    if (!state || !(id in state.cards)) ids.push(id);
+  }
   return ids;
 }
 
@@ -64,7 +90,7 @@ export function kfUnlockedFor(lexemeId, state) {
 }
 
 /**
- * New `kf` cards to introduce this session: per unlocked lexeme, the first `perLexeme` not-yet-introduced
+ * New `fm` cards to introduce this session (key forms that have no `fm` card yet): per unlocked lexeme, the first `perLexeme` not-yet-introduced
  * `keyForms` in order; lexemes by frequency rank; at most `cap` in total.
  */
 export function newKfCards(state, content, { perLexeme = KF_PER_LEXEME, cap = KF_PER_SESSION } = {}) {
@@ -75,7 +101,7 @@ export function newKfCards(state, content, { perLexeme = KF_PER_LEXEME, cap = KF
   for (const l of lexemes) {
     const ids = l.keyForms
       .filter((f) => l.forms?.[f])
-      .map((f) => buildCardId("kf", l.id, f))
+      .map((f) => buildCardId("fm", l.id, f))
       .filter((id) => !(id in state.cards))
       .slice(0, perLexeme);
     for (const id of ids) if (out.length < cap) out.push(id);
@@ -168,7 +194,7 @@ function keyFormsIntroduced(sentence, state, content) {
   for (const id of lexes) {
     const l = content.lexemes.get(id);
     for (const f of l?.keyForms ?? []) {
-      if (l.forms?.[f] && !(buildCardId("kf", id, f) in state.cards)) return false;
+      if (l.forms?.[f] && !(buildCardId("fm", id, f) in state.cards)) return false;
     }
   }
   return true;
@@ -360,16 +386,10 @@ export function newTransformCards(state, content, { cap = XF_PER_SESSION, skip =
 export const ER_STABILITY_DAYS = 7;
 export const ER_PER_SESSION = 3;
 
-/** FR-D6: the sentence has cloze cards and every one of them has stability ≥ 7 days. */
+/** FR-D6: the sentence has cloze units and each one's `fm` card has stability ≥ 7 days. */
 export function erUnlocked(sentence, state) {
-  let n = 0;
-  for (let i = 0; i < sentence.tokens.length; i++) {
-    if (!sentence.tokens[i].cloze) continue;
-    n++;
-    const c = state.cards[buildCardId("cz", sentence.id, i)];
-    if (!c || c.stability < ER_STABILITY_DAYS) return false;
-  }
-  return n > 0;
+  const units = clozeUnitIds(sentence);
+  return units.length > 0 && units.every((u) => (state.cards[fmIdForUnit(u)]?.stability ?? 0) >= ER_STABILITY_DAYS);
 }
 
 /** Units an `er` card exercises, as `{u, lx}`: every unit of each cloze token, plus the pattern of each head unit. */
@@ -400,12 +420,17 @@ export function newErCards(state, content, { cap = ER_PER_SESSION, skip = new Se
 }
 
 /**
- * `lr` is always unlocked; `cz` once the sentence's `lr` card exists; `kf` once its lexeme was met in ≥2 sentences;
+ * `lr` is always unlocked; `fm` while its lexeme and form exist (it is only created once a sentence or key form unlocked it);
+ * legacy `cz` once the sentence's `lr` card exists; legacy `kf` once its lexeme was met in ≥2 sentences;
  * `xf` / `sb` per FR-D4 / D5; `er` per FR-D6.
  */
 export function isUnlocked(cardId, state, content) {
   let p;
   try { p = parseCardId(cardId); } catch { return false; }
+  if (p.type === "fm") {
+    const l = content.lexemes.get(p.lexemeId);
+    return !!l && (p.formKey === "base" || !!l.forms?.[p.formKey]);
+  }
   if (p.type === "kf") {
     const l = content.lexemes.get(p.lexemeId);
     return !!l?.keyForms?.includes(p.formKey) && !!l.forms?.[p.formKey] && kfUnlockedFor(p.lexemeId, state);
