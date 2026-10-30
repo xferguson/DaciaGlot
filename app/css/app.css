@@ -176,6 +176,10 @@ a { color: var(--accent); }
 .state-chip { padding: 0 8px; border-radius: 10px; border: 1px solid var(--border); font-size: .85rem; }
 .state-chip.st-producing, .state-chip.st-automatic { border-color: var(--ok); }
 .tok-link { color: inherit; text-decoration: underline dotted; text-underline-offset: 4px; padding: 6px 2px; }
+button.tok-link { background: none; border: 0; font: inherit; cursor: pointer; min-height: 44px; min-width: 44px; }
+.sheet-backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, .45); display: flex; align-items: flex-end; justify-content: center; z-index: 50; }
+.sheet { width: 100%; max-width: 480px; background: var(--surface); color: var(--fg); border-radius: 12px 12px 0 0; padding: 16px; display: grid; gap: 8px; }
+.sheet h2 { margin: 0; }
 .form-row { display: flex; align-items: center; gap: 8px; min-height: 44px; margin: 0; }
 .dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--border); flex: none; }
 .dot.st-seen { background: var(--warn); border-color: var(--warn); }

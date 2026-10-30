@@ -112,6 +112,7 @@ export function allPatternStates(state, content, now) {
 
 /** ARCHITECTURE §7.2: "unseen" | "seen" | "produced" | "stable". */
 export function unitState(unitId, state, content, now) {
+  if (unitId in (state.claimed ?? {})) return "stable";
   const s = fold(state, now);
   const st = unitStats(unitId, s);
   if (st.everCorrect) {
@@ -165,7 +166,7 @@ function isMastered(sentenceId, s, content, latest, whole) {
   const sentence = content.sentences.get(sentenceId);
   if (!sentence) return false;
   const units = clozeUnitIds(sentence);
-  if (units.length && units.every((u) => passed(s.cards[fmIdForUnit(u)], latest.byUnit.get(u)))) return true;
+  if (units.length && units.every((u) => u in (s.claimed ?? {}) || passed(s.cards[fmIdForUnit(u)], latest.byUnit.get(u)))) return true;
   return whole.has(sentenceId);
 }
 

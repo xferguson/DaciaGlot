@@ -1,6 +1,6 @@
 // Study loop: Quick / Mix / Learn / Review / Focus (PRD FR-S2…S9). Renders T07 cards one after another.
-import { buildSession, gradeFromResult, applyReview, applyCheck, addMinutes, requeueWrong, keepStarted, markDifficult } from "../../core/session.js";
-import { parseCardId, exampleSentenceFor } from "../../core/cards.js";
+import { buildSession, gradeFromResult, applyReview, applyCheck, addMinutes, requeueWrong, keepStarted, markDifficult, claimForm, unclaimForm } from "../../core/session.js";
+import { parseCardId, unitIdOfFm, exampleSentenceFor } from "../../core/cards.js";
 import { unitsRequiredForCard } from "../../core/units.js";
 import { resolveFm } from "../../core/carrier.js";
 import { renderCard as renderLr } from "./card-lr.js";
@@ -10,6 +10,7 @@ import { renderCard as renderXf } from "./card-transform.js";
 import { renderCard as renderSb } from "./card-slot.js";
 import { renderCard as renderEr } from "./card-enro.js";
 import { toast } from "../components/toast.js";
+import { setClaimHandler } from "../components/feedback.js";
 import { flagButton } from "../components/flag-button.js";
 import { situationName, parseFocusParam } from "./lists.js";
 import { allPatternStates } from "../../core/mastery.js";
@@ -25,6 +26,12 @@ const EMPTY = {
 const RENDERERS = { lr: renderLr, cz: renderCz, kf: renderKf, xf: renderXf, sb: renderSb, er: renderEr };
 
 export function render(root, ctx) {
+  setClaimHandler({
+    content: ctx.content,
+    isClaimed: (unit) => unit in ctx.state.claimed,
+    claim: (unit) => { ctx.state = claimForm(ctx.state, unit, Date.now()); ctx.store.save(ctx.state); },
+    unclaim: (unit) => { ctx.state = unclaimForm(ctx.state, unit, Date.now()); ctx.store.save(ctx.state); },
+  });
   const params = ctx.route?.params ?? {};
   // Old links (`mode=session`, `mode=focus`) open Mix. A focus (`f=type:id,…`, or old `type`+`id`) filters any mode (FR-S8).
   const mode = MODES.includes(params.mode) ? params.mode : "mix";
@@ -117,6 +124,7 @@ export function render(root, ctx) {
     // An `fm` card is the schedule of one word form; it is shown as a cloze in a fresh sentence, or as a key-form drill.
     let shown = item.cardId;
     if (parseCardId(item.cardId).type === "fm") {
+      if (unitIdOfFm(item.cardId) in ctx.state.claimed) { pos++; return next(); } // claimed mid-session (FR-R4)
       const r = resolveFm(item.cardId, ctx.state, ctx.content, {
         now: Date.now(), rng: Math.random, exclude: carriersUsed, prefer: item.isNew || item.check ? item.from : undefined,
       });

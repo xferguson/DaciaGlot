@@ -106,6 +106,7 @@ The session view calls `resolveFm` at render time and passes the presented id to
  * @property {Record<string, number>} canDoChecked // canDoId → ts
  * @property {number|null} lastCompactionAt
  * @property {Record<string, number>} difficult // cardId → ts: struggled with twice in one session (PRD FR-S9)
+ * @property {Record<string, number>} claimed   // lexeme-form unit id (`lex.form`) → ts: "I can produce this" (PRD FR-R4, T28); default {}, no schema bump
  */
 
 
@@ -212,6 +213,7 @@ Diacritic-less input (*o sa*) is handled by the `correct-diacritics` path, not b
 - `isKnown(unitId, state, content) → boolean`:
   - A **lexeme-form unit** is known if it has ≥1 correct attempt (or an aggregate with `correct ≥ 1`), **or** it appears in a sentence whose `lr` card has been passed **and** its lexeme has another form already known. (Seeing a new form of a known word counts as recognition.)
   - A **pattern unit** is known when its state ≥ `seen`, i.e. ≥1 sentence containing it has been introduced.
+  - A **claimed** unit (`state.claimed[unit]`, FR-R4) is always known. A claim is per form: `locui.pres3sg` ≠ `locui.pres1sg`.
   - Function words marked `"trivial": true` in the lexicon (e.g. *și, la, de*) count as known once seen.
 
 ### 6.2 Algorithm
@@ -253,7 +255,7 @@ All functions are pure: `(state, content, now) → …`.
 | `unseen` | Never appeared in an introduced sentence |
 | `seen` | Appeared |
 | `produced` | ≥1 correct attempt |
-| `stable` | The unit's `fm` card (or another card requiring it) has stability ≥ 21 days and the last attempt was correct |
+| `stable` | The unit is claimed (`state.claimed`, FR-R4; claimed cloze units also count as stable for §7.3), **or** the unit's `fm` card (or another card requiring it) has stability ≥ 21 days and the last attempt was correct |
 
 ### 7.3 Sentence mastered
 
@@ -274,8 +276,10 @@ buildSession({ mode /* "quick"|"review"|"learn"|"mix"|"session" */, focus /* fil
   → { queue: QueueItem[], estimateSec: number, blocked?, suggest?, plan? /* mix only */ }
 mixPlan(due, newPerSession) → { newCount, reviewPct }  // PRD FR-S10: new sentences fill MIX_BUDGET_SEC (720) after due reviews
 gradeFromResult({ result, usedHint, attemptNo, rating /* "hard"|"medium"|"easy"|null */ }) → 1|2|3|4     // PRD FR-S2
-applyReview(state, cardId, grade, unitsRequired /* {u,lx}[] */, now, content, presentedId = cardId) → AppState  // FSRS on `cardId` + attempts (recorded with `card: presentedId`) + history (pure; returns new state). `content` is only used for `lr` exposure.
-dueCards(state, content, now) → string[]      // due + unlocked card ids, most overdue first
+applyReview(state, cardId, grade, unitsRequired /* {u,lx}[] */, now, content, presentedId = cardId) → AppState  // FSRS on `cardId` + attempts (recorded with `card: presentedId`) + history (pure; returns new state). `content` is only used for `lr` exposure. A wrong `er` card (grade 1) also removes the claims on the units it tested (FR-R4, evidence wins).
+dueCards(state, content, now) → string[]      // due + unlocked card ids, most overdue first; `fm` cards of claimed forms are left out
+claimForm(state, unit, now) → AppState        // FR-R4: state.claimed[unit] = now (pure; creates no card)
+unclaimForm(state, unit, now) → AppState      // drops the claim; the `fm` card is active again with its old schedule
 dueCount(state, content, now) → number
 requeueWrong(queue, pos, item, rng, content?) → number  // PRD FR-S9: splice a wrong card back 3–5 cards later (with content: up to 3 more, away from related cards)
 inFocus(cardId, focus, content, state?) → boolean      // FR-S8: card's sentence is in any focus topic; an `fm` is in focus if any seen carrier sentence is (needs `state`); legacy kf never; empty focus → true. `focus` is one {type,id}, a list, or null everywhere.

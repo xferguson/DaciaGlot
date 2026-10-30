@@ -37,6 +37,7 @@ export function defaultState(now) {
     canDoChecked: {},
     lastCompactionAt: null,
     difficult: {},
+    claimed: {},
   };
 }
 
@@ -48,7 +49,7 @@ function withDefaults(s, now) {
   const out = { ...d, ...s, settings: { ...d.settings, ...(isObject(s.settings) ? s.settings : {}) } };
   delete out.activeSession; // briefly shipped in 0.7.0, now unused
   out.settings.focus = Array.isArray(out.settings.focus) ? out.settings.focus : out.settings.focus ? [out.settings.focus] : [];
-  for (const k of ['cards', 'seenSentences', 'lexemeSentences', 'unitAggregates', 'history', 'canDoChecked', 'difficult']) {
+  for (const k of ['cards', 'seenSentences', 'lexemeSentences', 'unitAggregates', 'history', 'canDoChecked', 'difficult', 'claimed']) {
     if (!isObject(out[k])) out[k] = d[k];
   }
   for (const k of ['attempts', 'flags']) {
@@ -201,7 +202,7 @@ export function importState(json, mode, current) {
       `This backup was made by a newer version of the app (schema ${v}; this app supports up to ${CURRENT_SCHEMA_VERSION}). Update the app and try again.`,
     );
   }
-  for (const k of ['cards', 'seenSentences', 'lexemeSentences', 'unitAggregates', 'history', 'canDoChecked', 'settings']) {
+  for (const k of ['cards', 'seenSentences', 'lexemeSentences', 'unitAggregates', 'history', 'canDoChecked', 'claimed', 'settings']) {
     if (k in incoming && !isObject(incoming[k])) throw new ImportError(`Backup field "${k}" has the wrong shape.`);
   }
   for (const k of ['attempts', 'flags']) {
@@ -270,6 +271,11 @@ function mergeStates(cur, inc) {
   // canDoChecked: union (earliest timestamp wins)
   for (const [id, ts] of Object.entries(inc.canDoChecked)) {
     out.canDoChecked[id] = id in out.canDoChecked ? Math.min(out.canDoChecked[id], ts) : ts;
+  }
+
+  // claimed: union (earliest timestamp wins)
+  for (const [u, ts] of Object.entries(inc.claimed)) {
+    out.claimed[u] = u in out.claimed ? Math.min(out.claimed[u], ts) : ts;
   }
 
   // lexemeSentences: union of sentence ids

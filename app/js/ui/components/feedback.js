@@ -1,16 +1,69 @@
 // Light feedback (PRD P-8): the expected sentence with wrong tokens marked, no explanations.
+import { labelFor } from "../../core/cards.js";
+
+/**
+ * Claims (FR-R4): the view that owns the state registers how a tapped token reads and changes claims.
+ * `{content, isClaimed(unit), claim(unit), unclaim(unit)}`; without one, tokens are plain word links.
+ */
+let claims = null;
+export function setClaimHandler(handler) {
+  claims = handler;
+}
+
+const el = (tag, props = {}) => Object.assign(document.createElement(tag), props);
+
+/** A bottom sheet for one word form: its details, "I can produce this" (or Undo) and a link to the word page. */
+export function openFormSheet(unit, token) {
+  const { content } = claims;
+  const dot = unit.indexOf(".");
+  const lexeme = content.lexemes.get(unit.slice(0, dot));
+  const form = unit.slice(dot + 1);
+  const backdrop = el("div", { className: "sheet-backdrop" });
+  const sheet = el("div", { className: "sheet", role: "dialog" });
+  sheet.setAttribute("aria-modal", "true");
+  sheet.setAttribute("aria-label", "Word form");
+  const close = () => { backdrop.remove(); document.removeEventListener("keydown", onKey); };
+  const onKey = (e) => { if (e.key === "Escape") close(); };
+  document.addEventListener("keydown", onKey);
+  backdrop.addEventListener("click", (e) => { if (e.target === backdrop) close(); });
+  const claimBtn = el("button", { type: "button", className: "btn block" });
+  const paint = () => {
+    claimBtn.textContent = claims.isClaimed(unit) ? "Claimed ✓ · Undo" : "I can produce this";
+    claimBtn.className = claims.isClaimed(unit) ? "btn secondary block" : "btn block";
+  };
+  paint();
+  claimBtn.addEventListener("click", () => {
+    if (claims.isClaimed(unit)) claims.unclaim(unit); else claims.claim(unit);
+    paint();
+  });
+  const open = el("a", { className: "btn secondary block", href: `#/lexeme/${encodeURIComponent(unit.slice(0, dot))}`, textContent: "Open word page" });
+  open.addEventListener("click", close);
+  const done = el("button", { type: "button", className: "btn secondary block", textContent: "Close" });
+  done.addEventListener("click", close);
+  sheet.append(
+    el("h2", { lang: "ro", textContent: token }),
+    el("p", { className: "muted", textContent: `${lexeme?.lemma ?? unit.slice(0, dot)} · ${lexeme?.gloss ?? ""} · ${labelFor(form)}` }),
+    claimBtn, open, done,
+  );
+  backdrop.append(sheet);
+  document.body.append(backdrop);
+  claimBtn.focus();
+}
 
 /** Pure: build display parts for a full sentence from a checkAnswer diff over one token span. */
 export function partsFor(tokens, diff, tokenIndex = null) {
-  const lexOf = (i) => tokens[i]?.units?.[0]?.lex;
+  const lexOf = (i) => {
+    const u = tokens[i]?.units?.[0];
+    return u?.lex ? { lex: u.lex, unit: `${u.lex}.${u.form}` } : {};
+  };
   if (tokenIndex == null) {
     const linkable = diff.length === tokens.length;
-    return diff.map((d, i) => ({ token: d.token, status: d.status, ...(linkable && lexOf(i) ? { lex: lexOf(i) } : {}) }));
+    return diff.map((d, i) => ({ token: d.token, status: d.status, ...(linkable ? lexOf(i) : {}) }));
   }
   const out = [];
   tokens.forEach((t, i) => {
     if (i === tokenIndex) out.push(...diff.map((d) => ({ token: d.token, status: d.status })));
-    else out.push({ token: t.t, status: "ok", ...(lexOf(i) ? { lex: lexOf(i) } : {}) });
+    else out.push({ token: t.t, status: "ok", ...lexOf(i) });
   });
   return out;
 }
@@ -21,9 +74,14 @@ export function sentenceView(parts) {
   p.lang = "ro";
   parts.forEach((part, i) => {
     if (i) p.append(" ");
-    const s = document.createElement(part.lex ? "a" : "span");
+    const tappable = part.lex && claims && part.unit;
+    const s = document.createElement(tappable ? "button" : part.lex ? "a" : "span");
     s.textContent = part.token;
-    if (part.lex) {
+    if (tappable) {
+      s.type = "button";
+      s.className = "tok-link";
+      s.addEventListener("click", () => openFormSheet(part.unit, part.token));
+    } else if (part.lex) {
       s.href = `#/lexeme/${encodeURIComponent(part.lex)}`;
       s.className = "tok-link";
     }
