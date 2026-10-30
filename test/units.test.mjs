@@ -59,3 +59,10 @@ test("isKnown: new form seen in a recognized sentence of a known lexeme", () => 
   assert.equal(isKnown("termina.inf", st, content), true);
   assert.equal(isKnown("termina.ppl", { ...st, attempts: [] }, content), false);
 });
+
+test("isKnown: a claim makes exactly that form known", () => {
+  const st = state();
+  st.claimed["termina.ppl"] = NOW;
+  assert.equal(isKnown("termina.ppl", st, content), true);
+  assert.equal(isKnown("termina.inf", st, content), false);
+});

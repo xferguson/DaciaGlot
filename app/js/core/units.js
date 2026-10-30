@@ -60,6 +60,7 @@ export function isKnown(unit, state, content) {
   const dot = unit.indexOf(".");
   const lex = unit.slice(0, dot);
   const form = unit.slice(dot + 1);
+  if (unit in (state.claimed ?? {})) return true;
   if (hasCorrect(unit, state)) return true;
   const lexeme = content.lexemes.get(lex);
   if (lexeme?.trivial && inSeenSentence(lex, null, state, content)) return true;

@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { patternState, allPatternStates, unitState, sentenceMastered, compactAttempts } from "../app/js/core/mastery.js";
+import { claimForm } from "../app/js/core/session.js";
 import { NOW, makeContent, sentence, state as freshState } from "./helpers/mini-content.mjs";
 
 const DAY = 86400000;
@@ -182,4 +183,16 @@ test("store.load() compacts old attempts at most once a day", async () => {
   } finally {
     Date.now = real;
   }
+});
+
+test("claims: the claimed form is stable, per form; a claimed cloze form counts toward a mastered sentence", () => {
+  const base = st({ claimed: { "a.x": NOW } });
+  assert.equal(unitState("a.x", base, content, NOW), "stable");
+  assert.equal(unitState("b.x", base, content, NOW), "seen");
+  assert.equal(unitState("a.y", base, content, NOW), "unseen");
+  const m = sentence("m1", "aa bb", [U("a"), U("b")]);
+  const c2 = makeContent([m], [], []);
+  const only = { ...freshState(), seenSentences: { m1: NOW - DAY } };
+  assert.equal(sentenceMastered("m1", only, c2, NOW), false);
+  assert.equal(sentenceMastered("m1", claimForm(only, "a.x", NOW), c2, NOW), true);
 });

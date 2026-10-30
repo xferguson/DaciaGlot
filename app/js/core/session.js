@@ -116,10 +116,24 @@ export function gradeFromResult({ result, usedHint = false, attemptNo = 1, ratin
   return rating === "easy" || tooEasy ? 4 : 3;
 }
 
-/** Due, unlocked cards whose sentence still exists, most overdue first. */
+/** Is this `fm` card's form claimed ("I can produce this", FR-R4)? Claimed forms are never tested. */
+const isClaimedCard = (cardId, state) => cardId.startsWith("fm:") && unitIdOfFm(cardId) in (state.claimed ?? {});
+
+/** FR-R4: claim a lexeme-form unit (`<lex>.<form>`) as producible. Its `fm` card, if any, stays as it is. Returns a new state. */
+export function claimForm(state, unit, now) {
+  return { ...state, claimed: { ...state.claimed, [unit]: now } };
+}
+
+/** Undo a claim: its `fm` card (suspended while claimed) is active again with its old schedule. Returns a new state. */
+export function unclaimForm(state, unit, _now) {
+  const { [unit]: _gone, ...claimed } = state.claimed ?? {};
+  return { ...state, claimed };
+}
+
+/** Due, unlocked, unclaimed cards whose sentence still exists, most overdue first. */
 export function dueCards(state, content, now) {
   return Object.entries(state.cards)
-    .filter(([id, c]) => c.due <= now && isUnlocked(id, state, content))
+    .filter(([id, c]) => c.due <= now && !isClaimedCard(id, state) && isUnlocked(id, state, content))
     .sort((a, b) => a[1].due - b[1].due || (a[0] < b[0] ? -1 : 1))
     .map(([id]) => id);
 }
@@ -235,10 +249,10 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
     .map((id) => content.sentences.get(id))
     .filter(Boolean)
     .map((s) => cardsForSentence(s, content, state)
-      .filter((cardId) => !claimed.has(cardId) && claimed.add(cardId))
+      .filter((cardId) => !isClaimedCard(cardId, state) && !claimed.has(cardId) && claimed.add(cardId))
       .map((cardId) => (cardId.startsWith("fm:") ? { cardId, isNew: true, from: s.id } : { cardId, isNew: true })));
   const k = groups.length;
-  const kf = focus ? [] : newKfCards(state, content).filter((id) => !claimed.has(id)).map((cardId) => ({ cardId, isNew: true }));
+  const kf = focus ? [] : newKfCards(state, content).filter((id) => !claimed.has(id) && !isClaimedCard(id, state)).map((cardId) => ({ cardId, isNew: true }));
   const queue = [];
   if (k === 0) queue.push(...due);
   else {
@@ -306,6 +320,10 @@ export function applyReview(state, cardId, grade, unitsRequired, now, content, p
       next.lexemeSentences = ls;
     }
   } else {
+    // FR-R4, evidence wins: a missed EN→RO card takes back the claims on the forms it tested.
+    if (p.type === "er" && grade === 1 && unitsRequired.some(({ u }) => u in (state.claimed ?? {}))) {
+      next.claimed = Object.fromEntries(Object.entries(state.claimed).filter(([u]) => !unitsRequired.some((r) => r.u === u)));
+    }
     next.attempts = [
       ...state.attempts,
       ...unitsRequired.map(({ u, lx }) => ({ u, lx, c: grade >= 2 ? 1 : 0, t: now, card: presentedId })),

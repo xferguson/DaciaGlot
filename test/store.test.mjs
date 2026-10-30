@@ -20,7 +20,7 @@ const card = (lastReview, extra = {}) => ({
 test('defaultState has every documented field', () => {
   const s = defaultState(NOW);
   assert.deepEqual(Object.keys(s).sort(), [
-    'attempts', 'canDoChecked', 'cards', 'contentVersion', 'createdAt', 'difficult', 'flags', 'history',
+    'attempts', 'canDoChecked', 'cards', 'claimed', 'contentVersion', 'createdAt', 'difficult', 'flags', 'history',
     'lastCompactionAt', 'lexemeSentences', 'schemaVersion', 'seenSentences', 'settings', 'unitAggregates',
   ]);
   assert.equal(s.schemaVersion, CURRENT_SCHEMA_VERSION);
@@ -294,4 +294,20 @@ test('importing a v1 backup migrates it; load() migrates stored v1 state and nev
   assert.ok('fm:fi:pres3sg' in s.cards);
   ls.setItem(STATE_KEY, JSON.stringify({ schemaVersion: 1, cards: 'junk' }));
   assert.doesNotThrow(load);
+});
+
+test('claimed: old state loads with {}; export/import round-trips it; merge unions with earliest ts', () => {
+  const old = defaultState(NOW);
+  delete old.claimed;
+  globalThis.localStorage.setItem(STATE_KEY, JSON.stringify(old));
+  assert.deepEqual(load(NOW).claimed, {});
+  const s = defaultState(NOW);
+  s.claimed = { 'fi.pres3sg': NOW };
+  const text = JSON.stringify(s);
+  assert.deepEqual(importState(text, 'replace', defaultState(NOW + 1)).claimed, { 'fi.pres3sg': NOW });
+  const cur = defaultState(NOW);
+  cur.claimed = { 'a.x': NOW + 5 };
+  const inc = defaultState(NOW);
+  inc.claimed = { 'a.x': NOW, 'b.y': NOW };
+  assert.deepEqual(importState(JSON.stringify(inc), 'merge', cur).claimed, { 'a.x': NOW, 'b.y': NOW });
 });

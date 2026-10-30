@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   gradeFromResult, buildSession, applyReview, dueCards, requeueWrong, dayKey, interimNewSentences, mixPlan,
-  spaceOut, cardKeys, keepStarted, markDifficult, COLD_START_SEEN, ladderDays,
+  spaceOut, cardKeys, keepStarted, markDifficult, COLD_START_SEEN, ladderDays, claimForm, unclaimForm,
 } from "../app/js/core/session.js";
 import { newCard } from "../app/js/core/fsrs.js";
 import { makeContent, sentence, state, NOW } from "./helpers/mini-content.mjs";
@@ -244,4 +244,38 @@ test("applyReview: always-Medium follows the ladder; always-Easy grows 3, 12, 48
     }
     assert.deepEqual(gaps, want);
   }
+});
+
+test("claimForm / unclaimForm are pure; a claimed unit's fm is not due, unclaiming restores its schedule", () => {
+  const content = makeContent(mk(2), [{ id: "a0", forms: { pres1sg: "x" } }]);
+  const st = state();
+  const due = { ...newCard(NOW), due: NOW - 1000 };
+  st.cards["fm:a0:base"] = due;
+  st.cards["fm:a0:pres1sg"] = { ...due };
+  const before = JSON.stringify(st);
+  const claimed = claimForm(st, "a0.base", NOW);
+  assert.equal(JSON.stringify(st), before, "input not mutated");
+  assert.deepEqual(claimed.claimed, { "a0.base": NOW });
+  assert.deepEqual(dueCards(claimed, content, NOW), ["fm:a0:pres1sg"], "claim is per form");
+  assert.deepEqual(claimed.cards["fm:a0:base"], due, "card untouched");
+  const back = unclaimForm(claimed, "a0.base", NOW);
+  assert.deepEqual(back.claimed, {});
+  assert.deepEqual(back.cards["fm:a0:base"], due);
+  assert.deepEqual(dueCards(back, content, NOW).sort(), ["fm:a0:base", "fm:a0:pres1sg"]);
+  assert.deepEqual(claimForm(st, "zz.base", NOW).cards, st.cards, "claiming a form with no fm creates none");
+});
+
+test("claimed forms get no new fm card in a session", () => {
+  const st = claimForm(state(), "a0.base", NOW);
+  const { queue } = buildSession({ mode: "learn", state: st, content, now: NOW, rng, newSentenceIds: ["s00"] });
+  assert.ok(!queue.some((q) => q.cardId === "fm:a0:base"));
+  assert.ok(queue.some((q) => q.cardId === "lr:s00"));
+});
+
+test("an EN→RO miss takes back the claims on the forms it tested; a hit keeps them", () => {
+  const st = claimForm(claimForm(state(), "a0.base", NOW), "b9.base", NOW);
+  const units = [{ u: "a0.base", lx: "a0" }];
+  assert.deepEqual(applyReview(st, "er:s00", 3, units, NOW, content).claimed, st.claimed);
+  assert.deepEqual(applyReview(st, "fm:a0:base", 1, units, NOW, content).claimed, st.claimed);
+  assert.deepEqual(applyReview(st, "er:s00", 1, units, NOW, content).claimed, { "b9.base": NOW });
 });
