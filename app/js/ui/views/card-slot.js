@@ -8,9 +8,12 @@ import { diacriticBar } from "../components/diacritic-bar.js";
 import { renderFeedback, nextButtons, partsFor } from "../components/feedback.js";
 import { hintFor } from "./card-transform.js";
 
+/** Pure: the tags shown for a slot: Leipzig glosses of the wanted form(s), else the pattern labels. */
+export const slotTags = (slot) => (slot.gloss?.length ? slot.gloss : slot.labels);
+
 /** Pure: the slot line as text, e.g. `Ieri + [not] [past] + termina + sprint`. */
 export function slotLine(slots) {
-  return slots.map((s) => (s.type === "word" ? s.text : s.labels.map((l) => `[${l}]`).join(" "))).join(" + ");
+  return slots.map((s) => (s.type === "word" ? s.text : slotTags(s).map((l) => `[${l}]`).join(" "))).join(" + ");
 }
 
 export function renderCard(root, { card, sentence, content, tts, settings = {}, onResult }) {
@@ -40,8 +43,12 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
     if (s.type === "word") line.append(s.text);
     else {
       const chip = document.createElement("span");
-      chip.className = "chip";
-      chip.textContent = s.labels.map((l) => `[${l}]`).join(" ");
+      chip.className = "chip slot-gloss";
+      chip.textContent = slotTags(s).map((l) => `[${l}]`).join(" ");
+      if (s.gloss?.length) {
+        chip.title = s.labels.join(" · ");
+        chip.setAttribute("aria-label", `${s.gloss.join(" ")} (${s.labels.join(", ")})`);
+      }
       line.append(chip);
     }
   });

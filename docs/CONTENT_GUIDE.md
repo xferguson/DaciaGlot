@@ -27,6 +27,7 @@ Bump `contentVersion` (date + counter) in every PR that changes content.
   "lemma": "a găsi",
   "pos": "verb",
   "gloss": "to find",
+  "lemmaGloss": "find",
   "freq": 412,
   "class": "IV-esc",
   "forms": {
@@ -163,6 +164,7 @@ Adding an op requires updating this table **and** the UI instruction renderer in
 9. `register` or `situations` contains a value outside the allowed enums. `op` is not in §3.
 10. `canDo` references an unknown can-do. `level` doesn't exist in the manifest.
 11. A file under `app/js` or `app/css` is missing from the `sw.js` precache list.
+12. `lemmaGloss` (optional) is not one lowercase word or a dotted compound (`be`, `get.up`), or a small-caps label (`NEG`), of at most 16 characters.
 
 **Warnings:** a sentence with no `cloze` token; a sentence with no transforms (from Phase 2 on); `en` missing on a person transform; a lexeme with no sentences.
 
@@ -232,3 +234,12 @@ The Stage 3–4 `requires` edges are written by the Phase 4 content task.
 7. **Topical, personal and useful.** Prefer sentences the learner would actually say at standup, in a 1:1, at dinner, or about themself. Use realistic names (*Andrei, Ioana, Mihai, Elena, Radu, Cristina*) and Romanian places (*Cluj, Iași, Timișoara, Brașov, Constanța, Sibiu*).
 8. **English glosses** should be natural, not word-for-word. Note ambiguity where it exists (*am terminat* = I/we finished, so pick one and stay consistent with the transform `en`).
 9. **Never** use cedilla ş/ţ. Always use ș/ț (U+0219/U+021B).
+
+## 9. Glossing (slot-building cards, EXP-06)
+
+Slot cards label each changed slot with a Leipzig-style gloss of the *wanted form*, e.g. `[be.PRS.2SG]`, built by `leipzigFor(lexeme, formKey)` as `<lemma gloss>.<form gloss>`.
+
+- The lemma part is `lemmaGloss` if the lexeme has one, else the first word of `gloss` with a leading *to* dropped (*to live (somewhere)* → `live`). Add `lemmaGloss` when that first word is ambiguous or misleading (*to be able, can* → `can`, not `be`), or for a grammatical word (`NEG`, `SBJV`, `AUX`). A `gloss` already in small caps is used as is.
+- The form part comes from `LEIPZIG` in `app/js/core/cards.js` (`pres2sg → PRS.2SG`, `sgDef → SG.DEF`, `accShort → ACC.CL`). `base` and `short` add nothing.
+- Pronoun lexemes (`pron-<person><number>[-m|f]`) lead with person and number: `2SG.ACC.CL`.
+- If a result word can't be resolved to a lexeme form, the card falls back to the pattern's `slotLabel`.

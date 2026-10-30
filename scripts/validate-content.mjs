@@ -75,6 +75,15 @@ export function validateContent(raw, { fileOf = new Map(), phase = 1 } = {}) {
   dupes(levels, "level", "levels");
   dupes(levels.flatMap((lv) => lv.canDos ?? []), "can-do", "levels");
 
+  // Rule 12 — lemmaGloss is one lowercase word or a dotted compound (or a small-caps label), at most 16 chars
+  for (const l of lexemes) {
+    if (l.lemmaGloss === undefined) continue;
+    const g = l.lemmaGloss;
+    if (typeof g !== "string" || g.length > 16 || !/^([a-z]+(\.[a-z]+)*|[A-Z0-9]+(\.[A-Z0-9]+)*)$/.test(g)) {
+      err(l, "lexemes", 12, `lemmaGloss "${g}" must be one lowercase word or a dotted compound (e.g. "be", "get.up"), or a small-caps label like "NEG", up to 16 chars`);
+    }
+  }
+
   // Rule 6 — requires: known, same-or-lower stage, acyclic
   for (const p of patterns) {
     for (const r of p.requires ?? []) {

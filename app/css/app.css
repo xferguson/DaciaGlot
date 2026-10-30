@@ -135,6 +135,7 @@ a { color: var(--accent); }
   min-height: 44px; padding: 0 16px; border-radius: 22px; font: inherit;
   border: 1px solid var(--border); background: transparent; color: var(--fg); cursor: pointer;
 }
+.slot-gloss { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .85rem; letter-spacing: .02em; color: var(--accent); }
 .chip[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
 .card .actions { margin-top: 8px; }
 

@@ -156,3 +156,13 @@ test("CLI: --strict-a1 exits 1 on thin fixture content and --coverage prints Mar
   assert.equal(cov.status, 0, cov.stderr);
   assert.match(cov.stdout, /## Content coverage/);
 });
+
+test("rule 12: lemmaGloss must be one lowercase word, a dotted compound or a small-caps label, ≤ 16 chars", () => {
+  const { raw, fileOf } = readContentDir(join(FIXTURES, "valid"));
+  const check = (lemmaGloss) => {
+    const lexemes = raw.lexemes.map((l, i) => (i === 0 ? { ...l, lemmaGloss } : l));
+    return validateContent({ ...raw, lexemes }, { fileOf }).errors.filter((e) => e.rule === 12);
+  };
+  for (const ok of ["be", "get.up", "NEG", "cabbage.roll"]) assert.deepEqual(check(ok), [], ok);
+  for (const bad of ["to be", "Be", "two words", "", "averyveryverylongword", 3]) assert.equal(check(bad).length, 1, String(bad));
+});

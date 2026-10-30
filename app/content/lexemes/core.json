@@ -37,7 +37,8 @@
       "1pl": "am",
       "2pl": "ați",
       "3pl": "au"
-    }
+    },
+    "lemmaGloss": "AUX"
   },
   {
     "id": "nu",
@@ -49,7 +50,8 @@
     "forms": {
       "base": "nu",
       "short": "n"
-    }
+    },
+    "lemmaGloss": "NEG"
   },
   {
     "id": "sa",
@@ -60,7 +62,8 @@
     "trivial": true,
     "forms": {
       "base": "să"
-    }
+    },
+    "lemmaGloss": "SBJV"
   },
   {
     "id": "se",
@@ -71,7 +74,8 @@
     "trivial": true,
     "forms": {
       "base": "se"
-    }
+    },
+    "lemmaGloss": "REFL"
   },
   {
     "id": "la",
@@ -215,7 +219,8 @@
       "pres1sg",
       "pres2sg",
       "pres3sg"
-    ]
+    ],
+    "lemmaGloss": "can"
   },
   {
     "id": "sti",
@@ -825,7 +830,8 @@
     },
     "keyForms": [
       "pres3sg"
-    ]
+    ],
+    "lemmaGloss": "must"
   },
   {
     "id": "citi",
