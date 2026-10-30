@@ -13,11 +13,11 @@ export function unitsForSentence(sentence) {
 
 /**
  * Units a card exercises, as `{u, lx}` (lx = head lexeme, see ARCHITECTURE §4.3).
- * `kf`: the form unit `<lex>.<form>`. `xf`/`sb`: see `transformUnits`. `er`: see `erUnits`. `cz`: the target token's units plus the patterns those units realize. `lr` records exposure, not attempts.
+ * `fm`/`kf`: the form unit `<lex>.<form>`. `xf`/`sb`: see `transformUnits`. `er`: see `erUnits`. `cz`: the target token's units plus the patterns those units realize. `lr` records exposure, not attempts.
  */
 export function unitsRequiredForCard(cardId, content) {
   const p = parseCardId(cardId);
-  if (p.type === "kf") return [{ u: `${p.lexemeId}.${p.formKey}`, lx: p.lexemeId }];
+  if (p.type === "kf" || p.type === "fm") return [{ u: `${p.lexemeId}.${p.formKey}`, lx: p.lexemeId }];
   if (p.type === "xf" || p.type === "sb") {
     const sentence = content.sentences.get(p.sentenceId);
     const t = sentence?.transforms?.[p.transformIndex];

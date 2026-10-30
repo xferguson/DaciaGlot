@@ -4,6 +4,7 @@ import { toast } from "../components/toast.js";
 import { hideBanner } from "../components/banner.js";
 import { defaultState, exportState, importState, ImportError } from "../../data/store.js";
 import { setVoiceURI, speak } from "../../data/tts.js";
+import { foldClozeCards } from "../../data/migrations.js";
 
 const dateStamp = () => new Date().toISOString().slice(0, 10);
 
@@ -134,7 +135,7 @@ export function render(root, ctx) {
     box.querySelector("[data-cancel]").addEventListener("click", closeDialog);
     box.querySelectorAll("[data-mode]").forEach((b) => b.addEventListener("click", () => {
       try {
-        ctx.state = importState(text, b.dataset.mode, ctx.state);
+        ctx.state = foldClozeCards(importState(text, b.dataset.mode, ctx.state), ctx.content);
         ctx.store.save(ctx.state);
         ctx.store.flush();
         closeDialog();

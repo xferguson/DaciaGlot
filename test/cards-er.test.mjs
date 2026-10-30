@@ -32,15 +32,15 @@ function withCz(stabs) {
   const st = state();
   st.seenSentences.s1 = NOW;
   stabs.forEach((stability, i) => {
-    st.cards[buildCardId("cz", "s1", i === 0 ? 0 : 2)] = { ...newCard(NOW), stability };
+    st.cards[i === 0 ? "fm:avea:pres1sg" : "fm:problema:sg"] = { ...newCard(NOW), stability };
   });
   return st;
 }
 
-test("er unlocks only when every cloze card has stability ≥ 7 days", () => {
+test("er unlocks only when every cloze unit's fm card has stability ≥ 7 days", () => {
   assert.equal(erUnlocked(s1, withCz([7, 7])), true);
   assert.equal(erUnlocked(s1, withCz([30, 6.9])), false);
-  assert.equal(erUnlocked(s1, withCz([30])), false, "a cloze card is missing");
+  assert.equal(erUnlocked(s1, withCz([30])), false, "a cloze unit's fm card is missing");
   assert.equal(erUnlocked(s1, state()), false);
   assert.equal(erUnlocked(noCloze, state()), false, "no cloze tokens");
 });
@@ -76,4 +76,5 @@ test("buildSession appends new er cards in session mode", () => {
 test("er has the lowest drill weight (FR-D9)", () => {
   assert.deepEqual(pickPerSentence(["er:s1", "xf:s1:0"]), ["xf:s1:0"]);
   assert.deepEqual(pickPerSentence(["er:s1", "cz:s1:0"]), ["er:s1", "cz:s1:0"]);
+  assert.deepEqual(pickPerSentence(["fm:avea:pres1sg", "er:s1"]), ["fm:avea:pres1sg", "er:s1"], "fm has no sentence until shown");
 });

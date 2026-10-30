@@ -1,8 +1,9 @@
 // Session building, grading and review application (ARCHITECTURE §8). Pure: `now` and `rng` are injected.
 import { newCard, review } from "./fsrs.js";
-import { parseCardId, cardsForSentence, isUnlocked, newKfCards, newTransformCards, newErCards, pickPerSentence } from "./cards.js";
+import { parseCardId, unitIdOfFm, cardsForSentence, isUnlocked, newKfCards, newTransformCards, newErCards, pickPerSentence } from "./cards.js";
 import { unitsForSentence, isKnown, unitsRequiredForCard } from "./units.js";
 import { pickNewSentences, focusList } from "./select.js";
+import { carriersFor } from "./carrier.js";
 
 export const QUICK_CAP = 15;
 export const SEC_PER_REVIEW = 12;
@@ -21,6 +22,7 @@ export function cardKeys(item, content) {
   const p = parseCardId(item.cardId);
   const keys = new Set();
   if (p.sentenceId) keys.add(`s:${p.sentenceId}`);
+  if (item.from) keys.add(`s:${item.from}`);
   for (const { lx } of unitsRequiredForCard(item.cardId, content)) keys.add(`l:${lx}`);
   if (item.isNew && p.type === "lr") keys.add("new");
   return keys;
@@ -58,16 +60,16 @@ export function spaceOut(queue, content) {
 }
 
 /**
- * Leaving a session early: new `cz` cards whose sentence was already introduced (its `lr` reviewed) but
+ * Leaving a session early: new `fm` cards of a sentence that was already introduced (its `lr` reviewed, `from`) but
  * which weren't reached yet are created as new cards due now, so the next session picks them up.
  * `remaining` is the rest of the queue. Returns a new state.
  */
 export function keepStarted(state, remaining, now) {
   const cards = { ...state.cards };
-  for (const { cardId, isNew } of remaining) {
+  for (const { cardId, isNew, from } of remaining) {
     if (!isNew || cardId in cards) continue;
     const p = parseCardId(cardId);
-    if (p.type === "cz" && `lr:${p.sentenceId}` in cards) cards[cardId] = newCard(now);
+    if (p.type === "fm" && from && `lr:${from}` in cards) cards[cardId] = newCard(now);
   }
   return { ...state, cards };
 }
@@ -137,23 +139,30 @@ export function interimNewSentences(n, state, content) {
     .map((x) => x.s.id);
 }
 
-/** FR-S8: does the card's sentence belong to the focus? `kf` cards (no sentence) never do. No focus → true. */
-export function inFocus(cardId, focus, content) {
+/**
+ * FR-S8: does the card's sentence belong to the focus? An `fm` card is in focus if any seen sentence it can be
+ * shown in is. Legacy `kf` cards (no sentence) never are. No focus → true. `state` is only needed for `fm`.
+ */
+export function inFocus(cardId, focus, content, state = null) {
   const list = focusList(focus);
   if (!list.length) return true;
-  const s = content.sentences.get(parseCardId(cardId).sentenceId);
-  return !!s && list.some((f) => (f.type === "pattern" ? (s.patterns ?? []) : (s.situations ?? [])).includes(f.id));
+  const inList = (s) => !!s && list.some((f) => (f.type === "pattern" ? (s.patterns ?? []) : (s.situations ?? [])).includes(f.id));
+  const p = parseCardId(cardId);
+  if (p.type === "fm") {
+    return !!state && carriersFor(unitIdOfFm(cardId), state, content).some((c) => inList(content.sentences.get(c.sentenceId)));
+  }
+  return inList(content.sentences.get(p.sentenceId));
 }
 
 /** Due cards, filtered to the focus when there is one (FR-S8). */
 export function dueInFocus(state, content, now, focus) {
-  return dueCards(state, content, now).filter((id) => inFocus(id, focus, content));
+  return dueCards(state, content, now).filter((id) => inFocus(id, focus, content, state));
 }
 
 /** FR-S8: stable partition, cards whose sentence matches the focus first. `kf` cards have no sentence and keep their place after. */
-export function focusFirst(cardIds, focus, content) {
+export function focusFirst(cardIds, focus, content, state = null) {
   if (!focusList(focus).length) return cardIds;
-  const hit = (id) => inFocus(id, focus, content);
+  const hit = (id) => inFocus(id, focus, content, state);
   const flags = cardIds.map(hit);
   return [...cardIds.filter((_, i) => flags[i]), ...cardIds.filter((_, i) => !flags[i])];
 }
@@ -188,7 +197,7 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
   const focus = focusList(rawFocus).length ? focusList(rawFocus) : null;
   let focused = dueInFocus(state, content, now, focus);
   if (focus && mode === "mix") {
-    const outside = dueCards(state, content, now).filter((id) => !inFocus(id, focus, content)).slice(0, MIX_OUTSIDE);
+    const outside = dueCards(state, content, now).filter((id) => !inFocus(id, focus, content, state)).slice(0, MIX_OUTSIDE);
     focused = [...focused, ...outside];
   }
   const dueIds = pickPerSentence(focused);
@@ -215,17 +224,21 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
       // New profile: i+1 finds few sentences yet, so top up with the easiest ones (FR-S4 order).
       const have = new Set(ids);
       const extra = interimNewSentences(Infinity, state, content)
-        .filter((id) => !have.has(id) && inFocus(`lr:${id}`, focus, content))
+        .filter((id) => !have.has(id) && inFocus(`lr:${id}`, focus, content, state))
         .slice(0, want - ids.length);
       ids = [...ids, ...extra];
     }
   }
+  // One schedule per word form: a form shared by two new sentences gets its `fm` card from the first.
+  const claimed = new Set();
   const groups = ids
     .map((id) => content.sentences.get(id))
     .filter(Boolean)
-    .map((s) => cardsForSentence(s, content).map((cardId) => ({ cardId, isNew: true })));
+    .map((s) => cardsForSentence(s, content, state)
+      .filter((cardId) => !claimed.has(cardId) && claimed.add(cardId))
+      .map((cardId) => (cardId.startsWith("fm:") ? { cardId, isNew: true, from: s.id } : { cardId, isNew: true })));
   const k = groups.length;
-  const kf = focus ? [] : newKfCards(state, content).map((cardId) => ({ cardId, isNew: true }));
+  const kf = focus ? [] : newKfCards(state, content).filter((id) => !claimed.has(id)).map((cardId) => ({ cardId, isNew: true }));
   const queue = [];
   if (k === 0) queue.push(...due);
   else {
@@ -236,9 +249,9 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
     });
   }
   const busy = new Set(dueIds.map(parseCardId).filter((p) => p.type === "xf" || p.type === "sb").map((p) => p.sentenceId));
-  const xf = newTransformCards(state, content, { skip: busy }).filter((id) => inFocus(id, focus, content)).map((cardId) => ({ cardId, isNew: true }));
+  const xf = newTransformCards(state, content, { skip: busy }).filter((id) => inFocus(id, focus, content, state)).map((cardId) => ({ cardId, isNew: true }));
   const taken = new Set([...busy, ...xf.map((x) => parseCardId(x.cardId).sentenceId)]);
-  const er = newErCards(state, content, { skip: taken }).filter((id) => inFocus(id, focus, content)).map((cardId) => ({ cardId, isNew: true }));
+  const er = newErCards(state, content, { skip: taken }).filter((id) => inFocus(id, focus, content, state)).map((cardId) => ({ cardId, isNew: true }));
   queue.push(...kf, ...xf, ...er);
   const estimateSec = due.length * SEC_PER_REVIEW + (k + kf.length + xf.length + er.length) * SEC_PER_NEW;
   return plan ? { queue, estimateSec, plan } : { queue, estimateSec };
@@ -264,9 +277,10 @@ export function addMinutes(state, minutes, now) {
 /**
  * FSRS update (Medium/Easy gaps from `ladderDays`), attempts (production cards only, PRD FR-S3), `lr` exposure, day stats.
  * `unitsRequired` is `{u, lx}[]` from `unitsRequiredForCard`. `content` is only needed for `lr` exposure.
+ * For an `fm` card, `presentedId` is the id it was shown as (`cz:<sid>:<i>` or `kf:<lex>:<form>`), recorded on the attempts; `unitsRequired` comes from it.
  * Returns a new state; the input is not mutated.
  */
-export function applyReview(state, cardId, grade, unitsRequired, now, content) {
+export function applyReview(state, cardId, grade, unitsRequired, now, content, presentedId = cardId) {
   const p = parseCardId(cardId);
   const prev = state.cards[cardId];
   let card = review(prev ?? newCard(now), grade, now);
@@ -294,7 +308,7 @@ export function applyReview(state, cardId, grade, unitsRequired, now, content) {
   } else {
     next.attempts = [
       ...state.attempts,
-      ...unitsRequired.map(({ u, lx }) => ({ u, lx, c: grade >= 2 ? 1 : 0, t: now, card: cardId })),
+      ...unitsRequired.map(({ u, lx }) => ({ u, lx, c: grade >= 2 ? 1 : 0, t: now, card: presentedId })),
     ];
   }
   next.history = bumpDay(state.history, now, (d) => {

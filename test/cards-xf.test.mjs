@@ -118,9 +118,9 @@ test("xf additionally needs every lexeme's key-forms cards introduced", () => {
   const st = seen("s1");
   assert.equal(isUnlocked("sb:s1:0", st, c), true);
   assert.equal(isUnlocked("xf:s1:0", st, c), false);
-  st.cards["kf:termina:ppl"] = newCard(NOW);
+  st.cards["fm:termina:ppl"] = newCard(NOW);
   assert.equal(isUnlocked("xf:s1:0", st, c), false);
-  st.cards["kf:termina:pres1sg"] = newCard(NOW);
+  st.cards["fm:termina:pres1sg"] = newCard(NOW);
   assert.equal(isUnlocked("xf:s1:0", st, c), true);
   assert.equal(isUnlocked("xf:s1:0", state(), c), false, "sentence not seen");
 });

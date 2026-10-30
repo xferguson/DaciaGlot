@@ -55,10 +55,10 @@ test("patternState: only the last 20 attempts count", () => {
 
 test("patternState: automatic needs 90%, 10 lexemes and a stable card", () => {
   const good = patAttempts(10);
-  const cards = { "cz:s1:0": card(21) };
+  const cards = { "fm:a:x": card(21) };
   assert.equal(patternState("p", st({ attempts: good, cards }), content, NOW), "automatic");
   assert.equal(patternState("p", st({ attempts: patAttempts(9), cards }), content, NOW), "producing", "9 lexemes");
-  assert.equal(patternState("p", st({ attempts: good, cards: { "cz:s1:0": card(20.9) } }), content, NOW), "producing", "stability 20.9");
+  assert.equal(patternState("p", st({ attempts: good, cards: { "fm:a:x": card(20.9) } }), content, NOW), "producing", "stability 20.9");
   assert.equal(patternState("p", st({ attempts: good }), content, NOW), "producing", "no card");
   // 10 correct + 1 wrong = 90.9%; + 2 wrong = 83%.
   assert.equal(patternState("p", st({ attempts: patAttempts(10, 1), cards }), content, NOW), "automatic");
@@ -84,9 +84,9 @@ test("unitState", () => {
   assert.equal(unitState("a.x", st({ attempts: [att("a.x", "a", 0)] }), content, NOW), "seen");
   const ok = st({ attempts: [att("a.x", "a", 1)] });
   assert.equal(unitState("a.x", ok, content, NOW), "produced");
-  const stable = { ...ok, cards: { "cz:s1:0": card(21) } };
+  const stable = { ...ok, cards: { "fm:a:x": card(21) } };
   assert.equal(unitState("a.x", stable, content, NOW), "stable");
-  assert.equal(unitState("a.x", { ...stable, cards: { "cz:s1:0": card(20) } }, content, NOW), "produced");
+  assert.equal(unitState("a.x", { ...stable, cards: { "fm:a:x": card(20) } }, content, NOW), "produced");
   const lastWrong = { ...stable, attempts: [att("a.x", "a", 1), att("a.x", "a", 0, NOW - 1000)] };
   assert.equal(unitState("a.x", lastWrong, content, NOW), "produced");
   const agg = st({ unitAggregates: { "a.x": { n: 1, correct: 1, lexemes: ["a"], lastCorrectAt: 1 } } });
@@ -94,12 +94,17 @@ test("unitState", () => {
 });
 
 test("sentenceMastered", () => {
-  const withCard = (c, attempts = [att("a.x", "a", 1, NOW - DAY, "cz:s1:0")]) => st({ cards: { "cz:s1:0": c }, attempts });
+  const withCard = (c, attempts = [att("a.x", "a", 1, NOW - DAY, "cz:s1:0")]) => st({ cards: { "fm:a:x": c }, attempts });
   assert.equal(sentenceMastered("s1", withCard(card(7)), content, NOW), true);
   assert.equal(sentenceMastered("s1", withCard(card(6.9)), content, NOW), false);
   assert.equal(sentenceMastered("s1", withCard(card(7), [att("a.x", "a", 0, NOW - DAY, "cz:s1:0")]), content, NOW), false);
   assert.equal(sentenceMastered("s2", withCard(card(30)), content, NOW), false, "other sentence");
   assert.equal(sentenceMastered("s1", st({ cards: { "lr:s1": card(30) } }), content, NOW), false, "lr is not production");
+  // an er card of the sentence also masters it; a stable fm for a unit of another sentence does not
+  const er = (c, a) => st({ cards: { "er:s1": c }, attempts: a });
+  assert.equal(sentenceMastered("s1", er(card(7), [att("a.x", "a", 1, NOW - DAY, "er:s1")]), content, NOW), true);
+  assert.equal(sentenceMastered("s1", er(card(7), [att("a.x", "a", 0, NOW - DAY, "er:s1")]), content, NOW), false);
+  assert.equal(sentenceMastered("s1", st({ cards: { "fm:c:x": card(30) } }), content, NOW), false);
   // attempt folded away: fall back to the card's FSRS state
   assert.equal(sentenceMastered("s1", withCard(card(30), []), content, NOW), true);
   assert.equal(sentenceMastered("s1", withCard(card(30, { state: 3 }), []), content, NOW), false);
@@ -145,7 +150,7 @@ test("derived states do not change across a compaction", () => {
     ...Array.from({ length: 8 }, (_, i) => att("pat:p", `m${i}`, 1, NOW - 30 * DAY + i)),
     att("a.x", "a", 1, NOW - 120 * DAY), att("b.x", "b", 0, NOW - 10 * DAY),
   ];
-  const cards = { "cz:s1:0": card(25) };
+  const cards = { "fm:a:x": card(25) };
   for (const base of [st({ attempts, cards }), st({ attempts: attempts.slice(0, 12), cards }), st({ attempts: attempts.slice(12), cards })]) {
     const after = compactAttempts(base, NOW);
     assert.deepEqual(allPatternStates(after, content, NOW), allPatternStates(base, content, NOW));

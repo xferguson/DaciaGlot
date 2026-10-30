@@ -4,7 +4,7 @@ import { installLocalStorage } from './helpers/local-storage-shim.mjs';
 import {
   STATE_KEY, defaultState, load, save, flush, exportState, importState, onError, ImportError,
 } from '../app/js/data/store.js';
-import { CURRENT_SCHEMA_VERSION, migrations, migrate } from '../app/js/data/migrations.js';
+import { CURRENT_SCHEMA_VERSION, migrations, migrate, foldClozeCards, hasLegacyCloze } from '../app/js/data/migrations.js';
 
 let ls;
 beforeEach(() => {
@@ -23,7 +23,7 @@ test('defaultState has every documented field', () => {
     'attempts', 'canDoChecked', 'cards', 'contentVersion', 'createdAt', 'difficult', 'flags', 'history',
     'lastCompactionAt', 'lexemeSentences', 'schemaVersion', 'seenSentences', 'settings', 'unitAggregates',
   ]);
-  assert.equal(s.schemaVersion, 1);
+  assert.equal(s.schemaVersion, CURRENT_SCHEMA_VERSION);
   assert.equal(s.createdAt, NOW);
   assert.deepEqual(s.settings, {
     newPerSession: 8, ttsRate: 0.9, voiceURI: null, autoplay: true,
@@ -34,7 +34,7 @@ test('defaultState has every documented field', () => {
 test('load: empty storage gives defaults, not flagged as recovered', () => {
   const s = load();
   assert.equal(s._recovered, undefined);
-  assert.equal(s.schemaVersion, 1);
+  assert.equal(s.schemaVersion, CURRENT_SCHEMA_VERSION);
   assert.equal(ls.length, 0);
 });
 
@@ -106,7 +106,7 @@ test('quota error on save invokes onError callback and does not throw', () => {
 test('migrate runs pending migrations in order', () => {
   assert.deepEqual(migrate({ schemaVersion: CURRENT_SCHEMA_VERSION, x: 1 }), { schemaVersion: CURRENT_SCHEMA_VERSION, x: 1 });
   assert.throws(() => migrate({ schemaVersion: 0 }), /No migration/);
-  assert.deepEqual(Object.keys(migrations), []);
+  assert.deepEqual(Object.keys(migrations), ['1']);
 });
 
 test('export → import(replace) round-trips to a deep-equal state', async () => {
@@ -235,4 +235,63 @@ test('NFR-2: 600 sentences × 5 cards + 90 days × 150 attempts serializes < 2 M
   save(s);
   flush();
   assert.ok(quotaLs.getItem(STATE_KEY));
+});
+
+// ---- schema 1 → 2: one schedule per word form (T25) ----
+
+const sent = (id, tokens) => ({ id, tokens: tokens.map((units) => ({ units })) });
+const migContent = {
+  sentences: new Map([
+    ['s1', sent('s1', [[{ lex: 'fi', form: 'pres3sg' }], [{ lex: 'nu', form: 'short' }, { lex: 'aux-perf', form: '1sg' }]])],
+    ['s2', sent('s2', [[{ lex: 'fi', form: 'pres3sg' }]])],
+  ]),
+};
+const v1 = (cards, extra = {}) => ({ ...defaultState(NOW), schemaVersion: 1, cards, ...extra });
+
+test('migration 1 → 2: kf cards fold into fm ids; difficult remaps; cz waits for content', () => {
+  const kf = card(NOW, { stability: 9, lapses: 1 });
+  const cz = card(NOW, { stability: 4 });
+  const out = migrate(v1({ 'kf:fi:pres3sg': kf, 'cz:s1:0': cz, 'lr:s1': card(NOW) }, { difficult: { 'kf:fi:pres3sg': 5, 'lr:s1': 6 } }));
+  assert.equal(out.schemaVersion, 2);
+  assert.deepEqual(Object.keys(out.cards).sort(), ['cz:s1:0', 'fm:fi:pres3sg', 'lr:s1']);
+  assert.deepEqual(out.cards['fm:fi:pres3sg'], kf);
+  assert.deepEqual(out.difficult, { 'fm:fi:pres3sg': 5, 'lr:s1': 6 });
+  assert.equal(hasLegacyCloze(out), true);
+});
+
+test('foldClozeCards: strongest state wins, lapses are summed, drops old ids, idempotent', () => {
+  const weak = card(NOW - DAY, { stability: 3, lapses: 2 });
+  const strong = card(NOW - 2 * DAY, { stability: 12, lapses: 1, reps: 7 });
+  const tie = card(NOW, { stability: 12, lapses: 0, reps: 9 });
+  const start = migrate(v1({ 'cz:s1:0': weak, 'cz:s2:0': strong, 'kf:fi:pres3sg': tie }, { difficult: { 'cz:s1:0': 8, 'cz:s2:0': 9 } }));
+  const out = foldClozeCards(start, migContent);
+  assert.deepEqual(Object.keys(out.cards).sort(), ['fm:fi:pres3sg']);
+  assert.equal(out.cards['fm:fi:pres3sg'].reps, 9, 'tie on stability → latest lastReview');
+  assert.equal(out.cards['fm:fi:pres3sg'].lapses, 3, '2 + 1 + 0');
+  assert.deepEqual(out.difficult, { 'fm:fi:pres3sg': 9 });
+  assert.equal(foldClozeCards(out, migContent), out, 'nothing left to fold');
+  const hi = foldClozeCards(v1({ 'cz:s2:0': strong, 'cz:s1:0': weak }), migContent);
+  assert.equal(hi.cards['fm:fi:pres3sg'].stability, 12);
+});
+
+test('foldClozeCards: a multi-unit token feeds each unit; unknown sentences are dropped; attempts untouched', () => {
+  const c = card(NOW, { stability: 5 });
+  const attempts = [{ u: 'fi.pres3sg', lx: 'fi', c: 1, t: NOW, card: 'cz:s1:0' }];
+  const out = foldClozeCards(v1({ 'cz:s1:1': c, 'cz:gone:0': c }, { attempts }), migContent);
+  assert.deepEqual(Object.keys(out.cards).sort(), ['fm:aux-perf:1sg', 'fm:nu:short']);
+  assert.deepEqual(out.attempts, attempts);
+});
+
+test('importing a v1 backup migrates it; load() migrates stored v1 state and never throws', () => {
+  const backup = JSON.stringify(v1({ 'kf:fi:pres3sg': card(NOW, { stability: 2 }), 'cz:s1:0': card(NOW, { stability: 6 }) }));
+  const imported = importState(backup, 'replace', defaultState(NOW));
+  assert.equal(imported.schemaVersion, 2);
+  assert.ok('fm:fi:pres3sg' in imported.cards && !('kf:fi:pres3sg' in imported.cards));
+  assert.equal(foldClozeCards(imported, migContent).cards['fm:fi:pres3sg'].stability, 6);
+  ls.setItem(STATE_KEY, backup);
+  const s = load();
+  assert.equal(s.schemaVersion, 2);
+  assert.ok('fm:fi:pres3sg' in s.cards);
+  ls.setItem(STATE_KEY, JSON.stringify({ schemaVersion: 1, cards: 'junk' }));
+  assert.doesNotThrow(load);
 });

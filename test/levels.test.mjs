@@ -23,13 +23,13 @@ const att = (u, lx, c = 1) => ({ u, lx, c, t: NOW - DAY, card: "cz:s1:0" });
 const st = (extra = {}) => ({ ...freshState(), ...extra });
 
 test("canDoCheckable: needs linked sentences, all mastered", () => {
-  const one = { "cz:s1:0": card(7) };
-  const both = { ...one, "cz:s2:0": card(8) };
+  const one = { "fm:a:x": card(7) };
+  const both = { ...one, "fm:c:x": card(8) };
   assert.equal(canDoCheckable("c4", st({ cards: both }), content, NOW), false, "no linked sentences");
   assert.equal(canDoCheckable("c1", st(), content, NOW), false);
   assert.equal(canDoCheckable("c1", st({ cards: one }), content, NOW), false, "only one of two");
   assert.equal(canDoCheckable("c1", st({ cards: both }), content, NOW), true);
-  assert.equal(canDoCheckable("c1", st({ cards: { ...both, "cz:s2:0": card(6.9) } }), content, NOW), false, "stability below 7");
+  assert.equal(canDoCheckable("c1", st({ cards: { ...both, "fm:c:x": card(6.9) } }), content, NOW), false, "stability below 7");
   assert.deepEqual(canDoMastery("c1", st({ cards: one }), content, NOW), { done: 1, total: 2 });
 });
 
