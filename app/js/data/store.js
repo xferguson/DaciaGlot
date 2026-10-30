@@ -25,7 +25,7 @@ export function defaultState(now) {
       registers: ['colloquial', 'neutral'],
       lastExportAt: null,
       ttsBannerDismissed: false,
-      focus: null,
+      focus: [],
     },
     cards: {},
     seenSentences: {},
@@ -36,7 +36,7 @@ export function defaultState(now) {
     history: {},
     canDoChecked: {},
     lastCompactionAt: null,
-    activeSession: null,
+    difficult: {},
   };
 }
 
@@ -46,7 +46,9 @@ const isObject = (v) => v !== null && typeof v === 'object' && !Array.isArray(v)
 function withDefaults(s, now) {
   const d = defaultState(now);
   const out = { ...d, ...s, settings: { ...d.settings, ...(isObject(s.settings) ? s.settings : {}) } };
-  for (const k of ['cards', 'seenSentences', 'lexemeSentences', 'unitAggregates', 'history', 'canDoChecked']) {
+  delete out.activeSession; // briefly shipped in 0.7.0, now unused
+  out.settings.focus = Array.isArray(out.settings.focus) ? out.settings.focus : out.settings.focus ? [out.settings.focus] : [];
+  for (const k of ['cards', 'seenSentences', 'lexemeSentences', 'unitAggregates', 'history', 'canDoChecked', 'difficult']) {
     if (!isObject(out[k])) out[k] = d[k];
   }
   for (const k of ['attempts', 'flags']) {

@@ -2,15 +2,17 @@
 import { newCard, review } from "./fsrs.js";
 import { parseCardId, cardsForSentence, isUnlocked, newKfCards, newTransformCards, newErCards, pickPerSentence } from "./cards.js";
 import { unitsForSentence, isKnown, unitsRequiredForCard } from "./units.js";
-import { pickNewSentences } from "./select.js";
+import { pickNewSentences, focusList } from "./select.js";
 
 export const QUICK_CAP = 15;
 export const SEC_PER_REVIEW = 12;
 export const SEC_PER_NEW = 40;
 /** Mix aims for a session of about this long: due reviews first, new sentences fill what's left. */
 export const MIX_BUDGET_SEC = 12 * 60;
-/** An unfinished session can be resumed for this long after its last answer. */
-export const RESUME_MS = 12 * 60 * 60 * 1000;
+/** With a focus, Mix also brings in up to this many of the most overdue cards from outside it (FR-S8). */
+export const MIX_OUTSIDE = 3;
+/** Below this many seen sentences, new sessions top up with the easiest sentences (FR-S4 order) when i+1 finds too few. */
+export const COLD_START_SEEN = 30;
 const SPACING_GAP = 2;
 const SPACING_WINDOW = 8;
 
@@ -55,9 +57,24 @@ export function spaceOut(queue, content) {
   return out.map((r) => r.item);
 }
 
-/** True when `active` (AppState.activeSession) still has cards left and was touched within `RESUME_MS`. */
-export function resumable(active, now) {
-  return !!active && Array.isArray(active.queue) && active.pos < active.queue.length && now - active.updatedAt <= RESUME_MS;
+/**
+ * Leaving a session early: new `cz` cards whose sentence was already introduced (its `lr` reviewed) but
+ * which weren't reached yet are created as new cards due now, so the next session picks them up.
+ * `remaining` is the rest of the queue. Returns a new state.
+ */
+export function keepStarted(state, remaining, now) {
+  const cards = { ...state.cards };
+  for (const { cardId, isNew } of remaining) {
+    if (!isNew || cardId in cards) continue;
+    const p = parseCardId(cardId);
+    if (p.type === "cz" && `lr:${p.sentenceId}` in cards) cards[cardId] = newCard(now);
+  }
+  return { ...state, cards };
+}
+
+/** FR-S9: a card struggled with (Hard or wrong) twice in one session goes on the difficult list. */
+export function markDifficult(state, cardId, now) {
+  return { ...state, difficult: { ...state.difficult, [cardId]: now } };
 }
 
 /**
@@ -71,6 +88,22 @@ export function mixPlan(due, newPerSession) {
   const newCount = Math.max(0, Math.min(newPerSession, room));
   const total = due * SEC_PER_REVIEW + newCount * SEC_PER_NEW;
   return { newCount, reviewPct: total ? Math.round((100 * due * SEC_PER_REVIEW) / total) : 0 };
+}
+
+/** PRD FR-S1: Medium (Good) climbs this ladder of gaps, in days, and stays on the top rung. */
+export const MEDIUM_LADDER_DAYS = [1, 4, 16, 64, 256];
+/** Easy waits this many times Medium's next gap (capped at the top rung). */
+export const EASY_FACTOR = 3;
+const DAY_MS = 864e5;
+
+/**
+ * Days until the next review for a Medium (3) or Easy (4) answer, given the card's previous scheduled gap
+ * in days (0 for a new card): the first rung above it, × `EASY_FACTOR` for Easy. Hard and Again keep FSRS.
+ */
+export function ladderDays(prevDays, grade) {
+  const top = MEDIUM_LADDER_DAYS[MEDIUM_LADDER_DAYS.length - 1];
+  const medium = MEDIUM_LADDER_DAYS.find((d) => d > prevDays + 1e-6) ?? top;
+  return grade === 4 ? Math.min(top, medium * EASY_FACTOR) : medium;
 }
 
 /** PRD FR-S2. `rating` ("hard"|"medium"|"easy") is the learner's self-rating after a clean correct answer. */
@@ -106,9 +139,10 @@ export function interimNewSentences(n, state, content) {
 
 /** FR-S8: does the card's sentence belong to the focus? `kf` cards (no sentence) never do. No focus → true. */
 export function inFocus(cardId, focus, content) {
-  if (!focus) return true;
+  const list = focusList(focus);
+  if (!list.length) return true;
   const s = content.sentences.get(parseCardId(cardId).sentenceId);
-  return !!s && (focus.type === "pattern" ? (s.patterns ?? []) : (s.situations ?? [])).includes(focus.id);
+  return !!s && list.some((f) => (f.type === "pattern" ? (s.patterns ?? []) : (s.situations ?? [])).includes(f.id));
 }
 
 /** Due cards, filtered to the focus when there is one (FR-S8). */
@@ -118,11 +152,8 @@ export function dueInFocus(state, content, now, focus) {
 
 /** FR-S8: stable partition, cards whose sentence matches the focus first. `kf` cards have no sentence and keep their place after. */
 export function focusFirst(cardIds, focus, content) {
-  if (!focus) return cardIds;
-  const hit = (id) => {
-    const s = content.sentences.get(parseCardId(id).sentenceId);
-    return !!s && (focus.type === "pattern" ? (s.patterns ?? []) : (s.situations ?? [])).includes(focus.id);
-  };
+  if (!focusList(focus).length) return cardIds;
+  const hit = (id) => inFocus(id, focus, content);
   const flags = cardIds.map(hit);
   return [...cardIds.filter((_, i) => flags[i]), ...cardIds.filter((_, i) => !flags[i])];
 }
@@ -140,8 +171,10 @@ function chunk(list, parts) {
  * - `learn`: new material only (no due cards): `newPerSession` new sentences plus newly unlocked drills.
  * - `mix`: all due cards plus as many new sentences as `mixPlan` allows; no new drills when it allows none.
  * - `session` (legacy): all due cards plus `newPerSession` new sentences.
- * Any mode takes a `focus`, which filters everything to that situation or pattern (FR-S8): due cards,
- * new sentences and drills; `kf` cards are left out.
+ * Any mode takes a `focus` (one topic or a list), which filters everything to those situations/patterns
+ * (FR-S8): due cards, new sentences and drills; `kf` cards are left out. Mix with a focus also adds the
+ * `MIX_OUTSIDE` most overdue cards from outside it.
+ * A new profile (< `COLD_START_SEEN` seen sentences) is topped up to the wanted number of new sentences.
  * The queue is then spaced out (`spaceOut`) so related cards are not back to back.
  * New sentences (`lr`, then `cz`) are chosen by `select.js` (FR-S5; the FR-S4 interim order is the cold-start fallback), spread so two new sentences' `lr` cards are never adjacent, then newly unlocked `kf` (T14), `xf`/`sb` (T15) and `er` (T20) cards. Due cards are thinned per sentence (FR-D9).
  * @returns {{queue: {cardId: string, isNew: boolean}[], estimateSec: number, blocked?: true, suggest?: {type: string, id: string}|null, plan?: {newCount: number, reviewPct: number}}}
@@ -151,8 +184,14 @@ export function buildSession(opts) {
   return { ...out, queue: spaceOut(out.queue, opts.content) };
 }
 
-function composeSession({ mode, focus = null, state, content, now, rng, newSentenceIds }) {
-  const dueIds = pickPerSentence(dueInFocus(state, content, now, focus));
+function composeSession({ mode, focus: rawFocus = null, state, content, now, rng, newSentenceIds }) {
+  const focus = focusList(rawFocus).length ? focusList(rawFocus) : null;
+  let focused = dueInFocus(state, content, now, focus);
+  if (focus && mode === "mix") {
+    const outside = dueCards(state, content, now).filter((id) => !inFocus(id, focus, content)).slice(0, MIX_OUTSIDE);
+    focused = [...focused, ...outside];
+  }
+  const dueIds = pickPerSentence(focused);
   const allDue = dueIds.map((cardId) => ({ cardId, isNew: false }));
   if (mode === "quick" || mode === "review") {
     const queue = mode === "quick" ? allDue.slice(0, QUICK_CAP) : allDue;
@@ -172,6 +211,14 @@ function composeSession({ mode, focus = null, state, content, now, rng, newSente
       return { queue, estimateSec: queue.length * SEC_PER_REVIEW, blocked: true, suggest: pick.suggest };
     }
     ids = pick.sentences.length || focus ? pick.sentences : interimNewSentences(want, state, content);
+    if (ids.length < want && Object.keys(state.seenSentences).length < COLD_START_SEEN) {
+      // New profile: i+1 finds few sentences yet, so top up with the easiest ones (FR-S4 order).
+      const have = new Set(ids);
+      const extra = interimNewSentences(Infinity, state, content)
+        .filter((id) => !have.has(id) && inFocus(`lr:${id}`, focus, content))
+        .slice(0, want - ids.length);
+      ids = [...ids, ...extra];
+    }
   }
   const groups = ids
     .map((id) => content.sentences.get(id))
@@ -215,13 +262,19 @@ export function addMinutes(state, minutes, now) {
 }
 
 /**
- * FSRS update, attempts (production cards only, PRD FR-S3), `lr` exposure, day stats.
+ * FSRS update (Medium/Easy gaps from `ladderDays`), attempts (production cards only, PRD FR-S3), `lr` exposure, day stats.
  * `unitsRequired` is `{u, lx}[]` from `unitsRequiredForCard`. `content` is only needed for `lr` exposure.
  * Returns a new state; the input is not mutated.
  */
 export function applyReview(state, cardId, grade, unitsRequired, now, content) {
   const p = parseCardId(cardId);
-  const card = review(state.cards[cardId] ?? newCard(now), grade, now);
+  const prev = state.cards[cardId];
+  let card = review(prev ?? newCard(now), grade, now);
+  if (grade >= 3) {
+    // FSRS keeps stability/difficulty (mastery reads them); the gap itself follows the ladder (FR-S1).
+    const prevDays = prev?.lastReview != null ? Math.max(0, prev.due - prev.lastReview) / DAY_MS : 0;
+    card = { ...card, due: now + ladderDays(prevDays, grade) * DAY_MS };
+  }
   const next = { ...state, cards: { ...state.cards, [cardId]: card } };
   let isNewSentence = false;
   if (p.type === "lr") {

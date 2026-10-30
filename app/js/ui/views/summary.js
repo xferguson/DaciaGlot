@@ -37,6 +37,7 @@ export function summarize({ before, state, content, stats, startedAt, now }) {
     cards: stats.cards,
     correct: stats.correct,
     newSentences: stats.newSentences,
+    difficult: stats.difficult ?? 0,
     forms: formsProduced(state.attempts, startedAt),
     changes: diffPatternStates(before, allPatternStates(state, content, now)),
   };
@@ -49,6 +50,7 @@ export function renderSummary(root, { summary, content, onMore }) {
     <section class="card">
       <p><strong data-n="cards"></strong> cards · <strong data-n="correct"></strong> correct</p>
       <p><span data-n="new"></span> new sentences · <span data-n="forms"></span> forms produced</p>
+      <p data-difficult hidden><span data-n="difficult"></span> added to your Difficult list</p>
     </section>
     <section class="card" data-changes hidden><h2>Pattern progress</h2><ul></ul></section>
     <button class="btn block" data-more>One more Quick</button>
@@ -58,6 +60,10 @@ export function renderSummary(root, { summary, content, onMore }) {
   set("correct", summary.correct);
   set("new", summary.newSentences);
   set("forms", summary.forms);
+  if (summary.difficult) {
+    root.querySelector("[data-difficult]").hidden = false;
+    set("difficult", summary.difficult === 1 ? "1 card" : `${summary.difficult} cards`);
+  }
   if (summary.changes.length) {
     const box = root.querySelector("[data-changes]");
     box.hidden = false;

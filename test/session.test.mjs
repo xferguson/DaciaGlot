@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   gradeFromResult, buildSession, applyReview, dueCards, requeueWrong, dayKey, interimNewSentences, mixPlan,
-  spaceOut, cardKeys, resumable, RESUME_MS,
+  spaceOut, cardKeys, keepStarted, markDifficult, COLD_START_SEEN, ladderDays,
 } from "../app/js/core/session.js";
 import { newCard } from "../app/js/core/fsrs.js";
 import { makeContent, sentence, state, NOW } from "./helpers/mini-content.mjs";
@@ -182,10 +182,60 @@ test("requeueWrong with content skips past a related neighbour", () => {
   assert.equal(q[6].cardId, "cz:s00:0");
 });
 
-test("resumable: needs cards left and a recent answer", () => {
-  const a = { queue: [{ cardId: "lr:s00" }, { cardId: "lr:s01" }], pos: 1, updatedAt: NOW };
-  assert.equal(resumable(a, NOW + 1000), true);
-  assert.equal(resumable({ ...a, pos: 2 }, NOW), false);
-  assert.equal(resumable(a, NOW + RESUME_MS + 1), false);
-  assert.equal(resumable(null, NOW), false);
+test("keepStarted: an introduced sentence's unreached cz cards come back as new cards", () => {
+  const st = state();
+  st.cards["lr:s00"] = newCard(NOW);
+  const out = keepStarted(st, [
+    { cardId: "cz:s00:0", isNew: true }, // lr reviewed → kept
+    { cardId: "lr:s01", isNew: true }, { cardId: "cz:s01:0", isNew: true }, // never started → dropped
+    { cardId: "cz:s02:0", isNew: false }, // a due review, already in state elsewhere
+  ], NOW);
+  assert.deepEqual(Object.keys(out.cards).sort(), ["cz:s00:0", "lr:s00"]);
+  assert.equal(out.cards["cz:s00:0"].due, NOW);
+  assert.equal(st.cards["cz:s00:0"], undefined); // input not mutated
+});
+
+test("markDifficult records the card", () => {
+  const st = state();
+  assert.deepEqual(markDifficult(st, "cz:s00:0", NOW).difficult, { "cz:s00:0": NOW });
+  assert.deepEqual(st.difficult, {});
+});
+
+test("new profile: Learn tops up to newPerSession with the easiest sentences", () => {
+  const st = state();
+  st.settings.newPerSession = 6;
+  const { queue } = buildSession({ mode: "learn", state: st, content, now: NOW, rng });
+  assert.equal(queue.filter((q) => q.cardId.startsWith("lr:")).length, 6);
+  for (let i = 0; i < COLD_START_SEEN; i++) st.seenSentences[`s${String(i).padStart(2, "0")}`] = NOW;
+  // Past the cold start: no top-up (all 30 seen here, so nothing new at all).
+  assert.equal(buildSession({ mode: "learn", state: st, content, now: NOW, rng }).queue.length, 0);
+});
+
+test("ladderDays: Medium climbs 1 → 4 → 16 → 64 → 256; Easy is 3× Medium's, capped", () => {
+  assert.equal(ladderDays(0, 3), 1);
+  assert.equal(ladderDays(10 / 1440, 3), 1); // a 10-minute learning step
+  assert.equal(ladderDays(1, 3), 4);
+  assert.equal(ladderDays(4, 3), 16);
+  assert.equal(ladderDays(14, 3), 16); // an older FSRS gap joins the ladder above it
+  assert.equal(ladderDays(64, 3), 256);
+  assert.equal(ladderDays(256, 3), 256);
+  assert.equal(ladderDays(0, 4), 3);
+  assert.equal(ladderDays(4, 4), 48);
+  assert.equal(ladderDays(64, 4), 256);
+});
+
+test("applyReview: always-Medium follows the ladder; always-Easy grows 3, 12, 48, 192, 256", () => {
+  const DAY = 864e5;
+  for (const [grade, want] of [[3, [1, 4, 16, 64, 256, 256]], [4, [3, 12, 48, 192, 256, 256]]]) {
+    let st = state();
+    let t = NOW;
+    const gaps = [];
+    for (let i = 0; i < want.length; i++) {
+      st = applyReview(st, "lr:s00", grade, [], t, content);
+      const c = st.cards["lr:s00"];
+      gaps.push(Math.round((c.due - t) / DAY));
+      t = c.due;
+    }
+    assert.deepEqual(gaps, want);
+  }
 });
