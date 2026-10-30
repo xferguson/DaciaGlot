@@ -19,6 +19,10 @@ DaciaGlot is an offline-first PWA for learning to **speak** Romanian. It is vani
 7. **Merge policy:** once the PR's CI is green, it has no merge conflict and no unresolved review comments, merge it yourself without asking. **A PR that changes only `.md` files triggers no CI, so don't wait for it: merge as soon as it has no conflict and no unresolved review comments.** If anything is outstanding, fix it first, or ask the user if it needs their call. After merging, the next session starts from the updated `main`. **After any successful merge, flip the task's row in `docs/STATUS.md` from `review` to `done`** (if it isn't already) via a small follow-up PR from a fresh branch off `main`, titled `STATUS: mark T## done`, and merge that under the same policy.
    **If CI doesn't start or respond quickly, check for a merge conflict first** (the PR's `mergeable_state` is `dirty`). GitHub doesn't run workflows on a conflicted PR. Merge `origin/main` into the branch, resolve, re-run the tests and push.
 
+## Product check-ins
+
+When the owner asks for a product check-in (or to "check in as product designer"), read `docs/EXPERIMENTS.md` and follow its check-in protocol. Don't pick a task first. When a task that is tied to an experiment (T25–T30) merges, set that experiment's status to `live since <date>` in the same STATUS follow-up PR.
+
 ## Ground rules
 
 - **Contracts are binding.** Function signatures and data shapes in `docs/ARCHITECTURE.md` are the interface other agents build against. If you need to change one, update the doc in the same PR and call it out at the top of the PR description.
@@ -46,5 +50,6 @@ python3 -m http.server -d app 8080     # local preview at http://localhost:8080/
 | `docs/ARCHITECTURE.md` | Module layout, data types, function contracts, algorithms |
 | `docs/CONTENT_GUIDE.md` | Content schemas, validator rules, pattern inventory, authoring rules |
 | `docs/STATUS.md` | Task board |
+| `docs/EXPERIMENTS.md` | Product experiments, owner interview record, check-in protocol |
 | `docs/MANUAL.md` | Owner-only manual checks and settings, deferred ("later"); not agent work |
 | `docs/tasks/T##-*.md` | Self-contained work packages |

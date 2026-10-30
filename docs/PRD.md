@@ -154,6 +154,19 @@ Requirement IDs are referenced by tasks and tests.
 | FR-X8 | **Web app manifest:** `display: standalone`, `start_url: "./"`, `scope: "./"`, a theme color, and 192/512 maskable icons. | 1 |
 | FR-X9 | **Flag a sentence:** a note is stored locally. Settings lists the flags, each with a button that opens a pre-filled GitHub issue URL (`https://github.com/xferguson/DaciaGlot/issues/new?title=…&body=…&labels=content-flag`) and a "copy all" action. | 2 |
 
+### 4.8 Less repetition (Phase 3.5)
+
+From the 2026-10-30 owner discovery interview. Each requirement is an experiment logged in `docs/EXPERIMENTS.md`. Where it conflicts with an earlier FR, this section wins once its task merges, and that task updates the earlier FR.
+
+| ID | Requirement | Phase |
+|---|---|---|
+| FR-R1 | **One schedule per word form.** A lexeme-form unit has a single card (`fm`) shared by every sentence and by key-form drills. When due, it is shown blanked in a seen sentence not used for it recently, or as a key-form drill when no carrier fits. (T25) | 3.5 |
+| FR-R2 | **Learn today, test tomorrow.** A new sentence is `lr` plus an immediate, uncounted check on its *new* forms only. The first counted test of those forms is due the next local day at the earliest. A review session holds at most one card per sentence and per head lexeme. (T26) | 3.5 |
+| FR-R3 | **Whole sentence later.** `er` unlocks when every cloze form of the sentence has reached a ≥4-day gap. A missed token sends only its form(s) back to single-form review. Correct tokens don't reschedule their forms. (T27) | 3.5 |
+| FR-R4 | **"I can produce this."** The learner can claim a form from card feedback or the word page (with undo). A claimed form is never tested and counts as known and stable. An EN→RO miss on it removes the claim. Content never auto-skips forms. (T28) | 3.5 |
+| FR-R5 | **Sentence families.** Sentences differing only in forms of the same lexemes (ignoring subject pronouns) are introduced together as a paradigm (up to 3). Reviews probe one random member at a time and show at most one due card per family per session. (T29) | 3.5 |
+| FR-R6 | **Leipzig glosses on slot-building cards.** Each slot is labelled with its target form, `<gloss>.<GLOSS>` (e.g. `[be.PRS.2SG]`), falling back to the pattern label only when the form can't be resolved. (T30) | 3.5 |
+
 ## 5. Non-functional requirements
 
 | ID | Requirement |
@@ -183,6 +196,7 @@ Requirement IDs are referenced by tasks and tests.
 | **1 · Core loop** ✅ | On Android/Brave: installs; a full Session runs offline with Romanian TTS; `lr` and `cz` cards work with diacritic leniency and highlighting; progress survives reload; export → reset → import round-trips; ≥100 valid sentences; CI green | T01–T10 |
 | **2 · Building sentences** | Pattern focus yields known lexemes in the new pattern first (test); no new sentence has novelty > 2 (test); `kf`, `xf` and `sb` cards work; flags open GitHub issues; ≥300 sentences across all 9 situations | T11–T17 |
 | **3 · Progress** | Dashboard shows A1 completion from the real state; can-dos become checkable; `er` cards work; the coverage report runs in CI with every A1 can-do having ≥5 sentences; 400–600 sentences | T18–T23 |
+| **3.5 · Less repetition** | Each FR-R experiment is live and has had ≥1 owner check-in logged in `docs/EXPERIMENTS.md` | T25–T30 |
 | **4 · A2 pack** | Stage 3–4 content and A2 manifest; formal register; optional audio packs | epic E4 (tasks written when Phase 3 lands) |
 | **5 · Reading & personal** | Reading mode with tap-to-gloss feeding the selector; user-added sentences | epic E5 |
 
