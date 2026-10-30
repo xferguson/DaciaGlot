@@ -27,6 +27,14 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [T21](tasks/T21-summary-reminders.md) | Session summary and export reminder | 3 | T11 | done | ccr-d8a0c191-p843sy | Summary helpers (`diffPatternStates`, `formsProduced`, `exportReminderDue`) live in `ui/views/summary.js`; session.js calls `renderSummary` directly (no router route). Sessions are not recorded, so "after the 3rd session" = 3 days with ≥1 card. Export banner id `export`, hidden by settings on export. APP_VERSION 0.3.2. Not checked on a device. |
 | [T22](tasks/T22-coverage-report.md) | Content coverage report in CI | 3 | T02 | done | ccr-6f18b7e8-0f35w7 | `--coverage` prints Markdown tables (exports `computeCoverage`, `coverageReport`, `strictA1Failures`); `--strict-a1` is left commented out in `deploy-pages.yml` until T23 lands. Head-lexeme target skips `be-pres`, `have-pres`, `neg-nu`. |
 | [T23](tasks/T23-content-batch-c.md) | Content batch C: Stages 1–2 complete (400–600) | 3 | T17, T19, T22 | done | ccr-5c22eee3-nenxec | 470 sentences; every lexeme ≥2 sentences; 19 new can-dos for decisions/coaching/domain/getting-to-know/news (35 total, all ≥5); `--strict-a1` now runs in CI. ~70 new sentences have no `transforms` yet (warnings only under `--phase 2`), so xf/sb cards are thin for them. |
+| [T25](tasks/T25-per-form-schedule.md) | One schedule per word form (`fm` cards) | 3.5 | none | todo | | EXP-01. **Contract change** (card ids, migration to schema 2). Start here. |
+| [T26](tasks/T26-learn-today-test-tomorrow.md) | Learn today, test tomorrow | 3.5 | T25 | todo | | EXP-02. Immediate check on new forms only; first counted test next day; bury siblings. |
+| [T27](tasks/T27-whole-sentence-later.md) | Whole sentence later, with part-level credit | 3.5 | T25, T26 | todo | | EXP-03. `er` misses send only the wrong part back. |
+| [T28](tasks/T28-produce-claims.md) | "I can produce this" claims | 3.5 | T25 | todo | | EXP-04. Per form, trusted; EN→RO miss removes the claim. |
+| [T29](tasks/T29-sentence-families.md) | Sentence families: paradigm batch + one random probe | 3.5 | T25, T26 | todo | | EXP-05. |
+| [T30](tasks/T30-leipzig-slot-glosses.md) | Leipzig glosses on slot-building cards | 3.5 | none | todo | | EXP-06. Independent; can run in parallel with T25. |
+
+**Phase 3.5 · Less repetition.** Every T25–T30 task is a product experiment logged in [`EXPERIMENTS.md`](EXPERIMENTS.md). When its PR merges, set the experiment's status to `live since <date>`.
 
 ## Manual activities (later)
 
@@ -51,4 +59,5 @@ Phase 1:  T01 T02 T03 T04 T05 T06   (all independent)
             └─────┴─T10 (needs T01,T07,T08)
 Phase 2:  T11 ← T08 · T12 ← T08,T11 · T13 ← T11,T12 · T14 ← T08 · T15 ← T08,T11 · T16 ← T07 · T17 ← T09
 Phase 3:  T19 ← T11 · T18 ← T11,T19 · T20 ← T08,T15 · T21 ← T11 · T22 ← T02 · T23 ← T17,T19,T22
+Phase 3.5: T25 · T30 (parallel) · T26 ← T25 · T28 ← T25 · T27 ← T25,T26 · T29 ← T25,T26
 ```
