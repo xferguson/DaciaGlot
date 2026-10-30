@@ -1,4 +1,9 @@
-import { dueCount, mixPlan, resumable } from "../../core/session.js";
+import { dueCount, mixPlan, resumable, QUICK_CAP, SEC_PER_REVIEW, SEC_PER_NEW } from "../../core/session.js";
+
+/** "≈ N min" for a session of `reviews` due cards and `fresh` new sentences (the PRD FR-S7 rates). */
+function minutes(reviews, fresh) {
+  return `≈ ${Math.max(1, Math.round((reviews * SEC_PER_REVIEW + fresh * SEC_PER_NEW) / 60))} min`;
+}
 import { levelProgress } from "../../core/mastery.js";
 import { ring } from "../components/ring.js";
 import { currentLevelId } from "./dashboard.js";
@@ -10,7 +15,8 @@ export function render(root, ctx) {
   const due = ctx.content ? dueCount(ctx.state, ctx.content, Date.now()) : 0;
   const full = ctx.state.settings.newPerSession;
   const { newCount } = mixPlan(due, full);
-  const mixSub = !newCount ? "all review today" : due ? `${due} due + up to ${newCount} new` : `up to ${newCount} new`;
+  const mixSub = !newCount ? "all review today" : due ? `${due} due + ${newCount} new` : `up to ${newCount} new`;
+  const quickN = Math.min(due, QUICK_CAP);
   root.innerHTML = `
     <h1>DaciaGlot</h1>
     <p class="muted" lang="ro">Hai să vorbim românește.</p>
@@ -21,10 +27,10 @@ export function render(root, ctx) {
     <section class="card">
       <p><strong data-due>${due}</strong> cards due</p>
       <div class="modes">
-        <a class="btn mode" href="#/session?mode=mix">Mix<small>${mixSub}</small></a>
-        <a class="btn secondary mode" href="#/session?mode=quick">Quick<small>≤ 15 due · 5 min</small></a>
-        <a class="btn secondary mode" href="#/session?mode=learn">Learn<small>up to ${full} new</small></a>
-        <a class="btn secondary mode" href="#/session?mode=review">Review<small>${due ? `all ${due} due` : "nothing due"}</small></a>
+        <a class="btn mode" href="#/session?mode=mix">Mix<small>${mixSub}</small><small>${minutes(due, newCount)}</small></a>
+        <a class="btn secondary mode" href="#/session?mode=quick">Quick<small>${quickN ? `${quickN} due` : "nothing due"}</small><small>${quickN ? `≤ ${Math.min(5, Math.max(1, Math.round((quickN * SEC_PER_REVIEW) / 60)))} min` : "–"}</small></a>
+        <a class="btn secondary mode" href="#/session?mode=learn">Learn<small>up to ${full} new</small><small>${minutes(0, full)}</small></a>
+        <a class="btn secondary mode" href="#/session?mode=review">Review<small>${due ? `all ${due} due` : "nothing due"}</small><small>${due ? minutes(due, 0) : "–"}</small></a>
       </div>
     </section>
     <section aria-label="Choose focus">

@@ -1,5 +1,5 @@
 // Study loop: Quick / Mix / Learn / Review / Focus (PRD FR-S2…S9). Renders T07 cards one after another.
-import { buildSession, SEC_PER_REVIEW, gradeFromResult, applyReview, addMinutes, requeueWrong, resumable } from "../../core/session.js";
+import { buildSession, gradeFromResult, applyReview, addMinutes, requeueWrong, resumable } from "../../core/session.js";
 import { parseCardId, exampleSentenceFor } from "../../core/cards.js";
 import { unitsRequiredForCard } from "../../core/units.js";
 import { renderCard as renderLr } from "./card-lr.js";
@@ -34,8 +34,8 @@ export function render(root, ctx) {
   const href = location.hash;
   const key = focus ? `focus:${focus.type}:${focus.id}` : mode;
   const saved = resumable(ctx.state.activeSession, Date.now()) && ctx.state.activeSession.key === key ? ctx.state.activeSession : null;
-  const { queue, estimateSec, blocked, suggest, plan } = saved
-    ? { queue: saved.queue.map((q) => ({ ...q })), estimateSec: 0 }
+  const { queue, blocked, suggest, plan } = saved
+    ? { queue: saved.queue.map((q) => ({ ...q })) }
     : buildSession({ mode, focus, state: ctx.state, content: ctx.content, now: Date.now(), rng: Math.random });
   let cardCleanup = null;
   let alive = true;
@@ -98,27 +98,17 @@ export function render(root, ctx) {
         <p class="muted">${EMPTY[mode] ?? "Nothing to study right now."}</p>${home}`;
       return;
     }
-    if (mode === "quick") return begin();
-    const mins = Math.max(1, Math.round(estimateSec / 60));
-    const fresh = queue.filter((q) => q.isNew && q.cardId.startsWith("lr:")).length;
-    const forms = queue.filter((q) => q.isNew && q.cardId.startsWith("kf:")).length;
-    const drills = queue.filter((q) => q.isNew && /^(xf|sb|er):/.test(q.cardId)).length;
-    const reviews = queue.filter((q) => !q.isNew).length;
-    root.innerHTML = `<h1>${focus ? "Focus: <span data-focus></span>" : TITLES[mode]}</h1>
-      <section class="card"><p>${queue.length} cards · ${mode === "learn" ? "" : `${reviews} reviews · `}${fresh} new sentence${fresh === 1 ? "" : "s"}${forms ? ` · ${forms} new forms` : ""}${drills ? ` · ${drills} new drills` : ""}</p>
-      ${plan ? `<p>${mixNote(plan, reviews, ctx.state.settings.newPerSession)}</p>` : ""}
-      <p class="muted">≈ ${mins} min</p>
-      <button class="btn block" data-start>Start</button></section>${home}`;
-    fillNames();
-    root.querySelector("[data-start]").addEventListener("click", begin);
+    begin();
+    const note = plan && mixNote(plan, ctx.state.settings.newPerSession);
+    if (note) toast(note);
   }
 
-  function mixNote({ newCount }, reviews, full) {
-    const reviewPct = Math.round((100 * reviews * SEC_PER_REVIEW) / Math.max(estimateSec, 1));
-    const split = `≈ ${reviewPct}% review · ${100 - reviewPct}% new.`;
-    if (newCount >= full) return `${split} Light review load, so up to ${full} new sentences.`;
-    if (newCount > 0) return `${split} ${reviews} reviews due, so only ${newCount} new sentences today.`;
-    return `All review today: ${reviews} cards are due. Catch up first, or use Learn for new material anyway.`;
+  /** Why Mix holds back new sentences; nothing to say when it gives the full set. */
+  function mixNote({ newCount }, full) {
+    const reviews = queue.filter((q) => !q.isNew).length;
+    if (newCount >= full) return "";
+    if (newCount > 0) return `${reviews} reviews due, so only ${newCount} new sentences today.`;
+    return `All review today: ${reviews} cards are due. Use Learn for new material anyway.`;
   }
 
   function begin() {

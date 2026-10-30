@@ -79,7 +79,7 @@ a { color: var(--accent); }
 .row > .btn { flex: 1; }
 .row.rate > .btn { padding: 0 8px; }
 .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.btn.mode { flex-direction: column; padding: 8px 12px; min-height: 60px; }
+.btn.mode { flex-direction: column; padding: 8px 12px; min-height: 72px; }
 .btn.mode small { font-weight: 400; font-size: .8rem; opacity: .85; }
 
 
