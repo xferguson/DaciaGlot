@@ -92,7 +92,7 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
 
 ## EXP-04 · "I can produce this" claims · [T28](tasks/T28-produce-claims.md)
 
-- **Status:** planned
+- **Status:** live since 2026-10-30
 - **Complaint:** "If I … already know it, I don't want to see a test for the word Cluj again."
 - **Hypothesis:** letting the owner claim a form they can produce (trusted, with undo) removes trivially easy blanks without the app guessing what's trivial.
 - **Change:** tap a word in feedback or on the word page → "I can produce *X* (gloss)". That form is never blanked again unless an EN→RO miss shows otherwise.
