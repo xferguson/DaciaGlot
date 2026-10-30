@@ -16,7 +16,7 @@ export function diffPatternStates(before, after) {
 
 /** Distinct units answered correctly at or after `since` (ms epoch). */
 export function formsProduced(attempts, since) {
-  return new Set(attempts.filter((a) => a.c === 1 && a.t >= since).map((a) => a.u)).size;
+  return new Set(attempts.filter((a) => a.c === 1 && !a.enc && a.t >= since).map((a) => a.u)).size;
 }
 
 /**

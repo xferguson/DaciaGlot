@@ -64,7 +64,7 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
 
 ## EXP-02 · Learn today, test tomorrow · [T26](tasks/T26-learn-today-test-tomorrow.md)
 
-- **Status:** planned
+- **Status:** live since 2026-10-30
 - **Complaint:** the same sentence comes back within a few cards, so "I might still have the sentence in my working memory".
 - **Hypothesis:** an immediate (uncounted) check on only the new forms, with the first counted test in a later session and no two cards from one sentence or lexeme in a session, makes reviews test memory rather than recency.
 - **Change:** new sentence = `lr` + immediate check of new forms only. Their `fm` cards are first due the next day. Reviews show at most one card per sentence and per head lexeme each session.

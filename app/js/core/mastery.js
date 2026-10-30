@@ -20,6 +20,7 @@ function fold(state, now) {
   if (!old.length) return state;
   const aggs = { ...state.unitAggregates };
   for (const a of old) {
+    if (a.enc) continue; // immediate checks never count (FR-R2)
     const cur = aggs[a.u] ?? emptyAgg();
     const next = { ...cur, lexemes: [...cur.lexemes], n: cur.n + 1 };
     if (a.c === 1) {
@@ -42,7 +43,7 @@ export function compactAttempts(state, now) {
  * aggregate, treating its ratio as representative. Also the distinct correct lexemes and totals.
  */
 function unitStats(unit, state) {
-  const raw = state.attempts.filter((a) => a.u === unit).sort((a, b) => a.t - b.t);
+  const raw = state.attempts.filter((a) => a.u === unit && !a.enc).sort((a, b) => a.t - b.t);
   const agg = state.unitAggregates[unit];
   const recent = raw.slice(-WINDOW);
   let n = recent.length;
@@ -135,6 +136,7 @@ function latestAttempts(s) {
   const byCard = new Map();
   const byUnit = new Map();
   for (const a of s.attempts) {
+    if (a.enc) continue;
     const c = byCard.get(a.card);
     if (!c || a.t >= c.t) byCard.set(a.card, a);
     const u = byUnit.get(a.u);
