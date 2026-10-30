@@ -38,9 +38,9 @@ export function sentenceView(parts) {
 
 /**
  * Render feedback into `root` (replacing its content).
- * `result` is correct | correct-diacritics | wrong. `onTooEasy(on)` shows the chip after a correct answer.
+ * `result` is correct | correct-diacritics | wrong.
  */
-export function renderFeedback(root, { result, parts, en, onTooEasy }) {
+export function renderFeedback(root, { result, parts, en }) {
   root.replaceChildren();
   const wrap = document.createElement("div");
   wrap.className = `feedback ${result === "wrong" ? "bad" : "good"}`;
@@ -60,19 +60,39 @@ export function renderFeedback(root, { result, parts, en, onTooEasy }) {
     n.textContent = "check the diacritics";
     wrap.append(n);
   }
-  if (result !== "wrong" && onTooEasy) {
-    const chip = document.createElement("button");
-    chip.type = "button";
-    chip.className = "chip";
-    chip.setAttribute("aria-pressed", "false");
-    chip.textContent = "Too easy";
-    chip.addEventListener("click", () => {
-      const on = chip.getAttribute("aria-pressed") !== "true";
-      chip.setAttribute("aria-pressed", String(on));
-      onTooEasy(on);
-    });
-    wrap.append(chip);
-  }
   root.append(wrap);
   return wrap;
+}
+
+/** Self-ratings shown after a clean correct answer (PRD FR-S2); `medium` is the default. */
+export const RATINGS = [["hard", "Hard"], ["medium", "Medium"], ["easy", "Easy"]];
+
+/**
+ * Append the buttons that end a card to `actions`. With `canRate` (correct on the first try, no hint)
+ * they are Hard · Medium · Easy and each calls `onPick(rating)` straight away; otherwise a single
+ * Continue calls `onPick(null)`. Focuses the default button so Enter moves on.
+ */
+export function nextButtons(actions, { canRate, onPick }) {
+  const make = (label, cls, rating) => {
+    const b = Object.assign(document.createElement("button"), { type: "button", className: cls, textContent: label });
+    b.addEventListener("click", () => {
+      for (const x of actions.querySelectorAll("button")) x.disabled = true;
+      onPick(rating);
+    }, { once: true });
+    return b;
+  };
+  if (!canRate) {
+    const next = make("Continue", "btn block", null);
+    actions.append(next);
+    next.focus();
+    return;
+  }
+  const row = document.createElement("div");
+  row.className = "row rate";
+  row.setAttribute("role", "group");
+  row.setAttribute("aria-label", "How hard was that?");
+  const buttons = RATINGS.map(([r, label]) => make(label, r === "medium" ? "btn" : "btn secondary", r));
+  row.append(...buttons);
+  actions.append(row);
+  buttons[1].focus();
 }

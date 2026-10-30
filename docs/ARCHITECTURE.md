@@ -96,6 +96,21 @@ Card ids are strings. `core/cards.js` exports `parseCardId`, `buildCardId`, and 
  * @property {Record<string, DayStats>} history // "YYYY-MM-DD" → stats
  * @property {Record<string, number>} canDoChecked // canDoId → ts
  * @property {number|null} lastCompactionAt
+ * @property {ActiveSession|null} activeSession // unfinished session, saved after every answer (PRD FR-S12)
+ */
+
+/** @typedef {Object} ActiveSession
+ * @property {string} key            // mode, or "focus:<type>:<id>"; resumes only from the same route
+ * @property {string} href           // route to reopen it
+ * @property {string} title
+ * @property {QueueItem[]} queue     // whole queue, including re-queued cards
+ * @property {number} pos            // index of the next card
+ * @property {{cards:number, correct:number, newSentences:number}} stats
+ * @property {string[]} done         // cards already re-queued once (FR-S9)
+ * @property {Record<string,string>} before // pattern states at the start, for the summary
+ * @property {number} firstStartedAt
+ * @property {number} elapsedMs      // study time so far (Quick's 5 minutes count across visits)
+ * @property {number} updatedAt
  */
 
 /** @typedef {Object} Settings
@@ -256,11 +271,14 @@ A sentence is mastered when it has ≥1 production card (`cz`, `xf` or `er`) wit
 buildSession({ mode /* "quick"|"review"|"learn"|"mix"|"session" */, focus, state, content, now, rng, newSentenceIds })
   → { queue: QueueItem[], estimateSec: number, blocked?, suggest?, plan? /* mix only */ }
 mixPlan(due, newPerSession) → { newCount, reviewPct }  // PRD FR-S10: new sentences fill MIX_BUDGET_SEC (720) after due reviews
-gradeFromResult({ result, usedHint, attemptNo, tooEasy }) → 1|2|3|4     // PRD FR-S2
+gradeFromResult({ result, usedHint, attemptNo, rating /* "hard"|"medium"|"easy"|null */ }) → 1|2|3|4     // PRD FR-S2
 applyReview(state, cardId, grade, unitsRequired /* {u,lx}[] */, now, content) → AppState  // FSRS + attempts + history (pure; returns new state). `content` is only used for `lr` exposure.
 dueCards(state, content, now) → string[]      // due + unlocked card ids, most overdue first
 dueCount(state, content, now) → number
-requeueWrong(queue, pos, item, rng) → number  // PRD FR-S9: splice a wrong card back 3–5 cards later
+requeueWrong(queue, pos, item, rng, content?) → number  // PRD FR-S9: splice a wrong card back 3–5 cards later (with content: up to 3 more, away from related cards)
+cardKeys(item, content) → Set<string>          // "s:<sentence>", "l:<target lexeme>", "new" for a new lr
+spaceOut(queue, content) → QueueItem[]        // PRD FR-S11; buildSession applies it to every queue
+resumable(activeSession, now) → boolean       // cards left and last answer within RESUME_MS (12 h)
 ```
 
 `QueueItem = { cardId, isNew: boolean }`.

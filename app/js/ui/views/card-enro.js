@@ -5,7 +5,7 @@ import { checkAnswer } from "../../core/check.js";
 import { audioButton } from "../components/audio-button.js";
 import { answerInput } from "../components/answer-input.js";
 import { diacriticBar } from "../components/diacritic-bar.js";
-import { renderFeedback, partsFor } from "../components/feedback.js";
+import { renderFeedback, nextButtons, partsFor } from "../components/feedback.js";
 
 /** Pure: first letter of each expected token that is still wrong or missing. */
 export function hintFor(input, expected, accept = []) {
@@ -52,7 +52,6 @@ export function renderCard(root, { card, sentence, tts, settings = {}, onResult 
 
   let attempts = 0;
   let usedHint = false;
-  let tooEasy = false;
   let finished = false;
 
   function finish(result) {
@@ -69,12 +68,11 @@ export function renderCard(root, { card, sentence, tts, settings = {}, onResult 
       result,
       parts: partsFor(sentence.tokens, diff),
       en: sentence.en,
-      onTooEasy: result !== "wrong" && attempts === 1 && !usedHint ? (on) => { tooEasy = on; } : null,
     });
-    const next = Object.assign(document.createElement("button"), { type: "button", className: "btn block", textContent: "Continue" });
-    next.addEventListener("click", () => onResult({ result, usedHint, attemptNo: attempts, tooEasy }), { once: true });
-    actions.append(next);
-    next.focus();
+    nextButtons(actions, {
+      canRate: result !== "wrong" && attempts === 1 && !usedHint,
+      onPick: (rating) => onResult({ result, usedHint, attemptNo: attempts, rating }),
+    });
   }
 
   function check() {

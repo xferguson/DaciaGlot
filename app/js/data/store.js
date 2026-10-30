@@ -35,6 +35,7 @@ export function defaultState(now) {
     history: {},
     canDoChecked: {},
     lastCompactionAt: null,
+    activeSession: null,
   };
 }
 

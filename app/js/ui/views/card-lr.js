@@ -1,7 +1,7 @@
 // Listen & recognize card (PRD FR-D1, FR-D7). Pick the text that matches the audio.
 
 import { audioButton } from "../components/audio-button.js";
-import { renderFeedback, partsFor } from "../components/feedback.js";
+import { renderFeedback, nextButtons, partsFor } from "../components/feedback.js";
 
 export function shuffle(arr, rng = Math.random) {
   const a = [...arr];
@@ -59,7 +59,6 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
   const slot = root.querySelector(".feedback-slot");
   const actions = root.querySelector(".actions");
   let done = false;
-  let tooEasy = false;
 
   const buttons = options.map((s) => {
     const b = document.createElement("button");
@@ -88,15 +87,11 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
       result,
       parts: partsFor(sentence.tokens, sentence.ro.split(/\s+/).map((token) => ({ token, status: "ok" }))),
       en: sentence.en,
-      onTooEasy: (on) => { tooEasy = on; },
     });
-    const next = document.createElement("button");
-    next.type = "button";
-    next.className = "btn block";
-    next.textContent = "Continue";
-    next.addEventListener("click", () => onResult({ result, usedHint: false, attemptNo: 1, tooEasy }), { once: true });
-    actions.append(next);
-    next.focus();
+    nextButtons(actions, {
+      canRate: result !== "wrong",
+      onPick: (rating) => onResult({ result, usedHint: false, attemptNo: 1, rating }),
+    });
   }
 
   if (settings.autoplay !== false) speak(sentence.ro);

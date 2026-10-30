@@ -77,6 +77,7 @@ a { color: var(--accent); }
 }
 .row { display: flex; gap: var(--gap); }
 .row > .btn { flex: 1; }
+.row.rate > .btn { padding: 0 8px; }
 .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .btn.mode { flex-direction: column; padding: 8px 12px; min-height: 60px; }
 .btn.mode small { font-weight: 400; font-size: .8rem; opacity: .85; }
@@ -139,6 +140,9 @@ a { color: var(--accent); }
 
 /* Session (T08) */
 .progress { height: 8px; border-radius: 4px; background: var(--border); overflow: hidden; margin-bottom: var(--gap); }
+.session-bar { display: flex; align-items: center; gap: 8px; margin-bottom: var(--gap); }
+.session-bar .progress { flex: 1; margin: 0; }
+.btn.icon { padding: 0; width: 44px; font-size: 1.5rem; line-height: 1; }
 .progress-fill { height: 100%; width: 0; background: var(--accent); transition: width .2s; }
 .settings label { display: block; margin: 12px 0 4px; font-weight: 600; }
 .settings select, .settings input[type="number"] { font: inherit; min-height: 44px; width: 100%; padding: 0 8px; background: var(--surface); color: var(--fg); border: 2px solid var(--border); border-radius: 8px; }

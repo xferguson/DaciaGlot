@@ -5,7 +5,7 @@ import { parseCardId, slotsFor } from "../../core/cards.js";
 import { audioButton } from "../components/audio-button.js";
 import { answerInput } from "../components/answer-input.js";
 import { diacriticBar } from "../components/diacritic-bar.js";
-import { renderFeedback, partsFor } from "../components/feedback.js";
+import { renderFeedback, nextButtons, partsFor } from "../components/feedback.js";
 import { hintFor } from "./card-transform.js";
 
 /** Pure: the slot line as text, e.g. `Ieri + [not] [past] + termina + sprint`. */
@@ -63,7 +63,6 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
 
   let attempts = 0;
   let usedHint = false;
-  let tooEasy = false;
   let finished = false;
 
   function finish(result) {
@@ -79,13 +78,12 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
       result,
       parts: partsFor([], diff),
       en: t.en ?? null,
-      onTooEasy: result !== "wrong" && attempts === 1 && !usedHint ? (on) => { tooEasy = on; } : null,
     });
     root.querySelector(".audio-row").append(audioButton({ text: t.ro, rateNormal: rate }));
-    const next = Object.assign(document.createElement("button"), { type: "button", className: "btn block", textContent: "Continue" });
-    next.addEventListener("click", () => onResult({ result, usedHint, attemptNo: attempts, tooEasy }), { once: true });
-    actions.append(next);
-    next.focus();
+    nextButtons(actions, {
+      canRate: result !== "wrong" && attempts === 1 && !usedHint,
+      onPick: (rating) => onResult({ result, usedHint, attemptNo: attempts, rating }),
+    });
   }
 
   function check() {

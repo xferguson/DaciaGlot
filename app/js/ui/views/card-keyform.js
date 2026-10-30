@@ -5,7 +5,7 @@ import { parseCardId, labelFor } from "../../core/cards.js";
 import { audioButton } from "../components/audio-button.js";
 import { answerInput } from "../components/answer-input.js";
 import { diacriticBar } from "../components/diacritic-bar.js";
-import { renderFeedback, partsFor } from "../components/feedback.js";
+import { renderFeedback, nextButtons, partsFor } from "../components/feedback.js";
 
 /**
  * `sentence` is an already-seen sentence containing this form, or null (then the form alone is played).
@@ -53,7 +53,6 @@ export function renderCard(root, { card, sentence = null, content, tts, settings
 
   let attempts = 0;
   let usedHint = false;
-  let tooEasy = false;
   let finished = false;
 
   function finish(result) {
@@ -71,13 +70,12 @@ export function renderCard(root, { card, sentence = null, content, tts, settings
       result,
       parts: partsFor([], diff),
       en: result !== "wrong" && sentence ? `${sentence.ro} — ${sentence.en ?? ""}` : null,
-      onTooEasy: result !== "wrong" && attempts === 1 && !usedHint ? (on) => { tooEasy = on; } : null,
     });
     root.querySelector(".audio-row").append(audioButton({ text: sentence?.ro ?? expected, rateNormal: rate }));
-    const next = Object.assign(document.createElement("button"), { type: "button", className: "btn block", textContent: "Continue" });
-    next.addEventListener("click", () => onResult({ result, usedHint, attemptNo: attempts, tooEasy }), { once: true });
-    actions.append(next);
-    next.focus();
+    nextButtons(actions, {
+      canRate: result !== "wrong" && attempts === 1 && !usedHint,
+      onPick: (rating) => onResult({ result, usedHint, attemptNo: attempts, rating }),
+    });
   }
 
   function check() {

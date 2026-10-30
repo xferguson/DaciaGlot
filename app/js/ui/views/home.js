@@ -1,4 +1,4 @@
-import { dueCount, mixPlan } from "../../core/session.js";
+import { dueCount, mixPlan, resumable } from "../../core/session.js";
 import { levelProgress } from "../../core/mastery.js";
 import { ring } from "../components/ring.js";
 import { currentLevelId } from "./dashboard.js";
@@ -14,6 +14,10 @@ export function render(root, ctx) {
   root.innerHTML = `
     <h1>DaciaGlot</h1>
     <p class="muted" lang="ro">Hai să vorbim românește.</p>
+    <section class="card" data-resume hidden>
+      <a class="btn block" data-resume-link></a>
+      <p class="muted" data-resume-left></p>
+    </section>
     <section class="card">
       <p><strong data-due>${due}</strong> cards due</p>
       <div class="modes">
@@ -33,6 +37,14 @@ export function render(root, ctx) {
     </section>
     <section class="card" aria-label="Level progress" data-level></section>
     <a class="btn secondary block" href="#/settings">Settings</a>`;
+  const active = ctx.state.activeSession;
+  if (resumable(active, Date.now())) {
+    root.querySelector("[data-resume]").hidden = false;
+    root.querySelector("[data-resume-link]").href = active.href;
+    root.querySelector("[data-resume-link]").textContent = `Continue ${active.title}`;
+    const left = active.queue.length - active.pos;
+    root.querySelector("[data-resume-left]").textContent = `${left} card${left === 1 ? "" : "s"} to go · your progress is saved`;
+  }
   const levelSlot = root.querySelector("[data-level]");
   if (ctx.content) {
     const now = Date.now();

@@ -105,13 +105,15 @@ Requirement IDs are referenced by tasks and tests.
 | ID | Requirement | Phase |
 |---|---|---|
 | FR-S1 | **FSRS-5** with default weights, implemented in-repo (`core/fsrs.js`), with deterministic unit tests. Target retention is 0.9. | 1 |
-| FR-S2 | **Grades are inferred:** correct first try → Good (3). `correct-diacritics` → Good (3). Correct after hint or second try → Hard (2). Wrong → Again (1). An optional "too easy" tap after a correct answer → Easy (4). | 1 |
+| FR-S2 | **Grades are inferred:** correct first try → Good (3). `correct-diacritics` → Good (3). Correct after hint or second try → Hard (2). Wrong → Again (1). After a correct first try with no hint, the learner rates it and moves on in one tap: **Hard** → Hard (2), **Medium** → Good (3, the default, focused), **Easy** → Easy (4). Otherwise a single Continue. | 1 |
 | FR-S3 | Every graded production card (`cz`, `kf`, `xf`, `sb`, `er`) appends an **attempt** for each unit it required (ARCHITECTURE §4.3). `lr` records *exposure*, not attempts. | 1 |
 | FR-S4 | **Interim new-sentence order (Phase 1 only):** unseen, non-retired sentences ordered by `stage` ↑, then the minimum unknown-unit count ↑, then `id`. FR-S5 replaces it. | 1 |
 | FR-S5 | **i+1 selection** (`core/select.js`), exactly per ARCHITECTURE §6: candidate filter → novelty → score with cross-prioritization → pick with seeded tie-break randomness. It never returns a sentence with novelty > 2. If none are eligible for the focus, it returns `{ blocked: true, suggest: <patternId or situationId> }`. | 2 |
 | FR-S6 | **Quick mode:** only due cards, most overdue first. It stops at 15 cards or 5 minutes, whichever comes first. | 1 |
 | FR-S7 | **Session mode:** due cards plus N new sentences (`settings.newPerSession`, default 8), each new sentence introduced as `lr` then `cz`, interleaved so no two new sentences are adjacent. The time estimate is shown before starting (≈ 12 s per review, 40 s per new sentence). | 1 |
 | FR-S10 | **Learn, Review and Mix modes** (home screen, alongside Quick). **Learn:** new material only, with no due cards: `newPerSession` new sentences plus newly unlocked drills. **Review:** every due card, uncapped, nothing new. **Mix** (the default; old `mode=session` links open it): all due cards plus as many new sentences as fit a ≈12-minute budget after reviews (12 s each), at most `newPerSession`, 0 once reviews fill it (`mixPlan`). The preview shows the review/new split and why. | 3 |
+| FR-S11 | **Spacing within a session:** cards that share a sentence or a target lexeme are kept at least 2 cards apart where the next 8 cards allow it (`spaceOut`); a sentence's cards keep their order (`lr` before `cz`), and a re-queued wrong card avoids landing next to a related card. | 3 |
+| FR-S12 | **Exit and resume:** the session screen has an × (Exit) button. The remaining queue is saved after every answer (`AppState.activeSession`), so reopening the same mode within 12 h continues where it stopped, and Home shows a "Continue" card. Leaving counts the minutes studied. | 3 |
 | FR-S8 | **Focus mode:** Session mode restricted to one situation or pattern, applied both to new selection and to the order of due cards (focus first). | 2 |
 | FR-S9 | A card answered wrong is re-queued once, 3–5 cards later in the same session. | 1 |
 
