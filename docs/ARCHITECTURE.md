@@ -270,6 +270,7 @@ cardKeys(item, content) → Set<string>          // "s:<sentence>", "l:<target l
 spaceOut(queue, content) → QueueItem[]        // PRD FR-S11; buildSession applies it to every queue
 keepStarted(state, remainingQueue, now) → AppState  // on leaving early: unreached new cz of an introduced sentence → new card due now
 markDifficult(state, cardId, now) → AppState  // FR-S9: second Hard/Again in a session
+ladderDays(prevGapDays, grade) → number       // FR-S1: Medium 1→4→16→64→256 d; Easy ×3, capped at 256
 ```
 
 `QueueItem = { cardId, isNew: boolean }`.
@@ -287,7 +288,7 @@ review(card, grade, now, { w = DEFAULT_W, requestRetention = 0.9 } = {}) → Car
 retrievability(card, now) → number
 ```
 
-Same-day reviews use the FSRS-5 short-term stability formula. Intervals are rounded to whole days for Review state; Learning steps are 1 min and 10 min; Relearning has a single 10 min step. `fuzz: true` (with `rng`) is off by default. Tests pin outputs for fixed inputs.
+`session.applyReview` overrides `due` for Good/Easy with `ladderDays(prevGapDays, grade)` (PRD FR-S1); stability, difficulty and state still come from FSRS. Same-day reviews use the FSRS-5 short-term stability formula. Intervals are rounded to whole days for Review state; Learning steps are 1 min and 10 min; Relearning has a single 10 min step. `fuzz: true` (with `rng`) is off by default. Tests pin outputs for fixed inputs.
 
 ## 10. TTS (`data/tts.js`)
 

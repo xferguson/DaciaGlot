@@ -90,6 +90,22 @@ export function mixPlan(due, newPerSession) {
   return { newCount, reviewPct: total ? Math.round((100 * due * SEC_PER_REVIEW) / total) : 0 };
 }
 
+/** PRD FR-S1: Medium (Good) climbs this ladder of gaps, in days, and stays on the top rung. */
+export const MEDIUM_LADDER_DAYS = [1, 4, 16, 64, 256];
+/** Easy waits this many times Medium's next gap (capped at the top rung). */
+export const EASY_FACTOR = 3;
+const DAY_MS = 864e5;
+
+/**
+ * Days until the next review for a Medium (3) or Easy (4) answer, given the card's previous scheduled gap
+ * in days (0 for a new card): the first rung above it, × `EASY_FACTOR` for Easy. Hard and Again keep FSRS.
+ */
+export function ladderDays(prevDays, grade) {
+  const top = MEDIUM_LADDER_DAYS[MEDIUM_LADDER_DAYS.length - 1];
+  const medium = MEDIUM_LADDER_DAYS.find((d) => d > prevDays + 1e-6) ?? top;
+  return grade === 4 ? Math.min(top, medium * EASY_FACTOR) : medium;
+}
+
 /** PRD FR-S2. `rating` ("hard"|"medium"|"easy") is the learner's self-rating after a clean correct answer. */
 export function gradeFromResult({ result, usedHint = false, attemptNo = 1, rating = null, tooEasy = false }) {
   if (result === "wrong") return 1;
@@ -246,13 +262,19 @@ export function addMinutes(state, minutes, now) {
 }
 
 /**
- * FSRS update, attempts (production cards only, PRD FR-S3), `lr` exposure, day stats.
+ * FSRS update (Medium/Easy gaps from `ladderDays`), attempts (production cards only, PRD FR-S3), `lr` exposure, day stats.
  * `unitsRequired` is `{u, lx}[]` from `unitsRequiredForCard`. `content` is only needed for `lr` exposure.
  * Returns a new state; the input is not mutated.
  */
 export function applyReview(state, cardId, grade, unitsRequired, now, content) {
   const p = parseCardId(cardId);
-  const card = review(state.cards[cardId] ?? newCard(now), grade, now);
+  const prev = state.cards[cardId];
+  let card = review(prev ?? newCard(now), grade, now);
+  if (grade >= 3) {
+    // FSRS keeps stability/difficulty (mastery reads them); the gap itself follows the ladder (FR-S1).
+    const prevDays = prev?.lastReview != null ? Math.max(0, prev.due - prev.lastReview) / DAY_MS : 0;
+    card = { ...card, due: now + ladderDays(prevDays, grade) * DAY_MS };
+  }
   const next = { ...state, cards: { ...state.cards, [cardId]: card } };
   let isNewSentence = false;
   if (p.type === "lr") {

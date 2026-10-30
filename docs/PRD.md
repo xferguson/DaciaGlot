@@ -104,7 +104,7 @@ Requirement IDs are referenced by tasks and tests.
 
 | ID | Requirement | Phase |
 |---|---|---|
-| FR-S1 | **FSRS-5** with default weights, implemented in-repo (`core/fsrs.js`), with deterministic unit tests. Target retention is 0.9. | 1 |
+| FR-S1 | **FSRS-5** with default weights, implemented in-repo (`core/fsrs.js`), with deterministic unit tests. Target retention is 0.9. FSRS tracks stability and difficulty (mastery uses them) and schedules Hard and Again. **Medium and Easy gaps follow a fixed ladder** (`ladderDays`): Medium moves to the next rung above the previous gap, 1 → 4 → 16 → 64 → 256 days, then stays at 256; Easy waits 3× that, capped at 256 (3, 12, 48, 192, 256). | 1 |
 | FR-S2 | **Grades are inferred:** correct first try → Good (3). `correct-diacritics` → Good (3). Correct after hint or second try → Hard (2). Wrong → Again (1). After a correct first try with no hint, the learner rates it and moves on in one tap: **Hard** → Hard (2), **Medium** → Good (3, the default, focused), **Easy** → Easy (4). Otherwise a single Continue. | 1 |
 | FR-S3 | Every graded production card (`cz`, `kf`, `xf`, `sb`, `er`) appends an **attempt** for each unit it required (ARCHITECTURE §4.3). `lr` records *exposure*, not attempts. | 1 |
 | FR-S4 | **Interim new-sentence order (Phase 1 only):** unseen, non-retired sentences ordered by `stage` ↑, then the minimum unknown-unit count ↑, then `id`. FR-S5 replaces it. It also tops up new profiles: while fewer than 30 sentences have been seen and FR-S5 offers fewer than wanted, the rest are filled in this order (easiest first) and spread through the session.  | 1 |
