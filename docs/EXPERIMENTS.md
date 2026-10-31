@@ -106,7 +106,7 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
 
 ## EXP-05 · Sentence families as paradigms · [T29](tasks/T29-sentence-families.md)
 
-- **Status:** planned
+- **Status:** live since 2026-10-31
 - **Complaint:** *he lives / you live / I live in Cluj* are drilled as if each were new.
 - **Hypothesis:** introducing a family once as a small paradigm, then probing one random member per review, tests the *form choice* (the real skill) and stops near-identical repeats.
 - **Change:** family detection; a paradigm card for up to 3 members; at most one due card per family per session; random-member carriers.
