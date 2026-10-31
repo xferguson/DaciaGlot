@@ -5,6 +5,7 @@ import { checkAnswer } from "../../core/check.js";
 import { audioButton } from "../components/audio-button.js";
 import { answerInput } from "../components/answer-input.js";
 import { diacriticBar } from "../components/diacritic-bar.js";
+import { erMisses } from "../../core/session.js";
 import { renderFeedback, nextButtons, partsFor } from "../components/feedback.js";
 
 /** Pure: first letter of each expected token that is still wrong or missing. */
@@ -69,9 +70,16 @@ export function renderCard(root, { card, sentence, tts, settings = {}, onResult 
       parts: partsFor(sentence.tokens, diff),
       en: sentence.en,
     });
+    const misses = erMisses(sentence, diff);
+    if (misses?.missedTokens.length) {
+      const note = document.createElement("p");
+      note.className = "muted";
+      note.textContent = `${misses.missedTokens.join(", ")} will be reviewed on its own.`;
+      slot.append(note);
+    }
     nextButtons(actions, {
       canRate: result !== "wrong" && attempts === 1 && !usedHint,
-      onPick: (rating) => onResult({ result, usedHint, attemptNo: attempts, rating }),
+      onPick: (rating) => onResult({ result, usedHint, attemptNo: attempts, rating, diff }),
     });
   }
 

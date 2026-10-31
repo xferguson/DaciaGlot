@@ -276,7 +276,9 @@ buildSession({ mode /* "quick"|"review"|"learn"|"mix"|"session" */, focus /* fil
   → { queue: QueueItem[], estimateSec: number, blocked?, suggest?, plan? /* mix only */ }
 mixPlan(due, newPerSession) → { newCount, reviewPct }  // PRD FR-S10: new sentences fill MIX_BUDGET_SEC (720) after due reviews
 gradeFromResult({ result, usedHint, attemptNo, rating /* "hard"|"medium"|"easy"|null */ }) → 1|2|3|4     // PRD FR-S2
-applyReview(state, cardId, grade, unitsRequired /* {u,lx}[] */, now, content, presentedId = cardId) → AppState  // FSRS on `cardId` + attempts (recorded with `card: presentedId`) + history (pure; returns new state). `content` is only used for `lr` exposure. A wrong `er` card (grade 1) also removes the claims on the units it tested (FR-R4, evidence wins).
+applyReview(state, cardId, grade, unitsRequired /* {u,lx}[] */, now, content, presentedId = cardId) → AppState  // FSRS on `cardId` + attempts (recorded with `card: presentedId`) + history (pure; returns new state). `content` is only used for `lr` exposure. Without part-level data (`applyErReview` gets `misses` null), a wrong `er` card (grade 1) removes the claims on all units it tested (FR-R4, evidence wins).
+erMisses(sentence, diff) → {missed, ok, missedTokens} | null  // FR-D6: cloze units the EN→RO answer got wrong/right from the checkAnswer diff; null if the diff doesn't line up with the tokens
+applyErReview(state, cardId, grade, unitsRequired, misses, now, content, presentedId?) → AppState  // FR-D6: `applyReview` for the `er` card, plus part-level credit: missed units get c:0 and their `fm` Again (created due now if absent; claim dropped), correct units get c:1 and keep their `fm`. `misses` null → whole card graded. A wrong `er` is not re-queued in the session.
 dueCards(state, content, now) → string[]      // due + unlocked card ids, most overdue first; `fm` cards of claimed forms are left out
 claimForm(state, unit, now) → AppState        // FR-R4: state.claimed[unit] = now (pure; creates no card)
 unclaimForm(state, unit, now) → AppState      // drops the claim; the `fm` card is active again with its old schedule
