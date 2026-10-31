@@ -455,13 +455,21 @@ export function newTransformCards(state, content, { cap = XF_PER_SESSION, skip =
   return out;
 }
 
-export const ER_STABILITY_DAYS = 7;
+export const ER_MIN_GAP_DAYS = 4;
 export const ER_PER_SESSION = 3;
+const DAY = 86400000;
 
-/** FR-D6: the sentence has cloze units and each one's `fm` card has stability ≥ 7 days. */
+/**
+ * FR-D6: the sentence has cloze units and each one is claimed (FR-R4) or its `fm` card has a scheduled gap
+ * of ≥ 4 days (the second ladder rung).
+ */
 export function erUnlocked(sentence, state) {
   const units = clozeUnitIds(sentence);
-  return units.length > 0 && units.every((u) => (state.cards[fmIdForUnit(u)]?.stability ?? 0) >= ER_STABILITY_DAYS);
+  return units.length > 0 && units.every((u) => {
+    if (u in (state.claimed ?? {})) return true;
+    const c = state.cards[fmIdForUnit(u)];
+    return !!c && c.lastReview != null && c.due - c.lastReview >= ER_MIN_GAP_DAYS * DAY;
+  });
 }
 
 /** Units an `er` card exercises, as `{u, lx}`: every unit of each cloze token, plus the pattern of each head unit. */

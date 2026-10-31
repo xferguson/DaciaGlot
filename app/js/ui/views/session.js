@@ -1,5 +1,5 @@
 // Study loop: Quick / Mix / Learn / Review / Focus (PRD FR-S2…S9). Renders T07 cards one after another.
-import { buildSession, gradeFromResult, applyReview, applyCheck, addMinutes, requeueWrong, keepStarted, markDifficult, claimForm, unclaimForm } from "../../core/session.js";
+import { buildSession, gradeFromResult, applyReview, applyErReview, erMisses, applyCheck, addMinutes, requeueWrong, keepStarted, markDifficult, claimForm, unclaimForm } from "../../core/session.js";
 import { parseCardId, unitIdOfFm, exampleSentenceFor } from "../../core/cards.js";
 import { unitsRequiredForCard } from "../../core/units.js";
 import { resolveFm } from "../../core/carrier.js";
@@ -165,13 +165,18 @@ export function render(root, ctx) {
         const now = Date.now();
         if (item.check) return onCheck(item, shown, grade, now);
         const seenBefore = Object.keys(ctx.state.seenSentences).length;
-        ctx.state = applyReview(ctx.state, item.cardId, grade, unitsRequiredForCard(shown, ctx.content), now, ctx.content, shown);
+        const isEr = p.type === "er";
+        const units = unitsRequiredForCard(shown, ctx.content);
+        ctx.state = isEr
+          ? applyErReview(ctx.state, item.cardId, grade, units, erMisses(sentence, r.diff), now, ctx.content, shown)
+          : applyReview(ctx.state, item.cardId, grade, units, now, ctx.content, shown);
         ctx.store.save(ctx.state);
         stats.cards++;
         if (grade > 1) stats.correct++;
         if (Object.keys(ctx.state.seenSentences).length > seenBefore) stats.newSentences++;
         // FR-S9: Hard or wrong → back once, 3–5 cards later; a second time → off to the difficult list.
-        if (grade <= 2) {
+        // A missed `er` waits for the ladder; its wrong parts return as single-form reviews (FR-D6).
+        if (grade <= 2 && !isEr) {
           if (!struggled.has(item.cardId)) {
             struggled.add(item.cardId);
             requeueWrong(queue, pos, item, Math.random, ctx.content);

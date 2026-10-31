@@ -1,6 +1,6 @@
 // Session building, grading and review application (ARCHITECTURE §8). Pure: `now` and `rng` are injected.
 import { newCard, review } from "./fsrs.js";
-import { parseCardId, unitIdOfFm, cardsForSentence, isUnlocked, newKfCards, newTransformCards, newErCards, pickPerSentence } from "./cards.js";
+import { parseCardId, unitIdOfFm, fmIdForUnit, cardsForSentence, isUnlocked, newKfCards, newTransformCards, newErCards, pickPerSentence } from "./cards.js";
 import { unitsForSentence, isKnown, unitsRequiredForCard } from "./units.js";
 import { pickNewSentences, focusList } from "./select.js";
 import { carriersFor } from "./carrier.js";
@@ -373,6 +373,56 @@ export function applyReview(state, cardId, grade, unitsRequired, now, content, p
     if (isNewSentence) d.newSentences += 1;
   });
   return next;
+}
+
+/**
+ * FR-D6: which cloze units an EN→RO answer got right and wrong, from the `checkAnswer` diff. A unit is missed when any
+ * token carrying it is `wrong`/`missing`. Null when the diff doesn't line up with the sentence's tokens (an `accept`
+ * alternative with another token count), so the caller grades the whole card instead.
+ * @returns {{missed: string[], ok: string[], missedTokens: string[]} | null}
+ */
+export function erMisses(sentence, diff) {
+  if (!diff || diff.length !== sentence.tokens.length) return null;
+  const missed = new Set();
+  const seen = new Set();
+  const missedTokens = [];
+  sentence.tokens.forEach((t, i) => {
+    if (!t.cloze) return;
+    const bad = diff[i].status === "wrong" || diff[i].status === "missing";
+    if (bad) missedTokens.push(t.t.replace(/[.,!?;:]+$/, ""));
+    for (const u of t.units) {
+      const id = `${u.lex}.${u.form}`;
+      seen.add(id);
+      if (bad) missed.add(id);
+    }
+  });
+  return { missed: [...missed], ok: [...seen].filter((u) => !missed.has(u)), missedTokens };
+}
+
+/**
+ * FR-D6/FR-S3: review an `er` card with part-level credit. The card itself is graded as `applyReview` does. Units of
+ * missed tokens get a `c: 0` attempt and their `fm` card Again (created due now if it doesn't exist; a claim on it is
+ * dropped); units of correct tokens get `c: 1` and keep their `fm` schedule. `misses` is `erMisses(...)`; without it
+ * the whole card is graded. Returns a new state.
+ */
+export function applyErReview(state, cardId, grade, unitsRequired, misses, now, content, presentedId = cardId) {
+  if (!misses) return applyReview(state, cardId, grade, unitsRequired, now, content, presentedId);
+  const clozeIds = new Set([...misses.missed, ...misses.ok]);
+  const rest = unitsRequired.filter(({ u }) => !clozeIds.has(u));
+  let next = applyReview(state, cardId, grade, rest, now, content, presentedId);
+  const lxOf = new Map(unitsRequired.map(({ u, lx }) => [u, lx]));
+  const missedSet = new Set(misses.missed);
+  const cards = { ...next.cards };
+  for (const u of misses.missed) {
+    const id = fmIdForUnit(u);
+    cards[id] = cards[id] ? review(cards[id], 1, now) : newCard(now);
+  }
+  const claimed = Object.fromEntries(Object.entries(next.claimed ?? {}).filter(([u]) => !missedSet.has(u)));
+  const attempts = [
+    ...next.attempts,
+    ...[...misses.missed, ...misses.ok].map((u) => ({ u, lx: lxOf.get(u) ?? u.slice(0, u.indexOf(".")), c: missedSet.has(u) ? 0 : 1, t: now, card: presentedId })),
+  ];
+  return { ...next, cards, claimed, attempts };
 }
 
 /**

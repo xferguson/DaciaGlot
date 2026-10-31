@@ -2,7 +2,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { isUnlocked, erUnlocked, erUnits, newErCards, pickPerSentence, buildCardId } from "../app/js/core/cards.js";
 import { unitsRequiredForCard } from "../app/js/core/units.js";
-import { buildSession } from "../app/js/core/session.js";
+import { buildSession, applyErReview, erMisses } from "../app/js/core/session.js";
+import { checkAnswer } from "../app/js/core/check.js";
 import { newCard } from "../app/js/core/fsrs.js";
 import { makeContent, state, NOW } from "./helpers/mini-content.mjs";
 
@@ -32,23 +33,24 @@ function withCz(stabs) {
   const st = state();
   st.seenSentences.s1 = NOW;
   stabs.forEach((stability, i) => {
-    st.cards[i === 0 ? "fm:avea:pres1sg" : "fm:problema:sg"] = { ...newCard(NOW), stability };
+    // `stability` is now the scheduled gap in days
+    st.cards[i === 0 ? "fm:avea:pres1sg" : "fm:problema:sg"] = { ...newCard(NOW), lastReview: NOW, due: NOW + stability * 86400000 };
   });
   return st;
 }
 
-test("er unlocks only when every cloze unit's fm card has stability ≥ 7 days", () => {
-  assert.equal(erUnlocked(s1, withCz([7, 7])), true);
-  assert.equal(erUnlocked(s1, withCz([30, 6.9])), false);
+test("er unlocks only when every cloze unit's fm card has scheduled gap ≥ 4 days", () => {
+  assert.equal(erUnlocked(s1, withCz([4, 16])), true);
+  assert.equal(erUnlocked(s1, withCz([30, 3.9])), false);
   assert.equal(erUnlocked(s1, withCz([30])), false, "a cloze unit's fm card is missing");
   assert.equal(erUnlocked(s1, state()), false);
   assert.equal(erUnlocked(noCloze, state()), false, "no cloze tokens");
 });
 
 test("isUnlocked handles er", () => {
-  assert.equal(isUnlocked("er:s1", withCz([8, 9]), content), true);
-  assert.equal(isUnlocked("er:s1", withCz([8, 3]), content), false);
-  assert.equal(isUnlocked("er:nope", withCz([8, 9]), content), false);
+  assert.equal(isUnlocked("er:s1", withCz([4, 9]), content), true);
+  assert.equal(isUnlocked("er:s1", withCz([4, 3]), content), false);
+  assert.equal(isUnlocked("er:nope", withCz([4, 9]), content), false);
 });
 
 test("er attempts: units of cloze tokens plus head patterns", () => {
@@ -59,7 +61,7 @@ test("er attempts: units of cloze tokens plus head patterns", () => {
 });
 
 test("newErCards introduces unlocked, not-yet-introduced cards and honours cap and skip", () => {
-  const st = withCz([8, 9]);
+  const st = withCz([4, 9]);
   assert.deepEqual(newErCards(st, content), ["er:s1"]);
   assert.deepEqual(newErCards(st, content, { skip: new Set(["s1"]) }), []);
   assert.deepEqual(newErCards(st, content, { cap: 0 }), []);
@@ -68,7 +70,7 @@ test("newErCards introduces unlocked, not-yet-introduced cards and honours cap a
 });
 
 test("buildSession appends new er cards in session mode", () => {
-  const st = withCz([8, 9]);
+  const st = withCz([4, 9]);
   const { queue } = buildSession({ mode: "session", state: st, content, now: NOW, rng: () => 0.5, newSentenceIds: [] });
   assert.ok(queue.some((q) => q.cardId === "er:s1" && q.isNew));
 });
@@ -77,4 +79,57 @@ test("er has the lowest drill weight (FR-D9)", () => {
   assert.deepEqual(pickPerSentence(["er:s1", "xf:s1:0"]), ["xf:s1:0"]);
   assert.deepEqual(pickPerSentence(["er:s1", "cz:s1:0"]), ["er:s1", "cz:s1:0"]);
   assert.deepEqual(pickPerSentence(["fm:avea:pres1sg", "er:s1"]), ["fm:avea:pres1sg", "er:s1"], "fm has no sentence until shown");
+});
+
+test("er unlocks for a claimed unit without an fm card", () => {
+  const st = withCz([16]);
+  st.claimed = { "problema.sg": NOW };
+  assert.equal(erUnlocked(s1, st), true);
+});
+
+// --- part-level credit (T27) ---
+const diffOf = (...st) => st.map((status, i) => ({ token: s1.tokens[i].t, status }));
+const units = () => unitsRequiredForCard("er:s1", content);
+
+test("erMisses blames only the wrong cloze token", () => {
+  const m = erMisses(s1, diffOf("ok", "ok", "wrong"));
+  assert.deepEqual(m.missed, ["problema.sg"]);
+  assert.deepEqual(m.ok, ["avea.pres1sg"]);
+  assert.deepEqual(m.missedTokens, ["problemă"]);
+  assert.equal(erMisses(s1, diffOf("ok", "ok")), null, "misaligned diff");
+});
+
+test("a contraction-equivalent answer blames no token", () => {
+  const m = erMisses(s1, checkAnswer("Am o problema", s1.ro).diff);
+  assert.deepEqual(m.missed, []);
+  const m2 = erMisses(s1, checkAnswer("am o problemă", s1.ro).diff);
+  assert.deepEqual(m2.missed, []);
+});
+
+test("one wrong token: only that unit's fm gets Again; the rest get c:1 and keep their schedule", () => {
+  const st = withCz([16, 16]);
+  const before = st.cards["fm:avea:pres1sg"];
+  const out = applyErReview(st, "er:s1", 1, units(), erMisses(s1, diffOf("ok", "ok", "wrong")), NOW, content);
+  assert.deepEqual(out.cards["fm:avea:pres1sg"], before);
+  assert.equal(out.cards["fm:problema:sg"].lapses >= 0, true);
+  assert.ok(out.cards["fm:problema:sg"].due < NOW + 86400000 * 4, "back soon");
+  const att = (u) => out.attempts.filter((a) => a.u === u).map((a) => a.c);
+  assert.deepEqual(att("avea.pres1sg"), [1]);
+  assert.deepEqual(att("problema.sg"), [0]);
+  assert.deepEqual(att("pat:have-pres"), [0], "the er card itself is graded wrong");
+  assert.ok(out.cards["er:s1"]);
+});
+
+test("a miss on a claimed unit drops that claim and creates its fm due now", () => {
+  const st = withCz([16]);
+  st.claimed = { "problema.sg": NOW - 1, "avea.pres1sg": NOW - 1 };
+  const out = applyErReview(st, "er:s1", 1, units(), erMisses(s1, diffOf("ok", "ok", "wrong")), NOW, content);
+  assert.deepEqual(Object.keys(out.claimed), ["avea.pres1sg"]);
+  assert.equal(out.cards["fm:problema:sg"].due, NOW);
+});
+
+test("without an alignment the whole card is graded", () => {
+  const st = withCz([16, 16]);
+  const out = applyErReview(st, "er:s1", 1, units(), null, NOW, content);
+  assert.deepEqual(out.attempts.map((a) => a.c), units().map(() => 0));
 });
