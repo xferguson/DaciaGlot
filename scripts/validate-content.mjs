@@ -5,6 +5,7 @@ import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
 import { join, relative, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { packPaths } from "../app/js/data/content.js";
+import { findFamilies } from "../app/js/core/families.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -247,7 +248,9 @@ export function computeCoverage({ patterns, lexemes, sentences, levels }) {
   const thinLexemes = lexemes
     .filter((l) => !l.retired && lexCount.get(l.id).size < TARGETS.lexemeSentences)
     .map((l) => ({ id: l.id, sentences: lexCount.get(l.id).size }));
-  return { patterns: patternsOut, situations, canDos: canDosOut, thinLexemes };
+  const byId = new Map(sentences.filter((s) => !s.retired).map((s) => [s.id, s]));
+  const families = [...findFamilies(byId.values())].map(([id, members]) => ({ id, members: members.map((m) => byId.get(m).ro) }));
+  return { patterns: patternsOut, situations, canDos: canDosOut, thinLexemes, families };
 }
 
 /** Render the coverage statistics as Markdown tables; below-target rows are marked ⚠. */
@@ -261,6 +264,9 @@ export function coverageReport(raw) {
     table("Patterns", ["Pattern", "Sentences", "Head lexemes", "Glue clozes"], cov.patterns.map((r) => [mark(r) + r.id, r.sentences, r.heads, r.glueCloze])),
     table("Situations", ["Situation", "Sentences"], cov.situations.map((r) => [mark(r) + r.id, r.sentences])),
     table("Can-dos", ["Can-do", "Level", "Sentences"], cov.canDos.map((r) => [mark(r) + r.id, r.level, r.sentences])),
+    cov.families.length
+      ? table("Sentence families (check that each is really one paradigm)", ["Family", "Members"], cov.families.map((f) => [f.id, f.members.join(" / ")]))
+      : "### Sentence families\n\nNone.\n",
     cov.thinLexemes.length
       ? table(`Lexemes with < ${TARGETS.lexemeSentences} sentences (key-forms would never unlock)`, ["Lexeme", "Sentences"], cov.thinLexemes.map((r) => ["⚠ " + r.id, r.sentences]))
       : `### Lexemes with < ${TARGETS.lexemeSentences} sentences\n\nNone.\n`,

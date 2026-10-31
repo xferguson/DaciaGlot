@@ -23,6 +23,18 @@ const matchesOne = (s, f) => (f.type === "pattern" ? (s.patterns ?? []) : (s.sit
 const matchedFocus = (s, focus) => focusList(focus).find((f) => matchesOne(s, f));
 const matchesFocus = (s, focus) => !!matchedFocus(s, focus);
 
+/** Siblings brought in with a new sentence (FR-R5): at most this many besides the sentence itself. */
+export const MAX_SIBLINGS = 2;
+
+/** Unseen members of the sentence's family in a wanted register, other than itself, by id; at most `MAX_SIBLINGS`. */
+export function siblingsOf(sid, { state, content }) {
+  const fid = content.familyOf?.get(sid);
+  if (!fid) return [];
+  return content.families.get(fid)
+    .filter((m) => m !== sid && !(m in state.seenSentences) && state.settings.registers.includes(content.sentences.get(m)?.register))
+    .slice(0, MAX_SIBLINGS);
+}
+
 /**
  * @param {number} n
  * @param {{focus: {type: "situation"|"pattern", id: string}|{type: string, id: string}[]|null, state: object, content: object, now: number, rng: () => number}} opts
@@ -95,11 +107,14 @@ export function pickNewSentences(n, { focus: rawFocus = null, state, content, no
 
   const picked = [];
   const taken = new Set();
+  const withFamily = new Set(); // siblings travel with the sentence that brought them (FR-R5)
   for (const c of ordered) {
     if (picked.length >= n) break;
+    if (withFamily.has(c.s.id)) continue;
     if (focus && !matchesFocus(c.s, focus)) continue; // FR-S8: a focus filters, it doesn't just rank
     if (c.unknown.some((u) => taken.has(u))) continue;
     picked.push(c.s.id);
+    siblingsOf(c.s.id, { state, content }).forEach((m) => withFamily.add(m));
     c.unknown.forEach((u) => taken.add(u));
   }
   return { sentences: picked };

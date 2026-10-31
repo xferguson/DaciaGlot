@@ -27,6 +27,11 @@ export function carriersFor(unitId, state, content) {
   return out;
 }
 
+const pickRandom = (list, rng) => {
+  const { sentenceId, tokenIndex } = list[Math.min(list.length - 1, Math.floor(rng() * list.length))];
+  return { sentenceId, tokenIndex };
+};
+
 /**
  * The carrier for a unit that is due: a seen sentence not among the unit's last `recent` attempts and not in
  * `exclude`, with the fewest unknown other units, then the longest since it was last used (any attempt, else
@@ -58,10 +63,12 @@ export function pickCarrier(unitId, state, content, { now, rng = Math.random, ex
       last: lastUsed.get(c.sentenceId) ?? state.seenSentences[c.sentenceId] ?? 0,
     }));
   if (!scored.length) return null;
+  // FR-R5: a form that varies inside a family is shown in a random family member, so the learner must choose it.
+  const fams = (content.familiesOfUnit?.get(unitId) ?? []).flatMap((f) => content.families.get(f) ?? []);
+  const inFamily = scored.filter((c) => fams.includes(c.sentenceId));
+  if (inFamily.length) return pickRandom(inFamily, rng);
   const best = scored.reduce((b, c) => (c.unknown < b.unknown || (c.unknown === b.unknown && c.last < b.last) ? c : b));
-  const ties = scored.filter((c) => c.unknown === best.unknown && c.last === best.last);
-  const pick = ties[Math.min(ties.length - 1, Math.floor(rng() * ties.length))];
-  return { sentenceId: pick.sentenceId, tokenIndex: pick.tokenIndex };
+  return pickRandom(scored.filter((c) => c.unknown === best.unknown && c.last === best.last), rng);
 }
 
 /**
