@@ -8,6 +8,7 @@ import { renderCard as renderCz } from "./card-cloze.js";
 import { renderCard as renderKf } from "./card-keyform.js";
 import { renderCard as renderXf } from "./card-transform.js";
 import { renderCard as renderSb } from "./card-slot.js";
+import { sun } from "../components/ornament.js";
 import { renderCard as renderEr } from "./card-enro.js";
 import { renderCard as renderPg } from "./card-paradigm.js";
 import { toast } from "../components/toast.js";
@@ -82,7 +83,7 @@ export function render(root, ctx) {
     }
     if (!queue.length) {
       root.innerHTML = `<h1>${TITLES[mode]}</h1>
-        <p class="muted">${focus ? "Nothing in this focus right now. Clear the focus on Home or pick another topic." : EMPTY[mode] ?? "Nothing to study right now."}</p>${home}`;
+        ${sun()}<p class="muted">${focus ? "Nothing in this focus right now. Clear the focus on Home or pick another topic." : EMPTY[mode] ?? "Nothing to study right now."}</p>${home}`;
       return;
     }
     begin();

@@ -1,5 +1,6 @@
 import { dueInFocus, mixPlan, QUICK_CAP, SEC_PER_REVIEW, SEC_PER_NEW } from "../../core/session.js";
 import { levelProgress } from "../../core/mastery.js";
+import { rooster } from "../components/ornament.js";
 import { ring } from "../components/ring.js";
 import { currentLevelId } from "./dashboard.js";
 import { renderList, readyCount, situationName, focusParam } from "./lists.js";
@@ -13,8 +14,8 @@ let activeTab = null;
 
 export function render(root, ctx) {
   root.innerHTML = `
-    <h1>DaciaGlot</h1>
-    <p class="muted" lang="ro">Hai să vorbim românește.</p>
+    <div class="hero"><div><h1>DaciaGlot</h1>
+    <p class="muted" lang="ro">Hai să vorbim românește.</p></div>${rooster()}</div>
     <section class="card" data-modes></section>
     <section aria-label="Choose focus">
       <h2>Focus</h2>

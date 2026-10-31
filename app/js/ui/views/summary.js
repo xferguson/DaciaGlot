@@ -1,5 +1,6 @@
 // End-of-session summary (PRD FR-P6) and the export reminder rule (FR-X4).
 // The helpers are pure so they can be tested without a DOM.
+import { tulip } from "../components/ornament.js";
 import { allPatternStates } from "../../core/mastery.js";
 
 const DAY = 86400000;
@@ -47,6 +48,7 @@ export function summarize({ before, state, content, stats, startedAt, now }) {
 export function renderSummary(root, { summary, content, onMore }) {
   const nameOf = (id) => content.patterns.get(id)?.name ?? id;
   root.innerHTML = `<h1>Done!</h1>
+    ${tulip()}<p class="bravo" lang="ro">Bravo!</p>
     <section class="card">
       <p><strong data-n="cards"></strong> cards · <strong data-n="correct"></strong> correct</p>
       <p><span data-n="new"></span> new sentences · <span data-n="forms"></span> forms produced</p>

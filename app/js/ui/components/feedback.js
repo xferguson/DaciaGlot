@@ -104,7 +104,7 @@ export function renderFeedback(root, { result, parts, en }) {
   wrap.className = `feedback ${result === "wrong" ? "bad" : "good"}`;
   wrap.setAttribute("role", "status");
   const head = document.createElement("strong");
-  head.textContent = result === "wrong" ? "Not quite" : "Correct!";
+  head.textContent = result === "wrong" ? "Not quite" : "Corect!";
   wrap.append(head, sentenceView(parts));
   if (en) {
     const e = document.createElement("p");

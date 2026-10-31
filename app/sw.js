@@ -1,5 +1,5 @@
 // Service worker. Keep APP_VERSION equal to js/version.js (the validator checks).
-const APP_VERSION = "0.14.0";
+const APP_VERSION = "0.15.0";
 const PREFIX = "dg-";
 
 // Every file under js/, css/ and icons/ must be listed (validator rule 11).
@@ -8,6 +8,10 @@ const PRECACHE = [
   "index.html",
   "manifest.webmanifest",
   "css/app.css",
+  "fonts/alegreya-latin-ext.woff2",
+  "fonts/alegreya-latin.woff2",
+  "fonts/nunito-latin-ext.woff2",
+  "fonts/nunito-latin.woff2",
   "icons/apple-touch-icon.png",
   "icons/favicon-32.png",
   "icons/favicon.svg",
@@ -40,6 +44,7 @@ const PRECACHE = [
   "js/ui/components/chart.js",
   "js/ui/components/diacritic-bar.js",
   "js/ui/components/feedback.js",
+  "js/ui/components/ornament.js",
   "js/ui/components/flag-button.js",
   "js/ui/components/ring.js",
   "js/ui/components/toast.js",

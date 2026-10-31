@@ -1,29 +1,75 @@
+/* Fonts: Alegreya (headings, Romanian text) and Nunito (UI), bundled variable fonts under OFL. */
+@font-face {
+  font-family: 'Alegreya';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url(../fonts/alegreya-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Alegreya';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url(../fonts/alegreya-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 200 1000;
+  font-display: swap;
+  src: url(../fonts/nunito-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 200 1000;
+  font-display: swap;
+  src: url(../fonts/nunito-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
-  --bg: #fbf8f3;
-  --surface: #ffffff;
-  --fg: #1d1b18;
-  --muted: #5f594f;
-  --accent: #1f4e9c;
-  --on-accent: #ffffff;
+  --bg: #fff4df;
+  --surface: #fffbf2;
+  --fg: #14213d;
+  --muted: #4c5878;
+  --accent: #0b2a6f;
+  --on-accent: #fff4df;
   --ok: #1b6b3a;
   --warn: #8a5a00;
   --err: #b3261e;
-  --border: #d9d3c8;
-  --radius: 12px;
+  --border: #c9b98f;
+  --radius: 16px;
   --gap: 16px;
+  /* Altiță × Horezu: motif colors, taken from the icon and from painted ceramics */
+  --red: #ce1126;
+  --gold: #fcd116;
+  --ochre: #d9a23b;
+  --green: #2e7d4f;
+  --stitch: #d9a23b;
+  --band: #0b2a6f;
+  --font-head: "Alegreya", Georgia, "Times New Roman", serif;
+  --font-body: "Nunito", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #16150f;
-    --surface: #221f18;
-    --fg: #ece8e1;
-    --muted: #a39d93;
-    --accent: #8fb3ff;
-    --on-accent: #0d1a33;
-    --ok: #6fd18f;
+    --bg: #0a2260;
+    --surface: #10337f;
+    --fg: #fff4df;
+    --muted: #b9c5e6;
+    --accent: #fcd116;
+    --on-accent: #0b2a6f;
+    --ok: #7fe0a0;
     --warn: #f0b84d;
-    --err: #ff8a80;
-    --border: #3a362c;
+    --err: #ff8a94;
+    --border: #3558a8;
+    --red: #ff4a5e;
+    --stitch: #5c86d6;
+    --band: #061746;
   }
 }
 
@@ -33,7 +79,7 @@ body {
   min-height: 100vh;
   background: var(--bg);
   color: var(--fg);
-  font: 17px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font: 17px/1.5 var(--font-body);
 }
 main, #banners {
   max-width: 36rem;
@@ -221,3 +267,103 @@ button.tok-link { background: none; border: 0; font: inherit; cursor: pointer; m
 .paradigm-row { display: flex; align-items: center; gap: 12px; }
 .paradigm-row p { margin: 0; }
 .paradigm-row mark { background: transparent; color: var(--accent); font-weight: 700; text-decoration: underline; }
+
+/* ===== Theme: Altiță × Horezu =====
+   Structure from the ie (stitched diamond bands, dashed seams), warmth from painted ceramics
+   (dotted plate rims, pill buttons, spot illustrations). Layout and behavior are unchanged. */
+body { display: flex; flex-direction: column; }
+main, #banners { width: 100%; }
+main { flex: 1; }
+h1, h2, h3, .ring-label { font-family: var(--font-head); }
+h1 { font-size: 2rem; font-weight: 800; line-height: 1.1; }
+h2 { font-size: 1.35rem; font-weight: 700; }
+[lang="ro"] { font-family: var(--font-head); font-size: 1.08em; }
+.answer-input { font-family: var(--font-head); }
+
+/* Embroidered bands: one diamond tile, repeated (the icon's rows) */
+.band {
+  height: calc(26px + env(safe-area-inset-top, 0px));
+  background-color: var(--band);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='26' viewBox='0 0 34 26'%3E%3Cpath d='M17 2L30 13 17 24 4 13Z' fill='%23ce1126'/%3E%3Cpath d='M17 6.5L25.5 13 17 19.5 8.5 13Z' fill='%23fcd116'/%3E%3Crect x='15.2' y='11.2' width='3.6' height='3.6' fill='%230b2a6f' transform='rotate(45 17 13)'/%3E%3Ccircle cx='0' cy='13' r='1.8' fill='%23fff4df'/%3E%3Ccircle cx='34' cy='13' r='1.8' fill='%23fff4df'/%3E%3C/svg%3E"),
+    linear-gradient(90deg, #fcd116 0 60%, transparent 60%),
+    linear-gradient(90deg, #fcd116 0 60%, transparent 60%);
+  background-repeat: repeat-x;
+  background-size: 34px 26px, 12px 2px, 12px 2px;
+  background-position: center bottom, 0 calc(100% - 22px), 0 calc(100% - 2px);
+}
+.band-bottom { height: 26px; margin-top: var(--gap); }
+@media (prefers-color-scheme: dark) {
+  .band {
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='34' height='26' viewBox='0 0 34 26'%3E%3Cpath d='M17 2L30 13 17 24 4 13Z' fill='%23ff4a5e'/%3E%3Cpath d='M17 6.5L25.5 13 17 19.5 8.5 13Z' fill='%23fcd116'/%3E%3Crect x='15.2' y='11.2' width='3.6' height='3.6' fill='%23061746' transform='rotate(45 17 13)'/%3E%3Ccircle cx='0' cy='13' r='1.8' fill='%23fff4df'/%3E%3Ccircle cx='34' cy='13' r='1.8' fill='%23fff4df'/%3E%3C/svg%3E"),
+      linear-gradient(90deg, #fcd116 0 60%, transparent 60%),
+      linear-gradient(90deg, #fcd116 0 60%, transparent 60%);
+  }
+}
+
+/* Buttons: pills with a stitched inner seam; the four mode buttons are rounded tiles */
+.btn { position: relative; border-radius: 999px; font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; }
+.btn:not(.icon)::after {
+  content: ""; position: absolute; inset: 3px; border-radius: inherit; pointer-events: none;
+  border: 1px dashed color-mix(in srgb, var(--on-accent) 55%, transparent);
+}
+.btn.secondary:not(.icon)::after { border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+.btn.mode { border-radius: 22px; }
+.btn.mode small { font-family: var(--font-body); }
+.btn.icon { border-radius: 50%; }
+.card-lr .option, .list-row, .answer-input, .settings select, .settings input[type="number"] { border-radius: 16px; }
+.card-lr .option::after { border-radius: 12px; }
+.btn.block { border-radius: 999px; }
+
+/* Cards are plates: a cobalt rim with an inner ring of dots */
+.card { border: 2px solid var(--accent); border-radius: 22px; padding: calc(var(--gap) + 4px); }
+.card::before {
+  content: ""; position: absolute; inset: 5px; border: 2px dotted var(--stitch); border-radius: 17px; pointer-events: none;
+}
+.card { position: relative; }
+.card > * { position: relative; }
+.sheet { border-radius: 24px 24px 0 0; }
+.dialog > div { border-radius: 22px; }
+.toast { border-radius: 999px; }
+
+/* Progress: a row of diamonds that fill red, then gold */
+.progress, .progress-fill {
+  --diamond: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='14' viewBox='0 0 16 14'%3E%3Cpath d='M8 0L16 7 8 14 0 7Z'/%3E%3C/svg%3E");
+}
+.progress {
+  height: 14px; border-radius: 0; background: var(--border);
+  -webkit-mask: var(--diamond) 0 0 / 16px 14px repeat-x; mask: var(--diamond) 0 0 / 16px 14px repeat-x;
+}
+.progress-fill { background: repeating-linear-gradient(90deg, var(--red) 0 16px, var(--gold) 16px 32px); }
+.progress-fill:not(.x) { transition: width .25s; }
+
+/* Level ring: stitched track, red arc */
+.ring-track { stroke-dasharray: 3 3.4; }
+.ring-arc { stroke: var(--red); }
+.ring-label { font-weight: 800; }
+
+/* Feedback words in Romanian, set in the heading face */
+.feedback strong { font-family: var(--font-head); font-size: 1.3rem; color: var(--ok); }
+.feedback.bad strong { color: var(--err); }
+
+/* Spot illustrations (small painted accents; aria-hidden) */
+.hero { display: flex; align-items: center; justify-content: space-between; gap: var(--gap); }
+.hero h1 { margin: 0; }
+.spot { flex: none; height: auto; }
+.spot-hero { width: 88px; }
+.spot-center { display: block; margin: 8px auto 0; width: 112px; }
+@media (prefers-reduced-motion: no-preference) {
+  .spot-hero { transform-origin: 50% 90%; animation: sway 6s ease-in-out infinite; }
+  @keyframes sway { 0%, 100% { transform: rotate(-2deg); } 50% { transform: rotate(2deg); } }
+}
+
+/* Banners and toasts hold buttons; keep the text readable beside them */
+.banner { flex-wrap: wrap; border-radius: var(--radius); }
+.banner > span { flex: 1 1 14rem; }
+.banner .btn, .toast .btn { font-size: 1rem; padding: 0 14px; white-space: nowrap; }
+
+/* Details */
+h1, h2, h3, .ring-label, .stat dd { font-variant-numeric: lining-nums; }
+input, select, progress { accent-color: var(--accent); }
+.bravo { text-align: center; margin: 0 0 8px; font-size: 1.6rem; font-weight: 700; color: var(--accent); }
