@@ -84,10 +84,13 @@ export function nextDayStart(now) {
  */
 export function keepStarted(state, remaining, now) {
   const cards = { ...state.cards };
-  for (const { cardId, isNew, from } of remaining) {
-    if (!isNew || cardId in cards || cardId.startsWith("pg:")) continue;
-    const p = parseCardId(cardId);
-    if (p.type === "fm" && from && `lr:${from}` in cards) cards[cardId] = { ...newCard(now), due: nextDayStart(now) };
+  for (const { cardId: id, isNew, from, forms } of remaining) {
+    if (!isNew || id.startsWith("pg:")) continue;
+    for (const cardId of forms ?? [id]) {
+      if (cardId in cards) continue;
+      const p = parseCardId(cardId);
+      if (p.type === "fm" && from && `lr:${from}` in cards) cards[cardId] = { ...newCard(now), due: nextDayStart(now) };
+    }
   }
   return { ...state, cards };
 }
@@ -235,19 +238,47 @@ export function onePerFamily(cardIds, content, rng) {
   return cardIds.filter((_, i) => !drop.has(i));
 }
 
-/** Put each new sentence's immediate checks (`check`, from `cardsForSentence`) straight after its `lr`. */
-function glueChecks(queue) {
+/** FR-R2: a new sentence's one immediate check comes at least this many cards after its `lr` (or paradigm). */
+export const CHECK_GAP = 8;
+
+/**
+ * FR-R2: place each new sentence's single immediate check (`check`, see `composeSession`) at least `CHECK_GAP`
+ * cards after its `lr`/paradigm card and never next to another check where the queue allows it; a check that
+ * can't get that far goes to the end. Other cards keep their order.
+ */
+export function placeChecks(queue) {
   const checks = queue.filter((q) => q.check);
   if (!checks.length) return queue;
   const out = queue.filter((q) => !q.check);
+  const anchor = (c) => out.findIndex((q) => q.cardId === `lr:${c.from}` || q.members?.includes(c.from));
+  checks.sort((a, b) => anchor(a) - anchor(b));
   for (const c of checks) {
-    const at = out.findIndex((q) => q.cardId === `lr:${c.from}` || q.members?.includes(c.from));
-    if (at < 0) { out.push(c); continue; }
-    let i = at + 1;
-    while (out[i]?.check && out[i].from === c.from) i++;
+    const at = anchor(c);
+    let i = at < 0 ? out.length : Math.min(out.length, at + 1 + CHECK_GAP);
+    while (i < out.length && (out[i - 1]?.check || out[i]?.check)) i++;
     out.splice(i, 0, c);
   }
   return out;
+}
+
+/** One check item per new sentence: all its new forms, blanked together in one card. */
+function oneCheck(fmIds, from) {
+  return fmIds.length ? [{ cardId: fmIds[0], isNew: true, from, check: true, forms: fmIds }] : [];
+}
+
+/**
+ * The blanks of an immediate check in its sentence: for each `fm` id (in `forms`), the first token carrying its unit.
+ * Forms with no such token are left out. Pure.
+ * @returns {{cardId: string, tokenIndex: number, presentedId: string}[]}
+ */
+export function checkBlanks(sentence, forms) {
+  const out = [];
+  for (const cardId of forms) {
+    const unit = unitIdOfFm(cardId);
+    const i = sentence.tokens.findIndex((t, j) => !out.some((b) => b.tokenIndex === j) && t.units.some((x) => `${x.lex}.${x.form}` === unit));
+    if (i >= 0) out.push({ cardId, tokenIndex: i, presentedId: `cz:${sentence.id}:${i}` });
+  }
+  return out.sort((a, b) => a.tokenIndex - b.tokenIndex);
 }
 
 function chunk(list, parts) {
@@ -273,7 +304,7 @@ function chunk(list, parts) {
  */
 export function buildSession(opts) {
   const out = composeSession(opts);
-  return { ...out, queue: glueChecks(spaceOut(out.queue, opts.content)) };
+  return { ...out, queue: placeChecks(spaceOut(out.queue, opts.content)) };
 }
 
 function composeSession({ mode, focus: rawFocus = null, state, content, now, rng, newSentenceIds }) {
@@ -324,9 +355,12 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
     .map((s) => {
       const sibs = siblingsOf(s.id, { state, content }).filter((m) => !grouped.has(m));
       if (!sibs.length) {
-        return cardsForSentence(s, content, state)
-          .filter((cardId) => !isClaimedCard(cardId, state) && !claimed.has(cardId) && claimed.add(cardId))
-          .map((cardId) => (cardId.startsWith("fm:") ? { cardId, isNew: true, from: s.id, check: true } : { cardId, isNew: true }));
+        const ids = cardsForSentence(s, content, state)
+          .filter((cardId) => !isClaimedCard(cardId, state) && !claimed.has(cardId) && claimed.add(cardId));
+        return [
+          ...ids.filter((cardId) => !cardId.startsWith("fm:")).map((cardId) => ({ cardId, isNew: true })),
+          ...oneCheck(ids.filter((cardId) => cardId.startsWith("fm:")), s.id),
+        ];
       }
       // A paradigm (FR-R5): one card for the family, one immediate check on a random member, the rest due tomorrow.
       sibs.forEach((m) => grouped.add(m));
@@ -336,7 +370,7 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
       const deferred = members.flatMap((m) => (m === chosen.id ? [] : newFms(content.sentences.get(m))));
       return [
         { cardId: `pg:${content.familyOf.get(s.id)}`, isNew: true, members, deferred },
-        ...checks.map((cardId) => ({ cardId, isNew: true, from: chosen.id, check: true })),
+        ...oneCheck(checks, chosen.id),
       ];
     });
   const k = groups.length;
@@ -356,7 +390,7 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
   const er = newErCards(state, content, { skip: taken }).filter((id) => inFocus(id, focus, content, state)).map((cardId) => ({ cardId, isNew: true }));
   queue.push(...kf, ...xf, ...er);
   const estimateSec = due.length * SEC_PER_REVIEW + (kf.length + xf.length + er.length) * SEC_PER_NEW
-    + groups.reduce((sum, g) => sum + newSentenceSec(g.length - 1) + (g[0].members ? SEC_PER_PARADIGM_ROW * (g[0].members.length - 1) : 0), 0);
+    + groups.reduce((sum, g) => sum + newSentenceSec(g.reduce((n, q) => n + (q.forms?.length ?? 0), 0)) + (g[0].members ? SEC_PER_PARADIGM_ROW * (g[0].members.length - 1) : 0), 0);
   return plan ? { queue, estimateSec, plan } : { queue, estimateSec };
 }
 
