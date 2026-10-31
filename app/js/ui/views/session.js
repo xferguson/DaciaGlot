@@ -1,5 +1,5 @@
 // Study loop: Quick / Mix / Learn / Review / Focus (PRD FR-S2…S9). Renders T07 cards one after another.
-import { buildSession, gradeFromResult, applyReview, applyErReview, erMisses, applyCheck, addMinutes, requeueWrong, keepStarted, markDifficult, claimForm, unclaimForm } from "../../core/session.js";
+import { buildSession, gradeFromResult, applyReview, applyErReview, erMisses, applyParadigm, applyCheck, addMinutes, requeueWrong, keepStarted, markDifficult, claimForm, unclaimForm } from "../../core/session.js";
 import { parseCardId, unitIdOfFm, exampleSentenceFor } from "../../core/cards.js";
 import { unitsRequiredForCard } from "../../core/units.js";
 import { resolveFm } from "../../core/carrier.js";
@@ -9,6 +9,7 @@ import { renderCard as renderKf } from "./card-keyform.js";
 import { renderCard as renderXf } from "./card-transform.js";
 import { renderCard as renderSb } from "./card-slot.js";
 import { renderCard as renderEr } from "./card-enro.js";
+import { renderCard as renderPg } from "./card-paradigm.js";
 import { toast } from "../components/toast.js";
 import { setClaimHandler } from "../components/feedback.js";
 import { flagButton } from "../components/flag-button.js";
@@ -121,6 +122,7 @@ export function render(root, ctx) {
     if (pos >= queue.length || timeUp) return finish();
     progress();
     const item = queue[pos];
+    if (item.members) return showParadigm(item);
     // An `fm` card is the schedule of one word form; it is shown as a cloze in a fresh sentence, or as a key-form drill.
     let shown = item.cardId;
     if (parseCardId(item.cardId).type === "fm") {
@@ -186,6 +188,29 @@ export function render(root, ctx) {
           }
         }
         ctx.store.save(ctx.state);
+        pos++;
+        next();
+      },
+    });
+  }
+
+  /** FR-R5: a family of sentences shown once; they all count as seen and the unchecked forms come back tomorrow. */
+  function showParadigm(item) {
+    const slot = root.querySelector("[data-card]");
+    slot.replaceChildren();
+    root.querySelector("[data-flag]").replaceChildren();
+    cardCleanup = renderPg(slot, {
+      members: item.members,
+      content: ctx.content,
+      tts: ctx.tts,
+      settings: ctx.state.settings,
+      onResult() {
+        const before = Object.keys(ctx.state.seenSentences).length;
+        ctx.state = applyParadigm(ctx.state, item, Date.now(), ctx.content);
+        ctx.store.save(ctx.state);
+        stats.cards++;
+        stats.correct++;
+        stats.newSentences += Object.keys(ctx.state.seenSentences).length - before;
         pos++;
         next();
       },

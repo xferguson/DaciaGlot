@@ -215,3 +215,9 @@ button.tok-link { background: none; border: 0; font: inherit; cursor: pointer; m
 .chart-tick { fill: var(--muted); font-size: 10px; }
 .chart-axis { fill: var(--muted); font-size: 11px; }
 .trend { margin-top: var(--gap); }
+
+/* Paradigm card (FR-R5) */
+.paradigm-rows { list-style: none; margin: var(--gap) 0; padding: 0; display: grid; gap: 8px; }
+.paradigm-row { display: flex; align-items: center; gap: 12px; }
+.paradigm-row p { margin: 0; }
+.paradigm-row mark { background: transparent; color: var(--accent); font-weight: 700; text-decoration: underline; }

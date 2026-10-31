@@ -55,6 +55,10 @@ test/*.test.mjs              # node --test; import from ../app/js/core/*
  * @property {Map<string, string[]>} sentencesByPattern
  * @property {Map<string, string[]>} sentencesBySituation
  * @property {Map<string, string[]>} sentencesByLexeme
+ * @property {Map<string, string[]>} families        familyId (smallest member id) → members (≤ 6); built by `findFamilies` (`core/families.js`)
+ * @property {Map<string, string>} familyOf          sentence id → familyId
+ * @property {Map<string, Set<string>>} familyForms  familyId → the `<lex>.<form>` units its members differ in
+ * @property {Map<string, string[]>} familiesOfUnit  unit → familyIds it varies in
  */
 ```
 
@@ -79,7 +83,7 @@ Card ids are strings. `core/cards.js` exports `parseCardId`, `buildCardId`, and 
 **One schedule per word form (T25).** `fm` is the only card stored in `state.cards` for a lexeme-form unit; `cz` and `kf` are never stored (schema ≥ 2) and exist only as ids on `attempt.card`. `core/carrier.js`:
 
 - `carriersFor(unitId, state, content) → {sentenceId, tokenIndex}[]`: seen sentences with a token carrying the unit (`cloze: true`, or the unit is the token's only unit).
-- `pickCarrier(unitId, state, content, {now, rng, exclude, recent = 3}) → {sentenceId, tokenIndex} | null`: skips sentences named in the unit's last 3 attempts and in `exclude`; prefers the fewest unknown other units, then the longest since the sentence was used, then `rng`.
+- `pickCarrier(unitId, state, content, {now, rng, exclude, recent = 3}) → {sentenceId, tokenIndex} | null`: skips sentences named in the unit's last 3 attempts and in `exclude`; a form that varies inside a family (`content.familiesOfUnit`) is carried by a family member (random among them, FR-R5); otherwise it prefers the fewest unknown other units, then the longest since the sentence was used, then `rng`.
 - `resolveFm(fmId, state, content, {now, rng, exclude, prefer}) → {type: "cz", presentedId, sentenceId, tokenIndex} | {type: "kf", presentedId} | null`: a cloze carrier (`prefer` = the sentence a new `fm` came from), else the key-form drill if the lexeme's `keyForms` has the form, else the least recent carrier, else `null`.
 
 The session view calls `resolveFm` at render time and passes the presented id to `applyReview` as the last argument.
@@ -218,6 +222,8 @@ Diacritic-less input (*o sa*) is handled by the `correct-diacritics` path, not b
 
 ### 6.2 Algorithm
 
+**Families (FR-R5).** `findFamilies(sentences)` (`core/families.js`, pure) groups sentences that, after dropping subject pronouns (*eu, tu, el, ea, noi, voi, ei, ele, dumneavoastră*), have the same token count and differ only in tokens that share a lexeme with another form (connected components, ≤ 6 members). `siblingsOf(sid, {state, content})` → the unseen members (wanted registers) that come with a new sentence, at most 2. `pickNewSentences` never picks a sibling as a separate sentence, so a family counts as one new sentence toward `newPerSession`.
+
 ```js
 pickNewSentences(n, { focus /* {type, id} | {type, id}[] | null; focusList() normalizes */, state, content, now, rng })
   → { sentences: string[] } | { blocked: true, suggest: { type, id } }
@@ -279,6 +285,8 @@ gradeFromResult({ result, usedHint, attemptNo, rating /* "hard"|"medium"|"easy"|
 applyReview(state, cardId, grade, unitsRequired /* {u,lx}[] */, now, content, presentedId = cardId) → AppState  // FSRS on `cardId` + attempts (recorded with `card: presentedId`) + history (pure; returns new state). `content` is only used for `lr` exposure. Without part-level data (`applyErReview` gets `misses` null), a wrong `er` card (grade 1) removes the claims on all units it tested (FR-R4, evidence wins).
 erMisses(sentence, diff) → {missed, ok, missedTokens} | null  // FR-D6: cloze units the EN→RO answer got wrong/right from the checkAnswer diff; null if the diff doesn't line up with the tokens
 applyErReview(state, cardId, grade, unitsRequired, misses, now, content, presentedId?) → AppState  // FR-D6: `applyReview` for the `er` card, plus part-level credit: missed units get c:0 and their `fm` Again (created due now if absent; claim dropped), correct units get c:1 and keep their `fm`. `misses` null → whole card graded. A wrong `er` is not re-queued in the session.
+onePerFamily(cardIds, content, rng) → string[]  // FR-R5: of the due `fm` cards whose forms vary inside one family, one at random stays; `buildSession` applies it before `burySiblings`
+applyParadigm(state, item, now, content) → AppState  // FR-R5: every `item.members` sentence becomes seen (as `lr`), counted as one card; `item.deferred` `fm` cards are created due `nextDayStart(now)`
 dueCards(state, content, now) → string[]      // due + unlocked card ids, most overdue first; `fm` cards of claimed forms are left out
 claimForm(state, unit, now) → AppState        // FR-R4: state.claimed[unit] = now (pure; creates no card)
 unclaimForm(state, unit, now) → AppState      // drops the claim; the `fm` card is active again with its old schedule
@@ -297,7 +305,7 @@ markDifficult(state, cardId, now) → AppState  // FR-S9: second Hard/Again in a
 ladderDays(prevGapDays, grade) → number       // FR-S1: Medium 1→4→16→64→256 d; Easy ×3, capped at 256
 ```
 
-`QueueItem = { cardId, isNew: boolean, from?: string, check?: true }`. `from` is the sentence a new `fm` was created with; the view shows that sentence first. `check` marks the immediate check of a new form (T26): `buildSession` places it directly after its `lr`, the view shows the cloze with a muted "not scored" label and no rating, and a wrong answer is re-asked once at the end of the session (a queue item with `isNew: false`, `check: true`). Both answers go through `applyCheck`.
+`QueueItem = { cardId, isNew: boolean, from?: string, check?: true, members?: string[], deferred?: string[] }`. A new family is one item `{cardId: "pg:<familyId>", isNew: true, members, deferred}` (a presentation only, never stored in `state.cards`; the view is `card-paradigm.js`) that replaces its members' `lr` cards; it is followed by the immediate check (`check: true`, `from` = one random member) of that member's new forms, and the other members' new forms (`deferred`) get `fm` cards due the next day without a check. `from` is the sentence a new `fm` was created with; the view shows that sentence first. `check` marks the immediate check of a new form (T26): `buildSession` places it directly after its `lr`, the view shows the cloze with a muted "not scored" label and no rating, and a wrong answer is re-asked once at the end of the session (a queue item with `isNew: false`, `check: true`). Both answers go through `applyCheck`.
 
 - The caller gets `newSentenceIds` from `select.js` in Phase 2+, or from the FR-S4 interim order in Phase 1.
 - The UI re-queues a wrong card per FR-S9 by splicing the queue (`requeueWrong`).

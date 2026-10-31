@@ -1,4 +1,5 @@
 // Content loader. `indexContent` is pure so Node tests and the validator can use it without fetch.
+import { findFamilies, familyForms } from "../core/families.js";
 
 /**
  * Paths (relative to the content root) of every file a manifest lists.
@@ -44,7 +45,18 @@ export function indexContent(raw) {
     }
   }
 
+  const families = findFamilies(sentences.values());
+  const familyOf = new Map();
+  for (const [fid, members] of families) for (const m of members) familyOf.set(m, fid);
+  const formsOfFamily = familyForms(families, sentences);
+  const familiesOfUnit = new Map();
+  for (const [fid, units] of formsOfFamily) for (const u of units) pushTo(familiesOfUnit, u, fid);
+
   return {
+    families,
+    familyOf,
+    familyForms: formsOfFamily,
+    familiesOfUnit,
     contentVersion: raw.manifest.contentVersion,
     sentences,
     lexemes: new Map(raw.lexemes.map((l) => [l.id, l])),

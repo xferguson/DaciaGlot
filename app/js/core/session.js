@@ -2,7 +2,7 @@
 import { newCard, review } from "./fsrs.js";
 import { parseCardId, unitIdOfFm, fmIdForUnit, cardsForSentence, isUnlocked, newKfCards, newTransformCards, newErCards, pickPerSentence } from "./cards.js";
 import { unitsForSentence, isKnown, unitsRequiredForCard } from "./units.js";
-import { pickNewSentences, focusList } from "./select.js";
+import { pickNewSentences, focusList, siblingsOf } from "./select.js";
 import { carriersFor } from "./carrier.js";
 
 export const QUICK_CAP = 15;
@@ -16,13 +16,23 @@ export const MIX_OUTSIDE = 3;
 export const COLD_START_SEEN = 30;
 /** A new sentence costs `SEC_PER_NEW` for one `lr` plus one new form to check; each form more (or fewer) scales it (FR-R2). */
 export const newSentenceSec = (forms) => (SEC_PER_NEW * (1 + forms)) / 2;
+/** Each extra member of a paradigm card adds this much reading time to the estimate. */
+const SEC_PER_PARADIGM_ROW = 10;
 const SPACING_GAP = 2;
 const SPACING_WINDOW = 8;
 
 /** Keys two cards share when they'd feel like a repeat: `s:<sentence>`, `l:<target lexeme>`; `new` marks a new `lr`. */
 export function cardKeys(item, content) {
-  const p = parseCardId(item.cardId);
   const keys = new Set();
+  if (item.members) { // a paradigm card (FR-R5)
+    for (const m of item.members) keys.add(`s:${m}`);
+    keys.add("new");
+    return keys;
+  }
+  const p = parseCardId(item.cardId);
+  if (p.type === "fm") {
+    for (const f of content.familiesOfUnit?.get(unitIdOfFm(item.cardId)) ?? []) keys.add(`f:${f}`);
+  }
   if (p.sentenceId) keys.add(`s:${p.sentenceId}`);
   if (item.from) keys.add(`s:${item.from}`);
   for (const { lx } of unitsRequiredForCard(item.cardId, content)) keys.add(`l:${lx}`);
@@ -75,7 +85,7 @@ export function nextDayStart(now) {
 export function keepStarted(state, remaining, now) {
   const cards = { ...state.cards };
   for (const { cardId, isNew, from } of remaining) {
-    if (!isNew || cardId in cards) continue;
+    if (!isNew || cardId in cards || cardId.startsWith("pg:")) continue;
     const p = parseCardId(cardId);
     if (p.type === "fm" && from && `lr:${from}` in cards) cards[cardId] = { ...newCard(now), due: nextDayStart(now) };
   }
@@ -203,13 +213,35 @@ export function burySiblings(cardIds, content) {
   });
 }
 
+/**
+ * FR-R5: of the due `fm` cards whose forms vary inside one family, keep one at random and leave the rest due for
+ * another session. Other cards, and `fm` cards of no family, pass through in their order.
+ */
+export function onePerFamily(cardIds, content, rng) {
+  const byFamily = new Map();
+  cardIds.forEach((id, i) => {
+    if (!id.startsWith("fm:")) return;
+    const f = content.familiesOfUnit?.get(unitIdOfFm(id))?.[0];
+    if (!f) return;
+    if (!byFamily.has(f)) byFamily.set(f, []);
+    byFamily.get(f).push(i);
+  });
+  const drop = new Set();
+  for (const idx of byFamily.values()) {
+    if (idx.length < 2) continue;
+    const keep = idx[Math.min(idx.length - 1, Math.floor(rng() * idx.length))];
+    for (const i of idx) if (i !== keep) drop.add(i);
+  }
+  return cardIds.filter((_, i) => !drop.has(i));
+}
+
 /** Put each new sentence's immediate checks (`check`, from `cardsForSentence`) straight after its `lr`. */
 function glueChecks(queue) {
   const checks = queue.filter((q) => q.check);
   if (!checks.length) return queue;
   const out = queue.filter((q) => !q.check);
   for (const c of checks) {
-    const at = out.findIndex((q) => q.cardId === `lr:${c.from}`);
+    const at = out.findIndex((q) => q.cardId === `lr:${c.from}` || q.members?.includes(c.from));
     if (at < 0) { out.push(c); continue; }
     let i = at + 1;
     while (out[i]?.check && out[i].from === c.from) i++;
@@ -252,7 +284,7 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
     focused = [...focused, ...outside];
   }
   const duePicked = pickPerSentence(focused);
-  const dueIds = burySiblings(duePicked, content);
+  const dueIds = burySiblings(onePerFamily(duePicked, content, rng), content);
   const allDue = dueIds.map((cardId) => ({ cardId, isNew: false }));
   if (mode === "quick" || mode === "review") {
     const queue = mode === "quick" ? allDue.slice(0, QUICK_CAP) : allDue;
@@ -283,12 +315,30 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
   }
   // One schedule per word form: a form shared by two new sentences gets its `fm` card from the first.
   const claimed = new Set();
+  const newFms = (s) => cardsForSentence(s, content, state)
+    .filter((cardId) => cardId.startsWith("fm:") && !isClaimedCard(cardId, state) && !claimed.has(cardId) && claimed.add(cardId));
+  const grouped = new Set(ids);
   const groups = ids
     .map((id) => content.sentences.get(id))
     .filter(Boolean)
-    .map((s) => cardsForSentence(s, content, state)
-      .filter((cardId) => !isClaimedCard(cardId, state) && !claimed.has(cardId) && claimed.add(cardId))
-      .map((cardId) => (cardId.startsWith("fm:") ? { cardId, isNew: true, from: s.id, check: true } : { cardId, isNew: true })));
+    .map((s) => {
+      const sibs = siblingsOf(s.id, { state, content }).filter((m) => !grouped.has(m));
+      if (!sibs.length) {
+        return cardsForSentence(s, content, state)
+          .filter((cardId) => !isClaimedCard(cardId, state) && !claimed.has(cardId) && claimed.add(cardId))
+          .map((cardId) => (cardId.startsWith("fm:") ? { cardId, isNew: true, from: s.id, check: true } : { cardId, isNew: true }));
+      }
+      // A paradigm (FR-R5): one card for the family, one immediate check on a random member, the rest due tomorrow.
+      sibs.forEach((m) => grouped.add(m));
+      const members = [s.id, ...sibs];
+      const chosen = content.sentences.get(members[Math.min(members.length - 1, Math.floor(rng() * members.length))]);
+      const checks = newFms(chosen);
+      const deferred = members.flatMap((m) => (m === chosen.id ? [] : newFms(content.sentences.get(m))));
+      return [
+        { cardId: `pg:${content.familyOf.get(s.id)}`, isNew: true, members, deferred },
+        ...checks.map((cardId) => ({ cardId, isNew: true, from: chosen.id, check: true })),
+      ];
+    });
   const k = groups.length;
   const kf = focus ? [] : newKfCards(state, content).filter((id) => !claimed.has(id) && !isClaimedCard(id, state)).map((cardId) => ({ cardId, isNew: true }));
   const queue = [];
@@ -306,7 +356,7 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
   const er = newErCards(state, content, { skip: taken }).filter((id) => inFocus(id, focus, content, state)).map((cardId) => ({ cardId, isNew: true }));
   queue.push(...kf, ...xf, ...er);
   const estimateSec = due.length * SEC_PER_REVIEW + (kf.length + xf.length + er.length) * SEC_PER_NEW
-    + groups.reduce((sum, g) => sum + newSentenceSec(g.length - 1), 0);
+    + groups.reduce((sum, g) => sum + newSentenceSec(g.length - 1) + (g[0].members ? SEC_PER_PARADIGM_ROW * (g[0].members.length - 1) : 0), 0);
   return plan ? { queue, estimateSec, plan } : { queue, estimateSec };
 }
 
@@ -423,6 +473,20 @@ export function applyErReview(state, cardId, grade, unitsRequired, misses, now, 
     ...[...misses.missed, ...misses.ok].map((u) => ({ u, lx: lxOf.get(u) ?? u.slice(0, u.indexOf(".")), c: missedSet.has(u) ? 0 : 1, t: now, card: presentedId })),
   ];
   return { ...next, cards, claimed, attempts };
+}
+
+/**
+ * FR-R5: the learner has gone through a paradigm card. Every member counts as seen (as `lr` does, as one card in the
+ * day's count), and the forms of the members that get no immediate check become `fm` cards due the next local day.
+ * `item` is the queue item (`{members, deferred}`). Returns a new state.
+ */
+export function applyParadigm(state, item, now, content) {
+  let next = state;
+  for (const m of item.members) next = applyReview(next, `lr:${m}`, 3, [], now, content);
+  const cards = { ...next.cards };
+  for (const id of item.deferred ?? []) if (!(id in cards)) cards[id] = { ...newCard(now), due: nextDayStart(now) };
+  const extra = item.members.length - 1;
+  return { ...next, cards, history: bumpDay(next.history, now, (d) => { d.cards -= extra; }) };
 }
 
 /**
