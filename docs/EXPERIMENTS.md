@@ -78,7 +78,7 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
 
 ## EXP-03 · Whole sentence later, part-level credit · [T27](tasks/T27-whole-sentence-later.md)
 
-- **Status:** planned
+- **Status:** live since 2026-10-31
 - **Complaint:** "Maybe I should write up the whole sentence." The owner was unsure how to test known sentences without re-blanking everything.
 - **Hypothesis:** once a sentence's new forms are past their first rung, typing the whole sentence EN→RO is a better, less repetitive test. Sending only the *missed* parts back to single-form review avoids redoing the whole sentence.
 - **Change:** `er` unlocks once every cloze form's `fm` is at ≥4 d. Grading aligns the answer and gives Again only to the wrong units' `fm` cards.
