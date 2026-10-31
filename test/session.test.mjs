@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import {
   gradeFromResult, buildSession, applyReview, dueCards, requeueWrong, dayKey, interimNewSentences, mixPlan,
   spaceOut, cardKeys, keepStarted, markDifficult, applyCheck, burySiblings, nextDayStart, newSentenceSec, COLD_START_SEEN, ladderDays,
-  claimForm, unclaimForm,
+  claimForm, unclaimForm, placeChecks, checkBlanks, CHECK_GAP,
 } from "../app/js/core/session.js";
 import { newCard } from "../app/js/core/fsrs.js";
 import { makeContent, sentence, state, NOW } from "./helpers/mini-content.mjs";
@@ -281,16 +281,53 @@ test("an EN→RO miss takes back the claims on the forms it tested; a hit keeps 
   assert.deepEqual(applyReview(st, "er:s00", 1, units, NOW, content).claimed, { "b9.base": NOW });
 });
 
-test("new sentence: lr + a directly following check per unknown form; none unknown → lr only", () => {
+test("new sentence: lr + one later check covering its unknown forms; none unknown → lr only", () => {
   const st = state();
   st.cards["fm:a1:base"] = newCard(NOW); // a1 already has its schedule
   const { queue, estimateSec } = buildSession({ mode: "learn", state: st, content, now: NOW, rng, newSentenceIds: ["s00", "s01"] });
   const ids = queue.map((q) => q.cardId);
   assert.deepEqual(ids.filter((id) => id.endsWith("s00") || id === "fm:a0:base"), ["lr:s00", "fm:a0:base"]);
-  assert.equal(ids.indexOf("fm:a0:base"), ids.indexOf("lr:s00") + 1, "check follows its lr directly");
-  assert.ok(queue.find((q) => q.cardId === "fm:a0:base").check);
+  const check = queue.find((q) => q.cardId === "fm:a0:base");
+  assert.ok(check.check);
+  assert.deepEqual(check.forms, ["fm:a0:base"]);
   assert.ok(!ids.includes("fm:a1:base"), "s01 has lr only");
   assert.equal(estimateSec, newSentenceSec(1) + newSentenceSec(0));
+});
+
+test("a sentence with several new forms gets ONE check item listing them all", () => {
+  const t0 = sentence("t0", "p0 q0 r0", [u("p"), u("q"), u("r")]);
+  t0.tokens.forEach((t) => { t.cloze = true; });
+  const c2 = makeContent([t0]);
+  const { queue } = buildSession({ mode: "learn", state: state(), content: c2, now: NOW, rng, newSentenceIds: ["t0"] });
+  const checks = queue.filter((q) => q.check);
+  assert.equal(checks.length, 1);
+  assert.deepEqual([...checks[0].forms].sort(), ["fm:p:base", "fm:q:base", "fm:r:base"]);
+  assert.deepEqual(checkBlanks(c2.sentences.get("t0"), checks[0].forms).map((b) => b.tokenIndex), [0, 1, 2]);
+});
+
+test("placeChecks: a check comes ≥ CHECK_GAP cards after its lr, never next to another check; short queues → end", () => {
+  const fill = Array.from({ length: 20 }, (_, i) => ({ cardId: `fm:z${i}:base`, isNew: false }));
+  const q = [
+    { cardId: "lr:a", isNew: true }, { cardId: "fm:a:base", isNew: true, from: "a", check: true, forms: ["fm:a:base"] },
+    { cardId: "lr:b", isNew: true }, { cardId: "fm:b:base", isNew: true, from: "b", check: true, forms: ["fm:b:base"] },
+    ...fill,
+  ];
+  const out = placeChecks(q);
+  const at = (id) => out.findIndex((x) => x.cardId === id);
+  assert.ok(at("fm:a:base") - at("lr:a") > CHECK_GAP);
+  assert.ok(at("fm:b:base") - at("lr:b") > CHECK_GAP);
+  assert.ok(Math.abs(at("fm:a:base") - at("fm:b:base")) > 1, "checks not adjacent");
+  assert.equal(out.length, q.length);
+  const short = placeChecks([q[0], q[1], { cardId: "fm:z0:base", isNew: false }]);
+  assert.deepEqual(short.map((x) => x.cardId), ["lr:a", "fm:z0:base", "fm:a:base"]);
+});
+
+test("keepStarted creates every form of an unreached combined check", () => {
+  const st = state();
+  st.cards["lr:t0"] = newCard(NOW);
+  const out = keepStarted(st, [{ cardId: "fm:p:base", isNew: true, from: "t0", check: true, forms: ["fm:p:base", "fm:q:base"] }], NOW);
+  assert.equal(out.cards["fm:p:base"].due, nextDayStart(NOW));
+  assert.equal(out.cards["fm:q:base"].due, nextDayStart(NOW));
 });
 
 test("applyCheck: enc attempts, fm card due next local midnight whatever the answer, no review", () => {

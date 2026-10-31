@@ -74,7 +74,12 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
   2. Did you see two cards from the same sentence or same word in one session?
   3. Are next-day tests harder than before? Too hard?
 - **Rollback:** restore same-session `cz` after `lr` (pre-T26 `composeSession`).
-- **Observations:** _none yet_
+- **Observations:**
+  - **2026-10-31 · owner report (unprompted).** "Did we revert all of the changes we just had to space out cards? … I just had the sentence *What will you have to eat?* as a learning sentence, and then immediately was asked the closed test for *will you have*, and then immediately after that, the closed test for *to eat*. So I heard the whole sentence 6 times in a row with no spaces. Of course, it's all in my working memory. That just doesn't help at all. What a waste of my time."
+    - Cause: T26 (as specified) glued **one check per new form** directly after the `lr`, outside `spaceOut`, and every cloze autoplayed the full sentence on show *and* after the answer, so the audio also gave each blank away.
+    - Follow-up interview: the learn day should be **one combined check late in the session** (≥ ~8 unrelated cards after the listen card), and a cloze should be **silent until answered**. The owner isn't sure yet whether reviews also feel back-to-back.
+    - **Decision: revise → [T31](tasks/T31-spaced-combined-check.md)** (one check per sentence, ≥ 8 cards later, never adjacent; cloze audio only after answering).
+    - Next check-in: ask whether the learn step still feels repetitive, and whether *reviews* have back-to-back repeats (this time's question 3 was "not sure yet").
 
 ## EXP-03 · Whole sentence later, part-level credit · [T27](tasks/T27-whole-sentence-later.md)
 

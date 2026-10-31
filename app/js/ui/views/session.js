@@ -1,5 +1,5 @@
 // Study loop: Quick / Mix / Learn / Review / Focus (PRD FR-S2…S9). Renders T07 cards one after another.
-import { buildSession, gradeFromResult, applyReview, applyErReview, erMisses, applyParadigm, applyCheck, addMinutes, requeueWrong, keepStarted, markDifficult, claimForm, unclaimForm } from "../../core/session.js";
+import { buildSession, gradeFromResult, applyReview, applyErReview, erMisses, applyParadigm, applyCheck, checkBlanks, addMinutes, requeueWrong, keepStarted, markDifficult, claimForm, unclaimForm } from "../../core/session.js";
 import { parseCardId, unitIdOfFm, exampleSentenceFor } from "../../core/cards.js";
 import { unitsRequiredForCard } from "../../core/units.js";
 import { resolveFm } from "../../core/carrier.js";
@@ -123,12 +123,13 @@ export function render(root, ctx) {
     progress();
     const item = queue[pos];
     if (item.members) return showParadigm(item);
+    if (item.check) return showCheck({ ...item, forms: item.forms ?? [item.cardId] });
     // An `fm` card is the schedule of one word form; it is shown as a cloze in a fresh sentence, or as a key-form drill.
     let shown = item.cardId;
     if (parseCardId(item.cardId).type === "fm") {
       if (unitIdOfFm(item.cardId) in ctx.state.claimed) { pos++; return next(); } // claimed mid-session (FR-R4)
       const r = resolveFm(item.cardId, ctx.state, ctx.content, {
-        now: Date.now(), rng: Math.random, exclude: carriersUsed, prefer: item.isNew || item.check ? item.from : undefined,
+        now: Date.now(), rng: Math.random, exclude: carriersUsed, prefer: item.isNew ? item.from : undefined,
       });
       if (!r) { pos++; return next(); }
       shown = r.presentedId;
@@ -161,11 +162,9 @@ export function render(root, ctx) {
       content: ctx.content,
       tts: ctx.tts,
       settings: ctx.state.settings,
-      check: !!item.check,
       onResult(r) {
         const grade = gradeFromResult(r);
         const now = Date.now();
-        if (item.check) return onCheck(item, shown, grade, now);
         const seenBefore = Object.keys(ctx.state.seenSentences).length;
         const isEr = p.type === "er";
         const units = unitsRequiredForCard(shown, ctx.content);
@@ -217,18 +216,49 @@ export function render(root, ctx) {
     });
   }
 
-  /** FR-R2: an immediate check is uncounted. Wrong → asked once more at the end; the `fm` card is due tomorrow either way. */
-  function onCheck(item, shown, grade, now) {
-    ctx.state = applyCheck(ctx.state, item.cardId, grade > 1, unitsRequiredForCard(shown, ctx.content), now, shown);
-    ctx.store.save(ctx.state);
-    stats.cards++;
-    if (grade > 1) stats.correct++;
-    if (grade <= 1 && !struggled.has(item.cardId)) {
-      struggled.add(item.cardId);
-      queue.push({ cardId: item.cardId, isNew: false, from: item.from, check: true, requeued: true });
+  /**
+   * FR-R2: a new sentence's one immediate check blanks all its new forms in that sentence. It is uncounted: each form
+   * gets its `fm` card due tomorrow whatever the answer, and wrong forms are asked once more at the end.
+   */
+  function showCheck(item) {
+    const forms = item.forms.filter((id) => !(unitIdOfFm(id) in ctx.state.claimed));
+    const sentence = ctx.content.sentences.get(item.from);
+    const blanks = sentence ? checkBlanks(sentence, forms) : [];
+    if (!blanks.length) {
+      ctx.state = keepStarted(ctx.state, [{ ...item, forms }], Date.now());
+      ctx.store.save(ctx.state);
+      pos++;
+      return next();
     }
-    pos++;
-    next();
+    const slot = root.querySelector("[data-card]");
+    slot.replaceChildren();
+    root.querySelector("[data-flag]").replaceChildren();
+    cardCleanup = renderCz(slot, {
+      card: blanks[0].presentedId,
+      sentence,
+      tts: ctx.tts,
+      settings: ctx.state.settings,
+      check: true,
+      blanks: blanks.map((b) => b.tokenIndex),
+      onResult(r) {
+        const now = Date.now();
+        const okAt = new Map((r.blanks ?? []).map((b) => [b.tokenIndex, b.ok]));
+        const wrong = [];
+        for (const b of blanks) {
+          const ok = okAt.get(b.tokenIndex) ?? r.result !== "wrong";
+          ctx.state = applyCheck(ctx.state, b.cardId, ok, unitsRequiredForCard(b.presentedId, ctx.content), now, b.presentedId);
+          if (!ok) wrong.push(b.cardId);
+        }
+        ctx.store.save(ctx.state);
+        stats.cards++;
+        if (!wrong.length) stats.correct++;
+        if (wrong.length && !item.requeued) {
+          queue.push({ cardId: wrong[0], isNew: false, from: item.from, check: true, forms: wrong, requeued: true });
+        }
+        pos++;
+        next();
+      },
+    });
   }
 
   function finish() {
