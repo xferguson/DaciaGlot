@@ -128,3 +128,13 @@ test("no two picks in one call share an unknown unit", () => {
   assert.equal(r.sentences.length, 2);
   assert.ok(r.sentences.includes("c"));
 });
+
+test("items budget (T33): picks until the new-item count reaches the target, counting unknown forms", () => {
+  const lexemes = Array.from({ length: 20 }, (_, i) => lex(`w${i}`, i + 1));
+  const sents = Array.from({ length: 10 }, (_, i) => sent(`n${i}`, [unit(`w${2 * i}`), unit(`w${2 * i + 1}`)]));
+  const content = makeContent(sents, lexemes);
+  const st = state();
+  const res = pickNewSentences(Infinity, { focus: null, state: st, content, now: NOW, rng, items: 8 });
+  assert.equal(res.items, 8); // two new forms per sentence → 4 sentences
+  assert.equal(res.sentences.length, 4);
+});

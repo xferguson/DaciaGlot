@@ -20,6 +20,8 @@ export function render(root, ctx) {
 
   root.innerHTML = `<h1>Settings</h1>
     <section class="card settings">
+      <label for="newItems">New items per Learn session</label>
+      <input id="newItems" type="number" min="5" max="40" inputmode="numeric">
       <label for="newPer">New sentences per session</label>
       <input id="newPer" type="number" min="1" max="30" inputmode="numeric">
       <label for="voice">Voice</label>
@@ -48,6 +50,10 @@ export function render(root, ctx) {
 
   const q = (s) => root.querySelector(s);
   const s0 = st().settings;
+  q("#newItems").value = s0.newItemsPerLearn ?? 15;
+  q("#newItems").addEventListener("change", (e) => {
+    update({ newItemsPerLearn: Math.min(40, Math.max(5, Math.round(Number(e.target.value)) || 15)) });
+  });
   q("#newPer").value = s0.newPerSession;
   q("#newPer").addEventListener("change", (e) => {
     update({ newPerSession: Math.min(30, Math.max(1, Math.round(Number(e.target.value)) || 8)) });

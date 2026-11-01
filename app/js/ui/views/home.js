@@ -1,4 +1,4 @@
-import { dueInFocus, mixPlan, QUICK_CAP, SEC_PER_REVIEW, SEC_PER_NEW } from "../../core/session.js";
+import { dueInFocus, mixPlan, QUICK_CAP, SEC_PER_REVIEW, SEC_PER_NEW, SEC_PER_NEW_FAST } from "../../core/session.js";
 import { levelProgress } from "../../core/mastery.js";
 import { rooster } from "../components/ornament.js";
 import { ring } from "../components/ring.js";
@@ -37,6 +37,8 @@ export function render(root, ctx) {
     const due = ctx.content ? dueInFocus(ctx.state, ctx.content, now, focus).length : 0;
     const full = ctx.state.settings.newPerSession;
     const avail = focus.length ? Math.min(full, readyCount(focus, { state: ctx.state, content: ctx.content, now })) : full;
+    const items = ctx.state.settings.newItemsPerLearn ?? 15;
+    const ready = !focus.length || readyCount(focus, { state: ctx.state, content: ctx.content, now }) > 0;
     const newCount = Math.min(avail, mixPlan(due, full).newCount);
     const mixSub = !newCount ? (due ? "all review" : "nothing yet") : due ? `${due} due + ${newCount} new` : `up to ${newCount} new`;
     const quickN = Math.min(due, QUICK_CAP);
@@ -48,7 +50,7 @@ export function render(root, ctx) {
       <div class="modes">
         <a class="btn mode" href="#/session?mode=mix${q}">Mix<small>${mixSub}</small><small>${due || newCount ? minutes(due, newCount) : "–"}</small></a>
         <a class="btn secondary mode" href="#/session?mode=quick${q}">Quick<small>${quickN ? `${quickN} due` : "nothing due"}</small><small>${quickN ? `≤ ${Math.min(5, Math.max(1, Math.round((quickN * SEC_PER_REVIEW) / 60)))} min` : "–"}</small></a>
-        <a class="btn secondary mode" href="#/session?mode=learn${q}">Learn<small>${avail ? `up to ${avail} new` : "nothing new yet"}</small><small>${avail ? minutes(0, avail) : "–"}</small></a>
+        <a class="btn secondary mode" href="#/session?mode=learn${q}">Learn<small>${avail && ready ? `~${items} new` : "nothing new yet"}</small><small>${avail && ready ? `~${Math.max(1, Math.round((items * SEC_PER_NEW_FAST) / 60))} min` : "–"}</small></a>
         <a class="btn secondary mode" href="#/session?mode=review${q}">Review<small>${due ? `all ${due} due` : "nothing due"}</small><small>${due ? minutes(due, 0) : "–"}</small></a>
       </div>`;
     if (focus.length) {

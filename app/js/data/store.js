@@ -19,6 +19,7 @@ export function defaultState(now) {
     createdAt: now,
     settings: {
       newPerSession: 8,
+      newItemsPerLearn: 15,
       ttsRate: 0.9,
       voiceURI: null,
       autoplay: true,

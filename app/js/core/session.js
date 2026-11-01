@@ -2,12 +2,16 @@
 import { newCard, review } from "./fsrs.js";
 import { parseCardId, unitIdOfFm, fmIdForUnit, cardsForSentence, isUnlocked, isEasy, newKfCards, newTransformCards, newErCards, pickPerSentence } from "./cards.js";
 import { unitsForSentence, isKnown, unitsRequiredForCard } from "./units.js";
-import { pickNewSentences, focusList, siblingsOf } from "./select.js";
+import { pickNewSentences, focusList, siblingsOf, newItemCount } from "./select.js";
 import { carriersFor, pickComposite } from "./carrier.js";
 
 export const QUICK_CAP = 15;
 export const SEC_PER_REVIEW = 12;
 export const SEC_PER_NEW = 40;
+/** T33: a new sentence in Learn mode (fast `lr`, one tap) including its share of the combined check. */
+export const SEC_PER_NEW_FAST = 25;
+/** Mix never drops below this many new sentences because of reviews; the review part is trimmed instead (T33). */
+export const MIX_MIN_NEW = 3;
 /** Mix aims for a session of about this long: due reviews first, new sentences fill what's left. */
 export const MIX_BUDGET_SEC = 12 * 60;
 /** With a focus, Mix also brings in up to this many of the most overdue cards from outside it (FR-S8). */
@@ -15,7 +19,7 @@ export const MIX_OUTSIDE = 3;
 /** Below this many seen sentences, new sessions top up with the easiest sentences (FR-S4 order) when i+1 finds too few. */
 export const COLD_START_SEEN = 30;
 /** A new sentence costs `SEC_PER_NEW` for one `lr` plus one new form to check; each form more (or fewer) scales it (FR-R2). */
-export const newSentenceSec = (forms) => (SEC_PER_NEW * (1 + forms)) / 2;
+export const newSentenceSec = (forms, perNew = SEC_PER_NEW) => (perNew * (1 + forms)) / 2;
 /** Each extra member of a paradigm card adds this much reading time to the estimate. */
 const SEC_PER_PARADIGM_ROW = 10;
 const SPACING_GAP = 2;
@@ -102,15 +106,25 @@ export function markDifficult(state, cardId, now) {
 
 /**
  * Mix mode: how many new sentences to add given the review load. All due cards stay in; new
- * sentences fill the rest of `MIX_BUDGET_SEC`, at most `newPerSession`, and drop to 0 once reviews fill it.
+ * sentences fill the rest of `MIX_BUDGET_SEC`, at most `newPerSession`, but never fewer than `MIX_MIN_NEW`
+ * (or `newPerSession` if lower): once reviews fill the budget they are trimmed instead (T33).
  * `reviewPct` is the review share of the estimated time.
  * @returns {{newCount: number, reviewPct: number}}
  */
 export function mixPlan(due, newPerSession) {
   const room = Math.floor((MIX_BUDGET_SEC - due * SEC_PER_REVIEW) / SEC_PER_NEW);
-  const newCount = Math.max(0, Math.min(newPerSession, room));
+  const newCount = Math.max(Math.min(MIX_MIN_NEW, newPerSession), Math.min(newPerSession, room));
   const total = due * SEC_PER_REVIEW + newCount * SEC_PER_NEW;
   return { newCount, reviewPct: total ? Math.round((100 * due * SEC_PER_REVIEW) / total) : 0 };
+}
+
+/**
+ * Learn mode (T33): new sentences until their new-item count reaches `settings.newItemsPerLearn`
+ * (paradigm batches count each member's new forms). Same result shape as `pickNewSentences`, plus `items`.
+ */
+export function learnPlan(state, content, focus, now, rng) {
+  const items = state.settings.newItemsPerLearn ?? 15;
+  return pickNewSentences(Infinity, { focus, state, content, now, rng, items });
 }
 
 /** PRD FR-S1: Medium (Good) climbs this ladder of gaps, in days, and stays on the top rung. */
@@ -291,7 +305,7 @@ function chunk(list, parts) {
  * Modes (PRD FR-S6, FR-S7, FR-S10):
  * - `quick`: due cards only, capped at 15.
  * - `review`: every due card, nothing new.
- * - `learn`: new material only (no due cards): `newPerSession` new sentences plus newly unlocked drills.
+ * - `learn`: new material only (no due cards): `newItemsPerLearn` new items (`learnPlan`) plus newly unlocked drills.
  * - `mix`: all due cards plus as many new sentences as `mixPlan` allows; no new drills when it allows none.
  * - `session` (legacy): all due cards plus `newPerSession` new sentences.
  * Any mode takes a `focus` (one topic or a list), which filters everything to those situations/patterns
@@ -359,26 +373,43 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
     const queue = mode === "quick" ? allDue.slice(0, QUICK_CAP) : allDue;
     return { queue, estimateSec: dueSec(queue) };
   }
-  const due = mode === "learn" ? [] : allDue;
-  const plan = mode === "mix" ? mixPlan(dueSec(due) / SEC_PER_REVIEW, state.settings.newPerSession) : null;
+  let due = mode === "learn" ? [] : allDue;
+  let plan = mode === "mix" ? mixPlan(dueSec(due) / SEC_PER_REVIEW, state.settings.newPerSession) : null;
+  if (plan) {
+    // T33: new material has a floor; the review part is trimmed to what is left of the budget (oldest-due stay).
+    const left = MIX_BUDGET_SEC - plan.newCount * SEC_PER_NEW;
+    let used = 0;
+    const kept = [];
+    for (const q of due) {
+      if (used + itemSec(q) > left) break;
+      used += itemSec(q);
+      kept.push(q);
+    }
+    if (kept.length < due.length) {
+      due = kept;
+      plan = mixPlan(dueSec(due) / SEC_PER_REVIEW, state.settings.newPerSession);
+    }
+  }
   if (plan && plan.newCount === 0 && !newSentenceIds) {
     return { queue: due, estimateSec: dueSec(due), plan };
   }
-  const want = plan ? plan.newCount : state.settings.newPerSession;
+  const learn = mode === "learn";
+  const want = plan ? plan.newCount : learn ? state.settings.newItemsPerLearn ?? 15 : state.settings.newPerSession;
   let ids = newSentenceIds;
   if (!ids) {
-    const pick = pickNewSentences(want, { focus, state, content, now, rng });
+    const pick = learn ? learnPlan(state, content, focus, now, rng) : pickNewSentences(want, { focus, state, content, now, rng });
     if (pick.blocked) {
       const queue = due.slice();
       return { queue, estimateSec: dueSec(queue), blocked: true, suggest: pick.suggest };
     }
     ids = pick.sentences.length || focus ? pick.sentences : interimNewSentences(want, state, content);
-    if (ids.length < want && Object.keys(state.seenSentences).length < COLD_START_SEEN) {
+    const have0 = learn ? newItemCount(ids, state, content) : ids.length;
+    if (have0 < want && Object.keys(state.seenSentences).length < COLD_START_SEEN) {
       // New profile: i+1 finds few sentences yet, so top up with the easiest ones (FR-S4 order).
       const have = new Set(ids);
       const extra = interimNewSentences(Infinity, state, content)
         .filter((id) => !have.has(id) && inFocus(`lr:${id}`, focus, content, state))
-        .slice(0, want - ids.length);
+        .slice(0, want - have0);
       ids = [...ids, ...extra];
     }
   }
@@ -428,7 +459,7 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
   const er = newErCards(state, content, { skip: taken }).filter((id) => inFocus(id, focus, content, state)).map((cardId) => ({ cardId, isNew: true }));
   queue.push(...kf, ...xf, ...er);
   const estimateSec = dueSec(due) + (kf.length + xf.length + er.length) * SEC_PER_NEW
-    + groups.reduce((sum, g) => sum + newSentenceSec(g.reduce((n, q) => n + (q.forms?.length ?? 0), 0)) + (g[0].members ? SEC_PER_PARADIGM_ROW * (g[0].members.length - 1) : 0), 0);
+    + groups.reduce((sum, g) => sum + newSentenceSec(g.reduce((n, q) => n + (q.forms?.length ?? 0), 0), learn ? SEC_PER_NEW_FAST : SEC_PER_NEW) + (g[0].members ? SEC_PER_PARADIGM_ROW * (g[0].members.length - 1) : 0), 0);
   return plan ? { queue, estimateSec, plan } : { queue, estimateSec };
 }
 

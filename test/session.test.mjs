@@ -3,8 +3,9 @@ import assert from "node:assert/strict";
 import {
   gradeFromResult, buildSession, applyReview, dueCards, requeueWrong, dayKey, interimNewSentences, mixPlan,
   spaceOut, cardKeys, keepStarted, markDifficult, applyCheck, burySiblings, nextDayStart, newSentenceSec, COLD_START_SEEN, ladderDays,
-  claimForm, unclaimForm, placeChecks, checkBlanks, CHECK_GAP,
+  claimForm, unclaimForm, placeChecks, checkBlanks, CHECK_GAP, learnPlan, SEC_PER_NEW_FAST, MIX_MIN_NEW, MIX_BUDGET_SEC,
 } from "../app/js/core/session.js";
+import { newItemCount } from "../app/js/core/select.js";
 import { newCard } from "../app/js/core/fsrs.js";
 import { makeContent, sentence, state, NOW } from "./helpers/mini-content.mjs";
 
@@ -72,6 +73,29 @@ test("Session uses interim order when newSentenceIds absent, honoring newPerSess
   assert.equal(queue.filter((q) => q.cardId.startsWith("lr:")).length, 3);
 });
 
+test("Learn (T33): default settings yield 15 ± 2 new items; the setting changes the target", () => {
+  const st = withDue(10);
+  const plan = learnPlan(st, content, null, NOW, rng);
+  assert.ok(Math.abs(plan.items - 15) <= 2, `got ${plan.items}`);
+  assert.equal(plan.items, newItemCount(plan.sentences, st, content));
+  st.settings.newItemsPerLearn = 30;
+  assert.ok(Math.abs(learnPlan(st, content, null, NOW, rng).items - 30) <= 2);
+  const { queue, estimateSec } = buildSession({ mode: "learn", state: withDue(0), content, now: NOW, rng });
+  assert.equal(queue.filter((q) => q.cardId.startsWith("lr:")).length, plan.sentences.length);
+  assert.ok(estimateSec / plan.sentences.length <= 2 * SEC_PER_NEW_FAST, "fast pace per new sentence incl. its check");
+});
+
+test("Learn (T33): a paradigm batch counts each member's new forms", () => {
+  const fam = ["p0", "p1", "p2"].map((id) => sentence(id, `${id}x ${id}y`, [u(`${id}x`), u(`${id}y`)]));
+  const c = makeContent(fam);
+  c.families = new Map([["f", ["p0", "p1", "p2"]]]);
+  c.familyOf = new Map(fam.map((x) => [x.id, "f"]));
+  const st = state();
+  st.settings.newItemsPerLearn = 6;
+  const plan = learnPlan(st, c, null, NOW, rng);
+  assert.equal(plan.items, 6); // three members × two new forms, not one item
+});
+
 test("applyReview: an fm card records attempts under the presented id", () => {
   const st = applyReview(state(), "fm:a0:base", 3, [{ u: "a0.base", lx: "a0" }], NOW, content, "cz:s00:0");
   assert.deepEqual(st.attempts, [{ u: "a0.base", lx: "a0", c: 1, t: NOW, card: "cz:s00:0" }]);
@@ -113,8 +137,9 @@ test("mixPlan: new sentences fill the budget left after reviews", () => {
   assert.equal(mixPlan(20, 8).newCount, 8); // 720 - 240 = 480 s → 12, capped at 8
   assert.equal(mixPlan(40, 8).newCount, 6);
   assert.equal(mixPlan(50, 8).newCount, 3);
-  assert.equal(mixPlan(60, 8).newCount, 0);
-  assert.equal(mixPlan(60, 8).reviewPct, 100);
+  assert.equal(mixPlan(60, 8).newCount, MIX_MIN_NEW); // floor: reviews no longer squeeze new material out
+  assert.equal(mixPlan(200, 8).newCount, MIX_MIN_NEW);
+  assert.equal(mixPlan(200, 2).newCount, 2); // unless the setting itself is lower
   assert.equal(mixPlan(0, 0).reviewPct, 0);
 });
 
@@ -131,7 +156,7 @@ test("Learn: new sentences only, no due cards", () => {
   const { queue } = buildSession({ mode: "learn", state: st, content, now: NOW, rng });
   assert.ok(queue.length > 0);
   assert.ok(queue.every((q) => q.isNew));
-  assert.equal(queue.filter((q) => q.cardId.startsWith("lr:")).length, 3);
+  assert.equal(queue.filter((q) => q.cardId.startsWith("lr:")).length, 8); // newPerSession is for Session mode only
 });
 
 test("Mix: fewer new sentences under a heavy review load, none when reviews fill the budget", () => {
@@ -145,9 +170,17 @@ test("Mix: fewer new sentences under a heavy review load, none when reviews fill
   assert.equal(b.queue.filter((q) => !q.isNew).length, 25);
   assert.ok(b.queue.filter((q) => q.isNew && q.cardId.startsWith("lr:")).length <= 10);
   const c = buildSession({ mode: "mix", state: withDue(60), content: makeContent(mk(70)), now: NOW, rng });
-  assert.equal(c.plan.newCount, 0);
-  assert.equal(c.queue.length, 60);
-  assert.ok(c.queue.every((q) => !q.isNew));
+  assert.equal(c.plan.newCount, MIX_MIN_NEW);
+  const newLr = c.queue.filter((q) => q.isNew && q.cardId.startsWith("lr:"));
+  assert.equal(newLr.length, MIX_MIN_NEW);
+  const reviews = c.queue.filter((q) => !q.isNew);
+  assert.ok(reviews.length < 60, "reviews are trimmed to fit the budget");
+  assert.ok(reviews.some((q) => q.cardId === "lr:s59"), "most overdue stay");
+  assert.ok(reviews.length * 12 + MIX_MIN_NEW * 40 <= MIX_BUDGET_SEC);
+  assert.ok(c.estimateSec <= MIX_BUDGET_SEC + 60 * 2);
+
+  const d = buildSession({ mode: "mix", state: withDue(200), content: makeContent(mk(210)), now: NOW, rng });
+  assert.equal(d.queue.filter((q) => q.isNew && q.cardId.startsWith("lr:")).length, MIX_MIN_NEW);
 });
 
 const related = (a, b, c) => [...cardKeys({ cardId: a.cardId }, c)].some((k) => cardKeys({ cardId: b.cardId }, c).has(k));
@@ -208,11 +241,11 @@ test("markDifficult records the card", () => {
   assert.deepEqual(st.difficult, {});
 });
 
-test("new profile: Learn tops up to newPerSession with the easiest sentences", () => {
+test("new profile: Learn tops up to newItemsPerLearn with the easiest sentences", () => {
   const st = state();
-  st.settings.newPerSession = 6;
+  st.settings.newItemsPerLearn = 6;
   const { queue } = buildSession({ mode: "learn", state: st, content, now: NOW, rng });
-  assert.equal(queue.filter((q) => q.cardId.startsWith("lr:")).length, 6);
+  assert.equal(queue.filter((q) => q.cardId.startsWith("lr:")).length, 3); // two new forms each
   for (let i = 0; i < COLD_START_SEEN; i++) st.seenSentences[`s${String(i).padStart(2, "0")}`] = NOW;
   // Past the cold start: no top-up (all 30 seen here, so nothing new at all).
   assert.equal(buildSession({ mode: "learn", state: st, content, now: NOW, rng }).queue.length, 0);
@@ -291,7 +324,7 @@ test("new sentence: lr + one later check covering its unknown forms; none unknow
   assert.ok(check.check);
   assert.deepEqual(check.forms, ["fm:a0:base"]);
   assert.ok(!ids.includes("fm:a1:base"), "s01 has lr only");
-  assert.equal(estimateSec, newSentenceSec(1) + newSentenceSec(0));
+  assert.equal(estimateSec, newSentenceSec(1, SEC_PER_NEW_FAST) + newSentenceSec(0, SEC_PER_NEW_FAST));
 });
 
 test("a sentence with several new forms gets ONE check item listing them all", () => {

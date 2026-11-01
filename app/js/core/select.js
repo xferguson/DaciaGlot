@@ -38,9 +38,11 @@ export function siblingsOf(sid, { state, content }) {
 /**
  * @param {number} n
  * @param {{focus: {type: "situation"|"pattern", id: string}|{type: string, id: string}[]|null, state: object, content: object, now: number, rng: () => number}} opts
- * @returns {{sentences: string[]} | {blocked: true, suggest: {type: string, id: string}|null}}
+ * With `items` (T33), picking counts new items instead of sentences: a candidate costs its unknown units (at least 1),
+ * plus the same for each sibling it brings along, and picking stops once the total reaches `items`; `n` is ignored.
+ * @returns {{sentences: string[], items?: number} | {blocked: true, suggest: {type: string, id: string}|null}}
  */
-export function pickNewSentences(n, { focus: rawFocus = null, state, content, now, rng }) {
+export function pickNewSentences(n, { focus: rawFocus = null, state, content, now, rng, items = null }) {
   const focus = focusList(rawFocus).length ? focusList(rawFocus) : null;
   const pstates = allPatternStates(state, content, now);
   const seenPattern = (id) => (pstates[id] ?? "not-started") !== "not-started";
@@ -105,19 +107,25 @@ export function pickNewSentences(n, { focus: rawFocus = null, state, content, no
     return { blocked: true, suggest: suggestFor(focus, blockedByPrereq, candidates, unmetFor) };
   }
 
+  const cost = (id, unknown) => Math.max(1, unknown ?? unitsForSentence(content.sentences.get(id)).filter((u) => !known(u)).length);
   const picked = [];
+  let total = 0;
   const taken = new Set();
   const withFamily = new Set(); // siblings travel with the sentence that brought them (FR-R5)
   for (const c of ordered) {
-    if (picked.length >= n) break;
+    if (items == null ? picked.length >= n : total >= items) break;
     if (withFamily.has(c.s.id)) continue;
     if (focus && !matchesFocus(c.s, focus)) continue; // FR-S8: a focus filters, it doesn't just rank
     if (c.unknown.some((u) => taken.has(u))) continue;
+    const sibs = siblingsOf(c.s.id, { state, content });
+    const price = cost(c.s.id, c.unknown.length) + sibs.reduce((sum, m) => sum + cost(m), 0);
+    if (items != null && total > 0 && total + price > items + 1) continue; // keep within ±1 of the target
     picked.push(c.s.id);
-    siblingsOf(c.s.id, { state, content }).forEach((m) => withFamily.add(m));
+    total += price;
+    sibs.forEach((m) => withFamily.add(m));
     c.unknown.forEach((u) => taken.add(u));
   }
-  return { sentences: picked };
+  return items == null ? { sentences: picked } : { sentences: picked, items: total };
 }
 
 function mostCommon(items) {
@@ -134,4 +142,12 @@ function suggestFor(focus, blockedByPrereq, candidates, unmetFor) {
     candidates.flatMap((c) => c.s.situations ?? []).filter((id) => !focus.some((f) => f.type === "situation" && f.id === id)),
   );
   return sit ? { type: "situation", id: sit } : null;
+}
+
+/** T33: new items a set of new sentences adds: each one's unknown units, at least 1 (a new sentence with no new form). */
+export function newItemCount(ids, state, content) {
+  return ids.reduce((sum, id) => {
+    const s = content.sentences.get(id);
+    return sum + (s ? Math.max(1, unitsForSentence(s).filter((u) => !isKnown(u, state, content)).length) : 0);
+  }, 0);
 }
