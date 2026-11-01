@@ -20,6 +20,8 @@ export function defaultState(now) {
     settings: {
       newPerSession: 8,
       newItemsPerLearn: 15,
+      paceTarget: 15,
+      adaptiveBatch: true,
       ttsRate: 0.9,
       voiceURI: null,
       autoplay: true,
@@ -41,6 +43,7 @@ export function defaultState(now) {
     lastCompactionAt: null,
     difficult: {},
     claimed: {},
+    pace: { batch: null, history: [] },
   };
 }
 

@@ -4,6 +4,7 @@ import { parseCardId, unitIdOfFm, fmIdForUnit, cardsForSentence, isUnlocked, isE
 import { unitsForSentence, isKnown, unitsRequiredForCard } from "./units.js";
 import { pickNewSentences, focusList, siblingsOf, newItemCount } from "./select.js";
 import { carriersFor, pickComposite } from "./carrier.js";
+import { learnBatch } from "./pace.js";
 
 export const QUICK_CAP = 15;
 export const SEC_PER_REVIEW = 12;
@@ -123,7 +124,7 @@ export function mixPlan(due, newPerSession) {
  * (paradigm batches count each member's new forms). Same result shape as `pickNewSentences`, plus `items`.
  */
 export function learnPlan(state, content, focus, now, rng) {
-  const items = state.settings.newItemsPerLearn ?? 15;
+  const items = learnBatch(state);
   return pickNewSentences(Infinity, { focus, state, content, now, rng, items });
 }
 
@@ -394,7 +395,7 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
     return { queue: due, estimateSec: dueSec(due), plan };
   }
   const learn = mode === "learn";
-  const want = plan ? plan.newCount : learn ? state.settings.newItemsPerLearn ?? 15 : state.settings.newPerSession;
+  const want = plan ? plan.newCount : learn ? learnBatch(state) : state.settings.newPerSession;
   let ids = newSentenceIds;
   if (!ids) {
     const pick = learn ? learnPlan(state, content, focus, now, rng) : pickNewSentences(want, { focus, state, content, now, rng });
