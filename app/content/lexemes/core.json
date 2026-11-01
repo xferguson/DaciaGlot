@@ -5,7 +5,8 @@
     "pos": "adv",
     "gloss": "yesterday",
     "freq": 120,
-    "trivial": true
+    "trivial": true,
+    "transparent": true
   },
   {
     "id": "azi",
@@ -268,7 +269,8 @@
       "pres1sg",
       "pres3sg",
       "ppl"
-    ]
+    ],
+    "transparent": true
   },
   {
     "id": "termina",
@@ -295,7 +297,8 @@
       "pres1sg",
       "pres3sg",
       "ppl"
-    ]
+    ],
+    "transparent": true
   },
   {
     "id": "gasi",
@@ -377,7 +380,8 @@
       "pres1sg",
       "pres3sg",
       "subj2sg"
-    ]
+    ],
+    "transparent": true
   },
   {
     "id": "manca",
@@ -443,7 +447,8 @@
       "sg": "sprint",
       "sgDef": "sprintul"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "bug",
@@ -457,7 +462,8 @@
       "pl": "bug-uri",
       "plDef": "bug-urile"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "sora",
@@ -485,7 +491,8 @@
       "pl": "beri",
       "plDef": "berile"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "romana",
@@ -497,7 +504,8 @@
       "sg": "română",
       "sgDef": "româna"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "cluj",
@@ -549,7 +557,8 @@
     "pos": "adv",
     "gloss": "well",
     "freq": 70,
-    "trivial": true
+    "trivial": true,
+    "transparent": true
   },
   {
     "id": "foarte",
@@ -701,7 +710,8 @@
     "pos": "num",
     "gloss": "ten",
     "freq": 200,
-    "trivial": true
+    "trivial": true,
+    "transparent": true
   },
   {
     "id": "noroc",
@@ -934,7 +944,8 @@
       "pres1sg",
       "pres3sg",
       "ppl"
-    ]
+    ],
+    "transparent": true
   },
   {
     "id": "repara",
@@ -961,7 +972,8 @@
       "pres1sg",
       "pres3sg",
       "ppl"
-    ]
+    ],
+    "transparent": true
   },
   {
     "id": "verifica",
@@ -988,7 +1000,8 @@
       "pres1sg",
       "pres3sg",
       "ppl"
-    ]
+    ],
+    "transparent": true
   },
   {
     "id": "pleca",
@@ -1064,7 +1077,8 @@
       "pres1sg",
       "pres3sg",
       "ppl"
-    ]
+    ],
+    "transparent": true
   },
   {
     "id": "plati",
@@ -1283,7 +1297,8 @@
       "pres1sg",
       "pres3sg",
       "ppl"
-    ]
+    ],
+    "transparent": true
   },
   {
     "id": "task",
@@ -1297,7 +1312,8 @@
       "pl": "task-uri",
       "plDef": "task-urile"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "tichet",
@@ -1309,7 +1325,8 @@
       "sg": "tichet",
       "sgDef": "tichetul"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "cod",
@@ -1321,7 +1338,8 @@
       "sg": "cod",
       "sgDef": "codul"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "test",
@@ -1335,7 +1353,8 @@
       "pl": "teste",
       "plDef": "testele"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "review",
@@ -1347,7 +1366,8 @@
       "sg": "review",
       "sgDef": "review-ul"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "eroare",
@@ -1361,7 +1381,8 @@
       "pl": "erori",
       "plDef": "erorile"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "problema",
@@ -1373,7 +1394,8 @@
       "sg": "problemă",
       "sgDef": "problema"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "sedinta",
@@ -1397,7 +1419,8 @@
       "sg": "timp",
       "sgDef": "timpul"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "nevoie",
@@ -1433,7 +1456,8 @@
       "sg": "deploy",
       "sgDef": "deploy-ul"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "frate",
@@ -1459,7 +1483,8 @@
       "sg": "mamă",
       "sgDef": "mama"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "carte",
@@ -1523,7 +1548,8 @@
       "sg": "munte",
       "sgDef": "muntele"
     },
-    "gender": "m"
+    "gender": "m",
+    "transparent": true
   },
   {
     "id": "mare",
@@ -1535,7 +1561,8 @@
       "sg": "mare",
       "sgDef": "marea"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "sport",
@@ -1547,7 +1574,8 @@
       "sg": "sport",
       "sgDef": "sportul"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "weekend",
@@ -1559,7 +1587,8 @@
       "sg": "weekend",
       "sgDef": "weekendul"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "engleza",
@@ -1571,7 +1600,8 @@
       "sg": "engleză",
       "sgDef": "engleza"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "programator",
@@ -1583,7 +1613,8 @@
       "sg": "programator",
       "sgDef": "programatorul"
     },
-    "gender": "m"
+    "gender": "m",
+    "transparent": true
   },
   {
     "id": "cuvant",
@@ -1621,7 +1652,8 @@
       "sg": "apă",
       "sgDef": "apa"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "cafea",
@@ -1633,7 +1665,8 @@
       "sg": "cafea",
       "sgDef": "cafeaua"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "supa",
@@ -1645,7 +1678,8 @@
       "sg": "supă",
       "sgDef": "supa"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "ciorba",
@@ -1669,7 +1703,8 @@
       "sg": "vin",
       "sgDef": "vinul"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "mancare",
@@ -1741,6 +1776,7 @@
       "fsg": "bună",
       "mpl": "buni",
       "fpl": "bune"
-    }
+    },
+    "transparent": true
   }
 ]

@@ -166,3 +166,17 @@ test("rule 12: lemmaGloss must be one lowercase word, a dotted compound or a sma
   for (const ok of ["be", "get.up", "NEG", "cabbage.roll"]) assert.deepEqual(check(ok), [], ok);
   for (const bad of ["to be", "Be", "two words", "", "averyveryverylongword", 3]) assert.equal(check(bad).length, 1, String(bad));
 });
+
+test("rule 13: transparent and divergent are optional booleans", () => {
+  const { raw, fileOf } = readContentDir(join(FIXTURES, "valid"));
+  const run = (field, value) => {
+    const lexemes = field === "transparent" ? raw.lexemes.map((l, i) => (i === 0 ? { ...l, transparent: value } : l)) : raw.lexemes;
+    const patterns = field === "divergent" ? raw.patterns.map((p, i) => (i === 0 ? { ...p, divergent: value } : p)) : raw.patterns;
+    return validateContent({ ...raw, lexemes, patterns }, { fileOf }).errors.filter((e) => e.rule === 13);
+  };
+  for (const f of ["transparent", "divergent"]) {
+    assert.deepEqual(run(f, true), []);
+    assert.deepEqual(run(f, false), []);
+    assert.equal(run(f, "yes").length, 1, f);
+  }
+});

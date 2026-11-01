@@ -2,7 +2,7 @@
 import { newCard, review } from "./fsrs.js";
 import { parseCardId, unitIdOfFm, fmIdForUnit, cardsForSentence, isUnlocked, isEasy, newKfCards, newTransformCards, newErCards, pickPerSentence } from "./cards.js";
 import { unitsForSentence, isKnown, unitsRequiredForCard } from "./units.js";
-import { pickNewSentences, focusList, siblingsOf, newItemCount } from "./select.js";
+import { pickNewSentences, focusList, siblingsOf, newItemCount, isFastTrackUnit } from "./select.js";
 import { carriersFor, pickComposite } from "./carrier.js";
 import { learnBatch } from "./pace.js";
 
@@ -81,6 +81,13 @@ export function nextDayStart(now) {
   const d = new Date(now);
   return new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1).getTime();
 }
+
+/** FR-V3: the rung a transparent form's first right check lands on. */
+export const FAST_TRACK_DAYS = 4;
+const daysAfter = (now, n) => {
+  const d = new Date(now);
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n).getTime();
+};
 
 /**
  * Leaving a session early: new `fm` cards of a sentence that was already introduced (its `lr` reviewed, `from`) but
@@ -624,9 +631,10 @@ export function applyParadigm(state, item, now, content) {
 /**
  * FR-R2: the immediate check of a new form. Records `enc` attempts (ignored by mastery and `isKnown`) and, if the
  * `fm` card doesn't exist yet, creates it due the next local day whatever the answer; no FSRS review, no rating.
+ * Exception (FR-V3, needs `content`): a right check on a transparent form outside divergent slots creates it due in `FAST_TRACK_DAYS`.
  * Returns a new state; the input is not mutated.
  */
-export function applyCheck(state, cardId, correct, unitsRequired, now, presentedId = cardId) {
+export function applyCheck(state, cardId, correct, unitsRequired, now, presentedId = cardId, content = null) {
   const next = {
     ...state,
     attempts: [
@@ -634,7 +642,12 @@ export function applyCheck(state, cardId, correct, unitsRequired, now, presented
       ...unitsRequired.map(({ u, lx }) => ({ u, lx, c: correct ? 1 : 0, t: now, card: presentedId, enc: 1 })),
     ],
   };
-  if (!(cardId in state.cards)) next.cards = { ...state.cards, [cardId]: { ...newCard(now), due: nextDayStart(now) } };
+  if (!(cardId in state.cards)) {
+    // FR-V3: a right check on a transparent form outside divergent slots starts on the 4 d rung, not next day.
+    const p = parseCardId(cardId);
+    const fast = correct && content && p.type === "fm" && isFastTrackUnit(unitIdOfFm(cardId), content);
+    next.cards = { ...state.cards, [cardId]: { ...newCard(now), due: fast ? daysAfter(now, FAST_TRACK_DAYS) : nextDayStart(now) } };
+  }
   next.history = bumpDay(state.history, now, (d) => { d.cards += 1; });
   return next;
 }

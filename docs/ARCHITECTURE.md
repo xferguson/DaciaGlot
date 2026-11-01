@@ -64,6 +64,8 @@ test/*.test.mjs              # node --test; import from ../app/js/core/*
 
 `manifest.json` pack entries are paths relative to `baseUrl` (`"lexemes/core.json"`); each id in `levels` loads `levels/<id>.json`; `patterns.json` is always at the root. `indexContent(raw)` is the pure half: it takes `{ manifest, patterns, lexemes, sentences, levels }` (parsed JSON, packs flattened) and drops retired sentences only.
 
+`Lexeme.transparent` and `Pattern.divergent` (optional booleans, CONTENT_GUIDE §10) drive the Romance fast-track (FR-V3): see §6.2 step 2 and `applyCheck` in §8.
+
 The JSON shapes of `Sentence`, `Lexeme`, `Pattern` and `Level` are defined in CONTENT_GUIDE §2. They are not repeated here.
 
 ## 3. Cards
@@ -241,7 +243,7 @@ pickNewSentences(n, { focus /* {type, id} | {type, id}[] | null; focusList() nor
 ```
 
 1. **Candidates:** non-retired, unseen sentences whose `register` is in `settings.registers`, whose stage ≤ (the highest stage with any pattern at `seen`) + 1, and all of whose patterns have every prerequisite at ≥ `seen`. If no pattern is seen yet (cold start), only Stage 1 sentences are candidates.
-2. **Novelty** = the number of units in `unitsForSentence` not known. Drop the sentence if novelty is 0 or greater than 2. (Novelty-0 sentences are not introduced as new; they may appear later as extra `cz` practice in Phase 3+.)
+2. **Novelty** = the number of units in `unitsForSentence` not known. Drop the sentence if novelty is 0 or greater than 2, **not counting fast-track units** (T34, FR-V3: lexeme-form units of a `transparent` lexeme that no `divergent` pattern slot uses; `isFastTrackUnit(unit, content)` in `select.js`; pattern units never qualify). A sentence kept only thanks to free units scores as novelty 2. (Novelty-0 sentences are not introduced as new; they may appear later as extra `cz` practice in Phase 3+.)
 3. **Score:**
    - `+100` if novelty is 1, `+40` if it is 2.
    - `+50` if the sentence matches the focus.
@@ -310,7 +312,7 @@ inFocus(cardId, focus, content, state?) → boolean      // FR-S8: card's senten
 dueInFocus(state, content, now, focus) → string[]  // dueCards filtered by inFocus
 cardKeys(item, content) → Set<string>          // "s:<sentence>" (also the `from` sentence of a new `fm`), "l:<target lexeme>", "new" for a new lr
 spaceOut(queue, content) → QueueItem[]        // PRD FR-S11; buildSession applies it to every queue
-applyCheck(state, cardId, correct, unitsRequired, now, presentedId = cardId) → AppState  // FR-R2: immediate check of a new form: `enc` attempts, creates the `fm` card due `nextDayStart(now)` whatever the answer; no FSRS review
+applyCheck(state, cardId, correct, unitsRequired, now, presentedId = cardId, content = null) → AppState  // FR-R2: immediate check of a new form: `enc` attempts, creates the `fm` card due `nextDayStart(now)` whatever the answer, except (T34, FR-V3, needs `content`) a right check of a fast-track form is due `FAST_TRACK_DAYS` (4) days later; no FSRS review
 placeChecks(queue) → QueueItem[]              // FR-R2 (T31): each check ≥ CHECK_GAP (8) cards after its lr/paradigm, never next to another check; too short → end
 checkBlanks(sentence, forms) → {cardId, tokenIndex, presentedId}[]  // T31: the tokens to blank for a combined check, in sentence order
 nextDayStart(now) → number                    // start of the next local day (ms)

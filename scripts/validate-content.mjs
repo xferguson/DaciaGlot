@@ -85,6 +85,10 @@ export function validateContent(raw, { fileOf = new Map(), phase = 1 } = {}) {
     }
   }
 
+  // Rule 13 — transparent (lexeme) and divergent (pattern) are optional booleans
+  for (const l of lexemes) if (l.transparent !== undefined && typeof l.transparent !== "boolean") err(l, "lexemes", 13, `transparent must be a boolean, got ${JSON.stringify(l.transparent)}`);
+  for (const p of patterns) if (p.divergent !== undefined && typeof p.divergent !== "boolean") err(p, "patterns.json", 13, `divergent must be a boolean, got ${JSON.stringify(p.divergent)}`);
+
   // Rule 6 — requires: known, same-or-lower stage, acyclic
   for (const p of patterns) {
     for (const r of p.requires ?? []) {
@@ -218,7 +222,7 @@ const SINGLE_HEAD_PATTERNS = new Set(["be-pres", "have-pres", "neg-nu"]);
  * @param {{patterns: object[], lexemes: object[], sentences: object[], levels: object[]}} raw
  */
 export function computeCoverage({ patterns, lexemes, sentences, levels }) {
-  const patRows = patterns.map((p) => ({ id: p.id, sentences: 0, heads: new Set(), glueCloze: 0 }));
+  const patRows = patterns.map((p) => ({ id: p.id, divergent: !!p.divergent, sentences: 0, heads: new Set(), glueCloze: 0 }));
   const patRow = new Map(patRows.map((r) => [r.id, r]));
   const sitRows = new Map(SITUATIONS.map((id) => [id, { id, sentences: 0 }]));
   const canDos = levels.flatMap((lv) => (lv.canDos ?? []).map((c) => ({ ...c, level: lv.id })));
@@ -240,7 +244,7 @@ export function computeCoverage({ patterns, lexemes, sentences, levels }) {
     }
   }
   const patternsOut = patRows.map((r) => ({
-    id: r.id, sentences: r.sentences, heads: r.heads.size, glueCloze: r.glueCloze,
+    id: r.id, divergent: r.divergent, sentences: r.sentences, heads: r.heads.size, glueCloze: r.glueCloze,
     low: r.sentences < TARGETS.patternSentences || (!SINGLE_HEAD_PATTERNS.has(r.id) && r.heads.size < TARGETS.patternHeads),
   }));
   const situations = [...sitRows.values()].map((r) => ({ ...r, low: r.sentences < TARGETS.situationSentences }));
@@ -250,7 +254,9 @@ export function computeCoverage({ patterns, lexemes, sentences, levels }) {
     .map((l) => ({ id: l.id, sentences: lexCount.get(l.id).size }));
   const byId = new Map(sentences.filter((s) => !s.retired).map((s) => [s.id, s]));
   const families = [...findFamilies(byId.values())].map(([id, members]) => ({ id, members: members.map((m) => byId.get(m).ro) }));
-  return { patterns: patternsOut, situations, canDos: canDosOut, thinLexemes, families };
+  const live = lexemes.filter((l) => !l.retired);
+  const transparent = { count: live.filter((l) => l.transparent).length, total: live.length };
+  return { transparent, patterns: patternsOut, situations, canDos: canDosOut, thinLexemes, families };
 }
 
 /** Render the coverage statistics as Markdown tables; below-target rows are marked ⚠. */
@@ -261,7 +267,8 @@ export function coverageReport(raw) {
   return [
     "## Content coverage",
     "",
-    table("Patterns", ["Pattern", "Sentences", "Head lexemes", "Glue clozes"], cov.patterns.map((r) => [mark(r) + r.id, r.sentences, r.heads, r.glueCloze])),
+    table("Patterns", ["Pattern", "Divergent", "Sentences", "Head lexemes", "Glue clozes"], cov.patterns.map((r) => [mark(r) + r.id, r.divergent ? "yes" : "", r.sentences, r.heads, r.glueCloze])),
+    `Transparent lexemes (FR/IT/ES/PT guessable): ${cov.transparent.count} of ${cov.transparent.total} (${Math.round((100 * cov.transparent.count) / Math.max(1, cov.transparent.total))}%); divergent patterns: ${cov.patterns.filter((r) => r.divergent).length} of ${cov.patterns.length}.\n`,
     table("Situations", ["Situation", "Sentences"], cov.situations.map((r) => [mark(r) + r.id, r.sentences])),
     table("Can-dos", ["Can-do", "Level", "Sentences"], cov.canDos.map((r) => [mark(r) + r.id, r.level, r.sentences])),
     cov.families.length

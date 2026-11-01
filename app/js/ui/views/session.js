@@ -253,7 +253,7 @@ export function render(root, ctx) {
         const wrong = [];
         for (const b of blanks) {
           const ok = okAt.get(b.tokenIndex) ?? r.result !== "wrong";
-          ctx.state = applyCheck(ctx.state, b.cardId, ok, unitsRequiredForCard(b.presentedId, ctx.content), now, b.presentedId);
+          ctx.state = applyCheck(ctx.state, b.cardId, ok, unitsRequiredForCard(b.presentedId, ctx.content), now, b.presentedId, ctx.content);
           if (!ok) wrong.push(b.cardId);
         }
         ctx.store.save(ctx.state);

@@ -403,3 +403,23 @@ test("review queue: one due card per sentence and per head lexeme; the buried st
   assert.ok(queue.length < ids.length);
   assert.equal(dueCards(st, c2, NOW).length, 4, "buried cards are still due");
 });
+
+test("applyCheck (FR-V3): right check on a transparent form starts on the 4 d rung; wrong or divergent stays next day", () => {
+  const lexemes = [
+    { id: "tp", lemma: "tp", pos: "noun", gloss: "tp", freq: 1, transparent: true },
+    { id: "dv", lemma: "dv", pos: "noun", gloss: "dv", freq: 2, transparent: true },
+    { id: "op", lemma: "op", pos: "noun", gloss: "op", freq: 3 },
+  ];
+  const patterns = [{ id: "hard", name: "hard", stage: 1, level: "A1", requires: [], minLexemesForProducing: 5, slotLabel: "h", divergent: true }];
+  const s = sentence("s0", "tp0 dv0 op0", [{ lex: "tp", form: "base" }, { lex: "dv", form: "base", pattern: "hard" }, { lex: "op", form: "base" }], { patterns: ["hard"] });
+  const content = makeContent([s], lexemes, patterns);
+  const run = (lex, ok) => applyCheck(state(), `fm:${lex}:base`, ok, [{ u: `${lex}.base`, lx: lex }], NOW, "cz:s0:0", content).cards[`fm:${lex}:base`].due;
+  const fourDays = new Date(new Date(NOW).getFullYear(), new Date(NOW).getMonth(), new Date(NOW).getDate() + 4).getTime();
+  assert.equal(run("tp", true), fourDays);
+  assert.ok(run("tp", true) - NOW >= 3 * 24 * 36e5 + 1);
+  assert.equal(run("tp", false), nextDayStart(NOW));
+  assert.equal(run("dv", true), nextDayStart(NOW)); // divergent slot: never fast-tracked
+  assert.equal(run("op", true), nextDayStart(NOW)); // not transparent
+  // without content (old callers) nothing changes
+  assert.equal(applyCheck(state(), "fm:tp:base", true, [{ u: "tp.base", lx: "tp" }], NOW).cards["fm:tp:base"].due, nextDayStart(NOW));
+});
