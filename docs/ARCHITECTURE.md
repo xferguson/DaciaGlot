@@ -191,10 +191,17 @@ normalize(s) → string                         // PRD FR-A1  (normalize.js)
 stripDiacritics(s) → string                   // ă→a â→a î→i ș→s ț→t (normalize.js)
 tokenize(s) → string[]                        // split on whitespace; hyphenated clitic clusters stay ONE token
 checkAnswer(input, expected /* string */, accept /* string[] */) →
-  { result: "correct"|"correct-diacritics"|"wrong",
-    diff: Array<{ token: string, status: "ok"|"wrong"|"missing"|"diacritic" }>, // over EXPECTED tokens
+  { result: "correct"|"correct-diacritics"|"correct-typo"|"wrong",
+    diff: Array<{ token: string, status: "ok"|"wrong"|"missing"|"diacritic"|"typo" }>, // over EXPECTED tokens
     extra: string[] }                          // input tokens not aligned
+// 4th arg `{ avoid?: string[] }` (T35, FR-A6): other surface forms of the same lexemes (`cards.js` `lexemeForms`).
+// One edit (insert/delete/substitute/adjacent swap) in an aligned single token of ≥ 5 letters is `typo`; the whole answer is
+// `correct-typo` (graded like `correct-diacritics`). A typed word that is in `avoid` is another form, not a slip → `wrong`.
+tileOptions(sentence, content, rng, ro?) → string[]   // cards.js: target tokens (lowercase, no end punctuation) + 2–4 same-lexeme distractors, shuffled; `ro` overrides the target (a transform result)
+lexemeForms(sentence, content) → string[]             // cards.js: every form of every lexeme in the sentence (the `avoid` list)
 ```
+
+**Answer modes (T35, FR-V4).** `settings.answerMode` is `"speak"` (default) | `"tiles"` | `"type"`; `settings.autoAdvance` (default `true`). `ui/components/answer-mode.js` exports `getMode`, `tapDiff(words, tapped)` (a checkAnswer-shaped diff with the tapped words `wrong`, which `erMisses` accepts), `wordsOf`, `modeSwitch`, `mountAnswer`; `tiles.js` exports `tileBuilder`. `er`/`xf`/`sb` cards take `onSetting(patch)` and `rng`. `nextButtons(actions, {canRate, onPick, autoAdvance: {after, cancelOn}})` clicks the default button after `after` plus a pause unless the learner touches the card.
 
 **Equivalence table** (`equivalences.js`), applied per token before comparison. Each row is a set of interchangeable spellings. A row may be one token or a two-token span:
 

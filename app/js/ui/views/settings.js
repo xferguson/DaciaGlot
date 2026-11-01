@@ -28,6 +28,9 @@ export function render(root, ctx) {
       <input id="rate" type="range" min="0.5" max="1.2" step="0.05">
       <button class="btn secondary" data-test>Test voice</button>
       <label class="check"><input id="autoplay" type="checkbox"> Autoplay audio</label>
+      <label for="answerMode">Answer sentences by</label>
+      <select id="answerMode"><option value="speak">Saying it, then self-grade</option><option value="tiles">Word tiles</option><option value="type">Typing</option></select>
+      <label class="check"><input id="autoAdvance" type="checkbox"> Move on by itself after a correct answer</label>
     </section>
     <section class="card">
       <h2>Your data</h2>
@@ -68,6 +71,10 @@ export function render(root, ctx) {
   q("[data-test]").addEventListener("click", () => speak("Bună dimineața, ce mai faci?", { rate: st().settings.ttsRate }));
   q("#autoplay").checked = s0.autoplay;
   q("#autoplay").addEventListener("change", (e) => update({ autoplay: e.target.checked }));
+  q("#answerMode").value = s0.answerMode ?? "speak";
+  q("#answerMode").addEventListener("change", (e) => update({ answerMode: e.target.value }));
+  q("#autoAdvance").checked = s0.autoAdvance !== false;
+  q("#autoAdvance").addEventListener("change", (e) => update({ autoAdvance: e.target.checked }));
 
   const esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   function renderFlags() {

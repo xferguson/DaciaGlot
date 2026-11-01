@@ -526,3 +526,48 @@ export function isUnlocked(cardId, state, content) {
   if (p.type === "er") return erUnlocked(sentence, state);
   return false;
 }
+
+// ---- Word tiles and typo guard (FR-D6, T35) ----
+
+const tileText = (t) => String(t).toLowerCase().replace(/[.,!?;:"“”„]+$/g, "").trim();
+
+/** Every surface form of every lexeme in the sentence's tokens, lowercased: a typed word in this set is another form, not a slip. */
+export function lexemeForms(sentence, content) {
+  const out = new Set();
+  for (const t of sentence.tokens) {
+    for (const u of t.units ?? []) {
+      const lex = content.lexemes?.get?.(u.lex);
+      for (const f of Object.values(lex?.forms ?? {})) out.add(tileText(f));
+    }
+  }
+  return [...out];
+}
+
+/**
+ * Tiles for building a sentence: the target tokens (lowercase, no end punctuation, in order of appearance) plus 2–4
+ * distractors, other forms of the same lexemes, all shuffled. `ro` overrides the target (a transform's result). Distractors are never equal to a target token.
+ */
+export function tileOptions(sentence, content, rng = Math.random, ro = null) {
+  const targets = (ro == null ? sentence.tokens.map((t) => t.t) : tokenize(ro)).map(tileText);
+  const taken = new Set(targets);
+  const pool = [];
+  for (const t of sentence.tokens) {
+    for (const u of t.units ?? []) {
+      const lex = content.lexemes?.get?.(u.lex);
+      for (const f of Object.values(lex?.forms ?? {})) {
+        const x = tileText(f);
+        if (x && !/\s/.test(x) && !taken.has(x)) { taken.add(x); pool.push(x); }
+      }
+    }
+  }
+  const shuffle = (a) => {
+    const r = [...a];
+    for (let i = r.length - 1; i > 0; i--) {
+      const j = Math.floor(rng() * (i + 1));
+      [r[i], r[j]] = [r[j], r[i]];
+    }
+    return r;
+  };
+  const want = 2 + Math.floor(rng() * 3);
+  return shuffle([...targets, ...shuffle(pool).slice(0, want)]);
+}

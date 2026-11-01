@@ -215,7 +215,7 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
 
 ## EXP-09 · Faster answers · [T35](tasks/T35-faster-answers.md)
 
-- **Status:** planned
+- **Status:** live since 2026-11-01
 - **Complaint:** typing is the slowest step, mostly on a phone.
 - **Hypothesis:** letting the owner answer production cards by **saying the sentence aloud and self-grading** (default), building it from **word tiles**, or **lenient typing** that moves on automatically when right, roughly halves the time per card without losing production. Speaking aloud is also closest to the real goal.
 - **Change:** an answer mode per card (`speak` / `tiles` / `type`, default `speak` on whole-sentence cards) with a quick switch on the card. Speak: English prompt → say it → reveal (with audio) → tap any words you got wrong (part-level credit via `erMisses`) or "All right". Tiles: the sentence's tokens plus distractor forms of the same lexemes. Type: a one-letter typo in a long word counts as correct (shown), and a correct answer auto-advances after a short pause.

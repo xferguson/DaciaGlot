@@ -131,3 +131,41 @@ test('empty input is wrong with all tokens missing', () => {
   assert.equal(r.result, 'wrong');
   assert.deepEqual(statuses(r), ['missing', 'missing']);
 });
+
+test('typo: one edit in a long token is correct-typo, shown as typo', () => {
+  const r = checkAnswer('Eu locuiesti aici', 'Eu locuiești aici', []);
+  assert.equal(r.result, 'correct-diacritics', 'diacritic-only slip stays diacritics');
+  const t = checkAnswer('Eu locuiestte aici', 'Eu locuiește aici', []);
+  assert.equal(t.result, 'correct-typo');
+  assert.deepEqual(statuses(t), ['ok', 'typo', 'ok']);
+  for (const typed of ['Eu locuiestte aici', 'Eu locuiest aici', 'Eu locuiesre aici', 'Eu locuietse aici']) {
+    assert.equal(checkAnswer(typed, 'Eu locuiește aici', []).result, 'correct-typo', typed);
+  }
+});
+
+test('typo: two edits are wrong', () => {
+  assert.equal(checkAnswer('Eu locuiest aicii', 'Eu locuiește aici', []).result, 'wrong');
+  assert.equal(checkAnswer('Eu locxxeste aici', 'Eu locuiește aici', []).result, 'wrong');
+});
+
+test('typo: another form of the same lexeme is not a slip', () => {
+  const avoid = ['locuiesc', 'locuiești', 'locuiește', 'locuim', 'locuiți', 'locuiesc'];
+  assert.equal(checkAnswer('Ea locuiesc acasă', 'Ea locuiește acasă', [], { avoid }).result, 'wrong');
+  assert.equal(checkAnswer('Ea locuiesc acasă', 'Ea locuiește acasă', []).result, 'wrong', '2 edits anyway');
+  // a one-edit neighbour that is a real other form
+  assert.equal(checkAnswer('Ei locuiti acum', 'Ei locuiți acum', []).result, 'correct-diacritics');
+  assert.equal(checkAnswer('Vedeti casele', 'Vedeți casa', [], { avoid: ['casele'] }).result, 'wrong');
+  assert.equal(checkAnswer('Am casae', 'Am case', [], { avoid: [] }).result, 'wrong', 'short token: no tolerance');
+});
+
+test('typo: short tokens are never tolerated', () => {
+  assert.equal(checkAnswer('Am pern', 'Am parc', []).result, 'wrong');
+  assert.equal(checkAnswer('Eu sut', 'Eu sunt', []).result, 'wrong', 'four letters');
+  assert.equal(checkAnswer('Vei veni', 'Vei vini', []).result, 'wrong');
+});
+
+test('typo: an avoided adjacent form inside a long token', () => {
+  assert.equal(checkAnswer('Avem timpp', 'Avem timp', []).result, 'wrong', 'expected is short');
+  assert.equal(checkAnswer('Avem problemee', 'Avem probleme', []).result, 'correct-typo');
+  assert.equal(checkAnswer('Avem problemee', 'Avem probleme', [], { avoid: ['problemee'] }).result, 'wrong');
+});

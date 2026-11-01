@@ -163,6 +163,10 @@ export function render(root, ctx) {
       content: ctx.content,
       tts: ctx.tts,
       settings: ctx.state.settings,
+      onSetting(patch) {
+        ctx.state = { ...ctx.state, settings: { ...ctx.state.settings, ...patch } };
+        ctx.store.save(ctx.state);
+      },
       onResult(r) {
         const grade = gradeFromResult(r);
         const now = Date.now();
