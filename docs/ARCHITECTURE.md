@@ -207,7 +207,7 @@ tileOptions(sentence, content, rng, ro?) → string[]   // cards.js: target toke
 lexemeForms(sentence, content) → string[]             // cards.js: every form of every lexeme in the sentence (the `avoid` list)
 ```
 
-**Answer modes (T35, FR-V4).** `settings.answerMode` is `"speak"` (default) | `"tiles"` | `"type"`; `settings.autoAdvance` (default `true`). `ui/components/answer-mode.js` exports `getMode`, `tapDiff(words, tapped)` (a checkAnswer-shaped diff with the tapped words `wrong`, which `erMisses` accepts), `wordsOf`, `modeSwitch`, `mountAnswer`; `tiles.js` exports `tileBuilder`. `er`/`xf`/`sb` cards take `onSetting(patch)` and `rng`. `nextButtons(actions, {canRate, onPick, autoAdvance: {after, cancelOn}})` clicks the default button after `after` plus a pause unless the learner touches the card.
+**Answer modes (T35, FR-V4).** `settings.answerMode` is `"speak"` (default) | `"tiles"` | `"type"`. `ui/components/answer-mode.js` exports `getMode`, `tapDiff(words, tapped)` (a checkAnswer-shaped diff with the tapped words `wrong`, which `erMisses` accepts), `wordsOf`, `modeSwitch`, `mountAnswer`; `tiles.js` exports `tileBuilder`. `er`/`xf`/`sb` cards take `onSetting(patch)` and `rng`. `nextButtons(actions, {canRate, onPick})` never advances by itself: **no auto-advance anywhere** (owner preference, 2026-11-01).
 
 **Equivalence table** (`equivalences.js`), applied per token before comparison. Each row is a set of interchangeable spellings. A row may be one token or a two-token span:
 

@@ -133,10 +133,10 @@ export const RATINGS = [["hard", "Hard"], ["medium", "Medium"], ["easy", "Easy"]
 
 /**
  * Append the buttons that end a card to `actions`. With `canRate` (correct on the first try, no hint)
- * they are Hard · Medium · Easy and each calls `onPick(rating)` straight away (never auto-advanced); otherwise a single
- * Continue calls `onPick(null)`. Focuses the default button so Enter moves on.
+ * they are Hard · Medium · Easy and each calls `onPick(rating)` straight away; otherwise a single
+ * Continue calls `onPick(null)`. Focuses the default button so Enter moves on. Never advances by itself (owner preference).
  */
-export function nextButtons(actions, { canRate, onPick, autoAdvance = null }) {
+export function nextButtons(actions, { canRate, onPick }) {
   const make = (label, cls, rating) => {
     const b = Object.assign(document.createElement("button"), { type: "button", className: cls, textContent: label });
     b.addEventListener("click", () => {
@@ -160,22 +160,4 @@ export function nextButtons(actions, { canRate, onPick, autoAdvance = null }) {
     def = buttons[1];
   }
   def.focus();
-  // A rating screen waits for the learner: auto-clicking the default would pick "Medium" for them and
-  // skip the screen before it can be tapped. Only the single Continue button may move on by itself.
-  if (autoAdvance && !canRate) {
-    // FR-V4: a fully correct answer moves on once the sentence has been heard; touching the card stays put.
-    let armed = true;
-    const stay = () => {
-      armed = false;
-      note.style.visibility = "hidden"; // keep its space: removing it would shift buttons mid-tap and swallow the click
-    };
-    const note = Object.assign(document.createElement("p"), { className: "muted auto-note", textContent: "Moving on… tap to stay" });
-    actions.append(note);
-    actions.addEventListener("pointerdown", stay, { once: true });
-    autoAdvance.cancelOn?.addEventListener("pointerdown", stay, { once: true });
-    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
-    Promise.race([Promise.resolve(autoAdvance.after), wait(8000)])
-      .then(() => wait(autoAdvance.pauseMs ?? 1200))
-      .then(() => { if (armed && def.isConnected && !def.disabled) def.click(); });
-  }
 }

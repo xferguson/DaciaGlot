@@ -198,6 +198,10 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
 - **Rollback:** restore the 4-day `er` gate and turn off composite carriers (easy forms go back to single `fm` reviews; schedules are unaffected).
 - **Observations:** _none yet_
 
+## Owner preferences (standing)
+
+- **No auto-advance, ever (2026-11-01).** The app must never move to the next card by itself. It cut off audio the owner wanted to hear and removed the chance to tap words in the sentence to turn them off (claims). Every card ends on an explicit Continue or Hard/Medium/Easy tap. Removed in 0.19.2, with the `autoAdvance` setting; do not reintroduce.
+
 ## EXP-08 · Fast intake, Romance fast-track · [T33](tasks/T33-fast-intake.md), [T34](tasks/T34-romance-fast-track.md)
 
 - **Status:** live since 2026-11-01 (T33 and T34)
@@ -218,7 +222,7 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
 - **Status:** live since 2026-11-01
 - **Complaint:** typing is the slowest step, mostly on a phone.
 - **Hypothesis:** letting the owner answer production cards by **saying the sentence aloud and self-grading** (default), building it from **word tiles**, or **lenient typing** that moves on automatically when right, roughly halves the time per card without losing production. Speaking aloud is also closest to the real goal.
-- **Change:** an answer mode per card (`speak` / `tiles` / `type`, default `speak` on whole-sentence cards) with a quick switch on the card. Speak: English prompt → say it → reveal (with audio) → tap any words you got wrong (part-level credit via `erMisses`) or "All right". Tiles: the sentence's tokens plus distractor forms of the same lexemes. Type: a one-letter typo in a long word counts as correct (shown), and a correct answer auto-advances after a short pause.
+- **Change:** an answer mode per card (`speak` / `tiles` / `type`, default `speak` on whole-sentence cards) with a quick switch on the card. Speak: English prompt → say it → reveal (with audio) → tap any words you got wrong (part-level credit via `erMisses`) or "All right". Tiles: the sentence's tokens plus distractor forms of the same lexemes. Type: a one-letter typo in a long word counts as correct (shown), and (auto-advance was removed 2026-11-01; see Owner preferences).
 - **Expected felt difference:** cards take a few seconds; you're speaking more.
 - **Check-in questions:**
   1. Which mode did you end up using most? Where?

@@ -85,7 +85,7 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
     actions.replaceChildren();
     if (spoke) slots.input.replaceChildren();
     hintLine.textContent = "";
-    const heard = spoke ? Promise.resolve() : speak(t.ro);
+    if (!spoke) speak(t.ro);
     renderFeedback(slot, {
       result,
       parts: partsFor([], diff),
@@ -94,7 +94,6 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
     const clean = result !== "wrong" && attempts === 1 && !usedHint;
     nextButtons(actions, {
       canRate: clean,
-      autoAdvance: clean && settings.autoAdvance !== false ? { after: heard, cancelOn: slot } : null,
       onPick: (rating) => onResult({ result, usedHint, attemptNo: attempts, rating }),
     });
   }

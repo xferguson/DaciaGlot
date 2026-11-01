@@ -82,17 +82,14 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
     });
     if (!ok) btn.classList.add("wrong");
     const result = ok ? "correct" : "wrong";
-    const heard = speak(sentence.ro);
+    speak(sentence.ro);
     renderFeedback(slot, {
       result,
       parts: partsFor(sentence.tokens, sentence.ro.split(/\s+/).map((token) => ({ token, status: "ok" }))),
       en: sentence.en,
     });
     nextButtons(actions, {
-      canRate: false, // T33: one tap. A correct pick plays the sentence once and moves on (≤ 2 s); a wrong one waits.
-      autoAdvance: ok && settings.autoAdvance !== false
-        ? { after: Promise.race([Promise.resolve(heard), new Promise((r) => setTimeout(r, 1700))]), pauseMs: 300, cancelOn: slot }
-        : null,
+      canRate: false, // one tap; never moves on by itself
       onPick: (rating) => onResult({ result, usedHint: false, attemptNo: 1, rating }),
     });
   }

@@ -16,18 +16,20 @@ const setup = (opts) => {
 };
 const flush = async (ms) => { for (let i = 0; i < 5; i++) { await Promise.resolve(); mock.timers.tick(ms); } await Promise.resolve(); };
 
-test("bug 1: a rating screen never auto-advances before the learner picks", async () => {
-  const { picks } = setup({ canRate: true, autoAdvance: { after: Promise.resolve() } });
-  await flush(20000);
-  assert.deepEqual(picks, [], "must wait for Hard/Medium/Easy");
+test("nothing ever advances by itself, however long it waits", async () => {
+  for (const canRate of [true, false]) {
+    const { picks } = setup({ canRate });
+    await flush(60000);
+    assert.deepEqual(picks, [], "must wait for the learner");
+  }
   mock.timers.reset();
 });
 
-test("bug 2: a pointerdown on the card does not remove or move the rating buttons' neighbours before the click lands", async () => {
-  const { actions, picks, buttons } = setup({ canRate: true, autoAdvance: { after: Promise.resolve() } });
+test("a pointerdown on a rating button does not change the layout before the click lands", () => {
+  const { actions, picks, buttons } = setup({ canRate: true });
   const before = actions.children.length;
   const easy = buttons()[2];
-  easy.dispatch("pointerdown"); // finger down: layout must not change under it
+  easy.dispatch("pointerdown");
   assert.equal(actions.children.length, before);
   easy.click();
   assert.deepEqual(picks, ["easy"]);
@@ -40,12 +42,5 @@ test("every rating button fires exactly its rating", () => {
     buttons()[i].click();
     assert.deepEqual(picks, [r]);
   }
-  mock.timers.reset();
-});
-
-test("Continue (no rating) still auto-advances when asked to", async () => {
-  const { picks } = setup({ canRate: false, autoAdvance: { after: Promise.resolve() } });
-  await flush(20000);
-  assert.deepEqual(picks, [null]);
   mock.timers.reset();
 });
