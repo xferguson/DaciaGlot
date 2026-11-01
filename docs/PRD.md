@@ -167,6 +167,18 @@ From the 2026-10-30 owner discovery interview. Each requirement is an experiment
 | FR-R5 | **Sentence families.** Sentences differing only in forms of the same lexemes (ignoring subject pronouns) are introduced together as a paradigm (up to 3). Reviews probe one random member at a time and show at most one due card per family per session. (T29) | 3.5 |
 | FR-R6 | **Leipzig glosses on slot-building cards.** Each slot is labelled with its target form, `<gloss>.<GLOSS>` (e.g. `[be.PRS.2SG]`), falling back to the pattern label only when the form can't be resolved. (T30) | 3.5 |
 
+### 4.9 Pace (Phase 3.6)
+
+From the 2026-11-01 owner check-in: the app is too slow for an experienced polyglot who already speaks four Romance languages. Each requirement is an experiment in `docs/EXPERIMENTS.md`; its task fills in the details and updates any earlier FR it changes.
+
+| ID | Requirement | Phase |
+|---|---|---|
+| FR-V1 | **Easy becomes harder work.** A form is easy when claimed, last graded Easy, or at a ≥ 4-day gap. `er` unlocks when every cloze form is easy. Due easy forms are reviewed 2–4 at a time in one composite EN→RO sentence with part-level credit. (T32, EXP-07) | 3.6 |
+| FR-V2 | **Fast intake.** Learn mode delivers ~15–20 new items (forms or sentences) in ~10 minutes; a correct `lr` pick auto-advances; Mix mode keeps a floor of new material. (T33, EXP-08) | 3.6 |
+| FR-V3 | **Romance fast-track.** Content marks lexemes `transparent` (guessable from FR/IT/ES/PT) and patterns `divergent` (Romanian-specific). Transparent forms outside divergent patterns are free for the novelty cap and skip ahead after a right first check. (T34, EXP-08) | 3.6 |
+| FR-V4 | **Faster answers.** Production cards can be answered by speaking and self-grading per word, by word tiles, or by lenient typing; a correct answer auto-advances. (T35, EXP-09) | 3.6 |
+| FR-V5 | **Show the pace.** The session summary leads with new items and items per 10 minutes against a target; the dashboard shows weekly intake; Learn batch size adapts to pace and check accuracy. Local only. (T36, EXP-10) | 3.6 |
+
 ## 5. Non-functional requirements
 
 | ID | Requirement |
@@ -197,6 +209,7 @@ From the 2026-10-30 owner discovery interview. Each requirement is an experiment
 | **2 · Building sentences** ✅ | Pattern focus yields known lexemes in the new pattern first (test); no new sentence has novelty > 2 (test); `kf`, `xf` and `sb` cards work; flags open GitHub issues; ≥300 sentences across all 9 situations | T11–T17 |
 | **3 · Progress** ✅ | Dashboard shows A1 completion from the real state; can-dos become checkable; `er` cards work; the coverage report runs in CI with every A1 can-do having ≥5 sentences; 400–600 sentences | T18–T23 |
 | **3.5 · Less repetition** | Each FR-R experiment is live and has had ≥1 owner check-in logged in `docs/EXPERIMENTS.md` | T25–T30 |
+| **3.6 · Pace** | Each FR-V experiment is live and has had ≥1 owner check-in logged in `docs/EXPERIMENTS.md` | T32–T36 |
 | **4 · A2 pack** | Stage 3–4 content and A2 manifest; formal register; optional audio packs | epic E4 (tasks written when Phase 3 lands) |
 | **5 · Reading & personal** | Reading mode with tap-to-gloss feeding the selector; user-added sentences | epic E5 |
 

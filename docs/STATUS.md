@@ -35,7 +35,14 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [T30](tasks/T30-leipzig-slot-glosses.md) | Leipzig glosses on slot-building cards | 3.5 | none | done | ccr-089e3d24-6acdga | `cards.js` exports `LEIPZIG`, `leipzigFor`; `slotsFor` slots gained `gloss: string[]` (`[]` → UI falls back to `labels`). Optional `lemmaGloss` on lexemes (validator rule 12, also allows small-caps labels like `NEG`); set on 14 ambiguous/grammatical lexemes. CONTENT_GUIDE §9. APP_VERSION 0.8.1. Phone-width check done headless only. |
 | [T31](tasks/T31-spaced-combined-check.md) | One spaced, combined immediate check; silent cloze until answered | 3.5 | T26 | done | claude/language-learning-discovery-apqqgt | EXP-02 revise. `placeChecks`/`checkBlanks`/`CHECK_GAP` replace `glueChecks`; check items carry `forms`; `card-cloze.js` takes `blanks` and no longer autoplays (FR-D7). APP_VERSION 0.14.0. Headless only. |
 
+| [T32](tasks/T32-easy-compose-up.md) | Easy becomes harder work: composite reviews, whole sentence sooner | 3.6 | none | todo | | EXP-07; revises FR-R3 (EXP-03). |
+| [T33](tasks/T33-fast-intake.md) | Fast intake in Learn mode | 3.6 | T32 | todo | | EXP-08. Target 15–20 new items per ~10 min (owner's Memrise pace). |
+| [T34](tasks/T34-romance-fast-track.md) | Romance fast-track: transparent vs divergent material | 3.6 | T33 | todo | | EXP-08. Owner speaks FR/IT/ES/PT. Content flags can be authored before T33 lands. |
+| [T35](tasks/T35-faster-answers.md) | Faster answers: speak and self-grade, word tiles, lenient typing | 3.6 | none | todo | | EXP-09. Owner mostly uses a phone. |
+| [T36](tasks/T36-pace-meter.md) | Show the pace, adapt the batch | 3.6 | T33 | todo | | EXP-10. Local only; no telemetry. |
 **Phase 3.5 · Less repetition.** Every T25–T30 task is a product experiment logged in [`EXPERIMENTS.md`](EXPERIMENTS.md). When its PR merges, set the experiment's status to `live since <date>`.
+
+**Phase 3.6 · Pace.** From the 2026-11-01 check-in (EXPERIMENTS.md, EXP-07 to EXP-10). Same rule: when a task's PR merges, set its experiment to `live since <date>`.
 
 ## Manual activities (later)
 
@@ -61,4 +68,5 @@ Phase 1:  T01 T02 T03 T04 T05 T06   (all independent)
 Phase 2:  T11 ← T08 · T12 ← T08,T11 · T13 ← T11,T12 · T14 ← T08 · T15 ← T08,T11 · T16 ← T07 · T17 ← T09
 Phase 3:  T19 ← T11 · T18 ← T11,T19 · T20 ← T08,T15 · T21 ← T11 · T22 ← T02 · T23 ← T17,T19,T22
 Phase 3.5: T25 · T30 (parallel) · T26 ← T25 · T28 ← T25 · T27 ← T25,T26 · T29 ← T25,T26
+Phase 3.6: T32 · T35 (parallel) · T33 ← T32 · T34 ← T33 · T36 ← T33
 ```
