@@ -460,16 +460,21 @@ export const ER_PER_SESSION = 3;
 const DAY = 86400000;
 
 /**
- * FR-D6: the sentence has cloze units and each one is claimed (FR-R4) or its `fm` card has a scheduled gap
- * of ≥ 4 days (the second ladder rung).
+ * FR-V1 (T32): a form is *easy* when it is claimed (FR-R4), its `fm` card's last counted grade was Easy (`lastGrade` 4),
+ * or its scheduled gap (`due - lastReview`) is at least `ER_MIN_GAP_DAYS`. `now` is accepted for symmetry with the other
+ * state checks; the rule only reads the card.
  */
-export function erUnlocked(sentence, state) {
+export function isEasy(state, unit, _now) {
+  if (unit in (state.claimed ?? {})) return true;
+  const c = state.cards[fmIdForUnit(unit)];
+  if (!c || c.lastReview == null) return false;
+  return c.lastGrade === 4 || c.due - c.lastReview >= ER_MIN_GAP_DAYS * DAY;
+}
+
+/** FR-D6 / FR-R3: the sentence has cloze units and every one of them is easy (`isEasy`). */
+export function erUnlocked(sentence, state, now) {
   const units = clozeUnitIds(sentence);
-  return units.length > 0 && units.every((u) => {
-    if (u in (state.claimed ?? {})) return true;
-    const c = state.cards[fmIdForUnit(u)];
-    return !!c && c.lastReview != null && c.due - c.lastReview >= ER_MIN_GAP_DAYS * DAY;
-  });
+  return units.length > 0 && units.every((u) => isEasy(state, u, now));
 }
 
 /** Units an `er` card exercises, as `{u, lx}`: every unit of each cloze token, plus the pattern of each head unit. */

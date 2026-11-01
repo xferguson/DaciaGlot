@@ -160,6 +160,7 @@ export function render(root, ctx) {
     cardCleanup = draw(slot, {
       card: shown,
       sentence,
+      label: item.composite ? `Review · ${item.units.length} forms` : undefined,
       content: ctx.content,
       tts: ctx.tts,
       settings: ctx.state.settings,
@@ -170,7 +171,7 @@ export function render(root, ctx) {
         const isEr = p.type === "er";
         const units = unitsRequiredForCard(shown, ctx.content);
         ctx.state = isEr
-          ? applyErReview(ctx.state, item.cardId, grade, units, erMisses(sentence, r.diff), now, ctx.content, shown)
+          ? applyErReview(ctx.state, item.cardId, grade, units, erMisses(sentence, r.diff), now, ctx.content, shown, item.composite ? item.units : null)
           : applyReview(ctx.state, item.cardId, grade, units, now, ctx.content, shown);
         ctx.store.save(ctx.state);
         stats.cards++;

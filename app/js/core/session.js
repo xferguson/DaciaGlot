@@ -1,9 +1,9 @@
 // Session building, grading and review application (ARCHITECTURE §8). Pure: `now` and `rng` are injected.
 import { newCard, review } from "./fsrs.js";
-import { parseCardId, unitIdOfFm, fmIdForUnit, cardsForSentence, isUnlocked, newKfCards, newTransformCards, newErCards, pickPerSentence } from "./cards.js";
+import { parseCardId, unitIdOfFm, fmIdForUnit, cardsForSentence, isUnlocked, isEasy, newKfCards, newTransformCards, newErCards, pickPerSentence } from "./cards.js";
 import { unitsForSentence, isKnown, unitsRequiredForCard } from "./units.js";
 import { pickNewSentences, focusList, siblingsOf } from "./select.js";
-import { carriersFor } from "./carrier.js";
+import { carriersFor, pickComposite } from "./carrier.js";
 
 export const QUICK_CAP = 15;
 export const SEC_PER_REVIEW = 12;
@@ -307,6 +307,39 @@ export function buildSession(opts) {
   return { ...out, queue: placeChecks(spaceOut(out.queue, opts.content)) };
 }
 
+/** Seconds one queue item takes: a composite review (FR-V1) is a whole sentence, so twice a single card. */
+const itemSec = (q) => (q.composite ? 2 : 1) * SEC_PER_REVIEW;
+
+/**
+ * FR-V1 (T32): the due `fm` cards of easy forms are replaced by composite `er` items, greedily, until no composite
+ * of ≥ 2 forms is left; the rest stay single reviews. A composite sits where its first form was and drops a due
+ * `er:<sid>` for the same sentence (the composite is that review). Returns the new id list and `sid → units`.
+ */
+export function composeReviews(ids, state, content, now, rng, focus = null) {
+  const easy = ids.filter((id) => id.startsWith("fm:") && isEasy(state, unitIdOfFm(id), now));
+  const left = new Set(easy.map(unitIdOfFm));
+  const exclude = new Set();
+  const comps = new Map(); // sentenceId → units
+  const owner = new Map(); // unit → sentenceId
+  const allow = focus ? (sid) => inFocus(`er:${sid}`, focus, content, state) : null;
+  for (;;) {
+    const pick = pickComposite([...left], state, content, now, rng, { exclude, allow });
+    if (!pick) break;
+    comps.set(pick.sentenceId, pick.units);
+    exclude.add(pick.sentenceId);
+    for (const u of pick.units) { left.delete(u); owner.set(u, pick.sentenceId); }
+  }
+  const out = [];
+  const emitted = new Set();
+  for (const id of ids) {
+    if (id.startsWith("er:") && comps.has(id.slice(3))) continue;
+    const sid = id.startsWith("fm:") ? owner.get(unitIdOfFm(id)) : null;
+    if (!sid) { out.push(id); continue; }
+    if (!emitted.has(sid)) { emitted.add(sid); out.push(`er:${sid}`); }
+  }
+  return { ids: out, comps };
+}
+
 function composeSession({ mode, focus: rawFocus = null, state, content, now, rng, newSentenceIds }) {
   const focus = focusList(rawFocus).length ? focusList(rawFocus) : null;
   let focused = dueInFocus(state, content, now, focus);
@@ -315,16 +348,21 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
     focused = [...focused, ...outside];
   }
   const duePicked = pickPerSentence(focused);
-  const dueIds = burySiblings(onePerFamily(duePicked, content, rng), content);
-  const allDue = dueIds.map((cardId) => ({ cardId, isNew: false }));
+  const { ids: composed, comps } = composeReviews(onePerFamily(duePicked, content, rng), state, content, now, rng, focus);
+  const dueIds = burySiblings(composed, content);
+  const allDue = dueIds.map((cardId) => {
+    const units = cardId.startsWith("er:") ? comps.get(cardId.slice(3)) : null;
+    return units ? { cardId, isNew: false, composite: true, units } : { cardId, isNew: false };
+  });
+  const dueSec = (items) => items.reduce((n, q) => n + itemSec(q), 0);
   if (mode === "quick" || mode === "review") {
     const queue = mode === "quick" ? allDue.slice(0, QUICK_CAP) : allDue;
-    return { queue, estimateSec: queue.length * SEC_PER_REVIEW };
+    return { queue, estimateSec: dueSec(queue) };
   }
   const due = mode === "learn" ? [] : allDue;
-  const plan = mode === "mix" ? mixPlan(due.length, state.settings.newPerSession) : null;
+  const plan = mode === "mix" ? mixPlan(dueSec(due) / SEC_PER_REVIEW, state.settings.newPerSession) : null;
   if (plan && plan.newCount === 0 && !newSentenceIds) {
-    return { queue: due, estimateSec: due.length * SEC_PER_REVIEW, plan };
+    return { queue: due, estimateSec: dueSec(due), plan };
   }
   const want = plan ? plan.newCount : state.settings.newPerSession;
   let ids = newSentenceIds;
@@ -332,7 +370,7 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
     const pick = pickNewSentences(want, { focus, state, content, now, rng });
     if (pick.blocked) {
       const queue = due.slice();
-      return { queue, estimateSec: queue.length * SEC_PER_REVIEW, blocked: true, suggest: pick.suggest };
+      return { queue, estimateSec: dueSec(queue), blocked: true, suggest: pick.suggest };
     }
     ids = pick.sentences.length || focus ? pick.sentences : interimNewSentences(want, state, content);
     if (ids.length < want && Object.keys(state.seenSentences).length < COLD_START_SEEN) {
@@ -389,7 +427,7 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
   const taken = new Set([...busy, ...xf.map((x) => parseCardId(x.cardId).sentenceId)]);
   const er = newErCards(state, content, { skip: taken }).filter((id) => inFocus(id, focus, content, state)).map((cardId) => ({ cardId, isNew: true }));
   queue.push(...kf, ...xf, ...er);
-  const estimateSec = due.length * SEC_PER_REVIEW + (kf.length + xf.length + er.length) * SEC_PER_NEW
+  const estimateSec = dueSec(due) + (kf.length + xf.length + er.length) * SEC_PER_NEW
     + groups.reduce((sum, g) => sum + newSentenceSec(g.reduce((n, q) => n + (q.forms?.length ?? 0), 0)) + (g[0].members ? SEC_PER_PARADIGM_ROW * (g[0].members.length - 1) : 0), 0);
   return plan ? { queue, estimateSec, plan } : { queue, estimateSec };
 }
@@ -411,6 +449,37 @@ export function addMinutes(state, minutes, now) {
   return { ...state, history: bumpDay(state.history, now, (d) => { d.minutes += minutes; }) };
 }
 
+/** The `seenSentences` and `lexemeSentences` after the learner has met a sentence (`lr`, or a composite `er`). */
+function exposure(state, sentenceId, now, content) {
+  const out = {};
+  if (!(sentenceId in state.seenSentences)) out.seenSentences = { ...state.seenSentences, [sentenceId]: now };
+  const sentence = content?.sentences.get(sentenceId);
+  if (sentence) {
+    const ls = { ...state.lexemeSentences };
+    for (const t of sentence.tokens) {
+      for (const u of t.units) {
+        const cur = ls[u.lex] ?? [];
+        if (!cur.includes(sentenceId)) ls[u.lex] = [...cur, sentenceId];
+      }
+    }
+    out.lexemeSentences = ls;
+  }
+  return out;
+}
+
+/**
+ * One review of a card: FSRS keeps stability/difficulty (mastery reads them); from Good up the gap itself follows the
+ * ladder (FR-S1). `lastGrade` records the grade for `isEasy` (FR-V1). `prev` may be undefined (a new card).
+ */
+function scheduleCard(prev, grade, now) {
+  let card = review(prev ?? newCard(now), grade, now);
+  if (grade >= 3) {
+    const prevDays = prev?.lastReview != null ? Math.max(0, prev.due - prev.lastReview) / DAY_MS : 0;
+    card = { ...card, due: now + ladderDays(prevDays, grade) * DAY_MS };
+  }
+  return { ...card, lastGrade: grade };
+}
+
 /**
  * FSRS update (Medium/Easy gaps from `ladderDays`), attempts (production cards only, PRD FR-S3), `lr` exposure, day stats.
  * `unitsRequired` is `{u, lx}[]` from `unitsRequiredForCard`. `content` is only needed for `lr` exposure.
@@ -419,29 +488,12 @@ export function addMinutes(state, minutes, now) {
  */
 export function applyReview(state, cardId, grade, unitsRequired, now, content, presentedId = cardId) {
   const p = parseCardId(cardId);
-  const prev = state.cards[cardId];
-  let card = review(prev ?? newCard(now), grade, now);
-  if (grade >= 3) {
-    // FSRS keeps stability/difficulty (mastery reads them); the gap itself follows the ladder (FR-S1).
-    const prevDays = prev?.lastReview != null ? Math.max(0, prev.due - prev.lastReview) / DAY_MS : 0;
-    card = { ...card, due: now + ladderDays(prevDays, grade) * DAY_MS };
-  }
+  const card = scheduleCard(state.cards[cardId], grade, now);
   const next = { ...state, cards: { ...state.cards, [cardId]: card } };
   let isNewSentence = false;
   if (p.type === "lr") {
     isNewSentence = !(p.sentenceId in state.seenSentences);
-    if (isNewSentence) next.seenSentences = { ...state.seenSentences, [p.sentenceId]: now };
-    const sentence = content?.sentences.get(p.sentenceId);
-    if (sentence) {
-      const ls = { ...state.lexemeSentences };
-      for (const t of sentence.tokens) {
-        for (const u of t.units) {
-          const cur = ls[u.lex] ?? [];
-          if (!cur.includes(p.sentenceId)) ls[u.lex] = [...cur, p.sentenceId];
-        }
-      }
-      next.lexemeSentences = ls;
-    }
+    Object.assign(next, exposure(state, p.sentenceId, now, content));
   } else {
     // FR-R4, evidence wins: a missed EN→RO card takes back the claims on the forms it tested.
     if (p.type === "er" && grade === 1 && unitsRequired.some(({ u }) => u in (state.claimed ?? {}))) {
@@ -487,19 +539,33 @@ export function erMisses(sentence, diff) {
  * FR-D6/FR-S3: review an `er` card with part-level credit. The card itself is graded as `applyReview` does. Units of
  * missed tokens get a `c: 0` attempt and their `fm` card Again (created due now if it doesn't exist; a claim on it is
  * dropped); units of correct tokens get `c: 1` and keep their `fm` schedule. `misses` is `erMisses(...)`; without it
- * the whole card is graded. Returns a new state.
+ * the whole card is graded.
+ *
+ * `composite` (FR-V1, T32) is the list of due easy unit ids the card was built to review. Those that were answered
+ * correctly are reviewed on their own `fm` card too (Good, Easy when the learner rated Easy, Hard after a hint or
+ * retry); without `misses` a wrong card fails them all and any other grade passes them all. A composite on an
+ * unseen sentence also marks it seen. Returns a new state.
  */
-export function applyErReview(state, cardId, grade, unitsRequired, misses, now, content, presentedId = cardId) {
+export function applyErReview(state, cardId, grade, unitsRequired, misses, now, content, presentedId = cardId, composite = null) {
+  if (composite && !misses) {
+    misses = grade === 1 ? { missed: [...composite], ok: [], missedTokens: [] } : { missed: [], ok: [...composite], missedTokens: [] };
+  }
   if (!misses) return applyReview(state, cardId, grade, unitsRequired, now, content, presentedId);
   const clozeIds = new Set([...misses.missed, ...misses.ok]);
   const rest = unitsRequired.filter(({ u }) => !clozeIds.has(u));
   let next = applyReview(state, cardId, grade, rest, now, content, presentedId);
+  if (composite) Object.assign(next, exposure(next, parseCardId(cardId).sentenceId, now, content));
   const lxOf = new Map(unitsRequired.map(({ u, lx }) => [u, lx]));
   const missedSet = new Set(misses.missed);
   const cards = { ...next.cards };
   for (const u of misses.missed) {
     const id = fmIdForUnit(u);
-    cards[id] = cards[id] ? review(cards[id], 1, now) : newCard(now);
+    cards[id] = cards[id] ? { ...review(cards[id], 1, now), lastGrade: 1 } : { ...newCard(now), lastGrade: 1 };
+  }
+  const okGrade = grade >= 3 ? grade : grade === 2 ? 2 : 3;
+  for (const u of composite ?? []) {
+    if (missedSet.has(u) || !clozeIds.has(u)) continue;
+    cards[fmIdForUnit(u)] = scheduleCard(cards[fmIdForUnit(u)], okGrade, now);
   }
   const claimed = Object.fromEntries(Object.entries(next.claimed ?? {}).filter(([u]) => !missedSet.has(u)));
   const attempts = [
