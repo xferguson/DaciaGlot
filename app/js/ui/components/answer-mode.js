@@ -4,15 +4,11 @@ import { tileOptions } from "../../core/cards.js";
 import { answerInput } from "./answer-input.js";
 import { diacriticBar } from "./diacritic-bar.js";
 import { tileBuilder } from "./tiles.js";
+import { button } from "./button.js";
 
 export const MODES = [["speak", "Say it"], ["tiles", "Tiles"], ["type", "Type"]];
 
 const el = (tag, props = {}) => Object.assign(document.createElement(tag), props);
-const button = (text, cls, onClick) => {
-  const b = el("button", { type: "button", className: cls, textContent: text });
-  b.addEventListener("click", onClick);
-  return b;
-};
 
 /** Pure: the saved mode, `speak` unless set to another known one. */
 export const getMode = (settings = {}) => (MODES.some(([m]) => m === settings.answerMode) ? settings.answerMode : "speak");

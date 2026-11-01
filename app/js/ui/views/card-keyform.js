@@ -6,6 +6,7 @@ import { audioButton } from "../components/audio-button.js";
 import { answerInput } from "../components/answer-input.js";
 import { diacriticBar } from "../components/diacritic-bar.js";
 import { renderFeedback, nextButtons, partsFor } from "../components/feedback.js";
+import { button } from "../components/button.js";
 
 /**
  * `sentence` is an already-seen sentence containing this form, or null (then the form alone is played).
@@ -41,15 +42,13 @@ export function renderCard(root, { card, sentence = null, content, tts, settings
   const slot = root.querySelector(".feedback-slot");
   const actions = root.querySelector(".actions");
 
-  const checkBtn = Object.assign(document.createElement("button"), { type: "button", className: "btn", textContent: "Check" });
-  const hintBtn = Object.assign(document.createElement("button"), { type: "button", className: "btn secondary", textContent: "Hint" });
-  actions.append(hintBtn, checkBtn);
-  checkBtn.addEventListener("click", () => check());
-  hintBtn.addEventListener("click", () => {
+  const checkBtn = button("Check", "btn", () => check());
+  const hintBtn = button("Hint", "btn secondary", () => {
     usedHint = true;
     hintLine.textContent = `Hint: ${[...expected][0]}…`;
     input.focus();
   });
+  actions.append(hintBtn, checkBtn);
 
   let attempts = 0;
   let usedHint = false;

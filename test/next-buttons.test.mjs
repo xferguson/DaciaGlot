@@ -44,3 +44,26 @@ test("every rating button fires exactly its rating", () => {
   }
   mock.timers.reset();
 });
+
+test("a Continue whose action throws re-enables, so the learner is never stuck", () => {
+  const errs = mock.method(console, "error", () => {});
+  let calls = 0;
+  const actions = document.createElement("div");
+  root.replaceChildren(actions);
+  nextButtons(actions, { canRate: false, onPick: () => { calls++; if (calls === 1) throw new Error("boom"); } });
+  const go = actions.querySelectorAll("button")[0];
+  go.click();
+  assert.equal(go.disabled, false, "re-enabled after the failure");
+  go.click();
+  assert.equal(calls, 2, "a second tap runs again");
+  assert.equal(go.disabled, true, "disabled once it has moved on");
+  errs.mock.restore();
+});
+
+test("a double tap on Continue fires once", () => {
+  const { buttons, picks } = setup({ canRate: false });
+  buttons()[0].click();
+  buttons()[0].click();
+  assert.deepEqual(picks, [null]);
+  mock.timers.reset();
+});

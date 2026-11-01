@@ -1,5 +1,6 @@
 // Light feedback (PRD P-8): the expected sentence with wrong tokens marked, no explanations.
 import { labelFor } from "../../core/cards.js";
+import { advanceButton } from "./button.js";
 
 /**
  * Claims (FR-R4): the view that owns the state registers how a tapped token reads and changes claims.
@@ -137,14 +138,7 @@ export const RATINGS = [["hard", "Hard"], ["medium", "Medium"], ["easy", "Easy"]
  * Continue calls `onPick(null)`. Focuses the default button so Enter moves on. Never advances by itself (owner preference).
  */
 export function nextButtons(actions, { canRate, onPick }) {
-  const make = (label, cls, rating) => {
-    const b = Object.assign(document.createElement("button"), { type: "button", className: cls, textContent: label });
-    b.addEventListener("click", () => {
-      for (const x of actions.querySelectorAll("button")) x.disabled = true;
-      onPick(rating);
-    }, { once: true });
-    return b;
-  };
+  const make = (label, cls, rating) => advanceButton(label, cls, () => onPick(rating), actions);
   let def;
   if (!canRate) {
     def = make("Continue", "btn block", null);
