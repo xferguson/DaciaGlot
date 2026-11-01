@@ -33,7 +33,8 @@
     "level": "A1",
     "requires": [],
     "minLexemesForProducing": 6,
-    "slotLabel": "the"
+    "slotLabel": "the",
+    "divergent": true
   },
   {
     "id": "wh-q",
@@ -73,7 +74,8 @@
       "pres-12-high"
     ],
     "minLexemesForProducing": 5,
-    "slotLabel": "want to"
+    "slotLabel": "want to",
+    "divergent": true
   },
   {
     "id": "meta-basic",
@@ -104,7 +106,8 @@
       "pres-full"
     ],
     "minLexemesForProducing": 6,
-    "slotLabel": "present"
+    "slotLabel": "present",
+    "divergent": true
   },
   {
     "id": "noun-pl",
@@ -115,7 +118,8 @@
       "def-sg"
     ],
     "minLexemesForProducing": 6,
-    "slotLabel": "plural"
+    "slotLabel": "plural",
+    "divergent": true
   },
   {
     "id": "def-pl",
@@ -126,7 +130,8 @@
       "noun-pl"
     ],
     "minLexemesForProducing": 6,
-    "slotLabel": "the (pl)"
+    "slotLabel": "the (pl)",
+    "divergent": true
   },
   {
     "id": "fut-o-sa",
@@ -137,7 +142,8 @@
       "modal-sa-12"
     ],
     "minLexemesForProducing": 6,
-    "slotLabel": "future"
+    "slotLabel": "future",
+    "divergent": true
   },
   {
     "id": "clitic-acc",
@@ -148,7 +154,8 @@
       "perfect-compus"
     ],
     "minLexemesForProducing": 6,
-    "slotLabel": "them"
+    "slotLabel": "them",
+    "divergent": true
   },
   {
     "id": "clitic-dat",
@@ -159,7 +166,8 @@
       "clitic-acc"
     ],
     "minLexemesForProducing": 6,
-    "slotLabel": "to him"
+    "slotLabel": "to him",
+    "divergent": true
   },
   {
     "id": "mi-e-construction",
@@ -170,7 +178,8 @@
       "clitic-dat"
     ],
     "minLexemesForProducing": 6,
-    "slotLabel": "I feel"
+    "slotLabel": "I feel",
+    "divergent": true
   },
   {
     "id": "dem-colloq",

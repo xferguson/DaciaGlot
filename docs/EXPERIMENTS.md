@@ -200,7 +200,7 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
 
 ## EXP-08 · Fast intake, Romance fast-track · [T33](tasks/T33-fast-intake.md), [T34](tasks/T34-romance-fast-track.md)
 
-- **Status:** T33 shipped (live since 2026-11-01); T34 planned
+- **Status:** live since 2026-11-01 (T33 and T34)
 - **Complaint:** too few new things per session; the app treats a speaker of four Romance languages like a beginner. Memrise gives 10–20 new items in 5–10 minutes.
 - **Hypothesis:** a Learn batch built for 15–20 new items in about 10 minutes, recognition first with the first production test the next day, plus fast-tracking material a French/Italian/Spanish/Portuguese speaker can guess, gets the owner to Memrise pace and puts the repetition on what's genuinely Romanian.
 - **Change:** T33: Learn mode intake measured in *new items* (new forms + new sentences), target 15–20 per ~10 min; a lighter `lr` (one tap, auto-advance on a correct pick); Mix mode keeps a floor of new material instead of dropping to 0. T34: content marks lexemes and patterns as **transparent** (guessable from FR/IT/ES/PT) or **divergent** (Romanian-specific: enclitic article, cases, clitic doubling, `să` subjunctive, `o să` future, `mi-e`, neuter plurals). Transparent forms that pass their first check skip ahead on the ladder and count less toward the novelty cap; divergent patterns keep full repetition.

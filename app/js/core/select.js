@@ -4,6 +4,26 @@ import { allPatternStates } from "./mastery.js";
 
 const BAND = 5;
 
+const divergentCache = new WeakMap();
+/** T34: "<lex>.<form>" units that some sentence uses in a slot of a `divergent` pattern (never fast-tracked). */
+function divergentUnits(content) {
+  let set = divergentCache.get(content);
+  if (!set) {
+    set = new Set();
+    for (const s of content.sentences.values()) {
+      for (const t of s.tokens) for (const u of t.units) if (u.pattern && content.patterns.get(u.pattern)?.divergent) set.add(`${u.lex}.${u.form}`);
+    }
+    divergentCache.set(content, set);
+  }
+  return set;
+}
+
+/** T34: a lexeme-form unit of a `transparent` lexeme that no divergent pattern slot uses (FR-V3). Pattern units are never free. */
+export function isFastTrackUnit(unit, content) {
+  if (unit.startsWith("pat:")) return false;
+  return !!content.lexemes.get(unit.slice(0, unit.indexOf(".")))?.transparent && !divergentUnits(content).has(unit);
+}
+
 function shuffle(list, rng) {
   for (let i = list.length - 1; i > 0; i--) {
     const j = Math.floor(rng() * (i + 1));
@@ -72,12 +92,14 @@ export function pickNewSentences(n, { focus: rawFocus = null, state, content, no
     if (unmetFor(s).length) { blockedByPrereq.push(s); continue; }
     const units = unitsForSentence(s);
     const unknown = units.filter((u) => !known(u));
-    if (unknown.length === 0 || unknown.length > 2) continue;
+    // Fast-track units (transparent lexeme, non-divergent slot) don't count toward the novelty cap (FR-V3).
+    if (unknown.length === 0 || unknown.filter((u) => !isFastTrackUnit(u, content)).length > 2) continue;
     candidates.push({ s, units, unknown });
   }
 
   const score = ({ s, units, unknown }) => {
     let sc = unknown.length === 1 ? 100 : 40;
+    if (unknown.length > 2) sc = 40; // only possible through free (transparent) units
     const hit = matchedFocus(s, focus);
     if (hit) {
       sc += 50;

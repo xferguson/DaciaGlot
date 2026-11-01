@@ -45,6 +45,7 @@ Bump `contentVersion` (date + counter) in every PR that changes content.
 - **`pos`**: one of `verb | noun | adj | pron | det | adv | prep | conj | num | intj | aux | particle | phrase`.
 - **`freq`**: a frequency rank (1 = most frequent). It may be approximate, and it is used only for ordering.
 - **`trivial: true`**: set this for function words (*și, la, de, în, cu, pe, dar, că*). It means they count as known once seen.
+- **`transparent: true`** (optional): a speaker of French, Italian, Spanish or Portuguese would recognise the lemma **and** produce its forms by analogy (§10).
 
 **Form keys by part of speech** (include only what the sentences use, plus the `keyForms`):
 
@@ -71,6 +72,8 @@ Bump `contentVersion` (date + counter) in every PR that changes content.
   "slotLabel": "past"
 }
 ```
+
+`divergent: true` (optional) marks a Romanian-specific pattern that keeps full repetition even for transparent words (§10).
 
 `slotLabel` is the short English label slot-building shows for this pattern (`past`, `future`, `them`, `to him`, `not`, `would`, `want to`, …).
 
@@ -165,10 +168,11 @@ Adding an op requires updating this table **and** the UI instruction renderer in
 10. `canDo` references an unknown can-do. `level` doesn't exist in the manifest.
 11. A file under `app/js` or `app/css` is missing from the `sw.js` precache list.
 12. `lemmaGloss` (optional) is not one lowercase word or a dotted compound (`be`, `get.up`), or a small-caps label (`NEG`), of at most 16 characters.
+13. `transparent` (lexeme) and `divergent` (pattern), when present, are booleans.
 
 **Warnings:** a sentence with no `cloze` token; a sentence with no transforms (from Phase 2 on); `en` missing on a person transform; a lexeme with no sentences.
 
-**Coverage report** (`--coverage` flag, Phase 3): per pattern, situation and can-do, the sentence counts, plus the distinct head lexemes per pattern. Anything under target is flagged (pattern < 10 sentences or < 6 head lexemes; can-do < 5; situation < 10).
+**Coverage report** (`--coverage` flag, Phase 3): per pattern, situation and can-do, the sentence counts, plus the distinct head lexemes per pattern. The pattern table also shows which patterns are `divergent`, and a line gives the share of `transparent` lexemes. Anything under target is flagged (pattern < 10 sentences or < 6 head lexemes; can-do < 5; situation < 10).
 
 ## 5. Situations
 
@@ -243,3 +247,12 @@ Slot cards label each changed slot with a Leipzig-style gloss of the *wanted for
 - The form part comes from `LEIPZIG` in `app/js/core/cards.js` (`pres2sg → PRS.2SG`, `sgDef → SG.DEF`, `accShort → ACC.CL`). `base` and `short` add nothing.
 - Pronoun lexemes (`pron-<person><number>[-m|f]`) lead with person and number: `2SG.ACC.CL`.
 - If a result word can't be resolved to a lexeme form, the card falls back to the pattern's `slotLabel`.
+
+## 10. Transparent vs divergent material (EXP-08, FR-V3)
+
+The owner speaks FR/IT/ES/PT, so material they can guess should fly by and repetition should go to what is Romanian-specific.
+
+- **`transparent: true` on a lexeme** only if the meaning *and* the forms are guessable (*problemă, a lucra, important, server*). Leave it off when either surprises: *oraș, a locui, a găsi, frate* (irregular plural), false friends (*mai, firmă, carte*), irregular paradigms. **When unsure, leave it off.**
+- **`divergent: true` on a pattern**: `def-sg`, `def-pl`, `clitic-acc`, `clitic-dat`, `mi-e-construction`, `modal-sa-12`, `fut-o-sa`, `noun-pl`, `pres-ez-esc`, and any later case or vocative pattern. New patterns default to not divergent.
+- A form used in a **divergent slot** (a token unit whose `pattern` is divergent, e.g. the definite *orașul* in `def-sg`) is never fast-tracked, even if its lexeme is transparent. This is decided per unit across all sentences: if any sentence uses the unit in a divergent slot, it is not free.
+- Effects: such free units don't count toward the novelty cap (`pickNewSentences`), and a right first check on a free form puts its `fm` card on the 4 d rung instead of next day (`applyCheck`).

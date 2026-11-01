@@ -365,7 +365,8 @@
     "pos": "num",
     "gloss": "two (m)",
     "freq": 90,
-    "trivial": true
+    "trivial": true,
+    "transparent": true
   },
   {
     "id": "doua",
@@ -373,7 +374,8 @@
     "pos": "num",
     "gloss": "two (f)",
     "freq": 90,
-    "trivial": true
+    "trivial": true,
+    "transparent": true
   },
   {
     "id": "trei",
@@ -381,7 +383,8 @@
     "pos": "num",
     "gloss": "three",
     "freq": 120,
-    "trivial": true
+    "trivial": true,
+    "transparent": true
   },
   {
     "id": "mihai",
@@ -415,7 +418,8 @@
       "fsg": "sigură",
       "mpl": "siguri",
       "fpl": "sigure"
-    }
+    },
+    "transparent": true
   },
   {
     "id": "mandru",
@@ -441,7 +445,8 @@
       "fsg": "clară",
       "mpl": "clari",
       "fpl": "clare"
-    }
+    },
+    "transparent": true
   },
   {
     "id": "corect",
@@ -454,7 +459,8 @@
       "fsg": "corectă",
       "mpl": "corecți",
       "fpl": "corecte"
-    }
+    },
+    "transparent": true
   },
   {
     "id": "stabil",
@@ -467,7 +473,8 @@
       "fsg": "stabilă",
       "mpl": "stabili",
       "fpl": "stabile"
-    }
+    },
+    "transparent": true
   },
   {
     "id": "scump",
@@ -506,7 +513,8 @@
       "fsg": "nouă",
       "mpl": "noi",
       "fpl": "noi"
-    }
+    },
+    "transparent": true
   },
   {
     "id": "mic",
@@ -571,7 +579,8 @@
       "fsg": "critică",
       "mpl": "critici",
       "fpl": "critice"
-    }
+    },
+    "transparent": true
   },
   {
     "id": "serios",
@@ -584,7 +593,8 @@
       "fsg": "serioasă",
       "mpl": "serioși",
       "fpl": "serioase"
-    }
+    },
+    "transparent": true
   },
   {
     "id": "cald",
@@ -597,7 +607,8 @@
       "fsg": "caldă",
       "mpl": "calzi",
       "fpl": "calde"
-    }
+    },
+    "transparent": true
   },
   {
     "id": "rece",
@@ -624,7 +635,8 @@
       "mpl": "specifici",
       "fpl": "specifice"
     },
-    "lemmaGloss": "specific"
+    "lemmaGloss": "specific",
+    "transparent": true
   },
   {
     "id": "important",
@@ -637,7 +649,8 @@
       "fsg": "importantă",
       "mpl": "importanți",
       "fpl": "importante"
-    }
+    },
+    "transparent": true
   },
   {
     "id": "adevarat",
@@ -663,7 +676,8 @@
       "fsg": "optimistă",
       "mpl": "optimiști",
       "fpl": "optimiste"
-    }
+    },
+    "transparent": true
   },
   {
     "id": "prost",
@@ -689,7 +703,8 @@
       "fsg": "prima",
       "mpl": "primii",
       "fpl": "primele"
-    }
+    },
+    "transparent": true
   },
   {
     "id": "acord",
@@ -701,7 +716,8 @@
       "sg": "acord",
       "sgDef": "acordul"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "dreptate",
@@ -728,7 +744,8 @@
       "pl": "termene",
       "plDef": "termenele"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "prioritate",
@@ -742,7 +759,8 @@
       "pl": "priorități",
       "plDef": "prioritățile"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "idee",
@@ -756,7 +774,8 @@
       "pl": "idei",
       "plDef": "ideile"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "ministru",
@@ -770,7 +789,8 @@
       "pl": "miniștri",
       "plDef": "miniștrii"
     },
-    "gender": "m"
+    "gender": "m",
+    "transparent": true
   },
   {
     "id": "guvern",
@@ -784,7 +804,8 @@
       "pl": "guverne",
       "plDef": "guvernele"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "optiune",
@@ -798,7 +819,8 @@
       "pl": "opțiuni",
       "plDef": "opțiunile"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "varianta",
@@ -812,7 +834,8 @@
       "pl": "variante",
       "plDef": "variantele"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "obiectiv",
@@ -826,7 +849,8 @@
       "pl": "obiective",
       "plDef": "obiectivele"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "feedback",
@@ -838,7 +862,8 @@
       "sg": "feedback",
       "sgDef": "feedback-ul"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "proiect",
@@ -852,7 +877,8 @@
       "pl": "proiecte",
       "plDef": "proiectele"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "prognoza",
@@ -880,7 +906,8 @@
       "pl": "consumuri",
       "plDef": "consumurile"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "model",
@@ -894,7 +921,8 @@
       "pl": "modele",
       "plDef": "modelele"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "retea",
@@ -922,7 +950,8 @@
       "pl": "energii",
       "plDef": "energiile"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "pret",
@@ -950,7 +979,8 @@
       "pl": "pipeline-uri",
       "plDef": "pipeline-urile"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "server",
@@ -964,7 +994,8 @@
       "pl": "servere",
       "plDef": "serverele"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "grafic",
@@ -978,7 +1009,8 @@
       "pl": "grafice",
       "plDef": "graficele"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "sursa",
@@ -1086,7 +1118,8 @@
       "pl": "funcții",
       "plDef": "funcțiile"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "desert",
@@ -1100,7 +1133,8 @@
       "pl": "deserturi",
       "plDef": "deserturile"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "cartof",
@@ -1141,7 +1175,8 @@
       "pl": "politicieni",
       "plDef": "politicienii"
     },
-    "gender": "m"
+    "gender": "m",
+    "transparent": true
   },
   {
     "id": "alegeri",
@@ -1192,7 +1227,8 @@
       "sg": "presă",
       "sgDef": "presa"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "parere",
@@ -1220,7 +1256,8 @@
       "pl": "articole",
       "plDef": "articolele"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "opozitie",
@@ -1232,7 +1269,8 @@
       "sg": "opoziție",
       "sgDef": "opoziția"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "politica",
@@ -1244,7 +1282,8 @@
       "sg": "politică",
       "sgDef": "politica"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "salariu",
@@ -1258,7 +1297,8 @@
       "pl": "salarii",
       "plDef": "salariile"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "limba",
@@ -1286,7 +1326,8 @@
       "pl": "colegi",
       "plDef": "colegii"
     },
-    "gender": "m"
+    "gender": "m",
+    "transparent": true
   },
   {
     "id": "masa",
@@ -1314,7 +1355,8 @@
       "pl": "case",
       "plDef": "casele"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "hobby",
@@ -1326,7 +1368,8 @@
       "sg": "hobby",
       "sgDef": "hobby-ul"
     },
-    "gender": "n"
+    "gender": "n",
+    "transparent": true
   },
   {
     "id": "familie",
@@ -1340,7 +1383,8 @@
       "pl": "familii",
       "plDef": "familiile"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "sarbatoare",
@@ -1434,7 +1478,8 @@
       "sg": "invitație",
       "sgDef": "invitația"
     },
-    "gender": "f"
+    "gender": "f",
+    "transparent": true
   },
   {
     "id": "somn",
@@ -1528,7 +1573,8 @@
       "pres1sg",
       "pres3sg",
       "ppl"
-    ]
+    ],
+    "transparent": true
   },
   {
     "id": "incepe",
@@ -1582,7 +1628,8 @@
       "pres1sg",
       "pres3sg",
       "ppl"
-    ]
+    ],
+    "transparent": true
   },
   {
     "id": "prezice",
@@ -1636,7 +1683,8 @@
       "pres1sg",
       "pres3sg",
       "ppl"
-    ]
+    ],
+    "transparent": true
   },
   {
     "id": "porni",
@@ -1718,7 +1766,8 @@
       "pres1sg",
       "pres3sg",
       "ppl"
-    ]
+    ],
+    "transparent": true
   },
   {
     "id": "gati",
@@ -1828,7 +1877,8 @@
       "pres3sg",
       "ppl"
     ],
-    "class": "I-ez"
+    "class": "I-ez",
+    "transparent": true
   },
   {
     "id": "veni",
@@ -1936,7 +1986,8 @@
       "pres1sg",
       "pres3sg",
       "ppl"
-    ]
+    ],
+    "transparent": true
   },
   {
     "id": "rula",
@@ -1992,7 +2043,8 @@
       "pres3sg",
       "ppl"
     ],
-    "class": "I-ez"
+    "class": "I-ez",
+    "transparent": true
   },
   {
     "id": "implementa",
@@ -2020,7 +2072,8 @@
       "pres3sg",
       "ppl"
     ],
-    "class": "I-ez"
+    "class": "I-ez",
+    "transparent": true
   },
   {
     "id": "analiza",
@@ -2048,7 +2101,8 @@
       "pres3sg",
       "ppl"
     ],
-    "class": "I-ez"
+    "class": "I-ez",
+    "transparent": true
   },
   {
     "id": "trimite",
@@ -2265,7 +2319,8 @@
       "pres1sg",
       "pres3sg",
       "ppl"
-    ]
+    ],
+    "transparent": true
   },
   {
     "id": "chema",
@@ -2319,7 +2374,8 @@
       "pres1sg",
       "pres3sg",
       "ppl"
-    ]
+    ],
+    "transparent": true
   },
   {
     "id": "creste",
@@ -2373,7 +2429,8 @@
       "pres1sg",
       "pres3sg",
       "ppl"
-    ]
+    ],
+    "transparent": true
   },
   {
     "id": "primi",
@@ -2429,7 +2486,8 @@
       "pres3sg",
       "ppl"
     ],
-    "class": "I-ez"
+    "class": "I-ez",
+    "transparent": true
   },
   {
     "id": "interesa",
@@ -2457,7 +2515,8 @@
       "pres3sg",
       "ppl"
     ],
-    "class": "I-ez"
+    "class": "I-ez",
+    "transparent": true
   },
   {
     "id": "arata",

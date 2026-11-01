@@ -73,3 +73,13 @@ test("loadContent fetches the manifest then every pack", async () => {
 test("packPaths resolves level ids to files", () => {
   assert.deepEqual(packPaths({ levels: ["A1"] }).levels, ["levels/A1.json"]);
 });
+
+test("T34 flags: the listed patterns are divergent, flags are booleans, some lexemes are transparent", () => {
+  const divergent = raw.patterns.filter((p) => p.divergent).map((p) => p.id).sort();
+  assert.deepEqual(divergent, ["clitic-acc", "clitic-dat", "def-pl", "def-sg", "fut-o-sa", "mi-e-construction", "modal-sa-12", "noun-pl", "pres-ez-esc"]);
+  for (const l of raw.lexemes) assert.ok(l.transparent === undefined || l.transparent === true, l.id);
+  const t = raw.lexemes.filter((l) => l.transparent);
+  assert.ok(t.length >= 40 && t.length < raw.lexemes.length / 2);
+  for (const id of ["oras", "locui", "gasi"]) assert.ok(!raw.lexemes.find((l) => l.id === id).transparent, id);
+  for (const id of ["problema", "important", "lucra"]) assert.ok(raw.lexemes.find((l) => l.id === id).transparent, id);
+});

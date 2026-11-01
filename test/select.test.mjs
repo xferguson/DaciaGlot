@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { pickNewSentences } from "../app/js/core/select.js";
+import { pickNewSentences, isFastTrackUnit } from "../app/js/core/select.js";
 import { buildSession } from "../app/js/core/session.js";
 import { isKnown } from "../app/js/core/units.js";
 import { makeContent, sentence, state, NOW } from "./helpers/mini-content.mjs";
@@ -137,4 +137,32 @@ test("items budget (T33): picks until the new-item count reaches the target, cou
   const res = pickNewSentences(Infinity, { focus: null, state: st, content, now: NOW, rng, items: 8 });
   assert.equal(res.items, 8); // two new forms per sentence → 4 sentences
   assert.equal(res.sentences.length, 4);
+});
+
+// ---- T34 · Romance fast-track (FR-V3) ----
+test("novelty cap ignores transparent units in non-divergent patterns only", () => {
+  const patterns = [pat("plain"), { ...pat("hard"), divergent: true }];
+  const lexemes = [
+    { ...lex("pb", 10), transparent: true }, { ...lex("im", 11), transparent: true }, { ...lex("op", 12), transparent: true },
+    lex("oras", 13), lex("loc", 14),
+  ];
+  const free = sent("free", [unit("pb", "base", "plain"), unit("im", "base", "plain"), unit("op", "base", "plain")], { patterns: ["plain"] });
+  const divergent = sent("div", [unit("pb", "base", "hard"), unit("im", "base", "hard"), unit("op", "base", "hard")], { patterns: ["hard"] });
+  const opaque = sent("opq", [unit("oras", "base", "plain"), unit("loc", "base", "plain"), unit("pb", "base", "plain")], { patterns: ["plain"] });
+  // 3 unknown lexeme-form units + 1 unknown pattern unit each; only `free` has ≤ 2 non-free unknowns
+  const content = makeContent([free], lexemes, patterns);
+  assert.deepEqual(pick(5, null, state(), content).sentences, ["free"]);
+  const c2 = makeContent([divergent, opaque], lexemes, patterns);
+  assert.deepEqual(pick(5, null, state(), c2).sentences, []);
+});
+
+test("a unit used in a divergent slot elsewhere is not free", () => {
+  const patterns = [pat("plain"), { ...pat("hard"), divergent: true }];
+  const lexemes = [{ ...lex("a", 1), transparent: true }, { ...lex("b", 2), transparent: true }, { ...lex("c", 3), transparent: true }];
+  const s1 = sent("s1", [unit("a", "base", "plain"), unit("b", "base", "plain"), unit("c", "base", "plain")], { patterns: ["plain"] });
+  const s2 = sent("s2", [unit("a", "base", "hard")], { patterns: ["hard"] });
+  const content = makeContent([s1, s2], lexemes, patterns);
+  assert.equal(isFastTrackUnit("b.base", content), true);
+  assert.equal(isFastTrackUnit("a.base", content), false);
+  assert.equal(isFastTrackUnit("pat:plain", content), false);
 });
