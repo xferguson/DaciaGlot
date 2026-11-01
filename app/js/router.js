@@ -25,7 +25,8 @@ export function start(routes, ctx) {
     const mine = ++token;
     const mod = await routes[route.name]();
     if (mine !== token) return;
-    if (typeof cleanup === "function") cleanup();
+    // A failing cleanup must never block navigation (it once left the session's × doing nothing).
+    try { if (typeof cleanup === "function") cleanup(); } catch (err) { console.error(err); }
     cleanup = null;
     root.replaceChildren();
     ctx.route = route;

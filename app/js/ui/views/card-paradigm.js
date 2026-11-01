@@ -4,6 +4,7 @@
 import { differingToken } from "../../core/families.js";
 import { labelFor } from "../../core/cards.js";
 import { audioButton } from "../components/audio-button.js";
+import { advanceButton } from "../components/button.js";
 
 /** Pure: one row per member: `{id, ro, en, token, label}` (`token`/`label` are null when no word differs). */
 export function paradigmRows(members, content) {
@@ -43,9 +44,8 @@ export function renderCard(root, { members, content, tts, settings = {}, onResul
     li.append(audioButton({ text: row.ro, rateNormal: rate }), text);
     list.append(li);
   }
-  const go = Object.assign(document.createElement("button"), { type: "button", className: "btn", textContent: "Continue" });
-  go.addEventListener("click", () => onResult({ result: "correct", usedHint: false, attemptNo: 1, rating: null }));
-  root.querySelector(".actions").append(go);
+  const actions = root.querySelector(".actions");
+  actions.append(advanceButton("Continue", "btn block", () => onResult({ result: "correct", usedHint: false, attemptNo: 1, rating: null }), actions));
   if (settings.autoplay !== false) tts?.speak?.(content.sentences.get(members[0]).ro, { rate });
   return () => {};
 }

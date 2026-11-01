@@ -17,6 +17,8 @@ import { flagButton } from "../components/flag-button.js";
 import { situationName, parseFocusParam } from "./lists.js";
 import { allPatternStates } from "../../core/mastery.js";
 import { summarize, renderSummary } from "./summary.js";
+import { sessionPace, checkAccuracy, recordSession } from "../../core/pace.js";
+import { button } from "../components/button.js";
 
 const QUICK_MS = 5 * 60 * 1000;
 const MODES = ["quick", "mix", "learn", "review"];
@@ -103,11 +105,14 @@ export function render(root, ctx) {
   function begin() {
     startedAt = Date.now();
     root.innerHTML = `<div class="session-bar">
-        <a class="btn secondary icon" href="#/home" aria-label="End session (answers so far are saved)" title="End session">×</a>
+        <span data-end></span>
         <div class="progress" role="progressbar" aria-label="Session progress"><div class="progress-fill"></div></div>
         <div data-flag></div>
       </div>
       <div data-card></div>`;
+    const end = button("×", "btn secondary icon", () => ctx.navigate("#/home"), { title: "End session" });
+    end.setAttribute("aria-label", "End session (answers so far are saved)");
+    root.querySelector("[data-end]").replaceWith(end);
     next();
   }
 

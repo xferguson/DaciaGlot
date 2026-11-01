@@ -1,5 +1,5 @@
 // Service worker. Keep APP_VERSION equal to js/version.js (the validator checks).
-const APP_VERSION = "0.19.3";
+const APP_VERSION = "0.19.4";
 const PREFIX = "dg-";
 
 // Every file under js/, css/ and icons/ must be listed (validator rule 11).
@@ -45,6 +45,7 @@ const PRECACHE = [
   "js/ui/components/banner.js",
   "js/ui/components/chart.js",
   "js/ui/components/diacritic-bar.js",
+  "js/ui/components/button.js",
   "js/ui/components/feedback.js",
   "js/ui/components/ornament.js",
   "js/ui/components/flag-button.js",
