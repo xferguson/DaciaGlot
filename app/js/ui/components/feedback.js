@@ -133,7 +133,7 @@ export const RATINGS = [["hard", "Hard"], ["medium", "Medium"], ["easy", "Easy"]
 
 /**
  * Append the buttons that end a card to `actions`. With `canRate` (correct on the first try, no hint)
- * they are Hard · Medium · Easy and each calls `onPick(rating)` straight away; otherwise a single
+ * they are Hard · Medium · Easy and each calls `onPick(rating)` straight away (never auto-advanced); otherwise a single
  * Continue calls `onPick(null)`. Focuses the default button so Enter moves on.
  */
 export function nextButtons(actions, { canRate, onPick, autoAdvance = null }) {
@@ -160,12 +160,14 @@ export function nextButtons(actions, { canRate, onPick, autoAdvance = null }) {
     def = buttons[1];
   }
   def.focus();
-  if (autoAdvance) {
+  // A rating screen waits for the learner: auto-clicking the default would pick "Medium" for them and
+  // skip the screen before it can be tapped. Only the single Continue button may move on by itself.
+  if (autoAdvance && !canRate) {
     // FR-V4: a fully correct answer moves on once the sentence has been heard; touching the card stays put.
     let armed = true;
     const stay = () => {
       armed = false;
-      note.remove();
+      note.style.visibility = "hidden"; // keep its space: removing it would shift buttons mid-tap and swallow the click
     };
     const note = Object.assign(document.createElement("p"), { className: "muted auto-note", textContent: "Moving on… tap to stay" });
     actions.append(note);
