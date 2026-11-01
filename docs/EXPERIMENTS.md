@@ -60,7 +60,9 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
   3. Did you get bare key-form drills when you'd have preferred a sentence (or the reverse)?
   4. Roughly what share of a session now feels repetitive, compared with the ~75% before?
 - **Rollback:** the migration keeps the strongest state per form, so it can't be undone exactly. A roll back would re-split by re-creating `cz` cards from `fm` state.
-- **Observations:** _none yet_
+- **Observations:**
+  - **2026-11-01 · check-in.** Owner: reviews have "still some repeats" but no concrete example to hand ("trust me that I'm being honest about it"). The bigger complaint is volume and pace, not back-to-back repeats (see the 2026-11-01 check-in below).
+    - **Decision: keep.** Next check-in: ask for one example as soon as it happens (sentence or word, and how soon it came back).
 
 ## EXP-02 · Learn today, test tomorrow · [T26](tasks/T26-learn-today-test-tomorrow.md)
 
@@ -80,6 +82,8 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
     - Follow-up interview: the learn day should be **one combined check late in the session** (≥ ~8 unrelated cards after the listen card), and a cloze should be **silent until answered**. The owner isn't sure yet whether reviews also feel back-to-back.
     - **Decision: revise → [T31](tasks/T31-spaced-combined-check.md)** (one check per sentence, ≥ 8 cards later, never adjacent; cloze audio only after answering).
     - Next check-in: ask whether the learn step still feels repetitive, and whether *reviews* have back-to-back repeats (this time's question 3 was "not sure yet").
+  - **2026-11-01 · check-in.** Owner reports "still some repeats" in reviews, no example to hand. Not separable yet from the general volume complaint.
+    - **Decision: keep.** Next check-in: get one concrete example (card, sentence, how soon).
 
 ## EXP-03 · Whole sentence later, part-level credit · [T27](tasks/T27-whole-sentence-later.md)
 
@@ -93,7 +97,9 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
   2. When you missed one word, did that word come back on its own? Was that the right word (did the alignment blame the right part)?
   3. Does writing the whole sentence feel like real speaking practice?
 - **Rollback:** revert `er` grading to all-or-nothing.
-- **Observations:** _none yet_
+- **Observations:**
+  - **2026-11-01 · check-in.** Owner wants whole-sentence tests **sooner**: "if something is easy, chunk it into harder material instead of wasting time reviewing." The 4-day gate holds easy sentences in single-form review.
+    - **Decision: revise → [T32](tasks/T32-easy-compose-up.md)** (EXP-07: `er` unlocks once each form is easy, and easy forms are reviewed together in one composite sentence).
 
 ## EXP-04 · "I can produce this" claims · [T28](tasks/T28-produce-claims.md)
 
@@ -107,7 +113,9 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
   2. Did any claimed word get taken back by an EN→RO miss? Was that fair?
   3. Is the tap easy to find, or do you need it somewhere else (e.g. during learning)?
 - **Rollback:** clear `state.claimed`. It's a separate key, so nothing else is touched.
-- **Observations:** _none yet_
+- **Observations:**
+  - **2026-11-01 · check-in.** Not asked directly. The owner wants material transparent from French/Italian/Spanish/Portuguese fast-tracked automatically, which is a content-side complement to manual claims, not a replacement.
+    - **Decision: keep.** Ask the original questions next time.
 
 ## EXP-05 · Sentence families as paradigms · [T29](tasks/T29-sentence-families.md)
 
@@ -121,7 +129,9 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
   2. In reviews, could you predict which form was coming? (You shouldn't be able to.)
   3. Any family members that weren't really one family (wrongly grouped)?
 - **Rollback:** turn off family grouping; members return to being independent sentences.
-- **Observations:** _none yet_
+- **Observations:**
+  - **2026-11-01 · check-in.** No specific feedback; pace dominated the interview.
+    - **Decision: keep.** Ask the original questions next time.
 
 ## EXP-06 · Leipzig glosses on slot-building cards · [T30](tasks/T30-leipzig-slot-glosses.md)
 
@@ -135,4 +145,99 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
   2. Are the glosses notated the way you'd expect (abbreviations, order, clitic/oblique marking)? Any you'd change?
   3. Would you want the same glossing elsewhere (key-form labels, cloze cues, feedback)? (Originally scoped to slot cards only.)
 - **Rollback:** use `slotLabel` again.
+- **Observations:**
+  - **2026-11-01 · check-in.** No specific feedback; pace dominated the interview.
+    - **Decision: keep.** Ask the original questions next time.
+
+---
+
+## Check-in · 2026-11-01 · pace
+
+**What's working (owner's words, paraphrased):** "What we've created so far is actually pretty cool. I really like the design." Switching between words and sentences, cloze and transformations, "is really nice". Picking specific topics has given "enough repetition to actually notice the differences and start to internalize them. So that's a real positive experience."
+
+**What isn't:**
+- "Any system that asks me to go slow … too much repetition, too slow of activity can really, really demotivate me." "Right now … it is going too slowly for me to be excited." "It's already getting really boring."
+- "A big part of what is exciting is the pace at which I recognize new things so that I can internalize them." "I need … any system I'm using to keep track of if I'm going fast enough to be excited."
+- Background: experienced polyglot with a linguistics and anthropology background (field methods, morphosyntax, phonology). Already speaks **French, Italian, Spanish and Portuguese**, so is used to learning Romance languages very quickly. Partly unexcited by Romanian itself, but doesn't want to accept that as the barrier.
+- **Benchmark: Memrise.** "If I'm doing sentences or vocabulary more often with this app than I do in Memrise, then I'm definitely doing it too much." A good Memrise session is **10–20 new items in 5–10 minutes.** Uses Drops only for early sounds (past that), LingQ for reading (passive), Duolingo is "way too slow, way too constrictive". Has never had a good *production* tool; in real life, once a grammar pattern is understood, they work it into conversation well.
+
+**Answers to the follow-up questions:**
+
+| Question | Owner's answer |
+|---|---|
+| Where is it slow? | All four: too few new things, too many reviews, each card is slow, new grammar is drip-fed |
+| What counts as a "new thing"? | All four: new vocabulary, new grammar patterns, new things I can say, faster recall |
+| Mode used | Learn mode, picking topics |
+| Slowest step in a card | **Typing answers** (mostly on a phone) |
+| Use of their Romance languages | Fast-track the familiar; spend the time on what's different. (Not chosen: contrast notes on cards, a placement test.) |
+| Recognition-first intake (Memrise-style) | Yes. "BUT I need a way to make reviews more aggressive about either chunking material in one view or widening review times because things are easy. Most beneficial for me is if something is easy, chunk it into harder material instead of wasting time reviewing. That's about grammar and vocab both." |
+| What "chunk into harder material" means | Combine easy forms into a new sentence; whole sentence sooner. (Not chosen: transforms, bigger interval jumps alone.) |
+| Faster answering | All of: say it aloud and self-grade, word tiles, lenient typing; mostly on a phone |
+| Max review share | "Don't care if fast": the share matters less than each review being quick and actually testing |
+| Repeats since Oct 30–31 | "Still some repeats", no example to hand |
+| Build which experiments? | All four (EXP-07 to EXP-10), sequenced |
+
+**Causes found in the code:** Learn mode gives `newPerSession` = 8 sentences at ~40 s each (Memrise pace is ~2–4× that). In Mix mode new sentences drop toward 0 as reviews fill `MIX_BUDGET_SEC`, so intake shrinks the more the app is used. An easy form still climbs 1 → 4 → 16 d one single review at a time, and `er` waits for a ≥ 4 d gap on every form. Nothing in content marks what a French/Italian/Spanish/Portuguese speaker can guess, so *Eu locuiesc în Cluj* costs as much as clitic doubling. Production cards are typed, and the feedback screen needs a tap to continue. No screen shows the learner their *intake* pace.
+
+**Decision:** four new experiments, built one at a time so each can be judged at the next check-in: EXP-07 → EXP-08 → EXP-09 → EXP-10 (EXP-09 and EXP-10 touch different files and may run in parallel with the others). Measurement stays interview-only; EXP-10's pace display is shown to the owner on their device and never leaves it.
+
+---
+
+## EXP-07 · Easy becomes harder work · [T32](tasks/T32-easy-compose-up.md)
+
+- **Status:** planned
+- **Complaint:** "If something is easy, chunk it into harder material instead of wasting time reviewing. That's about grammar and vocab both."
+- **Hypothesis:** if forms the owner finds easy stop getting their own single-form reviews and are instead tested 2–4 at a time inside one EN→RO sentence (with only missed parts sent back), review time per form drops sharply and each review feels like a real production test.
+- **Change:** a form is *easy* when its last counted grade was Easy, or it is claimed, or its `fm` gap is ≥ 4 d. `er` unlocks as soon as every cloze form of the sentence is easy (revises FR-R3's 4-day-only gate). Due easy forms are reviewed through a **composite** `er`: the sentence (seen or unseen) that covers the most due easy forms while every other unit is known. One answer reviews all of them, with part-level credit (T27).
+- **Expected felt difference:** far fewer single-blank cards for things you know; more whole sentences; reviews that combine.
+- **Check-in questions:**
+  1. When you marked something Easy, did it stop coming back on its own? Did it reappear inside a bigger sentence?
+  2. Did the combined sentences feel like a real test, or like a pile of things you already knew?
+  3. When you missed one part of a combined sentence, was the right part sent back?
+  4. Did whole-sentence tests arrive at the right time now (too early / about right / still too late)?
+- **Rollback:** restore the 4-day `er` gate and turn off composite carriers (easy forms go back to single `fm` reviews; schedules are unaffected).
+- **Observations:** _none yet_
+
+## EXP-08 · Fast intake, Romance fast-track · [T33](tasks/T33-fast-intake.md), [T34](tasks/T34-romance-fast-track.md)
+
+- **Status:** planned
+- **Complaint:** too few new things per session; the app treats a speaker of four Romance languages like a beginner. Memrise gives 10–20 new items in 5–10 minutes.
+- **Hypothesis:** a Learn batch built for 15–20 new items in about 10 minutes, recognition first with the first production test the next day, plus fast-tracking material a French/Italian/Spanish/Portuguese speaker can guess, gets the owner to Memrise pace and puts the repetition on what's genuinely Romanian.
+- **Change:** T33: Learn mode intake measured in *new items* (new forms + new sentences), target 15–20 per ~10 min; a lighter `lr` (one tap, auto-advance on a correct pick); Mix mode keeps a floor of new material instead of dropping to 0. T34: content marks lexemes and patterns as **transparent** (guessable from FR/IT/ES/PT) or **divergent** (Romanian-specific: enclitic article, cases, clitic doubling, `să` subjunctive, `o să` future, `mi-e`, neuter plurals). Transparent forms that pass their first check skip ahead on the ladder and count less toward the novelty cap; divergent patterns keep full repetition.
+- **Expected felt difference:** more new things per session; cognates and familiar structures fly by; time goes to the hard Romanian bits.
+- **Check-in questions:**
+  1. How many new things did a Learn session give you, and how long did it take? Close to Memrise?
+  2. Did familiar (cognate) words fly by? Any that were marked familiar but that you actually found hard?
+  3. Were the Romanian-specific patterns getting enough repetition, or too much?
+  4. Did recognition-first feel too passive?
+- **Rollback:** batch size back to 8 sentences; ignore `transparent` (treat everything as divergent).
+- **Observations:** _none yet_
+
+## EXP-09 · Faster answers · [T35](tasks/T35-faster-answers.md)
+
+- **Status:** planned
+- **Complaint:** typing is the slowest step, mostly on a phone.
+- **Hypothesis:** letting the owner answer production cards by **saying the sentence aloud and self-grading** (default), building it from **word tiles**, or **lenient typing** that moves on automatically when right, roughly halves the time per card without losing production. Speaking aloud is also closest to the real goal.
+- **Change:** an answer mode per card (`speak` / `tiles` / `type`, default `speak` on whole-sentence cards) with a quick switch on the card. Speak: English prompt → say it → reveal (with audio) → tap any words you got wrong (part-level credit via `erMisses`) or "All right". Tiles: the sentence's tokens plus distractor forms of the same lexemes. Type: a one-letter typo in a long word counts as correct (shown), and a correct answer auto-advances after a short pause.
+- **Expected felt difference:** cards take a few seconds; you're speaking more.
+- **Check-in questions:**
+  1. Which mode did you end up using most? Where?
+  2. Was self-grading honest and easy (tapping the wrong words)?
+  3. Did tiles make it too easy (guessable from the tiles)?
+  4. Did auto-advance ever skip something you wanted to look at (e.g. to claim a word)?
+- **Rollback:** typing only, Continue button.
+- **Observations:** _none yet_
+
+## EXP-10 · Show the pace · [T36](tasks/T36-pace-meter.md)
+
+- **Status:** planned
+- **Complaint:** "I need … any system I'm using to keep track of if I'm going fast enough to be excited."
+- **Hypothesis:** showing the owner their **intake pace** (new items per 10 minutes, new patterns met) against a target they set, and letting the next Learn batch grow when they're under target and getting checks right, keeps momentum visible and stops the app quietly slowing down.
+- **Change:** session summary leads with "New this session: N words · M sentences · pattern X" and items per 10 min vs the target (setting, default 15). Dashboard adds a weekly intake trend. A review-heavy session (no new items) is labelled as such. Learn batch size adapts: under target with ≥ 85 % on immediate checks → next batch +25 %; under 60 % → −25 % (bounded by the setting). Local only; nothing is exported.
+- **Expected felt difference:** you can see you're moving; the app speeds up when you're coasting.
+- **Check-in questions:**
+  1. Do you look at the pace numbers? Do they match how fast it felt?
+  2. Did the batch size grow or shrink? Was that the right call?
+  3. Is the target (15 per 10 min) right?
+- **Rollback:** hide the pace block; fixed batch size.
 - **Observations:** _none yet_
