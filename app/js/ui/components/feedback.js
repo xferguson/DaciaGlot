@@ -96,7 +96,7 @@ export function sentenceView(parts) {
 
 /**
  * Render feedback into `root` (replacing its content).
- * `result` is correct | correct-diacritics | wrong.
+ * `result` is correct | correct-diacritics | correct-typo | wrong.
  */
 export function renderFeedback(root, { result, parts, en }) {
   root.replaceChildren();
@@ -111,6 +111,12 @@ export function renderFeedback(root, { result, parts, en }) {
     e.className = "muted";
     e.textContent = en;
     wrap.append(e);
+  }
+  if (result === "correct-typo") {
+    const n = document.createElement("p");
+    n.className = "diacritic-note";
+    n.textContent = "small slip: see the spelling above";
+    wrap.append(n);
   }
   if (result === "correct-diacritics") {
     const n = document.createElement("p");
@@ -130,7 +136,7 @@ export const RATINGS = [["hard", "Hard"], ["medium", "Medium"], ["easy", "Easy"]
  * they are Hard · Medium · Easy and each calls `onPick(rating)` straight away; otherwise a single
  * Continue calls `onPick(null)`. Focuses the default button so Enter moves on.
  */
-export function nextButtons(actions, { canRate, onPick }) {
+export function nextButtons(actions, { canRate, onPick, autoAdvance = null }) {
   const make = (label, cls, rating) => {
     const b = Object.assign(document.createElement("button"), { type: "button", className: cls, textContent: label });
     b.addEventListener("click", () => {
@@ -139,18 +145,35 @@ export function nextButtons(actions, { canRate, onPick }) {
     }, { once: true });
     return b;
   };
+  let def;
   if (!canRate) {
-    const next = make("Continue", "btn block", null);
-    actions.append(next);
-    next.focus();
-    return;
+    def = make("Continue", "btn block", null);
+    actions.append(def);
+  } else {
+    const row = document.createElement("div");
+    row.className = "row rate";
+    row.setAttribute("role", "group");
+    row.setAttribute("aria-label", "How hard was that?");
+    const buttons = RATINGS.map(([r, label]) => make(label, r === "medium" ? "btn" : "btn secondary", r));
+    row.append(...buttons);
+    actions.append(row);
+    def = buttons[1];
   }
-  const row = document.createElement("div");
-  row.className = "row rate";
-  row.setAttribute("role", "group");
-  row.setAttribute("aria-label", "How hard was that?");
-  const buttons = RATINGS.map(([r, label]) => make(label, r === "medium" ? "btn" : "btn secondary", r));
-  row.append(...buttons);
-  actions.append(row);
-  buttons[1].focus();
+  def.focus();
+  if (autoAdvance) {
+    // FR-V4: a fully correct answer moves on once the sentence has been heard; touching the card stays put.
+    let armed = true;
+    const stay = () => {
+      armed = false;
+      note.remove();
+    };
+    const note = Object.assign(document.createElement("p"), { className: "muted auto-note", textContent: "Moving on… tap to stay" });
+    actions.append(note);
+    actions.addEventListener("pointerdown", stay, { once: true });
+    autoAdvance.cancelOn?.addEventListener("pointerdown", stay, { once: true });
+    const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+    Promise.race([Promise.resolve(autoAdvance.after), wait(8000)])
+      .then(() => wait(autoAdvance.pauseMs ?? 1200))
+      .then(() => { if (armed && def.isConnected && !def.disabled) def.click(); });
+  }
 }

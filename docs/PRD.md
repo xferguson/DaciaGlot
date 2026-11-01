@@ -98,6 +98,7 @@ Requirement IDs are referenced by tasks and tests.
 | FR-A2 | Results: an exact match to the expected answer or any `accept[]` entry → `correct`. A match after stripping diacritics → `correct-diacritics`, which grades the same as correct but shows the note "check the diacritics" and highlights those characters. Anything else → `wrong`. | 1 |
 | FR-A3 | **Contraction equivalence** at token level, from a fixed table (ARCHITECTURE §5): e.g. *n-am* ≡ *nu am*, *mi-e* ≡ *îmi e* ≡ *îmi este*. The table is the only source of extra variants beyond `accept[]`. | 1 |
 | FR-A4 | Wrong answers get a token-level diff (LCS over normalized tokens) marking each expected token `ok \| wrong \| missing` and each input token `extra`. The UI highlights only the non-`ok` tokens of the *expected* sentence. | 1 |
+| FR-A6 | **Typo tolerance.** One edit (insert, delete, substitute, adjacent swap) in a token of ≥ 5 letters gives `correct-typo`: graded like `correct-diacritics`, the fix is shown. Not for shorter tokens, and not when the typed word is another form of the same lexeme. (T35) | 3.6 |
 | FR-A5 | A **diacritic bar** (`ă â î ș ț`) above the input inserts at the cursor. Long-press inserts the uppercase letter. | 1 |
 
 ### 4.4 Scheduling, selection, sessions

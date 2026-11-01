@@ -1,6 +1,7 @@
 // Cloze card (PRD FR-D2, FR-D7, FR-D8). Type the blanked token; one retry.
 
 import { checkAnswer } from "../../core/check.js";
+import { lexemeForms } from "../../core/cards.js";
 import { audioButton } from "../components/audio-button.js";
 import { answerInput } from "../components/answer-input.js";
 import { diacriticBar } from "../components/diacritic-bar.js";
@@ -31,7 +32,7 @@ function partsForBlanks(tokens, diffs) {
  * the card's own token. No audio before answering, so the sentence can't give the blank away (FR-D7); it plays after.
  * `onResult` also gets `blanks: {tokenIndex, ok}[]`.
  */
-export function renderCard(root, { card, sentence, tts, settings = {}, onResult, check = false, blanks = null }) {
+export function renderCard(root, { card, sentence, content, tts, settings = {}, onResult, check = false, blanks = null }) {
   const rate = settings.ttsRate ?? 0.9;
   const speak = (text, opts) => tts?.speak?.(text, { rate, ...opts });
   const idxs = blanks?.length ? [...blanks].sort((a, b) => a - b) : [tokenIndexOf(card)];
@@ -82,13 +83,16 @@ export function renderCard(root, { card, sentence, tts, settings = {}, onResult,
   let attempts = 0;
   let usedHint = false;
   let finished = false;
-  const resultOf = (i) => checkAnswer(inputs.get(i).value, sentence.tokens[i].t).result;
+  const avoidOf = (i) => (content ? lexemeForms({ tokens: [sentence.tokens[i]] }, content) : []);
+  const checkOf = (i) => checkAnswer(inputs.get(i).value, sentence.tokens[i].t, [], { avoid: avoidOf(i) });
+  const resultOf = (i) => checkOf(i).result;
 
   function finish() {
     finished = true;
     const results = idxs.map((i) => ({ tokenIndex: i, result: resultOf(i) }));
     const result = results.some((r) => r.result === "wrong") ? "wrong"
-      : results.some((r) => r.result === "correct-diacritics") ? "correct-diacritics" : "correct";
+      : results.some((r) => r.result === "correct-typo") ? "correct-typo"
+        : results.some((r) => r.result === "correct-diacritics") ? "correct-diacritics" : "correct";
     for (const r of results) {
       const input = inputs.get(r.tokenIndex);
       input.readOnly = true;
@@ -97,16 +101,18 @@ export function renderCard(root, { card, sentence, tts, settings = {}, onResult,
     }
     actions.replaceChildren();
     hintLine.textContent = "";
-    speak(sentence.ro);
+    const heard = speak(sentence.ro);
     root.querySelector(".audio-row").append(audioButton({ text: sentence.ro, rateNormal: rate }));
-    const diffs = new Map(idxs.map((i) => [i, checkAnswer(inputs.get(i).value, sentence.tokens[i].t).diff]));
+    const diffs = new Map(idxs.map((i) => [i, checkOf(i).diff]));
     renderFeedback(slot, {
       result,
       parts: idxs.length === 1 ? partsFor(sentence.tokens, diffs.get(idxs[0]), idxs[0]) : partsForBlanks(sentence.tokens, diffs),
       en: sentence.en,
     });
+    const clean = result !== "wrong" && attempts === 1 && !usedHint;
     nextButtons(actions, {
-      canRate: !check && result !== "wrong" && attempts === 1 && !usedHint,
+      canRate: !check && clean,
+      autoAdvance: clean && settings.autoAdvance !== false ? { after: heard, cancelOn: slot } : null,
       onPick: (rating) => onResult({
         result, usedHint, attemptNo: attempts, rating,
         blanks: results.map((r) => ({ tokenIndex: r.tokenIndex, ok: r.result !== "wrong" })),

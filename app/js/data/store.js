@@ -22,6 +22,8 @@ export function defaultState(now) {
       ttsRate: 0.9,
       voiceURI: null,
       autoplay: true,
+      answerMode: 'speak',
+      autoAdvance: true,
       registers: ['colloquial', 'neutral'],
       lastExportAt: null,
       ttsBannerDismissed: false,

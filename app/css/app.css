@@ -175,6 +175,7 @@ a { color: var(--accent); }
 .feedback .expected { font-size: 1.15rem; margin: 4px 0; }
 .tok { text-decoration: underline wavy; text-underline-offset: 4px; border-radius: 4px; padding: 0 2px; }
 .tok-wrong, .tok-missing { text-decoration-color: var(--err); background: color-mix(in srgb, var(--err) 18%, transparent); }
+.tok-typo { text-decoration-color: var(--warn); background: color-mix(in srgb, var(--warn) 22%, transparent); }
 .tok-diacritic { text-decoration-color: var(--warn); background: color-mix(in srgb, var(--warn) 22%, transparent); }
 .diacritic-note { color: var(--warn); margin: 4px 0; }
 .chip {
@@ -367,3 +368,15 @@ h2 { font-size: 1.35rem; font-weight: 700; }
 h1, h2, h3, .ring-label, .stat dd { font-variant-numeric: lining-nums; }
 input, select, progress { accent-color: var(--accent); }
 .bravo { text-align: center; margin: 0 0 8px; font-size: 1.6rem; font-weight: 700; color: var(--accent); }
+
+/* Answer modes and word tiles (T35) */
+.mode-switch { display: flex; gap: 8px; margin: 8px 0; }
+.mode-chip { flex: 1; min-height: 44px; cursor: pointer; font: inherit; border: 1px solid var(--border); background: var(--bg); color: var(--fg); border-radius: 22px; }
+.mode-chip.on { border-color: var(--accent, currentColor); font-weight: 600; }
+.tile-builder { margin: 8px 0; }
+.tile-line { min-height: 52px; display: flex; flex-wrap: wrap; gap: 8px; padding: 6px; border: 2px dashed var(--border); border-radius: 8px; }
+.tile-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.tile { min-height: 44px; min-width: 44px; padding: 0 12px; font: inherit; font-size: 1.05rem; color: var(--fg); background: var(--bg); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; touch-action: manipulation; }
+.tile:disabled { opacity: .7; }
+.speak-word { min-height: 44px; min-width: 44px; padding: 0 8px; margin: 2px; font: inherit; font-size: 1.15rem; color: inherit; background: none; border: 1px solid var(--border); border-radius: 8px; }
+.auto-note { margin: 4px 0 0; width: 100%; text-align: center; }

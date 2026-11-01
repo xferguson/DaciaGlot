@@ -1,10 +1,10 @@
-// EN→RO card (PRD FR-D6, FR-D7, FR-D8). Shows the English; type the whole Romanian sentence; one retry.
-// Audio is hidden until the first wrong attempt, then offered as a reveal.
+// EN→RO card (PRD FR-D6, FR-D7, FR-D8, FR-V4). Shows the English; answer by speaking and self-grading, by word tiles,
+// or by typing the whole Romanian sentence (one retry). Audio is hidden until the answer is revealed.
 
 import { checkAnswer } from "../../core/check.js";
+import { lexemeForms } from "../../core/cards.js";
 import { audioButton } from "../components/audio-button.js";
-import { answerInput } from "../components/answer-input.js";
-import { diacriticBar } from "../components/diacritic-bar.js";
+import { getMode, mountAnswer, tapDiff, wordsOf } from "../components/answer-mode.js";
 import { erMisses } from "../../core/session.js";
 import { renderFeedback, nextButtons, partsFor } from "../components/feedback.js";
 
@@ -15,17 +15,17 @@ export function hintFor(input, expected, accept = []) {
     .map((d) => [...d.token][0] + "…").join(" ");
 }
 
-export function renderCard(root, { card, sentence, tts, settings = {}, label, onResult }) {
+export function renderCard(root, { card, sentence, content, tts, settings = {}, label, onResult, onSetting, rng = Math.random }) {
   const rate = settings.ttsRate ?? 0.9;
   const speak = (text, opts) => tts?.speak?.(text, { rate, ...opts });
   const accept = sentence.accept ?? [];
-  const input = answerInput({ size: Math.max(sentence.ro.length, 12), onSubmit: () => check() });
-  input.setAttribute("aria-label", "Romanian sentence");
+  const avoid = content ? lexemeForms(sentence, content) : [];
 
   root.innerHTML = `
     <section class="card card-enro" data-card="${card?.id ?? card ?? ""}">
       <p class="muted"></p>
       <p class="en"><strong></strong></p>
+      <div class="mode-slot"></div>
       <div class="audio-row"></div>
       <div class="input-slot"></div>
       <div class="bar-slot"></div>
@@ -35,37 +35,60 @@ export function renderCard(root, { card, sentence, tts, settings = {}, label, on
     </section>`;
   root.querySelector(".en strong").textContent = sentence.en ?? "";
   root.querySelector("p.muted").textContent = label ? `${label} · say it in Romanian` : "Say it in Romanian";
-  root.querySelector(".input-slot").append(input);
-  root.querySelector(".bar-slot").append(diacriticBar(() => input));
   const audioRow = root.querySelector(".audio-row");
   const hintLine = root.querySelector(".hint-line");
   const slot = root.querySelector(".feedback-slot");
   const actions = root.querySelector(".actions");
+  const slots = { mode: root.querySelector(".mode-slot"), input: root.querySelector(".input-slot"), bar: root.querySelector(".bar-slot"), actions };
 
-  const checkBtn = Object.assign(document.createElement("button"), { type: "button", className: "btn", textContent: "Check" });
-  const hintBtn = Object.assign(document.createElement("button"), { type: "button", className: "btn secondary", textContent: "Hint" });
-  actions.append(hintBtn, checkBtn);
-  checkBtn.addEventListener("click", () => check());
-  hintBtn.addEventListener("click", () => {
-    usedHint = true;
-    hintLine.textContent = `Hint: ${hintFor(input.value, sentence.ro, accept)}`;
-    input.focus();
-  });
-
+  let mode = getMode(settings);
+  let input = null;
   let attempts = 0;
   let usedHint = false;
   let finished = false;
 
-  function finish(result) {
-    finished = true;
-    input.readOnly = true;
-    input.classList.toggle("ok", result !== "wrong");
-    input.classList.toggle("bad", result === "wrong");
-    actions.replaceChildren();
-    hintLine.textContent = "";
+  function mount() {
+    ({ input } = mountAnswer({
+      mode, slots, sentence, content, rng, label: "Romanian sentence",
+      words: wordsOf(sentence), size: Math.max(sentence.ro.length, 12),
+      say: () => { showAudio(); speak(sentence.ro); },
+      onCheck: check,
+      onHint() {
+        usedHint = true;
+        hintLine.textContent = `Hint: ${hintFor(input.value, sentence.ro, accept)}`;
+        input.focus();
+      },
+      onSpeakDone(tapped) {
+        attempts = 1;
+        finish(tapped.size ? "wrong" : "correct", tapDiff(wordsOf(sentence), tapped), true);
+      },
+      onMode(m) {
+        if (finished || attempts || m === mode) return;
+        mode = m;
+        onSetting?.({ answerMode: m });
+        mount();
+      },
+    }));
+    input?.focus();
+  }
+
+  function showAudio() {
     if (!audioRow.firstChild) audioRow.append(audioButton({ text: sentence.ro, rateNormal: rate }));
-    speak(sentence.ro);
-    const diff = checkAnswer(input.value, sentence.ro, accept).diff;
+  }
+
+  function finish(result, diff = checkAnswer(input.value, sentence.ro, accept, { avoid }).diff, spoke = false) {
+    finished = true;
+    if (input) {
+      input.readOnly = true;
+      input.classList.toggle("ok", result !== "wrong");
+      input.classList.toggle("bad", result === "wrong");
+    }
+    slots.mode.replaceChildren();
+    actions.replaceChildren();
+    if (spoke) slots.input.replaceChildren();
+    hintLine.textContent = "";
+    showAudio();
+    const heard = spoke ? Promise.resolve() : speak(sentence.ro);
     renderFeedback(slot, {
       result,
       parts: partsFor(sentence.tokens, diff),
@@ -78,19 +101,21 @@ export function renderCard(root, { card, sentence, tts, settings = {}, label, on
       note.textContent = `${misses.missedTokens.join(", ")} will be reviewed on its own.`;
       slot.append(note);
     }
+    const clean = result !== "wrong" && attempts === 1 && !usedHint;
     nextButtons(actions, {
-      canRate: result !== "wrong" && attempts === 1 && !usedHint,
+      canRate: clean,
+      autoAdvance: clean && settings.autoAdvance !== false ? { after: heard, cancelOn: slot } : null,
       onPick: (rating) => onResult({ result, usedHint, attemptNo: attempts, rating, diff }),
     });
   }
 
   function check() {
-    if (finished || !input.value.trim()) return;
+    if (finished || !input?.value.trim()) return;
     attempts++;
-    const { result } = checkAnswer(input.value, sentence.ro, accept);
+    const { result } = checkAnswer(input.value, sentence.ro, accept, { avoid });
     if (result !== "wrong") return finish(result);
     if (attempts >= 2) return finish("wrong");
-    if (!audioRow.firstChild) audioRow.append(audioButton({ text: sentence.ro, rateNormal: rate }));
+    showAudio();
     slot.replaceChildren();
     const msg = document.createElement("p");
     msg.className = "feedback bad";
@@ -101,6 +126,6 @@ export function renderCard(root, { card, sentence, tts, settings = {}, label, on
     input.focus();
   }
 
-  input.focus();
+  mount();
   return () => { finished = true; };
 }
