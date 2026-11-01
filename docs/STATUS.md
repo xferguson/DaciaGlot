@@ -44,6 +44,29 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 
 **Phase 3.6 · Pace.** From the 2026-11-01 check-in (EXPERIMENTS.md, EXP-07 to EXP-10). Same rule: when a task's PR merges, set its experiment to `live since <date>`.
 
+**Code quality (Q).** From the 2026-11-01 code audit; see [Q00](tasks/Q00-code-quality-overview.md) for the rules and the waves. Q tasks don't change behavior, and each lands characterization tests before the code it rewrites. Q and T tasks are picked the same way (lowest-numbered `todo` with deps `done`), with T tasks first.
+
+| Task | Title | Track | Depends on | Status | Branch / PR | Notes |
+|---|---|---|---|---|---|---|
+| [Q01](tasks/Q01-missing-pace-import.md) | Fix the missing pace import | Q | none | done | #87 | Shipped by #87 (`test/imports.test.mjs`, `ui/components/button.js`). Q16 replaces the import test with a stricter one. |
+| [Q02](tasks/Q02-view-characterization-tests.md) | Characterization tests for the card and session views | Q | none | todo |  | Extends `test/helpers/fake-dom.mjs`. Gates Q05, Q08, Q13. |
+| [Q03](tasks/Q03-core-time.md) | One time module: `core/time.js` | Q | none | todo |  |  |
+| [Q04](tasks/Q04-core-history.md) | Day history in one place; break the session ↔ pace cycle | Q | Q03 | todo |  |  |
+| [Q05](tasks/Q05-answer-card.md) | One typed-answer card controller: `answerCard` | Q | Q02 | todo |  |  |
+| [Q06](tasks/Q06-core-random.md) | Shared randomness helpers: `core/random.js` | Q | none | todo |  | Keep each caller's `rng()` call sequence. |
+| [Q07](tasks/Q07-ui-dom.md) | Safe markup helpers: `ui/dom.js` | Q | none | todo |  |  |
+| [Q08](tasks/Q08-ctx-update.md) | One state-update path for views: `ctx.update` | Q | Q02 | todo |  |  |
+| [Q09](tasks/Q09-card-registry.md) | Card-type registry and id helpers | Q | Q04, Q10 | todo |  |  |
+| [Q10](tasks/Q10-core-purity.md) | Enforce the pure core: required `rng`, no mutation | Q | Q06 | todo |  |  |
+| [Q11](tasks/Q11-split-session.md) | Split `core/session.js` and `composeSession` | Q | Q09 | todo |  | Golden test first; `session.js` stays a re-export barrel. |
+| [Q12](tasks/Q12-review-cleanup.md) | Review transitions: one attempt builder, clear names | Q | Q11 | todo |  |  |
+| [Q13](tasks/Q13-models-out-of-views.md) | Pure models out of views; views never import views | Q | Q02 | todo |  |  |
+| [Q14](tasks/Q14-settings-defaults.md) | Settings defaults in one place; cards get a ready `speak` | Q | Q05 | todo |  |  |
+| [Q15](tasks/Q15-claim-handler.md) | Remove the global claim handler | Q | Q08 | todo |  |  |
+| [Q16](tasks/Q16-lint-ratchet.md) | Zero-dependency lint with ratcheting allowlists | Q | none | todo |  |  |
+| [Q17](tasks/Q17-how-we-build.md) | Write down how we build | Q | none | todo |  | Docs only. |
+| [Q18](tasks/Q18-close-out.md) | Close out: quote style, task template, allowlists at zero | Q | Q02–Q17 | todo |  |  |
+
 ## Manual activities (later)
 
 Things only the owner can do (real-device checks, the Dexonline network allowlist for T24, the T20 `accept[]` check). They are collected in [`MANUAL.md`](MANUAL.md), marked **later**, and live in epic E6 below, outside the task board. They don't block any task.
@@ -69,4 +92,5 @@ Phase 2:  T11 ← T08 · T12 ← T08,T11 · T13 ← T11,T12 · T14 ← T08 · T1
 Phase 3:  T19 ← T11 · T18 ← T11,T19 · T20 ← T08,T15 · T21 ← T11 · T22 ← T02 · T23 ← T17,T19,T22
 Phase 3.5: T25 · T30 (parallel) · T26 ← T25 · T28 ← T25 · T27 ← T25,T26 · T29 ← T25,T26
 Phase 3.6: T32 · T35 (parallel) · T33 ← T32 · T34 ← T33 · T36 ← T33
+Q track:  Q02 Q03 Q06 Q07 Q16 Q17 (parallel) · Q04 ← Q03 · Q10 ← Q06 · Q05 Q08 Q13 ← Q02 · Q09 ← Q04,Q10 · Q14 ← Q05 · Q15 ← Q08 · Q11 ← Q09 · Q12 ← Q11 · Q18 last
 ```
