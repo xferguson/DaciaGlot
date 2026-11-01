@@ -327,6 +327,21 @@ ladderDays(prevGapDays, grade) → number       // FR-S1: Medium 1→4→16→64
 - The UI re-queues a wrong card per FR-S9 by splicing the queue (`requeueWrong`).
 - `units.js` `unitsRequiredForCard(cardId, content) → {u, lx}[]` feeds `unitsRequired`.
 
+### 8.1 Pace (`core/pace.js`, T36, FR-V5)
+
+Pure; local only, never exported as telemetry.
+
+```js
+sessionPace(attempts, exposures /* state.seenSentences */, startedAt, endedAt, content)
+  → { newForms, newSentences, newPatterns: string[], minutes, perTen, reviewShare }  // new forms = distinct units of `enc` attempts in the window; new sentences = first seen in it
+weeklyIntake(history, now, weeks = 8) → {label, items}[]   // sums history[day].newItems per rolling week, oldest first
+nextBatchSize(current, perTen, target, checkAccuracy /* 0..1|null */, min = 5, max = 40) → number  // under target and acc ≥ .85 → ×1.25; acc < .6 → ×0.75; else unchanged; rounded, bounded
+learnBatch(state) → number   // state.pace.batch when settings.adaptiveBatch (default true) else newItemsPerLearn; used by learnPlan, buildSession, Home
+recordSession(state, { pace, accuracy, learn, now }) → AppState  // adds newItems to today's history; in Learn, stores the next batch in state.pace.batch and appends {t,size,perTen} (last 10) to state.pace.history
+```
+
+Settings: `paceTarget` (default 15 per 10 min, 3–60), `adaptiveBatch` (default true). State: `pace: {batch: number|null, history}`, `history[day].newItems`.
+
 ## 9. FSRS (`core/fsrs.js`)
 
 ```js

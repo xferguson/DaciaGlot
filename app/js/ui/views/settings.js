@@ -22,6 +22,9 @@ export function render(root, ctx) {
     <section class="card settings">
       <label for="newItems">New items per Learn session</label>
       <input id="newItems" type="number" min="5" max="40" inputmode="numeric">
+      <label for="paceTarget">Pace target (new items per 10 min)</label>
+      <input id="paceTarget" type="number" min="3" max="60" inputmode="numeric">
+      <label class="check"><input id="adaptiveBatch" type="checkbox"> Adapt the Learn batch to my pace and check accuracy</label>
       <label for="newPer">New sentences per session</label>
       <input id="newPer" type="number" min="1" max="30" inputmode="numeric">
       <label for="voice">Voice</label>
@@ -54,6 +57,12 @@ export function render(root, ctx) {
   q("#newItems").addEventListener("change", (e) => {
     update({ newItemsPerLearn: Math.min(40, Math.max(5, Math.round(Number(e.target.value)) || 15)) });
   });
+  q("#paceTarget").value = s0.paceTarget ?? 15;
+  q("#paceTarget").addEventListener("change", (e) => {
+    update({ paceTarget: Math.min(60, Math.max(3, Math.round(Number(e.target.value)) || 15)) });
+  });
+  q("#adaptiveBatch").checked = s0.adaptiveBatch !== false;
+  q("#adaptiveBatch").addEventListener("change", (e) => update({ adaptiveBatch: e.target.checked }));
   q("#newPer").value = s0.newPerSession;
   q("#newPer").addEventListener("change", (e) => {
     update({ newPerSession: Math.min(30, Math.max(1, Math.round(Number(e.target.value)) || 8)) });

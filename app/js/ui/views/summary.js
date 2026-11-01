@@ -33,8 +33,10 @@ export function exportReminderDue(state, now) {
   return now - last > EXPORT_REMINDER_DAYS * DAY;
 }
 
-export function summarize({ before, state, content, stats, startedAt, now }) {
+export function summarize({ before, state, content, stats, startedAt, now, pace = null, target = 15 }) {
   return {
+    pace,
+    target,
     cards: stats.cards,
     correct: stats.correct,
     newSentences: stats.newSentences,
@@ -44,11 +46,26 @@ export function summarize({ before, state, content, stats, startedAt, now }) {
   };
 }
 
+/** Pace block (T36, FR-V5): what came in this session and how fast, against the target. Learner-only, local. */
+function paceBlock(box, { pace, target }, nameOf) {
+  if (!pace) { box.hidden = true; return; }
+  const add = (html) => { const p = document.createElement("p"); p.innerHTML = html; box.append(p); };
+  const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]);
+  if (!pace.newForms && !pace.newSentences) {
+    add("<strong>Review session</strong>: nothing new this time.");
+    return;
+  }
+  const first = pace.newPatterns[0];
+  add(`New this session: <strong>${pace.newForms}</strong> words · <strong>${pace.newSentences}</strong> sentences${first ? ` · first <em>${esc(nameOf(first))}</em>` : ""}`);
+  add(`<strong>${(Math.round(pace.perTen * 10) / 10).toString()}</strong> per 10 min (target ${target})`);
+}
+
 /** Render the summary into `root`. `onMore` starts another Quick session. */
 export function renderSummary(root, { summary, content, onMore }) {
   const nameOf = (id) => content.patterns.get(id)?.name ?? id;
   root.innerHTML = `<h1>Done!</h1>
     ${tulip()}<p class="bravo" lang="ro">Bravo!</p>
+    <section class="card" data-pace></section>
     <section class="card">
       <p><strong data-n="cards"></strong> cards · <strong data-n="correct"></strong> correct</p>
       <p><span data-n="new"></span> new sentences · <span data-n="forms"></span> forms produced</p>
@@ -57,6 +74,7 @@ export function renderSummary(root, { summary, content, onMore }) {
     <section class="card" data-changes hidden><h2>Pattern progress</h2><ul></ul></section>
     <button class="btn block" data-more>One more Quick</button>
     <a class="btn secondary block" href="#/home">Home</a>`;
+  paceBlock(root.querySelector("[data-pace]"), summary, nameOf);
   const set = (k, v) => { root.querySelector(`[data-n="${k}"]`).textContent = v; };
   set("cards", summary.cards);
   set("correct", summary.correct);

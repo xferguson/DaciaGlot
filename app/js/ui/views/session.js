@@ -46,6 +46,7 @@ export function render(root, ctx) {
   let pos = 0;
   let startedAt = 0;
   let finished = false;
+  const exposuresBefore = new Set(Object.keys(ctx.state.seenSentences));
   const stats = { cards: 0, correct: 0, newSentences: 0, difficult: 0 };
   const carriersUsed = new Set(); // sentences an `fm` card was already shown in this session
   const struggled = new Set(); // cards graded Hard or Again once already this session (FR-S9)
@@ -267,14 +268,22 @@ export function render(root, ctx) {
     });
   }
 
+  /** `seenSentences` entries first seen during this session. */
+  function newExposures() {
+    return Object.fromEntries(Object.entries(ctx.state.seenSentences).filter(([id]) => !exposuresBefore.has(id)));
+  }
+
   function finish() {
     finished = true;
-    const minutes = (Date.now() - startedAt) / 60000;
-    ctx.state = addMinutes(ctx.state, minutes, Date.now());
+    const endedAt = Date.now();
+    ctx.state = addMinutes(ctx.state, (endedAt - startedAt) / 60000, endedAt);
+    const pace = sessionPace(ctx.state.attempts, newExposures(), startedAt, endedAt, ctx.content);
+    ctx.state = recordSession(ctx.state, { pace, accuracy: checkAccuracy(ctx.state.attempts, startedAt, endedAt), learn: mode === "learn", now: endedAt });
     ctx.store.save(ctx.state);
     ctx.store.flush();
     const summary = summarize({
-      before: patternsBefore, state: ctx.state, content: ctx.content, stats, startedAt, now: Date.now(),
+      before: patternsBefore, state: ctx.state, content: ctx.content, stats, startedAt, now: endedAt, pace,
+      target: ctx.state.settings.paceTarget ?? 15,
     });
     renderSummary(root, { summary, content: ctx.content, onMore: () => ctx.navigate("#/session?mode=quick") });
     alive = false;
@@ -287,6 +296,7 @@ export function render(root, ctx) {
     if (alive && startedAt && !finished) {
       const now = Date.now();
       ctx.state = addMinutes(keepStarted(ctx.state, queue.slice(pos), now), (now - startedAt) / 60000, now);
+      ctx.state = recordSession(ctx.state, { pace: sessionPace(ctx.state.attempts, newExposures(), startedAt, now, ctx.content), accuracy: null, learn: false, now });
       ctx.store.save(ctx.state);
       if (stats.cards) toast(`Session ended. Your ${stats.cards} answer${stats.cards === 1 ? " is" : "s are"} saved.`);
     }

@@ -3,6 +3,7 @@ import { levelProgress, allPatternStates, masteredSentenceIds } from "../../core
 import { dayKey } from "../../core/session.js";
 import { ring } from "../components/ring.js";
 import { barChart, lineChart } from "../components/chart.js";
+import { weeklyIntake } from "../../core/pace.js";
 import { renderCanDos } from "./cando.js";
 
 const DAY = 86400000;
@@ -87,6 +88,7 @@ export function dashboardModel(state, content, now) {
     patternStates: allPatternStates(state, content, now),
     stats: productionStats(state, content, now),
     weekly: weeklyHistory(state, now),
+    intake: weeklyIntake(state.history, now),
     forecast: dueForecast(state, now),
   };
 }
@@ -195,6 +197,8 @@ function chartsSection(model) {
   s.append(
     el("h3", null, "Forms produced per week"),
     barChart({ data: weeks.map((w) => ({ label: w.label, value: w.forms })), title: "Forms produced per week", xLabel: "Week", yLabel: "Forms" }),
+    el("h3", null, "New items per week"),
+    barChart({ data: model.intake.map((w) => ({ label: w.label, value: w.items })), title: "New words and sentences per week", xLabel: "Week", yLabel: "New items" }),
     el("h3", null, "Minutes per week"),
     barChart({ data: weeks.map((w) => ({ label: w.label, value: w.minutes })), title: "Minutes studied per week", xLabel: "Week", yLabel: "Minutes" }),
     el("h3", null, "Reviews due, next 14 days"),

@@ -1,4 +1,5 @@
 import { dueInFocus, mixPlan, QUICK_CAP, SEC_PER_REVIEW, SEC_PER_NEW, SEC_PER_NEW_FAST } from "../../core/session.js";
+import { learnBatch } from "../../core/pace.js";
 import { levelProgress } from "../../core/mastery.js";
 import { rooster } from "../components/ornament.js";
 import { ring } from "../components/ring.js";
@@ -37,7 +38,7 @@ export function render(root, ctx) {
     const due = ctx.content ? dueInFocus(ctx.state, ctx.content, now, focus).length : 0;
     const full = ctx.state.settings.newPerSession;
     const avail = focus.length ? Math.min(full, readyCount(focus, { state: ctx.state, content: ctx.content, now })) : full;
-    const items = ctx.state.settings.newItemsPerLearn ?? 15;
+    const items = learnBatch(ctx.state);
     const ready = !focus.length || readyCount(focus, { state: ctx.state, content: ctx.content, now }) > 0;
     const newCount = Math.min(avail, mixPlan(due, full).newCount);
     const mixSub = !newCount ? (due ? "all review" : "nothing yet") : due ? `${due} due + ${newCount} new` : `up to ${newCount} new`;

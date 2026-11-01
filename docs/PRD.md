@@ -126,8 +126,8 @@ Requirement IDs are referenced by tasks and tests.
 | FR-P2 | **Lexeme-form unit states:** `unseen → seen → produced → stable`, also per ARCHITECTURE §7. | 2 |
 | FR-P3 | **Level manifests** (`content/levels/A1.json`, …) list required patterns, can-dos and target lexemes. Completion is per ARCHITECTURE §7.4. | 3 |
 | FR-P4 | **Can-do statements** are shown per situation. A can-do is *checkable* when all its linked sentences are mastered (ARCHITECTURE §7.3). Checking is a learner action, stored with a timestamp. | 3 |
-| FR-P5 | **Dashboard, in priority order:** level rings; patterns grid by stage and state; can-do checklist; production stats (distinct forms produced, all time and this week; sentences mastered; words known shown *beside* those); a weekly history chart (forms produced, minutes); a 14-day review forecast. | 3 |
-| FR-P6 | **Session summary:** cards done, new sentences, pattern state changes, and forms produced in this session. | 3 |
+| FR-P5 | **Dashboard, in priority order:** level rings; patterns grid by stage and state; can-do checklist; production stats (distinct forms produced, all time and this week; sentences mastered; words known shown *beside* those); a weekly history chart (forms produced, new items, minutes); a 14-day review forecast. | 3 |
+| FR-P6 | **Session summary:** leads with the pace block (new words · sentences · first pattern; items per 10 min vs `paceTarget`; "Review session" when nothing was new, FR-V5), then cards done, new sentences, pattern state changes, and forms produced in this session. | 3 |
 | FR-P7 | No streak counter on Home. "Days studied this month" is shown in History only. | 3 |
 
 ### 4.6 Navigation and screens

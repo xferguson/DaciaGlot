@@ -230,7 +230,7 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
 
 ## EXP-10 · Show the pace · [T36](tasks/T36-pace-meter.md)
 
-- **Status:** planned
+- **Status:** live since 2026-11-01
 - **Complaint:** "I need … any system I'm using to keep track of if I'm going fast enough to be excited."
 - **Hypothesis:** showing the owner their **intake pace** (new items per 10 minutes, new patterns met) against a target they set, and letting the next Learn batch grow when they're under target and getting checks right, keeps momentum visible and stops the app quietly slowing down.
 - **Change:** session summary leads with "New this session: N words · M sentences · pattern X" and items per 10 min vs the target (setting, default 15). Dashboard adds a weekly intake trend. A review-heavy session (no new items) is labelled as such. Learn batch size adapts: under target with ≥ 85 % on immediate checks → next batch +25 %; under 60 % → −25 % (bounded by the setting). Local only; nothing is exported.
