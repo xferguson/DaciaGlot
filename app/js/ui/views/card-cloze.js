@@ -101,7 +101,7 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
     }
     actions.replaceChildren();
     hintLine.textContent = "";
-    const heard = speak(sentence.ro);
+    speak(sentence.ro);
     root.querySelector(".audio-row").append(audioButton({ text: sentence.ro, rateNormal: rate }));
     const diffs = new Map(idxs.map((i) => [i, checkOf(i).diff]));
     renderFeedback(slot, {
@@ -112,7 +112,6 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
     const clean = result !== "wrong" && attempts === 1 && !usedHint;
     nextButtons(actions, {
       canRate: !check && clean,
-      autoAdvance: clean && settings.autoAdvance !== false ? { after: heard, cancelOn: slot } : null,
       onPick: (rating) => onResult({
         result, usedHint, attemptNo: attempts, rating,
         blanks: results.map((r) => ({ tokenIndex: r.tokenIndex, ok: r.result !== "wrong" })),

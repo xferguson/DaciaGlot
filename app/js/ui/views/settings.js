@@ -35,7 +35,6 @@ export function render(root, ctx) {
       <label class="check"><input id="autoplay" type="checkbox"> Autoplay audio</label>
       <label for="answerMode">Answer sentences by</label>
       <select id="answerMode"><option value="speak">Saying it, then self-grade</option><option value="tiles">Word tiles</option><option value="type">Typing</option></select>
-      <label class="check"><input id="autoAdvance" type="checkbox"> Move on by itself after a correct answer</label>
     </section>
     <section class="card">
       <h2>Your data</h2>
@@ -88,8 +87,6 @@ export function render(root, ctx) {
   q("#autoplay").addEventListener("change", (e) => update({ autoplay: e.target.checked }));
   q("#answerMode").value = s0.answerMode ?? "speak";
   q("#answerMode").addEventListener("change", (e) => update({ answerMode: e.target.value }));
-  q("#autoAdvance").checked = s0.autoAdvance !== false;
-  q("#autoAdvance").addEventListener("change", (e) => update({ autoAdvance: e.target.checked }));
 
   const esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   function renderFlags() {

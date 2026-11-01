@@ -379,4 +379,3 @@ input, select, progress { accent-color: var(--accent); }
 .tile { min-height: 44px; min-width: 44px; padding: 0 12px; font: inherit; font-size: 1.05rem; color: var(--fg); background: var(--bg); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; touch-action: manipulation; }
 .tile:disabled { opacity: .7; }
 .speak-word { min-height: 44px; min-width: 44px; padding: 0 8px; margin: 2px; font: inherit; font-size: 1.15rem; color: inherit; background: none; border: 1px solid var(--border); border-radius: 8px; }
-.auto-note { margin: 4px 0 0; width: 100%; text-align: center; }
