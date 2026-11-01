@@ -121,8 +121,8 @@ a { color: var(--accent); }
   padding: var(--gap);
   margin: var(--gap) 0;
 }
-.row { display: flex; gap: var(--gap); }
-.row > .btn { flex: 1; }
+.row { display: flex; flex-wrap: wrap; gap: var(--gap); }
+.row > .btn { flex: 1 0 auto; white-space: nowrap; }
 .row.rate > .btn { padding: 0 8px; }
 .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .btn.mode { flex-direction: column; padding: 8px 12px; min-height: 72px; }
