@@ -176,9 +176,9 @@ From the 2026-11-01 owner check-in: the app is too slow for an experienced polyg
 | ID | Requirement | Phase |
 |---|---|---|
 | FR-V1 | **Easy becomes harder work.** A form is easy when claimed, last graded Easy, or at a ≥ 4-day gap. `er` unlocks when every cloze form is easy. Due easy forms are reviewed 2–4 at a time in one composite EN→RO sentence with part-level credit. (T32, EXP-07) | 3.6 |
-| FR-V2 | **Fast intake.** Learn mode delivers ~15–20 new items (forms or sentences) in ~10 minutes; a correct `lr` pick auto-advances; Mix mode keeps a floor of new material. (T33, EXP-08) | 3.6 |
+| FR-V2 | **Fast intake.** Learn mode delivers ~15–20 new items (forms or sentences) in ~10 minutes; `lr` is one tap; Mix mode keeps a floor of new material. (T33, EXP-08) | 3.6 |
 | FR-V3 | **Romance fast-track.** Content marks lexemes `transparent` (guessable from FR/IT/ES/PT) and patterns `divergent` (Romanian-specific). Transparent forms outside divergent patterns are free for the novelty cap and skip ahead after a right first check. (T34, EXP-08) | 3.6 |
-| FR-V4 | **Faster answers.** Production cards can be answered by speaking and self-grading per word, by word tiles, or by lenient typing; a correct answer auto-advances. (T35, EXP-09) | 3.6 |
+| FR-V4 | **Faster answers.** Production cards can be answered by speaking and self-grading per word, by word tiles, or by lenient typing. No card ever advances by itself (owner preference, 2026-11-01). (T35, EXP-09) | 3.6 |
 | FR-V5 | **Show the pace.** The session summary leads with new items and items per 10 minutes against a target; the dashboard shows weekly intake; Learn batch size adapts to pace and check accuracy. Local only. (T36, EXP-10) | 3.6 |
 
 ## 5. Non-functional requirements

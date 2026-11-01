@@ -1,5 +1,7 @@
 # T35 · Faster answers: speak and self-grade, word tiles, lenient typing
 
+> **Superseded 2026-11-01:** auto-advance was removed entirely at the owner's request (see `docs/EXPERIMENTS.md`, Owner preferences). Ignore the auto-advance parts below.
+
 | | |
 |---|---|
 | **Phase** | 3.6 |

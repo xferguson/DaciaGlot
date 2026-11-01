@@ -200,14 +200,14 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
 
 ## Owner preferences (standing)
 
-- **No auto-advance, ever (2026-11-01).** The app must never move to the next card by itself. It cut off audio the owner wanted to hear and removed the chance to tap words in the sentence to turn them off (claims). Every card ends on an explicit Continue or Hard/Medium/Easy tap. Removed in 0.19.2, with the `autoAdvance` setting; do not reintroduce.
+- **No auto-advance, ever (2026-11-01).** The app must never move to the next card by itself. It cut off audio the owner wanted to hear and removed the chance to tap words in the sentence to turn them off (claims). Every card ends on an explicit Continue or Hard/Medium/Easy tap. Removed in 0.19.3 (0.19.2 collided with another release, so cached phones kept the old code), with the `autoAdvance` setting; do not reintroduce.
 
 ## EXP-08 · Fast intake, Romance fast-track · [T33](tasks/T33-fast-intake.md), [T34](tasks/T34-romance-fast-track.md)
 
 - **Status:** live since 2026-11-01 (T33 and T34)
 - **Complaint:** too few new things per session; the app treats a speaker of four Romance languages like a beginner. Memrise gives 10–20 new items in 5–10 minutes.
 - **Hypothesis:** a Learn batch built for 15–20 new items in about 10 minutes, recognition first with the first production test the next day, plus fast-tracking material a French/Italian/Spanish/Portuguese speaker can guess, gets the owner to Memrise pace and puts the repetition on what's genuinely Romanian.
-- **Change:** T33: Learn mode intake measured in *new items* (new forms + new sentences), target 15–20 per ~10 min; a lighter `lr` (one tap, auto-advance on a correct pick); Mix mode keeps a floor of new material instead of dropping to 0. T34: content marks lexemes and patterns as **transparent** (guessable from FR/IT/ES/PT) or **divergent** (Romanian-specific: enclitic article, cases, clitic doubling, `să` subjunctive, `o să` future, `mi-e`, neuter plurals). Transparent forms that pass their first check skip ahead on the ladder and count less toward the novelty cap; divergent patterns keep full repetition.
+- **Change:** T33: Learn mode intake measured in *new items* (new forms + new sentences), target 15–20 per ~10 min; a lighter `lr` (one tap; its auto-advance was removed 2026-11-01); Mix mode keeps a floor of new material instead of dropping to 0. T34: content marks lexemes and patterns as **transparent** (guessable from FR/IT/ES/PT) or **divergent** (Romanian-specific: enclitic article, cases, clitic doubling, `să` subjunctive, `o să` future, `mi-e`, neuter plurals). Transparent forms that pass their first check skip ahead on the ladder and count less toward the novelty cap; divergent patterns keep full repetition.
 - **Expected felt difference:** more new things per session; cognates and familiar structures fly by; time goes to the hard Romanian bits.
 - **Check-in questions:**
   1. How many new things did a Learn session give you, and how long did it take? Close to Memrise?
@@ -221,14 +221,14 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
 
 - **Status:** live since 2026-11-01
 - **Complaint:** typing is the slowest step, mostly on a phone.
-- **Hypothesis:** letting the owner answer production cards by **saying the sentence aloud and self-grading** (default), building it from **word tiles**, or **lenient typing** that moves on automatically when right, roughly halves the time per card without losing production. Speaking aloud is also closest to the real goal.
+- **Hypothesis:** letting the owner answer production cards by **saying the sentence aloud and self-grading** (default), building it from **word tiles**, or **lenient typing**, roughly halves the time per card without losing production. Speaking aloud is also closest to the real goal.
 - **Change:** an answer mode per card (`speak` / `tiles` / `type`, default `speak` on whole-sentence cards) with a quick switch on the card. Speak: English prompt → say it → reveal (with audio) → tap any words you got wrong (part-level credit via `erMisses`) or "All right". Tiles: the sentence's tokens plus distractor forms of the same lexemes. Type: a one-letter typo in a long word counts as correct (shown), and (auto-advance was removed 2026-11-01; see Owner preferences).
 - **Expected felt difference:** cards take a few seconds; you're speaking more.
 - **Check-in questions:**
   1. Which mode did you end up using most? Where?
   2. Was self-grading honest and easy (tapping the wrong words)?
   3. Did tiles make it too easy (guessable from the tiles)?
-  4. Did auto-advance ever skip something you wanted to look at (e.g. to claim a word)?
+  4. ~~Did auto-advance ever skip something you wanted to look at?~~ Answered 2026-11-01: yes; auto-advance removed (see Owner preferences).
 - **Rollback:** typing only, Continue button.
 - **Observations:** _none yet_
 
