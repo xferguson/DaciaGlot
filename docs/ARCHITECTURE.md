@@ -291,7 +291,9 @@ A sentence is mastered when every `cloze: true` unit's `fm` card has stability �
 ```js
 buildSession({ mode /* "quick"|"review"|"learn"|"mix"|"session" */, focus /* filters every mode (FR-S8) */, state, content, now, rng, newSentenceIds })
   → { queue: QueueItem[], estimateSec: number, blocked?, suggest?, plan? /* mix only */ }
-mixPlan(due, newPerSession) → { newCount, reviewPct }  // PRD FR-S10: new sentences fill MIX_BUDGET_SEC (720) after due reviews
+mixPlan(due, newPerSession) → { newCount, reviewPct }  // PRD FR-S10: new sentences fill MIX_BUDGET_SEC (720) after due reviews, but never fewer than MIX_MIN_NEW (3, or newPerSession if lower); buildSession then trims the review part (oldest-due stay) to fit
+learnPlan(state, content, focus, now, rng) → {sentences, items} | {blocked, suggest}  // T33 / FR-V2: picks new sentences until their new-item count reaches settings.newItemsPerLearn (default 15, 5–40); a candidate costs its unknown units (≥ 1) plus the same for each paradigm sibling it brings; stops within ±1 of the target. `pickNewSentences(n, {…, items})` is the underlying option; `newItemCount(ids, state, content)` (select.js) counts a set
+SEC_PER_NEW_FAST = 25  // Learn-mode estimate per new sentence incl. its check share (newSentenceSec(forms, perNew)); Mix/Session keep SEC_PER_NEW
 gradeFromResult({ result, usedHint, attemptNo, rating /* "hard"|"medium"|"easy"|null */ }) → 1|2|3|4     // PRD FR-S2
 applyReview(state, cardId, grade, unitsRequired /* {u,lx}[] */, now, content, presentedId = cardId) → AppState  // FSRS on `cardId` + attempts (recorded with `card: presentedId`) + history (pure; returns new state). `content` is only used for `lr` exposure. Without part-level data (`applyErReview` gets `misses` null), a wrong `er` card (grade 1) removes the claims on all units it tested (FR-R4, evidence wins).
 erMisses(sentence, diff) → {missed, ok, missedTokens} | null  // FR-D6: cloze units the EN→RO answer got wrong/right from the checkAnswer diff; null if the diff doesn't line up with the tokens
