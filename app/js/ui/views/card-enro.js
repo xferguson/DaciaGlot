@@ -15,7 +15,7 @@ export function hintFor(input, expected, accept = []) {
     .map((d) => [...d.token][0] + "…").join(" ");
 }
 
-export function renderCard(root, { card, sentence, content, tts, settings = {}, onResult, onSetting, rng = Math.random }) {
+export function renderCard(root, { card, sentence, content, tts, settings = {}, label, onResult, onSetting, rng = Math.random }) {
   const rate = settings.ttsRate ?? 0.9;
   const speak = (text, opts) => tts?.speak?.(text, { rate, ...opts });
   const accept = sentence.accept ?? [];
@@ -23,7 +23,7 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
 
   root.innerHTML = `
     <section class="card card-enro" data-card="${card?.id ?? card ?? ""}">
-      <p class="muted">Say it in Romanian</p>
+      <p class="muted"></p>
       <p class="en"><strong></strong></p>
       <div class="mode-slot"></div>
       <div class="audio-row"></div>
@@ -34,6 +34,7 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
       <div class="actions row"></div>
     </section>`;
   root.querySelector(".en strong").textContent = sentence.en ?? "";
+  root.querySelector("p.muted").textContent = label ? `${label} · say it in Romanian` : "Say it in Romanian";
   const audioRow = root.querySelector(".audio-row");
   const hintLine = root.querySelector(".hint-line");
   const slot = root.querySelector(".feedback-slot");

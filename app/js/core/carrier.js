@@ -1,5 +1,5 @@
 // Picks the sentence an `fm` card is shown in (ARCHITECTURE §3). Pure: `now` and `rng` are injected.
-import { parseCardId, buildCardId, unitIdOfFm } from "./cards.js";
+import { parseCardId, buildCardId, unitIdOfFm, clozeUnitIds } from "./cards.js";
 import { unitsForSentence, isKnown } from "./units.js";
 
 /** A carrier is skipped when it was named in this many of the unit's latest attempts. */
@@ -91,4 +91,44 @@ export function resolveFm(fmId, state, content, opts = {}) {
   }
   const any = pickCarrier(unitId, state, content, { ...opts, exclude: new Set(), recent: 0 });
   return any ? cz(any) : null;
+}
+
+/** A composite never reuses a sentence that carried any form in this many days (FR-V1). */
+export const COMPOSITE_COOLDOWN_DAYS = 7;
+/** At most this many forms in one composite. */
+export const COMPOSITE_MAX_FORMS = 4;
+
+/**
+ * FR-V1 (T32): the sentence for a composite `er` review of several due easy forms. A candidate has at least two of
+ * `dueEasyUnits` among its cloze units and every other unit known (`isKnown`, which includes claimed), so it never
+ * introduces a new form; it is not a carrier used in the last 7 days. The one covering the most forms wins (up to 4),
+ * then a sentence the learner hasn't seen, then `rng`. `opts.exclude` is a set of sentence ids to skip and `opts.allow`
+ * an optional `(sentenceId) => boolean` (e.g. a focus filter).
+ * @returns {{sentenceId: string, units: string[]} | null}
+ */
+export function pickComposite(dueEasyUnits, state, content, now, rng = Math.random, { exclude = new Set(), allow = null } = {}) {
+  const due = new Set(dueEasyUnits);
+  const cutoff = now - COMPOSITE_COOLDOWN_DAYS * 86400000;
+  const recent = new Set();
+  for (const a of state.attempts) if (a.t > cutoff) { const sid = sentenceOfCard(a.card); if (sid) recent.add(sid); }
+  const candidates = new Set();
+  for (const u of due) for (const sid of content.sentencesByLexeme.get(u.slice(0, u.indexOf("."))) ?? []) candidates.add(sid);
+  const found = [];
+  for (const sid of candidates) {
+    if (exclude.has(sid) || recent.has(sid) || (allow && !allow(sid))) continue;
+    const s = content.sentences.get(sid);
+    if (!s?.en) continue;
+    const cloze = clozeUnitIds(s);
+    const covered = cloze.filter((u) => due.has(u));
+    if (covered.length < 2) continue;
+    const coveredSet = new Set(covered);
+    if (!unitsForSentence(s).every((u) => coveredSet.has(u) || isKnown(u, state, content))) continue;
+    found.push({ sentenceId: sid, units: covered.slice(0, COMPOSITE_MAX_FORMS), unseen: !(sid in state.seenSentences) });
+  }
+  if (!found.length) return null;
+  const rank = (c) => c.units.length * 2 + (c.unseen ? 1 : 0);
+  const top = Math.max(...found.map(rank));
+  const best = found.filter((c) => rank(c) === top).sort((a, b) => (a.sentenceId < b.sentenceId ? -1 : 1));
+  const { sentenceId, units } = best[Math.min(best.length - 1, Math.floor(rng() * best.length))];
+  return { sentenceId, units };
 }

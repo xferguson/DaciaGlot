@@ -185,7 +185,7 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
 
 ## EXP-07 · Easy becomes harder work · [T32](tasks/T32-easy-compose-up.md)
 
-- **Status:** planned
+- **Status:** built (T32), goes live when its PR merges
 - **Complaint:** "If something is easy, chunk it into harder material instead of wasting time reviewing. That's about grammar and vocab both."
 - **Hypothesis:** if forms the owner finds easy stop getting their own single-form reviews and are instead tested 2–4 at a time inside one EN→RO sentence (with only missed parts sent back), review time per form drops sharply and each review feels like a real production test.
 - **Change:** a form is *easy* when its last counted grade was Easy, or it is claimed, or its `fm` gap is ≥ 4 d. `er` unlocks as soon as every cloze form of the sentence is easy (revises FR-R3's 4-day-only gate). Due easy forms are reviewed through a **composite** `er`: the sentence (seen or unseen) that covers the most due easy forms while every other unit is known. One answer reviews all of them, with part-level credit (T27).
