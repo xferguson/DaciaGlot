@@ -194,8 +194,8 @@ From the 2026-10-30 owner discovery interview. Each requirement is an experiment
 |---|---|---|
 | **0 · Foundations** ✅ | Plan, deploy workflow, placeholder live | — |
 | **1 · Core loop** ✅ | On Android/Brave: installs; a full Session runs offline with Romanian TTS; `lr` and `cz` cards work with diacritic leniency and highlighting; progress survives reload; export → reset → import round-trips; ≥100 valid sentences; CI green | T01–T10 |
-| **2 · Building sentences** | Pattern focus yields known lexemes in the new pattern first (test); no new sentence has novelty > 2 (test); `kf`, `xf` and `sb` cards work; flags open GitHub issues; ≥300 sentences across all 9 situations | T11–T17 |
-| **3 · Progress** | Dashboard shows A1 completion from the real state; can-dos become checkable; `er` cards work; the coverage report runs in CI with every A1 can-do having ≥5 sentences; 400–600 sentences | T18–T23 |
+| **2 · Building sentences** ✅ | Pattern focus yields known lexemes in the new pattern first (test); no new sentence has novelty > 2 (test); `kf`, `xf` and `sb` cards work; flags open GitHub issues; ≥300 sentences across all 9 situations | T11–T17 |
+| **3 · Progress** ✅ | Dashboard shows A1 completion from the real state; can-dos become checkable; `er` cards work; the coverage report runs in CI with every A1 can-do having ≥5 sentences; 400–600 sentences | T18–T23 |
 | **3.5 · Less repetition** | Each FR-R experiment is live and has had ≥1 owner check-in logged in `docs/EXPERIMENTS.md` | T25–T30 |
 | **4 · A2 pack** | Stage 3–4 content and A2 manifest; formal register; optional audio packs | epic E4 (tasks written when Phase 3 lands) |
 | **5 · Reading & personal** | Reading mode with tap-to-gloss feeding the selector; user-added sentences | epic E5 |
