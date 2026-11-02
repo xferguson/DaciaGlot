@@ -12,7 +12,6 @@ import { sun } from "../components/ornament.js";
 import { renderCard as renderEr } from "../components/cards/card-enro.js";
 import { renderCard as renderPg } from "../components/cards/card-paradigm.js";
 import { toast } from "../components/toast.js";
-import { setClaimHandler } from "../components/feedback.js";
 import { flagButton } from "../components/flag-button.js";
 import { situationName, parseFocusParam } from "../models/lists.js";
 import { allPatternStates } from "../../core/mastery.js";
@@ -31,12 +30,12 @@ const EMPTY = {
 const RENDERERS = { lr: renderLr, cz: renderCz, kf: renderKf, xf: renderXf, sb: renderSb, er: renderEr };
 
 export function render(root, ctx) {
-  setClaimHandler({
+  const claims = {
     content: ctx.content,
     isClaimed: (unit) => unit in ctx.state.claimed,
     claim: (unit) => { ctx.update((s) => claimForm(s, unit, Date.now())); },
     unclaim: (unit) => { ctx.update((s) => unclaimForm(s, unit, Date.now())); },
-  });
+  };
   const params = ctx.route?.params ?? {};
   // Old links (`mode=session`, `mode=focus`) open Mix. A focus (`f=type:id,…`, or old `type`+`id`) filters any mode (FR-S8).
   const mode = MODES.includes(params.mode) ? params.mode : "mix";
@@ -169,6 +168,7 @@ export function render(root, ctx) {
       content: ctx.content,
       tts: ctx.tts,
       settings: ctx.state.settings,
+      claims,
       onSetting(patch) {
         ctx.updateSettings(patch);
       },

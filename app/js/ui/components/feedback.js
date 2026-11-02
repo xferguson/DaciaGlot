@@ -5,16 +5,10 @@ import { el } from "../dom.js";
 import { unitId, parseUnitId } from "../../core/unit-id.js";
 
 /**
- * Claims (FR-R4): the view that owns the state registers how a tapped token reads and changes claims.
- * `{content, isClaimed(unit), claim(unit), unclaim(unit)}`; without one, tokens are plain word links.
+ * A bottom sheet for one word form: its details, "I can produce this" (or Undo) and a link to the word page.
+ * `claims` is the handler the session view passes down (FR-R4): `{content, isClaimed(unit), claim(unit), unclaim(unit)}`.
  */
-let claims = null;
-export function setClaimHandler(handler) {
-  claims = handler;
-}
-
-/** A bottom sheet for one word form: its details, "I can produce this" (or Undo) and a link to the word page. */
-export function openFormSheet(unit, token) {
+export function openFormSheet(unit, token, claims) {
   const { content } = claims;
   const { lex, form } = parseUnitId(unit);
   const lexeme = content.lexemes.get(lex);
@@ -68,7 +62,8 @@ export function partsFor(tokens, diff, tokenIndex = null) {
   return out;
 }
 
-export function sentenceView(parts) {
+/** `claims` (optional): the claim handler; without one, tokens are plain word links. */
+export function sentenceView(parts, claims = null) {
   const p = document.createElement("p");
   p.className = "expected";
   p.lang = "ro";
@@ -80,7 +75,7 @@ export function sentenceView(parts) {
     if (tappable) {
       s.type = "button";
       s.className = "tok-link";
-      s.addEventListener("click", () => openFormSheet(part.unit, part.token));
+      s.addEventListener("click", () => openFormSheet(part.unit, part.token, claims));
     } else if (part.lex) {
       s.href = `#/lexeme/${encodeURIComponent(part.lex)}`;
       s.className = "tok-link";
@@ -96,16 +91,17 @@ export function sentenceView(parts) {
 
 /**
  * Render feedback into `root` (replacing its content).
+ * `claims` is the optional claim handler (see `openFormSheet`).
  * `result` is correct | correct-diacritics | correct-typo | wrong.
  */
-export function renderFeedback(root, { result, parts, en }) {
+export function renderFeedback(root, { result, parts, en, claims = null }) {
   root.replaceChildren();
   const wrap = document.createElement("div");
   wrap.className = `feedback ${result === "wrong" ? "bad" : "good"}`;
   wrap.setAttribute("role", "status");
   const head = document.createElement("strong");
   head.textContent = result === "wrong" ? "Not quite" : "Corect!";
-  wrap.append(head, sentenceView(parts));
+  wrap.append(head, sentenceView(parts, claims));
   if (en) {
     const e = document.createElement("p");
     e.className = "muted";

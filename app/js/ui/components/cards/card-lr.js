@@ -10,7 +10,7 @@ import { pickDistractors } from "../../models/card-lr.js";
 export { shuffle, pickDistractors };
 
 
-export function renderCard(root, { card, sentence, content, tts, settings = {}, onResult, rng = Math.random }) {
+export function renderCard(root, { card, sentence, content, tts, settings = {}, onResult, claims = null, rng = Math.random }) {
   const rate = settings.ttsRate ?? 0.9;
   const speak = (text, opts) => tts?.speak?.(text, { rate, ...opts });
   const options = shuffle([sentence, ...pickDistractors(sentence, content, rng)], rng);
@@ -55,6 +55,7 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
       result,
       parts: partsFor(sentence.tokens, sentence.ro.split(/\s+/).map((token) => ({ token, status: "ok" }))),
       en: sentence.en,
+      claims,
     });
     nextButtons(actions, {
       canRate: false, // one tap; never moves on by itself
