@@ -40,7 +40,7 @@ export function render(root, ctx) {
   // Old links (`mode=session`, `mode=focus`) open Mix. A focus (`f=type:id,…`, or old `type`+`id`) filters any mode (FR-S8).
   const mode = MODES.includes(params.mode) ? params.mode : "mix";
   const focus = parseFocusParam(params);
-  const { queue, blocked, suggest, plan } = buildSession({
+  let { queue, blocked, suggest, plan } = buildSession({
     mode, focus, state: ctx.state, content: ctx.content, now: Date.now(), rng: Math.random,
   });
   let cardCleanup = null;
@@ -193,7 +193,7 @@ export function render(root, ctx) {
         if (markHard) stats.difficult++;
         if (requeue) {
           struggled.add(item.cardId);
-          requeueWrong(queue, pos, item, Math.random, ctx.content);
+          queue = requeueWrong(queue, pos, item, Math.random, ctx.content).queue;
         }
         pos++;
         next();

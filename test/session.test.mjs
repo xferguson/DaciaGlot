@@ -124,12 +124,13 @@ test("applyReview: cz records attempts, lr records exposure only", () => {
 
 test("requeueWrong inserts 3-5 cards later once", () => {
   const queue = Array.from({ length: 10 }, (_, i) => ({ cardId: `c${i}`, isNew: false }));
-  const at = requeueWrong(queue, 2, queue[2], () => 0);
-  assert.equal(at, 5);
-  assert.equal(queue[5].cardId, "c2");
-  assert.equal(requeueWrong(queue, 2, queue[2], () => 0.99), 7);
+  const r = requeueWrong(queue, 2, queue[2], () => 0);
+  assert.equal(r.at, 5);
+  assert.equal(r.queue[5].cardId, "c2");
+  assert.equal(queue.length, 10, "the input queue is not mutated");
+  assert.equal(requeueWrong(queue, 2, queue[2], () => 0.99).at, 7);
   const short = [{ cardId: "x" }];
-  assert.equal(requeueWrong(short, 0, short[0], rng), 1);
+  assert.equal(requeueWrong(short, 0, short[0], rng).at, 1);
 });
 
 test("mixPlan: new sentences fill the budget left after reviews", () => {
@@ -216,10 +217,11 @@ test("spaceOut keeps the order when nothing is related", () => {
 test("requeueWrong with content skips past a related neighbour", () => {
   const mkq = () => ["cz:s01:0", "cz:s02:0", "cz:s03:0", "cz:s04:0", "lr:s00", "cz:s05:0", "cz:s06:0"].map((cardId) => ({ cardId, isNew: false }));
   const wrong = { cardId: "cz:s00:0", isNew: false };
-  assert.equal(requeueWrong(mkq(), 0, wrong, () => 0, content), 3); // neighbours unrelated
+  assert.equal(requeueWrong(mkq(), 0, wrong, () => 0, content).at, 3); // neighbours unrelated
   const q = mkq();
-  assert.equal(requeueWrong(q, 1, wrong, () => 0, content), 6); // 4 and 5 touch lr:s00
-  assert.equal(q[6].cardId, "cz:s00:0");
+  const r = requeueWrong(q, 1, wrong, () => 0, content);
+  assert.equal(r.at, 6); // 4 and 5 touch lr:s00
+  assert.equal(r.queue[6].cardId, "cz:s00:0");
 });
 
 test("keepStarted: an introduced sentence's unreached fm cards come back as new cards", () => {

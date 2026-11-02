@@ -40,7 +40,8 @@ const pickRandom = (list, rng) => {
  * when it was first seen), then `rng`. `null` when there is none.
  * @returns {{sentenceId: string, tokenIndex: number} | null}
  */
-export function pickCarrier(unitId, state, content, { now, rng = Math.random, exclude = new Set(), recent = RECENT_ATTEMPTS } = {}) {
+export function pickCarrier(unitId, state, content, { now, rng, exclude = new Set(), recent = RECENT_ATTEMPTS } = {}) {
+  if (typeof rng !== "function") throw new TypeError("pickCarrier: rng is required");
   const lastUsed = new Map();
   const mine = [];
   for (const a of state.attempts) {
@@ -108,7 +109,8 @@ export const COMPOSITE_MAX_FORMS = 4;
  * an optional `(sentenceId) => boolean` (e.g. a focus filter).
  * @returns {{sentenceId: string, units: string[]} | null}
  */
-export function pickComposite(dueEasyUnits, state, content, now, rng = Math.random, { exclude = new Set(), allow = null } = {}) {
+export function pickComposite(dueEasyUnits, state, content, now, rng, { exclude = new Set(), allow = null } = {}) {
+  if (typeof rng !== "function") throw new TypeError("pickComposite: rng is required");
   const due = new Set(dueEasyUnits);
   const cutoff = now - COMPOSITE_COOLDOWN_DAYS * DAY_MS;
   const recent = new Set();

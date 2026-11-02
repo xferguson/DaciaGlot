@@ -136,7 +136,7 @@ test("call site: session requeueWrong", () => {
   const out = SEEDS.map((seed) => {
     const r = seeded(seed);
     const queue = Array.from({ length: 10 }, (_, i) => ({ cardId: `lr:q${i}` }));
-    return [requeueWrong(queue, 1, queue[1], r), r.calls];
+    return [requeueWrong(queue, 1, queue[1], r).at, r.calls];
   });
   assert.deepEqual(out, RECORD.requeue);
 });
