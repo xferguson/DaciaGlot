@@ -87,7 +87,7 @@ test("resolveFm: cloze in a seen sentence; prefer wins; no carrier and no label 
   const r = resolveFm("fm:fi:pres3sg", st, content, { now: NOW, rng: () => 0 });
   assert.equal(r.type, "cz");
   assert.equal(r.presentedId, `cz:${r.sentenceId}:${r.tokenIndex}`);
-  assert.equal(resolveFm("fm:fi:pres3sg", st, content, { now: NOW, prefer: "b" }).sentenceId, "b");
-  assert.deepEqual(resolveFm("fm:fi:pres3sg", state(), content, { now: NOW }), { type: "kf", presentedId: "kf:fi:pres3sg" });
+  assert.equal(resolveFm("fm:fi:pres3sg", st, content, { now: NOW, prefer: "b", rng: () => 0 }).sentenceId, "b");
+  assert.deepEqual(resolveFm("fm:fi:pres3sg", state(), content, { now: NOW, rng: () => 0 }), { type: "kf", presentedId: "kf:fi:pres3sg" });
   assert.equal(resolveFm("fm:fi:inf", state(), content, { now: NOW, rng: () => 0 }), null);
 });
