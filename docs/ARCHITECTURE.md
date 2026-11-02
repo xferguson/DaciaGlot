@@ -39,7 +39,7 @@ test/*.test.mjs              # node --test; import from ../app/js/core/*
 
 - `core/` modules must be importable in Node. They take time as a `now` parameter (ms epoch), and randomness as an injected `rng` function.
 - UI modules export `render(root, ctx)` and return an optional `cleanup()`.
-- `ctx = { state, content, store, tts, navigate }`.
+- `ctx = { state, content, store, tts, voices, navigate, update, updateSettings }`. Views change state only through `ctx.update(fn)` (`ctx.state = fn(ctx.state)`, one `store.save`, returns the new state; `fn` is a pure core transition) or `ctx.updateSettings(patch)`. Never assign `ctx.state` in a view.
 - No framework and no bundler. All imports use relative paths ending in `.js`.
 
 **Shared modules.** Search these before writing a helper; add to them rather than copying. "(coming in Qxx)" means not on `main` yet; the task that lands it removes the marker.
