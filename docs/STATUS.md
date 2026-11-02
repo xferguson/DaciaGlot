@@ -50,7 +50,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 |---|---|---|---|---|---|---|
 | [Q01](tasks/Q01-missing-pace-import.md) | Fix the missing pace import | Q | none | done | #87 | Shipped by #87 (`test/imports.test.mjs`, `ui/components/button.js`). Q16 replaces the import test with a stricter one. |
 | [Q02](tasks/Q02-view-characterization-tests.md) | Characterization tests for the card and session views | Q | none | todo |  | Extends `test/helpers/fake-dom.mjs`. Gates Q05, Q08, Q13. |
-| [Q03](tasks/Q03-core-time.md) | One time module: `core/time.js` | Q | none | review | `claude/q03-core-time` | `core/time.js` has `DAY_MS`, `dayKey`, `startOfDayPlus`; `session.js` re-exports `dayKey`. Q04 can import day helpers from `time.js` instead of `session.js`. |
+| [Q03](tasks/Q03-core-time.md) | One time module: `core/time.js` | Q | none | done | #90 | `core/time.js` has `DAY_MS`, `dayKey`, `startOfDayPlus`; `session.js` re-exports `dayKey`. Q04 can import day helpers from `time.js` instead of `session.js`. |
 | [Q04](tasks/Q04-core-history.md) | Day history in one place; break the session ↔ pace cycle | Q | Q03 | todo |  |  |
 | [Q05](tasks/Q05-answer-card.md) | One typed-answer card controller: `answerCard` | Q | Q02 | todo |  |  |
 | [Q06](tasks/Q06-core-random.md) | Shared randomness helpers: `core/random.js` | Q | none | todo |  | Keep each caller's `rng()` call sequence. |
