@@ -1,5 +1,6 @@
 // Card ids and unlock rules (ARCHITECTURE §3). Pure.
 import { tokenize, tokenKey } from "./normalize.js";
+import { DAY_MS as DAY } from "./time.js";
 
 export const CARD_TYPES = ["lr", "fm", "cz", "kf", "xf", "sb", "er"];
 
@@ -457,7 +458,6 @@ export function newTransformCards(state, content, { cap = XF_PER_SESSION, skip =
 
 export const ER_MIN_GAP_DAYS = 4;
 export const ER_PER_SESSION = 3;
-const DAY = 86400000;
 
 /**
  * FR-V1 (T32): a form is *easy* when it is claimed (FR-R4), its `fm` card's last counted grade was Easy (`lastGrade` 4),

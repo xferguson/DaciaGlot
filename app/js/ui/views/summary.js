@@ -2,8 +2,8 @@
 // The helpers are pure so they can be tested without a DOM.
 import { tulip } from "../components/ornament.js";
 import { allPatternStates } from "../../core/mastery.js";
+import { DAY_MS as DAY } from "../../core/time.js";
 
-const DAY = 86400000;
 export const EXPORT_REMINDER_DAYS = 14;
 export const EXPORT_REMINDER_MIN_STUDY_DAYS = 3;
 
