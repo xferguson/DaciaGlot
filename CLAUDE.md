@@ -39,6 +39,7 @@ When the owner asks for a product check-in (or to "check in as product designer"
 ```bash
 node --test                           # unit tests
 node scripts/validate-content.mjs      # content integrity (add --coverage for the report)
+node scripts/lint.mjs                  # lint app/js (--update-allow shrinks scripts/lint-allow.json; it never grows)
 python3 -m http.server -d app 8080     # local preview at http://localhost:8080/
 ```
 

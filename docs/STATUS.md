@@ -63,7 +63,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [Q13](tasks/Q13-models-out-of-views.md) | Pure models out of views; views never import views | Q | Q02 | todo |  |  |
 | [Q14](tasks/Q14-settings-defaults.md) | Settings defaults in one place; cards get a ready `speak` | Q | Q05 | todo |  |  |
 | [Q15](tasks/Q15-claim-handler.md) | Remove the global claim handler | Q | Q08 | todo |  |  |
-| [Q16](tasks/Q16-lint-ratchet.md) | Zero-dependency lint with ratcheting allowlists | Q | none | todo |  |  |
+| [Q16](tasks/Q16-lint-ratchet.md) | Zero-dependency lint with ratcheting allowlists | Q | none | in-progress | q16-lint-ratchet |  |
 | [Q17](tasks/Q17-how-we-build.md) | Write down how we build | Q | none | todo |  | Docs only. |
 | [Q18](tasks/Q18-close-out.md) | Close out: quote style, task template, allowlists at zero | Q | Q02–Q17 | todo |  |  |
 
