@@ -1,5 +1,6 @@
 // Intake pace (T36, FR-V5): pure helpers. Nothing here leaves the device.
 import { dayKey, DAY_MS as DAY } from "./time.js";
+import { bumpDay } from "./history.js";
 
 export const PACE_TARGET_DEFAULT = 15;
 export const BATCH_MIN = 5;
@@ -76,10 +77,7 @@ export function checkAccuracy(attempts, startedAt, endedAt) {
 
 /** State after a finished session: today's `newItems`, and (Learn only) the next batch size + last 10 batch records. Pure. */
 export function recordSession(state, { pace, accuracy, learn, now }) {
-  const key = dayKey(now);
-  const day = { minutes: 0, cards: 0, newSentences: 0, formsProduced: 0, ...state.history[key] };
-  day.newItems = (day.newItems ?? 0) + pace.newForms + pace.newSentences;
-  const out = { ...state, history: { ...state.history, [key]: day } };
+  const out = { ...state, history: bumpDay(state.history, now, (d) => { d.newItems += pace.newForms + pace.newSentences; }) };
   if (learn && pace.newForms + pace.newSentences > 0) {
     const cur = learnBatch(state);
     const target = state.settings.paceTarget ?? PACE_TARGET_DEFAULT;

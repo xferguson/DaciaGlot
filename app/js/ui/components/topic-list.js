@@ -51,8 +51,7 @@ export function renderList(root, ctx, tab, onChange = () => {}) {
   list.className = "list";
   const toggle = (topic) => {
     const focus = toggleFocus(ctx.state.settings.focus ?? [], topic);
-    ctx.state = { ...ctx.state, settings: { ...ctx.state.settings, focus } };
-    ctx.store.save(ctx.state);
+    ctx.updateSettings({ focus });
     renderList(root, ctx, tab, onChange);
     onChange(focus);
   };

@@ -41,7 +41,7 @@ test/*.test.mjs              # node --test; import from ../app/js/core/*
 
 - `core/` modules must be importable in Node. They take time as a `now` parameter (ms epoch), and randomness as an injected `rng` function.
 - UI modules export `render(root, ctx)` and return an optional `cleanup()`.
-- `ctx = { state, content, store, tts, navigate }`.
+- `ctx = { state, content, store, tts, voices, navigate, update, updateSettings }`. Views change state only through `ctx.update(fn)` (`ctx.state = fn(ctx.state)`, one `store.save`, returns the new state; `fn` is a pure core transition) or `ctx.updateSettings(patch)`. Never assign `ctx.state` in a view.
 - No framework and no bundler. All imports use relative paths ending in `.js`.
 
 **Shared modules.** Search these before writing a helper; add to them rather than copying. "(coming in Qxx)" means not on `main` yet; the task that lands it removes the marker.
@@ -49,7 +49,7 @@ test/*.test.mjs              # node --test; import from ../app/js/core/*
 | Module | What lives there |
 |---|---|
 | `core/time.js` | `DAY_MS`, `dayKey(now)`, `startOfDayPlus(now, n)` |
-| `core/history.js` (coming in Q04) | per-day history reads and writes |
+| `core/history.js` | per-day history reads and writes |
 | `core/random.js` (coming in Q06) | `shuffle` and index picks from an injected `rng` |
 | `core/cards.js` | `buildCardId`/`parseCardId`: the only way to make or read a card id; `CARD_SPEC` registry (coming in Q09) |
 | `core/units.js` | `unitId(u)`/`parseUnitId(id)`: the only way to make or read a unit id (coming in Q09) |
@@ -167,8 +167,10 @@ The session view calls `resolveFm` at render time and passes the presented id to
 
 ```js
 /** @typedef {{sentenceId:string, note:string, ts:number}} Flag */
-/** @typedef {{minutes:number, cards:number, newSentences:number, formsProduced:number}} DayStats */
+/** @typedef {{minutes:number, cards:number, newSentences:number, formsProduced:number, newItems:number}} DayStats */
 ```
+
+The empty record and the update helpers live in `core/history.js`: `emptyDay()`, `bumpDay(history, now, fn)` (new history; `fn` gets a copy of the day), `addMinutes(state, minutes, now)` (re-exported by `session.js`).
 
 ### 4.3 Attempt and UnitAggregate
 

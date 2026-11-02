@@ -34,8 +34,8 @@ export function render(root, ctx) {
   setClaimHandler({
     content: ctx.content,
     isClaimed: (unit) => unit in ctx.state.claimed,
-    claim: (unit) => { ctx.state = claimForm(ctx.state, unit, Date.now()); ctx.store.save(ctx.state); },
-    unclaim: (unit) => { ctx.state = unclaimForm(ctx.state, unit, Date.now()); ctx.store.save(ctx.state); },
+    claim: (unit) => { ctx.update((s) => claimForm(s, unit, Date.now())); },
+    unclaim: (unit) => { ctx.update((s) => unclaimForm(s, unit, Date.now())); },
   });
   const params = ctx.route?.params ?? {};
   // Old links (`mode=session`, `mode=focus`) open Mix. A focus (`f=type:id,…`, or old `type`+`id`) filters any mode (FR-S8).
@@ -79,8 +79,7 @@ export function render(root, ctx) {
       fillNames();
       root.querySelector("[data-due]")?.addEventListener("click", begin);
       root.querySelector("[data-switch]")?.addEventListener("click", () => {
-        ctx.state = { ...ctx.state, settings: { ...ctx.state.settings, focus: [suggest] } };
-        ctx.store.save(ctx.state);
+        ctx.updateSettings({ focus: [suggest] });
         ctx.navigate(`#/session?mode=${mode}&f=${encodeURIComponent(`${suggest.type}:${suggest.id}`)}`);
       });
       return;
@@ -158,8 +157,7 @@ export function render(root, ctx) {
         sentenceId: sentence.id,
         isFlagged: () => ctx.state.flags.some((f) => f.sentenceId === sentence.id),
         onSave(flag) {
-          ctx.state = { ...ctx.state, flags: [...ctx.state.flags, flag] };
-          ctx.store.save(ctx.state);
+          ctx.update((s) => ({ ...s, flags: [...s.flags, flag] }));
           toast("Flagged. See Settings to report it.");
         },
       }));
@@ -172,8 +170,7 @@ export function render(root, ctx) {
       tts: ctx.tts,
       settings: ctx.state.settings,
       onSetting(patch) {
-        ctx.state = { ...ctx.state, settings: { ...ctx.state.settings, ...patch } };
-        ctx.store.save(ctx.state);
+        ctx.updateSettings(patch);
       },
       onResult(r) {
         const grade = gradeFromResult(r);
@@ -181,25 +178,24 @@ export function render(root, ctx) {
         const seenBefore = Object.keys(ctx.state.seenSentences).length;
         const isEr = p.type === "er";
         const units = unitsRequiredForCard(shown, ctx.content);
-        ctx.state = isEr
-          ? applyErReview(ctx.state, item.cardId, grade, units, erMisses(sentence, r.diff), now, ctx.content, shown, item.composite ? item.units : null)
-          : applyReview(ctx.state, item.cardId, grade, units, now, ctx.content, shown);
-        ctx.store.save(ctx.state);
+        // FR-S9: Hard or wrong → back once, 3–5 cards later; a second time → off to the difficult list.
+        // A missed `er` waits for the ladder; its wrong parts return as single-form reviews (FR-D6).
+        const requeue = grade <= 2 && !isEr && !struggled.has(item.cardId);
+        const markHard = grade <= 2 && !isEr && struggled.has(item.cardId) && !(item.cardId in ctx.state.difficult);
+        ctx.update((s) => {
+          const reviewed = isEr
+            ? applyErReview(s, item.cardId, grade, units, erMisses(sentence, r.diff), now, ctx.content, shown, item.composite ? item.units : null)
+            : applyReview(s, item.cardId, grade, units, now, ctx.content, shown);
+          return markHard ? markDifficult(reviewed, item.cardId, now) : reviewed;
+        });
         stats.cards++;
         if (grade > 1) stats.correct++;
         if (Object.keys(ctx.state.seenSentences).length > seenBefore) stats.newSentences++;
-        // FR-S9: Hard or wrong → back once, 3–5 cards later; a second time → off to the difficult list.
-        // A missed `er` waits for the ladder; its wrong parts return as single-form reviews (FR-D6).
-        if (grade <= 2 && !isEr) {
-          if (!struggled.has(item.cardId)) {
-            struggled.add(item.cardId);
-            requeueWrong(queue, pos, item, Math.random, ctx.content);
-          } else if (!(item.cardId in ctx.state.difficult)) {
-            ctx.state = markDifficult(ctx.state, item.cardId, now);
-            stats.difficult++;
-          }
+        if (markHard) stats.difficult++;
+        if (requeue) {
+          struggled.add(item.cardId);
+          requeueWrong(queue, pos, item, Math.random, ctx.content);
         }
-        ctx.store.save(ctx.state);
         pos++;
         next();
       },
@@ -218,8 +214,7 @@ export function render(root, ctx) {
       settings: ctx.state.settings,
       onResult() {
         const before = Object.keys(ctx.state.seenSentences).length;
-        ctx.state = applyParadigm(ctx.state, item, Date.now(), ctx.content);
-        ctx.store.save(ctx.state);
+        ctx.update((s) => applyParadigm(s, item, Date.now(), ctx.content));
         stats.cards++;
         stats.correct++;
         stats.newSentences += Object.keys(ctx.state.seenSentences).length - before;
@@ -238,8 +233,7 @@ export function render(root, ctx) {
     const sentence = ctx.content.sentences.get(item.from);
     const blanks = sentence ? checkBlanks(sentence, forms) : [];
     if (!blanks.length) {
-      ctx.state = keepStarted(ctx.state, [{ ...item, forms }], Date.now());
-      ctx.store.save(ctx.state);
+      ctx.update((s) => keepStarted(s, [{ ...item, forms }], Date.now()));
       pos++;
       return next();
     }
@@ -256,13 +250,12 @@ export function render(root, ctx) {
       onResult(r) {
         const now = Date.now();
         const okAt = new Map((r.blanks ?? []).map((b) => [b.tokenIndex, b.ok]));
-        const wrong = [];
-        for (const b of blanks) {
-          const ok = okAt.get(b.tokenIndex) ?? r.result !== "wrong";
-          ctx.state = applyCheck(ctx.state, b.cardId, ok, unitsRequiredForCard(b.presentedId, ctx.content), now, b.presentedId, ctx.content);
-          if (!ok) wrong.push(b.cardId);
-        }
-        ctx.store.save(ctx.state);
+        const oks = blanks.map((b) => okAt.get(b.tokenIndex) ?? r.result !== "wrong");
+        const wrong = blanks.filter((_, i) => !oks[i]).map((b) => b.cardId);
+        ctx.update((s) => blanks.reduce(
+          (acc, b, i) => applyCheck(acc, b.cardId, oks[i], unitsRequiredForCard(b.presentedId, ctx.content), now, b.presentedId, ctx.content),
+          s,
+        ));
         stats.cards++;
         if (!wrong.length) stats.correct++;
         if (wrong.length && !item.requeued) {
@@ -275,17 +268,19 @@ export function render(root, ctx) {
   }
 
   /** `seenSentences` entries first seen during this session. */
-  function newExposures() {
-    return Object.fromEntries(Object.entries(ctx.state.seenSentences).filter(([id]) => !exposuresBefore.has(id)));
+  function newExposures(st = ctx.state) {
+    return Object.fromEntries(Object.entries(st.seenSentences).filter(([id]) => !exposuresBefore.has(id)));
   }
 
   function finish() {
     finished = true;
     const endedAt = Date.now();
-    ctx.state = addMinutes(ctx.state, (endedAt - startedAt) / 60000, endedAt);
-    const pace = sessionPace(ctx.state.attempts, newExposures(), startedAt, endedAt, ctx.content);
-    ctx.state = recordSession(ctx.state, { pace, accuracy: checkAccuracy(ctx.state.attempts, startedAt, endedAt), learn: mode === "learn", now: endedAt });
-    ctx.store.save(ctx.state);
+    let pace;
+    ctx.update((s) => {
+      const timed = addMinutes(s, (endedAt - startedAt) / 60000, endedAt);
+      pace = sessionPace(timed.attempts, newExposures(timed), startedAt, endedAt, ctx.content);
+      return recordSession(timed, { pace, accuracy: checkAccuracy(timed.attempts, startedAt, endedAt), learn: mode === "learn", now: endedAt });
+    });
     ctx.store.flush();
     const summary = summarize({
       before: patternsBefore, state: ctx.state, content: ctx.content, stats, startedAt, now: endedAt, pace,
@@ -301,9 +296,10 @@ export function render(root, ctx) {
     // time and make sure a half-introduced sentence's cloze cards come back next time.
     if (alive && startedAt && !finished) {
       const now = Date.now();
-      ctx.state = addMinutes(keepStarted(ctx.state, queue.slice(pos), now), (now - startedAt) / 60000, now);
-      ctx.state = recordSession(ctx.state, { pace: sessionPace(ctx.state.attempts, newExposures(), startedAt, now, ctx.content), accuracy: null, learn: false, now });
-      ctx.store.save(ctx.state);
+      ctx.update((s) => {
+        const timed = addMinutes(keepStarted(s, queue.slice(pos), now), (now - startedAt) / 60000, now);
+        return recordSession(timed, { pace: sessionPace(timed.attempts, newExposures(timed), startedAt, now, ctx.content), accuracy: null, learn: false, now });
+      });
       if (stats.cards) toast(`Session ended. Your ${stats.cards} answer${stats.cards === 1 ? " is" : "s are"} saved.`);
     }
     alive = false;

@@ -31,8 +31,7 @@ export function renderCanDos(root, ctx, levelId = "A1", opts = {}) {
       const checkedMap = { ...ctx.state.canDoChecked };
       if (box.checked) checkedMap[box.dataset.id] = Date.now();
       else delete checkedMap[box.dataset.id];
-      ctx.state = { ...ctx.state, canDoChecked: checkedMap };
-      ctx.store.save(ctx.state);
+      ctx.update((s) => ({ ...s, canDoChecked: checkedMap }));
     });
   });
 }
