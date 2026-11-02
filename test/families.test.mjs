@@ -4,7 +4,7 @@ import { findFamilies } from "../app/js/core/families.js";
 import { buildSession, applyParadigm, onePerFamily, nextDayStart } from "../app/js/core/session.js";
 import { pickNewSentences, siblingsOf } from "../app/js/core/select.js";
 import { pickCarrier } from "../app/js/core/carrier.js";
-import { paradigmRows } from "../app/js/ui/views/card-paradigm.js";
+import { paradigmRows } from "../app/js/ui/models/card-paradigm.js";
 import { newCard } from "../app/js/core/fsrs.js";
 import { makeContent, state, NOW } from "./helpers/mini-content.mjs";
 

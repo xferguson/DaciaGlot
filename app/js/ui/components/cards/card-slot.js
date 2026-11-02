@@ -1,7 +1,7 @@
 // Slot-building card (PRD FR-D5, FR-D7, FR-D8). Slots derived from a transform; type the whole sentence; one retry.
 
-import { parseCardId, slotsFor, lexemeForms } from "../../core/cards.js";
-import { answerCard } from "../components/answer-card.js";
+import { parseCardId, slotsFor, lexemeForms } from "../../../core/cards.js";
+import { answerCard } from "../answer-card.js";
 
 /** Pure: the tags shown for a slot: Leipzig glosses of the wanted form(s), else the pattern labels. */
 export const slotTags = (slot) => (slot.gloss?.length ? slot.gloss : slot.labels);

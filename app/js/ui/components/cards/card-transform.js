@@ -1,8 +1,8 @@
 // Transformation card (PRD FR-D4, FR-D7, FR-D8). Type the whole changed sentence; one retry.
 
-import { parseCardId, opInstruction, lexemeForms } from "../../core/cards.js";
-import { audioButton } from "../components/audio-button.js";
-import { answerCard } from "../components/answer-card.js";
+import { parseCardId, opInstruction, lexemeForms } from "../../../core/cards.js";
+import { audioButton } from "../audio-button.js";
+import { answerCard } from "../answer-card.js";
 
 export function renderCard(root, { card, sentence, content, tts, settings = {}, onResult, onSetting, rng = Math.random }) {
   const { transformIndex } = parseCardId(typeof card === "string" ? card : card.id ?? card.cardId);

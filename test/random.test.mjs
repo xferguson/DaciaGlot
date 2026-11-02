@@ -3,7 +3,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { shuffle, pickIndex, pickOne } from "../app/js/core/random.js";
-import { shuffle as lrShuffle, pickDistractors } from "../app/js/ui/views/card-lr.js";
+import { shuffle as lrShuffle } from "../app/js/ui/components/cards/card-lr.js";
+import { pickDistractors } from "../app/js/ui/models/card-lr.js";
 import { tileOptions } from "../app/js/core/cards.js";
 import { buildSession, onePerFamily, requeueWrong } from "../app/js/core/session.js";
 import { pickNewSentences } from "../app/js/core/select.js";

@@ -1,14 +1,14 @@
 // Key-forms card (PRD FR-D3). Lemma + gloss + form label; the learner types the form.
 
-import { checkAnswer } from "../../core/check.js";
-import { answerStep, initialAnswer, canRate } from "../../core/answer.js";
-import { parseCardId, labelFor } from "../../core/cards.js";
-import { audioButton } from "../components/audio-button.js";
-import { answerInput } from "../components/answer-input.js";
-import { diacriticBar } from "../components/diacritic-bar.js";
-import { renderFeedback, nextButtons, partsFor } from "../components/feedback.js";
-import { button } from "../components/button.js";
-import { retryMessage } from "../components/answer-card.js";
+import { checkAnswer } from "../../../core/check.js";
+import { answerStep, initialAnswer, canRate } from "../../../core/answer.js";
+import { parseCardId, labelFor } from "../../../core/cards.js";
+import { audioButton } from "../audio-button.js";
+import { answerInput } from "../answer-input.js";
+import { diacriticBar } from "../diacritic-bar.js";
+import { renderFeedback, nextButtons, partsFor } from "../feedback.js";
+import { button } from "../button.js";
+import { retryMessage } from "../answer-card.js";
 
 /**
  * `sentence` is an already-seen sentence containing this form, or null (then the form alone is played).

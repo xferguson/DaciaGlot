@@ -1,19 +1,11 @@
 // Paradigm card (PRD FR-R5): a family of near-identical sentences shown once as a small table.
 // Each row has audio, the Romanian with the differing word highlighted and labelled, and the English.
 
-import { differingToken } from "../../core/families.js";
-import { labelFor } from "../../core/cards.js";
-import { audioButton } from "../components/audio-button.js";
-import { advanceButton } from "../components/button.js";
+import { paradigmRows } from "../../models/card-paradigm.js";
+import { audioButton } from "../audio-button.js";
+import { advanceButton } from "../button.js";
 
-/** Pure: one row per member: `{id, ro, en, token, label}` (`token`/`label` are null when no word differs). */
-export function paradigmRows(members, content) {
-  return members.map((id) => {
-    const s = content.sentences.get(id);
-    const d = differingToken(s, (content.families.get(content.familyOf.get(id)) ?? []).filter((m) => m !== id), content.sentences);
-    return { id, ro: s.ro, en: s.en, token: d?.token ?? null, label: d ? labelFor(d.unit.slice(d.unit.indexOf(".") + 1)) : null };
-  });
-}
+export { paradigmRows };
 
 export function renderCard(root, { members, content, tts, settings = {}, onResult }) {
   const rate = settings.ttsRate ?? 0.9;

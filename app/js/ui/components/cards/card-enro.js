@@ -1,10 +1,10 @@
 // EN→RO card (PRD FR-D6, FR-D7, FR-D8, FR-V4). Shows the English; answer by speaking and self-grading, by word tiles,
 // or by typing the whole Romanian sentence (one retry). Audio is hidden until the answer is revealed.
 
-import { hintFor } from "../../core/check.js";
-import { lexemeForms } from "../../core/cards.js";
-import { erMisses } from "../../core/session.js";
-import { answerCard } from "../components/answer-card.js";
+import { hintFor } from "../../../core/check.js";
+import { lexemeForms } from "../../../core/cards.js";
+import { erMisses } from "../../../core/session.js";
+import { answerCard } from "../answer-card.js";
 
 export { hintFor };
 

@@ -1,9 +1,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { pickDistractors } from "../app/js/ui/views/card-lr.js";
+import { pickDistractors } from "../app/js/ui/models/card-lr.js";
 import { insertAt } from "../app/js/ui/components/diacritic-bar.js";
 import { partsFor } from "../app/js/ui/components/feedback.js";
-import { hintFor, tokenIndexOf } from "../app/js/ui/views/card-cloze.js";
+import { hintFor, tokenIndexOf } from "../app/js/ui/components/cards/card-cloze.js";
 
 const mk = (id, ro, lex, patterns = [], situations = ["x"]) => ({
   id, ro, patterns, situations,

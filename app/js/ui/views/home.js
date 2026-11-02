@@ -3,8 +3,9 @@ import { learnBatch } from "../../core/pace.js";
 import { levelProgress } from "../../core/mastery.js";
 import { rooster } from "../components/ornament.js";
 import { ring } from "../components/ring.js";
-import { currentLevelId } from "./dashboard.js";
-import { renderList, readyCount, situationName, focusParam } from "./lists.js";
+import { currentLevelId } from "../models/dashboard.js";
+import { renderList } from "../components/topic-list.js";
+import { readyCount, situationName, focusParam } from "../models/lists.js";
 
 /** "≈ N min" for a session of `reviews` due cards and `fresh` new sentences (the PRD FR-S7 rates). */
 function minutes(reviews, fresh) {

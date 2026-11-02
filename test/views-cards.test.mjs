@@ -6,13 +6,13 @@ import { installFakeDom } from "./helpers/fake-dom.mjs";
 import { makeContent } from "./helpers/mini-content.mjs";
 
 installFakeDom();
-const { renderCard: renderLr } = await import("../app/js/ui/views/card-lr.js");
-const { renderCard: renderCz } = await import("../app/js/ui/views/card-cloze.js");
-const { renderCard: renderKf } = await import("../app/js/ui/views/card-keyform.js");
-const { renderCard: renderXf } = await import("../app/js/ui/views/card-transform.js");
-const { renderCard: renderSb } = await import("../app/js/ui/views/card-slot.js");
-const { renderCard: renderEr } = await import("../app/js/ui/views/card-enro.js");
-const { renderCard: renderPg } = await import("../app/js/ui/views/card-paradigm.js");
+const { renderCard: renderLr } = await import("../app/js/ui/components/cards/card-lr.js");
+const { renderCard: renderCz } = await import("../app/js/ui/components/cards/card-cloze.js");
+const { renderCard: renderKf } = await import("../app/js/ui/components/cards/card-keyform.js");
+const { renderCard: renderXf } = await import("../app/js/ui/components/cards/card-transform.js");
+const { renderCard: renderSb } = await import("../app/js/ui/components/cards/card-slot.js");
+const { renderCard: renderEr } = await import("../app/js/ui/components/cards/card-enro.js");
+const { renderCard: renderPg } = await import("../app/js/ui/components/cards/card-paradigm.js");
 
 // ---------- content ----------
 

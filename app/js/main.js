@@ -4,7 +4,7 @@ import { foldClozeCards } from "./data/migrations.js";
 import { loadContent } from "./data/content.js";
 import * as tts from "./data/tts.js";
 import { showBanner } from "./ui/components/banner.js";
-import { exportReminderDue } from "./ui/views/summary.js";
+import { exportReminderDue } from "./ui/models/summary.js";
 import { toast } from "./ui/components/toast.js";
 
 function registerServiceWorker() {

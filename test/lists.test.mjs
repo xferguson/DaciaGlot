@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readyCount, listRows, progressCounts, parseFocusParam, focusParam, toggleFocus } from "../app/js/ui/views/lists.js";
-import { lexemeModel } from "../app/js/ui/views/lexeme.js";
+import { readyCount, listRows, progressCounts, parseFocusParam, focusParam, toggleFocus } from "../app/js/ui/models/lists.js";
+import { lexemeModel } from "../app/js/ui/models/lexeme.js";
 import { pickNewSentences } from "../app/js/core/select.js";
 import { buildSession, focusFirst, inFocus } from "../app/js/core/session.js";
 import { newCard } from "../app/js/core/fsrs.js";

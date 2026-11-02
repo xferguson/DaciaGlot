@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { diffPatternStates, formsProduced, exportReminderDue } from "../app/js/ui/views/summary.js";
+import { diffPatternStates, formsProduced, exportReminderDue } from "../app/js/ui/models/summary.js";
 import { NOW, state } from "./helpers/mini-content.mjs";
 
 const DAY = 86400000;
