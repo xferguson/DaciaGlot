@@ -1,7 +1,6 @@
 // Intake pace (T36, FR-V5): pure helpers. Nothing here leaves the device.
-import { dayKey } from "./session.js";
+import { dayKey, DAY_MS as DAY } from "./time.js";
 
-const DAY = 86400000;
 export const PACE_TARGET_DEFAULT = 15;
 export const BATCH_MIN = 5;
 export const BATCH_MAX = 40;

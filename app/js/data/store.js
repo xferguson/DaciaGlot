@@ -1,5 +1,6 @@
 import { CURRENT_SCHEMA_VERSION, migrate } from './migrations.js';
 import { compactAttempts } from '../core/mastery.js';
+import { DAY_MS } from '../core/time.js';
 
 export const STATE_KEY = 'dg:v1:state';
 const SAVE_DEBOUNCE_MS = 500;
@@ -167,7 +168,7 @@ export function load() {
 
   if (state) {
     // FR-X5: fold old attempts into aggregates, at most once a day.
-    if (state.lastCompactionAt == null || now - state.lastCompactionAt >= 86400000) state = compactAttempts(state, now);
+    if (state.lastCompactionAt == null || now - state.lastCompactionAt >= DAY_MS) state = compactAttempts(state, now);
     return state;
   }
   backupCorrupt(raw, now);

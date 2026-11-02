@@ -1,12 +1,11 @@
 // Progress dashboard (PRD FR-P5, P-6): production is the measure. Sections in FR-P5 order.
 import { levelProgress, allPatternStates, masteredSentenceIds } from "../../core/mastery.js";
-import { dayKey } from "../../core/session.js";
+import { dayKey, DAY_MS as DAY } from "../../core/time.js";
 import { ring } from "../components/ring.js";
 import { barChart, lineChart } from "../components/chart.js";
 import { weeklyIntake } from "../../core/pace.js";
 import { renderCanDos } from "./cando.js";
 
-const DAY = 86400000;
 export const WEEKS = 8;
 export const FORECAST_DAYS = 14;
 

@@ -13,6 +13,7 @@ DaciaGlot is an offline-first PWA for learning to **speak** Romanian. It is vani
    - **Immediately before every `git push`, run `git fetch origin main && git merge origin/main` and read its output** (don't pipe it through `tail` or `-q`). A merge done at the start of the session doesn't count. After opening the PR, read its `mergeable_state`; if it is `dirty`, or no checks have appeared after a minute or so, fix the conflict before waiting on CI.
    - `node --test` passes.
    - `node scripts/validate-content.mjs` passes (once it exists).
+   - `node scripts/lint.mjs` passes (coming in Q16).
    - Each of the task's acceptance criteria is met. Check them off in the PR description.
    - Set `docs/STATUS.md` to `done` (or `review`) and add a one-line note on anything the next task needs to know.
 6. One task per PR. The PR title is `T## · <task title>`.
@@ -33,6 +34,28 @@ When the owner asks for a product check-in (or to "check in as product designer"
 - **Romanian text:** use comma-below `ș ț` (never cedilla `ş ţ`). Follow `docs/CONTENT_GUIDE.md` §8.
 - **UI:** phone-first, 44 px tap targets, light and dark mode via CSS tokens in `app/css/app.css`. No external network requests at runtime.
 - Never commit secrets. The app has none, so if something seems to need one, stop and ask.
+
+## How we build
+
+Shared code lives in a few modules. **Search them before writing a helper**, and add to them instead of copying (list and paths in `docs/ARCHITECTURE.md` §1):
+
+- `core/time.js`: days and local midnights
+- `core/history.js`: per-day history (coming in Q04)
+- `core/random.js`: `shuffle` and index picks from an injected `rng` (coming in Q06)
+- `core/cards.js` `buildCardId`/`parseCardId`; `core/units.js` `unitId`/`parseUnitId` (coming in Q09)
+- `ui/dom.js`: safe markup helpers (coming in Q07)
+- `ui/components/button.js`: every button
+- `ui/components/answer-card.js`: `answerCard`, the typed-answer card controller (coming in Q05)
+
+Rules:
+
+1. Card and unit ids are made and read only through `buildCardId`/`parseCardId` and `unitId`/`parseUnitId`. No string splitting or template literals for ids.
+2. Views hold no logic. A view renders a model from a pure function, changes state only through `ctx.update(coreTransition)` (coming in Q08), and never imports another view.
+3. Every view change gets a fake-DOM test (`test/helpers/fake-dom.mjs`). Every bug fix starts with a failing test.
+4. A new card type is one `CARD_SPEC` entry in `core/cards.js` (coming in Q09) plus a renderer built on `answerCard`.
+5. `node scripts/lint.mjs` (coming in Q16) is part of the pre-PR checks.
+
+When a "(coming in Qxx)" module lands, that task drops its marker here and in ARCHITECTURE §1.
 
 ## Commands
 

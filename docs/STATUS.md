@@ -50,7 +50,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 |---|---|---|---|---|---|---|
 | [Q01](tasks/Q01-missing-pace-import.md) | Fix the missing pace import | Q | none | done | #87 | Shipped by #87 (`test/imports.test.mjs`, `ui/components/button.js`). Q16 replaces the import test with a stricter one. |
 | [Q02](tasks/Q02-view-characterization-tests.md) | Characterization tests for the card and session views | Q | none | todo |  | Extends `test/helpers/fake-dom.mjs`. Gates Q05, Q08, Q13. |
-| [Q03](tasks/Q03-core-time.md) | One time module: `core/time.js` | Q | none | todo |  |  |
+| [Q03](tasks/Q03-core-time.md) | One time module: `core/time.js` | Q | none | done | #90 | `core/time.js` has `DAY_MS`, `dayKey`, `startOfDayPlus`; `session.js` re-exports `dayKey`. Q04 can import day helpers from `time.js` instead of `session.js`. |
 | [Q04](tasks/Q04-core-history.md) | Day history in one place; break the session ↔ pace cycle | Q | Q03 | todo |  |  |
 | [Q05](tasks/Q05-answer-card.md) | One typed-answer card controller: `answerCard` | Q | Q02 | todo |  |  |
 | [Q06](tasks/Q06-core-random.md) | Shared randomness helpers: `core/random.js` | Q | none | todo |  | Keep each caller's `rng()` call sequence. |
@@ -64,7 +64,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [Q14](tasks/Q14-settings-defaults.md) | Settings defaults in one place; cards get a ready `speak` | Q | Q05 | todo |  |  |
 | [Q15](tasks/Q15-claim-handler.md) | Remove the global claim handler | Q | Q08 | todo |  |  |
 | [Q16](tasks/Q16-lint-ratchet.md) | Zero-dependency lint with ratcheting allowlists | Q | none | in-progress | q16-lint-ratchet |  |
-| [Q17](tasks/Q17-how-we-build.md) | Write down how we build | Q | none | todo |  | Docs only. |
+| [Q17](tasks/Q17-how-we-build.md) | Write down how we build | Q | none | done | q17-how-we-build | "How we build" in CLAUDE.md, shared-modules table in ARCHITECTURE §1. Q03–Q09, Q16: when your module lands, drop its "(coming in Qxx)" marker in both places. |
 | [Q18](tasks/Q18-close-out.md) | Close out: quote style, task template, allowlists at zero | Q | Q02–Q17 | todo |  |  |
 
 ## Manual activities (later)
