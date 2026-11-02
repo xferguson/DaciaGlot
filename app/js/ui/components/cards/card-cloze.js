@@ -1,12 +1,12 @@
 // Cloze card (PRD FR-D2, FR-D7, FR-D8). Type the blanked token; one retry.
 
-import { checkAnswer } from "../../core/check.js";
-import { lexemeForms } from "../../core/cards.js";
-import { audioButton } from "../components/audio-button.js";
-import { answerInput } from "../components/answer-input.js";
-import { diacriticBar } from "../components/diacritic-bar.js";
-import { renderFeedback, nextButtons, partsFor } from "../components/feedback.js";
-import { button } from "../components/button.js";
+import { checkAnswer } from "../../../core/check.js";
+import { lexemeForms } from "../../../core/cards.js";
+import { audioButton } from "../audio-button.js";
+import { answerInput } from "../answer-input.js";
+import { diacriticBar } from "../diacritic-bar.js";
+import { renderFeedback, nextButtons, partsFor } from "../feedback.js";
+import { button } from "../button.js";
 
 /** Pure: first letter of each expected token that is still wrong or missing. */
 export function hintFor(input, expected, accept = []) {

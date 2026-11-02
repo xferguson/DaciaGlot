@@ -1,19 +1,13 @@
-// Slot-building card (PRD FR-D5, FR-D7, FR-D8). Slots derived from a transform; type the whole sentence; one retry.
+// Transformation card (PRD FR-D4, FR-D7, FR-D8). Type the whole changed sentence; one retry.
 
-import { checkAnswer } from "../../core/check.js";
-import { parseCardId, slotsFor, lexemeForms } from "../../core/cards.js";
-import { audioButton } from "../components/audio-button.js";
-import { getMode, mountAnswer, tapDiff, wordsOf } from "../components/answer-mode.js";
-import { renderFeedback, nextButtons, partsFor } from "../components/feedback.js";
-import { hintFor } from "./card-transform.js";
+import { checkAnswer } from "../../../core/check.js";
+import { parseCardId, opInstruction, lexemeForms } from "../../../core/cards.js";
+import { audioButton } from "../audio-button.js";
+import { getMode, mountAnswer, tapDiff, wordsOf } from "../answer-mode.js";
+import { hintFor } from "../../models/hint.js";
+import { renderFeedback, nextButtons, partsFor } from "../feedback.js";
 
-/** Pure: the tags shown for a slot: Leipzig glosses of the wanted form(s), else the pattern labels. */
-export const slotTags = (slot) => (slot.gloss?.length ? slot.gloss : slot.labels);
-
-/** Pure: the slot line as text, e.g. `Ieri + [not] [past] + termina + sprint`. */
-export function slotLine(slots) {
-  return slots.map((s) => (s.type === "word" ? s.text : slotTags(s).map((l) => `[${l}]`).join(" "))).join(" + ");
-}
+export { hintFor };
 
 export function renderCard(root, { card, sentence, content, tts, settings = {}, onResult, onSetting, rng = Math.random }) {
   const { transformIndex } = parseCardId(typeof card === "string" ? card : card.id ?? card.cardId);
@@ -23,34 +17,22 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
   const avoid = content ? lexemeForms(sentence, content) : [];
 
   root.innerHTML = `
-    <section class="card card-slot" data-card="${sentence.id}:${transformIndex}">
-      <p class="muted">Build the sentence</p>
-      <p class="en"></p>
-      <p class="slot-line" lang="ro"></p>
+    <section class="card card-transform" data-card="${sentence.id}:${transformIndex}">
+      <p class="muted">Transform</p>
+      <p class="xf-source" lang="ro"></p>
+      <div class="audio-row"></div>
+      <p class="xf-instruction"><strong></strong></p>
+      <p class="muted xf-en"></p>
       <div class="mode-slot"></div>
       <div class="input-slot"></div>
       <div class="bar-slot"></div>
       <div class="hint-line muted" aria-live="polite"></div>
       <div class="feedback-slot"></div>
-      <div class="audio-row"></div>
       <div class="actions row"></div>
     </section>`;
-  root.querySelector(".en").textContent = t.en ?? "";
-  const line = root.querySelector(".slot-line");
-  slotsFor(sentence, t, content).forEach((s, i) => {
-    if (i) line.append(" + ");
-    if (s.type === "word") line.append(s.text);
-    else {
-      const chip = document.createElement("span");
-      chip.className = "chip slot-gloss";
-      chip.textContent = slotTags(s).map((l) => `[${l}]`).join(" ");
-      if (s.gloss?.length) {
-        chip.title = s.labels.join(" · ");
-        chip.setAttribute("aria-label", `${s.gloss.join(" ")} (${s.labels.join(", ")})`);
-      }
-      line.append(chip);
-    }
-  });
+  root.querySelector(".xf-source").textContent = sentence.ro;
+  root.querySelector(".xf-instruction strong").textContent = opInstruction(t.op);
+  root.querySelector(".audio-row").append(audioButton({ text: sentence.ro, rateNormal: rate }));
   const hintLine = root.querySelector(".hint-line");
   const slot = root.querySelector(".feedback-slot");
   const actions = root.querySelector(".actions");
@@ -65,7 +47,7 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
 
   function mount() {
     ({ input } = mountAnswer({
-      mode, slots, sentence, content, rng, ro: t.ro, label: "Sentence",
+      mode, slots, sentence, content, rng, ro: t.ro, label: "Changed sentence",
       words: wordsOf(sentence, t.ro), size: Math.max(t.ro.length, 12),
       say: () => speak(t.ro),
       onCheck: check,
@@ -105,7 +87,6 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
       parts: partsFor([], diff),
       en: t.en ?? null,
     });
-    root.querySelector(".audio-row").append(audioButton({ text: t.ro, rateNormal: rate }));
     const clean = result !== "wrong" && attempts === 1 && !usedHint;
     nextButtons(actions, {
       canRate: clean,
@@ -129,6 +110,7 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
     input.focus();
   }
 
+  if (settings.autoplay !== false) speak(sentence.ro);
   mount();
   return () => { finished = true; };
 }

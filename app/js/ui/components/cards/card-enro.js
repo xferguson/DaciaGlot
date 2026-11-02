@@ -1,12 +1,12 @@
 // EN→RO card (PRD FR-D6, FR-D7, FR-D8, FR-V4). Shows the English; answer by speaking and self-grading, by word tiles,
 // or by typing the whole Romanian sentence (one retry). Audio is hidden until the answer is revealed.
 
-import { checkAnswer } from "../../core/check.js";
-import { lexemeForms } from "../../core/cards.js";
-import { audioButton } from "../components/audio-button.js";
-import { getMode, mountAnswer, tapDiff, wordsOf } from "../components/answer-mode.js";
-import { erMisses } from "../../core/session.js";
-import { renderFeedback, nextButtons, partsFor } from "../components/feedback.js";
+import { checkAnswer } from "../../../core/check.js";
+import { lexemeForms } from "../../../core/cards.js";
+import { audioButton } from "../audio-button.js";
+import { getMode, mountAnswer, tapDiff, wordsOf } from "../answer-mode.js";
+import { erMisses } from "../../../core/session.js";
+import { renderFeedback, nextButtons, partsFor } from "../feedback.js";
 
 /** Pure: first letter of each expected token that is still wrong or missing. */
 export function hintFor(input, expected, accept = []) {

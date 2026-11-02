@@ -5,7 +5,7 @@ import { indexContent, packPaths } from "../app/js/data/content.js";
 import { levelProgress, allPatternStates, sentenceMastered, masteredSentenceIds } from "../app/js/core/mastery.js";
 import { dayKey } from "../app/js/core/session.js";
 import { defaultState } from "../app/js/data/store.js";
-import { currentLevelId, dashboardModel, productionStats, weeklyHistory, dueForecast, patternTrend, WEEKS, FORECAST_DAYS } from "../app/js/ui/views/dashboard.js";
+import { currentLevelId, dashboardModel, productionStats, weeklyHistory, dueForecast, patternTrend, WEEKS, FORECAST_DAYS } from "../app/js/ui/models/dashboard.js";
 import { niceMax } from "../app/js/ui/components/chart.js";
 import { arcLength } from "../app/js/ui/components/ring.js";
 

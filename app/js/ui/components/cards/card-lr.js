@@ -1,42 +1,14 @@
 // Listen & recognize card (PRD FR-D1, FR-D7). Pick the text that matches the audio.
 
-import { audioButton } from "../components/audio-button.js";
-import { renderFeedback, nextButtons, partsFor } from "../components/feedback.js";
+import { audioButton } from "../audio-button.js";
+import { renderFeedback, nextButtons, partsFor } from "../feedback.js";
 
-import { shuffle } from "../../core/random.js";
+import { shuffle } from "../../../core/random.js";
+import { pickDistractors } from "../../models/card-lr.js";
 
 // Q06: `shuffle` lives in core/random.js; re-exported here for one release.
-export { shuffle };
+export { shuffle, pickDistractors };
 
-const lexemesOf = (s) => [...new Set(s.tokens.flatMap((t) => t.units.map((u) => u.lex)))];
-
-/**
- * Pure. Up to 3 distractor sentences, never the answer or a sentence with identical text.
- * Preference: shares a lexeme, then shares a pattern, then same situation, then anything.
- */
-export function pickDistractors(sentence, content, rng = Math.random, count = 3) {
-  const taken = new Set([sentence.id]);
-  const texts = new Set([sentence.ro]);
-  const out = [];
-  const tiers = [
-    () => lexemesOf(sentence).flatMap((l) => content.sentencesByLexeme?.get(l) ?? []),
-    () => (sentence.patterns ?? []).flatMap((p) => content.sentencesByPattern?.get(p) ?? []),
-    () => (sentence.situations ?? []).flatMap((s) => content.sentencesBySituation?.get(s) ?? []),
-    () => [...content.sentences.keys()],
-  ];
-  for (const tier of tiers) {
-    const ids = shuffle([...new Set(tier())].filter((id) => !taken.has(id)), rng);
-    for (const id of ids) {
-      if (out.length >= count) return out;
-      const s = content.sentences.get(id);
-      if (!s || texts.has(s.ro)) continue;
-      taken.add(id);
-      texts.add(s.ro);
-      out.push(s);
-    }
-  }
-  return out;
-}
 
 export function renderCard(root, { card, sentence, content, tts, settings = {}, onResult, rng = Math.random }) {
   const rate = settings.ttsRate ?? 0.9;

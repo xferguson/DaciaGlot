@@ -1,8 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { esc, html, raw, el } from "../app/js/ui/dom.js";
-import { renderCanDos } from "../app/js/ui/views/cando.js";
-import { renderSummary } from "../app/js/ui/views/summary.js";
+import { renderCanDos } from "../app/js/ui/components/can-dos.js";
+import { renderSummary } from "../app/js/ui/components/session-summary.js";
 import { FakeEl, installFakeDom } from "./helpers/fake-dom.mjs";
 
 // ---- esc ----

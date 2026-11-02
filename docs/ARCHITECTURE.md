@@ -28,8 +28,10 @@ app/                         # deployed site root (GitHub Pages)
       store.js  migrations.js
       tts.js
     ui/
-      components/            # diacritic-bar.js, audio-button.js, toast.js, banner.js …
-      views/                 # home.js, session.js, card-*.js, settings.js, lists.js, dashboard.js, lexeme.js
+      components/            # diacritic-bar.js, audio-button.js, toast.js, banner.js, topic-list.js, can-dos.js, session-summary.js …
+        cards/               # card-*.js: one renderer per card type (moved from views/ in Q13)
+      models/                # pure view models (dashboard, lists, lexeme, summary, card-lr, card-paradigm, hint); tests import these
+      views/                 # home.js, session.js, settings.js, lists.js, dashboard.js, lexeme.js, summary.js, cando.js (import core/, data/, components/, models/, dom.js only)
   content/                   # see CONTENT_GUIDE.md
 scripts/validate-content.mjs
 test/*.test.mjs              # node --test; import from ../app/js/core/*
