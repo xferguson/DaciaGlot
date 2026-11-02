@@ -7,8 +7,9 @@ import { carriersFor, pickComposite } from "./carrier.js";
 import { learnBatch } from "./pace.js";
 import { pickIndex, pickOne } from "./random.js";
 import { DAY_MS, dayKey, startOfDayPlus } from "./time.js";
+import { bumpDay, addMinutes } from "./history.js";
 
-export { dayKey };
+export { dayKey, addMinutes };
 
 export const QUICK_CAP = 15;
 export const SEC_PER_REVIEW = 12;
@@ -465,17 +466,6 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
   const estimateSec = dueSec(due) + (kf.length + xf.length + er.length) * SEC_PER_NEW
     + groups.reduce((sum, g) => sum + newSentenceSec(g.reduce((n, q) => n + (q.forms?.length ?? 0), 0), learn ? SEC_PER_NEW_FAST : SEC_PER_NEW) + (g[0].members ? SEC_PER_PARADIGM_ROW * (g[0].members.length - 1) : 0), 0);
   return plan ? { queue, estimateSec, plan } : { queue, estimateSec };
-}
-
-function bumpDay(history, now, fn) {
-  const key = dayKey(now);
-  const day = { minutes: 0, cards: 0, newSentences: 0, formsProduced: 0, ...history[key] };
-  fn(day);
-  return { ...history, [key]: day };
-}
-
-export function addMinutes(state, minutes, now) {
-  return { ...state, history: bumpDay(state.history, now, (d) => { d.minutes += minutes; }) };
 }
 
 /** The `seenSentences` and `lexemeSentences` after the learner has met a sentence (`lr`, or a composite `er`). */
