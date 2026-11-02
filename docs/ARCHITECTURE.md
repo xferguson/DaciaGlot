@@ -20,7 +20,8 @@ app/                         # deployed site root (GitHub Pages)
     core/                    # PURE: no DOM, no storage, no globals → unit-tested in Node
       normalize.js  check.js  equivalences.js
       fsrs.js
-      units.js  mastery.js  select.js  session.js
+      units.js  mastery.js  select.js  session.js (barrel)
+      queue.js  due.js  spacing.js  review.js  schedule.js   # what session.js re-exports (Q11)
       time.js                # DAY_MS, dayKey, startOfDayPlus (local days)
       cards.js               # card id parsing/building, unlock rules
     data/                    # side effects live here
@@ -310,6 +311,8 @@ A sentence is mastered when every `cloze: true` unit's `fm` card has stability �
 - **percent** = the mean of the three ratios, × 100.
 
 ## 8. Sessions (`core/session.js`)
+
+`session.js` is a barrel: import from it, the names below are unchanged. The code lives in `queue.js` (`MODES`, `buildSession` and its pipeline steps `selectDue` → `trimToBudget` (Mix) → `pickNew` → `groupNew` → `interleave` → `estimate`, plus `newDrills`; `mixPlan`, `learnPlan`), `due.js` (`dueCards`, `inFocus`, `cardKeys`, `burySiblings`, `onePerFamily`, `composeReviews`), `spacing.js` (`spaceOut`, `placeChecks`, `checkBlanks`, `requeueWrong`), `review.js` (`applyReview`, `applyErReview`, `applyParadigm`, `applyCheck`, `erMisses`, claims, `keepStarted`, `markDifficult`) and `schedule.js` (`ladderDays`, `gradeFromResult`, `scheduleCard`). New code imports the specific module. `test/session-golden.test.mjs` pins `buildSession` for every mode.
 
 ```js
 buildSession({ mode /* "quick"|"review"|"learn"|"mix"|"session" */, focus /* filters every mode (FR-S8) */, state, content, now, rng, newSentenceIds })
