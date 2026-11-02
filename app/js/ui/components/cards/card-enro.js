@@ -9,13 +9,13 @@ import { answerCard } from "../answer-card.js";
 
 export { hintFor };
 
-export function renderCard(root, { card, sentence, content, speak: speakIn, rate: rateIn, tts, settings = {}, label, onResult, onSetting, rng = Math.random }) {
+export function renderCard(root, { card, sentence, content, speak: speakIn, rate: rateIn, tts, settings = {}, label, onResult, onSetting, claims = null, rng = Math.random }) {
   const { speak, rate } = speechFor({ speak: speakIn, rate: rateIn, tts, settings });
   const cleanup = answerCard(root, {
     cls: "card-enro", dataCard: card?.id ?? card ?? "", audio: "mid", label: "Romanian sentence",
     header: '<p class="muted"></p><p class="en"><strong></strong></p>',
     expected: sentence.ro, accept: sentence.accept ?? [], avoid: content ? lexemeForms(sentence, content) : [],
-    sentence, content, rng, settings, partTokens: sentence.tokens, en: sentence.en, onResult, onSetting,
+    sentence, content, rng, settings, partTokens: sentence.tokens, en: sentence.en, onResult, onSetting, claims,
     speak,
     extras(diff, slot) {
       const misses = erMisses(sentence, diff);

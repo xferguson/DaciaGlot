@@ -12,7 +12,7 @@ export function slotLine(slots) {
   return slots.map((s) => (s.type === "word" ? s.text : slotTags(s).map((l) => `[${l}]`).join(" "))).join(" + ");
 }
 
-export function renderCard(root, { card, sentence, content, speak: speakIn, rate: rateIn, tts, settings = {}, onResult, onSetting, rng = Math.random }) {
+export function renderCard(root, { card, sentence, content, speak: speakIn, rate: rateIn, tts, settings = {}, onResult, onSetting, claims = null, rng = Math.random }) {
   const { transformIndex } = parseCardId(typeof card === "string" ? card : card.id ?? card.cardId);
   const t = sentence.transforms[transformIndex];
   const { speak, rate } = speechFor({ speak: speakIn, rate: rateIn, tts, settings });
@@ -20,7 +20,7 @@ export function renderCard(root, { card, sentence, content, speak: speakIn, rate
     cls: "card-slot", dataCard: `${sentence.id}:${transformIndex}`, audio: "end", label: "Sentence",
     header: '<p class="muted">Build the sentence</p><p class="en"></p><p class="slot-line" lang="ro"></p>',
     expected: t.ro, accept: t.accept, avoid: content ? lexemeForms(sentence, content) : [], ro: t.ro,
-    sentence, content, rng, settings, en: t.en ?? null, onResult, onSetting,
+    sentence, content, rng, settings, en: t.en ?? null, onResult, onSetting, claims,
     speak,
   });
   root.querySelector(".en").textContent = t.en ?? "";

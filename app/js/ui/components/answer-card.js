@@ -28,7 +28,7 @@ export function retryMessage(text = "Not quite. Try once more.") {
 export function answerCard(root, {
   cls, dataCard, header = "", audio = null, label, expected, accept = [], avoid = [], ro = undefined,
   sentence, content, speak, settings = {}, rng = Math.random, partTokens = [], en = null,
-  onResult, onSetting, extras,
+  onResult, onSetting, extras, claims = null,
 }) {
   const rate = speechFor({ settings }).rate;
   root.innerHTML = `
@@ -98,7 +98,7 @@ export function answerCard(root, {
     hintLine.textContent = "";
     if (audio === "mid") showAudio();
     if (!spoke) speak(expected);
-    renderFeedback(slot, { result, parts: partsFor(partTokens, diff), en });
+    renderFeedback(slot, { result, parts: partsFor(partTokens, diff), en, claims });
     if (audio === "end") showAudio();
     const extra = extras?.(diff, slot) ?? {};
     const { usedHint, attempts } = st;
