@@ -50,8 +50,7 @@ export function render(root, ctx) {
       });
       claim.style.marginLeft = "auto";
       claim.addEventListener("click", () => {
-        ctx.state = f.claimed ? unclaimForm(ctx.state, f.unit, Date.now()) : claimForm(ctx.state, f.unit, Date.now());
-        ctx.store.save(ctx.state);
+        ctx.update((s) => (f.claimed ? unclaimForm(s, f.unit, Date.now()) : claimForm(s, f.unit, Date.now())));
         render(root, ctx);
       });
       row.append(claim);

@@ -60,8 +60,7 @@ export function render(root, ctx) {
         .map((f) => (f.type === "pattern" ? ctx.content.patterns.get(f.id)?.name ?? f.id : situationName(f.id)))
         .join(", ");
       modes.querySelector("[data-clear]").addEventListener("click", () => {
-        ctx.state = { ...ctx.state, settings: { ...ctx.state.settings, focus: [] } };
-        ctx.store.save(ctx.state);
+        ctx.updateSettings({ focus: [] });
         renderModes();
         show(activeTab);
       });

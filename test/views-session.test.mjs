@@ -40,6 +40,8 @@ function start(st, params = { mode: "quick" }) {
     content,
     route: { params },
     store: { save: (s) => saves.push(s), flush: () => { ctx.flushes++; } },
+    update(fn) { ctx.state = fn(ctx.state); ctx.store.save(ctx.state); return ctx.state; },
+    updateSettings(patch) { return ctx.update((s) => ({ ...s, settings: { ...s.settings, ...patch } })); },
     flushes: 0,
     tts: { speak: () => Promise.resolve() },
     navigate: (h) => navs.push(h),
@@ -88,12 +90,12 @@ test("a Quick queue of due cards reaches the summary, saving and flushing on the
   assert.ok(s.isSummary(), "summary shown");
   assert.equal(s.root.querySelector('[data-n="cards"]').textContent, "3");
   assert.equal(s.root.querySelector('[data-n="correct"]').textContent, "3");
-  assert.equal(s.saves.length, 3 * 2 + 1, "two saves per card, one at the end");
+  assert.equal(s.saves.length, 3 + 1, "one save per card, one at the end");
   assert.equal(s.ctx.flushes, 1);
   assert.ok(Object.values(s.ctx.state.history).length, "the day is recorded");
   // Leaving after the summary records nothing more.
   s.cleanup();
-  assert.equal(s.saves.length, 7);
+  assert.equal(s.saves.length, 4);
   assert.equal(s.ctx.flushes, 2);
 });
 
