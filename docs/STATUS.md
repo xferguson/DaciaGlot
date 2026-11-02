@@ -54,7 +54,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [Q04](tasks/Q04-core-history.md) | Day history in one place; break the session ↔ pace cycle | Q | Q03 | todo |  |  |
 | [Q05](tasks/Q05-answer-card.md) | One typed-answer card controller: `answerCard` | Q | Q02 | todo |  |  |
 | [Q06](tasks/Q06-core-random.md) | Shared randomness helpers: `core/random.js` | Q | none | todo |  | Keep each caller's `rng()` call sequence. |
-| [Q07](tasks/Q07-ui-dom.md) | Safe markup helpers: `ui/dom.js` | Q | none | in-progress | q07-ui-dom |  |
+| [Q07](tasks/Q07-ui-dom.md) | Safe markup helpers: `ui/dom.js` | Q | none | review | q07-ui-dom | `ui/dom.js` exports `esc`, `raw`, `html` (returns a `raw` value; assign it straight to innerHTML) and `el`. Card views, `session.js`, `home.js`, `lists.js` still interpolate into innerHTML (see the PR). |
 | [Q08](tasks/Q08-ctx-update.md) | One state-update path for views: `ctx.update` | Q | Q02 | todo |  |  |
 | [Q09](tasks/Q09-card-registry.md) | Card-type registry and id helpers | Q | Q04, Q10 | todo |  |  |
 | [Q10](tasks/Q10-core-purity.md) | Enforce the pure core: required `rng`, no mutation | Q | Q06 | todo |  |  |

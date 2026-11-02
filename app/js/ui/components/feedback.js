@@ -1,6 +1,7 @@
 // Light feedback (PRD P-8): the expected sentence with wrong tokens marked, no explanations.
 import { labelFor } from "../../core/cards.js";
 import { advanceButton } from "./button.js";
+import { el } from "../dom.js";
 
 /**
  * Claims (FR-R4): the view that owns the state registers how a tapped token reads and changes claims.
@@ -10,8 +11,6 @@ let claims = null;
 export function setClaimHandler(handler) {
   claims = handler;
 }
-
-const el = (tag, props = {}) => Object.assign(document.createElement(tag), props);
 
 /** A bottom sheet for one word form: its details, "I can produce this" (or Undo) and a link to the word page. */
 export function openFormSheet(unit, token) {

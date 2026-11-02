@@ -2,6 +2,7 @@
 // The helpers are pure so they can be tested without a DOM.
 import { tulip } from "../components/ornament.js";
 import { allPatternStates } from "../../core/mastery.js";
+import { html } from "../dom.js";
 
 const DAY = 86400000;
 export const EXPORT_REMINDER_DAYS = 14;
@@ -49,15 +50,14 @@ export function summarize({ before, state, content, stats, startedAt, now, pace 
 /** Pace block (T36, FR-V5): what came in this session and how fast, against the target. Learner-only, local. */
 function paceBlock(box, { pace, target }, nameOf) {
   if (!pace) { box.hidden = true; return; }
-  const add = (html) => { const p = document.createElement("p"); p.innerHTML = html; box.append(p); };
-  const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]);
+  const add = (markup) => { const p = document.createElement("p"); p.innerHTML = markup; box.append(p); };
   if (!pace.newForms && !pace.newSentences) {
     add("<strong>Review session</strong>: nothing new this time.");
     return;
   }
   const first = pace.newPatterns[0];
-  add(`New this session: <strong>${pace.newForms}</strong> words · <strong>${pace.newSentences}</strong> sentences${first ? ` · first <em>${esc(nameOf(first))}</em>` : ""}`);
-  add(`<strong>${(Math.round(pace.perTen * 10) / 10).toString()}</strong> per 10 min (target ${target})`);
+  add(html`New this session: <strong>${pace.newForms}</strong> words · <strong>${pace.newSentences}</strong> sentences${first ? html` · first <em>${nameOf(first)}</em>` : ""}`);
+  add(html`<strong>${(Math.round(pace.perTen * 10) / 10).toString()}</strong> per 10 min (target ${target})`);
 }
 
 /** Render the summary into `root`. `onMore` starts another Quick session. */
