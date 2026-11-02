@@ -47,7 +47,7 @@ test/*.test.mjs              # node --test; import from ../app/js/core/*
 | Module | What lives there |
 |---|---|
 | `core/time.js` | `DAY_MS`, `dayKey(now)`, `startOfDayPlus(now, n)` |
-| `core/history.js` (coming in Q04) | per-day history reads and writes |
+| `core/history.js` | per-day history reads and writes |
 | `core/random.js` (coming in Q06) | `shuffle` and index picks from an injected `rng` |
 | `core/cards.js` | `buildCardId`/`parseCardId`: the only way to make or read a card id; `CARD_SPEC` registry (coming in Q09) |
 | `core/units.js` | `unitId(u)`/`parseUnitId(id)`: the only way to make or read a unit id (coming in Q09) |
@@ -165,8 +165,10 @@ The session view calls `resolveFm` at render time and passes the presented id to
 
 ```js
 /** @typedef {{sentenceId:string, note:string, ts:number}} Flag */
-/** @typedef {{minutes:number, cards:number, newSentences:number, formsProduced:number}} DayStats */
+/** @typedef {{minutes:number, cards:number, newSentences:number, formsProduced:number, newItems:number}} DayStats */
 ```
+
+The empty record and the update helpers live in `core/history.js`: `emptyDay()`, `bumpDay(history, now, fn)` (new history; `fn` gets a copy of the day), `addMinutes(state, minutes, now)` (re-exported by `session.js`).
 
 ### 4.3 Attempt and UnitAggregate
 
