@@ -3,6 +3,7 @@ import { parseCardId, buildCardId, unitIdOfFm, clozeUnitIds } from "./cards.js";
 import { unitsForSentence, isKnown } from "./units.js";
 import { pickOne } from "./random.js";
 import { DAY_MS } from "./time.js";
+import { unitId, parseUnitId } from "./unit-id.js";
 
 /** A carrier is skipped when it was named in this many of the unit's latest attempts. */
 export const RECENT_ATTEMPTS = 3;
@@ -12,18 +13,18 @@ function sentenceOfCard(cardId) {
 }
 
 /**
- * Seen sentences with a token that can be blanked for `unitId`: a `cloze: true` token carrying it, or any
+ * Seen sentences with a token that can be blanked for `unit`: a `cloze: true` token carrying it, or any
  * token whose only unit it is. One entry per sentence (its first such token).
  * @returns {{sentenceId: string, tokenIndex: number}[]}
  */
-export function carriersFor(unitId, state, content) {
-  const lex = unitId.slice(0, unitId.indexOf("."));
+export function carriersFor(unit, state, content) {
+  const lex = parseUnitId(unit).lex;
   const out = [];
   for (const sid of content.sentencesByLexeme.get(lex) ?? []) {
     if (!(sid in state.seenSentences)) continue;
     const s = content.sentences.get(sid);
     const tokenIndex = s?.tokens.findIndex((t) =>
-      t.units.some((u) => `${u.lex}.${u.form}` === unitId) && (t.cloze || t.units.length === 1));
+      t.units.some((u) => unitId(u) === unit) && (t.cloze || t.units.length === 1));
     if (tokenIndex >= 0) out.push({ sentenceId: sid, tokenIndex });
   }
   return out;
@@ -116,7 +117,7 @@ export function pickComposite(dueEasyUnits, state, content, now, rng, { exclude 
   const recent = new Set();
   for (const a of state.attempts) if (a.t > cutoff) { const sid = sentenceOfCard(a.card); if (sid) recent.add(sid); }
   const candidates = new Set();
-  for (const u of due) for (const sid of content.sentencesByLexeme.get(u.slice(0, u.indexOf("."))) ?? []) candidates.add(sid);
+  for (const u of due) for (const sid of content.sentencesByLexeme.get(parseUnitId(u).lex) ?? []) candidates.add(sid);
   const found = [];
   for (const sid of candidates) {
     if (exclude.has(sid) || recent.has(sid) || (allow && !allow(sid))) continue;

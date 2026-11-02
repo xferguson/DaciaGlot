@@ -51,8 +51,8 @@ test/*.test.mjs              # node --test; import from ../app/js/core/*
 | `core/time.js` | `DAY_MS`, `dayKey(now)`, `startOfDayPlus(now, n)` |
 | `core/history.js` | per-day history reads and writes |
 | `core/random.js` (coming in Q06) | `shuffle` and index picks from an injected `rng` |
-| `core/cards.js` | `buildCardId`/`parseCardId`: the only way to make or read a card id; `CARD_SPEC` registry (coming in Q09) |
-| `core/units.js` | `unitId(u)`/`parseUnitId(id)`: the only way to make or read a unit id (coming in Q09) |
+| `core/cards.js` | `buildCardId`/`parseCardId`: the only way to make or read a card id; `CARD_SPEC` registry |
+| `core/units.js` | `unitId(u)`/`parseUnitId(id)`: the only way to make or read a unit id |
 | `ui/dom.js` | safe markup helpers: `esc`, `html`, `raw`, `el` |
 | `ui/components/button.js` | every button |
 | `ui/components/answer-card.js` | `answerCard`, the typed-answer card controller; new card renderers build on it |
@@ -86,7 +86,7 @@ The JSON shapes of `Sentence`, `Lexeme`, `Pattern` and `Level` are defined in CO
 
 ## 3. Cards
 
-Card ids are strings. `core/cards.js` exports `parseCardId`, `buildCardId`, and `cardsForSentence(sentence, content, state?)` (→ `lr:<sid>` plus an `fm` id for each lexeme-form unit of a `cloze: true` token that has no card in `state.cards`).
+Card ids are strings. `core/cards.js` exports `parseCardId`, `buildCardId`, `cardTypeOf(id)`/`isCardType(id, type)` (non-throwing type checks; never test a prefix by hand), and `cardsForSentence(sentence, content, state?)` (→ `lr:<sid>` plus an `fm` id for each lexeme-form unit of a `cloze: true` token that has no card in `state.cards`).
 
 | Type | Id format | Example |
 |---|---|---|
@@ -97,6 +97,9 @@ Card ids are strings. `core/cards.js` exports `parseCardId`, `buildCardId`, and 
 | Transformation | `xf:<sentenceId>:<transformIndex>` | `xf:s-a1-standup-0012:0` |
 | Slot-building | `sb:<sentenceId>:<transformIndex>` | `sb:s-a1-standup-0012:0` |
 | EN→RO | `er:<sentenceId>` | `er:s-a1-standup-0012` |
+| Paradigm group (queue only, never stored) | `pg:<familyId>` | `pg:fam-…` |
+
+**`CARD_SPEC`** in `cards.js` holds each type's `parse`, `unlocked`, `stored` and (for drills) `drillWeight`; `parseCardId`, `isUnlocked` and `pickPerSentence` read it. **Adding a card type is one `CARD_SPEC` entry plus a renderer** in `ui/views/session.js`. Unit ids `<lex>.<form>` are made and read only by `unitId(u)`/`parseUnitId(id)` (`core/unit-id.js`, re-exported by `core/units.js`).
 
 **One schedule per word form (T25).** `fm` is the only card stored in `state.cards` for a lexeme-form unit; `cz` and `kf` are never stored (schema ≥ 2) and exist only as ids on `attempt.card`. `core/carrier.js`:
 

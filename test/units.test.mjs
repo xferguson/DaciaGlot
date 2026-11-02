@@ -76,3 +76,12 @@ test("isKnown: an immediate-check (enc) correct answer does not make a unit know
   st.attempts.push({ u: "a.x", lx: "a", c: 1, t: NOW, card: "cz:s9:0" });
   assert.equal(isKnown("a.x", st, c), true);
 });
+
+import { unitId as unitIdOf, parseUnitId as parseUnit } from "../app/js/core/units.js";
+
+test("unitId and parseUnitId round-trip", () => {
+  assert.equal(unitIdOf({ lex: "fi", form: "pres3sg" }), "fi.pres3sg");
+  assert.deepEqual(parseUnit("fi.pres3sg"), { lex: "fi", form: "pres3sg" });
+  assert.deepEqual(parseUnit("a.b.c"), { lex: "a", form: "b.c" });
+  assert.throws(() => parseUnit("nodot"));
+});

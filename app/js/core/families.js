@@ -1,5 +1,6 @@
 // Sentence families (ARCHITECTURE §2, PRD FR-R5): sentences that differ only in the form of one or more words,
 // like "El locuiește în Cluj" / "Locuiești în Cluj" / "Locuiesc în Cluj". Pure.
+import { unitId } from "./unit-id.js";
 
 /** Subject pronouns ignored when comparing sentences (the verb form already carries the person). */
 export const SUBJECT_PRONOUNS = new Set(["eu", "tu", "el", "ea", "noi", "voi", "ei", "ele", "dumneavoastră"]);
@@ -89,7 +90,7 @@ export function familyForms(families, sentences) {
         const ta = comparable(a);
         const tb = comparable(b);
         for (const k of idx) {
-          for (const u of [unit0(ta[k]), unit0(tb[k])]) units.add(`${u.lex}.${u.form}`);
+          for (const u of [unit0(ta[k]), unit0(tb[k])]) units.add(unitId(u));
         }
       }
     }

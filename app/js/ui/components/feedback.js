@@ -2,6 +2,7 @@
 import { labelFor } from "../../core/cards.js";
 import { advanceButton } from "./button.js";
 import { el } from "../dom.js";
+import { unitId, parseUnitId } from "../../core/unit-id.js";
 
 /**
  * A bottom sheet for one word form: its details, "I can produce this" (or Undo) and a link to the word page.
@@ -9,9 +10,8 @@ import { el } from "../dom.js";
  */
 export function openFormSheet(unit, token, claims) {
   const { content } = claims;
-  const dot = unit.indexOf(".");
-  const lexeme = content.lexemes.get(unit.slice(0, dot));
-  const form = unit.slice(dot + 1);
+  const { lex, form } = parseUnitId(unit);
+  const lexeme = content.lexemes.get(lex);
   const backdrop = el("div", { className: "sheet-backdrop" });
   const sheet = el("div", { className: "sheet", role: "dialog" });
   sheet.setAttribute("aria-modal", "true");
@@ -30,13 +30,13 @@ export function openFormSheet(unit, token, claims) {
     if (claims.isClaimed(unit)) claims.unclaim(unit); else claims.claim(unit);
     paint();
   });
-  const open = el("a", { className: "btn secondary block", href: `#/lexeme/${encodeURIComponent(unit.slice(0, dot))}`, textContent: "Open word page" });
+  const open = el("a", { className: "btn secondary block", href: `#/lexeme/${encodeURIComponent(lex)}`, textContent: "Open word page" });
   open.addEventListener("click", close);
   const done = el("button", { type: "button", className: "btn secondary block", textContent: "Close" });
   done.addEventListener("click", close);
   sheet.append(
     el("h2", { lang: "ro", textContent: token }),
-    el("p", { className: "muted", textContent: `${lexeme?.lemma ?? unit.slice(0, dot)} · ${lexeme?.gloss ?? ""} · ${labelFor(form)}` }),
+    el("p", { className: "muted", textContent: `${lexeme?.lemma ?? lex} · ${lexeme?.gloss ?? ""} · ${labelFor(form)}` }),
     claimBtn, open, done,
   );
   backdrop.append(sheet);
@@ -48,7 +48,7 @@ export function openFormSheet(unit, token, claims) {
 export function partsFor(tokens, diff, tokenIndex = null) {
   const lexOf = (i) => {
     const u = tokens[i]?.units?.[0];
-    return u?.lex ? { lex: u.lex, unit: `${u.lex}.${u.form}` } : {};
+    return u?.lex ? { lex: u.lex, unit: unitId(u) } : {};
   };
   if (tokenIndex == null) {
     const linkable = diff.length === tokens.length;

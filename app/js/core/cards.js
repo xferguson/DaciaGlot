@@ -2,49 +2,61 @@
 import { tokenize, tokenKey } from "./normalize.js";
 import { pickIndex, shuffle } from "./random.js";
 import { DAY_MS as DAY } from "./time.js";
-
-export const CARD_TYPES = ["lr", "fm", "cz", "kf", "xf", "sb", "er"];
+import { unitId, parseUnitId } from "./unit-id.js";
 
 /**
- * `lr:<sid>` → {type, sentenceId}; `cz:<sid>:<i>` adds tokenIndex; `fm:<lex>:<form>` and `kf:<lex>:<form>` → {lexemeId, formKey}.
- * Only `fm` is a stored schedule for a word form; `cz` and `kf` are how an `fm` is presented (they appear in `attempt.card`).
+ * `lr:<sid>` → {type, sentenceId}; `cz:<sid>:<i>` adds tokenIndex; `xf`/`sb:<sid>:<i>` add transformIndex;
+ * `fm:<lex>:<form>` and `kf:<lex>:<form>` → {lexemeId, formKey}; `pg:<familyId>` → {familyId}.
+ * Only `fm` is a stored schedule for a word form; `cz` and `kf` are how an `fm` is presented (they appear in `attempt.card`);
+ * `pg` is a queue item only and is never stored.
  */
 export function parseCardId(id) {
   const parts = String(id).split(":");
   const type = parts[0];
-  if (!CARD_TYPES.includes(type)) throw new Error(`Bad card id: ${id}`);
-  if (type === "kf" || type === "fm") return { type, lexemeId: parts[1], formKey: parts.slice(2).join(":") };
-  const out = { type, sentenceId: parts[1] };
-  if (type === "cz" || type === "xf" || type === "sb") {
-    const n = Number(parts[2]);
-    if (!Number.isInteger(n) || n < 0) throw new Error(`Bad card id: ${id}`);
-    if (type === "cz") out.tokenIndex = n;
-    else out.transformIndex = n;
-  }
-  return out;
+  if (!Object.hasOwn(CARD_SPEC, type)) throw new Error(`Bad card id: ${id}`);
+  const out = CARD_SPEC[type].parse(parts, id);
+  return { type, ...out };
 }
+
+/** The type of a card id (`"fm"`, `"lr"`, …), or `null` when it is not a known card id. */
+export function cardTypeOf(id) {
+  const type = String(id).split(":", 1)[0];
+  return Object.hasOwn(CARD_SPEC, type) ? type : null;
+}
+
+/** Is `id` a card of this type? Never throws. */
+export const isCardType = (id, type) => cardTypeOf(id) === type;
 
 export function buildCardId(type, ...parts) {
   return [type, ...parts].join(":");
 }
 
+const nonNegInt = (v, id) => {
+  const n = Number(v);
+  if (!Number.isInteger(n) || n < 0) throw new Error(`Bad card id: ${id}`);
+  return n;
+};
+const parseSentence = (parts) => ({ sentenceId: parts[1] });
+const parseLexForm = (parts) => ({ lexemeId: parts[1], formKey: parts.slice(2).join(":") });
+const parseIndexed = (key) => (parts, id) => ({ sentenceId: parts[1], [key]: nonNegInt(parts[2], id) });
+
 /** `<lex>.<form>` for each unit of each `cloze: true` token, in order, without repeats. */
 export function clozeUnitIds(sentence) {
   const out = new Set();
-  for (const t of sentence.tokens) if (t.cloze) for (const u of t.units) out.add(`${u.lex}.${u.form}`);
+  for (const t of sentence.tokens) if (t.cloze) for (const u of t.units) out.add(unitId(u));
   return [...out];
 }
 
 /** The `fm` card id of a lexeme-form unit id `<lex>.<form>`. */
-export function fmIdForUnit(unitId) {
-  const dot = unitId.indexOf(".");
-  return buildCardId("fm", unitId.slice(0, dot), unitId.slice(dot + 1));
+export function fmIdForUnit(unit) {
+  const { lex, form } = parseUnitId(unit);
+  return buildCardId("fm", lex, form);
 }
 
 /** The lexeme-form unit id of an `fm` (or `kf`) card id. */
 export function unitIdOfFm(cardId) {
   const p = parseCardId(cardId);
-  return `${p.lexemeId}.${p.formKey}`;
+  return unitId({ lex: p.lexemeId, form: p.formKey });
 }
 
 /**
@@ -399,7 +411,7 @@ export function transformUnits(sentence, transform, content) {
     if (matched.has(j)) return;
     for (const m of lookupToken(tok, content, hints) ?? []) {
       changed.push(m);
-      out.set(`${m.lex}.${m.form}`, { u: `${m.lex}.${m.form}`, lx: m.lex });
+      out.set(unitId(m), { u: unitId(m), lx: m.lex });
     }
   });
   const fallbackLx = changed[0]?.lex
@@ -412,8 +424,6 @@ export function transformUnits(sentence, transform, content) {
   return [...out.values()];
 }
 
-const DRILL_WEIGHT = { xf: 0, cz: 1, sb: 2, er: 3 };
-
 /**
  * PRD FR-D9: when a sentence has a due `xf` or `sb` card, only the best-weighted drill card
  * (`xf` > `cz` > `sb` > `er`; earlier wins ties) survives for that sentence. Other card types and
@@ -423,14 +433,14 @@ export function pickPerSentence(cardIds) {
   const groups = new Map();
   for (const id of cardIds) {
     const p = parseCardId(id);
-    if (!(p.type in DRILL_WEIGHT)) continue;
+    if (CARD_SPEC[p.type].drillWeight == null) continue;
     if (!groups.has(p.sentenceId)) groups.set(p.sentenceId, []);
     groups.get(p.sentenceId).push({ id, type: p.type });
   }
   const drop = new Set();
   for (const g of groups.values()) {
     if (!g.some((c) => c.type === "xf" || c.type === "sb")) continue;
-    const best = g.reduce((b, c) => (DRILL_WEIGHT[c.type] < DRILL_WEIGHT[b.type] ? c : b));
+    const best = g.reduce((b, c) => (CARD_SPEC[c.type].drillWeight < CARD_SPEC[b.type].drillWeight ? c : b));
     for (const c of g) if (c !== best) drop.add(c.id);
   }
   return cardIds.filter((id) => !drop.has(id));
@@ -483,7 +493,7 @@ export function erUnits(sentence) {
   const out = new Map();
   for (const t of sentence.tokens) {
     for (const u of t.units) {
-      if (t.cloze) out.set(`${u.lex}.${u.form}`, { u: `${u.lex}.${u.form}`, lx: u.lex });
+      if (t.cloze) out.set(unitId(u), { u: unitId(u), lx: u.lex });
       if (u.pattern && u.head) out.set(`pat:${u.pattern}`, { u: `pat:${u.pattern}`, lx: u.lex });
     }
   }
@@ -513,25 +523,76 @@ export function newErCards(state, content, { cap = ER_PER_SESSION, skip = new Se
 export function isUnlocked(cardId, state, content) {
   let p;
   try { p = parseCardId(cardId); } catch { return false; }
-  if (p.type === "fm") {
-    const l = content.lexemes.get(p.lexemeId);
-    return !!l && (p.formKey === "base" || !!l.forms?.[p.formKey]);
-  }
-  if (p.type === "kf") {
-    const l = content.lexemes.get(p.lexemeId);
-    return !!l?.keyForms?.includes(p.formKey) && !!l.forms?.[p.formKey] && kfUnlockedFor(p.lexemeId, state);
-  }
-  const sentence = content.sentences.get(p.sentenceId);
-  if (!sentence) return false;
-  if (p.type === "lr") return true;
-  if (p.type === "cz") {
-    return !!sentence.tokens[p.tokenIndex]?.cloze && !!state.cards[buildCardId("lr", p.sentenceId)];
-  }
-  if (p.type === "xf") return xfUnlocked(sentence, p.transformIndex, state, content);
-  if (p.type === "sb") return sbUnlocked(sentence, p.transformIndex, state, content);
-  if (p.type === "er") return erUnlocked(sentence, state);
-  return false;
+  return CARD_SPEC[p.type].unlocked(p, state, content);
 }
+
+/**
+ * Everything the code knows about a card type, in one place. Adding a type is one entry here plus a renderer
+ * (`ui/views/session.js`).
+ * - `parse(parts, id)`: the fields `parseCardId` returns besides `type`.
+ * - `unlocked(parsed, state, content)`: the unlock rule behind `isUnlocked`.
+ * - `drillWeight`: rank for FR-D9 `pickPerSentence` (lower wins); absent for types that are not per-sentence drills.
+ * - `stored`: true when the card has its own schedule in `state.cards`; false for presentations (`cz`, `kf`) and queue items (`pg`).
+ */
+export const CARD_SPEC = {
+  lr: { parse: parseSentence, stored: true, unlocked: (p, state, content) => content.sentences.has(p.sentenceId) },
+  fm: {
+    parse: parseLexForm,
+    stored: true,
+    unlocked: (p, _state, content) => {
+      const l = content.lexemes.get(p.lexemeId);
+      return !!l && (p.formKey === "base" || !!l.forms?.[p.formKey]);
+    },
+  },
+  cz: {
+    parse: parseIndexed("tokenIndex"),
+    stored: false,
+    drillWeight: 1,
+    unlocked: (p, state, content) => {
+      const sentence = content.sentences.get(p.sentenceId);
+      return !!sentence?.tokens[p.tokenIndex]?.cloze && !!state.cards[buildCardId("lr", p.sentenceId)];
+    },
+  },
+  kf: {
+    parse: parseLexForm,
+    stored: false,
+    unlocked: (p, state, content) => {
+      const l = content.lexemes.get(p.lexemeId);
+      return !!l?.keyForms?.includes(p.formKey) && !!l.forms?.[p.formKey] && kfUnlockedFor(p.lexemeId, state);
+    },
+  },
+  xf: {
+    parse: parseIndexed("transformIndex"),
+    stored: true,
+    drillWeight: 0,
+    unlocked: (p, state, content) => {
+      const sentence = content.sentences.get(p.sentenceId);
+      return !!sentence && xfUnlocked(sentence, p.transformIndex, state, content);
+    },
+  },
+  sb: {
+    parse: parseIndexed("transformIndex"),
+    stored: true,
+    drillWeight: 2,
+    unlocked: (p, state, content) => {
+      const sentence = content.sentences.get(p.sentenceId);
+      return !!sentence && sbUnlocked(sentence, p.transformIndex, state, content);
+    },
+  },
+  er: {
+    parse: parseSentence,
+    stored: true,
+    drillWeight: 3,
+    unlocked: (p, state, content) => {
+      const sentence = content.sentences.get(p.sentenceId);
+      return !!sentence && erUnlocked(sentence, state);
+    },
+  },
+  // A paradigm group (FR-R5): a queue item only, never stored and never unlocked on its own.
+  pg: { parse: (parts) => ({ familyId: parts.slice(1).join(":") }), stored: false, unlocked: () => false },
+};
+
+export const CARD_TYPES = Object.keys(CARD_SPEC);
 
 // ---- Word tiles and typo guard (FR-D6, T35) ----
 

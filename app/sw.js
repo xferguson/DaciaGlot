@@ -36,6 +36,7 @@ const PRECACHE = [
   "js/core/random.js",
   "js/core/session.js",
   "js/core/time.js",
+  "js/core/unit-id.js",
   "js/core/units.js",
   "js/data/content.js",
   "js/data/migrations.js",

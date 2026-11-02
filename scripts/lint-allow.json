@@ -1,10 +1,7 @@
 {
   "undeclared-call": {},
   "core-purity": {},
-  "raw-card-id": {
-    "app/js/core/session.js": 20,
-    "app/js/data/migrations.js": 9
-  },
+  "raw-card-id": {},
   "import-direction": {},
   "import-cycle": {},
   "import-specifier": {}

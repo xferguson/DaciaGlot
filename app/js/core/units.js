@@ -1,7 +1,8 @@
 // Learning units (ARCHITECTURE §6.1). Pure.
 import { parseCardId, transformUnits, erUnits } from "./cards.js";
+import { unitId, parseUnitId, isPatternUnit } from "./unit-id.js";
 
-const unitId = (u) => `${u.lex}.${u.form}`;
+export { unitId, parseUnitId };
 
 /** Every "<lex>.<form>" from the token units, plus "pat:<id>" for each pattern. */
 export function unitsForSentence(sentence) {
@@ -17,7 +18,7 @@ export function unitsForSentence(sentence) {
  */
 export function unitsRequiredForCard(cardId, content) {
   const p = parseCardId(cardId);
-  if (p.type === "kf" || p.type === "fm") return [{ u: `${p.lexemeId}.${p.formKey}`, lx: p.lexemeId }];
+  if (p.type === "kf" || p.type === "fm") return [{ u: unitId({ lex: p.lexemeId, form: p.formKey }), lx: p.lexemeId }];
   if (p.type === "xf" || p.type === "sb") {
     const sentence = content.sentences.get(p.sentenceId);
     const t = sentence?.transforms?.[p.transformIndex];
@@ -54,12 +55,10 @@ function inSeenSentence(lex, form, state, content) {
 
 /** ARCHITECTURE §6.1. */
 export function isKnown(unit, state, content) {
-  if (unit.startsWith("pat:")) {
+  if (isPatternUnit(unit)) {
     return (content.sentencesByPattern.get(unit.slice(4)) ?? []).some((id) => id in state.seenSentences);
   }
-  const dot = unit.indexOf(".");
-  const lex = unit.slice(0, dot);
-  const form = unit.slice(dot + 1);
+  const { lex, form } = parseUnitId(unit);
   if (unit in (state.claimed ?? {})) return true;
   if (hasCorrect(unit, state)) return true;
   const lexeme = content.lexemes.get(lex);
