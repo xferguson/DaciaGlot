@@ -45,7 +45,7 @@ Shared code lives in a few modules. **Search them before writing a helper**, and
 - `core/cards.js` `buildCardId`/`parseCardId`; `core/units.js` `unitId`/`parseUnitId` (coming in Q09)
 - `ui/dom.js`: safe markup helpers (`esc`, `html`, `raw`, `el`)
 - `ui/components/button.js`: every button
-- `ui/components/answer-card.js`: `answerCard`, the typed-answer card controller (coming in Q05)
+- `ui/components/answer-card.js`: `answerCard`, the typed-answer card controller
 
 Rules:
 

@@ -1,12 +1,14 @@
 // Key-forms card (PRD FR-D3). Lemma + gloss + form label; the learner types the form.
 
 import { checkAnswer } from "../../core/check.js";
+import { answerStep, initialAnswer, canRate } from "../../core/answer.js";
 import { parseCardId, labelFor } from "../../core/cards.js";
 import { audioButton } from "../components/audio-button.js";
 import { answerInput } from "../components/answer-input.js";
 import { diacriticBar } from "../components/diacritic-bar.js";
 import { renderFeedback, nextButtons, partsFor } from "../components/feedback.js";
 import { button } from "../components/button.js";
+import { retryMessage } from "../components/answer-card.js";
 
 /**
  * `sentence` is an already-seen sentence containing this form, or null (then the form alone is played).
@@ -44,18 +46,15 @@ export function renderCard(root, { card, sentence = null, content, tts, settings
 
   const checkBtn = button("Check", "btn", () => check());
   const hintBtn = button("Hint", "btn secondary", () => {
-    usedHint = true;
+    st = answerStep(st, { type: "hint" }).state;
     hintLine.textContent = `Hint: ${[...expected][0]}…`;
     input.focus();
   });
   actions.append(hintBtn, checkBtn);
 
-  let attempts = 0;
-  let usedHint = false;
-  let finished = false;
+  let st = initialAnswer();
 
   function finish(result) {
-    finished = true;
     input.readOnly = true;
     input.classList.toggle("ok", result !== "wrong");
     input.classList.toggle("bad", result === "wrong");
@@ -71,28 +70,24 @@ export function renderCard(root, { card, sentence = null, content, tts, settings
       en: result !== "wrong" && sentence ? `${sentence.ro} — ${sentence.en ?? ""}` : null,
     });
     root.querySelector(".audio-row").append(audioButton({ text: sentence?.ro ?? expected, rateNormal: rate }));
+    const { usedHint, attempts } = st;
     nextButtons(actions, {
-      canRate: result !== "wrong" && attempts === 1 && !usedHint,
+      canRate: canRate(st, result),
       onPick: (rating) => onResult({ result, usedHint, attemptNo: attempts, rating }),
     });
   }
 
   function check() {
-    if (finished || !input.value.trim()) return;
-    attempts++;
+    if (st.finished || !input.value.trim()) return;
     const { result } = checkAnswer(input.value, expected);
-    if (result !== "wrong") return finish(result);
-    if (attempts >= 2) return finish("wrong");
-    slot.replaceChildren();
-    const msg = document.createElement("p");
-    msg.className = "feedback bad";
-    msg.setAttribute("role", "status");
-    msg.textContent = "Not quite. Try once more.";
-    slot.append(msg);
+    const { state, effect } = answerStep(st, { type: "check", result });
+    st = state;
+    if (effect === "finish") return finish(result);
+    slot.replaceChildren(retryMessage());
     input.select();
     input.focus();
   }
 
   input.focus();
-  return () => { finished = true; };
+  return () => { st = { ...st, finished: true }; };
 }

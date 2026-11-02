@@ -53,7 +53,7 @@ test/*.test.mjs              # node --test; import from ../app/js/core/*
 | `core/units.js` | `unitId(u)`/`parseUnitId(id)`: the only way to make or read a unit id (coming in Q09) |
 | `ui/dom.js` | safe markup helpers: `esc`, `html`, `raw`, `el` |
 | `ui/components/button.js` | every button |
-| `ui/components/answer-card.js` (coming in Q05) | `answerCard`, the typed-answer card controller; new card renderers build on it |
+| `ui/components/answer-card.js` | `answerCard`, the typed-answer card controller; new card renderers build on it |
 
 ## 2. Content (in memory)
 
