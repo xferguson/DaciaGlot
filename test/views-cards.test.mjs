@@ -445,3 +445,15 @@ test("paradigm: one row per member, Continue → correct, attempt 1, no rating",
   assert.ok(hasContinueOnly(c));
   assert.deepEqual(finishWith(c, "Continue"), { result: "correct", usedHint: false, attemptNo: 1, rating: null });
 });
+
+// ---------- Q15: claims are an option, not a global ----------
+
+test("feedback without a claim handler: tapping a word is a plain link, nothing throws", async () => {
+  const { renderFeedback } = await import("../app/js/ui/components/feedback.js");
+  const slot = document.createElement("div");
+  renderFeedback(slot, { result: "correct", parts: [{ token: "Am", status: "ok", lex: "avea", unit: "avea.pres1sg" }] });
+  const word = slot.querySelectorAll(".tok-link")[0];
+  assert.equal(word.href, "#/lexeme/avea");
+  assert.doesNotThrow(() => word.click());
+  assert.equal(document.body.querySelector(".sheet"), null, "no sheet without a handler");
+});

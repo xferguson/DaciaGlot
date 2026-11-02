@@ -30,7 +30,7 @@ function partsForBlanks(tokens, diffs) {
  * the card's own token. No audio before answering, so the sentence can't give the blank away (FR-D7); it plays after.
  * `onResult` also gets `blanks: {tokenIndex, ok}[]`.
  */
-export function renderCard(root, { card, sentence, content, tts, settings = {}, onResult, check = false, blanks = null }) {
+export function renderCard(root, { card, sentence, content, tts, settings = {}, onResult, claims = null, check = false, blanks = null }) {
   const rate = settings.ttsRate ?? 0.9;
   const speak = (text, opts) => tts?.speak?.(text, { rate, ...opts });
   const idxs = blanks?.length ? [...blanks].sort((a, b) => a - b) : [tokenIndexOf(card)];
@@ -101,6 +101,7 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
       result,
       parts: idxs.length === 1 ? partsFor(sentence.tokens, diffs.get(idxs[0]), idxs[0]) : partsForBlanks(sentence.tokens, diffs),
       en: sentence.en,
+      claims,
     });
     const { usedHint, attempts } = st;
     nextButtons(actions, {

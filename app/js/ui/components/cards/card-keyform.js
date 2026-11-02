@@ -13,7 +13,7 @@ import { retryMessage } from "../answer-card.js";
 /**
  * `sentence` is an already-seen sentence containing this form, or null (then the form alone is played).
  */
-export function renderCard(root, { card, sentence = null, content, tts, settings = {}, onResult }) {
+export function renderCard(root, { card, sentence = null, content, tts, settings = {}, onResult, claims = null }) {
   const { lexemeId, formKey } = parseCardId(typeof card === "string" ? card : card.id ?? card.cardId);
   const lexeme = content.lexemes.get(lexemeId);
   const expected = lexeme.forms[formKey];
@@ -68,6 +68,7 @@ export function renderCard(root, { card, sentence = null, content, tts, settings
       result,
       parts: partsFor([], diff),
       en: result !== "wrong" && sentence ? `${sentence.ro} — ${sentence.en ?? ""}` : null,
+      claims,
     });
     root.querySelector(".audio-row").append(audioButton({ text: sentence?.ro ?? expected, rateNormal: rate }));
     const { usedHint, attempts } = st;
