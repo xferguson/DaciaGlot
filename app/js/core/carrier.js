@@ -2,6 +2,7 @@
 import { parseCardId, buildCardId, unitIdOfFm, clozeUnitIds } from "./cards.js";
 import { unitsForSentence, isKnown } from "./units.js";
 import { pickOne } from "./random.js";
+import { DAY_MS } from "./time.js";
 
 /** A carrier is skipped when it was named in this many of the unit's latest attempts. */
 export const RECENT_ATTEMPTS = 3;
@@ -109,7 +110,7 @@ export const COMPOSITE_MAX_FORMS = 4;
  */
 export function pickComposite(dueEasyUnits, state, content, now, rng = Math.random, { exclude = new Set(), allow = null } = {}) {
   const due = new Set(dueEasyUnits);
-  const cutoff = now - COMPOSITE_COOLDOWN_DAYS * 86400000;
+  const cutoff = now - COMPOSITE_COOLDOWN_DAYS * DAY_MS;
   const recent = new Set();
   for (const a of state.attempts) if (a.t > cutoff) { const sid = sentenceOfCard(a.card); if (sid) recent.add(sid); }
   const candidates = new Set();

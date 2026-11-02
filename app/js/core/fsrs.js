@@ -1,5 +1,6 @@
 // FSRS-5 scheduler. Pure: `now` (ms epoch) and `rng` are always passed in.
 // Reference: https://github.com/open-spaced-repetition/fsrs4anki/wiki/The-Algorithm
+import { DAY_MS } from "./time.js";
 
 import { pickIndex } from "./random.js";
 
@@ -12,7 +13,6 @@ export const MAX_INTERVAL = 36500;
 export const State = Object.freeze({ New: 0, Learning: 1, Review: 2, Relearning: 3 });
 export const Grade = Object.freeze({ Again: 1, Hard: 2, Good: 3, Easy: 4 });
 
-const DAY_MS = 86400000;
 const MIN_MS = 60000;
 const LEARNING_STEPS = [1, 10]; // minutes
 const RELEARNING_STEPS = [10]; // minutes
