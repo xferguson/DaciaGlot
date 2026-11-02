@@ -13,7 +13,7 @@ DaciaGlot is an offline-first PWA for learning to **speak** Romanian. It is vani
    - **Immediately before every `git push`, run `git fetch origin main && git merge origin/main` and read its output** (don't pipe it through `tail` or `-q`). A merge done at the start of the session doesn't count. After opening the PR, read its `mergeable_state`; if it is `dirty`, or no checks have appeared after a minute or so, fix the conflict before waiting on CI.
    - `node --test` passes.
    - `node scripts/validate-content.mjs` passes (once it exists).
-   - `node scripts/lint.mjs` passes (coming in Q16).
+   - `node scripts/lint.mjs` passes.
    - Each of the task's acceptance criteria is met. Check them off in the PR description.
    - Set `docs/STATUS.md` to `done` (or `review`) and add a one-line note on anything the next task needs to know.
 6. One task per PR. The PR title is `T## · <task title>`.
@@ -53,7 +53,7 @@ Rules:
 2. Views hold no logic. A view renders a model from a pure function, changes state only through `ctx.update(coreTransition)` (coming in Q08), and never imports another view.
 3. Every view change gets a fake-DOM test (`test/helpers/fake-dom.mjs`). Every bug fix starts with a failing test.
 4. A new card type is one `CARD_SPEC` entry in `core/cards.js` (coming in Q09) plus a renderer built on `answerCard`.
-5. `node scripts/lint.mjs` (coming in Q16) is part of the pre-PR checks.
+5. `node scripts/lint.mjs` is part of the pre-PR checks.
 
 When a "(coming in Qxx)" module lands, that task drops its marker here and in ARCHITECTURE §1.
 

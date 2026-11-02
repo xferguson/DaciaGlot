@@ -14,9 +14,6 @@
     "app/js/ui/views/home.js": 2,
     "app/js/ui/views/session.js": 9
   },
-  "import-cycle": {
-    "app/js/core/pace.js": 1,
-    "app/js/core/session.js": 1
-  },
+  "import-cycle": {},
   "import-specifier": {}
 }
