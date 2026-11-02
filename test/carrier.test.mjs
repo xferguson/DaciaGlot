@@ -28,7 +28,7 @@ const attempt = (sid, t) => ({ u: U, lx: "fi", c: 1, t, card: `cz:${sid}:0` });
 
 test("no seen carrier → null", () => {
   assert.deepEqual(carriersFor(U, state(), content), []);
-  assert.equal(pickCarrier(U, state(), content, { now: NOW }), null);
+  assert.equal(pickCarrier(U, state(), content, { now: NOW, rng: () => 0 }), null);
 });
 
 test("only seen sentences carry; a non-cloze token counts when the unit is its only unit", () => {
@@ -70,15 +70,15 @@ test("rotates: never one of the last 3 attempts' carriers while another exists",
 
 test("honours exclude; with every candidate recent or excluded → null, and resolveFm falls back", () => {
   const st = seenAll(["a", "b"]);
-  assert.equal(pickCarrier(U, st, content, { now: NOW, exclude: new Set(["a"]) }).sentenceId, "b");
-  assert.equal(pickCarrier(U, st, content, { now: NOW, exclude: new Set(["a", "b"]) }), null);
+  assert.equal(pickCarrier(U, st, content, { now: NOW, rng: () => 0, exclude: new Set(["a"]) }).sentenceId, "b");
+  assert.equal(pickCarrier(U, st, content, { now: NOW, rng: () => 0, exclude: new Set(["a", "b"]) }), null);
   // key-form label exists → drill
-  assert.deepEqual(resolveFm("fm:fi:pres3sg", st, content, { now: NOW, exclude: new Set(["a", "b"]) }),
+  assert.deepEqual(resolveFm("fm:fi:pres3sg", st, content, { now: NOW, rng: () => 0, exclude: new Set(["a", "b"]) }),
     { type: "kf", presentedId: "kf:fi:pres3sg" });
   // no label for the form → the least recent carrier despite exclude
   st.attempts.push({ u: "fi.inf", lx: "fi", c: 1, t: NOW - 9, card: "cz:a:0" });
   const noLabel = makeContent([{ ...mk("a"), tokens: [tok("a fi", [{ lex: "fi", form: "inf" }], { cloze: true })] }], lexemes);
-  const r = resolveFm("fm:fi:inf", st, noLabel, { now: NOW, exclude: new Set(["a"]) });
+  const r = resolveFm("fm:fi:inf", st, noLabel, { now: NOW, rng: () => 0, exclude: new Set(["a"]) });
   assert.deepEqual(r, { type: "cz", presentedId: "cz:a:0", sentenceId: "a", tokenIndex: 0 });
 });
 
@@ -89,5 +89,5 @@ test("resolveFm: cloze in a seen sentence; prefer wins; no carrier and no label 
   assert.equal(r.presentedId, `cz:${r.sentenceId}:${r.tokenIndex}`);
   assert.equal(resolveFm("fm:fi:pres3sg", st, content, { now: NOW, prefer: "b" }).sentenceId, "b");
   assert.deepEqual(resolveFm("fm:fi:pres3sg", state(), content, { now: NOW }), { type: "kf", presentedId: "kf:fi:pres3sg" });
-  assert.equal(resolveFm("fm:fi:inf", state(), content, { now: NOW }), null);
+  assert.equal(resolveFm("fm:fi:inf", state(), content, { now: NOW, rng: () => 0 }), null);
 });

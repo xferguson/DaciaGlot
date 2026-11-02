@@ -57,8 +57,8 @@ test("pickComposite: most due easy forms; needs ≥ 2; never an unknown other un
   const pick = pickComposite(["a.base", "b.base", "c.base"], st, content, NOW, () => 0);
   assert.equal(pick.sentenceId, "p");
   assert.deepEqual(pick.units, ["a.base", "b.base", "c.base"]);
-  assert.equal(pickComposite(["a.base"], st, content, NOW), null, "one form is not a composite");
-  assert.equal(pickComposite(["a.base", "d.base"], st, content, NOW), null, "the only sentence with both has no English");
+  assert.equal(pickComposite(["a.base"], st, content, NOW, () => 0), null, "one form is not a composite");
+  assert.equal(pickComposite(["a.base", "d.base"], st, content, NOW, () => 0), null, "the only sentence with both has no English");
   assert.equal(pickComposite(["a.base", "z.base"], st, content, NOW, () => 0).sentenceId, "r");
 });
 
