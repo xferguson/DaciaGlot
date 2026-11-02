@@ -2,6 +2,8 @@
 // Reference: https://github.com/open-spaced-repetition/fsrs4anki/wiki/The-Algorithm
 import { DAY_MS } from "./time.js";
 
+import { pickIndex } from "./random.js";
+
 export const DEFAULT_W = [
   0.40255, 1.18385, 3.173, 15.69105, 7.1949, 0.5345, 1.4604, 0.0046, 1.54575, 0.1192,
   1.01925, 1.9395, 0.11, 0.29605, 2.2698, 0.2315, 2.9898, 0.51655, 0.6621,
@@ -73,7 +75,7 @@ function fuzzInterval(days, rng) {
   for (const [a, b, f] of ranges) delta += f * Math.max(Math.min(days, b) - a, 0);
   const lo = Math.max(2, Math.round(days - delta));
   const hi = Math.min(Math.round(days + delta), MAX_INTERVAL);
-  return clamp(Math.floor(rng() * (hi - lo + 1) + lo), 1, MAX_INTERVAL);
+  return clamp(lo + pickIndex(rng, hi - lo + 1), 1, MAX_INTERVAL);
 }
 
 /**

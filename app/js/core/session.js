@@ -5,6 +5,7 @@ import { unitsForSentence, isKnown, unitsRequiredForCard } from "./units.js";
 import { pickNewSentences, focusList, siblingsOf, newItemCount, isFastTrackUnit } from "./select.js";
 import { carriersFor, pickComposite } from "./carrier.js";
 import { learnBatch } from "./pace.js";
+import { pickIndex, pickOne } from "./random.js";
 import { DAY_MS, dayKey, startOfDayPlus } from "./time.js";
 
 export { dayKey };
@@ -249,7 +250,7 @@ export function onePerFamily(cardIds, content, rng) {
   const drop = new Set();
   for (const idx of byFamily.values()) {
     if (idx.length < 2) continue;
-    const keep = idx[Math.min(idx.length - 1, Math.floor(rng() * idx.length))];
+    const keep = pickOne(idx, rng);
     for (const i of idx) if (i !== keep) drop.add(i);
   }
   return cardIds.filter((_, i) => !drop.has(i));
@@ -437,7 +438,7 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
       // A paradigm (FR-R5): one card for the family, one immediate check on a random member, the rest due tomorrow.
       sibs.forEach((m) => grouped.add(m));
       const members = [s.id, ...sibs];
-      const chosen = content.sentences.get(members[Math.min(members.length - 1, Math.floor(rng() * members.length))]);
+      const chosen = content.sentences.get(pickOne(members, rng));
       const checks = newFms(chosen);
       const deferred = members.flatMap((m) => (m === chosen.id ? [] : newFms(content.sentences.get(m))));
       return [
@@ -646,7 +647,7 @@ export function applyCheck(state, cardId, correct, unitsRequired, now, presented
  * so it doesn't land next to a related card (`cardKeys`). Returns the index it was inserted at.
  */
 export function requeueWrong(queue, pos, item, rng, content) {
-  let at = Math.min(queue.length, pos + 3 + Math.floor(rng() * 3));
+  let at = Math.min(queue.length, pos + 3 + pickIndex(rng, 3));
   if (content) {
     const keys = cardKeys({ cardId: item.cardId }, content);
     const clash = (i) => i >= 0 && i < queue.length && overlaps(keys, cardKeys(queue[i], content));
