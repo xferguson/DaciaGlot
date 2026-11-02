@@ -2,6 +2,7 @@
 import { unitsForSentence, isKnown } from "./units.js";
 import { allPatternStates } from "./mastery.js";
 import { shuffle } from "./random.js";
+import { unitId, parseUnitId, isPatternUnit } from "./unit-id.js";
 
 const BAND = 5;
 
@@ -12,7 +13,7 @@ function divergentUnits(content) {
   if (!set) {
     set = new Set();
     for (const s of content.sentences.values()) {
-      for (const t of s.tokens) for (const u of t.units) if (u.pattern && content.patterns.get(u.pattern)?.divergent) set.add(`${u.lex}.${u.form}`);
+      for (const t of s.tokens) for (const u of t.units) if (u.pattern && content.patterns.get(u.pattern)?.divergent) set.add(unitId(u));
     }
     divergentCache.set(content, set);
   }
@@ -21,8 +22,8 @@ function divergentUnits(content) {
 
 /** T34: a lexeme-form unit of a `transparent` lexeme that no divergent pattern slot uses (FR-V3). Pattern units are never free. */
 export function isFastTrackUnit(unit, content) {
-  if (unit.startsWith("pat:")) return false;
-  return !!content.lexemes.get(unit.slice(0, unit.indexOf(".")))?.transparent && !divergentUnits(content).has(unit);
+  if (isPatternUnit(unit)) return false;
+  return !!content.lexemes.get(parseUnitId(unit).lex)?.transparent && !divergentUnits(content).has(unit);
 }
 
 /** A focus may be one `{type, id}`, a list of them, or null; always returns a list (FR-S8). */
@@ -97,11 +98,11 @@ export function pickNewSentences(n, { focus: rawFocus = null, state, content, no
     if (hit) {
       sc += 50;
       if (hit.type === "pattern") {
-        const lexemes = new Set(units.filter((u) => !u.startsWith("pat:") && known(u)).map((u) => u.slice(0, u.indexOf("."))));
+        const lexemes = new Set(units.filter((u) => !isPatternUnit(u) && known(u)).map((u) => parseUnitId(u).lex));
         sc += Math.min(90, 30 * lexemes.size);
-      } else if (unknown.every((u) => !u.startsWith("pat:"))) sc += 30;
+      } else if (unknown.every((u) => !isPatternUnit(u))) sc += 30;
     }
-    const freqs = units.filter((u) => !u.startsWith("pat:")).map((u) => content.lexemes.get(u.slice(0, u.indexOf(".")))?.freq).filter(Number.isFinite);
+    const freqs = units.filter((u) => !isPatternUnit(u)).map((u) => content.lexemes.get(parseUnitId(u).lex)?.freq).filter(Number.isFinite);
     if (freqs.length) sc += Math.round(20 * (1 - Math.max(...freqs) / maxFreq));
     sc -= 15 * (s.patterns ?? []).filter((p) => pstates[p] === "seen").length;
     return sc;

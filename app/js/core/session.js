@@ -1,12 +1,13 @@
 // Session building, grading and review application (ARCHITECTURE §8). Pure: `now` and `rng` are injected.
 import { newCard, review } from "./fsrs.js";
-import { parseCardId, unitIdOfFm, fmIdForUnit, cardsForSentence, isUnlocked, isEasy, newKfCards, newTransformCards, newErCards, pickPerSentence } from "./cards.js";
+import { parseCardId, buildCardId, isCardType, unitIdOfFm, fmIdForUnit, cardsForSentence, isUnlocked, isEasy, newKfCards, newTransformCards, newErCards, pickPerSentence } from "./cards.js";
 import { unitsForSentence, isKnown, unitsRequiredForCard } from "./units.js";
 import { pickNewSentences, focusList, siblingsOf, newItemCount, isFastTrackUnit } from "./select.js";
 import { carriersFor, pickComposite } from "./carrier.js";
 import { learnBatch } from "./pace.js";
 import { pickIndex, pickOne } from "./random.js";
 import { DAY_MS, dayKey, startOfDayPlus } from "./time.js";
+import { unitId, parseUnitId } from "./unit-id.js";
 import { bumpDay, addMinutes } from "./history.js";
 
 export { dayKey, addMinutes };
@@ -95,11 +96,11 @@ export const FAST_TRACK_DAYS = 4;
 export function keepStarted(state, remaining, now) {
   const cards = { ...state.cards };
   for (const { cardId: id, isNew, from, forms } of remaining) {
-    if (!isNew || id.startsWith("pg:")) continue;
+    if (!isNew || isCardType(id, "pg")) continue;
     for (const cardId of forms ?? [id]) {
       if (cardId in cards) continue;
       const p = parseCardId(cardId);
-      if (p.type === "fm" && from && `lr:${from}` in cards) cards[cardId] = { ...newCard(now), due: nextDayStart(now) };
+      if (p.type === "fm" && from && buildCardId("lr", from) in cards) cards[cardId] = { ...newCard(now), due: nextDayStart(now) };
     }
   }
   return { ...state, cards };
@@ -157,7 +158,7 @@ export function gradeFromResult({ result, usedHint = false, attemptNo = 1, ratin
 }
 
 /** Is this `fm` card's form claimed ("I can produce this", FR-R4)? Claimed forms are never tested. */
-const isClaimedCard = (cardId, state) => cardId.startsWith("fm:") && unitIdOfFm(cardId) in (state.claimed ?? {});
+const isClaimedCard = (cardId, state) => isCardType(cardId, "fm") && unitIdOfFm(cardId) in (state.claimed ?? {});
 
 /** FR-R4: claim a lexeme-form unit (`<lex>.<form>`) as producible. Its `fm` card, if any, stays as it is. Returns a new state. */
 export function claimForm(state, unit, now) {
@@ -242,7 +243,7 @@ export function burySiblings(cardIds, content) {
 export function onePerFamily(cardIds, content, rng) {
   const byFamily = new Map();
   cardIds.forEach((id, i) => {
-    if (!id.startsWith("fm:")) return;
+    if (!isCardType(id, "fm")) return;
     const f = content.familiesOfUnit?.get(unitIdOfFm(id))?.[0];
     if (!f) return;
     if (!byFamily.has(f)) byFamily.set(f, []);
@@ -269,7 +270,7 @@ export function placeChecks(queue) {
   const checks = queue.filter((q) => q.check);
   if (!checks.length) return queue;
   const out = queue.filter((q) => !q.check);
-  const anchor = (c) => out.findIndex((q) => q.cardId === `lr:${c.from}` || q.members?.includes(c.from));
+  const anchor = (c) => out.findIndex((q) => q.cardId === buildCardId("lr", c.from) || q.members?.includes(c.from));
   checks.sort((a, b) => anchor(a) - anchor(b));
   for (const c of checks) {
     const at = anchor(c);
@@ -294,8 +295,8 @@ export function checkBlanks(sentence, forms) {
   const out = [];
   for (const cardId of forms) {
     const unit = unitIdOfFm(cardId);
-    const i = sentence.tokens.findIndex((t, j) => !out.some((b) => b.tokenIndex === j) && t.units.some((x) => `${x.lex}.${x.form}` === unit));
-    if (i >= 0) out.push({ cardId, tokenIndex: i, presentedId: `cz:${sentence.id}:${i}` });
+    const i = sentence.tokens.findIndex((t, j) => !out.some((b) => b.tokenIndex === j) && t.units.some((x) => unitId(x) === unit));
+    if (i >= 0) out.push({ cardId, tokenIndex: i, presentedId: buildCardId("cz", sentence.id, i) });
   }
   return out.sort((a, b) => a.tokenIndex - b.tokenIndex);
 }
@@ -335,12 +336,12 @@ const itemSec = (q) => (q.composite ? 2 : 1) * SEC_PER_REVIEW;
  * `er:<sid>` for the same sentence (the composite is that review). Returns the new id list and `sid → units`.
  */
 export function composeReviews(ids, state, content, now, rng, focus = null) {
-  const easy = ids.filter((id) => id.startsWith("fm:") && isEasy(state, unitIdOfFm(id), now));
+  const easy = ids.filter((id) => isCardType(id, "fm") && isEasy(state, unitIdOfFm(id), now));
   const left = new Set(easy.map(unitIdOfFm));
   const exclude = new Set();
   const comps = new Map(); // sentenceId → units
   const owner = new Map(); // unit → sentenceId
-  const allow = focus ? (sid) => inFocus(`er:${sid}`, focus, content, state) : null;
+  const allow = focus ? (sid) => inFocus(buildCardId("er", sid), focus, content, state) : null;
   for (;;) {
     const pick = pickComposite([...left], state, content, now, rng, { exclude, allow });
     if (!pick) break;
@@ -351,10 +352,10 @@ export function composeReviews(ids, state, content, now, rng, focus = null) {
   const out = [];
   const emitted = new Set();
   for (const id of ids) {
-    if (id.startsWith("er:") && comps.has(id.slice(3))) continue;
-    const sid = id.startsWith("fm:") ? owner.get(unitIdOfFm(id)) : null;
+    if (isCardType(id, "er") && comps.has(parseCardId(id).sentenceId)) continue;
+    const sid = isCardType(id, "fm") ? owner.get(unitIdOfFm(id)) : null;
     if (!sid) { out.push(id); continue; }
-    if (!emitted.has(sid)) { emitted.add(sid); out.push(`er:${sid}`); }
+    if (!emitted.has(sid)) { emitted.add(sid); out.push(buildCardId("er", sid)); }
   }
   return { ids: out, comps };
 }
@@ -370,7 +371,7 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
   const { ids: composed, comps } = composeReviews(onePerFamily(duePicked, content, rng), state, content, now, rng, focus);
   const dueIds = burySiblings(composed, content);
   const allDue = dueIds.map((cardId) => {
-    const units = cardId.startsWith("er:") ? comps.get(cardId.slice(3)) : null;
+    const units = isCardType(cardId, "er") ? comps.get(parseCardId(cardId).sentenceId) : null;
     return units ? { cardId, isNew: false, composite: true, units } : { cardId, isNew: false };
   });
   const dueSec = (items) => items.reduce((n, q) => n + itemSec(q), 0);
@@ -413,7 +414,7 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
       // New profile: i+1 finds few sentences yet, so top up with the easiest ones (FR-S4 order).
       const have = new Set(ids);
       const extra = interimNewSentences(Infinity, state, content)
-        .filter((id) => !have.has(id) && inFocus(`lr:${id}`, focus, content, state))
+        .filter((id) => !have.has(id) && inFocus(buildCardId("lr", id), focus, content, state))
         .slice(0, want - have0);
       ids = [...ids, ...extra];
     }
@@ -421,7 +422,7 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
   // One schedule per word form: a form shared by two new sentences gets its `fm` card from the first.
   const claimed = new Set();
   const newFms = (s) => cardsForSentence(s, content, state)
-    .filter((cardId) => cardId.startsWith("fm:") && !isClaimedCard(cardId, state) && !claimed.has(cardId) && claimed.add(cardId));
+    .filter((cardId) => isCardType(cardId, "fm") && !isClaimedCard(cardId, state) && !claimed.has(cardId) && claimed.add(cardId));
   const grouped = new Set(ids);
   const groups = ids
     .map((id) => content.sentences.get(id))
@@ -432,8 +433,8 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
         const ids = cardsForSentence(s, content, state)
           .filter((cardId) => !isClaimedCard(cardId, state) && !claimed.has(cardId) && claimed.add(cardId));
         return [
-          ...ids.filter((cardId) => !cardId.startsWith("fm:")).map((cardId) => ({ cardId, isNew: true })),
-          ...oneCheck(ids.filter((cardId) => cardId.startsWith("fm:")), s.id),
+          ...ids.filter((cardId) => !isCardType(cardId, "fm")).map((cardId) => ({ cardId, isNew: true })),
+          ...oneCheck(ids.filter((cardId) => isCardType(cardId, "fm")), s.id),
         ];
       }
       // A paradigm (FR-R5): one card for the family, one immediate check on a random member, the rest due tomorrow.
@@ -443,7 +444,7 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
       const checks = newFms(chosen);
       const deferred = members.flatMap((m) => (m === chosen.id ? [] : newFms(content.sentences.get(m))));
       return [
-        { cardId: `pg:${content.familyOf.get(s.id)}`, isNew: true, members, deferred },
+        { cardId: buildCardId("pg", content.familyOf.get(s.id)), isNew: true, members, deferred },
         ...oneCheck(checks, chosen.id),
       ];
     });
@@ -546,7 +547,7 @@ export function erMisses(sentence, diff) {
     const bad = diff[i].status === "wrong" || diff[i].status === "missing";
     if (bad) missedTokens.push(t.t.replace(/[.,!?;:]+$/, ""));
     for (const u of t.units) {
-      const id = `${u.lex}.${u.form}`;
+      const id = unitId(u);
       seen.add(id);
       if (bad) missed.add(id);
     }
@@ -589,7 +590,7 @@ export function applyErReview(state, cardId, grade, unitsRequired, misses, now, 
   const claimed = Object.fromEntries(Object.entries(next.claimed ?? {}).filter(([u]) => !missedSet.has(u)));
   const attempts = [
     ...next.attempts,
-    ...[...misses.missed, ...misses.ok].map((u) => ({ u, lx: lxOf.get(u) ?? u.slice(0, u.indexOf(".")), c: missedSet.has(u) ? 0 : 1, t: now, card: presentedId })),
+    ...[...misses.missed, ...misses.ok].map((u) => ({ u, lx: lxOf.get(u) ?? parseUnitId(u).lex, c: missedSet.has(u) ? 0 : 1, t: now, card: presentedId })),
   ];
   return { ...next, cards, claimed, attempts };
 }
@@ -601,7 +602,7 @@ export function applyErReview(state, cardId, grade, unitsRequired, misses, now, 
  */
 export function applyParadigm(state, item, now, content) {
   let next = state;
-  for (const m of item.members) next = applyReview(next, `lr:${m}`, 3, [], now, content);
+  for (const m of item.members) next = applyReview(next, buildCardId("lr", m), 3, [], now, content);
   const cards = { ...next.cards };
   for (const id of item.deferred ?? []) if (!(id in cards)) cards[id] = { ...newCard(now), due: nextDayStart(now) };
   const extra = item.members.length - 1;

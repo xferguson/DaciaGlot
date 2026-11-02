@@ -2,6 +2,7 @@
 import { parseCardId, clozeUnitIds, fmIdForUnit } from "./cards.js";
 import { unitsRequiredForCard } from "./units.js";
 import { DAY_MS as DAY } from "./time.js";
+import { unitId, parseUnitId } from "./unit-id.js";
 
 export const COMPACT_AFTER_MS = 90 * DAY;
 const WINDOW = 20;
@@ -82,7 +83,7 @@ function cardCarries(cardId, unit, content) {
   const s = content.sentences.get(p.sentenceId);
   if (!s) return false;
   if (unit.startsWith("pat:")) return (s.patterns ?? []).includes(unit.slice(4));
-  return s.tokens.some((t) => t.units.some((u) => `${u.lex}.${u.form}` === unit));
+  return s.tokens.some((t) => t.units.some((u) => unitId(u) === unit));
 }
 
 function lastAttemptCorrect(unit, stats) {
@@ -111,20 +112,18 @@ export function allPatternStates(state, content, now) {
 }
 
 /** ARCHITECTURE §7.2: "unseen" | "seen" | "produced" | "stable". */
-export function unitState(unitId, state, content, now) {
-  if (unitId in (state.claimed ?? {})) return "stable";
+export function unitState(unit, state, content, now) {
+  if (unit in (state.claimed ?? {})) return "stable";
   const s = fold(state, now);
-  const st = unitStats(unitId, s);
+  const st = unitStats(unit, s);
   if (st.everCorrect) {
     const stable =
-      lastAttemptCorrect(unitId, st) &&
-      Object.entries(s.cards).some(([cid, c]) => c.stability >= STABLE_DAYS && cardCarries(cid, unitId, content));
+      lastAttemptCorrect(unit, st) &&
+      Object.entries(s.cards).some(([cid, c]) => c.stability >= STABLE_DAYS && cardCarries(cid, unit, content));
     return stable ? "stable" : "produced";
   }
-  if (st.raw.length || s.unitAggregates[unitId]) return "seen";
-  const dot = unitId.indexOf(".");
-  const lex = unitId.slice(0, dot);
-  const form = unitId.slice(dot + 1);
+  if (st.raw.length || s.unitAggregates[unit]) return "seen";
+  const { lex, form } = parseUnitId(unit);
   for (const sid of content.sentencesByLexeme.get(lex) ?? []) {
     if (!(sid in s.seenSentences)) continue;
     if (content.sentences.get(sid)?.tokens.some((t) => t.units.some((u) => u.lex === lex && u.form === form))) return "seen";

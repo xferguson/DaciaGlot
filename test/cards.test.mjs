@@ -48,3 +48,19 @@ test("isUnlocked: lr always, cz after lr exists, later types locked", () => {
   assert.equal(isUnlocked("lr:missing", st, content), false);
   assert.equal(isUnlocked("er:s1", st, content), false);
 });
+
+import { CARD_SPEC, CARD_TYPES, cardTypeOf, isCardType } from "../app/js/core/cards.js";
+
+test("pg is a known, queue-only card type", () => {
+  assert.deepEqual(parseCardId("pg:fam-1"), { type: "pg", familyId: "fam-1" });
+  assert.equal(buildCardId("pg", "fam-1"), "pg:fam-1");
+  assert.equal(CARD_SPEC.pg.stored, false);
+  assert.ok(CARD_TYPES.includes("pg"));
+});
+
+test("cardTypeOf and isCardType never throw", () => {
+  assert.equal(cardTypeOf("fm:fi:pres3sg"), "fm");
+  assert.equal(cardTypeOf("nope:x"), null);
+  assert.equal(isCardType("er:s1", "er"), true);
+  assert.equal(isCardType("er:s1", "fm"), false);
+});

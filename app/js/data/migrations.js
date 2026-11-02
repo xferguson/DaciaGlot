@@ -1,4 +1,5 @@
 /** Schema migrations, keyed by the schemaVersion they migrate FROM. */
+import { parseCardId, buildCardId, isCardType } from "../core/cards.js";
 
 export const CURRENT_SCHEMA_VERSION = 2;
 
@@ -14,7 +15,10 @@ function mergeInto(cards, fmId, card) {
 }
 
 /** `kf:<lex>:<form>` → `fm:<lex>:<form>` (same lexeme and form, so it needs no content). */
-const kfToFm = (id) => `fm:${id.slice(3)}`;
+const kfToFm = (id) => {
+  const p = parseCardId(id);
+  return buildCardId("fm", p.lexemeId, p.formKey);
+};
 
 /** @type {Record<number, (state: object) => object>} */
 export const migrations = {
@@ -23,19 +27,19 @@ export const migrations = {
   1: (s) => {
     const cards = {};
     for (const [id, c] of Object.entries(s.cards ?? {})) {
-      if (id.startsWith("kf:")) mergeInto(cards, kfToFm(id), c);
+      if (isCardType(id, "kf")) mergeInto(cards, kfToFm(id), c);
       else cards[id] = c;
     }
     const difficult = {};
-    for (const [id, ts] of Object.entries(s.difficult ?? {})) difficult[id.startsWith("kf:") ? kfToFm(id) : id] = ts;
+    for (const [id, ts] of Object.entries(s.difficult ?? {})) difficult[isCardType(id, "kf") ? kfToFm(id) : id] = ts;
     return { ...s, schemaVersion: 2, cards, difficult };
   },
 };
 
 /** True if the state still holds old `cz` cards (or `difficult` entries) that `foldClozeCards` has to fold. */
 export function hasLegacyCloze(state) {
-  return Object.keys(state.cards ?? {}).some((id) => id.startsWith("cz:"))
-    || Object.keys(state.difficult ?? {}).some((id) => id.startsWith("cz:"));
+  return Object.keys(state.cards ?? {}).some((id) => isCardType(id, "cz"))
+    || Object.keys(state.difficult ?? {}).some((id) => isCardType(id, "cz"));
 }
 
 /**
@@ -49,20 +53,20 @@ export function hasLegacyCloze(state) {
 export function foldClozeCards(state, content) {
   if (!hasLegacyCloze(state)) return state;
   const fmIdsFor = (czId) => {
-    const [, sid, i] = czId.split(":");
-    const units = content.sentences.get(sid)?.tokens[Number(i)]?.units ?? [];
-    return [...new Set(units.map((u) => `fm:${u.lex}:${u.form}`))];
+    const { sentenceId, tokenIndex } = parseCardId(czId);
+    const units = content.sentences.get(sentenceId)?.tokens[tokenIndex]?.units ?? [];
+    return [...new Set(units.map((u) => buildCardId("fm", u.lex, u.form)))];
   };
   const cards = {};
   const legacy = [];
   for (const [id, c] of Object.entries(state.cards)) {
-    if (id.startsWith("cz:")) legacy.push([id, c]);
+    if (isCardType(id, "cz")) legacy.push([id, c]);
     else cards[id] = c;
   }
   for (const [id, c] of legacy) for (const fm of fmIdsFor(id)) mergeInto(cards, fm, c);
   const difficult = {};
   for (const [id, ts] of Object.entries(state.difficult ?? {})) {
-    for (const key of id.startsWith("cz:") ? fmIdsFor(id) : [id]) difficult[key] = Math.max(ts, difficult[key] ?? 0);
+    for (const key of isCardType(id, "cz") ? fmIdsFor(id) : [id]) difficult[key] = Math.max(ts, difficult[key] ?? 0);
   }
   return { ...state, cards, difficult };
 }

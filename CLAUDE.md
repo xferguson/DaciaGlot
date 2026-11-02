@@ -42,7 +42,7 @@ Shared code lives in a few modules. **Search them before writing a helper**, and
 - `core/time.js`: days and local midnights
 - `core/history.js`: per-day history: `emptyDay`, `bumpDay`, `addMinutes`
 - `core/random.js`: `shuffle` and index picks from an injected `rng` (coming in Q06)
-- `core/cards.js` `buildCardId`/`parseCardId`; `core/units.js` `unitId`/`parseUnitId` (coming in Q09)
+- `core/cards.js` `buildCardId`/`parseCardId`; `core/units.js` `unitId`/`parseUnitId`
 - `ui/dom.js`: safe markup helpers (`esc`, `html`, `raw`, `el`)
 - `ui/components/button.js`: every button
 - `ui/components/answer-card.js`: `answerCard`, the typed-answer card controller
@@ -52,7 +52,7 @@ Rules:
 1. Card and unit ids are made and read only through `buildCardId`/`parseCardId` and `unitId`/`parseUnitId`. No string splitting or template literals for ids.
 2. Views hold no logic. A view renders a model from a pure function, changes state only through `ctx.update(coreTransition)` (coming in Q08), and never imports another view.
 3. Every view change gets a fake-DOM test (`test/helpers/fake-dom.mjs`). Every bug fix starts with a failing test.
-4. A new card type is one `CARD_SPEC` entry in `core/cards.js` (coming in Q09) plus a renderer built on `answerCard`.
+4. A new card type is one `CARD_SPEC` entry in `core/cards.js` plus a renderer built on `answerCard`.
 5. `node scripts/lint.mjs` is part of the pre-PR checks.
 
 When a "(coming in Qxx)" module lands, that task drops its marker here and in ARCHITECTURE §1.

@@ -2,6 +2,7 @@
 import { levelProgress, allPatternStates, masteredSentenceIds } from "../../core/mastery.js";
 import { dayKey, DAY_MS as DAY } from "../../core/time.js";
 import { weeklyIntake } from "../../core/pace.js";
+import { parseUnitId, isPatternUnit } from "../../core/unit-id.js";
 
 export const WEEKS = 8;
 export const FORECAST_DAYS = 14;
@@ -25,13 +26,13 @@ function weekIndex(t, now) {
 export function productionStats(state, content, now) {
   const all = new Set();
   const week = new Set();
-  for (const [u, agg] of Object.entries(state.unitAggregates ?? {})) if (!u.startsWith("pat:") && agg.correct > 0) all.add(u);
+  for (const [u, agg] of Object.entries(state.unitAggregates ?? {})) if (!isPatternUnit(u) && agg.correct > 0) all.add(u);
   for (const a of state.attempts) {
-    if (a.enc || a.c !== 1 || a.u.startsWith("pat:")) continue;
+    if (a.enc || a.c !== 1 || isPatternUnit(a.u)) continue;
     all.add(a.u);
     if (a.t > now - 7 * DAY && a.t <= now) week.add(a.u);
   }
-  const words = new Set([...all].map((u) => u.slice(0, u.indexOf("."))));
+  const words = new Set([...all].map((u) => parseUnitId(u).lex));
   const mastered = masteredSentenceIds(state, content, now).size;
   return { formsAll: all.size, formsWeek: week.size, sentencesMastered: mastered, wordsKnown: words.size };
 }
