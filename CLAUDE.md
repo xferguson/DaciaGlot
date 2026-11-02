@@ -40,7 +40,7 @@ When the owner asks for a product check-in (or to "check in as product designer"
 Shared code lives in a few modules. **Search them before writing a helper**, and add to them instead of copying (list and paths in `docs/ARCHITECTURE.md` §1):
 
 - `core/time.js`: days and local midnights
-- `core/history.js`: per-day history (coming in Q04)
+- `core/history.js`: per-day history: `emptyDay`, `bumpDay`, `addMinutes`
 - `core/random.js`: `shuffle` and index picks from an injected `rng` (coming in Q06)
 - `core/cards.js` `buildCardId`/`parseCardId`; `core/units.js` `unitId`/`parseUnitId` (coming in Q09)
 - `ui/dom.js`: safe markup helpers (`esc`, `html`, `raw`, `el`)

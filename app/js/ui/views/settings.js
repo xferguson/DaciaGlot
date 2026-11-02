@@ -11,10 +11,7 @@ const dateStamp = () => new Date().toISOString().slice(0, 10);
 
 export function render(root, ctx) {
   const st = () => ctx.state;
-  const update = (patch) => {
-    ctx.state = { ...ctx.state, settings: { ...ctx.state.settings, ...patch } };
-    ctx.store.save(ctx.state);
-  };
+  const update = (patch) => ctx.updateSettings(patch);
   const voices = ctx.voices ?? [];
   const ro = voices.filter((v) => /^ro/i.test(v.lang));
   const list = ro.length ? ro : voices;
@@ -116,8 +113,7 @@ export function render(root, ctx) {
     });
   }
   function removeFlag(i) {
-    ctx.state = { ...ctx.state, flags: ctx.state.flags.filter((_, j) => j !== i) };
-    ctx.store.save(ctx.state);
+    ctx.update((s) => ({ ...s, flags: s.flags.filter((_, j) => j !== i) }));
     renderFlags();
   }
   renderFlags();
@@ -154,8 +150,7 @@ export function render(root, ctx) {
     box.querySelector("[data-cancel]").addEventListener("click", closeDialog);
     box.querySelectorAll("[data-mode]").forEach((b) => b.addEventListener("click", () => {
       try {
-        ctx.state = foldClozeCards(importState(text, b.dataset.mode, ctx.state), ctx.content);
-        ctx.store.save(ctx.state);
+        ctx.update((s) => foldClozeCards(importState(text, b.dataset.mode, s), ctx.content));
         ctx.store.flush();
         closeDialog();
         toast("Backup imported");
@@ -177,8 +172,7 @@ export function render(root, ctx) {
     input.addEventListener("input", () => { go.disabled = input.value.trim() !== "RESET"; });
     box.querySelector("[data-cancel]").addEventListener("click", closeDialog);
     go.addEventListener("click", () => {
-      ctx.state = { ...defaultState(Date.now()), contentVersion: ctx.content?.contentVersion ?? "" };
-      ctx.store.save(ctx.state);
+      ctx.update(() => ({ ...defaultState(Date.now()), contentVersion: ctx.content?.contentVersion ?? "" }));
       ctx.store.flush();
       closeDialog();
       toast("All data reset");
