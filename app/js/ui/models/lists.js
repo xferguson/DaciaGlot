@@ -1,6 +1,7 @@
 // Situations / Patterns lists: learned · learning · to learn per topic; tapping a row sets the session focus (PRD P-9, FR-N2, FR-S8).
 import { pickNewSentences, focusList } from "../../core/select.js";
 import { allPatternStates, masteredSentenceIds } from "../../core/mastery.js";
+import { cmpStr } from "../../core/sort.js";
 
 export const SITUATION_NAMES = {
   standup: "Stand-up",
@@ -47,7 +48,7 @@ export function listRows(tab, { state, content, now }) {
   const states = allPatternStates(state, content, now);
   const seen = (id) => (states[id] ?? "not-started") !== "not-started";
   return [...content.patterns.values()]
-    .sort((a, b) => a.stage - b.stage || (a.id < b.id ? -1 : 1))
+    .sort((a, b) => a.stage - b.stage || cmpStr(a.id, b.id))
     .map((p) => {
       const needs = (p.requires ?? []).filter((r) => !seen(r)).map((r) => content.patterns.get(r)?.name ?? r);
       return {

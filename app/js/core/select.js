@@ -3,6 +3,7 @@ import { unitsForSentence, isKnown } from "./units.js";
 import { allPatternStates } from "./mastery.js";
 import { shuffle } from "./random.js";
 import { unitId, parseUnitId, isPatternUnit } from "./unit-id.js";
+import { cmpStr } from "./sort.js";
 
 const BAND = 5;
 
@@ -110,7 +111,7 @@ export function pickNewSentences(n, { focus: rawFocus = null, state, content, no
 
   const scored = candidates
     .map((c) => ({ ...c, score: score(c) }))
-    .sort((a, b) => b.score - a.score || (a.s.id < b.s.id ? -1 : 1));
+    .sort((a, b) => b.score - a.score || cmpStr(a.s.id, b.s.id));
   const ordered = [];
   for (let i = 0; i < scored.length; ) {
     let j = i + 1;
@@ -147,7 +148,7 @@ export function pickNewSentences(n, { focus: rawFocus = null, state, content, no
 function mostCommon(items) {
   const counts = new Map();
   for (const x of items) counts.set(x, (counts.get(x) ?? 0) + 1);
-  return [...counts].sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1))[0]?.[0] ?? null;
+  return [...counts].sort((a, b) => b[1] - a[1] || cmpStr(a[0], b[0]))[0]?.[0] ?? null;
 }
 
 /** The unmet prerequisite pattern with the most focus sentences behind it, else the roomiest other situation. */

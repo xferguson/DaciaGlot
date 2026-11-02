@@ -62,7 +62,7 @@ When a "(coming in Qxx)" module lands, that task drops its marker here and in AR
 ```bash
 node --test                           # unit tests
 node scripts/validate-content.mjs      # content integrity (add --coverage for the report)
-node scripts/lint.mjs                  # lint app/js (--update-allow shrinks scripts/lint-allow.json; it never grows)
+node scripts/lint.mjs                  # lint app/js
 python3 -m http.server -d app 8080     # local preview at http://localhost:8080/
 ```
 

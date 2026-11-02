@@ -7,6 +7,7 @@ import { weeklyIntake } from "../../core/pace.js";
 import { renderCanDos } from "../components/can-dos.js";
 
 import { WEEKS, FORECAST_DAYS, currentLevelId, productionStats, weeklyHistory, dueForecast, patternTrend, dashboardModel } from "../models/dashboard.js";
+import { byKey } from "../../core/sort.js";
 
 // The pure model lives in ui/models/dashboard.js (Q13); re-exported here for one release.
 export { WEEKS, FORECAST_DAYS, currentLevelId, productionStats, weeklyHistory, dueForecast, patternTrend, dashboardModel };
@@ -63,7 +64,7 @@ function patternsSection(ctx, model, now) {
   for (const stage of [...byStage.keys()].sort((a, b) => a - b)) {
     s.append(el("h3", null, `Stage ${stage}`));
     const grid = el("div", "pattern-grid");
-    for (const p of byStage.get(stage).sort((a, b) => (a.id < b.id ? -1 : 1))) {
+    for (const p of byStage.get(stage).sort(byKey((p) => p.id))) {
       const st = model.patternStates[p.id];
       const chip = el("button", `chip pat-chip st-${st}`, p.name);
       chip.type = "button";

@@ -5,6 +5,7 @@ import { focusList } from "./select.js";
 import { carriersFor, pickComposite } from "./carrier.js";
 import { pickOne } from "./random.js";
 import { isClaimedCard } from "./review.js";
+import { cmpStr } from "./sort.js";
 
 /** Keys two cards share when they'd feel like a repeat: `s:<sentence>`, `l:<target lexeme>`; `new` marks a new `lr`. */
 export function cardKeys(item, content) {
@@ -29,7 +30,7 @@ export function cardKeys(item, content) {
 export function dueCards(state, content, now) {
   return Object.entries(state.cards)
     .filter(([id, c]) => c.due <= now && !isClaimedCard(id, state) && isUnlocked(id, state, content))
-    .sort((a, b) => a[1].due - b[1].due || (a[0] < b[0] ? -1 : 1))
+    .sort((a, b) => a[1].due - b[1].due || cmpStr(a[0], b[0]))
     .map(([id]) => id);
 }
 

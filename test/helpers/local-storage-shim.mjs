@@ -10,8 +10,8 @@ export function createLocalStorage({ quota = Infinity } = {}) {
       v = String(v);
       const next = size() - (map.has(k) ? k.length + map.get(k).length : 0) + k.length + v.length;
       if (next > quota) {
-        const e = new Error('The quota has been exceeded.');
-        e.name = 'QuotaExceededError';
+        const e = new Error("The quota has been exceeded.");
+        e.name = "QuotaExceededError";
         e.code = 22;
         throw e;
       }
@@ -25,6 +25,6 @@ export function createLocalStorage({ quota = Infinity } = {}) {
 /** Install a fresh shim on globalThis and return it. */
 export function installLocalStorage(opts) {
   const ls = createLocalStorage(opts);
-  Object.defineProperty(globalThis, 'localStorage', { value: ls, configurable: true, writable: true });
+  Object.defineProperty(globalThis, "localStorage", { value: ls, configurable: true, writable: true });
   return ls;
 }

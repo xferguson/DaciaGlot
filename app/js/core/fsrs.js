@@ -87,7 +87,7 @@ function fuzzInterval(days, rng) {
 export function review(card, grade, now, opts = {}) {
   const { w = DEFAULT_W, requestRetention = 0.9, fuzz = false, rng } = opts;
   if (![1, 2, 3, 4].includes(grade)) throw new RangeError(`invalid grade: ${grade}`);
-  if (fuzz && typeof rng !== 'function') throw new TypeError('fuzz requires an rng function');
+  if (fuzz && typeof rng !== "function") throw new TypeError("fuzz requires an rng function");
 
   const next = { ...card, reps: card.reps + 1, lastReview: now, step: card.step ?? 0 };
   const elapsed = card.lastReview == null ? 0 : Math.max(0, (now - card.lastReview) / DAY_MS);

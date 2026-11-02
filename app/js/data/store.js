@@ -1,14 +1,14 @@
-import { CURRENT_SCHEMA_VERSION, migrate } from './migrations.js';
-import { compactAttempts } from '../core/mastery.js';
-import { DAY_MS } from '../core/time.js';
+import { CURRENT_SCHEMA_VERSION, migrate } from "./migrations.js";
+import { compactAttempts } from "../core/mastery.js";
+import { DAY_MS } from "../core/time.js";
 
-export const STATE_KEY = 'dg:v1:state';
+export const STATE_KEY = "dg:v1:state";
 const SAVE_DEBOUNCE_MS = 500;
 
 export class ImportError extends Error {
   constructor(message) {
     super(message);
-    this.name = 'ImportError';
+    this.name = "ImportError";
   }
 }
 
@@ -21,8 +21,8 @@ export const SETTINGS_DEFAULTS = {
     ttsRate: 0.9,
     voiceURI: null,
     autoplay: true,
-    answerMode: 'speak',
-    registers: ['colloquial', 'neutral'],
+    answerMode: "speak",
+    registers: ["colloquial", "neutral"],
     lastExportAt: null,
     ttsBannerDismissed: false,
     focus: [],
@@ -32,7 +32,7 @@ export const SETTINGS_DEFAULTS = {
 export function defaultState(now) {
   return {
     schemaVersion: CURRENT_SCHEMA_VERSION,
-    contentVersion: '',
+    contentVersion: "",
     createdAt: now,
     settings: { ...SETTINGS_DEFAULTS, registers: [...SETTINGS_DEFAULTS.registers], focus: [] },
     cards: {},
@@ -50,7 +50,7 @@ export function defaultState(now) {
   };
 }
 
-const isObject = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
+const isObject = (v) => v !== null && typeof v === "object" && !Array.isArray(v);
 
 /** Fill any field missing from `s` with its default (one level deep for settings). */
 function withDefaults(s, now) {
@@ -58,10 +58,10 @@ function withDefaults(s, now) {
   const out = { ...d, ...s, settings: { ...d.settings, ...(isObject(s.settings) ? s.settings : {}) } };
   delete out.activeSession; // briefly shipped in 0.7.0, now unused
   out.settings.focus = Array.isArray(out.settings.focus) ? out.settings.focus : out.settings.focus ? [out.settings.focus] : [];
-  for (const k of ['cards', 'seenSentences', 'lexemeSentences', 'unitAggregates', 'history', 'canDoChecked', 'difficult', 'claimed']) {
+  for (const k of ["cards", "seenSentences", "lexemeSentences", "unitAggregates", "history", "canDoChecked", "difficult", "claimed"]) {
     if (!isObject(out[k])) out[k] = d[k];
   }
-  for (const k of ['attempts', 'flags']) {
+  for (const k of ["attempts", "flags"]) {
     if (!Array.isArray(out[k])) out[k] = d[k];
   }
   return out;
@@ -130,8 +130,8 @@ function hookVisibility() {
   const doc = globalThis.document;
   if (!doc?.addEventListener) return;
   visibilityHooked = true;
-  doc.addEventListener('visibilitychange', () => {
-    if (doc.visibilityState === 'hidden') flush();
+  doc.addEventListener("visibilitychange", () => {
+    if (doc.visibilityState === "hidden") flush();
   });
 }
 
@@ -176,14 +176,14 @@ export function load() {
   }
   backupCorrupt(raw, now);
   const fresh = defaultState(now);
-  Object.defineProperty(fresh, '_recovered', { value: true, enumerable: false, writable: true, configurable: true });
+  Object.defineProperty(fresh, "_recovered", { value: true, enumerable: false, writable: true, configurable: true });
   return fresh;
 }
 
 // ---- export / import ---------------------------------------------------------
 
 export function exportState(state) {
-  return new Blob([JSON.stringify(persistable(state), null, 2)], { type: 'application/json' });
+  return new Blob([JSON.stringify(persistable(state), null, 2)], { type: "application/json" });
 }
 
 /**
@@ -194,27 +194,27 @@ export function exportState(state) {
  * @throws {ImportError}
  */
 export function importState(json, mode, current) {
-  if (mode !== 'merge' && mode !== 'replace') throw new ImportError(`Unknown import mode: ${mode}`);
+  if (mode !== "merge" && mode !== "replace") throw new ImportError(`Unknown import mode: ${mode}`);
   let incoming = json;
-  if (typeof json === 'string') {
+  if (typeof json === "string") {
     try {
       incoming = JSON.parse(json);
     } catch {
-      throw new ImportError('This file is not valid JSON.');
+      throw new ImportError("This file is not valid JSON.");
     }
   }
-  if (!isObject(incoming)) throw new ImportError('This file is not a DaciaGlot backup.');
+  if (!isObject(incoming)) throw new ImportError("This file is not a DaciaGlot backup.");
   const v = incoming.schemaVersion;
-  if (!Number.isInteger(v) || v < 1) throw new ImportError('This file is not a DaciaGlot backup (no schemaVersion).');
+  if (!Number.isInteger(v) || v < 1) throw new ImportError("This file is not a DaciaGlot backup (no schemaVersion).");
   if (v > CURRENT_SCHEMA_VERSION) {
     throw new ImportError(
       `This backup was made by a newer version of the app (schema ${v}; this app supports up to ${CURRENT_SCHEMA_VERSION}). Update the app and try again.`,
     );
   }
-  for (const k of ['cards', 'seenSentences', 'lexemeSentences', 'unitAggregates', 'history', 'canDoChecked', 'claimed', 'settings']) {
+  for (const k of ["cards", "seenSentences", "lexemeSentences", "unitAggregates", "history", "canDoChecked", "claimed", "settings"]) {
     if (k in incoming && !isObject(incoming[k])) throw new ImportError(`Backup field "${k}" has the wrong shape.`);
   }
-  for (const k of ['attempts', 'flags']) {
+  for (const k of ["attempts", "flags"]) {
     if (k in incoming && !Array.isArray(incoming[k])) throw new ImportError(`Backup field "${k}" has the wrong shape.`);
   }
 
@@ -225,7 +225,7 @@ export function importState(json, mode, current) {
     throw new ImportError(`Could not migrate this backup: ${err.message}`);
   }
   migrated = persistable(migrated);
-  return mode === 'replace' ? migrated : mergeStates(current, migrated);
+  return mode === "replace" ? migrated : mergeStates(current, migrated);
 }
 
 // ---- merge -----------------------------------------------------------------
