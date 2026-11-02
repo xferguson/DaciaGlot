@@ -1,6 +1,7 @@
 // Picks the sentence an `fm` card is shown in (ARCHITECTURE §3). Pure: `now` and `rng` are injected.
 import { parseCardId, buildCardId, unitIdOfFm, clozeUnitIds } from "./cards.js";
 import { unitsForSentence, isKnown } from "./units.js";
+import { pickOne } from "./random.js";
 import { DAY_MS } from "./time.js";
 
 /** A carrier is skipped when it was named in this many of the unit's latest attempts. */
@@ -29,7 +30,7 @@ export function carriersFor(unitId, state, content) {
 }
 
 const pickRandom = (list, rng) => {
-  const { sentenceId, tokenIndex } = list[Math.min(list.length - 1, Math.floor(rng() * list.length))];
+  const { sentenceId, tokenIndex } = pickOne(list, rng);
   return { sentenceId, tokenIndex };
 };
 
@@ -130,6 +131,6 @@ export function pickComposite(dueEasyUnits, state, content, now, rng = Math.rand
   const rank = (c) => c.units.length * 2 + (c.unseen ? 1 : 0);
   const top = Math.max(...found.map(rank));
   const best = found.filter((c) => rank(c) === top).sort((a, b) => (a.sentenceId < b.sentenceId ? -1 : 1));
-  const { sentenceId, units } = best[Math.min(best.length - 1, Math.floor(rng() * best.length))];
+  const { sentenceId, units } = pickOne(best, rng);
   return { sentenceId, units };
 }
