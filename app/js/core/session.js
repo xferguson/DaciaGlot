@@ -634,7 +634,7 @@ export function applyCheck(state, cardId, correct, unitsRequired, now, presented
 
 /**
  * PRD FR-S9: re-queue a wrong card once, 3–5 cards later. With `content`, it moves up to 3 further
- * so it doesn't land next to a related card (`cardKeys`). Returns the index it was inserted at.
+ * so it doesn't land next to a related card (`cardKeys`). Pure: returns `{queue, at}`, a new queue and the index it was inserted at.
  */
 export function requeueWrong(queue, pos, item, rng, content) {
   let at = Math.min(queue.length, pos + 3 + pickIndex(rng, 3));
@@ -645,6 +645,7 @@ export function requeueWrong(queue, pos, item, rng, content) {
       if (!clash(i - 1) && !clash(i)) { at = i; break; }
     }
   }
-  queue.splice(at, 0, { cardId: item.cardId, isNew: false, requeued: true });
-  return at;
+  const out = queue.slice();
+  out.splice(at, 0, { cardId: item.cardId, isNew: false, requeued: true });
+  return { queue: out, at };
 }

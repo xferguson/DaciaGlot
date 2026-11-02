@@ -1,9 +1,6 @@
 {
   "undeclared-call": {},
-  "core-purity": {
-    "app/js/core/cards.js": 1,
-    "app/js/core/carrier.js": 2
-  },
+  "core-purity": {},
   "raw-card-id": {
     "app/js/core/session.js": 20,
     "app/js/data/migrations.js": 9

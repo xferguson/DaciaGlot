@@ -111,3 +111,10 @@ export function checkAnswer(input, expected, accept = [], { avoid = [] } = {}) {
   }
   return { result: best.result, diff: best.diff, extra: best.extra };
 }
+
+/** Pure: first letter of each expected token that is still wrong or missing, e.g. `t… s…`. */
+export function hintFor(input, expected, accept = []) {
+  const { diff } = checkAnswer(input, expected, accept);
+  return diff.filter((d) => d.status === 'wrong' || d.status === 'missing')
+    .map((d) => [...d.token][0] + '…').join(' ');
+}

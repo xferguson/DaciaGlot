@@ -1,19 +1,16 @@
 // Cloze card (PRD FR-D2, FR-D7, FR-D8). Type the blanked token; one retry.
 
-import { checkAnswer } from "../../../core/check.js";
+import { checkAnswer, hintFor } from "../../../core/check.js";
+import { answerStep, initialAnswer, canRate } from "../../../core/answer.js";
 import { lexemeForms } from "../../../core/cards.js";
 import { audioButton } from "../audio-button.js";
 import { answerInput } from "../answer-input.js";
 import { diacriticBar } from "../diacritic-bar.js";
 import { renderFeedback, nextButtons, partsFor } from "../feedback.js";
+import { retryMessage } from "../answer-card.js";
 import { button } from "../button.js";
 
-/** Pure: first letter of each expected token that is still wrong or missing. */
-export function hintFor(input, expected, accept = []) {
-  const { diff } = checkAnswer(input, expected, accept);
-  return diff.filter((d) => d.status === "wrong" || d.status === "missing")
-    .map((d) => [...d.token][0] + "…").join(" ");
-}
+export { hintFor };
 
 /** Token index from a card or id string `cz:<sentenceId>:<idx>`. */
 export function tokenIndexOf(card) {
@@ -73,21 +70,18 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
 
   const checkBtn = button("Check", "btn", () => submit());
   const hintBtn = button("Hint", "btn secondary", () => {
-    usedHint = true;
+    st = answerStep(st, { type: "hint" }).state;
     hintLine.textContent = `Hint: ${idxs.map((i) => hintFor(inputs.get(i).value, sentence.tokens[i].t, [])).filter(Boolean).join(" · ")}`;
     lastFocused.focus();
   });
   actions.append(hintBtn, checkBtn);
 
-  let attempts = 0;
-  let usedHint = false;
-  let finished = false;
+  let st = initialAnswer();
   const avoidOf = (i) => (content ? lexemeForms({ tokens: [sentence.tokens[i]] }, content) : []);
   const checkOf = (i) => checkAnswer(inputs.get(i).value, sentence.tokens[i].t, [], { avoid: avoidOf(i) });
   const resultOf = (i) => checkOf(i).result;
 
   function finish() {
-    finished = true;
     const results = idxs.map((i) => ({ tokenIndex: i, result: resultOf(i) }));
     const result = results.some((r) => r.result === "wrong") ? "wrong"
       : results.some((r) => r.result === "correct-typo") ? "correct-typo"
@@ -108,9 +102,9 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
       parts: idxs.length === 1 ? partsFor(sentence.tokens, diffs.get(idxs[0]), idxs[0]) : partsForBlanks(sentence.tokens, diffs),
       en: sentence.en,
     });
-    const clean = result !== "wrong" && attempts === 1 && !usedHint;
+    const { usedHint, attempts } = st;
     nextButtons(actions, {
-      canRate: !check && clean,
+      canRate: !check && canRate(st, result),
       onPick: (rating) => onResult({
         result, usedHint, attemptNo: attempts, rating,
         blanks: results.map((r) => ({ tokenIndex: r.tokenIndex, ok: r.result !== "wrong" })),
@@ -119,25 +113,22 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
   }
 
   function submit() {
-    if (finished || idxs.every((i) => !inputs.get(i).value.trim())) return;
-    attempts++;
+    if (st.finished || idxs.every((i) => !inputs.get(i).value.trim())) return;
     const wrong = idxs.filter((i) => resultOf(i) === "wrong");
-    if (!wrong.length || attempts >= 2) return finish();
+    const { state, effect } = answerStep(st, { type: "check", result: wrong.length ? "wrong" : "correct" });
+    st = state;
+    if (effect === "finish") return finish();
     for (const i of idxs) {
       inputs.get(i).classList.toggle("bad", wrong.includes(i));
       if (!wrong.includes(i)) inputs.get(i).readOnly = true;
     }
     slot.replaceChildren();
-    const msg = document.createElement("p");
-    msg.className = "feedback bad";
-    msg.setAttribute("role", "status");
-    msg.textContent = wrong.length < idxs.length ? "Not quite: the marked word. Try once more." : "Not quite. Try once more.";
-    slot.append(msg);
+    slot.append(retryMessage(wrong.length < idxs.length ? "Not quite: the marked word. Try once more." : "Not quite. Try once more."));
     const first = inputs.get(wrong[0]);
     first.select();
     first.focus();
   }
 
   inputs.get(idxs[0]).focus();
-  return () => { finished = true; };
+  return () => { st = { ...st, finished: true }; };
 }

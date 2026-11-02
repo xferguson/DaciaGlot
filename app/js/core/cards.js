@@ -553,7 +553,8 @@ export function lexemeForms(sentence, content) {
  * Tiles for building a sentence: the target tokens (lowercase, no end punctuation, in order of appearance) plus 2–4
  * distractors, other forms of the same lexemes, all shuffled. `ro` overrides the target (a transform's result). Distractors are never equal to a target token.
  */
-export function tileOptions(sentence, content, rng = Math.random, ro = null) {
+export function tileOptions(sentence, content, rng, ro = null) {
+  if (typeof rng !== "function") throw new TypeError("tileOptions: rng is required");
   const targets = (ro == null ? sentence.tokens.map((t) => t.t) : tokenize(ro)).map(tileText);
   const taken = new Set(targets);
   const pool = [];

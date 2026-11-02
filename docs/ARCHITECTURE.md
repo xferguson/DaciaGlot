@@ -55,7 +55,7 @@ test/*.test.mjs              # node --test; import from ../app/js/core/*
 | `core/units.js` | `unitId(u)`/`parseUnitId(id)`: the only way to make or read a unit id (coming in Q09) |
 | `ui/dom.js` | safe markup helpers: `esc`, `html`, `raw`, `el` |
 | `ui/components/button.js` | every button |
-| `ui/components/answer-card.js` (coming in Q05) | `answerCard`, the typed-answer card controller; new card renderers build on it |
+| `ui/components/answer-card.js` | `answerCard`, the typed-answer card controller; new card renderers build on it |
 
 ## 2. Content (in memory)
 
@@ -325,7 +325,7 @@ dueCards(state, content, now) → string[]      // due + unlocked card ids, most
 claimForm(state, unit, now) → AppState        // FR-R4: state.claimed[unit] = now (pure; creates no card)
 unclaimForm(state, unit, now) → AppState      // drops the claim; the `fm` card is active again with its old schedule
 dueCount(state, content, now) → number
-requeueWrong(queue, pos, item, rng, content?) → number  // PRD FR-S9: splice a wrong card back 3–5 cards later (with content: up to 3 more, away from related cards)
+requeueWrong(queue, pos, item, rng, content?) → {queue, at}  // PRD FR-S9: pure; a new queue with a wrong card back 3–5 cards later (with content: up to 3 more, away from related cards)
 inFocus(cardId, focus, content, state?) → boolean      // FR-S8: card's sentence is in any focus topic; an `fm` is in focus if any seen carrier sentence is (needs `state`); legacy kf never; empty focus → true. `focus` is one {type,id}, a list, or null everywhere.
 dueInFocus(state, content, now, focus) → string[]  // dueCards filtered by inFocus
 cardKeys(item, content) → Set<string>          // "s:<sentence>" (also the `from` sentence of a new `fm`), "l:<target lexeme>", "new" for a new lr
@@ -344,7 +344,7 @@ ladderDays(prevGapDays, grade) → number       // FR-S1: Medium 1→4→16→64
 `QueueItem = { cardId, isNew: boolean, from?: string, check?: true, forms?: string[], members?: string[], deferred?: string[], composite?: true, units?: string[] }`. A **composite** (FR-V1, T32) is `{cardId: "er:<sid>", isNew: false, composite: true, units}`: `units` (2–4 unit ids) are the due easy forms it reviews; the view shows it as an `er` labelled "Review · N forms". It counts as `2 × SEC_PER_REVIEW`. A new family is one item `{cardId: "pg:<familyId>", isNew: true, members, deferred}` (a presentation only, never stored in `state.cards`; the view is `card-paradigm.js`) that replaces its members' `lr` cards; it is followed by the immediate check (`check: true`, `from` = one random member) of that member's new forms, and the other members' new forms (`deferred`) get `fm` cards due the next day without a check. `from` is the sentence a new `fm` was created with; the view shows that sentence first. `check` marks a new sentence's **one** immediate check (T26, revised by T31): `forms` lists every new `fm` of that sentence (`cardId` is the first), all blanked together in one cloze (`checkBlanks`). `buildSession` places it with `placeChecks`: at least `CHECK_GAP` (8) cards after its `lr`/paradigm card and never next to another check, or at the end of a queue too short for that. The view shows it with a muted "not scored" label and no rating, applies `applyCheck` per form, and re-asks the wrong forms once at the end of the session (an item with `isNew: false`, `check: true`, `forms` = the wrong ones). `keepStarted` creates every form of an unreached check.
 
 - The caller gets `newSentenceIds` from `select.js` in Phase 2+, or from the FR-S4 interim order in Phase 1.
-- The UI re-queues a wrong card per FR-S9 by splicing the queue (`requeueWrong`).
+- The UI re-queues a wrong card per FR-S9 with `queue = requeueWrong(queue, …).queue` (the queue is never mutated). `tileOptions`, `pickCarrier` and `pickComposite` require `rng` (TypeError otherwise); `test/purity.test.mjs` enforces a pure `core/`.
 - `units.js` `unitsRequiredForCard(cardId, content) → {u, lx}[]` feeds `unitsRequired`.
 
 ### 8.1 Pace (`core/pace.js`, T36, FR-V5)
