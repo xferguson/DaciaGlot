@@ -23,6 +23,7 @@ export const RULES = {
   "import-direction": "ui/views must not import ui/views; core must import only core",
   "import-cycle": "import is part of a cycle in app/js",
   "import-specifier": "imports must be relative and end in .js",
+  "param-reassign": "app/js/core never assigns to a function parameter; use a new local",
 };
 
 // ---------------------------------------------------------------------------------------------
@@ -218,6 +219,87 @@ export function impureUses(code) {
 }
 
 // ---------------------------------------------------------------------------------------------
+// Rule 7 · parameter reassignment in core (a heuristic: scope shadowing is not tracked)
+
+const NOT_NAMES = new Set(["null", "true", "false", "undefined", "NaN", "Infinity"]);
+
+/** Split on top-level commas (not inside brackets). */
+function splitTop(text) {
+  const parts = [];
+  let depth = 0;
+  let from = 0;
+  for (let k = 0; k < text.length; k++) {
+    if ("([{".includes(text[k])) depth++;
+    else if (")]}".includes(text[k])) depth--;
+    else if (text[k] === "," && depth === 0) { parts.push(text.slice(from, k)); from = k + 1; }
+  }
+  parts.push(text.slice(from));
+  return parts.map((p) => p.trim()).filter(Boolean);
+}
+
+/** The names a parameter list binds: plain, defaulted, rest and destructured parameters. */
+export function paramNames(list) {
+  const names = [];
+  for (const p of splitTop(list)) {
+    const bare = p.replace(/^\.\.\./, "");
+    if (/^[\w$]+/.test(bare) && !/^[{[]/.test(bare)) { names.push(bare.match(/^[\w$]+/)[0]); continue; }
+    const pattern = splitTop(bare.replace(/^[{[]|[}\]]\s*(=.*)?$/gs, "")).map((x) => x.replace(/^[\w$]+\s*:/, "").replace(/=.*$/s, "").trim());
+    for (const x of pattern) if (/^[\w$]+$/.test(x) && !NOT_NAMES.has(x) && !/^\d/.test(x)) names.push(x);
+  }
+  return names;
+}
+
+const matching = (code, open, o, c) => {
+  let d = 0;
+  for (let k = open; k < code.length; k++) {
+    if (code[k] === o) d++;
+    else if (code[k] === c && --d === 0) return k;
+  }
+  return -1;
+};
+
+/** Function bodies with their parameter lists: `function f(a) {…}` and `(a) => {…}` / `a => {…}`. */
+function functionsOf(code) {
+  const out = [];
+  const add = (params, bodyOpen) => {
+    const end = matching(code, bodyOpen, "{", "}");
+    if (end > 0) out.push({ params: paramNames(params), start: bodyOpen, end });
+  };
+  for (const m of code.matchAll(/\bfunction\s*\*?\s*[\w$]*\s*\(/g)) {
+    const open = m.index + m[0].length - 1;
+    const close = matching(code, open, "(", ")");
+    const brace = code.indexOf("{", close);
+    if (close > 0 && brace > 0) add(code.slice(open + 1, close), brace);
+  }
+  for (const m of code.matchAll(/=>\s*\{/g)) {
+    let k = m.index - 1;
+    while (k >= 0 && /\s/.test(code[k])) k--;
+    if (code[k] === ")") {
+      let d = 0, j = k;
+      for (; j >= 0; j--) { if (code[j] === ")") d++; else if (code[j] === "(" && --d === 0) break; }
+      add(code.slice(j + 1, k), m.index + m[0].length - 1);
+    } else {
+      let j = k;
+      while (j >= 0 && isWord(code[j])) j--;
+      add(code.slice(j + 1, k + 1), m.index + m[0].length - 1);
+    }
+  }
+  return out;
+}
+
+export function paramReassignments(code) {
+  const out = [];
+  for (const { params, start, end } of functionsOf(code)) {
+    const body = code.slice(start, end);
+    for (const name of params) {
+      const re = new RegExp(`(?<![\\w$.])${name.replace(/\$/g, "\\$")}\\s*(?:\\*\\*|\\?\\?|&&|\\|\\||[-+*/%&|^]|<<|>>>?)?=(?![=>])|(?:\\+\\+|--)${name.replace(/\$/g, "\\$")}(?![\\w$])|(?<![\\w$.])${name.replace(/\$/g, "\\$")}(?:\\+\\+|--)`, "g");
+      for (const m of body.matchAll(re)) out.push({ index: start + m.index, message: `parameter ${name} is reassigned` });
+    }
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------------------------------------
 // Rule 3 · raw card-id prefixes (needs string contents, so it runs on comment-stripped source)
 
 export const CARD_PREFIXES = ["lr", "cz", "kf", "fm", "xf", "sb", "er", "pg"];
@@ -329,6 +411,7 @@ export function lintSources(sources) {
     const imports = importsOf(text);
     push(file, "undeclared-call", undeclaredCalls(code));
     if (file.startsWith(`${SRC}/core/`)) push(file, "core-purity", impureUses(code));
+    if (file.startsWith(`${SRC}/core/`)) push(file, "param-reassign", paramReassignments(code));
     if (file !== `${SRC}/core/cards.js`) push(file, "raw-card-id", rawCardIds(text));
     push(file, "import-direction", wrongDirection(file, imports));
     push(file, "import-specifier", badSpecifiers(imports));

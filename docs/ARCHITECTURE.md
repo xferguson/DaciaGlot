@@ -111,7 +111,7 @@ Card ids are strings. `core/cards.js` exports `parseCardId`, `buildCardId`, `car
 
 The session view calls `resolveFm` at render time and passes the presented id to `applyReview` as the last argument.
 
-`cards.js` also exports `isEasy(state, unit, now)` (FR-V1: claimed, or the `fm` card's `lastGrade` is 4, or its gap `due - lastReview` ≥ `ER_MIN_GAP_DAYS`). `CardState.lastGrade?: 1|2|3|4` is set by every review of an `fm` card (absent on old cards; no migration). `erUnlocked(sentence, state, now)` is true when every cloze unit is easy.
+`cards.js` also exports `isEasy(state, unit)` (FR-V1: claimed, or the `fm` card's `lastGrade` is 4, or its gap `due - lastReview` ≥ `ER_MIN_GAP_DAYS`). `CardState.lastGrade?: 1|2|3|4` is set by every review of an `fm` card (absent on old cards; no migration). `erUnlocked(sentence, state)` is true when every cloze unit is easy.
 
 **Unlock rules** live in `cards.js` as `isUnlocked(cardId, state, content) → boolean` and follow PRD FR-D1…D6.
 
@@ -312,7 +312,7 @@ A sentence is mastered when every `cloze: true` unit's `fm` card has stability �
 
 ## 8. Sessions (`core/session.js`)
 
-`session.js` is a barrel: import from it, the names below are unchanged. The code lives in `queue.js` (`MODES`, `buildSession` and its pipeline steps `selectDue` → `trimToBudget` (Mix) → `pickNew` → `groupNew` → `interleave` → `estimate`, plus `newDrills`; `mixPlan`, `learnPlan`), `due.js` (`dueCards`, `inFocus`, `cardKeys`, `burySiblings`, `onePerFamily`, `composeReviews`), `spacing.js` (`spaceOut`, `placeChecks`, `checkBlanks`, `requeueWrong`), `review.js` (`applyReview`, `applyErReview`, `applyParadigm`, `applyCheck`, `erMisses`, claims, `keepStarted`, `markDifficult`) and `schedule.js` (`ladderDays`, `gradeFromResult`, `scheduleCard`). New code imports the specific module. `test/session-golden.test.mjs` pins `buildSession` for every mode.
+`session.js` is a barrel: import from it, the names below are unchanged. The code lives in `queue.js` (`MODES`, `buildSession` and its pipeline steps `selectDue` → `trimToBudget` (Mix) → `pickNew` → `groupNew` → `interleave` → `estimate`, plus `newDrills`; `mixPlan`, `learnPlan`), `due.js` (`dueCards`, `inFocus`, `cardKeys`, `burySiblings`, `onePerFamily`, `composeReviews`), `spacing.js` (`spaceOut`, `placeChecks`, `checkBlanks`, `requeueWrong`), `review.js` (`applyReview`, `applyErReview`, `applyParadigm`, `applyCheck`, `erMisses`, claims, `keepStarted`, `markDifficult`) and `schedule.js` (`ladderDays`, `gradeFromResult`, `scheduleCard`). `review.js` builds every `Attempt` (§4.3) with `makeAttempts(units, correct, now, presentedId, {enc})`. New code imports the specific module. `test/session-golden.test.mjs` pins `buildSession` for every mode.
 
 ```js
 buildSession({ mode /* "quick"|"review"|"learn"|"mix"|"session" */, focus /* filters every mode (FR-S8) */, state, content, now, rng, newSentenceIds })

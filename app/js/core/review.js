@@ -7,6 +7,14 @@ import { unitId, parseUnitId } from "./unit-id.js";
 import { bumpDay } from "./history.js";
 import { scheduleCard } from "./schedule.js";
 
+/**
+ * Attempt records (ARCHITECTURE §4.3) for `units` (`{u, lx}[]`) answered right or wrong, shown as `presentedId`.
+ * `enc` marks an immediate check of a new form (ignored by mastery and `isKnown`).
+ */
+export function makeAttempts(units, correct, now, presentedId, { enc = false } = {}) {
+  return units.map(({ u, lx }) => ({ u, lx, c: correct ? 1 : 0, t: now, card: presentedId, ...(enc ? { enc: 1 } : {}) }));
+}
+
 /** Start of the local day after `now` (ms): the earliest a form's first counted test is due (FR-R2). */
 export const nextDayStart = (now) => startOfDayPlus(now, 1);
 
@@ -87,10 +95,7 @@ export function applyReview(state, cardId, grade, unitsRequired, now, content, p
     if (p.type === "er" && grade === 1 && unitsRequired.some(({ u }) => u in (state.claimed ?? {}))) {
       next.claimed = Object.fromEntries(Object.entries(state.claimed).filter(([u]) => !unitsRequired.some((r) => r.u === u)));
     }
-    next.attempts = [
-      ...state.attempts,
-      ...unitsRequired.map(({ u, lx }) => ({ u, lx, c: grade >= 2 ? 1 : 0, t: now, card: presentedId })),
-    ];
+    next.attempts = [...state.attempts, ...makeAttempts(unitsRequired, grade >= 2, now, presentedId)];
   }
   next.history = bumpDay(state.history, now, (d) => {
     d.cards += 1;
@@ -123,6 +128,11 @@ export function erMisses(sentence, diff) {
   return { missed: [...missed], ok: [...seen].filter((u) => !missed.has(u)), missedTokens };
 }
 
+/** Part-level result of a composite review that has no token diff: every form wrong on Again, every form right otherwise. */
+const compositeParts = (composite, grade) => (grade === 1
+  ? { missed: [...composite], ok: [], missedTokens: [] }
+  : { missed: [], ok: [...composite], missedTokens: [] });
+
 /**
  * FR-D6/FR-S3: review an `er` card with part-level credit. The card itself is graded as `applyReview` does. Units of
  * missed tokens get a `c: 0` attempt and their `fm` card Again (created due now if it doesn't exist; a claim on it is
@@ -135,18 +145,16 @@ export function erMisses(sentence, diff) {
  * unseen sentence also marks it seen. Returns a new state.
  */
 export function applyErReview(state, cardId, grade, unitsRequired, misses, now, content, presentedId = cardId, composite = null) {
-  if (composite && !misses) {
-    misses = grade === 1 ? { missed: [...composite], ok: [], missedTokens: [] } : { missed: [], ok: [...composite], missedTokens: [] };
-  }
-  if (!misses) return applyReview(state, cardId, grade, unitsRequired, now, content, presentedId);
-  const clozeIds = new Set([...misses.missed, ...misses.ok]);
+  const parts = misses ?? (composite ? compositeParts(composite, grade) : null);
+  if (!parts) return applyReview(state, cardId, grade, unitsRequired, now, content, presentedId);
+  const clozeIds = new Set([...parts.missed, ...parts.ok]);
   const rest = unitsRequired.filter(({ u }) => !clozeIds.has(u));
   let next = applyReview(state, cardId, grade, rest, now, content, presentedId);
   if (composite) Object.assign(next, exposure(next, parseCardId(cardId).sentenceId, now, content));
   const lxOf = new Map(unitsRequired.map(({ u, lx }) => [u, lx]));
-  const missedSet = new Set(misses.missed);
+  const missedSet = new Set(parts.missed);
   const cards = { ...next.cards };
-  for (const u of misses.missed) {
+  for (const u of parts.missed) {
     const id = fmIdForUnit(u);
     cards[id] = cards[id] ? { ...review(cards[id], 1, now), lastGrade: 1 } : { ...newCard(now), lastGrade: 1 };
   }
@@ -156,9 +164,11 @@ export function applyErReview(state, cardId, grade, unitsRequired, misses, now, 
     cards[fmIdForUnit(u)] = scheduleCard(cards[fmIdForUnit(u)], okGrade, now);
   }
   const claimed = Object.fromEntries(Object.entries(next.claimed ?? {}).filter(([u]) => !missedSet.has(u)));
+  const withLx = (u) => ({ u, lx: lxOf.get(u) ?? parseUnitId(u).lex });
   const attempts = [
     ...next.attempts,
-    ...[...misses.missed, ...misses.ok].map((u) => ({ u, lx: lxOf.get(u) ?? parseUnitId(u).lex, c: missedSet.has(u) ? 0 : 1, t: now, card: presentedId })),
+    ...makeAttempts(parts.missed.map(withLx), false, now, presentedId),
+    ...makeAttempts(parts.ok.map(withLx), true, now, presentedId),
   ];
   return { ...next, cards, claimed, attempts };
 }
@@ -186,10 +196,7 @@ export function applyParadigm(state, item, now, content) {
 export function applyCheck(state, cardId, correct, unitsRequired, now, presentedId = cardId, content = null) {
   const next = {
     ...state,
-    attempts: [
-      ...state.attempts,
-      ...unitsRequired.map(({ u, lx }) => ({ u, lx, c: correct ? 1 : 0, t: now, card: presentedId, enc: 1 })),
-    ],
+    attempts: [...state.attempts, ...makeAttempts(unitsRequired, correct, now, presentedId, { enc: true })],
   };
   if (!(cardId in state.cards)) {
     // FR-V3: a right check on a transparent form outside divergent slots starts on the 4 d rung, not next day.

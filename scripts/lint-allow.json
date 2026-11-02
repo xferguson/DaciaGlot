@@ -4,5 +4,6 @@
   "raw-card-id": {},
   "import-direction": {},
   "import-cycle": {},
-  "import-specifier": {}
+  "import-specifier": {},
+  "param-reassign": {}
 }
