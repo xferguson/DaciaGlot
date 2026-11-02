@@ -51,7 +51,7 @@ test/*.test.mjs              # node --test; import from ../app/js/core/*
 | `core/random.js` (coming in Q06) | `shuffle` and index picks from an injected `rng` |
 | `core/cards.js` | `buildCardId`/`parseCardId`: the only way to make or read a card id; `CARD_SPEC` registry (coming in Q09) |
 | `core/units.js` | `unitId(u)`/`parseUnitId(id)`: the only way to make or read a unit id (coming in Q09) |
-| `ui/dom.js` (coming in Q07) | safe markup helpers |
+| `ui/dom.js` | safe markup helpers: `esc`, `html`, `raw`, `el` |
 | `ui/components/button.js` | every button |
 | `ui/components/answer-card.js` (coming in Q05) | `answerCard`, the typed-answer card controller; new card renderers build on it |
 

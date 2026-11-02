@@ -5,6 +5,7 @@ import { hideBanner } from "../components/banner.js";
 import { defaultState, exportState, importState, ImportError } from "../../data/store.js";
 import { setVoiceURI, speak } from "../../data/tts.js";
 import { foldClozeCards } from "../../data/migrations.js";
+import { html } from "../dom.js";
 
 const dateStamp = () => new Date().toISOString().slice(0, 10);
 
@@ -88,21 +89,20 @@ export function render(root, ctx) {
   q("#answerMode").value = s0.answerMode ?? "speak";
   q("#answerMode").addEventListener("change", (e) => update({ answerMode: e.target.value }));
 
-  const esc = (t) => String(t ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   function renderFlags() {
     const box = q("[data-flags]");
     const flags = st().flags;
     if (!flags.length) { box.innerHTML = `<p class="muted">No flags yet. Use the flag icon on a card.</p>`; return; }
-    box.innerHTML = flags.map((f, i) => {
+    box.innerHTML = html`${flags.map((f, i) => {
       const s = ctx.content?.sentences?.get(f.sentenceId);
-      return `<div class="flag-item" style="margin-bottom:12px">
-        <p lang="ro"><strong>${esc(s?.ro ?? f.sentenceId)}</strong></p>
-        <p class="muted">${esc(s?.en ?? "")}</p>
-        ${f.note ? `<p>${esc(f.note)}</p>` : ""}
+      return html`<div class="flag-item" style="margin-bottom:12px">
+        <p lang="ro"><strong>${s?.ro ?? f.sentenceId}</strong></p>
+        <p class="muted">${s?.en ?? ""}</p>
+        ${f.note ? html`<p>${f.note}</p>` : ""}
         <p class="muted">${new Date(f.ts).toISOString().slice(0, 10)}</p>
-        <div class="row"><a class="btn secondary" target="_blank" rel="noopener" data-open="${i}" href="${esc(issueUrl(f, s, ctx.content?.contentVersion))}">Open issue</a>
+        <div class="row"><a class="btn secondary" target="_blank" rel="noopener" data-open="${i}" href="${issueUrl(f, s, ctx.content?.contentVersion)}">Open issue</a>
         <button class="btn secondary" data-del="${i}">Delete</button></div></div>`;
-    }).join("") + `<button class="btn secondary block" data-copy>Copy all</button>`;
+    })}<button class="btn secondary block" data-copy>Copy all</button>`;
     box.querySelectorAll("[data-open]").forEach((a) => a.addEventListener("click", () => {
       const i = Number(a.dataset.open);
       setTimeout(() => {
