@@ -1,8 +1,8 @@
 // Mastery derivation and attempt compaction (ARCHITECTURE §7, PRD FR-P1/P2/X5). Pure: `now` is passed in.
 import { parseCardId, clozeUnitIds, fmIdForUnit } from "./cards.js";
 import { unitsRequiredForCard } from "./units.js";
+import { DAY_MS as DAY } from "./time.js";
 
-const DAY = 86400000;
 export const COMPACT_AFTER_MS = 90 * DAY;
 const WINDOW = 20;
 const MAX_AGG_LEXEMES = 50;

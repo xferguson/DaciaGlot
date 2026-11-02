@@ -21,6 +21,7 @@ app/                         # deployed site root (GitHub Pages)
       normalize.js  check.js  equivalences.js
       fsrs.js
       units.js  mastery.js  select.js  session.js
+      time.js                # DAY_MS, dayKey, startOfDayPlus (local days)
       cards.js               # card id parsing/building, unlock rules
     data/                    # side effects live here
       content.js             # fetch + index content packs
@@ -45,7 +46,7 @@ test/*.test.mjs              # node --test; import from ../app/js/core/*
 
 | Module | What lives there |
 |---|---|
-| `core/time.js` (coming in Q03) | `DAY_MS`, `dayKey(now)`, `startOfDayPlus(now, n)` |
+| `core/time.js` | `DAY_MS`, `dayKey(now)`, `startOfDayPlus(now, n)` |
 | `core/history.js` (coming in Q04) | per-day history reads and writes |
 | `core/random.js` (coming in Q06) | `shuffle` and index picks from an injected `rng` |
 | `core/cards.js` | `buildCardId`/`parseCardId`: the only way to make or read a card id; `CARD_SPEC` registry (coming in Q09) |
