@@ -38,7 +38,7 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
   const speak = (text, opts) => tts?.speak?.(text, { rate, ...opts });
   const idxs = blanks?.length ? [...blanks].sort((a, b) => a - b) : [tokenIndexOf(card)];
   const inputs = new Map(idxs.map((i) => {
-    const input = answerInput({ size: sentence.tokens[i].t.length + 1, onSubmit: () => check() });
+    const input = answerInput({ size: sentence.tokens[i].t.length + 1, onSubmit: () => submit() });
     input.setAttribute("aria-label", "Missing word");
     return [i, input];
   }));
@@ -71,7 +71,7 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
   const slot = root.querySelector(".feedback-slot");
   const actions = root.querySelector(".actions");
 
-  const checkBtn = button("Check", "btn", () => check());
+  const checkBtn = button("Check", "btn", () => submit());
   const hintBtn = button("Hint", "btn secondary", () => {
     usedHint = true;
     hintLine.textContent = `Hint: ${idxs.map((i) => hintFor(inputs.get(i).value, sentence.tokens[i].t, [])).filter(Boolean).join(" · ")}`;
@@ -118,7 +118,7 @@ export function renderCard(root, { card, sentence, content, tts, settings = {}, 
     });
   }
 
-  function check() {
+  function submit() {
     if (finished || idxs.every((i) => !inputs.get(i).value.trim())) return;
     attempts++;
     const wrong = idxs.filter((i) => resultOf(i) === "wrong");

@@ -152,22 +152,18 @@ test("lr: a wrong option marks it and the answer → wrong, attempt 1", () => {
 
 // ---------- cz ----------
 
-// TODAY'S BEHAVIOR (pinned, not endorsed): in card-cloze.js the inner `function check()` shadows the
-// `check = false` option, so every cloze card behaves like an immediate check: it shows the "Quick check"
-// label and is never rated (Continue only, `rating: null`). Flagged in the Q02 PR for a behavior-change task.
-
-test("cz: right first time → Continue only (see the note above), with blanks", () => {
+test("cz: right first time → rated, with blanks", () => {
   const c = mount(renderCz, { card: "cz:s1:0", sentence: sHave });
   assert.equal(c.inputs().length, 1);
-  assert.equal(c.root.querySelector(".muted").textContent, "Quick check · not scored, the real test is tomorrow");
+  assert.equal(c.root.querySelector(".muted").textContent, "Fill in the blank");
   assert.deepEqual(c.spoken, [], "no audio before answering");
   c.type("Am");
   c.tap("Check");
-  assert.ok(hasContinueOnly(c));
+  assert.ok(hasRating(c));
   assert.equal(c.inputs()[0].readOnly, true);
   assert.deepEqual(c.spoken, ["Am o problemă."]);
-  assert.deepEqual(finishWith(c, "Continue"), {
-    result: "correct", usedHint: false, attemptNo: 1, rating: null, blanks: [{ tokenIndex: 0, ok: true }],
+  assert.deepEqual(finishWith(c, "Easy"), {
+    result: "correct", usedHint: false, attemptNo: 1, rating: "easy", blanks: [{ tokenIndex: 0, ok: true }],
   });
 });
 
@@ -177,8 +173,8 @@ test("cz: an empty Check does nothing; Enter checks", () => {
   assert.ok(c.labels().includes("Check"), "still asking");
   c.type("Am");
   c.enter();
-  assert.ok(hasContinueOnly(c));
-  assert.equal(finishWith(c, "Continue").attemptNo, 1);
+  assert.ok(hasRating(c));
+  assert.equal(finishWith(c, "Medium").rating, "medium");
 });
 
 test("cz: right after a retry → Continue, attempt 2, no rating", () => {
@@ -221,13 +217,14 @@ test("cz: a hint shows first letters and takes the rating away", () => {
   });
 });
 
-test("cz: a diacritic slip is correct-diacritics on the first attempt", () => {
+test("cz: a diacritic slip is correct-diacritics and still rated", () => {
   const c = mount(renderCz, { card: "cz:s1:2", sentence: sHave });
   c.type("problema");
   c.tap("Check");
-  const r = finishWith(c, "Continue");
+  assert.ok(hasRating(c));
+  const r = finishWith(c, "Hard");
   assert.equal(r.result, "correct-diacritics");
-  assert.equal(r.attemptNo, 1);
+  assert.equal(r.rating, "hard");
 });
 
 test("cz check: several blanks, all right first time → Continue only (not scored)", () => {
