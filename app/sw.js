@@ -1,5 +1,5 @@
 // Service worker. Keep APP_VERSION equal to js/version.js (the validator checks).
-const APP_VERSION = "0.19.11";
+const APP_VERSION = "0.19.12";
 const PREFIX = "dg-";
 
 // Every file under js/, css/ and icons/ must be listed (validator rule 11).
