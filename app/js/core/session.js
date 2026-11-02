@@ -5,6 +5,9 @@ import { unitsForSentence, isKnown, unitsRequiredForCard } from "./units.js";
 import { pickNewSentences, focusList, siblingsOf, newItemCount, isFastTrackUnit } from "./select.js";
 import { carriersFor, pickComposite } from "./carrier.js";
 import { learnBatch } from "./pace.js";
+import { DAY_MS, dayKey, startOfDayPlus } from "./time.js";
+
+export { dayKey };
 
 export const QUICK_CAP = 15;
 export const SEC_PER_REVIEW = 12;
@@ -77,17 +80,10 @@ export function spaceOut(queue, content) {
 }
 
 /** Start of the local day after `now` (ms): the earliest a form's first counted test is due (FR-R2). */
-export function nextDayStart(now) {
-  const d = new Date(now);
-  return new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1).getTime();
-}
+export const nextDayStart = (now) => startOfDayPlus(now, 1);
 
 /** FR-V3: the rung a transparent form's first right check lands on. */
 export const FAST_TRACK_DAYS = 4;
-const daysAfter = (now, n) => {
-  const d = new Date(now);
-  return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n).getTime();
-};
 
 /**
  * Leaving a session early: new `fm` cards of a sentence that was already introduced (its `lr` reviewed, `from`) but
@@ -139,7 +135,6 @@ export function learnPlan(state, content, focus, now, rng) {
 export const MEDIUM_LADDER_DAYS = [1, 4, 16, 64, 256];
 /** Easy waits this many times Medium's next gap (capped at the top rung). */
 export const EASY_FACTOR = 3;
-const DAY_MS = 864e5;
 
 /**
  * Days until the next review for a Medium (3) or Easy (4) answer, given the card's previous scheduled gap
@@ -471,12 +466,6 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
   return plan ? { queue, estimateSec, plan } : { queue, estimateSec };
 }
 
-export function dayKey(now) {
-  const d = new Date(now);
-  const p = (n) => String(n).padStart(2, "0");
-  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
-}
-
 function bumpDay(history, now, fn) {
   const key = dayKey(now);
   const day = { minutes: 0, cards: 0, newSentences: 0, formsProduced: 0, ...history[key] };
@@ -646,7 +635,7 @@ export function applyCheck(state, cardId, correct, unitsRequired, now, presented
     // FR-V3: a right check on a transparent form outside divergent slots starts on the 4 d rung, not next day.
     const p = parseCardId(cardId);
     const fast = correct && content && p.type === "fm" && isFastTrackUnit(unitIdOfFm(cardId), content);
-    next.cards = { ...state.cards, [cardId]: { ...newCard(now), due: fast ? daysAfter(now, FAST_TRACK_DAYS) : nextDayStart(now) } };
+    next.cards = { ...state.cards, [cardId]: { ...newCard(now), due: fast ? startOfDayPlus(now, FAST_TRACK_DAYS) : nextDayStart(now) } };
   }
   next.history = bumpDay(state.history, now, (d) => { d.cards += 1; });
   return next;

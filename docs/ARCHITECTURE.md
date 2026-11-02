@@ -21,6 +21,7 @@ app/                         # deployed site root (GitHub Pages)
       normalize.js  check.js  equivalences.js
       fsrs.js
       units.js  mastery.js  select.js  session.js
+      time.js                # DAY_MS, dayKey, startOfDayPlus (local days)
       cards.js               # card id parsing/building, unlock rules
     data/                    # side effects live here
       content.js             # fetch + index content packs
