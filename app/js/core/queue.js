@@ -151,15 +151,25 @@ function paradigmGroup(s, sibs, { content, rng, newFms }) {
   ];
 }
 
+/** The ids not yet in `assigned` and not claimed by the learner (FR-R4), in order; adds them to `assigned`. */
+function takeOnce(ids, assigned, state) {
+  const out = [];
+  for (const id of ids) {
+    if (isClaimedCard(id, state) || assigned.has(id)) continue;
+    assigned.add(id);
+    out.push(id);
+  }
+  return out;
+}
+
 /**
  * Step 4. Each new sentence as a group of queue items: its `lr`/`cz` cards then one combined check, or a paradigm card
  * for a family. One schedule per word form: a form shared by two new sentences gets its `fm` card from the first.
- * @returns {{groups: object[][], claimed: Set<string>}} `claimed` is the `fm` ids already given to a group
+ * @returns {{groups: object[][], assigned: Set<string>}} `assigned` is every card id already given to a group
  */
 export function groupNew(ids, { state, content, rng }) {
-  const claimed = new Set();
-  const take = (cardId) => !isClaimedCard(cardId, state) && !claimed.has(cardId) && claimed.add(cardId);
-  const newFms = (s) => cardsForSentence(s, content, state).filter((cardId) => isCardType(cardId, "fm") && take(cardId));
+  const assigned = new Set();
+  const newFms = (s) => takeOnce(cardsForSentence(s, content, state).filter((cardId) => isCardType(cardId, "fm")), assigned, state);
   const grouped = new Set(ids);
   const groups = ids
     .map((id) => content.sentences.get(id))
@@ -170,19 +180,19 @@ export function groupNew(ids, { state, content, rng }) {
         sibs.forEach((m) => grouped.add(m));
         return paradigmGroup(s, sibs, { content, rng, newFms });
       }
-      const own = cardsForSentence(s, content, state).filter(take);
+      const own = takeOnce(cardsForSentence(s, content, state), assigned, state);
       return [
         ...own.filter((cardId) => !isCardType(cardId, "fm")).map((cardId) => ({ cardId, isNew: true })),
         ...oneCheck(own.filter((cardId) => isCardType(cardId, "fm")), s.id),
       ];
     });
-  return { groups, claimed };
+  return { groups, assigned };
 }
 
 /** Newly unlocked `kf` (T14), `xf`/`sb` (T15) and `er` (T20) drills, in that order; `kf` only without a focus. */
-export function newDrills({ focus, state, content, duePicked, claimed }) {
+export function newDrills({ focus, state, content, duePicked, assigned }) {
   const item = (cardId) => ({ cardId, isNew: true });
-  const kf = focus ? [] : newKfCards(state, content).filter((id) => !claimed.has(id) && !isClaimedCard(id, state)).map(item);
+  const kf = focus ? [] : newKfCards(state, content).filter((id) => !assigned.has(id) && !isClaimedCard(id, state)).map(item);
   const busy = new Set(duePicked.map(parseCardId).filter((p) => p.type === "xf" || p.type === "sb").map((p) => p.sentenceId));
   const xf = newTransformCards(state, content, { skip: busy }).filter((id) => inFocus(id, focus, content, state)).map(item);
   const taken = new Set([...busy, ...xf.map((x) => parseCardId(x.cardId).sentenceId)]);
@@ -235,8 +245,8 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
   if (plan && plan.newCount === 0 && !newSentenceIds) return { queue: due, estimateSec: dueSec(due), plan };
   const picked = pickNew(spec, { ...ctx, plan, newSentenceIds });
   if (picked.blocked) return { queue: due.slice(), estimateSec: dueSec(due), blocked: true, suggest: picked.suggest };
-  const { groups, claimed } = groupNew(picked.ids, ctx);
-  const drills = newDrills({ ...ctx, duePicked, claimed });
+  const { groups, assigned } = groupNew(picked.ids, ctx);
+  const drills = newDrills({ ...ctx, duePicked, assigned });
   const queue = interleave(due, groups, drills);
   const estimateSec = estimate(due, groups, drills, spec.newItems === "learn");
   return plan ? { queue, estimateSec, plan } : { queue, estimateSec };

@@ -107,7 +107,7 @@ export function onePerFamily(cardIds, content, rng) {
  * `er:<sid>` for the same sentence (the composite is that review). Returns the new id list and `sid → units`.
  */
 export function composeReviews(ids, state, content, now, rng, focus = null) {
-  const easy = ids.filter((id) => isCardType(id, "fm") && isEasy(state, unitIdOfFm(id), now));
+  const easy = ids.filter((id) => isCardType(id, "fm") && isEasy(state, unitIdOfFm(id)));
   const left = new Set(easy.map(unitIdOfFm));
   const exclude = new Set();
   const comps = new Map(); // sentenceId → units

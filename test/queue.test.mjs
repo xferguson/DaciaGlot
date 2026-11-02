@@ -56,13 +56,13 @@ test("pickNew: uses newSentenceIds as given; a new profile gets a list; learn mo
 });
 
 test("groupNew: one group per sentence, led by its lr, with one combined check; a shared form is claimed once", () => {
-  const { groups, claimed } = groupNew(["s00", "s01"], ctx());
+  const { groups, assigned } = groupNew(["s00", "s01"], ctx());
   assert.equal(groups.length, 2);
   assert.equal(groups[0][0].cardId, "lr:s00");
   assert.ok(groups.every((g) => g.every((q) => q.isNew)));
   const checks = groups.flat().filter((q) => q.check);
   assert.equal(checks.length, groups.filter((g) => g.some((q) => q.forms)).length);
-  for (const c of checks) for (const f of c.forms) assert.ok(claimed.has(f));
+  for (const c of checks) for (const f of c.forms) assert.ok(assigned.has(f));
   assert.deepEqual(groupNew([], ctx()).groups, []);
 });
 

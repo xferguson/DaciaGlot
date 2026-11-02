@@ -125,3 +125,13 @@ test("shrinkAllow only lowers or removes entries, never adds or raises them", ()
   assert.deepEqual(next["raw-card-id"], { "b.js": 1 });
   assert.deepEqual(next["import-cycle"], {});
 });
+
+test("rule param-reassign: core functions never assign to their parameters", () => {
+  const core = "app/js/core/x.js";
+  const bad = (src) => rules({ [core]: src }).filter((r) => r === "param-reassign").length;
+  assert.equal(bad("export function f(a, b) { a = 1; return b; }"), 1);
+  assert.equal(bad("export const f = (a, { b, c = 1 }) => { c += 2; b++; return a; };"), 2);
+  assert.equal(bad("export const f = (a) => { a ||= 3; return a; };"), 1);
+  assert.equal(bad("export function f(a) { const o = { a: 1 }; o.a = 2; return a === 1 || a >= 2; }"), 0, "properties, comparisons, locals");
+  assert.equal(rules({ "app/js/ui/x.js": "export function f(a) { a = 1; }" }).includes("param-reassign"), false, "core only");
+});
