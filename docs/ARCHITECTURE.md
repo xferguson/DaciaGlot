@@ -41,6 +41,19 @@ test/*.test.mjs              # node --test; import from ../app/js/core/*
 - `ctx = { state, content, store, tts, navigate }`.
 - No framework and no bundler. All imports use relative paths ending in `.js`.
 
+**Shared modules.** Search these before writing a helper; add to them rather than copying. "(coming in Qxx)" means not on `main` yet; the task that lands it removes the marker.
+
+| Module | What lives there |
+|---|---|
+| `core/time.js` (coming in Q03) | `DAY_MS`, `dayKey(now)`, `startOfDayPlus(now, n)` |
+| `core/history.js` (coming in Q04) | per-day history reads and writes |
+| `core/random.js` (coming in Q06) | `shuffle` and index picks from an injected `rng` |
+| `core/cards.js` | `buildCardId`/`parseCardId`: the only way to make or read a card id; `CARD_SPEC` registry (coming in Q09) |
+| `core/units.js` | `unitId(u)`/`parseUnitId(id)`: the only way to make or read a unit id (coming in Q09) |
+| `ui/dom.js` (coming in Q07) | safe markup helpers |
+| `ui/components/button.js` | every button |
+| `ui/components/answer-card.js` (coming in Q05) | `answerCard`, the typed-answer card controller; new card renderers build on it |
+
 ## 2. Content (in memory)
 
 `data/content.js` exports `async loadContent(baseUrl = "./content/") → Content`:
