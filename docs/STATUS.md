@@ -53,7 +53,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [Q03](tasks/Q03-core-time.md) | One time module: `core/time.js` | Q | none | todo |  |  |
 | [Q04](tasks/Q04-core-history.md) | Day history in one place; break the session ↔ pace cycle | Q | Q03 | todo |  |  |
 | [Q05](tasks/Q05-answer-card.md) | One typed-answer card controller: `answerCard` | Q | Q02 | todo |  |  |
-| [Q06](tasks/Q06-core-random.md) | Shared randomness helpers: `core/random.js` | Q | none | todo |  | Keep each caller's `rng()` call sequence. |
+| [Q06](tasks/Q06-core-random.md) | Shared randomness helpers: `core/random.js` | Q | none | in-progress | q06-core-random | Keep each caller's `rng()` call sequence. |
 | [Q07](tasks/Q07-ui-dom.md) | Safe markup helpers: `ui/dom.js` | Q | none | todo |  |  |
 | [Q08](tasks/Q08-ctx-update.md) | One state-update path for views: `ctx.update` | Q | Q02 | todo |  |  |
 | [Q09](tasks/Q09-card-registry.md) | Card-type registry and id helpers | Q | Q04, Q10 | todo |  |  |

@@ -3,14 +3,10 @@
 import { audioButton } from "../components/audio-button.js";
 import { renderFeedback, nextButtons, partsFor } from "../components/feedback.js";
 
-export function shuffle(arr, rng = Math.random) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
+import { shuffle } from "../../core/random.js";
+
+// Q06: `shuffle` lives in core/random.js; re-exported here for one release.
+export { shuffle };
 
 const lexemesOf = (s) => [...new Set(s.tokens.flatMap((t) => t.units.map((u) => u.lex)))];
 
