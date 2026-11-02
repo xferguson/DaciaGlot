@@ -46,7 +46,7 @@ test/*.test.mjs              # node --test; import from ../app/js/core/*
 
 | Module | What lives there |
 |---|---|
-| `core/time.js` (coming in Q03) | `DAY_MS`, `dayKey(now)`, `startOfDayPlus(now, n)` |
+| `core/time.js` | `DAY_MS`, `dayKey(now)`, `startOfDayPlus(now, n)` |
 | `core/history.js` (coming in Q04) | per-day history reads and writes |
 | `core/random.js` (coming in Q06) | `shuffle` and index picks from an injected `rng` |
 | `core/cards.js` | `buildCardId`/`parseCardId`: the only way to make or read a card id; `CARD_SPEC` registry (coming in Q09) |
