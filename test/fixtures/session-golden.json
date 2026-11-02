@@ -1,0 +1,3282 @@
+{
+ "new/quick/all": {
+  "queue": [],
+  "estimateSec": 0
+ },
+ "new/quick/standup": {
+  "queue": [],
+  "estimateSec": 0
+ },
+ "new/review/all": {
+  "queue": [],
+  "estimateSec": 0
+ },
+ "new/review/standup": {
+  "queue": [],
+  "estimateSec": 0
+ },
+ "new/learn/all": {
+  "queue": [
+   {
+    "cardId": "lr:s-a1-table-0003",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-decisions-0041",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-meta-0042",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-decisions-0008",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-table-0063",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-coaching-0001",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-coaching-0005",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:noroc:base",
+    "isNew": true,
+    "from": "s-a1-table-0003",
+    "check": true,
+    "forms": [
+     "fm:noroc:base"
+    ]
+   },
+   {
+    "cardId": "fm:propune:pres1sg",
+    "isNew": true,
+    "from": "s-a1-decisions-0041",
+    "check": true,
+    "forms": [
+     "fm:propune:pres1sg",
+     "fm:varianta:sg",
+     "fm:nou:fsg"
+    ]
+   },
+   {
+    "cardId": "fm:corect:msg",
+    "isNew": true,
+    "from": "s-a1-meta-0042",
+    "check": true,
+    "forms": [
+     "fm:corect:msg"
+    ]
+   },
+   {
+    "cardId": "fm:decide:inf",
+    "isNew": true,
+    "from": "s-a1-decisions-0008",
+    "check": true,
+    "forms": [
+     "fm:decide:inf"
+    ]
+   },
+   {
+    "cardId": "fm:merge:inf",
+    "isNew": true,
+    "from": "s-a1-coaching-0001",
+    "check": true,
+    "forms": [
+     "fm:merge:inf"
+    ]
+   },
+   {
+    "cardId": "fm:fi:pres2sg",
+    "isNew": true,
+    "from": "s-a1-coaching-0005",
+    "check": true,
+    "forms": [
+     "fm:fi:pres2sg"
+    ]
+   }
+  ],
+  "estimateSec": 187.5
+ },
+ "new/learn/standup": {
+  "queue": [],
+  "estimateSec": 0,
+  "blocked": true,
+  "suggest": {
+   "type": "pattern",
+   "id": "have-pres"
+  }
+ },
+ "new/mix/all": {
+  "queue": [
+   {
+    "cardId": "lr:s-a1-table-0003",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-decisions-0041",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-meta-0042",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-decisions-0008",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-table-0063",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-coaching-0001",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-coaching-0005",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-coaching-0038",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:noroc:base",
+    "isNew": true,
+    "from": "s-a1-table-0003",
+    "check": true,
+    "forms": [
+     "fm:noroc:base"
+    ]
+   },
+   {
+    "cardId": "fm:propune:pres1sg",
+    "isNew": true,
+    "from": "s-a1-decisions-0041",
+    "check": true,
+    "forms": [
+     "fm:propune:pres1sg",
+     "fm:varianta:sg",
+     "fm:nou:fsg"
+    ]
+   },
+   {
+    "cardId": "fm:corect:msg",
+    "isNew": true,
+    "from": "s-a1-meta-0042",
+    "check": true,
+    "forms": [
+     "fm:corect:msg"
+    ]
+   },
+   {
+    "cardId": "fm:decide:inf",
+    "isNew": true,
+    "from": "s-a1-decisions-0008",
+    "check": true,
+    "forms": [
+     "fm:decide:inf"
+    ]
+   },
+   {
+    "cardId": "fm:merge:inf",
+    "isNew": true,
+    "from": "s-a1-coaching-0001",
+    "check": true,
+    "forms": [
+     "fm:merge:inf"
+    ]
+   },
+   {
+    "cardId": "fm:fi:pres2sg",
+    "isNew": true,
+    "from": "s-a1-coaching-0005",
+    "check": true,
+    "forms": [
+     "fm:fi:pres2sg"
+    ]
+   },
+   {
+    "cardId": "fm:optimist:msg",
+    "isNew": true,
+    "from": "s-a1-coaching-0038",
+    "check": true,
+    "forms": [
+     "fm:optimist:msg"
+    ]
+   }
+  ],
+  "estimateSec": 340,
+  "plan": {
+   "newCount": 8,
+   "reviewPct": 0
+  }
+ },
+ "new/mix/standup": {
+  "queue": [],
+  "estimateSec": 0,
+  "blocked": true,
+  "suggest": {
+   "type": "pattern",
+   "id": "have-pres"
+  }
+ },
+ "new/session/all": {
+  "queue": [
+   {
+    "cardId": "lr:s-a1-table-0003",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-decisions-0041",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-meta-0042",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-decisions-0008",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-table-0063",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-coaching-0001",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-coaching-0005",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-coaching-0038",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:noroc:base",
+    "isNew": true,
+    "from": "s-a1-table-0003",
+    "check": true,
+    "forms": [
+     "fm:noroc:base"
+    ]
+   },
+   {
+    "cardId": "fm:propune:pres1sg",
+    "isNew": true,
+    "from": "s-a1-decisions-0041",
+    "check": true,
+    "forms": [
+     "fm:propune:pres1sg",
+     "fm:varianta:sg",
+     "fm:nou:fsg"
+    ]
+   },
+   {
+    "cardId": "fm:corect:msg",
+    "isNew": true,
+    "from": "s-a1-meta-0042",
+    "check": true,
+    "forms": [
+     "fm:corect:msg"
+    ]
+   },
+   {
+    "cardId": "fm:decide:inf",
+    "isNew": true,
+    "from": "s-a1-decisions-0008",
+    "check": true,
+    "forms": [
+     "fm:decide:inf"
+    ]
+   },
+   {
+    "cardId": "fm:merge:inf",
+    "isNew": true,
+    "from": "s-a1-coaching-0001",
+    "check": true,
+    "forms": [
+     "fm:merge:inf"
+    ]
+   },
+   {
+    "cardId": "fm:fi:pres2sg",
+    "isNew": true,
+    "from": "s-a1-coaching-0005",
+    "check": true,
+    "forms": [
+     "fm:fi:pres2sg"
+    ]
+   },
+   {
+    "cardId": "fm:optimist:msg",
+    "isNew": true,
+    "from": "s-a1-coaching-0038",
+    "check": true,
+    "forms": [
+     "fm:optimist:msg"
+    ]
+   }
+  ],
+  "estimateSec": 340
+ },
+ "new/session/standup": {
+  "queue": [],
+  "estimateSec": 0,
+  "blocked": true,
+  "suggest": {
+   "type": "pattern",
+   "id": "have-pres"
+  }
+ },
+ "seasoned/quick/all": {
+  "queue": [
+   {
+    "cardId": "lr:s-a1-standup-0003",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0004",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0010",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0015",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0022",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0027",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0031",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0036",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0041",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0001",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0014",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0017",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0025",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0028",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0030",
+    "isNew": false
+   }
+  ],
+  "estimateSec": 180
+ },
+ "seasoned/quick/standup": {
+  "queue": [
+   {
+    "cardId": "lr:s-a1-standup-0003",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0004",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0010",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0015",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0022",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0027",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0031",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0036",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0041",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0001",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0014",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0017",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0025",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0028",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0030",
+    "isNew": false
+   }
+  ],
+  "estimateSec": 180
+ },
+ "seasoned/review/all": {
+  "queue": [
+   {
+    "cardId": "lr:s-a1-standup-0003",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0004",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0010",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0015",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0022",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0027",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0031",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0036",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0041",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0001",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0014",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0017",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0025",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0028",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0030",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0032",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0037",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0042",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0002",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0007",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0019",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0020",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0021",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0024",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0033",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0038",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0043",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:acelasi:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:asta:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "er:s-a1-domain-0028",
+    "isNew": false,
+    "composite": true,
+    "units": [
+     "pron-3sg-m.accShort",
+     "aux-perf.1sg",
+     "testa.ppl"
+    ]
+   },
+   {
+    "cardId": "fm:bug:plDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:cum:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:deploy:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:greu:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:ieri:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:intelege:subj1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:lucra:ppl",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:merge:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:problema:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-1sg:datShort",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-2sg:datShort",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:review:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:termina:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:test:sgDef",
+    "isNew": false
+   },
+   {
+    "cardId": "er:s-a1-standup-0065",
+    "isNew": false,
+    "composite": true,
+    "units": [
+     "deschide.ppl",
+     "tichet.sgDef"
+    ]
+   },
+   {
+    "cardId": "fm:trebui:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:trimite:ppl",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:un:f",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:unde:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:acum:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:ajutor:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:aux-fut-o:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:avea:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:ce:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:cine:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:de:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:doua:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:eroare:sgDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:gata:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:lui:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:mihai:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:nevoie:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:putea:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:repara:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:sa:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:scrie:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:serios:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:sprint:sgDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:task:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:vrea:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:azi:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:cand:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:cluj:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:inca:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:la:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:mai:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:maine:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:mult:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:nu:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pleca:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-1pl:dat",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:sedinta:sgDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:timp:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:verifica:subj1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:zece:base",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0005",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0006",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0008",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0009",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0012",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0023",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0034",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0039",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0044",
+    "isNew": false
+   }
+  ],
+  "estimateSec": 1152
+ },
+ "seasoned/review/standup": {
+  "queue": [
+   {
+    "cardId": "lr:s-a1-standup-0003",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0004",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0010",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0015",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0022",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0027",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0031",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0036",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0041",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0001",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0014",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0017",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0025",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0028",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0030",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0032",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0037",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0042",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0002",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0007",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0019",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0020",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0021",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0024",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0033",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0038",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0043",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:acelasi:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:asta:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "er:s-a1-standup-0011",
+    "isNew": false,
+    "composite": true,
+    "units": [
+     "aux-perf.1sg",
+     "gasi.ppl",
+     "eroare.sg"
+    ]
+   },
+   {
+    "cardId": "fm:bug:plDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:cum:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:deploy:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:greu:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:ieri:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:intelege:subj1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:lucra:ppl",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:merge:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:problema:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-1sg:datShort",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-2sg:datShort",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:review:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:termina:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:test:sgDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:testa:ppl",
+    "isNew": false
+   },
+   {
+    "cardId": "er:s-a1-standup-0065",
+    "isNew": false,
+    "composite": true,
+    "units": [
+     "deschide.ppl",
+     "tichet.sgDef"
+    ]
+   },
+   {
+    "cardId": "fm:trebui:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:trimite:ppl",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:un:f",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:unde:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:acum:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:ajutor:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:aux-fut-o:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:avea:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:ce:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:cine:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:de:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:doua:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:gata:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:lui:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:mihai:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:nevoie:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-3sg-m:acc",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:putea:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:repara:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:sa:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:scrie:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:serios:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:sprint:sgDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:task:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:vrea:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:azi:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:cand:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:cluj:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:inca:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:la:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:mai:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:maine:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:mult:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:nu:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pleca:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-1pl:dat",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:sedinta:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:timp:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:verifica:subj1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:zece:base",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0005",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0006",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0008",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0009",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0012",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0023",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0034",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0039",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0044",
+    "isNew": false
+   }
+  ],
+  "estimateSec": 1164
+ },
+ "seasoned/learn/all": {
+  "queue": [
+   {
+    "cardId": "lr:s-a1-table-0003",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-me-0009",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-table-0018",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-meta-0042",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-decisions-0022",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-meta-0023",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-coaching-0024",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-me-0050",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-coaching-0005",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:noroc:base",
+    "isNew": true,
+    "from": "s-a1-table-0003",
+    "check": true,
+    "forms": [
+     "fm:noroc:base"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-coaching-0036",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:frate:sg",
+    "isNew": true,
+    "from": "s-a1-me-0009",
+    "check": true,
+    "forms": [
+     "fm:frate:sg"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-standup-0068",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:manca:ppl",
+    "isNew": true,
+    "from": "s-a1-table-0018",
+    "check": true,
+    "forms": [
+     "fm:manca:ppl"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-decisions-0008",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:corect:msg",
+    "isNew": true,
+    "from": "s-a1-meta-0042",
+    "check": true,
+    "forms": [
+     "fm:corect:msg"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-table-0065",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:decide:subj1sg",
+    "isNew": true,
+    "from": "s-a1-decisions-0022",
+    "check": true,
+    "forms": [
+     "fm:decide:subj1sg"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-me-0024",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:pron-1sg:acc",
+    "isNew": true,
+    "from": "s-a1-meta-0023",
+    "check": true,
+    "forms": [
+     "fm:pron-1sg:acc",
+     "fm:auzi:inf"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-table-0052",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:frica:sg",
+    "isNew": true,
+    "from": "s-a1-coaching-0024",
+    "check": true,
+    "forms": [
+     "fm:frica:sg"
+    ]
+   },
+   {
+    "cardId": "xf:s-a1-standup-0004:0",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:somn:sg",
+    "isNew": true,
+    "from": "s-a1-me-0050",
+    "check": true,
+    "forms": [
+     "fm:somn:sg"
+    ]
+   },
+   {
+    "cardId": "sb:s-a1-standup-0008:0",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:fi:pres2sg",
+    "isNew": true,
+    "from": "s-a1-coaching-0005",
+    "check": true,
+    "forms": [
+     "fm:fi:pres2sg"
+    ]
+   },
+   {
+    "cardId": "xf:s-a1-standup-0028:0",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:incepe:pres1pl",
+    "isNew": true,
+    "from": "s-a1-standup-0068",
+    "check": true,
+    "forms": [
+     "fm:incepe:pres1pl"
+    ]
+   },
+   {
+    "cardId": "xf:s-a1-standup-0019:0",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:decide:inf",
+    "isNew": true,
+    "from": "s-a1-decisions-0008",
+    "check": true,
+    "forms": [
+     "fm:decide:inf"
+    ]
+   },
+   {
+    "cardId": "er:s-a1-standup-0030",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:frig:sg",
+    "isNew": true,
+    "from": "s-a1-table-0065",
+    "check": true,
+    "forms": [
+     "fm:frig:sg"
+    ]
+   },
+   {
+    "cardId": "er:s-a1-standup-0026",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:caine:sg",
+    "isNew": true,
+    "from": "s-a1-me-0024",
+    "check": true,
+    "forms": [
+     "fm:caine:sg"
+    ]
+   },
+   {
+    "cardId": "er:s-a1-standup-0010",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:foame:sg",
+    "isNew": true,
+    "from": "s-a1-table-0052",
+    "check": true,
+    "forms": [
+     "fm:foame:sg"
+    ]
+   }
+  ],
+  "estimateSec": 655
+ },
+ "seasoned/learn/standup": {
+  "queue": [
+   {
+    "cardId": "lr:s-a1-standup-0068",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-standup-0054",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-standup-0067",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-standup-0072",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-standup-0060",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-standup-0050",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-standup-0061",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-standup-0064",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-standup-0046",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:incepe:pres1pl",
+    "isNew": true,
+    "from": "s-a1-standup-0068",
+    "check": true,
+    "forms": [
+     "fm:incepe:pres1pl"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-standup-0069",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:pron-3sg-f:acc",
+    "isNew": true,
+    "from": "s-a1-standup-0054",
+    "check": true,
+    "forms": [
+     "fm:pron-3sg-f:acc"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-standup-0055",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:amana:ppl",
+    "isNew": true,
+    "from": "s-a1-standup-0067",
+    "check": true,
+    "forms": [
+     "fm:amana:ppl"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-standup-0066",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:zi:sg",
+    "isNew": true,
+    "from": "s-a1-standup-0072",
+    "check": true,
+    "forms": [
+     "fm:zi:sg"
+    ]
+   },
+   {
+    "cardId": "xf:s-a1-standup-0004:0",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:serios:fsg",
+    "isNew": true,
+    "from": "s-a1-standup-0060",
+    "check": true,
+    "forms": [
+     "fm:serios:fsg"
+    ]
+   },
+   {
+    "cardId": "sb:s-a1-standup-0008:0",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:trimite:pres1sg",
+    "isNew": true,
+    "from": "s-a1-standup-0050",
+    "check": true,
+    "forms": [
+     "fm:trimite:pres1sg"
+    ]
+   },
+   {
+    "cardId": "xf:s-a1-standup-0028:0",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:critic:msg",
+    "isNew": true,
+    "from": "s-a1-standup-0061",
+    "check": true,
+    "forms": [
+     "fm:critic:msg"
+    ]
+   },
+   {
+    "cardId": "xf:s-a1-standup-0019:0",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:deschide:pres1sg",
+    "isNew": true,
+    "from": "s-a1-standup-0064",
+    "check": true,
+    "forms": [
+     "fm:deschide:pres1sg"
+    ]
+   },
+   {
+    "cardId": "er:s-a1-standup-0030",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:rezolva:pres1pl",
+    "isNew": true,
+    "from": "s-a1-standup-0046",
+    "check": true,
+    "forms": [
+     "fm:rezolva:pres1pl"
+    ]
+   },
+   {
+    "cardId": "er:s-a1-standup-0026",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:intreba:pres1sg",
+    "isNew": true,
+    "from": "s-a1-standup-0069",
+    "check": true,
+    "forms": [
+     "fm:intreba:pres1sg"
+    ]
+   },
+   {
+    "cardId": "er:s-a1-standup-0010",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:pron-3pl-m:dat",
+    "isNew": true,
+    "from": "s-a1-standup-0055",
+    "check": true,
+    "forms": [
+     "fm:pron-3pl-m:dat",
+     "fm:spune:pres1sg"
+    ]
+   },
+   {
+    "cardId": "fm:incepe:ppl",
+    "isNew": true,
+    "from": "s-a1-standup-0066",
+    "check": true,
+    "forms": [
+     "fm:incepe:ppl",
+     "fm:test:plDef"
+    ]
+   }
+  ],
+  "estimateSec": 605
+ },
+ "seasoned/mix/all": {
+  "queue": [
+   {
+    "cardId": "lr:s-a1-standup-0003",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0004",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0010",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0015",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0022",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0027",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0031",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-table-0003",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-standup-0036",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0041",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0001",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0014",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0017",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0025",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0028",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0030",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:noroc:base",
+    "isNew": true,
+    "from": "s-a1-table-0003",
+    "check": true,
+    "forms": [
+     "fm:noroc:base"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-standup-0032",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0037",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0042",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0002",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0007",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0019",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-me-0009",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-standup-0020",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0021",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0024",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0033",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0038",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0043",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:acelasi:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:asta:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:frate:sg",
+    "isNew": true,
+    "from": "s-a1-me-0009",
+    "check": true,
+    "forms": [
+     "fm:frate:sg"
+    ]
+   },
+   {
+    "cardId": "er:s-a1-domain-0028",
+    "isNew": false,
+    "composite": true,
+    "units": [
+     "pron-3sg-m.accShort",
+     "aux-perf.1sg",
+     "testa.ppl"
+    ]
+   },
+   {
+    "cardId": "fm:bug:plDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:cum:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:deploy:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:greu:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:ieri:base",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-table-0018",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:intelege:subj1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:lucra:ppl",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:merge:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:problema:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-1sg:datShort",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-2sg:datShort",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:review:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:termina:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:manca:ppl",
+    "isNew": true,
+    "from": "s-a1-table-0018",
+    "check": true,
+    "forms": [
+     "fm:manca:ppl"
+    ]
+   },
+   {
+    "cardId": "fm:test:sgDef",
+    "isNew": false
+   },
+   {
+    "cardId": "er:s-a1-standup-0065",
+    "isNew": false,
+    "composite": true,
+    "units": [
+     "deschide.ppl",
+     "tichet.sgDef"
+    ]
+   },
+   {
+    "cardId": "fm:trebui:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:trimite:ppl",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:un:f",
+    "isNew": false
+   },
+   {
+    "cardId": "xf:s-a1-standup-0004:0",
+    "isNew": true
+   },
+   {
+    "cardId": "sb:s-a1-standup-0008:0",
+    "isNew": true
+   },
+   {
+    "cardId": "er:s-a1-standup-0030",
+    "isNew": true
+   },
+   {
+    "cardId": "xf:s-a1-standup-0028:0",
+    "isNew": true
+   },
+   {
+    "cardId": "xf:s-a1-standup-0019:0",
+    "isNew": true
+   },
+   {
+    "cardId": "er:s-a1-standup-0010",
+    "isNew": true
+   },
+   {
+    "cardId": "er:s-a1-standup-0026",
+    "isNew": true
+   }
+  ],
+  "estimateSec": 1000,
+  "plan": {
+   "newCount": 3,
+   "reviewPct": 83
+  }
+ },
+ "seasoned/mix/standup": {
+  "queue": [
+   {
+    "cardId": "lr:s-a1-standup-0003",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0004",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0010",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0015",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0022",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0027",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0031",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0068",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-standup-0036",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0041",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0001",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0014",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0017",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0025",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0028",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0030",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:incepe:pres1pl",
+    "isNew": true,
+    "from": "s-a1-standup-0068",
+    "check": true,
+    "forms": [
+     "fm:incepe:pres1pl"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-standup-0032",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0037",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0042",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0002",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0007",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0019",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0067",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-standup-0020",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0021",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0024",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0033",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0038",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0043",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:acelasi:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:asta:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:amana:ppl",
+    "isNew": true,
+    "from": "s-a1-standup-0067",
+    "check": true,
+    "forms": [
+     "fm:amana:ppl"
+    ]
+   },
+   {
+    "cardId": "er:s-a1-standup-0039",
+    "isNew": false,
+    "composite": true,
+    "units": [
+     "pron-3sg-m.accShort",
+     "aux-perf.1sg",
+     "repara.ppl"
+    ]
+   },
+   {
+    "cardId": "fm:bug:plDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:cum:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:deploy:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:greu:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:ieri:base",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0054",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:intelege:subj1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:lucra:ppl",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:merge:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:problema:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-1sg:datShort",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-2sg:datShort",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:review:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:termina:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-3sg-f:acc",
+    "isNew": true,
+    "from": "s-a1-standup-0054",
+    "check": true,
+    "forms": [
+     "fm:pron-3sg-f:acc"
+    ]
+   },
+   {
+    "cardId": "fm:test:sgDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:testa:ppl",
+    "isNew": false
+   },
+   {
+    "cardId": "er:s-a1-standup-0065",
+    "isNew": false,
+    "composite": true,
+    "units": [
+     "deschide.ppl",
+     "tichet.sgDef"
+    ]
+   },
+   {
+    "cardId": "fm:trebui:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:trimite:ppl",
+    "isNew": false
+   },
+   {
+    "cardId": "xf:s-a1-standup-0004:0",
+    "isNew": true
+   },
+   {
+    "cardId": "sb:s-a1-standup-0008:0",
+    "isNew": true
+   },
+   {
+    "cardId": "er:s-a1-standup-0030",
+    "isNew": true
+   },
+   {
+    "cardId": "xf:s-a1-standup-0028:0",
+    "isNew": true
+   },
+   {
+    "cardId": "xf:s-a1-standup-0019:0",
+    "isNew": true
+   },
+   {
+    "cardId": "er:s-a1-standup-0010",
+    "isNew": true
+   },
+   {
+    "cardId": "er:s-a1-standup-0026",
+    "isNew": true
+   }
+  ],
+  "estimateSec": 1000,
+  "plan": {
+   "newCount": 3,
+   "reviewPct": 83
+  }
+ },
+ "seasoned/session/all": {
+  "queue": [
+   {
+    "cardId": "lr:s-a1-standup-0003",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0004",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0010",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0015",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0022",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0027",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-table-0003",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-standup-0031",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0036",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0041",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0001",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0014",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0017",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0025",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0028",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:noroc:base",
+    "isNew": true,
+    "from": "s-a1-table-0003",
+    "check": true,
+    "forms": [
+     "fm:noroc:base"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-standup-0030",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0032",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0037",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-me-0009",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-standup-0042",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0002",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0007",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0019",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0020",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0021",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0024",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0033",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:frate:sg",
+    "isNew": true,
+    "from": "s-a1-me-0009",
+    "check": true,
+    "forms": [
+     "fm:frate:sg"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-standup-0038",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0043",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:acelasi:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-table-0018",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:asta:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "er:s-a1-domain-0028",
+    "isNew": false,
+    "composite": true,
+    "units": [
+     "pron-3sg-m.accShort",
+     "aux-perf.1sg",
+     "testa.ppl"
+    ]
+   },
+   {
+    "cardId": "fm:bug:plDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:cum:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:deploy:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:greu:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:ieri:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:intelege:subj1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:manca:ppl",
+    "isNew": true,
+    "from": "s-a1-table-0018",
+    "check": true,
+    "forms": [
+     "fm:manca:ppl"
+    ]
+   },
+   {
+    "cardId": "fm:lucra:ppl",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:merge:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:problema:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-meta-0042",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:pron-1sg:datShort",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-2sg:datShort",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:review:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:termina:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:test:sgDef",
+    "isNew": false
+   },
+   {
+    "cardId": "er:s-a1-standup-0065",
+    "isNew": false,
+    "composite": true,
+    "units": [
+     "deschide.ppl",
+     "tichet.sgDef"
+    ]
+   },
+   {
+    "cardId": "fm:trebui:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:trimite:ppl",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:corect:msg",
+    "isNew": true,
+    "from": "s-a1-meta-0042",
+    "check": true,
+    "forms": [
+     "fm:corect:msg"
+    ]
+   },
+   {
+    "cardId": "fm:un:f",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:unde:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:acum:base",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-decisions-0022",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:ajutor:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:aux-fut-o:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:avea:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:ce:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:cine:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:de:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:doua:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:eroare:sgDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:decide:subj1sg",
+    "isNew": true,
+    "from": "s-a1-decisions-0022",
+    "check": true,
+    "forms": [
+     "fm:decide:subj1sg"
+    ]
+   },
+   {
+    "cardId": "fm:gata:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:lui:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:mihai:base",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-meta-0023",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:nevoie:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:putea:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:repara:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:sa:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:scrie:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:serios:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:sprint:sgDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:task:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-1sg:acc",
+    "isNew": true,
+    "from": "s-a1-meta-0023",
+    "check": true,
+    "forms": [
+     "fm:pron-1sg:acc",
+     "fm:auzi:inf"
+    ]
+   },
+   {
+    "cardId": "fm:vrea:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:azi:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:cand:base",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-coaching-0024",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:cluj:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:inca:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:la:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:mai:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:maine:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:mult:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:nu:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pleca:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:frica:sg",
+    "isNew": true,
+    "from": "s-a1-coaching-0024",
+    "check": true,
+    "forms": [
+     "fm:frica:sg"
+    ]
+   },
+   {
+    "cardId": "fm:pron-1pl:dat",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:sedinta:sgDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:timp:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-me-0050",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:verifica:subj1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:zece:base",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0005",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0006",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0008",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0009",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0012",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0023",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:somn:sg",
+    "isNew": true,
+    "from": "s-a1-me-0050",
+    "check": true,
+    "forms": [
+     "fm:somn:sg"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-standup-0034",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0039",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0044",
+    "isNew": false
+   },
+   {
+    "cardId": "xf:s-a1-standup-0004:0",
+    "isNew": true
+   },
+   {
+    "cardId": "sb:s-a1-standup-0008:0",
+    "isNew": true
+   },
+   {
+    "cardId": "er:s-a1-standup-0030",
+    "isNew": true
+   },
+   {
+    "cardId": "xf:s-a1-standup-0028:0",
+    "isNew": true
+   },
+   {
+    "cardId": "xf:s-a1-standup-0019:0",
+    "isNew": true
+   },
+   {
+    "cardId": "er:s-a1-standup-0010",
+    "isNew": true
+   },
+   {
+    "cardId": "er:s-a1-standup-0026",
+    "isNew": true
+   }
+  ],
+  "estimateSec": 1772
+ },
+ "seasoned/session/standup": {
+  "queue": [
+   {
+    "cardId": "lr:s-a1-standup-0003",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0004",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0010",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0015",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0022",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0027",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0068",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-standup-0031",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0036",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0041",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0001",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0014",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0017",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0025",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0028",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:incepe:pres1pl",
+    "isNew": true,
+    "from": "s-a1-standup-0068",
+    "check": true,
+    "forms": [
+     "fm:incepe:pres1pl"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-standup-0030",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0032",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0037",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0054",
+    "isNew": true
+   },
+   {
+    "cardId": "lr:s-a1-standup-0042",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0002",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0007",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0019",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0020",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0021",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0024",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0033",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-3sg-f:acc",
+    "isNew": true,
+    "from": "s-a1-standup-0054",
+    "check": true,
+    "forms": [
+     "fm:pron-3sg-f:acc"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-standup-0038",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0043",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:acelasi:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0067",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:asta:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "er:s-a1-standup-0011",
+    "isNew": false,
+    "composite": true,
+    "units": [
+     "aux-perf.1sg",
+     "gasi.ppl",
+     "eroare.sg"
+    ]
+   },
+   {
+    "cardId": "fm:bug:plDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:cum:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:deploy:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:greu:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:ieri:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:intelege:subj1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:amana:ppl",
+    "isNew": true,
+    "from": "s-a1-standup-0067",
+    "check": true,
+    "forms": [
+     "fm:amana:ppl"
+    ]
+   },
+   {
+    "cardId": "fm:lucra:ppl",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:merge:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:problema:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-1sg:datShort",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0072",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:pron-2sg:datShort",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:review:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:termina:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:test:sgDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:testa:ppl",
+    "isNew": false
+   },
+   {
+    "cardId": "er:s-a1-standup-0065",
+    "isNew": false,
+    "composite": true,
+    "units": [
+     "deschide.ppl",
+     "tichet.sgDef"
+    ]
+   },
+   {
+    "cardId": "fm:trebui:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:trimite:ppl",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:zi:sg",
+    "isNew": true,
+    "from": "s-a1-standup-0072",
+    "check": true,
+    "forms": [
+     "fm:zi:sg"
+    ]
+   },
+   {
+    "cardId": "fm:un:f",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:unde:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:acum:base",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0060",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:ajutor:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:aux-fut-o:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:avea:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:ce:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:cine:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:de:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:doua:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:gata:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:serios:fsg",
+    "isNew": true,
+    "from": "s-a1-standup-0060",
+    "check": true,
+    "forms": [
+     "fm:serios:fsg"
+    ]
+   },
+   {
+    "cardId": "fm:lui:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:mihai:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:nevoie:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0050",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:pron-3sg-m:acc",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:putea:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:repara:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:sa:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:scrie:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:serios:msg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:sprint:sgDef",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:task:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:trimite:pres1sg",
+    "isNew": true,
+    "from": "s-a1-standup-0050",
+    "check": true,
+    "forms": [
+     "fm:trimite:pres1sg"
+    ]
+   },
+   {
+    "cardId": "fm:vrea:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:azi:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:cand:base",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0061",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:cluj:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:inca:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:la:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:mai:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:maine:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:mult:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:nu:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pleca:pres1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:critic:msg",
+    "isNew": true,
+    "from": "s-a1-standup-0061",
+    "check": true,
+    "forms": [
+     "fm:critic:msg"
+    ]
+   },
+   {
+    "cardId": "fm:pron-1pl:dat",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:sedinta:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:timp:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0064",
+    "isNew": true
+   },
+   {
+    "cardId": "fm:verifica:subj1sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:zece:base",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0005",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0006",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0008",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0009",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0012",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0023",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:deschide:pres1sg",
+    "isNew": true,
+    "from": "s-a1-standup-0064",
+    "check": true,
+    "forms": [
+     "fm:deschide:pres1sg"
+    ]
+   },
+   {
+    "cardId": "lr:s-a1-standup-0034",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0039",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0044",
+    "isNew": false
+   },
+   {
+    "cardId": "xf:s-a1-standup-0004:0",
+    "isNew": true
+   },
+   {
+    "cardId": "sb:s-a1-standup-0008:0",
+    "isNew": true
+   },
+   {
+    "cardId": "er:s-a1-standup-0030",
+    "isNew": true
+   },
+   {
+    "cardId": "xf:s-a1-standup-0028:0",
+    "isNew": true
+   },
+   {
+    "cardId": "xf:s-a1-standup-0019:0",
+    "isNew": true
+   },
+   {
+    "cardId": "er:s-a1-standup-0010",
+    "isNew": true
+   },
+   {
+    "cardId": "er:s-a1-standup-0026",
+    "isNew": true
+   }
+  ],
+  "estimateSec": 1764
+ }
+}
