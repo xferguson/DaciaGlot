@@ -239,8 +239,8 @@ test("the × button navigates home; the empty state shows when nothing is due", 
   const s = start(st);
   s.tap("×");
   assert.deepEqual(s.navs, ["#/home"]);
-  // TODAY'S BEHAVIOR (pinned, not endorsed): `parseFocusParam` returns [] without a focus, and [] is truthy, so
-  // the empty state always shows the focus message instead of EMPTY[mode]. Flagged in the Q02 PR.
   const empty = start(state(), { mode: "review" });
-  assert.equal(empty.root.querySelector("p.muted").textContent, "Nothing in this focus right now. Clear the focus on Home or pick another topic.");
+  assert.equal(empty.root.querySelector("p.muted").textContent, "Nothing is due. Nice work.");
+  const focused = start(state(), { mode: "review", f: "situation:nowhere" });
+  assert.equal(focused.root.querySelector("p.muted").textContent, "Nothing in this focus right now. Clear the focus on Home or pick another topic.");
 });

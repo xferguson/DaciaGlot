@@ -86,7 +86,7 @@ export function render(root, ctx) {
     }
     if (!queue.length) {
       root.innerHTML = `<h1>${TITLES[mode]}</h1>
-        ${sun()}<p class="muted">${focus ? "Nothing in this focus right now. Clear the focus on Home or pick another topic." : EMPTY[mode] ?? "Nothing to study right now."}</p>${home}`;
+        ${sun()}<p class="muted">${focus.length ? "Nothing in this focus right now. Clear the focus on Home or pick another topic." : EMPTY[mode] ?? "Nothing to study right now."}</p>${home}`;
       return;
     }
     begin();
