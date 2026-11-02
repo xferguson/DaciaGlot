@@ -1,5 +1,6 @@
 // Key-forms card (PRD FR-D3). Lemma + gloss + form label; the learner types the form.
 
+import { speechFor } from "../speech.js";
 import { checkAnswer } from "../../../core/check.js";
 import { answerStep, initialAnswer, canRate } from "../../../core/answer.js";
 import { parseCardId, labelFor } from "../../../core/cards.js";
@@ -13,12 +14,11 @@ import { retryMessage } from "../answer-card.js";
 /**
  * `sentence` is an already-seen sentence containing this form, or null (then the form alone is played).
  */
-export function renderCard(root, { card, sentence = null, content, tts, settings = {}, onResult, claims = null }) {
+export function renderCard(root, { card, sentence = null, content, speak: speakIn, rate: rateIn, tts, settings = {}, onResult, claims = null }) {
   const { lexemeId, formKey } = parseCardId(typeof card === "string" ? card : card.id ?? card.cardId);
   const lexeme = content.lexemes.get(lexemeId);
   const expected = lexeme.forms[formKey];
-  const rate = settings.ttsRate ?? 0.9;
-  const speak = (text, opts) => tts?.speak?.(text, { rate, ...opts });
+  const { speak, rate } = speechFor({ speak: speakIn, rate: rateIn, tts, settings });
   const input = answerInput({ size: expected.length + 1, onSubmit: () => check() });
   input.setAttribute("aria-label", labelFor(formKey));
 

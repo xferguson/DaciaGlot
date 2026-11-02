@@ -137,7 +137,7 @@ The session view calls `resolveFm` at render time and passes the presented id to
 
 /** @typedef {Object} Settings
  * @property {number} newPerSession   // default 8
- * @property {number} ttsRate         // default 0.9
+ * @property {number} ttsRate         // default 0.9; all defaults live in `SETTINGS_DEFAULTS` (data/store.js), never as `??` fallbacks
  * @property {string|null} voiceURI
  * @property {boolean} autoplay       // default true
  * @property {string[]} registers     // default ["colloquial","neutral"]

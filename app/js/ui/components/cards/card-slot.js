@@ -1,5 +1,6 @@
 // Slot-building card (PRD FR-D5, FR-D7, FR-D8). Slots derived from a transform; type the whole sentence; one retry.
 
+import { speechFor } from "../speech.js";
 import { parseCardId, slotsFor, lexemeForms } from "../../../core/cards.js";
 import { answerCard } from "../answer-card.js";
 
@@ -11,16 +12,16 @@ export function slotLine(slots) {
   return slots.map((s) => (s.type === "word" ? s.text : slotTags(s).map((l) => `[${l}]`).join(" "))).join(" + ");
 }
 
-export function renderCard(root, { card, sentence, content, tts, settings = {}, onResult, onSetting, claims = null, rng = Math.random }) {
+export function renderCard(root, { card, sentence, content, speak: speakIn, rate: rateIn, tts, settings = {}, onResult, onSetting, claims = null, rng = Math.random }) {
   const { transformIndex } = parseCardId(typeof card === "string" ? card : card.id ?? card.cardId);
   const t = sentence.transforms[transformIndex];
-  const rate = settings.ttsRate ?? 0.9;
+  const { speak, rate } = speechFor({ speak: speakIn, rate: rateIn, tts, settings });
   const cleanup = answerCard(root, {
     cls: "card-slot", dataCard: `${sentence.id}:${transformIndex}`, audio: "end", label: "Sentence",
     header: '<p class="muted">Build the sentence</p><p class="en"></p><p class="slot-line" lang="ro"></p>',
     expected: t.ro, accept: t.accept, avoid: content ? lexemeForms(sentence, content) : [], ro: t.ro,
     sentence, content, rng, settings, en: t.en ?? null, onResult, onSetting, claims,
-    speak: (text, opts) => tts?.speak?.(text, { rate, ...opts }),
+    speak,
   });
   root.querySelector(".en").textContent = t.en ?? "";
   const line = root.querySelector(".slot-line");

@@ -1,5 +1,6 @@
 // Cloze card (PRD FR-D2, FR-D7, FR-D8). Type the blanked token; one retry.
 
+import { speechFor } from "../speech.js";
 import { checkAnswer, hintFor } from "../../../core/check.js";
 import { answerStep, initialAnswer, canRate } from "../../../core/answer.js";
 import { lexemeForms } from "../../../core/cards.js";
@@ -30,9 +31,8 @@ function partsForBlanks(tokens, diffs) {
  * the card's own token. No audio before answering, so the sentence can't give the blank away (FR-D7); it plays after.
  * `onResult` also gets `blanks: {tokenIndex, ok}[]`.
  */
-export function renderCard(root, { card, sentence, content, tts, settings = {}, onResult, claims = null, check = false, blanks = null }) {
-  const rate = settings.ttsRate ?? 0.9;
-  const speak = (text, opts) => tts?.speak?.(text, { rate, ...opts });
+export function renderCard(root, { card, sentence, content, speak: speakIn, rate: rateIn, tts, settings = {}, onResult, claims = null, check = false, blanks = null }) {
+  const { speak, rate } = speechFor({ speak: speakIn, rate: rateIn, tts, settings });
   const idxs = blanks?.length ? [...blanks].sort((a, b) => a - b) : [tokenIndexOf(card)];
   const inputs = new Map(idxs.map((i) => {
     const input = answerInput({ size: sentence.tokens[i].t.length + 1, onSubmit: () => submit() });
