@@ -1,6 +1,7 @@
 // EN→RO card (PRD FR-D6, FR-D7, FR-D8, FR-V4). Shows the English; answer by speaking and self-grading, by word tiles,
 // or by typing the whole Romanian sentence (one retry). Audio is hidden until the answer is revealed.
 
+import { speechFor } from "../speech.js";
 import { hintFor } from "../../../core/check.js";
 import { lexemeForms } from "../../../core/cards.js";
 import { erMisses } from "../../../core/session.js";
@@ -8,14 +9,14 @@ import { answerCard } from "../answer-card.js";
 
 export { hintFor };
 
-export function renderCard(root, { card, sentence, content, tts, settings = {}, label, onResult, onSetting, rng = Math.random }) {
-  const rate = settings.ttsRate ?? 0.9;
+export function renderCard(root, { card, sentence, content, speak: speakIn, rate: rateIn, tts, settings = {}, label, onResult, onSetting, rng = Math.random }) {
+  const { speak, rate } = speechFor({ speak: speakIn, rate: rateIn, tts, settings });
   const cleanup = answerCard(root, {
     cls: "card-enro", dataCard: card?.id ?? card ?? "", audio: "mid", label: "Romanian sentence",
     header: '<p class="muted"></p><p class="en"><strong></strong></p>',
     expected: sentence.ro, accept: sentence.accept ?? [], avoid: content ? lexemeForms(sentence, content) : [],
     sentence, content, rng, settings, partTokens: sentence.tokens, en: sentence.en, onResult, onSetting,
-    speak: (text, opts) => tts?.speak?.(text, { rate, ...opts }),
+    speak,
     extras(diff, slot) {
       const misses = erMisses(sentence, diff);
       if (misses?.missedTokens.length) {

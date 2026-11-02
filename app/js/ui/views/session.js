@@ -8,6 +8,7 @@ import { renderCard as renderCz } from "../components/cards/card-cloze.js";
 import { renderCard as renderKf } from "../components/cards/card-keyform.js";
 import { renderCard as renderXf } from "../components/cards/card-transform.js";
 import { renderCard as renderSb } from "../components/cards/card-slot.js";
+import { speechFor } from "../components/speech.js";
 import { sun } from "../components/ornament.js";
 import { renderCard as renderEr } from "../components/cards/card-enro.js";
 import { renderCard as renderPg } from "../components/cards/card-paradigm.js";
@@ -31,6 +32,8 @@ const EMPTY = {
 const RENDERERS = { lr: renderLr, cz: renderCz, kf: renderKf, xf: renderXf, sb: renderSb, er: renderEr };
 
 export function render(root, ctx) {
+  /** Ready-made `speak` and `rate` for cards, bound to the current settings (read at call time). */
+  const speechProps = () => speechFor({ tts: ctx.tts, settings: ctx.state.settings });
   setClaimHandler({
     content: ctx.content,
     isClaimed: (unit) => unit in ctx.state.claimed,
@@ -167,7 +170,7 @@ export function render(root, ctx) {
       sentence,
       label: item.composite ? `Review · ${item.units.length} forms` : undefined,
       content: ctx.content,
-      tts: ctx.tts,
+      ...speechProps(),
       settings: ctx.state.settings,
       onSetting(patch) {
         ctx.updateSettings(patch);
@@ -210,7 +213,7 @@ export function render(root, ctx) {
     cardCleanup = renderPg(slot, {
       members: item.members,
       content: ctx.content,
-      tts: ctx.tts,
+      ...speechProps(),
       settings: ctx.state.settings,
       onResult() {
         const before = Object.keys(ctx.state.seenSentences).length;
@@ -243,7 +246,7 @@ export function render(root, ctx) {
     cardCleanup = renderCz(slot, {
       card: blanks[0].presentedId,
       sentence,
-      tts: ctx.tts,
+      ...speechProps(),
       settings: ctx.state.settings,
       check: true,
       blanks: blanks.map((b) => b.tokenIndex),
@@ -284,7 +287,7 @@ export function render(root, ctx) {
     ctx.store.flush();
     const summary = summarize({
       before: patternsBefore, state: ctx.state, content: ctx.content, stats, startedAt, now: endedAt, pace,
-      target: ctx.state.settings.paceTarget ?? 15,
+      target: ctx.state.settings.paceTarget,
     });
     renderSummary(root, { summary, content: ctx.content, onMore: () => ctx.navigate("#/session?mode=quick") });
     alive = false;

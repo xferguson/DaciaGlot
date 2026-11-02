@@ -1,6 +1,7 @@
 // Shared controller for the whole-sentence typed-answer cards (en→ro, transform, slot-building): one try plus one retry,
 // hint, three answer modes. A card file supplies its header markup and the expected text; this does the rest.
 
+import { speechFor } from "./speech.js";
 import { checkAnswer } from "../../core/check.js";
 import { hintFor } from "../../core/check.js";
 import { answerStep, initialAnswer, canRate } from "../../core/answer.js";
@@ -29,7 +30,7 @@ export function answerCard(root, {
   sentence, content, speak, settings = {}, rng = Math.random, partTokens = [], en = null,
   onResult, onSetting, extras,
 }) {
-  const rate = settings.ttsRate ?? 0.9;
+  const rate = speechFor({ settings }).rate;
   root.innerHTML = `
     <section class="card ${cls}" data-card="${dataCard}">
       ${header}

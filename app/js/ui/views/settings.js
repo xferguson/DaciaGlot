@@ -2,7 +2,7 @@
 import { issueUrl, flagsMarkdown } from "../components/flag-button.js";
 import { toast } from "../components/toast.js";
 import { hideBanner } from "../components/banner.js";
-import { defaultState, exportState, importState, ImportError } from "../../data/store.js";
+import { SETTINGS_DEFAULTS, defaultState, exportState, importState, ImportError } from "../../data/store.js";
 import { setVoiceURI, speak } from "../../data/tts.js";
 import { foldClozeCards } from "../../data/migrations.js";
 import { html } from "../dom.js";
@@ -50,13 +50,13 @@ export function render(root, ctx) {
 
   const q = (s) => root.querySelector(s);
   const s0 = st().settings;
-  q("#newItems").value = s0.newItemsPerLearn ?? 15;
+  q("#newItems").value = s0.newItemsPerLearn;
   q("#newItems").addEventListener("change", (e) => {
-    update({ newItemsPerLearn: Math.min(40, Math.max(5, Math.round(Number(e.target.value)) || 15)) });
+    update({ newItemsPerLearn: Math.min(40, Math.max(5, Math.round(Number(e.target.value)) || SETTINGS_DEFAULTS.newItemsPerLearn)) });
   });
-  q("#paceTarget").value = s0.paceTarget ?? 15;
+  q("#paceTarget").value = s0.paceTarget;
   q("#paceTarget").addEventListener("change", (e) => {
-    update({ paceTarget: Math.min(60, Math.max(3, Math.round(Number(e.target.value)) || 15)) });
+    update({ paceTarget: Math.min(60, Math.max(3, Math.round(Number(e.target.value)) || SETTINGS_DEFAULTS.paceTarget)) });
   });
   q("#adaptiveBatch").checked = s0.adaptiveBatch !== false;
   q("#adaptiveBatch").addEventListener("change", (e) => update({ adaptiveBatch: e.target.checked }));

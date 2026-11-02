@@ -2,7 +2,6 @@
 import { dayKey, DAY_MS as DAY } from "./time.js";
 import { bumpDay } from "./history.js";
 
-export const PACE_TARGET_DEFAULT = 15;
 export const BATCH_MIN = 5;
 export const BATCH_MAX = 40;
 export const PACE_WEEKS = 8;
@@ -64,7 +63,7 @@ export function nextBatchSize(current, perTen, target, checkAccuracy, min = BATC
 
 /** Learn batch size in effect: the adapted size when `adaptiveBatch` is on, else the setting. */
 export function learnBatch(state) {
-  const base = state.settings.newItemsPerLearn ?? 15;
+  const base = state.settings.newItemsPerLearn;
   const adapted = state.pace?.batch;
   return state.settings.adaptiveBatch !== false && adapted ? Math.min(BATCH_MAX, Math.max(BATCH_MIN, adapted)) : base;
 }
@@ -80,7 +79,7 @@ export function recordSession(state, { pace, accuracy, learn, now }) {
   const out = { ...state, history: bumpDay(state.history, now, (d) => { d.newItems += pace.newForms + pace.newSentences; }) };
   if (learn && pace.newForms + pace.newSentences > 0) {
     const cur = learnBatch(state);
-    const target = state.settings.paceTarget ?? PACE_TARGET_DEFAULT;
+    const target = state.settings.paceTarget;
     const next = state.settings.adaptiveBatch !== false ? nextBatchSize(cur, pace.perTen, target, accuracy) : cur;
     const prev = state.pace?.history ?? [];
     out.pace = { batch: next, history: [...prev, { t: now, size: cur, perTen: Math.round(pace.perTen * 10) / 10 }].slice(-10) };

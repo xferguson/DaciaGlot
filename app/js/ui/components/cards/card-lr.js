@@ -1,5 +1,6 @@
 // Listen & recognize card (PRD FR-D1, FR-D7). Pick the text that matches the audio.
 
+import { speechFor } from "../speech.js";
 import { audioButton } from "../audio-button.js";
 import { renderFeedback, nextButtons, partsFor } from "../feedback.js";
 
@@ -10,9 +11,8 @@ import { pickDistractors } from "../../models/card-lr.js";
 export { shuffle, pickDistractors };
 
 
-export function renderCard(root, { card, sentence, content, tts, settings = {}, onResult, rng = Math.random }) {
-  const rate = settings.ttsRate ?? 0.9;
-  const speak = (text, opts) => tts?.speak?.(text, { rate, ...opts });
+export function renderCard(root, { card, sentence, content, speak: speakIn, rate: rateIn, tts, settings = {}, onResult, rng = Math.random }) {
+  const { speak, rate } = speechFor({ speak: speakIn, rate: rateIn, tts, settings });
   const options = shuffle([sentence, ...pickDistractors(sentence, content, rng)], rng);
   root.innerHTML = `
     <section class="card card-lr" data-card="${card?.id ?? card ?? ""}">

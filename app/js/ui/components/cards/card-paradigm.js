@@ -1,14 +1,15 @@
 // Paradigm card (PRD FR-R5): a family of near-identical sentences shown once as a small table.
 // Each row has audio, the Romanian with the differing word highlighted and labelled, and the English.
 
+import { speechFor } from "../speech.js";
 import { paradigmRows } from "../../models/card-paradigm.js";
 import { audioButton } from "../audio-button.js";
 import { advanceButton } from "../button.js";
 
 export { paradigmRows };
 
-export function renderCard(root, { members, content, tts, settings = {}, onResult }) {
-  const rate = settings.ttsRate ?? 0.9;
+export function renderCard(root, { members, content, speak: speakIn, rate: rateIn, tts, settings = {}, onResult }) {
+  const { speak, rate } = speechFor({ speak: speakIn, rate: rateIn, tts, settings });
   root.innerHTML = `
     <section class="card card-paradigm">
       <p class="muted">One idea, several forms. Listen to each, then notice what changes.</p>
@@ -38,6 +39,6 @@ export function renderCard(root, { members, content, tts, settings = {}, onResul
   }
   const actions = root.querySelector(".actions");
   actions.append(advanceButton("Continue", "btn block", () => onResult({ result: "correct", usedHint: false, attemptNo: 1, rating: null }), actions));
-  if (settings.autoplay !== false) tts?.speak?.(content.sentences.get(members[0]).ro, { rate });
+  if (settings.autoplay !== false) speak(content.sentences.get(members[0]).ro);
   return () => {};
 }

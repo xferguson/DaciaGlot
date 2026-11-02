@@ -12,26 +12,29 @@ export class ImportError extends Error {
   }
 }
 
+/** Every setting with its default; `withDefaults` fills these in on load, so readers never need a `??` fallback. */
+export const SETTINGS_DEFAULTS = {
+    newPerSession: 8,
+    newItemsPerLearn: 15,
+    paceTarget: 15,
+    adaptiveBatch: true,
+    ttsRate: 0.9,
+    voiceURI: null,
+    autoplay: true,
+    answerMode: 'speak',
+    registers: ['colloquial', 'neutral'],
+    lastExportAt: null,
+    ttsBannerDismissed: false,
+    focus: [],
+};
+
 /** @param {number} now ms epoch */
 export function defaultState(now) {
   return {
     schemaVersion: CURRENT_SCHEMA_VERSION,
     contentVersion: '',
     createdAt: now,
-    settings: {
-      newPerSession: 8,
-      newItemsPerLearn: 15,
-      paceTarget: 15,
-      adaptiveBatch: true,
-      ttsRate: 0.9,
-      voiceURI: null,
-      autoplay: true,
-      answerMode: 'speak',
-      registers: ['colloquial', 'neutral'],
-      lastExportAt: null,
-      ttsBannerDismissed: false,
-      focus: [],
-    },
+    settings: { ...SETTINGS_DEFAULTS, registers: [...SETTINGS_DEFAULTS.registers], focus: [] },
     cards: {},
     seenSentences: {},
     lexemeSentences: {},
