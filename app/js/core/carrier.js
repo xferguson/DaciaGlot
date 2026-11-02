@@ -4,6 +4,7 @@ import { unitsForSentence, isKnown } from "./units.js";
 import { pickOne } from "./random.js";
 import { DAY_MS } from "./time.js";
 import { unitId, parseUnitId } from "./unit-id.js";
+import { byKey } from "./sort.js";
 
 /** A carrier is skipped when it was named in this many of the unit's latest attempts. */
 export const RECENT_ATTEMPTS = 3;
@@ -133,7 +134,7 @@ export function pickComposite(dueEasyUnits, state, content, now, rng, { exclude 
   if (!found.length) return null;
   const rank = (c) => c.units.length * 2 + (c.unseen ? 1 : 0);
   const top = Math.max(...found.map(rank));
-  const best = found.filter((c) => rank(c) === top).sort((a, b) => (a.sentenceId < b.sentenceId ? -1 : 1));
+  const best = found.filter((c) => rank(c) === top).sort(byKey((c) => c.sentenceId));
   const { sentenceId, units } = pickOne(best, rng);
   return { sentenceId, units };
 }

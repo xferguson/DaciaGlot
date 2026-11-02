@@ -1,6 +1,7 @@
 // Sentence families (ARCHITECTURE §2, PRD FR-R5): sentences that differ only in the form of one or more words,
 // like "El locuiește în Cluj" / "Locuiești în Cluj" / "Locuiesc în Cluj". Pure.
 import { unitId } from "./unit-id.js";
+import { byKey } from "./sort.js";
 
 /** Subject pronouns ignored when comparing sentences (the verb form already carries the person). */
 export const SUBJECT_PRONOUNS = new Set(["eu", "tu", "el", "ea", "noi", "voi", "ei", "ele", "dumneavoastră"]);
@@ -50,7 +51,7 @@ export function findFamilies(sentences) {
   const families = new Map();
   for (const list of buckets.values()) {
     if (list.length < 2) continue;
-    list.sort((a, b) => (a.id < b.id ? -1 : 1));
+    list.sort(byKey((x) => x.id));
     const parent = list.map((_, i) => i);
     const find = (i) => (parent[i] === i ? i : (parent[i] = find(parent[i])));
     for (let i = 0; i < list.length; i++) {

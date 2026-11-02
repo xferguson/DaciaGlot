@@ -1,15 +1,15 @@
-// Q16: the zero-dependency lint (scripts/lint.mjs) and its ratcheting allowlist.
+// Q16/Q18: the zero-dependency lint (scripts/lint.mjs). No allowlist: every rule holds everywhere.
 // Replaces test/imports.test.mjs: rule 1 (undeclared bare calls) catches a function used in a
 // module but never imported there, including calls inside `${…}`.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import {
-  ALLOW_PATH, checkAllow, format, lintRepo, lintSources, shrinkAllow, sourceFiles, strip,
+  format, lintRepo, lintSources, sourceFiles, strip,
 } from "../scripts/lint.mjs";
 
 const lint = (files) => lintSources(Object.entries(files).map(([file, src]) => ({ file, src })));
-const rules = (files) => lint(files).map((v) => v.rule);
+const rules = (files) => lint(files).map((v) => v.rule).filter((r) => r !== "quote-style"); // fixtures may use any quotes
 
 test("strip blanks comments, strings, template text and regexes but keeps ${} code and offsets", () => {
   const src = 'a("x(") // b()\n/* c() */ `t d() ${e("f")} g()` + /h()/.test(s) / 2';
@@ -93,37 +93,30 @@ test("violations print as `file:line rule message`", () => {
   assert.equal(format(v), "app/js/core/x.js:3 core-purity Date.now in core");
 });
 
-const allow = JSON.parse(readFileSync(ALLOW_PATH, "utf8"));
 const repo = () => sourceFiles().map((file) => ({ file, src: readFileSync(new URL(`../${file}`, import.meta.url), "utf8") }));
 
-test("app/js matches the allowlist exactly (no new violations, no stale entries)", () => {
-  const { over, stale } = checkAllow(lintRepo(), allow);
-  assert.deepEqual(over.map(format), [], "new lint violations");
-  assert.deepEqual(stale, [], "allowlist can shrink: run node scripts/lint.mjs --update-allow");
+test("app/js has no lint violations", () => {
+  assert.deepEqual(lintRepo().map(format), []);
 });
 
 test("adding Math.random() to a core file fails the lint", () => {
   const files = repo().map((f) => f.file === "app/js/core/fsrs.js" ? { ...f, src: `${f.src}\nexport const r = () => Math.random();\n` } : f);
-  const { over } = checkAllow(lintSources(files), allow);
+  const over = lintSources(files);
   assert.deepEqual(over.map((v) => `${v.file} ${v.rule}`), ["app/js/core/fsrs.js core-purity"]);
 });
 
 test("a new view-to-view import fails the lint", () => {
   const files = repo().map((f) => f.file === "app/js/ui/views/lexeme.js" ? { ...f, src: `import { listRows } from "./lists.js";\n${f.src}` } : f);
-  const { over } = checkAllow(lintSources(files), allow);
+  const over = lintSources(files);
   assert.deepEqual(over.map((v) => `${v.file}:${v.line} ${v.rule}`), ["app/js/ui/views/lexeme.js:1 import-direction"]);
 });
 
-test("shrinkAllow only lowers or removes entries, never adds or raises them", () => {
-  const violations = [
-    { file: "a.js", rule: "core-purity" }, { file: "a.js", rule: "core-purity" }, { file: "a.js", rule: "core-purity" },
-    { file: "b.js", rule: "raw-card-id" },
-    { file: "c.js", rule: "import-cycle" },
-  ];
-  const next = shrinkAllow({ "core-purity": { "a.js": 2, "z.js": 4 }, "raw-card-id": { "b.js": 5 } }, violations);
-  assert.deepEqual(next["core-purity"], { "a.js": 2 });
-  assert.deepEqual(next["raw-card-id"], { "b.js": 1 });
-  assert.deepEqual(next["import-cycle"], {});
+test("rule quote-style: single quotes only when the text holds a double quote", () => {
+  const bad = (src) => lint({ "app/js/x.js": src }).filter((v) => v.rule === "quote-style").length;
+  assert.equal(bad("export const a = 'x';"), 1);
+  assert.equal(bad(`export const a = 'say "hi"';`), 0);
+  assert.equal(bad('export const a = "it\'s";'), 0);
+  assert.equal(bad("export const a = `it's`; // 'x'"), 0, "templates and comments");
 });
 
 test("rule param-reassign: core functions never assign to their parameters", () => {

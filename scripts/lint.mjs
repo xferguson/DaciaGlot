@@ -1,20 +1,13 @@
 #!/usr/bin/env node
-// Zero-dependency lint for app/js with ratcheting allowlists (Q16).
+// Zero-dependency lint for app/js (Q16, closed out in Q18). Every rule is enforced with no exceptions.
 //
-//   node scripts/lint.mjs                 # print new violations as `file:line rule message`, exit 1 if any
-//   node scripts/lint.mjs --all           # print every violation, allowlisted or not
-//   node scripts/lint.mjs --update-allow  # shrink scripts/lint-allow.json to today's counts (never grows)
-//
-// The allowlist maps rule → file → count. A file may have at most its allowed count of violations
-// for a rule; more fails, and fewer also fails (the entry is stale, so the ratchet must click down
-// with --update-allow). New entries are never added by --update-allow: fix the code instead.
-import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
-import { join, posix, relative } from "node:path";
+//   node scripts/lint.mjs   # print violations as `file:line rule message`, exit 1 if any
+import { readdirSync, readFileSync, statSync } from "node:fs";
+import { join, posix } from "node:path";
 import { fileURLToPath } from "node:url";
 
 export const ROOT = fileURLToPath(new URL("../", import.meta.url));
 export const SRC = "app/js";
-export const ALLOW_PATH = join(ROOT, "scripts/lint-allow.json");
 
 export const RULES = {
   "undeclared-call": "bare call to a name that is never declared or imported in this file",
@@ -24,6 +17,7 @@ export const RULES = {
   "import-cycle": "import is part of a cycle in app/js",
   "import-specifier": "imports must be relative and end in .js",
   "param-reassign": "app/js/core never assigns to a function parameter; use a new local",
+  "quote-style": "string literals use double quotes (single quotes only when the text contains a double quote)",
 };
 
 // ---------------------------------------------------------------------------------------------
@@ -300,6 +294,20 @@ export function paramReassignments(code) {
 }
 
 // ---------------------------------------------------------------------------------------------
+// Rule 8 · quote style
+
+/** Single-quoted string literals whose text has no double quote; `text` keeps strings, `code` blanks them. */
+export function singleQuoted(text, code) {
+  const out = [];
+  const marks = [];
+  for (let i = 0; i < code.length; i++) if (code[i] === "'") marks.push(i);
+  for (let p = 0; p + 1 < marks.length; p += 2) {
+    if (!text.slice(marks[p] + 1, marks[p + 1]).includes('"')) out.push({ index: marks[p], message: "single-quoted string; use double quotes" });
+  }
+  return out;
+}
+
+// ---------------------------------------------------------------------------------------------
 // Rule 3 · raw card-id prefixes (needs string contents, so it runs on comment-stripped source)
 
 export const CARD_PREFIXES = ["lr", "cz", "kf", "fm", "xf", "sb", "er", "pg"];
@@ -413,6 +421,7 @@ export function lintSources(sources) {
     if (file.startsWith(`${SRC}/core/`)) push(file, "core-purity", impureUses(code));
     if (file.startsWith(`${SRC}/core/`)) push(file, "param-reassign", paramReassignments(code));
     if (file !== `${SRC}/core/cards.js`) push(file, "raw-card-id", rawCardIds(text));
+    push(file, "quote-style", singleQuoted(text, code));
     push(file, "import-direction", wrongDirection(file, imports));
     push(file, "import-specifier", badSpecifiers(imports));
     graph.set(file, imports.filter((im) => !im.dynamic && isRelative(im.spec)).map((im) => ({ target: resolveSpec(file, im.spec), index: im.index })));
@@ -430,64 +439,17 @@ export function sourceFiles(root = ROOT, dir = SRC) {
 
 export const lintRepo = (root = ROOT) => lintSources(sourceFiles(root).map((file) => ({ file, src: readFileSync(join(root, file), "utf8") })));
 
-/** Count violations as {rule: {file: n}}. */
-export function countViolations(violations) {
-  const counts = {};
-  for (const v of violations) (counts[v.rule] ??= {})[v.file] = (counts[v.rule][v.file] ?? 0) + 1;
-  return counts;
-}
-
-/**
- * Compare violations with an allowlist. `over` lists violations in rule/file pairs above their
- * allowed count; `stale` lists allowlist entries above today's count ({rule, file, allowed, actual}).
- */
-export function checkAllow(violations, allow) {
-  const counts = countViolations(violations);
-  const over = violations.filter((v) => counts[v.rule][v.file] > (allow[v.rule]?.[v.file] ?? 0));
-  const stale = [];
-  for (const [rule, files] of Object.entries(allow)) {
-    for (const [file, allowed] of Object.entries(files)) {
-      const actual = counts[rule]?.[file] ?? 0;
-      if (actual < allowed) stale.push({ rule, file, allowed, actual });
-    }
-  }
-  return { over, stale };
-}
-
-/** The allowlist shrunk to today's counts: entries only go down or disappear, never appear or grow. */
-export function shrinkAllow(allow, violations) {
-  const counts = countViolations(violations);
-  const next = {};
-  for (const rule of Object.keys(RULES)) {
-    next[rule] = {};
-    for (const [file, allowed] of Object.entries(allow[rule] ?? {}).sort(([a], [b]) => a.localeCompare(b))) {
-      const n = Math.min(allowed, counts[rule]?.[file] ?? 0);
-      if (n > 0) next[rule][file] = n;
-    }
-  }
-  return next;
-}
-
 export const format = (v) => `${v.file}:${v.line} ${v.rule} ${v.message}`;
 
-function main(args) {
+function main() {
   const violations = lintRepo();
-  const allow = JSON.parse(readFileSync(ALLOW_PATH, "utf8"));
-  if (args.includes("--update-allow")) {
-    const next = shrinkAllow(allow, violations);
-    writeFileSync(ALLOW_PATH, `${JSON.stringify(next, null, 2)}\n`);
-    console.log(`Wrote ${relative(ROOT, ALLOW_PATH)}.`);
-  }
-  const { over, stale } = checkAllow(violations, args.includes("--update-allow") ? shrinkAllow(allow, violations) : allow);
-  const shown = args.includes("--all") ? violations : over;
-  for (const v of shown) console.log(format(v));
-  for (const s of stale) console.log(`${s.file} ${s.rule} allowlist says ${s.allowed}, found ${s.actual}: run node scripts/lint.mjs --update-allow`);
-  if (over.length || stale.length) {
-    if (over.length) console.log(`\n${over.length} lint violation(s) beyond the allowlist. Fix them; the allowlist never grows.`);
+  for (const v of violations) console.log(format(v));
+  if (violations.length) {
+    console.log(`\n${violations.length} lint violation(s).`);
     process.exitCode = 1;
   } else {
-    console.log(`Lint OK (${violations.length} allowlisted violation(s) left).`);
+    console.log("Lint OK.");
   }
 }
 
-if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) main(process.argv.slice(2));
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) main();

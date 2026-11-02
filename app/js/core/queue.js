@@ -7,6 +7,7 @@ import { pickOne } from "./random.js";
 import { cardKeys, dueCards, dueInFocus, inFocus, onePerFamily, composeReviews, burySiblings } from "./due.js";
 import { isClaimedCard } from "./review.js";
 import { spaceOut, placeChecks } from "./spacing.js";
+import { cmpStr } from "./sort.js";
 
 export const QUICK_CAP = 15;
 export const SEC_PER_REVIEW = 12;
@@ -55,7 +56,7 @@ export function interimNewSentences(n, state, content) {
   return [...content.sentences.values()]
     .filter((s) => !(s.id in state.seenSentences) && registers.includes(s.register))
     .map((s) => ({ s, unknown: unitsForSentence(s).filter((u) => !isKnown(u, state, content)).length }))
-    .sort((a, b) => a.s.stage - b.s.stage || a.unknown - b.unknown || (a.s.id < b.s.id ? -1 : 1))
+    .sort((a, b) => a.s.stage - b.s.stage || a.unknown - b.unknown || cmpStr(a.s.id, b.s.id))
     .slice(0, n)
     .map((x) => x.s.id);
 }

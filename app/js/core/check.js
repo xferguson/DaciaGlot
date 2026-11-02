@@ -1,13 +1,13 @@
 // Answer checking (ARCHITECTURE §5, PRD FR-A1…A4). Pure.
-import { normalize, stripDiacritics, tokenize } from './normalize.js';
-import { canonicalize } from './equivalences.js';
+import { normalize, stripDiacritics, tokenize } from "./normalize.js";
+import { canonicalize } from "./equivalences.js";
 
 export { normalize, stripDiacritics, tokenize };
 
-const RANK = { correct: 0, 'correct-diacritics': 1, 'correct-typo': 2, wrong: 3 };
+const RANK = { correct: 0, "correct-diacritics": 1, "correct-typo": 2, wrong: 3 };
 export const TYPO_MIN_LEN = 5;
 
-const plain = (t) => stripDiacritics(t).toLowerCase().replace(/[.,!?;:"“”„]+/g, '');
+const plain = (t) => stripDiacritics(t).toLowerCase().replace(/[.,!?;:"“”„]+/g, "");
 
 /** Exactly one insert / delete / substitute / adjacent transposition apart (not equal). */
 export function oneEdit(a, b) {
@@ -17,11 +17,11 @@ export function oneEdit(a, b) {
   let i = 0;
   while (i < x.length && i < y.length && x[i] === y[i]) i++;
   if (x.length === y.length) {
-    if (x.slice(i + 1).join('') === y.slice(i + 1).join('')) return true;
-    return x[i] === y[i + 1] && x[i + 1] === y[i] && x.slice(i + 2).join('') === y.slice(i + 2).join('');
+    if (x.slice(i + 1).join("") === y.slice(i + 1).join("")) return true;
+    return x[i] === y[i + 1] && x[i + 1] === y[i] && x.slice(i + 2).join("") === y.slice(i + 2).join("");
   }
   const [long, short] = x.length > y.length ? [x, y] : [y, x];
-  return long.slice(i + 1).join('') === short.slice(i).join('');
+  return long.slice(i + 1).join("") === short.slice(i).join("");
 }
 
 function analyse(text) {
@@ -30,12 +30,12 @@ function analyse(text) {
 }
 
 function spanText(a, item) {
-  return a.raw.slice(item.start, item.end).join(' ');
+  return a.raw.slice(item.start, item.end).join(" ");
 }
 
 /** Strict canonical form of a span (diacritics significant), for flagging diacritic-only differences. */
 function strictKey(tokens) {
-  return canonicalize(tokens, false).map((i) => i.canon).join(' ');
+  return canonicalize(tokens, false).map((i) => i.canon).join(" ");
 }
 
 function lcsPairs(a, b) {
@@ -57,7 +57,7 @@ function lcsPairs(a, b) {
 }
 
 function compare(inp, exp, avoid) {
-  const status = new Array(exp.items.length).fill('wrong');
+  const status = new Array(exp.items.length).fill("wrong");
   const extraItems = [];
   const pairs = lcsPairs(exp.items.map((x) => x.canon), inp.items.map((x) => x.canon));
   const anchors = [...pairs, [exp.items.length, inp.items.length]];
@@ -65,18 +65,18 @@ function compare(inp, exp, avoid) {
   for (const [ei, ii] of anchors) {
     const e = ei - pe, i = ii - pi;
     const paired = Math.min(e, i);
-    for (let k = 0; k < e; k++) status[pe + k] = k < paired ? 'wrong' : 'missing';
+    for (let k = 0; k < e; k++) status[pe + k] = k < paired ? "wrong" : "missing";
     for (let k = 0; k < paired; k++) {
       const ei2 = exp.items[pe + k], ii2 = inp.items[pi + k];
       if (ei2.end - ei2.start !== 1 || ii2.end - ii2.start !== 1) continue;
       const want = plain(exp.raw[ei2.start]), got = plain(inp.raw[ii2.start]);
-      if ([...want].length >= TYPO_MIN_LEN && !avoid.has(got) && oneEdit(want, got)) status[pe + k] = 'typo';
+      if ([...want].length >= TYPO_MIN_LEN && !avoid.has(got) && oneEdit(want, got)) status[pe + k] = "typo";
     }
     for (let k = paired; k < i; k++) extraItems.push(inp.items[pi + k]);
     if (ei < exp.items.length) {
       const same = strictKey(exp.raw.slice(exp.items[ei].start, exp.items[ei].end))
         === strictKey(inp.raw.slice(inp.items[ii].start, inp.items[ii].end));
-      status[ei] = same ? 'ok' : 'diacritic';
+      status[ei] = same ? "ok" : "diacritic";
     }
     pe = ei + 1;
     pi = ii + 1;
@@ -86,11 +86,11 @@ function compare(inp, exp, avoid) {
     for (let t = item.start; t < item.end; t++) diff.push({ token: exp.raw[t], status: status[idx] });
   });
   const extra = extraItems.map((it) => spanText(inp, it));
-  const bad = status.filter((s) => s === 'wrong' || s === 'missing').length;
+  const bad = status.filter((s) => s === "wrong" || s === "missing").length;
   let result;
-  if (bad > 0 || extra.length > 0) result = 'wrong';
-  else if (status.includes('typo')) result = 'correct-typo';
-  else result = status.includes('diacritic') ? 'correct-diacritics' : 'correct';
+  if (bad > 0 || extra.length > 0) result = "wrong";
+  else if (status.includes("typo")) result = "correct-typo";
+  else result = status.includes("diacritic") ? "correct-diacritics" : "correct";
   return { result, diff, extra, score: bad + extra.length };
 }
 
@@ -115,6 +115,6 @@ export function checkAnswer(input, expected, accept = [], { avoid = [] } = {}) {
 /** Pure: first letter of each expected token that is still wrong or missing, e.g. `t… s…`. */
 export function hintFor(input, expected, accept = []) {
   const { diff } = checkAnswer(input, expected, accept);
-  return diff.filter((d) => d.status === 'wrong' || d.status === 'missing')
-    .map((d) => [...d.token][0] + '…').join(' ');
+  return diff.filter((d) => d.status === "wrong" || d.status === "missing")
+    .map((d) => [...d.token][0] + "…").join(" ");
 }

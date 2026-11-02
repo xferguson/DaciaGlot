@@ -1,6 +1,6 @@
 # Task board
 
-Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update your row in your PR. Pick the lowest-numbered `todo` whose dependencies are `done`.
+Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update your row in your PR. Pick the lowest-numbered `todo` whose dependencies are `done`. Task files list a standing criterion: view changes have a fake-DOM test and `node scripts/lint.mjs` passes.
 
 | Task | Title | Phase | Depends on | Status | Branch / PR | Notes |
 |---|---|---|---|---|---|---|
@@ -65,7 +65,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [Q15](tasks/Q15-claim-handler.md) | Remove the global claim handler | Q | Q08 | done | #111 | `renderFeedback(slot,{…,claims})` and `openFormSheet(unit,token,claims)` take the handler; cards (`lr`, `cz`, `kf`, `er`, `xf`, `sb`, via `answerCard`) accept a `claims` option, which the session view builds once. `setClaimHandler` is gone. APP_VERSION 0.19.12. |
 | [Q16](tasks/Q16-lint-ratchet.md) | Zero-dependency lint with ratcheting allowlists | Q | none | done | #94 | `node scripts/lint.mjs` (6 rules, also in `node --test` and CI) with `scripts/lint-allow.json` as rule → file → count. A count above the allowlist fails, and so does one below it: when your task removes a violation, run `node scripts/lint.mjs --update-allow` (it only shrinks). Started at 45: purity 3, raw card ids 29, view→view imports 13; no undeclared calls, cycles or bad specifiers. |
 | [Q17](tasks/Q17-how-we-build.md) | Write down how we build | Q | none | done | q17-how-we-build | "How we build" in CLAUDE.md, shared-modules table in ARCHITECTURE §1. Q03–Q09, Q16: when your module lands, drop its "(coming in Qxx)" marker in both places. |
-| [Q18](tasks/Q18-close-out.md) | Close out: quote style, task template, allowlists at zero | Q | Q02–Q17 | todo |  |  |
+| [Q18](tasks/Q18-close-out.md) | Close out: quote style, task template, allowlists at zero | Q | Q02–Q17 | review | q18-close-out | Double quotes everywhere in `app/js` (lint rule `quote-style`); `core/sort.js` `cmpStr`/`byKey`; `lint-allow.json` and the allowlist code path are gone. `test/lint.test.mjs` edits: allowlist tests removed, fixtures ignore `quote-style`. APP_VERSION 0.19.16. |
 
 ## Manual activities (later)
 

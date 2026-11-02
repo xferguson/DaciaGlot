@@ -3,6 +3,7 @@ import { tokenize, tokenKey } from "./normalize.js";
 import { pickIndex, shuffle } from "./random.js";
 import { DAY_MS as DAY } from "./time.js";
 import { unitId, parseUnitId } from "./unit-id.js";
+import { cmpStr } from "./sort.js";
 
 /**
  * `lr:<sid>` → {type, sentenceId}; `cz:<sid>:<i>` adds tokenIndex; `xf`/`sb:<sid>:<i>` add transformIndex;
@@ -157,7 +158,7 @@ export function kfUnlockedFor(lexemeId, state) {
 export function newKfCards(state, content, { perLexeme = KF_PER_LEXEME, cap = KF_PER_SESSION } = {}) {
   const lexemes = [...content.lexemes.values()]
     .filter((l) => l.keyForms?.length && kfUnlockedFor(l.id, state))
-    .sort((a, b) => (a.freq ?? Infinity) - (b.freq ?? Infinity) || (a.id < b.id ? -1 : 1));
+    .sort((a, b) => (a.freq ?? Infinity) - (b.freq ?? Infinity) || cmpStr(a.id, b.id));
   const out = [];
   for (const l of lexemes) {
     const ids = l.keyForms
@@ -174,7 +175,7 @@ export function newKfCards(state, content, { perLexeme = KF_PER_LEXEME, cap = KF
 export function exampleSentenceFor(lexemeId, formKey, state, content) {
   const seen = (state.lexemeSentences?.[lexemeId] ?? [])
     .filter((id) => id in state.seenSentences)
-    .sort((a, b) => state.seenSentences[a] - state.seenSentences[b] || (a < b ? -1 : 1));
+    .sort((a, b) => state.seenSentences[a] - state.seenSentences[b] || cmpStr(a, b));
   for (const id of seen) {
     const s = content.sentences.get(id);
     if (s?.tokens.some((t) => t.units.some((u) => u.lex === lexemeId && u.form === formKey))) return s;
@@ -452,7 +453,7 @@ export function pickPerSentence(cardIds) {
  */
 export function newTransformCards(state, content, { cap = XF_PER_SESSION, skip = new Set() } = {}) {
   const seen = Object.entries(state.seenSentences)
-    .sort((a, b) => a[1] - b[1] || (a[0] < b[0] ? -1 : 1));
+    .sort((a, b) => a[1] - b[1] || cmpStr(a[0], b[0]));
   const out = [];
   for (const [sid] of seen) {
     if (out.length >= cap) break;
@@ -502,7 +503,7 @@ export function erUnits(sentence) {
 /** New `er` cards to introduce: seen sentences (oldest first) with `er` unlocked and not yet introduced; at most `cap`. */
 export function newErCards(state, content, { cap = ER_PER_SESSION, skip = new Set() } = {}) {
   const seen = Object.entries(state.seenSentences)
-    .sort((a, b) => a[1] - b[1] || (a[0] < b[0] ? -1 : 1));
+    .sort((a, b) => a[1] - b[1] || cmpStr(a[0], b[0]));
   const out = [];
   for (const [sid] of seen) {
     if (out.length >= cap) break;
