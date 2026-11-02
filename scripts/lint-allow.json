@@ -1,0 +1,19 @@
+{
+  "undeclared-call": {},
+  "core-purity": {
+    "app/js/core/cards.js": 1,
+    "app/js/core/carrier.js": 2
+  },
+  "raw-card-id": {
+    "app/js/core/session.js": 20,
+    "app/js/data/migrations.js": 9
+  },
+  "import-direction": {
+    "app/js/ui/views/card-slot.js": 1,
+    "app/js/ui/views/dashboard.js": 1,
+    "app/js/ui/views/home.js": 2,
+    "app/js/ui/views/session.js": 9
+  },
+  "import-cycle": {},
+  "import-specifier": {}
+}
