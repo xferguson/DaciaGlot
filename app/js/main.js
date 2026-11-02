@@ -45,6 +45,14 @@ async function boot() {
     store,
     tts,
     voices: [],
+    update(fn) {
+      ctx.state = fn(ctx.state);
+      store.save(ctx.state);
+      return ctx.state;
+    },
+    updateSettings(patch) {
+      return ctx.update((s) => ({ ...s, settings: { ...s.settings, ...patch } }));
+    },
     navigate(hash) {
       if (location.hash === hash) window.dispatchEvent(new HashChangeEvent("hashchange"));
       else location.hash = hash;
@@ -69,12 +77,10 @@ async function boot() {
   // Schema 1 → 2 (T25): old `cz` cards fold into per-form `fm` cards now that the content can resolve their tokens.
   const folded = foldClozeCards(ctx.state, ctx.content);
   if (folded !== ctx.state) {
-    ctx.state = folded;
-    store.save(ctx.state);
+    ctx.update(() => folded);
   }
   if (ctx.state.contentVersion !== ctx.content.contentVersion) {
-    ctx.state = { ...ctx.state, contentVersion: ctx.content.contentVersion };
-    store.save(ctx.state);
+    ctx.update((s) => ({ ...s, contentVersion: ctx.content.contentVersion }));
   }
 
   // First run: ask the browser not to evict our storage.
@@ -89,8 +95,7 @@ async function boot() {
         action: {
           label: "Dismiss for good",
           onClick: () => {
-            ctx.state = { ...ctx.state, settings: { ...ctx.state.settings, ttsBannerDismissed: true } };
-            store.save(ctx.state);
+            ctx.updateSettings({ ttsBannerDismissed: true });
             document.querySelector('#banners [data-id="tts"]')?.remove();
           },
         },
