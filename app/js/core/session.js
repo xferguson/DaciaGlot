@@ -5,6 +5,10 @@ import { unitsForSentence, isKnown, unitsRequiredForCard } from "./units.js";
 import { pickNewSentences, focusList, siblingsOf, newItemCount, isFastTrackUnit } from "./select.js";
 import { carriersFor, pickComposite } from "./carrier.js";
 import { learnBatch } from "./pace.js";
+import { pickIndex, pickOne } from "./random.js";
+import { DAY_MS, dayKey, startOfDayPlus } from "./time.js";
+
+export { dayKey };
 
 export const QUICK_CAP = 15;
 export const SEC_PER_REVIEW = 12;
@@ -77,17 +81,10 @@ export function spaceOut(queue, content) {
 }
 
 /** Start of the local day after `now` (ms): the earliest a form's first counted test is due (FR-R2). */
-export function nextDayStart(now) {
-  const d = new Date(now);
-  return new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1).getTime();
-}
+export const nextDayStart = (now) => startOfDayPlus(now, 1);
 
 /** FR-V3: the rung a transparent form's first right check lands on. */
 export const FAST_TRACK_DAYS = 4;
-const daysAfter = (now, n) => {
-  const d = new Date(now);
-  return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n).getTime();
-};
 
 /**
  * Leaving a session early: new `fm` cards of a sentence that was already introduced (its `lr` reviewed, `from`) but
@@ -139,7 +136,6 @@ export function learnPlan(state, content, focus, now, rng) {
 export const MEDIUM_LADDER_DAYS = [1, 4, 16, 64, 256];
 /** Easy waits this many times Medium's next gap (capped at the top rung). */
 export const EASY_FACTOR = 3;
-const DAY_MS = 864e5;
 
 /**
  * Days until the next review for a Medium (3) or Easy (4) answer, given the card's previous scheduled gap
@@ -254,7 +250,7 @@ export function onePerFamily(cardIds, content, rng) {
   const drop = new Set();
   for (const idx of byFamily.values()) {
     if (idx.length < 2) continue;
-    const keep = idx[Math.min(idx.length - 1, Math.floor(rng() * idx.length))];
+    const keep = pickOne(idx, rng);
     for (const i of idx) if (i !== keep) drop.add(i);
   }
   return cardIds.filter((_, i) => !drop.has(i));
@@ -442,7 +438,7 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
       // A paradigm (FR-R5): one card for the family, one immediate check on a random member, the rest due tomorrow.
       sibs.forEach((m) => grouped.add(m));
       const members = [s.id, ...sibs];
-      const chosen = content.sentences.get(members[Math.min(members.length - 1, Math.floor(rng() * members.length))]);
+      const chosen = content.sentences.get(pickOne(members, rng));
       const checks = newFms(chosen);
       const deferred = members.flatMap((m) => (m === chosen.id ? [] : newFms(content.sentences.get(m))));
       return [
@@ -469,12 +465,6 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
   const estimateSec = dueSec(due) + (kf.length + xf.length + er.length) * SEC_PER_NEW
     + groups.reduce((sum, g) => sum + newSentenceSec(g.reduce((n, q) => n + (q.forms?.length ?? 0), 0), learn ? SEC_PER_NEW_FAST : SEC_PER_NEW) + (g[0].members ? SEC_PER_PARADIGM_ROW * (g[0].members.length - 1) : 0), 0);
   return plan ? { queue, estimateSec, plan } : { queue, estimateSec };
-}
-
-export function dayKey(now) {
-  const d = new Date(now);
-  const p = (n) => String(n).padStart(2, "0");
-  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
 }
 
 function bumpDay(history, now, fn) {
@@ -646,7 +636,7 @@ export function applyCheck(state, cardId, correct, unitsRequired, now, presented
     // FR-V3: a right check on a transparent form outside divergent slots starts on the 4 d rung, not next day.
     const p = parseCardId(cardId);
     const fast = correct && content && p.type === "fm" && isFastTrackUnit(unitIdOfFm(cardId), content);
-    next.cards = { ...state.cards, [cardId]: { ...newCard(now), due: fast ? daysAfter(now, FAST_TRACK_DAYS) : nextDayStart(now) } };
+    next.cards = { ...state.cards, [cardId]: { ...newCard(now), due: fast ? startOfDayPlus(now, FAST_TRACK_DAYS) : nextDayStart(now) } };
   }
   next.history = bumpDay(state.history, now, (d) => { d.cards += 1; });
   return next;
@@ -657,7 +647,7 @@ export function applyCheck(state, cardId, correct, unitsRequired, now, presented
  * so it doesn't land next to a related card (`cardKeys`). Returns the index it was inserted at.
  */
 export function requeueWrong(queue, pos, item, rng, content) {
-  let at = Math.min(queue.length, pos + 3 + Math.floor(rng() * 3));
+  let at = Math.min(queue.length, pos + 3 + pickIndex(rng, 3));
   if (content) {
     const keys = cardKeys({ cardId: item.cardId }, content);
     const clash = (i) => i >= 0 && i < queue.length && overlaps(keys, cardKeys(queue[i], content));

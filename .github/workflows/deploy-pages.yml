@@ -28,6 +28,8 @@ jobs:
       - name: Unit tests
         run: |
           if [ -d test ]; then node --test; else echo "No tests yet"; fi
+      - name: Lint
+        run: node scripts/lint.mjs
       - name: Validate content
         run: |
           if [ -f scripts/validate-content.mjs ]; then node scripts/validate-content.mjs; else echo "No content validator yet"; fi

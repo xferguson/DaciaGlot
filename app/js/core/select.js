@@ -1,6 +1,7 @@
 // i+1 selection (ARCHITECTURE §6.2, PRD FR-S5). Pure: `now` and `rng` are injected.
 import { unitsForSentence, isKnown } from "./units.js";
 import { allPatternStates } from "./mastery.js";
+import { shuffle } from "./random.js";
 
 const BAND = 5;
 
@@ -22,14 +23,6 @@ function divergentUnits(content) {
 export function isFastTrackUnit(unit, content) {
   if (unit.startsWith("pat:")) return false;
   return !!content.lexemes.get(unit.slice(0, unit.indexOf(".")))?.transparent && !divergentUnits(content).has(unit);
-}
-
-function shuffle(list, rng) {
-  for (let i = list.length - 1; i > 0; i--) {
-    const j = Math.floor(rng() * (i + 1));
-    [list[i], list[j]] = [list[j], list[i]];
-  }
-  return list;
 }
 
 /** A focus may be one `{type, id}`, a list of them, or null; always returns a list (FR-S8). */
