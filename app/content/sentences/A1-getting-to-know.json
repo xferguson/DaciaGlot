@@ -2,7 +2,7 @@
   {
     "id": "s-a1-getting-to-know-0001",
     "ro": "De unde ești?",
-    "en": "Where are you from?",
+    "en": "Where are you (sg.) from?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -64,7 +64,7 @@
   {
     "id": "s-a1-getting-to-know-0002",
     "ro": "Ești din Cluj?",
-    "en": "Are you from Cluj?",
+    "en": "Are you (sg.) from Cluj?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -353,7 +353,7 @@
   {
     "id": "s-a1-getting-to-know-0006",
     "ro": "Ce mănânci de Crăciun?",
-    "en": "What do you eat at Christmas?",
+    "en": "What do you (sg.) eat at Christmas?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -425,7 +425,7 @@
   {
     "id": "s-a1-getting-to-know-0007",
     "ro": "Ai mâncat mămăligă?",
-    "en": "Have you eaten polenta?",
+    "en": "Have you (sg.) eaten polenta?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -498,7 +498,7 @@
   {
     "id": "s-a1-getting-to-know-0008",
     "ro": "Unde locuiești acum?",
-    "en": "Where do you live now?",
+    "en": "Where do you (sg.) live now?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -622,7 +622,7 @@
   {
     "id": "s-a1-getting-to-know-0010",
     "ro": "Ai o familie mare?",
-    "en": "Do you have a big family?",
+    "en": "Do you (sg.) have a big family?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -692,7 +692,7 @@
   {
     "id": "s-a1-getting-to-know-0011",
     "ro": "Ce faci în weekend?",
-    "en": "What do you do on the weekend?",
+    "en": "What do you (sg.) do on the weekend?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -764,7 +764,7 @@
   {
     "id": "s-a1-getting-to-know-0012",
     "ro": "Ce hobby ai?",
-    "en": "What's your hobby?",
+    "en": "What's your (sg.) hobby?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -898,7 +898,7 @@
   {
     "id": "s-a1-getting-to-know-0014",
     "ro": "Ce sărbătoare e importantă la voi?",
-    "en": "Which holiday is important where you're from?",
+    "en": "Which holiday is important where you're (pl.) from?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -976,7 +976,7 @@
       {
         "op": "tense:pres>perf",
         "ro": "Ce sărbătoare a fost importantă la voi?",
-        "en": "Which holiday was important where you're from?",
+        "en": "Which holiday was important where you're (pl.) from?",
         "targetTokens": [
           2
         ]
@@ -1066,7 +1066,7 @@
   {
     "id": "s-a1-getting-to-know-0016",
     "ro": "Ce-ți place cel mai mult la Cluj?",
-    "en": "What do you like most about Cluj?",
+    "en": "What do you (sg.) like most about Cluj?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1162,7 +1162,7 @@
       {
         "op": "tense:pres>perf",
         "ro": "Ce ți-a plăcut cel mai mult la Cluj?",
-        "en": "What did you like most about Cluj?",
+        "en": "What did you (sg.) like most about Cluj?",
         "targetTokens": [
           0,
           1
@@ -1176,7 +1176,7 @@
   {
     "id": "s-a1-getting-to-know-0017",
     "ro": "Îți place Clujul?",
-    "en": "Do you like Cluj?",
+    "en": "Do you (sg.) like Cluj?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1246,7 +1246,7 @@
   {
     "id": "s-a1-getting-to-know-0018",
     "ro": "Îți place să gătești?",
-    "en": "Do you like to cook?",
+    "en": "Do you (sg.) like to cook?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1323,7 +1323,7 @@
   {
     "id": "s-a1-getting-to-know-0019",
     "ro": "Ce mâncare îți place cel mai mult?",
-    "en": "Which food do you like the most?",
+    "en": "Which food do you (sg.) like the most?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1428,7 +1428,7 @@
   {
     "id": "s-a1-getting-to-know-0020",
     "ro": "Îți plac sarmalele?",
-    "en": "Do you like sarmale?",
+    "en": "Do you (sg.) like sarmale?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1575,7 +1575,7 @@
   {
     "id": "s-a1-getting-to-know-0022",
     "ro": "Mergi acasă de sărbători?",
-    "en": "Are you going home for the holidays?",
+    "en": "Are you (sg.) going home for the holidays?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1647,7 +1647,7 @@
   {
     "id": "s-a1-getting-to-know-0023",
     "ro": "Ce obiceiuri aveți de Crăciun?",
-    "en": "What customs do you have at Christmas?",
+    "en": "What customs do you (pl./formal) have at Christmas?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1886,7 +1886,7 @@
   {
     "id": "s-a1-getting-to-know-0026",
     "ro": "Câți frați ai?",
-    "en": "How many siblings do you have? (brothers)",
+    "en": "How many siblings do you (sg.) have? (brothers)",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1952,7 +1952,7 @@
   {
     "id": "s-a1-getting-to-know-0027",
     "ro": "Ce limbi vorbești acasă?",
-    "en": "What languages do you speak at home?",
+    "en": "What languages do you (sg.) speak at home?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2027,7 +2027,7 @@
   {
     "id": "s-a1-getting-to-know-0028",
     "ro": "Ce faceți de Paște?",
-    "en": "What are you doing at Easter?",
+    "en": "What are you (pl./formal) doing at Easter?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2086,7 +2086,7 @@
       {
         "op": "person:2pl>2sg",
         "ro": "Ce faci de Paște?",
-        "en": "What are you doing at Easter?",
+        "en": "What are you (sg.) doing at Easter?",
         "targetTokens": [
           1
         ]
@@ -2181,7 +2181,7 @@
   {
     "id": "s-a1-getting-to-know-0030",
     "ro": "O să-ți arăt Clujul.",
-    "en": "I'll show you Cluj.",
+    "en": "I'll show you (sg.) Cluj.",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2265,7 +2265,7 @@
   {
     "id": "s-a1-getting-to-know-0031",
     "ro": "Cum te cheamă?",
-    "en": "What's your name?",
+    "en": "What's your (sg.) name?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2483,7 +2483,7 @@
   {
     "id": "s-a1-getting-to-know-0034",
     "ro": "Ți-e dor de Iași?",
-    "en": "Do you miss Iași?",
+    "en": "Do you (sg.) miss Iași?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2871,7 +2871,7 @@
   {
     "id": "s-a1-getting-to-know-0040",
     "ro": "Mulțumesc pentru invitație.",
-    "en": "Thank you for the invitation.",
+    "en": "Thank you for the invitation (from me).",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -3151,7 +3151,7 @@
   {
     "id": "s-a1-getting-to-know-0045",
     "ro": "Ai un hobby nou?",
-    "en": "Do you have a new hobby?",
+    "en": "Do you (sg.) have a new hobby?",
     "level": "A1",
     "stage": 1,
     "situations": [

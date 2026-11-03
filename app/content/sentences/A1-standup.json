@@ -129,7 +129,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Ai nevoie de ajutor.",
-        "en": "You need help.",
+        "en": "You (sg.) need help.",
         "targetTokens": [
           0
         ]
@@ -293,7 +293,7 @@
   {
     "id": "s-a1-standup-0018",
     "ro": "Ce lucrezi azi?",
-    "en": "What are you working on today?",
+    "en": "What are you (sg.) working on today?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -355,7 +355,7 @@
   {
     "id": "s-a1-standup-0015",
     "ro": "Când termini task-ul?",
-    "en": "When are you finishing the task?",
+    "en": "When are you (sg.) finishing the task?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -786,7 +786,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Mâine pleci la Cluj.",
-        "en": "Tomorrow you're leaving for Cluj.",
+        "en": "Tomorrow you're (sg.) leaving for Cluj.",
         "targetTokens": [
           1
         ]
@@ -948,7 +948,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Lucrezi la un task.",
-        "en": "You are working on a task.",
+        "en": "You (sg.) are working on a task.",
         "targetTokens": [
           1
         ]
@@ -1790,7 +1790,7 @@
   {
     "id": "s-a1-standup-0013",
     "ro": "Ai terminat review-ul?",
-    "en": "Did you finish the review?",
+    "en": "Did you (sg.) finish the review?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -2239,7 +2239,7 @@
   {
     "id": "s-a1-standup-0029",
     "ro": "Poți să verifici codul?",
-    "en": "Can you check the code?",
+    "en": "Can you (sg.) check the code?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -2757,7 +2757,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "O să verifici codul mâine.",
-        "en": "You'll check the code tomorrow.",
+        "en": "You'll (sg.) check the code tomorrow.",
         "targetTokens": [
           2
         ]
@@ -3007,7 +3007,7 @@
   {
     "id": "s-a1-standup-0040",
     "ro": "Ți-am trimis tichetul.",
-    "en": "I sent you the ticket.",
+    "en": "I sent you (sg.) the ticket.",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -3074,7 +3074,7 @@
       {
         "op": "person:1sg>3sg",
         "ro": "Ți-a trimis tichetul.",
-        "en": "He/She sent you the ticket.",
+        "en": "He/She sent you (sg.) the ticket.",
         "targetTokens": [
           0
         ]
@@ -3804,7 +3804,7 @@
       {
         "op": "add-dat:dat-2sg",
         "ro": "Îți trimit tichetul azi.",
-        "en": "I'm sending you the ticket today.",
+        "en": "I'm sending you (sg.) the ticket today.",
         "targetTokens": [
           0
         ]

@@ -934,7 +934,7 @@
   {
     "id": "s-a1-domain-0013",
     "ro": "Poți să verifici prognoza?",
-    "en": "Can you check the forecast?",
+    "en": "Can you (sg.) check the forecast?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -1008,7 +1008,7 @@
       {
         "op": "add-obj:acc-3sg-f",
         "ro": "Poți s-o verifici?",
-        "en": "Can you check it?",
+        "en": "Can you (sg.) check it?",
         "targetTokens": [
           1,
           3

@@ -2,7 +2,7 @@
   {
     "id": "s-a1-news-0001",
     "ro": "Ai citit știrea?",
-    "en": "Have you read the story?",
+    "en": "Have you (sg.) read the story?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -512,7 +512,7 @@
   {
     "id": "s-a1-news-0008",
     "ro": "Crezi că e adevărat?",
-    "en": "Do you think it's true?",
+    "en": "Do you (sg.) think it's true?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -585,7 +585,7 @@
   {
     "id": "s-a1-news-0009",
     "ro": "Ce părere ai?",
-    "en": "What's your opinion?",
+    "en": "What's your (sg.) opinion?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -731,7 +731,7 @@
   {
     "id": "s-a1-news-0011",
     "ro": "Votezi duminică?",
-    "en": "Are you voting on Sunday?",
+    "en": "Are you (sg.) voting on Sunday?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -776,7 +776,7 @@
       {
         "op": "tense:pres>perf",
         "ro": "Ai votat duminică?",
-        "en": "Did you vote on Sunday?",
+        "en": "Did you (sg.) vote on Sunday?",
         "targetTokens": [
           0
         ]

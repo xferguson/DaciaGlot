@@ -99,6 +99,18 @@ test("a Quick queue of due cards reaches the summary, saving and flushing on the
   assert.equal(s.ctx.flushes, 2);
 });
 
+test("the session bar shows how many cards are done out of the queue", () => {
+  const st = state();
+  due(st, "lr:s0", 1000);
+  due(st, "lr:s1", 2000);
+  const s = start(st);
+  const count = () => s.root.querySelector(".progress-count").textContent;
+  assert.equal(count(), "0/2");
+  s.answerLr(true);
+  assert.equal(count(), "1/2");
+  assert.equal(s.root.querySelector(".progress").getAttribute("aria-valuetext"), "1 of 2 done");
+});
+
 test("nothing advances by itself: the session waits on each card", () => {
   const st = state();
   due(st, "lr:s0", 1000);

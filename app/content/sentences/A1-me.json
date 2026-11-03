@@ -464,7 +464,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Locuiești în Cluj.",
-        "en": "You live in Cluj.",
+        "en": "You (sg.) live in Cluj.",
         "targetTokens": [
           0
         ]
@@ -477,7 +477,7 @@
   {
     "id": "s-a1-me-0007",
     "ro": "Unde locuiești?",
-    "en": "Where do you live?",
+    "en": "Where do you (sg.) live?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -653,7 +653,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Duminică stai acasă.",
-        "en": "On Sunday you're staying home.",
+        "en": "On Sunday you're (sg.) staying home.",
         "targetTokens": [
           1
         ]
@@ -713,7 +713,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Vorbești puțin română.",
-        "en": "You speak a little Romanian.",
+        "en": "You (sg.) speak a little Romanian.",
         "targetTokens": [
           0
         ]
@@ -800,7 +800,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Vorbești engleză și puțin română.",
-        "en": "You speak English and a little Romanian.",
+        "en": "You (sg.) speak English and a little Romanian.",
         "targetTokens": [
           0
         ]
@@ -919,7 +919,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Înveți româna acum.",
-        "en": "You're learning Romanian now.",
+        "en": "You're (sg.) learning Romanian now.",
         "targetTokens": [
           0
         ]
@@ -932,7 +932,7 @@
   {
     "id": "s-a1-me-0028",
     "ro": "Ce faci în weekend?",
-    "en": "What do you do on weekends?",
+    "en": "What do you (sg.) do on weekends?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -1060,7 +1060,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Faci sport în weekend.",
-        "en": "You play sports on weekends.",
+        "en": "You (sg.) play sports on weekends.",
         "targetTokens": [
           0
         ]
@@ -1444,7 +1444,7 @@
   {
     "id": "s-a1-me-0008",
     "ro": "Ai o soră?",
-    "en": "Do you have a sister?",
+    "en": "Do you (sg.) have a sister?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -1587,7 +1587,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Ai o soră în Iași.",
-        "en": "You have a sister in Iași.",
+        "en": "You (sg.) have a sister in Iași.",
         "targetTokens": [
           0
         ]
@@ -1658,7 +1658,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Ai o pisică.",
-        "en": "You have a cat.",
+        "en": "You (sg.) have a cat.",
         "targetTokens": [
           0
         ]
@@ -1789,7 +1789,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Ai un câine.",
-        "en": "You have a dog.",
+        "en": "You (sg.) have a dog.",
         "targetTokens": [
           0
         ]
@@ -1865,7 +1865,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Sâmbătă mergi la munte.",
-        "en": "On Saturday you're going to the mountains.",
+        "en": "On Saturday you're (sg.) going to the mountains.",
         "targetTokens": [
           1
         ]
@@ -2689,7 +2689,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Gătești acasă.",
-        "en": "You cook at home.",
+        "en": "You (sg.) cook at home.",
         "targetTokens": [
           0
         ]
@@ -3086,7 +3086,7 @@
       {
         "op": "question",
         "ro": "Cum te cheamă?",
-        "en": "What's your name?",
+        "en": "What's your (sg.) name?",
         "targetTokens": [
           0,
           2
@@ -3492,7 +3492,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Ți-e somn?",
-        "en": "Are you sleepy?",
+        "en": "Are you (sg.) sleepy?",
         "targetTokens": [
           0
         ]
@@ -3898,7 +3898,7 @@
   {
     "id": "s-a1-me-0057",
     "ro": "Câți colegi ai?",
-    "en": "How many colleagues do you have?",
+    "en": "How many colleagues do you (sg.) have?",
     "level": "A1",
     "stage": 2,
     "situations": [

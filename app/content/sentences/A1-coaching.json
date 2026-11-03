@@ -52,7 +52,7 @@
   {
     "id": "s-a1-coaching-0002",
     "ro": "Ce vrei să faci?",
-    "en": "What do you want to do?",
+    "en": "What do you (sg.) want to do?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -131,7 +131,7 @@
   {
     "id": "s-a1-coaching-0003",
     "ro": "De ce ai nevoie?",
-    "en": "What do you need?",
+    "en": "What do you (sg.) need?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -203,7 +203,7 @@
   {
     "id": "s-a1-coaching-0004",
     "ro": "Poți să explici?",
-    "en": "Can you explain?",
+    "en": "Can you (sg.) explain?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -269,7 +269,7 @@
   {
     "id": "s-a1-coaching-0005",
     "ro": "Ești gata?",
-    "en": "Are you ready?",
+    "en": "Are you (sg.) ready?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -319,7 +319,7 @@
   {
     "id": "s-a1-coaching-0006",
     "ro": "Ai o idee?",
-    "en": "Do you have an idea?",
+    "en": "Do you (sg.) have an idea?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -379,7 +379,7 @@
   {
     "id": "s-a1-coaching-0007",
     "ro": "Ai făcut bine.",
-    "en": "You did well.",
+    "en": "You (sg.) did well.",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -450,7 +450,7 @@
   {
     "id": "s-a1-coaching-0008",
     "ro": "Ai lucrat mult.",
-    "en": "You've worked a lot.",
+    "en": "You've (sg.) worked a lot.",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -523,7 +523,7 @@
   {
     "id": "s-a1-coaching-0009",
     "ro": "Ai învățat repede.",
-    "en": "You learned quickly.",
+    "en": "You (sg.) learned quickly.",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -585,7 +585,7 @@
   {
     "id": "s-a1-coaching-0010",
     "ro": "Ce ai învățat?",
-    "en": "What did you learn?",
+    "en": "What did you (sg.) learn?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -649,7 +649,7 @@
   {
     "id": "s-a1-coaching-0011",
     "ro": "Ce obiectiv ai?",
-    "en": "What goal do you have?",
+    "en": "What goal do you (sg.) have?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -793,7 +793,7 @@
   {
     "id": "s-a1-coaching-0013",
     "ro": "Mulțumesc pentru feedback.",
-    "en": "Thanks for the feedback.",
+    "en": "Thanks for the feedback (from me).",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -853,7 +853,7 @@
   {
     "id": "s-a1-coaching-0014",
     "ro": "Sunt mândru de tine.",
-    "en": "I'm proud of you.",
+    "en": "I'm proud of you (sg.).",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -916,7 +916,7 @@
       {
         "op": "person:1sg>3sg",
         "ro": "E mândru de tine.",
-        "en": "He's proud of you.",
+        "en": "He's proud of you (sg.).",
         "targetTokens": [
           0
         ]
@@ -929,7 +929,7 @@
   {
     "id": "s-a1-coaching-0015",
     "ro": "Cum pot să te ajut?",
-    "en": "How can I help you?",
+    "en": "How can I help you (sg.)?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1007,7 +1007,7 @@
       {
         "op": "person:1sg>3sg",
         "ro": "Cum poate să te ajute?",
-        "en": "How can he/she help you?",
+        "en": "How can he/she help you (sg.)?",
         "targetTokens": [
           1,
           4
@@ -1021,7 +1021,7 @@
   {
     "id": "s-a1-coaching-0016",
     "ro": "Te ascult.",
-    "en": "I'm listening.",
+    "en": "I'm listening (to you, sg.).",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1070,7 +1070,7 @@
       {
         "op": "person:1sg>3sg",
         "ro": "Te ascultă.",
-        "en": "He/She is listening to you.",
+        "en": "He/She is listening to you (sg.).",
         "targetTokens": [
           1
         ]
@@ -1083,7 +1083,7 @@
   {
     "id": "s-a1-coaching-0017",
     "ro": "Mă vezi?",
-    "en": "Can you see me?",
+    "en": "Can you (sg.) see me?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1138,7 +1138,7 @@
   {
     "id": "s-a1-coaching-0018",
     "ro": "Îți dau feedback mâine.",
-    "en": "I'll give you feedback tomorrow.",
+    "en": "I'll give you (sg.) feedback tomorrow.",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1209,7 +1209,7 @@
       {
         "op": "person:1sg>3sg",
         "ro": "Îți dă feedback mâine.",
-        "en": "He/She gives you feedback tomorrow.",
+        "en": "He/She gives you (sg.) feedback tomorrow.",
         "targetTokens": [
           1
         ]
@@ -1222,7 +1222,7 @@
   {
     "id": "s-a1-coaching-0019",
     "ro": "Îți place proiectul?",
-    "en": "Do you like the project?",
+    "en": "Do you (sg.) like the project?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1292,7 +1292,7 @@
   {
     "id": "s-a1-coaching-0020",
     "ro": "Ce îți trebuie?",
-    "en": "What do you need?",
+    "en": "What do you (sg.) need?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1359,7 +1359,7 @@
   {
     "id": "s-a1-coaching-0021",
     "ro": "Ți-am spus.",
-    "en": "I told you.",
+    "en": "I told you (sg.).",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1413,7 +1413,7 @@
       {
         "op": "person:1sg>3sg",
         "ro": "Ți-a spus.",
-        "en": "He/She told you.",
+        "en": "He/She told you (sg.).",
         "targetTokens": [
           0
         ]
@@ -1426,7 +1426,7 @@
   {
     "id": "s-a1-coaching-0022",
     "ro": "Mi-ai dat o idee bună.",
-    "en": "You gave me a good idea.",
+    "en": "You (sg.) gave me a good idea.",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1598,7 +1598,7 @@
   {
     "id": "s-a1-coaching-0024",
     "ro": "Ți-e frică?",
-    "en": "Are you scared?",
+    "en": "Are you (sg.) scared?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1818,7 +1818,7 @@
   {
     "id": "s-a1-coaching-0027",
     "ro": "Cum o să rezolvi problema?",
-    "en": "How are you going to solve the problem?",
+    "en": "How are you (sg.) going to solve the problem?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1907,7 +1907,7 @@
   {
     "id": "s-a1-coaching-0028",
     "ro": "Ce o să faci?",
-    "en": "What are you going to do?",
+    "en": "What are you (sg.) going to do?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2050,7 +2050,7 @@
   {
     "id": "s-a1-coaching-0030",
     "ro": "Ai două obiective?",
-    "en": "Do you have two goals?",
+    "en": "Do you (sg.) have two goals?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2100,7 +2100,7 @@
       {
         "op": "singular",
         "ro": "Ai un obiectiv?",
-        "en": "Do you have one goal?",
+        "en": "Do you (sg.) have one goal?",
         "targetTokens": [
           1,
           2
@@ -2321,7 +2321,7 @@
       {
         "op": "add-dat:dat-2sg",
         "ro": "Îți dau feedback mâine.",
-        "en": "I'll give you feedback tomorrow.",
+        "en": "I'll give you (sg.) feedback tomorrow.",
         "targetTokens": [
           0
         ]
@@ -2341,7 +2341,7 @@
   {
     "id": "s-a1-coaching-0034",
     "ro": "Sunt mândru de tine.",
-    "en": "I'm proud of you.",
+    "en": "I'm proud of you (sg.).",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -2397,7 +2397,7 @@
       {
         "op": "person:1sg>3sg",
         "ro": "E mândru de tine.",
-        "en": "He's proud of you.",
+        "en": "He's proud of you (sg.).",
         "targetTokens": [
           0
         ]
@@ -2480,7 +2480,7 @@
   {
     "id": "s-a1-coaching-0036",
     "ro": "Ai nevoie de ajutor?",
-    "en": "Do you need help?",
+    "en": "Do you (sg.) need help?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -2549,7 +2549,7 @@
   {
     "id": "s-a1-coaching-0037",
     "ro": "Vreau să te ascult.",
-    "en": "I want to listen to you.",
+    "en": "I want to listen to you (sg.).",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2627,7 +2627,7 @@
   {
     "id": "s-a1-coaching-0038",
     "ro": "Ești optimist?",
-    "en": "Are you optimistic?",
+    "en": "Are you (sg.) optimistic?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -2677,7 +2677,7 @@
   {
     "id": "s-a1-coaching-0039",
     "ro": "Ce te interesează?",
-    "en": "What interests you?",
+    "en": "What interests you (sg.)?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2734,7 +2734,7 @@
   {
     "id": "s-a1-coaching-0040",
     "ro": "Primești feedback de la mine.",
-    "en": "You get feedback from me.",
+    "en": "You (sg.) get feedback from me.",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2800,7 +2800,7 @@
       {
         "op": "person:2sg>1sg",
         "ro": "Primesc feedback de la tine.",
-        "en": "I get feedback from you.",
+        "en": "I get feedback from you (sg.).",
         "targetTokens": [
           0,
           4
@@ -2814,7 +2814,7 @@
   {
     "id": "s-a1-coaching-0041",
     "ro": "Ai primit feedback?",
-    "en": "Have you got feedback?",
+    "en": "Have you (sg.) got feedback?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -2878,7 +2878,7 @@
   {
     "id": "s-a1-coaching-0042",
     "ro": "Îți arăt cum se face.",
-    "en": "I'll show you how it's done.",
+    "en": "I'll show you (sg.) how it's done.",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2963,7 +2963,7 @@
   {
     "id": "s-a1-coaching-0043",
     "ro": "Îți aduc o veste bună.",
-    "en": "I've got good news for you.",
+    "en": "I've got good news for you (sg.).",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -3110,7 +3110,7 @@
   {
     "id": "s-a1-coaching-0045",
     "ro": "Ești prea serios.",
-    "en": "You're too serious.",
+    "en": "You're (sg.) too serious.",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -3169,7 +3169,7 @@
   {
     "id": "s-a1-coaching-0046",
     "ro": "Îți promit că te ajut.",
-    "en": "I promise I'll help you.",
+    "en": "I promise I'll help you (sg.).",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -3244,7 +3244,7 @@
   {
     "id": "s-a1-coaching-0047",
     "ro": "Ți-e somn?",
-    "en": "Are you sleepy?",
+    "en": "Are you (sg.) sleepy?",
     "level": "A1",
     "stage": 2,
     "situations": [

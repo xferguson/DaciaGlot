@@ -55,7 +55,7 @@
   {
     "id": "s-a1-meta-0004",
     "ro": "Mai încet, te rog.",
-    "en": "Slower, please.",
+    "en": "Slower, please (sg.).",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -108,7 +108,7 @@
   {
     "id": "s-a1-meta-0002",
     "ro": "Poți să repeți, te rog?",
-    "en": "Can you repeat that, please?",
+    "en": "Can you (sg.) repeat that, please?",
     "accept": [
       "Poți să repeți, te rog."
     ],
@@ -195,7 +195,7 @@
   {
     "id": "s-a1-meta-0011",
     "ro": "Poți să repeți?",
-    "en": "Can you repeat?",
+    "en": "Can you (sg.) repeat?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -262,7 +262,7 @@
   {
     "id": "s-a1-meta-0010",
     "ro": "Poți să vorbești mai încet?",
-    "en": "Can you speak more slowly?",
+    "en": "Can you (sg.) speak more slowly?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -408,7 +408,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Poți să întrebi ceva?",
-        "en": "Can you ask something?",
+        "en": "Can you (sg.) ask something?",
         "targetTokens": [
           0,
           2
@@ -422,7 +422,7 @@
   {
     "id": "s-a1-meta-0014",
     "ro": "Poți să scrii cuvântul?",
-    "en": "Can you write the word?",
+    "en": "Can you (sg.) write the word?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -543,7 +543,7 @@
   {
     "id": "s-a1-meta-0015",
     "ro": "Ce vrei să spui?",
-    "en": "What do you mean?",
+    "en": "What do you (sg.) mean?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -622,7 +622,7 @@
   {
     "id": "s-a1-meta-0016",
     "ro": "Adică ce vrei să spui?",
-    "en": "I mean, what do you want to say?",
+    "en": "I mean, what do you (sg.) want to say?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -1183,7 +1183,7 @@
   {
     "id": "s-a1-meta-0018",
     "ro": "Am înțeles, mulțumesc.",
-    "en": "Got it, thank you.",
+    "en": "Got it, thank you (from me).",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -1489,7 +1489,7 @@
   {
     "id": "s-a1-meta-0021",
     "ro": "Nu te aud bine.",
-    "en": "I can't hear you well.",
+    "en": "I can't hear you (sg.) well.",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1562,7 +1562,7 @@
   {
     "id": "s-a1-meta-0022",
     "ro": "Nu te înțeleg.",
-    "en": "I don't understand you.",
+    "en": "I don't understand you (sg.).",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1626,7 +1626,7 @@
   {
     "id": "s-a1-meta-0023",
     "ro": "Mă auzi?",
-    "en": "Can you hear me?",
+    "en": "Can you (sg.) hear me?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1655,7 +1655,7 @@
         "units": [
           {
             "lex": "auzi",
-            "form": "inf"
+            "form": "pres2sg"
           }
         ],
         "cloze": true
@@ -1675,7 +1675,7 @@
   {
     "id": "s-a1-meta-0024",
     "ro": "Poți să-mi spui din nou?",
-    "en": "Can you tell me again?",
+    "en": "Can you (sg.) tell me again?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1754,7 +1754,7 @@
       {
         "op": "person:2sg>1sg",
         "ro": "Pot să-ți spun din nou?",
-        "en": "Can I tell you again?",
+        "en": "Can I tell you (sg.) again?",
         "targetTokens": [
           0,
           1,
@@ -1766,7 +1766,7 @@
   {
     "id": "s-a1-meta-0025",
     "ro": "Poți să-mi explici cuvântul ăsta?",
-    "en": "Can you explain this word to me?",
+    "en": "Can you (sg.) explain this word to me?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1850,7 +1850,7 @@
       {
         "op": "person:2sg>1sg",
         "ro": "Pot să-ți explic cuvântul ăsta?",
-        "en": "Can I explain this word to you?",
+        "en": "Can I explain this word to you (sg.)?",
         "targetTokens": [
           0,
           1,
@@ -2267,7 +2267,7 @@
   {
     "id": "s-a1-meta-0031",
     "ro": "Îți explic altfel.",
-    "en": "I'll explain it to you differently.",
+    "en": "I'll explain it to you (sg.) differently.",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2331,7 +2331,7 @@
   {
     "id": "s-a1-meta-0032",
     "ro": "Vă aud bine.",
-    "en": "I can hear you (all) well.",
+    "en": "I can hear you (pl.) well.",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2391,7 +2391,7 @@
   {
     "id": "s-a1-meta-0033",
     "ro": "Ne auzi?",
-    "en": "Can you hear us?",
+    "en": "Can you (sg.) hear us?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2420,7 +2420,7 @@
         "units": [
           {
             "lex": "auzi",
-            "form": "inf"
+            "form": "pres2sg"
           }
         ],
         "cloze": true
@@ -2440,7 +2440,7 @@
   {
     "id": "s-a1-meta-0034",
     "ro": "Vorbești prea repede pentru mine.",
-    "en": "You speak too fast for me.",
+    "en": "You (sg.) speak too fast for me.",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2506,7 +2506,7 @@
       {
         "op": "person:2sg>1sg",
         "ro": "Vorbesc prea repede pentru tine.",
-        "en": "I speak too fast for you.",
+        "en": "I speak too fast for you (sg.).",
         "targetTokens": [
           0,
           4
@@ -2520,7 +2520,7 @@
   {
     "id": "s-a1-meta-0035",
     "ro": "Repeți, te rog?",
-    "en": "Could you repeat, please?",
+    "en": "Could you (sg.) repeat, please?",
     "level": "A1",
     "stage": 1,
     "situations": [

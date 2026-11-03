@@ -1367,7 +1367,7 @@
     "check": true,
     "forms": [
      "fm:pron-1sg:acc",
-     "fm:auzi:inf"
+     "fm:auzi:pres2sg"
     ]
    },
    {
@@ -2591,7 +2591,7 @@
     "check": true,
     "forms": [
      "fm:pron-1sg:acc",
-     "fm:auzi:inf"
+     "fm:auzi:pres2sg"
     ]
    },
    {
