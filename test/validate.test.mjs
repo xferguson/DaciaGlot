@@ -5,7 +5,7 @@ import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import { tmpdir } from "node:os";
-import { validateContent, readContentDir, checkPrecache, isValidOp, computeCoverage, coverageReport, strictA1Failures } from "../scripts/validate-content.mjs";
+import { validateContent, readContentDir, checkPrecache, isValidOp, computeCoverage, coverageReport, strictA1Failures, addressWords, addressOf, addressProblems } from "../scripts/validate-content.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const FIXTURES = join(HERE, "fixtures");
@@ -179,4 +179,37 @@ test("rule 13: transparent and divergent are optional booleans", () => {
     assert.deepEqual(run(f, false), []);
     assert.equal(run(f, "yes").length, 1, f);
   }
+});
+
+test("rule 14: English marks sg/pl 'you' and I/we wherever Romanian tells them apart", () => {
+  const lexemes = [
+    { id: "pron-2sg", lemma: "te", pos: "pron", gloss: "you", freq: 1, forms: { acc: "te", dat: "îți", datShort: "ți-" } },
+    { id: "pron-2pl", lemma: "vă", pos: "pron", gloss: "you (pl)", freq: 1, forms: { acc: "vă", dat: "vă" } },
+    { id: "avea", lemma: "a avea", pos: "verb", gloss: "to have", freq: 1, forms: { inf: "a avea", pres1sg: "am", pres2sg: "ai", pres2pl: "aveți", pres1pl: "avem" } },
+    { id: "multumi", lemma: "a mulțumi", pos: "verb", gloss: "to thank", freq: 1, forms: { pres1sg: "mulțumesc", pres1pl: "mulțumim", pres3pl: "mulțumesc" } },
+    { id: "aux-perf", lemma: "am", pos: "aux", gloss: "AUX", freq: 1, forms: { "1sg": "am", "1pl": "am", "2sg": "ai" } },
+  ];
+  const words = addressWords(lexemes);
+  assert.equal(words.get("aveți"), "pl");
+  assert.equal(words.get("ți"), "sg");
+  assert.equal(words.has("am"), false, "a form shared with another person is no cue");
+  const lexById = new Map(lexemes.map((l) => [l.id, l]));
+  assert.deepEqual([...addressOf("Aveți apă rece?", [], words)], ["pl"]);
+  assert.deepEqual([...addressOf("Ți-e foame?", [], words)], ["sg"]);
+  assert.deepEqual(addressProblems("Do you have cold water?", new Set(["pl"])).length, 1);
+  assert.deepEqual(addressProblems("Do you (pl./formal) have cold water?", new Set(["pl"])), []);
+  assert.deepEqual(addressProblems("Are you (sg.) hungry?", new Set(["sg"])), []);
+  assert.equal(addressProblems("Thank you.", new Set(), ["1sg"]).length, 1);
+  assert.deepEqual(addressProblems("Thank you (from us).", new Set(), ["1pl"]), []);
+
+  // Through validateContent: "Mulțumim" (1pl) needs "we/us"; "Am" (aux 1sg = 1pl) needs nothing.
+  const { raw } = readContentDir(join(FIXTURES, "valid"));
+  const s = (id, ro, en, tokens) => ({ ...structuredClone(raw.sentences[0]), id, ro, en, tokens, patterns: [], transforms: [] });
+  const sentences = [
+    s("s-thanks", "Mulțumim.", "Thank you.", [{ t: "Mulțumim.", units: [{ lex: "multumi", form: "pres1pl" }], cloze: true }]),
+    s("s-had", "Am avut.", "Had it.", [{ t: "Am", units: [{ lex: "aux-perf", form: "1sg" }], cloze: true }, { t: "avut.", units: [] }]),
+  ];
+  const lex = [...raw.lexemes.filter((l) => !lexById.has(l.id)), ...lexemes];
+  const r14 = validateContent({ ...raw, lexemes: lex, sentences }).errors.filter((e) => e.rule === 14);
+  assert.deepEqual(r14.map((e) => e.id), ["s-thanks"]);
 });

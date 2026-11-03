@@ -29,7 +29,7 @@
   {
     "id": "s-a1-table-0013",
     "ro": "Nota, te rog.",
-    "en": "The bill, please.",
+    "en": "The bill, please (sg.).",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -114,7 +114,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Iei supa.",
-        "en": "You'll have the soup.",
+        "en": "You'll (sg.) have the soup.",
         "targetTokens": [
           0
         ]
@@ -270,7 +270,7 @@
   {
     "id": "s-a1-table-0005",
     "ro": "Vreau o cafea, te rog.",
-    "en": "I'd like a coffee, please.",
+    "en": "I'd like a coffee, please (sg.).",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -330,7 +330,7 @@
       {
         "op": "person:1sg>3sg",
         "ro": "Vrea o cafea, te rog.",
-        "en": "He/She would like a coffee, please.",
+        "en": "He/She would like a coffee, please (sg.).",
         "targetTokens": [
           0
         ]
@@ -343,7 +343,7 @@
   {
     "id": "s-a1-table-0006",
     "ro": "Vrei o bere?",
-    "en": "Do you want a beer?",
+    "en": "Do you (sg.) want a beer?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -461,7 +461,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Vrei să plătești.",
-        "en": "You'd like to pay.",
+        "en": "You'd (sg.) like to pay.",
         "targetTokens": [
           0,
           2
@@ -528,7 +528,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Poți să comanzi?",
-        "en": "Can you order?",
+        "en": "Can you (sg.) order?",
         "targetTokens": [
           0,
           2
@@ -542,7 +542,7 @@
   {
     "id": "s-a1-table-0002",
     "ro": "Ce vrei să mănânci?",
-    "en": "What do you want to eat?",
+    "en": "What do you (sg.) want to eat?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -629,7 +629,7 @@
   {
     "id": "s-a1-table-0007",
     "ro": "Ce vrei să bei?",
-    "en": "What do you want to drink?",
+    "en": "What do you (sg.) want to drink?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -707,7 +707,7 @@
   {
     "id": "s-a1-table-0009",
     "ro": "Ce iei de mâncare?",
-    "en": "What are you having to eat?",
+    "en": "What are you (sg.) having to eat?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -1031,7 +1031,7 @@
   {
     "id": "s-a1-table-0018",
     "ro": "Ai mâncat?",
-    "en": "Have you eaten?",
+    "en": "Have you (sg.) eaten?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -1086,7 +1086,7 @@
   {
     "id": "s-a1-table-0020",
     "ro": "Ce ai comandat?",
-    "en": "What did you order?",
+    "en": "What did you (sg.) order?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -1389,7 +1389,7 @@
   {
     "id": "s-a1-table-0023",
     "ro": "Voi ce luați?",
-    "en": "What are you having?",
+    "en": "What are you (pl.) having?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1449,7 +1449,7 @@
   {
     "id": "s-a1-table-0024",
     "ro": "Două beri, te rog.",
-    "en": "Two beers, please.",
+    "en": "Two beers, please (sg.).",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1500,7 +1500,7 @@
       {
         "op": "singular",
         "ro": "O bere, te rog.",
-        "en": "One beer, please.",
+        "en": "One beer, please (sg.).",
         "targetTokens": [
           0,
           1
@@ -1511,7 +1511,7 @@
   {
     "id": "s-a1-table-0025",
     "ro": "Ne aduceți nota?",
-    "en": "Could you bring us the check?",
+    "en": "Could you (pl./formal) bring us the check?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -1566,7 +1566,7 @@
       {
         "op": "person:2pl>2sg",
         "ro": "Ne aduci nota?",
-        "en": "Could you bring us the check?",
+        "en": "Could you (sg.) bring us the check?",
         "targetTokens": [
           1
         ]
@@ -1707,7 +1707,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Ți-e foame?",
-        "en": "Are you hungry?",
+        "en": "Are you (sg.) hungry?",
         "targetTokens": [
           0
         ]
@@ -1717,7 +1717,7 @@
   {
     "id": "s-a1-table-0028",
     "ro": "Ți-e sete?",
-    "en": "Are you thirsty?",
+    "en": "Are you (sg.) thirsty?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2147,7 +2147,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "O să plătești tu.",
-        "en": "You'll pay.",
+        "en": "You'll (sg.) pay.",
         "targetTokens": [
           2,
           3
@@ -2158,7 +2158,7 @@
   {
     "id": "s-a1-table-0035",
     "ro": "Te invit eu.",
-    "en": "I'm inviting you. (It's on me.)",
+    "en": "I'm inviting you (sg.). (It's on me.)",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2216,7 +2216,7 @@
       {
         "op": "person:1sg>3sg",
         "ro": "Te invită el.",
-        "en": "He's inviting you.",
+        "en": "He's inviting you (sg.).",
         "targetTokens": [
           1,
           2
@@ -2227,7 +2227,7 @@
   {
     "id": "s-a1-table-0036",
     "ro": "Vă mulțumesc.",
-    "en": "Thank you.",
+    "en": "I thank you (pl./formal).",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2269,7 +2269,7 @@
       {
         "op": "person:1sg>3sg",
         "ro": "Vă mulțumește.",
-        "en": "He/She thanks you.",
+        "en": "He/She thanks you (pl./formal).",
         "targetTokens": [
           1
         ]
@@ -2428,7 +2428,7 @@
   {
     "id": "s-a1-table-0039",
     "ro": "Mulțumim pentru invitație.",
-    "en": "Thank you for the invitation.",
+    "en": "Thank you for the invitation (from us).",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2475,7 +2475,7 @@
       {
         "op": "person:1pl>1sg",
         "ro": "Mulțumesc pentru invitație.",
-        "en": "Thank you for the invitation.",
+        "en": "Thank you for the invitation (from me).",
         "targetTokens": [
           0
         ]
@@ -2603,7 +2603,7 @@
   {
     "id": "s-a1-table-0042",
     "ro": "Ne aduci nota, te rog?",
-    "en": "Could you bring us the bill, please?",
+    "en": "Could you (sg.) bring us the bill, please?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2841,7 +2841,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Poți să plătești tu?",
-        "en": "Can you pay?",
+        "en": "Can you (sg.) pay?",
         "targetTokens": [
           0,
           2
@@ -2855,7 +2855,7 @@
   {
     "id": "s-a1-table-0046",
     "ro": "Aveți ciorbă?",
-    "en": "Do you have ciorbă?",
+    "en": "Do you (pl./formal) have ciorbă?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -2895,7 +2895,7 @@
   {
     "id": "s-a1-table-0047",
     "ro": "Aveți cartofi?",
-    "en": "Do you have potatoes?",
+    "en": "Do you (pl./formal) have potatoes?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2938,7 +2938,7 @@
   {
     "id": "s-a1-table-0048",
     "ro": "Aveți și desert?",
-    "en": "Do you have dessert too?",
+    "en": "Do you (pl./formal) have dessert too?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -2987,7 +2987,7 @@
   {
     "id": "s-a1-table-0049",
     "ro": "Aveți apă rece?",
-    "en": "Do you have cold water?",
+    "en": "Do you (pl./formal) have cold water?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -3100,7 +3100,7 @@
   {
     "id": "s-a1-table-0051",
     "ro": "Ți-e sete?",
-    "en": "Are you thirsty?",
+    "en": "Are you (sg.) thirsty?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -3787,7 +3787,7 @@
   {
     "id": "s-a1-table-0062",
     "ro": "Te invit la masă.",
-    "en": "I'm treating you to dinner.",
+    "en": "I'm treating you (sg.) to dinner.",
     "level": "A1",
     "stage": 2,
     "situations": [

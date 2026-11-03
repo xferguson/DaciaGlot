@@ -109,6 +109,7 @@ export function render(root, ctx) {
     root.innerHTML = `<div class="session-bar">
         <span data-end></span>
         <div class="progress" role="progressbar" aria-label="Session progress"><div class="progress-fill"></div></div>
+        <span class="progress-count" aria-hidden="true"></span>
         <div data-flag></div>
       </div>
       <div data-card></div>`;
@@ -121,6 +122,9 @@ export function render(root, ctx) {
   function progress() {
     const fill = root.querySelector(".progress-fill");
     if (fill) fill.style.width = `${Math.round((pos / Math.max(queue.length, 1)) * 100)}%`;
+    const count = root.querySelector(".progress-count");
+    if (count) count.textContent = `${pos}/${queue.length}`;
+    root.querySelector(".progress")?.setAttribute("aria-valuetext", `${pos} of ${queue.length} done`);
   }
 
   function next() {

@@ -43,6 +43,77 @@ function formCandidates(value) {
   return out;
 }
 
+// Rule 14: the English prompt must say which Romanian person/number is wanted wherever English can't.
+const SG_PRONOUNS = new Set(["pron-2sg", "tine"]);
+const PL_PRONOUNS = new Set(["pron-2pl", "voi"]);
+const SG_CUE = /\bsg\b/;
+const PL_CUE = /\((?:[^)]*\b)?(?:pl|formal)\b/;
+const SUBJECT_CUE = { "1sg": /\b(?:I|I'm|I'll|I'd|I've|me|my)\b/, "1pl": /\b(?:we|we're|we'll|we'd|we've|us|our|let's)\b/i };
+
+function wordsOf(ro) {
+  return String(ro).normalize("NFC").toLowerCase().split(/[\s,.!?;:„”"“]+|-/).filter(Boolean);
+}
+
+/** Romanian word → "sg" | "pl" for second-person forms that belong to no other person. */
+export function addressWords(lexemes) {
+  const seen = new Map();
+  const note = (word, tag) => {
+    const w = wordsOf(String(word).replace(/^(a|să) /, ""));
+    if (w.length !== 1) return;
+    seen.set(w[0], new Set([...(seen.get(w[0]) ?? []), tag]));
+  };
+  for (const l of lexemes) {
+    const pron = SG_PRONOUNS.has(l.id) ? "sg" : PL_PRONOUNS.has(l.id) ? "pl" : null;
+    if (pron) {
+      note(l.lemma, pron);
+      for (const v of Object.values(l.forms ?? {})) note(v, pron);
+      continue;
+    }
+    for (const [k, v] of Object.entries(l.forms ?? {})) {
+      const m = k.match(/2(sg|pl)$/);
+      note(v, m ? m[1] : "other");
+    }
+  }
+  const out = new Map();
+  for (const [w, tags] of seen) if (tags.size === 1 && !tags.has("other")) out.set(w, [...tags][0]);
+  return out;
+}
+
+/** Which "you" (sg/pl) a Romanian line addresses, from its units (if any) and its words. */
+export function addressOf(ro, units, words) {
+  const out = new Set();
+  for (const u of units) {
+    if (SG_PRONOUNS.has(u.lex)) out.add("sg");
+    else if (PL_PRONOUNS.has(u.lex)) out.add("pl");
+    const m = String(u.form).match(/2(sg|pl)$/);
+    if (m) out.add(m[1]);
+  }
+  for (const w of wordsOf(ro)) if (words.has(w)) out.add(words.get(w));
+  return out;
+}
+
+/** Problems with an English prompt: a missing sg/pl "you" marker, or a missing I/we where Romanian tells them apart. */
+export function addressProblems(en, address, persons = []) {
+  const out = [];
+  if (address.has("sg") && !SG_CUE.test(en)) out.push(`Romanian says "you" (sg), so en needs a "(sg.)" marker`);
+  if (address.has("pl") && !PL_CUE.test(en)) out.push(`Romanian says "you" (pl/formal), so en needs a "(pl.)" or "(pl./formal)" marker`);
+  for (const p of persons) if (!SUBJECT_CUE[p].test(en)) out.push(`Romanian is ${p}, so en must say ${p === "1sg" ? "I/me" : "we/us"}`);
+  return out;
+}
+
+/** 1sg/1pl verb units whose form differs from the other number (so the learner must know which). */
+function firstPersons(units, lexById) {
+  const out = new Set();
+  for (const u of units) {
+    const m = String(u.form).match(/^(.*)1(sg|pl)$/);
+    const forms = lexById.get(u.lex)?.forms;
+    if (!m || !forms) continue;
+    const other = forms[`${m[1]}1${m[2] === "sg" ? "pl" : "sg"}`];
+    if (other !== undefined && other !== forms[u.form]) out.add(`1${m[2]}`);
+  }
+  return [...out];
+}
+
 /**
  * Run every rule over parsed content.
  * @param {{manifest: object, patterns: object[], lexemes: object[], sentences: object[], levels: object[]}} raw
@@ -58,6 +129,7 @@ export function validateContent(raw, { fileOf = new Map(), phase = 1 } = {}) {
 
   const { manifest, patterns, lexemes, sentences, levels } = raw;
   const lexById = new Map(lexemes.map((l) => [l.id, l]));
+  const youWords = addressWords(lexemes);
   const patById = new Map(patterns.map((p) => [p.id, p]));
   const manifestLevels = new Set(manifest.levels ?? []);
   const canDoIds = new Set(levels.flatMap((lv) => (lv.canDos ?? []).map((c) => c.id)));
@@ -177,6 +249,15 @@ export function validateContent(raw, { fileOf = new Map(), phase = 1 } = {}) {
     for (const c of s.canDo ?? []) {
       if (!canDoIds.has(c)) err(s, f, 10, `canDo "${c}" is unknown`);
     }
+
+    // Rule 14
+    const units = tokens.flatMap((t) => t.units ?? []);
+    for (const m of addressProblems(s.en ?? "", addressOf(s.ro, units, youWords), firstPersons(units, lexById))) err(s, f, 14, `"${s.en}": ${m}`);
+    (s.transforms ?? []).forEach((t, i) => {
+      if (!t.en) return;
+      const to = String(t.op).match(/^person:\w+>(1sg|1pl)$/)?.[1];
+      for (const m of addressProblems(t.en, addressOf(t.ro, [], youWords), to ? [to] : [])) err(s, f, 14, `transform ${i} "${t.en}": ${m}`);
+    });
 
     // Warnings
     if (!tokens.some((t) => t.cloze)) warn(s, f, "no cloze token");

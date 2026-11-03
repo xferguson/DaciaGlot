@@ -169,6 +169,7 @@ Adding an op requires updating this table **and** the UI instruction renderer in
 11. A file under `app/js` or `app/css` is missing from the `sw.js` precache list.
 12. `lemmaGloss` (optional) is not one lowercase word or a dotted compound (`be`, `get.up`), or a small-caps label (`NEG`), of at most 16 characters.
 13. `transparent` (lexeme) and `divergent` (pattern), when present, are booleans.
+14. The English (`en` of a sentence or transform) doesn't say which form Romanian wants (§8 rule 10): Romanian addresses "you" in the singular (*tu, te, îți, ai, faci*, *te rog*) and `en` has no `(sg.)`; Romanian uses the plural/formal (*voi, vă, aveți*) and `en` has no `(pl.)` or `(pl./formal)`; or a 1sg/1pl verb form that differs between the two (*mulțumesc/mulțumim*, not *am*) has no *I/me* or *we/us* in `en`.
 
 **Warnings:** a sentence with no `cloze` token; a sentence with no transforms (from Phase 2 on); `en` missing on a person transform; a lexeme with no sentences.
 
@@ -238,6 +239,7 @@ The Stage 3–4 `requires` edges are written by the Phase 4 content task.
 7. **Topical, personal and useful.** Prefer sentences the learner would actually say at standup, in a 1:1, at dinner, or about themself. Use realistic names (*Andrei, Ioana, Mihai, Elena, Radu, Cristina*) and Romanian places (*Cluj, Iași, Timișoara, Brașov, Constanța, Sibiu*).
 8. **English glosses** should be natural, not word-for-word. Note ambiguity where it exists (*am terminat* = I/we finished, so pick one and stay consistent with the transform `en`).
 9. **Never** use cedilla ş/ţ. Always use ș/ț (U+0219/U+021B).
+10. **Mark what English can't say.** English *you* is both *tu* and *voi/dumneavoastră*, and *Thank you* is both *mulțumesc* and *mulțumim*. Put a marker right after the first *you/your* (or after *please* for *te rog*): `Do you (sg.) like fish?`, `Do you (pl./formal) have ciorbă?`, `What are you (pl.) having?` (with *voi*). Where English drops the subject, say it: `Thank you for the invitation (from us).` The validator enforces this (rule 14). Formal *dumneavoastră* will get its own `(formal)` marker when the register lands (E4).
 
 ## 9. Glossing (slot-building cards, EXP-06)
 

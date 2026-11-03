@@ -417,7 +417,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Nu ești sigur.",
-        "en": "You're not sure.",
+        "en": "You're (sg.) not sure.",
         "targetTokens": [
           1
         ]
@@ -430,7 +430,7 @@
   {
     "id": "s-a1-decisions-0007",
     "ro": "Ai dreptate.",
-    "en": "You're right.",
+    "en": "You're (sg.) right.",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -784,7 +784,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Vrei să vorbești cu Mihai.",
-        "en": "You want to talk to Mihai.",
+        "en": "You (sg.) want to talk to Mihai.",
         "targetTokens": [
           0,
           2
@@ -798,7 +798,7 @@
   {
     "id": "s-a1-decisions-0012",
     "ro": "Ce propui?",
-    "en": "What do you propose?",
+    "en": "What do you (sg.) propose?",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -1589,7 +1589,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "O să decizi mâine.",
-        "en": "You'll decide tomorrow.",
+        "en": "You'll (sg.) decide tomorrow.",
         "targetTokens": [
           2
         ]
@@ -2040,7 +2040,7 @@
   {
     "id": "s-a1-decisions-0029",
     "ro": "Nu-ți place ideea?",
-    "en": "Don't you like the idea?",
+    "en": "Don't you (sg.) like the idea?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2113,7 +2113,7 @@
   {
     "id": "s-a1-decisions-0030",
     "ro": "Ce zici de ideea asta?",
-    "en": "What do you say about this idea?",
+    "en": "What do you (sg.) say about this idea?",
     "level": "A1",
     "stage": 2,
     "situations": [
@@ -2186,7 +2186,7 @@
       {
         "op": "tense:pres>perf",
         "ro": "Ce ai zis de ideea asta?",
-        "en": "What did you say about this idea?",
+        "en": "What did you (sg.) say about this idea?",
         "targetTokens": [
           1
         ]
@@ -2625,7 +2625,7 @@
   {
     "id": "s-a1-decisions-0037",
     "ro": "Nu ai dreptate.",
-    "en": "You're not right.",
+    "en": "You're (sg.) not right.",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -2675,7 +2675,7 @@
       {
         "op": "affirm",
         "ro": "Ai dreptate.",
-        "en": "You're right.",
+        "en": "You're (sg.) right.",
         "targetTokens": [
           0
         ]
@@ -2696,7 +2696,7 @@
   {
     "id": "s-a1-decisions-0038",
     "ro": "Sunt sigur că ai dreptate.",
-    "en": "I'm sure you're right.",
+    "en": "I'm sure you're (sg.) right.",
     "level": "A1",
     "stage": 1,
     "situations": [
@@ -3068,7 +3068,7 @@
       {
         "op": "person:1sg>2sg",
         "ro": "Poți să amâni termenul?",
-        "en": "Can you postpone the deadline?",
+        "en": "Can you (sg.) postpone the deadline?",
         "targetTokens": [
           0,
           2

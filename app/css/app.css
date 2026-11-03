@@ -192,6 +192,7 @@ a { color: var(--accent); }
 .session-bar .progress { flex: 1; margin: 0; }
 .btn.icon { padding: 0; width: 44px; font-size: 1.5rem; line-height: 1; }
 .progress-fill { height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+.progress-count { font-size: .8rem; font-variant-numeric: tabular-nums; color: var(--muted); white-space: nowrap; }
 .settings label { display: block; margin: 12px 0 4px; font-weight: 600; }
 .settings select, .settings input[type="number"] { font: inherit; min-height: 44px; width: 100%; padding: 0 8px; background: var(--surface); color: var(--fg); border: 2px solid var(--border); border-radius: 8px; }
 .settings .check { display: flex; align-items: center; gap: 12px; min-height: 44px; }
