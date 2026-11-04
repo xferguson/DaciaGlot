@@ -1,6 +1,6 @@
 // Review transitions: how a card, an `er` card, a paradigm or an immediate check changes the state (ARCHITECTURE §8). Pure.
 import { newCard, review } from "./fsrs.js";
-import { parseCardId, buildCardId, isCardType, unitIdOfFm, fmIdForUnit } from "./cards.js";
+import { parseCardId, buildCardId, isCardType, unitIdOfFm, fmIdForUnit, erUnits } from "./cards.js";
 import { isFastTrackUnit } from "./select.js";
 import { startOfDayPlus } from "./time.js";
 import { unitId, parseUnitId } from "./unit-id.js";
@@ -8,6 +8,7 @@ import { bumpDay } from "./history.js";
 import { scheduleCard, partialCredit, PRIMED_CREDIT } from "./schedule.js";
 import { recallEntry, appendRecall } from "./calibrate.js";
 import { creditProduced } from "./credit.js";
+import { exposureCredit } from "./familiarity.js";
 
 /**
  * Attempt records (ARCHITECTURE §4.3) for `units` (`{u, lx}[]`) answered right or wrong, shown as `presentedId`.
@@ -105,13 +106,17 @@ export function applyReview(state, cardId, grade, unitsRequired, now, content, p
     }
     next.attempts = [...state.attempts, ...makeAttempts(unitsRequired, grade >= 2, now, presentedId)];
     // FR-R7: units produced in a transform / slot card count as their own review.
-    if ((p.type === "xf" || p.type === "sb") && grade >= 2 && !partial) next.cards = creditProduced(next, unitsRequired.map(({ u }) => u), grade, now).cards;
+    if ((p.type === "xf" || p.type === "sb") && grade >= 2 && !partial) Object.assign(next, creditProduced(next, unitsRequired.map(({ u }) => u), grade, now));
   }
   next.history = bumpDay(state.history, now, (d) => {
     d.cards += 1;
     if (isNewSentence) d.newSentences += 1;
   });
-  return next;
+  // FR-R7 (T39): the other words of a sentence that was on screen in a correct card are met again.
+  const sentence = p.type !== "fm" && p.type !== "kf" && (p.type === "lr" || grade >= 2) ? content?.sentences.get(p.sentenceId) : null;
+  if (!sentence) return next;
+  const tested = p.type === "er" ? erUnits(sentence).map(({ u }) => u) : unitsRequired.map(({ u }) => u);
+  return exposureCredit(next, sentence, tested, "seen", now, content);
 }
 
 /**
@@ -187,7 +192,7 @@ export function applyErReview(state, cardId, grade, unitsRequired, misses, now, 
     ...makeAttempts(parts.missed.map(withLx), false, now, presentedId),
     ...makeAttempts(parts.ok.map(withLx), true, now, presentedId),
   ];
-  return { ...next, cards: credited.cards, claimed, attempts, ...(calibration ? { calibration } : {}) };
+  return { ...next, cards: credited.cards, familiarity: credited.familiarity, claimed, attempts, ...(calibration ? { calibration } : {}) };
 }
 
 /**

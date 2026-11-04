@@ -276,7 +276,12 @@ test("T40: a card whose word was just on screen is deferred; a forced primed suc
   s.tap("Check");
   s.tap("Medium");
   assert.ok(s.isSummary());
-  assert.deepEqual(s.ctx.state.cards["fm:b0:base"], { ...old, due: NOW - 3000 }, "the deferred card is untouched and still due");
+  // The deferred card was not reviewed (T39 may still give it a small "seen" bump for the lr card).
+  const deferred = s.ctx.state.cards["fm:b0:base"];
+  assert.equal(deferred.reps, 0, "no review");
+  assert.equal(deferred.lastReview, old.lastReview);
+  assert.equal(deferred.baseGap, 10);
+  assert.ok(!s.ctx.state.attempts.some((a) => a.u === "b0.base"), "no attempt on the deferred word");
   // ...and the forced one gets partial credit: later, but no full review.
   const after = s.ctx.state.cards["fm:a1:base"];
   assert.ok(after.due >= NOW - 2000, "never earlier");
