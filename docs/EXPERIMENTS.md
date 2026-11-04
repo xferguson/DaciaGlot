@@ -306,7 +306,7 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
   - T38: a correct part of an EN→RO, transform or slot card reviews that word's own card when it's on time.
   - T39: a discounted bump for words met in context (25 % seen, 50 % produced early).
   - T40: a card is moved or deferred if its word was on screen earlier in the session; a forced primed success gets 25 % credit.
-  - T41: sentences sharing ≥ 50 % of their content words count as siblings.
+  - T41 (built, `g:` key in `cardKeys`): sentences sharing ≥ 50 % of their content words count as siblings.
   - T42: all-claimed sentences only get a 60-day claim check; all-but-one-claimed becomes one card, not two.
 - **Expected felt difference:** fewer "I just saw that" moments; fewer cards for things you've claimed; a sentence answer counts for its words.
 - **Check-in questions:**

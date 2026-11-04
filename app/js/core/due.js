@@ -7,7 +7,7 @@ import { pickOne } from "./random.js";
 import { isClaimedCard } from "./review.js";
 import { cmpStr } from "./sort.js";
 
-/** Keys two cards share when they'd feel like a repeat: `s:<sentence>`, `l:<target lexeme>`; `new` marks a new `lr`. */
+/** Keys two cards share when they'd feel like a repeat: `s:<sentence>`, `g:<similar-sentence group>`, `l:<target lexeme>`; `new` marks a new `lr`. */
 export function cardKeys(item, content) {
   const keys = new Set();
   if (item.members) { // a paradigm card (FR-R5)
@@ -21,6 +21,10 @@ export function cardKeys(item, content) {
   }
   if (p.sentenceId) keys.add(`s:${p.sentenceId}`);
   if (item.from) keys.add(`s:${item.from}`);
+  for (const sid of [p.sentenceId, item.from]) { // T41: near-identical sentences share a group key
+    const g = sid && content.similarOf?.get(sid);
+    if (g) keys.add(`g:${g[0]}`);
+  }
   for (const { lx } of unitsRequiredForCard(item.cardId, content)) keys.add(`l:${lx}`);
   if (item.isNew && p.type === "lr") keys.add("new");
   return keys;

@@ -6,6 +6,7 @@ import { join, relative, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { packPaths } from "../app/js/data/content.js";
 import { findFamilies } from "../app/js/core/families.js";
+import { similarGroups } from "../app/js/core/similar.js";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -337,7 +338,8 @@ export function computeCoverage({ patterns, lexemes, sentences, levels }) {
   const families = [...findFamilies(byId.values())].map(([id, members]) => ({ id, members: members.map((m) => byId.get(m).ro) }));
   const live = lexemes.filter((l) => !l.retired);
   const transparent = { count: live.filter((l) => l.transparent).length, total: live.length };
-  return { transparent, patterns: patternsOut, situations, canDos: canDosOut, thinLexemes, families };
+  const similar = [...similarGroups({ sentences: byId, lexemes: new Map(lexemes.map((l) => [l.id, l])) })].map(([id, members]) => ({ id, members: members.map((m) => byId.get(m).ro) }));
+  return { transparent, patterns: patternsOut, situations, canDos: canDosOut, thinLexemes, families, similar, sentenceCount: byId.size };
 }
 
 /** Render the coverage statistics as Markdown tables; below-target rows are marked ⚠. */
@@ -355,6 +357,7 @@ export function coverageReport(raw) {
     cov.families.length
       ? table("Sentence families (check that each is really one paradigm)", ["Family", "Members"], cov.families.map((f) => [f.id, f.members.join(" / ")]))
       : "### Sentence families\n\nNone.\n",
+    `Similar-sentence groups (T41, FR-S11): ${cov.similar.length}, covering ${cov.similar.reduce((n, g) => n + g.members.length, 0)} of ${cov.sentenceCount} sentences.\n`,
     cov.thinLexemes.length
       ? table(`Lexemes with < ${TARGETS.lexemeSentences} sentences (key-forms would never unlock)`, ["Lexeme", "Sentences"], cov.thinLexemes.map((r) => ["⚠ " + r.id, r.sentences]))
       : `### Lexemes with < ${TARGETS.lexemeSentences} sentences\n\nNone.\n`,

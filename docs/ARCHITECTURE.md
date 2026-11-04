@@ -76,6 +76,7 @@ test/*.test.mjs              # node --test; import from ../app/js/core/*
  * @property {Map<string, string>} familyOf          sentence id → familyId
  * @property {Map<string, Set<string>>} familyForms  familyId → the `<lex>.<form>` units its members differ in
  * @property {Map<string, string[]>} familiesOfUnit  unit → familyIds it varies in
+ * @property {Map<string, string[]>} similarOf       sentence id → its similar-sentence group (members, sorted, incl. itself); built by `similarGroups` (`core/similar.js`, T41); absent if it has no similar sentence
  */
 ```
 
@@ -334,7 +335,7 @@ dueCount(state, content, now) → number
 requeueWrong(queue, pos, item, rng, content?) → {queue, at}  // PRD FR-S9: pure; a new queue with a wrong card back 3–5 cards later (with content: up to 3 more, away from related cards)
 inFocus(cardId, focus, content, state?) → boolean      // FR-S8: card's sentence is in any focus topic; an `fm` is in focus if any seen carrier sentence is (needs `state`); legacy kf never; empty focus → true. `focus` is one {type,id}, a list, or null everywhere.
 dueInFocus(state, content, now, focus) → string[]  // dueCards filtered by inFocus
-cardKeys(item, content) → Set<string>          // "s:<sentence>" (also the `from` sentence of a new `fm`), "l:<target lexeme>", "new" for a new lr
+cardKeys(item, content) → Set<string>          // "s:<sentence>" (also the `from` sentence of a new `fm`), "g:<similar group>" for the sentence or `from` sentence (T41), "l:<target lexeme>", "new" for a new lr
 spaceOut(queue, content) → QueueItem[]        // PRD FR-S11; buildSession applies it to every queue
 applyCheck(state, cardId, correct, unitsRequired, now, presentedId = cardId, content = null) → AppState  // FR-R2: immediate check of a new form: `enc` attempts, creates the `fm` card due `nextDayStart(now)` whatever the answer, except (T34, FR-V3, needs `content`) a right check of a fast-track form is due `FAST_TRACK_DAYS` (4) days later; no FSRS review
 placeChecks(queue) → QueueItem[]              // FR-R2 (T31): each check ≥ CHECK_GAP (8) cards after its lr/paradigm, never next to another check; too short → end

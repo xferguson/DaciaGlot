@@ -358,19 +358,11 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0022",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0027",
     "isNew": false
    },
    {
     "cardId": "lr:s-a1-standup-0031",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0036",
     "isNew": false
    },
    {
@@ -382,149 +374,7 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0014",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0017",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0025",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0028",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0030",
-    "isNew": false
-   }
-  ],
-  "estimateSec": 180
- },
- "seasoned/quick/standup": {
-  "queue": [
-   {
-    "cardId": "lr:s-a1-standup-0003",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0004",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0010",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0015",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0022",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0027",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0031",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0036",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0041",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0001",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0014",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0017",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0025",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0028",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0030",
-    "isNew": false
-   }
-  ],
-  "estimateSec": 180
- },
- "seasoned/review/all": {
-  "queue": [
-   {
-    "cardId": "lr:s-a1-standup-0003",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0004",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0010",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0015",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0022",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0027",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0031",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0036",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0041",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0001",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0014",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0017",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0025",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0028",
     "isNew": false
    },
    {
@@ -550,9 +400,135 @@
    {
     "cardId": "lr:s-a1-standup-0007",
     "isNew": false
+   }
+  ],
+  "estimateSec": 180
+ },
+ "seasoned/quick/standup": {
+  "queue": [
+   {
+    "cardId": "lr:s-a1-standup-0003",
+    "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0019",
+    "cardId": "lr:s-a1-standup-0004",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0010",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0015",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0027",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0031",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0041",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0001",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0017",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0030",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0032",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0037",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0042",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0002",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0007",
+    "isNew": false
+   }
+  ],
+  "estimateSec": 180
+ },
+ "seasoned/review/all": {
+  "queue": [
+   {
+    "cardId": "lr:s-a1-standup-0003",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0004",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0010",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0015",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0027",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0031",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0041",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0001",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0017",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0030",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0032",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0037",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0042",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0002",
+    "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0007",
     "isNew": false
    },
    {
@@ -823,10 +799,6 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0005",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0006",
     "isNew": false
    },
@@ -836,14 +808,6 @@
    },
    {
     "cardId": "lr:s-a1-standup-0009",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0012",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0023",
     "isNew": false
    },
    {
@@ -859,7 +823,7 @@
     "isNew": false
    }
   ],
-  "estimateSec": 1152
+  "estimateSec": 1044
  },
  "seasoned/review/standup": {
   "queue": [
@@ -880,19 +844,11 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0022",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0027",
     "isNew": false
    },
    {
     "cardId": "lr:s-a1-standup-0031",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0036",
     "isNew": false
    },
    {
@@ -904,19 +860,7 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0014",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0017",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0025",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0028",
     "isNew": false
    },
    {
@@ -941,10 +885,6 @@
    },
    {
     "cardId": "lr:s-a1-standup-0007",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0019",
     "isNew": false
    },
    {
@@ -980,14 +920,8 @@
     "isNew": false
    },
    {
-    "cardId": "er:s-a1-standup-0011",
-    "isNew": false,
-    "composite": true,
-    "units": [
-     "aux-perf.1sg",
-     "gasi.ppl",
-     "eroare.sg"
-    ]
+    "cardId": "fm:aux-perf:2sg",
+    "isNew": false
    },
    {
     "cardId": "fm:bug:plDef",
@@ -1107,6 +1041,10 @@
     "isNew": false
    },
    {
+    "cardId": "fm:eroare:sgDef",
+    "isNew": false
+   },
+   {
     "cardId": "fm:gata:base",
     "isNew": false
    },
@@ -1219,10 +1157,6 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0005",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0006",
     "isNew": false
    },
@@ -1232,14 +1166,6 @@
    },
    {
     "cardId": "lr:s-a1-standup-0009",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0012",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0023",
     "isNew": false
    },
    {
@@ -1255,7 +1181,7 @@
     "isNew": false
    }
   ],
-  "estimateSec": 1164
+  "estimateSec": 1056
  },
  "seasoned/learn/all": {
   "queue": [
@@ -1423,7 +1349,7 @@
     ]
    },
    {
-    "cardId": "xf:s-a1-standup-0019:0",
+    "cardId": "er:s-a1-standup-0030",
     "isNew": true
    },
    {
@@ -1436,7 +1362,7 @@
     ]
    },
    {
-    "cardId": "er:s-a1-standup-0030",
+    "cardId": "er:s-a1-standup-0010",
     "isNew": true
    },
    {
@@ -1449,7 +1375,7 @@
     ]
    },
    {
-    "cardId": "er:s-a1-standup-0026",
+    "cardId": "xf:s-a1-standup-0019:0",
     "isNew": true
    },
    {
@@ -1462,7 +1388,7 @@
     ]
    },
    {
-    "cardId": "er:s-a1-standup-0010",
+    "cardId": "er:s-a1-standup-0026",
     "isNew": true
    },
    {
@@ -1603,7 +1529,7 @@
     ]
    },
    {
-    "cardId": "xf:s-a1-standup-0019:0",
+    "cardId": "er:s-a1-standup-0030",
     "isNew": true
    },
    {
@@ -1616,7 +1542,7 @@
     ]
    },
    {
-    "cardId": "er:s-a1-standup-0030",
+    "cardId": "er:s-a1-standup-0010",
     "isNew": true
    },
    {
@@ -1629,7 +1555,7 @@
     ]
    },
    {
-    "cardId": "er:s-a1-standup-0026",
+    "cardId": "xf:s-a1-standup-0019:0",
     "isNew": true
    },
    {
@@ -1642,7 +1568,7 @@
     ]
    },
    {
-    "cardId": "er:s-a1-standup-0010",
+    "cardId": "er:s-a1-standup-0026",
     "isNew": true
    },
    {
@@ -1687,10 +1613,6 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0022",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0027",
     "isNew": false
    },
@@ -1699,23 +1621,15 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-table-0003",
-    "isNew": true
-   },
-   {
-    "cardId": "lr:s-a1-standup-0036",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0041",
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0001",
-    "isNew": false
+    "cardId": "lr:s-a1-table-0003",
+    "isNew": true
    },
    {
-    "cardId": "lr:s-a1-standup-0014",
+    "cardId": "lr:s-a1-standup-0001",
     "isNew": false
    },
    {
@@ -1723,25 +1637,8 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0025",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0028",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0030",
     "isNew": false
-   },
-   {
-    "cardId": "fm:noroc:base",
-    "isNew": true,
-    "from": "s-a1-table-0003",
-    "check": true,
-    "forms": [
-     "fm:noroc:base"
-    ]
    },
    {
     "cardId": "lr:s-a1-standup-0032",
@@ -1764,12 +1661,13 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0019",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-me-0009",
-    "isNew": true
+    "cardId": "fm:noroc:base",
+    "isNew": true,
+    "from": "s-a1-table-0003",
+    "check": true,
+    "forms": [
+     "fm:noroc:base"
+    ]
    },
    {
     "cardId": "lr:s-a1-standup-0020",
@@ -1796,21 +1694,16 @@
     "isNew": false
    },
    {
+    "cardId": "lr:s-a1-me-0009",
+    "isNew": true
+   },
+   {
     "cardId": "fm:acelasi:msg",
     "isNew": false
    },
    {
     "cardId": "fm:asta:msg",
     "isNew": false
-   },
-   {
-    "cardId": "fm:frate:sg",
-    "isNew": true,
-    "from": "s-a1-me-0009",
-    "check": true,
-    "forms": [
-     "fm:frate:sg"
-    ]
    },
    {
     "cardId": "er:s-a1-domain-0028",
@@ -1843,8 +1736,13 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-table-0018",
-    "isNew": true
+    "cardId": "fm:frate:sg",
+    "isNew": true,
+    "from": "s-a1-me-0009",
+    "check": true,
+    "forms": [
+     "fm:frate:sg"
+    ]
    },
    {
     "cardId": "fm:intelege:subj1sg",
@@ -1871,21 +1769,16 @@
     "isNew": false
    },
    {
+    "cardId": "lr:s-a1-table-0018",
+    "isNew": true
+   },
+   {
     "cardId": "fm:review:sg",
     "isNew": false
    },
    {
     "cardId": "fm:termina:pres1sg",
     "isNew": false
-   },
-   {
-    "cardId": "fm:manca:ppl",
-    "isNew": true,
-    "from": "s-a1-table-0018",
-    "check": true,
-    "forms": [
-     "fm:manca:ppl"
-    ]
    },
    {
     "cardId": "fm:test:sgDef",
@@ -1913,7 +1806,40 @@
     "isNew": false
    },
    {
-    "cardId": "xf:s-a1-standup-0004:0",
+    "cardId": "fm:unde:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:manca:ppl",
+    "isNew": true,
+    "from": "s-a1-table-0018",
+    "check": true,
+    "forms": [
+     "fm:manca:ppl"
+    ]
+   },
+   {
+    "cardId": "fm:acum:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:ajutor:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:aux-fut-o:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:avea:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:ce:base",
+    "isNew": false
+   },
+   {
+    "cardId": "xf:s-a1-standup-0019:0",
     "isNew": true
    },
    {
@@ -1925,15 +1851,15 @@
     "isNew": true
    },
    {
-    "cardId": "xf:s-a1-standup-0028:0",
-    "isNew": true
-   },
-   {
-    "cardId": "xf:s-a1-standup-0019:0",
+    "cardId": "xf:s-a1-standup-0004:0",
     "isNew": true
    },
    {
     "cardId": "er:s-a1-standup-0010",
+    "isNew": true
+   },
+   {
+    "cardId": "xf:s-a1-standup-0028:0",
     "isNew": true
    },
    {
@@ -1966,10 +1892,6 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0022",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0027",
     "isNew": false
    },
@@ -1978,23 +1900,15 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0068",
-    "isNew": true
-   },
-   {
-    "cardId": "lr:s-a1-standup-0036",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0041",
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0001",
-    "isNew": false
+    "cardId": "lr:s-a1-standup-0068",
+    "isNew": true
    },
    {
-    "cardId": "lr:s-a1-standup-0014",
+    "cardId": "lr:s-a1-standup-0001",
     "isNew": false
    },
    {
@@ -2002,25 +1916,8 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0025",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0028",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0030",
     "isNew": false
-   },
-   {
-    "cardId": "fm:incepe:pres1pl",
-    "isNew": true,
-    "from": "s-a1-standup-0068",
-    "check": true,
-    "forms": [
-     "fm:incepe:pres1pl"
-    ]
    },
    {
     "cardId": "lr:s-a1-standup-0032",
@@ -2043,12 +1940,13 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0019",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0067",
-    "isNew": true
+    "cardId": "fm:incepe:pres1pl",
+    "isNew": true,
+    "from": "s-a1-standup-0068",
+    "check": true,
+    "forms": [
+     "fm:incepe:pres1pl"
+    ]
    },
    {
     "cardId": "lr:s-a1-standup-0020",
@@ -2075,21 +1973,16 @@
     "isNew": false
    },
    {
+    "cardId": "lr:s-a1-standup-0067",
+    "isNew": true
+   },
+   {
     "cardId": "fm:acelasi:msg",
     "isNew": false
    },
    {
     "cardId": "fm:asta:msg",
     "isNew": false
-   },
-   {
-    "cardId": "fm:amana:ppl",
-    "isNew": true,
-    "from": "s-a1-standup-0067",
-    "check": true,
-    "forms": [
-     "fm:amana:ppl"
-    ]
    },
    {
     "cardId": "er:s-a1-standup-0039",
@@ -2122,8 +2015,13 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0054",
-    "isNew": true
+    "cardId": "fm:amana:ppl",
+    "isNew": true,
+    "from": "s-a1-standup-0067",
+    "check": true,
+    "forms": [
+     "fm:amana:ppl"
+    ]
    },
    {
     "cardId": "fm:intelege:subj1sg",
@@ -2150,21 +2048,16 @@
     "isNew": false
    },
    {
+    "cardId": "lr:s-a1-standup-0054",
+    "isNew": true
+   },
+   {
     "cardId": "fm:review:sg",
     "isNew": false
    },
    {
     "cardId": "fm:termina:pres1sg",
     "isNew": false
-   },
-   {
-    "cardId": "fm:pron-3sg-f:acc",
-    "isNew": true,
-    "from": "s-a1-standup-0054",
-    "check": true,
-    "forms": [
-     "fm:pron-3sg-f:acc"
-    ]
    },
    {
     "cardId": "fm:test:sgDef",
@@ -2192,7 +2085,40 @@
     "isNew": false
    },
    {
-    "cardId": "xf:s-a1-standup-0004:0",
+    "cardId": "fm:un:f",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-3sg-f:acc",
+    "isNew": true,
+    "from": "s-a1-standup-0054",
+    "check": true,
+    "forms": [
+     "fm:pron-3sg-f:acc"
+    ]
+   },
+   {
+    "cardId": "fm:unde:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:acum:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:ajutor:sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:aux-fut-o:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:avea:pres3sg",
+    "isNew": false
+   },
+   {
+    "cardId": "xf:s-a1-standup-0019:0",
     "isNew": true
    },
    {
@@ -2204,15 +2130,15 @@
     "isNew": true
    },
    {
-    "cardId": "xf:s-a1-standup-0028:0",
-    "isNew": true
-   },
-   {
-    "cardId": "xf:s-a1-standup-0019:0",
+    "cardId": "xf:s-a1-standup-0004:0",
     "isNew": true
    },
    {
     "cardId": "er:s-a1-standup-0010",
+    "isNew": true
+   },
+   {
+    "cardId": "xf:s-a1-standup-0028:0",
     "isNew": true
    },
    {
@@ -2245,10 +2171,6 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0022",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0027",
     "isNew": false
    },
@@ -2261,10 +2183,6 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0036",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0041",
     "isNew": false
    },
@@ -2273,29 +2191,8 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0014",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0017",
     "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0025",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0028",
-    "isNew": false
-   },
-   {
-    "cardId": "fm:noroc:base",
-    "isNew": true,
-    "from": "s-a1-table-0003",
-    "check": true,
-    "forms": [
-     "fm:noroc:base"
-    ]
    },
    {
     "cardId": "lr:s-a1-standup-0030",
@@ -2310,12 +2207,17 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-me-0009",
-    "isNew": true
-   },
-   {
     "cardId": "lr:s-a1-standup-0042",
     "isNew": false
+   },
+   {
+    "cardId": "fm:noroc:base",
+    "isNew": true,
+    "from": "s-a1-table-0003",
+    "check": true,
+    "forms": [
+     "fm:noroc:base"
+    ]
    },
    {
     "cardId": "lr:s-a1-standup-0002",
@@ -2326,8 +2228,8 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0019",
-    "isNew": false
+    "cardId": "lr:s-a1-me-0009",
+    "isNew": true
    },
    {
     "cardId": "lr:s-a1-standup-0020",
@@ -2346,15 +2248,6 @@
     "isNew": false
    },
    {
-    "cardId": "fm:frate:sg",
-    "isNew": true,
-    "from": "s-a1-me-0009",
-    "check": true,
-    "forms": [
-     "fm:frate:sg"
-    ]
-   },
-   {
     "cardId": "lr:s-a1-standup-0038",
     "isNew": false
    },
@@ -2367,12 +2260,17 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-table-0018",
-    "isNew": true
-   },
-   {
     "cardId": "fm:asta:msg",
     "isNew": false
+   },
+   {
+    "cardId": "fm:frate:sg",
+    "isNew": true,
+    "from": "s-a1-me-0009",
+    "check": true,
+    "forms": [
+     "fm:frate:sg"
+    ]
    },
    {
     "cardId": "er:s-a1-domain-0028",
@@ -2387,6 +2285,10 @@
    {
     "cardId": "fm:bug:plDef",
     "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-table-0018",
+    "isNew": true
    },
    {
     "cardId": "fm:cum:base",
@@ -2409,15 +2311,6 @@
     "isNew": false
    },
    {
-    "cardId": "fm:manca:ppl",
-    "isNew": true,
-    "from": "s-a1-table-0018",
-    "check": true,
-    "forms": [
-     "fm:manca:ppl"
-    ]
-   },
-   {
     "cardId": "fm:lucra:ppl",
     "isNew": false
    },
@@ -2430,8 +2323,13 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-meta-0042",
-    "isNew": true
+    "cardId": "fm:manca:ppl",
+    "isNew": true,
+    "from": "s-a1-table-0018",
+    "check": true,
+    "forms": [
+     "fm:manca:ppl"
+    ]
    },
    {
     "cardId": "fm:pron-1sg:datShort",
@@ -2440,6 +2338,10 @@
    {
     "cardId": "fm:pron-2sg:datShort",
     "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-meta-0042",
+    "isNew": true
    },
    {
     "cardId": "fm:review:sg",
@@ -2471,6 +2373,14 @@
     "isNew": false
    },
    {
+    "cardId": "fm:un:f",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:unde:base",
+    "isNew": false
+   },
+   {
     "cardId": "fm:corect:msg",
     "isNew": true,
     "from": "s-a1-meta-0042",
@@ -2480,24 +2390,16 @@
     ]
    },
    {
-    "cardId": "fm:un:f",
-    "isNew": false
-   },
-   {
-    "cardId": "fm:unde:base",
-    "isNew": false
-   },
-   {
     "cardId": "fm:acum:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:ajutor:sg",
     "isNew": false
    },
    {
     "cardId": "lr:s-a1-decisions-0022",
     "isNew": true
-   },
-   {
-    "cardId": "fm:ajutor:sg",
-    "isNew": false
    },
    {
     "cardId": "fm:aux-fut-o:base",
@@ -2528,6 +2430,10 @@
     "isNew": false
    },
    {
+    "cardId": "fm:gata:base",
+    "isNew": false
+   },
+   {
     "cardId": "fm:decide:subj1sg",
     "isNew": true,
     "from": "s-a1-decisions-0022",
@@ -2535,10 +2441,6 @@
     "forms": [
      "fm:decide:subj1sg"
     ]
-   },
-   {
-    "cardId": "fm:gata:base",
-    "isNew": false
    },
    {
     "cardId": "fm:lui:base",
@@ -2603,12 +2505,12 @@
     "isNew": false
    },
    {
-    "cardId": "fm:cand:base",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-coaching-0024",
     "isNew": true
+   },
+   {
+    "cardId": "fm:cand:base",
+    "isNew": false
    },
    {
     "cardId": "fm:cluj:base",
@@ -2639,10 +2541,6 @@
     "isNew": false
    },
    {
-    "cardId": "fm:pleca:pres1sg",
-    "isNew": false
-   },
-   {
     "cardId": "fm:frica:sg",
     "isNew": true,
     "from": "s-a1-coaching-0024",
@@ -2652,8 +2550,16 @@
     ]
    },
    {
+    "cardId": "fm:pleca:pres1sg",
+    "isNew": false
+   },
+   {
     "cardId": "fm:pron-1pl:dat",
     "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-me-0050",
+    "isNew": true
    },
    {
     "cardId": "fm:sedinta:sgDef",
@@ -2664,19 +2570,11 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-me-0050",
-    "isNew": true
-   },
-   {
     "cardId": "fm:verifica:subj1sg",
     "isNew": false
    },
    {
     "cardId": "fm:zece:base",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0005",
     "isNew": false
    },
    {
@@ -2692,11 +2590,7 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0012",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0023",
+    "cardId": "lr:s-a1-standup-0034",
     "isNew": false
    },
    {
@@ -2707,10 +2601,6 @@
     "forms": [
      "fm:somn:sg"
     ]
-   },
-   {
-    "cardId": "lr:s-a1-standup-0034",
-    "isNew": false
    },
    {
     "cardId": "lr:s-a1-standup-0039",
@@ -2737,11 +2627,11 @@
     "isNew": true
    },
    {
-    "cardId": "xf:s-a1-standup-0019:0",
+    "cardId": "er:s-a1-standup-0010",
     "isNew": true
    },
    {
-    "cardId": "er:s-a1-standup-0010",
+    "cardId": "xf:s-a1-standup-0019:0",
     "isNew": true
    },
    {
@@ -2749,7 +2639,7 @@
     "isNew": true
    }
   ],
-  "estimateSec": 1772
+  "estimateSec": 1664
  },
  "seasoned/session/standup": {
   "queue": [
@@ -2770,24 +2660,16 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0022",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0027",
     "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0068",
-    "isNew": true
    },
    {
     "cardId": "lr:s-a1-standup-0031",
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0036",
-    "isNew": false
+    "cardId": "lr:s-a1-standup-0068",
+    "isNew": true
    },
    {
     "cardId": "lr:s-a1-standup-0041",
@@ -2798,29 +2680,8 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0014",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0017",
     "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0025",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0028",
-    "isNew": false
-   },
-   {
-    "cardId": "fm:incepe:pres1pl",
-    "isNew": true,
-    "from": "s-a1-standup-0068",
-    "check": true,
-    "forms": [
-     "fm:incepe:pres1pl"
-    ]
    },
    {
     "cardId": "lr:s-a1-standup-0030",
@@ -2835,10 +2696,6 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0054",
-    "isNew": true
-   },
-   {
     "cardId": "lr:s-a1-standup-0042",
     "isNew": false
    },
@@ -2847,16 +2704,25 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0007",
-    "isNew": false
+    "cardId": "fm:incepe:pres1pl",
+    "isNew": true,
+    "from": "s-a1-standup-0068",
+    "check": true,
+    "forms": [
+     "fm:incepe:pres1pl"
+    ]
    },
    {
-    "cardId": "lr:s-a1-standup-0019",
+    "cardId": "lr:s-a1-standup-0007",
     "isNew": false
    },
    {
     "cardId": "lr:s-a1-standup-0020",
     "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0054",
+    "isNew": true
    },
    {
     "cardId": "lr:s-a1-standup-0021",
@@ -2871,15 +2737,6 @@
     "isNew": false
    },
    {
-    "cardId": "fm:pron-3sg-f:acc",
-    "isNew": true,
-    "from": "s-a1-standup-0054",
-    "check": true,
-    "forms": [
-     "fm:pron-3sg-f:acc"
-    ]
-   },
-   {
     "cardId": "lr:s-a1-standup-0038",
     "isNew": false
    },
@@ -2892,21 +2749,20 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0067",
-    "isNew": true
-   },
-   {
     "cardId": "fm:asta:msg",
     "isNew": false
    },
    {
-    "cardId": "er:s-a1-standup-0011",
-    "isNew": false,
-    "composite": true,
-    "units": [
-     "aux-perf.1sg",
-     "gasi.ppl",
-     "eroare.sg"
+    "cardId": "fm:aux-perf:2sg",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:pron-3sg-f:acc",
+    "isNew": true,
+    "from": "s-a1-standup-0054",
+    "check": true,
+    "forms": [
+     "fm:pron-3sg-f:acc"
     ]
    },
    {
@@ -2916,6 +2772,10 @@
    {
     "cardId": "fm:cum:base",
     "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0067",
+    "isNew": true
    },
    {
     "cardId": "fm:deploy:sg",
@@ -2934,15 +2794,6 @@
     "isNew": false
    },
    {
-    "cardId": "fm:amana:ppl",
-    "isNew": true,
-    "from": "s-a1-standup-0067",
-    "check": true,
-    "forms": [
-     "fm:amana:ppl"
-    ]
-   },
-   {
     "cardId": "fm:lucra:ppl",
     "isNew": false
    },
@@ -2959,8 +2810,13 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0072",
-    "isNew": true
+    "cardId": "fm:amana:ppl",
+    "isNew": true,
+    "from": "s-a1-standup-0067",
+    "check": true,
+    "forms": [
+     "fm:amana:ppl"
+    ]
    },
    {
     "cardId": "fm:pron-2sg:datShort",
@@ -2969,6 +2825,10 @@
    {
     "cardId": "fm:review:sg",
     "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0072",
+    "isNew": true
    },
    {
     "cardId": "fm:termina:pres1sg",
@@ -3000,6 +2860,14 @@
     "isNew": false
    },
    {
+    "cardId": "fm:un:f",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:unde:base",
+    "isNew": false
+   },
+   {
     "cardId": "fm:zi:sg",
     "isNew": true,
     "from": "s-a1-standup-0072",
@@ -3009,20 +2877,8 @@
     ]
    },
    {
-    "cardId": "fm:un:f",
-    "isNew": false
-   },
-   {
-    "cardId": "fm:unde:base",
-    "isNew": false
-   },
-   {
     "cardId": "fm:acum:base",
     "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0060",
-    "isNew": true
    },
    {
     "cardId": "fm:ajutor:sg",
@@ -3031,6 +2887,10 @@
    {
     "cardId": "fm:aux-fut-o:base",
     "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0060",
+    "isNew": true
    },
    {
     "cardId": "fm:avea:pres3sg",
@@ -3053,7 +2913,15 @@
     "isNew": false
    },
    {
+    "cardId": "fm:eroare:sgDef",
+    "isNew": false
+   },
+   {
     "cardId": "fm:gata:base",
+    "isNew": false
+   },
+   {
+    "cardId": "fm:lui:base",
     "isNew": false
    },
    {
@@ -3064,10 +2932,6 @@
     "forms": [
      "fm:serios:fsg"
     ]
-   },
-   {
-    "cardId": "fm:lui:base",
-    "isNew": false
    },
    {
     "cardId": "fm:mihai:base",
@@ -3131,12 +2995,12 @@
     "isNew": false
    },
    {
-    "cardId": "fm:cand:base",
-    "isNew": false
-   },
-   {
     "cardId": "lr:s-a1-standup-0061",
     "isNew": true
+   },
+   {
+    "cardId": "fm:cand:base",
+    "isNew": false
    },
    {
     "cardId": "fm:cluj:base",
@@ -3167,10 +3031,6 @@
     "isNew": false
    },
    {
-    "cardId": "fm:pleca:pres1sg",
-    "isNew": false
-   },
-   {
     "cardId": "fm:critic:msg",
     "isNew": true,
     "from": "s-a1-standup-0061",
@@ -3180,8 +3040,16 @@
     ]
    },
    {
+    "cardId": "fm:pleca:pres1sg",
+    "isNew": false
+   },
+   {
     "cardId": "fm:pron-1pl:dat",
     "isNew": false
+   },
+   {
+    "cardId": "lr:s-a1-standup-0064",
+    "isNew": true
    },
    {
     "cardId": "fm:sedinta:sg",
@@ -3192,19 +3060,11 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0064",
-    "isNew": true
-   },
-   {
     "cardId": "fm:verifica:subj1sg",
     "isNew": false
    },
    {
     "cardId": "fm:zece:base",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0005",
     "isNew": false
    },
    {
@@ -3220,11 +3080,7 @@
     "isNew": false
    },
    {
-    "cardId": "lr:s-a1-standup-0012",
-    "isNew": false
-   },
-   {
-    "cardId": "lr:s-a1-standup-0023",
+    "cardId": "lr:s-a1-standup-0034",
     "isNew": false
    },
    {
@@ -3235,10 +3091,6 @@
     "forms": [
      "fm:deschide:pres1sg"
     ]
-   },
-   {
-    "cardId": "lr:s-a1-standup-0034",
-    "isNew": false
    },
    {
     "cardId": "lr:s-a1-standup-0039",
@@ -3265,11 +3117,11 @@
     "isNew": true
    },
    {
-    "cardId": "xf:s-a1-standup-0019:0",
+    "cardId": "er:s-a1-standup-0010",
     "isNew": true
    },
    {
-    "cardId": "er:s-a1-standup-0010",
+    "cardId": "xf:s-a1-standup-0019:0",
     "isNew": true
    },
    {
@@ -3277,6 +3129,6 @@
     "isNew": true
    }
   ],
-  "estimateSec": 1764
+  "estimateSec": 1656
  }
 }
