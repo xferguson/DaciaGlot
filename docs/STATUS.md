@@ -44,7 +44,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [T38](tasks/T38-credit-produced-words.md) | A word produced correctly in a sentence counts as its review | 3.7 | none | done | ccr-6fdfbc8e-hm4bje | EXP-12. New `core/credit.js`; one-call hooks in `review.js`. `creditProduced(state, okUnits, grade, now)` leaves a `// T39: partial credit here` marker; T37's `{multiplier}` is passed from `state.calibration` and ignored until T37 lands. |
 | [T39](tasks/T39-familiarity-credit.md) | Familiarity credit for words met in context | 3.7 | T37, T38 | todo | | EXP-12. New `core/familiarity.js`. |
 | [T40](tasks/T40-priming-guard.md) | Priming guard: don't test a word just seen | 3.7 | T37 | todo | | EXP-12. New `core/priming.js`; session view tracks shown units. |
-| [T41](tasks/T41-similar-sentences.md) | Near-identical sentences are siblings | 3.7 | none | review | ccr-9f091188-u2mxw7 | EXP-12. `core/similar.js` + `content.similarOf`; `g:` key in `cardKeys`. Real content: 85 groups covering 259 of 470 sentences. Golden fixture regenerated (similar due cards now buried). |
+| [T41](tasks/T41-similar-sentences.md) | Near-identical sentences are siblings | 3.7 | none | done | ccr-9f091188-u2mxw7 | EXP-12. `core/similar.js` + `content.similarOf`; `g:` key in `cardKeys`. Real content: 85 groups covering 259 of 470 sentences. Golden fixture regenerated (similar due cards now buried). |
 | [T42](tasks/T42-claims-shape-cards.md) | Claims shape the cards | 3.7 | T38 | todo | | EXP-12. `dropClaimDuplicates` queue step; 60-day claim check. |
 
 **Phase 3.5 · Less repetition.** Every T25–T30 task is a product experiment logged in [`EXPERIMENTS.md`](EXPERIMENTS.md). When its PR merges, set the experiment's status to `live since <date>`.
