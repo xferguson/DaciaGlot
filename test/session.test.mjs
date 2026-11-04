@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   gradeFromResult, buildSession, applyReview, dueCards, requeueWrong, dayKey, interimNewSentences, mixPlan,
-  spaceOut, cardKeys, keepStarted, markDifficult, applyCheck, burySiblings, nextDayStart, newSentenceSec, COLD_START_SEEN, ladderDays,
+  spaceOut, cardKeys, keepStarted, markDifficult, applyCheck, burySiblings, nextDayStart, newSentenceSec, COLD_START_SEEN,
   claimForm, unclaimForm, placeChecks, checkBlanks, CHECK_GAP, learnPlan, SEC_PER_NEW_FAST, MIX_MIN_NEW, MIX_BUDGET_SEC,
 } from "../app/js/core/session.js";
 import { newItemCount } from "../app/js/core/select.js";
@@ -253,22 +253,9 @@ test("new profile: Learn tops up to newItemsPerLearn with the easiest sentences"
   assert.equal(buildSession({ mode: "learn", state: st, content, now: NOW, rng }).queue.length, 0);
 });
 
-test("ladderDays: Medium climbs 1 → 4 → 16 → 64 → 256; Easy is 3× Medium's, capped", () => {
-  assert.equal(ladderDays(0, 3), 1);
-  assert.equal(ladderDays(10 / 1440, 3), 1); // a 10-minute learning step
-  assert.equal(ladderDays(1, 3), 4);
-  assert.equal(ladderDays(4, 3), 16);
-  assert.equal(ladderDays(14, 3), 16); // an older FSRS gap joins the ladder above it
-  assert.equal(ladderDays(64, 3), 256);
-  assert.equal(ladderDays(256, 3), 256);
-  assert.equal(ladderDays(0, 4), 3);
-  assert.equal(ladderDays(4, 4), 48);
-  assert.equal(ladderDays(64, 4), 256);
-});
-
-test("applyReview: always-Medium follows the ladder; always-Easy grows 3, 12, 48, 192, 256", () => {
+test("applyReview: always-Good grows 4, 12, 36, 108, 324, 365; always-Easy 10, 60, 360, 365", () => {
   const DAY = 864e5;
-  for (const [grade, want] of [[3, [1, 4, 16, 64, 256, 256]], [4, [3, 12, 48, 192, 256, 256]]]) {
+  for (const [grade, want] of [[3, [4, 12, 36, 108, 324, 365]], [4, [10, 60, 360, 365, 365]], [2, [2, 3, 5, 7, 10]]]) {
     let st = state();
     let t = NOW;
     const gaps = [];

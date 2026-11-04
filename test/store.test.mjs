@@ -20,14 +20,14 @@ const card = (lastReview, extra = {}) => ({
 test('defaultState has every documented field', () => {
   const s = defaultState(NOW);
   assert.deepEqual(Object.keys(s).sort(), [
-    'attempts', 'canDoChecked', 'cards', 'claimed', 'contentVersion', 'createdAt', 'difficult', 'flags', 'history',
+    'attempts', 'calibration', 'canDoChecked', 'cards', 'claimed', 'contentVersion', 'createdAt', 'difficult', 'flags', 'history',
     'lastCompactionAt', 'lexemeSentences', 'pace', 'schemaVersion', 'seenSentences', 'settings', 'unitAggregates',
   ]);
   assert.equal(s.schemaVersion, CURRENT_SCHEMA_VERSION);
   assert.equal(s.createdAt, NOW);
   assert.deepEqual(s.settings, {
     newPerSession: 8, newItemsPerLearn: 15, paceTarget: 15, adaptiveBatch: true, ttsRate: 0.9, voiceURI: null, autoplay: true, answerMode: 'speak',
-    registers: ['colloquial', 'neutral'], lastExportAt: null, ttsBannerDismissed: false, focus: [],
+    registers: ['colloquial', 'neutral'], lastExportAt: null, ttsBannerDismissed: false, focus: [], targetRetention: 0.85,
   });
 });
 

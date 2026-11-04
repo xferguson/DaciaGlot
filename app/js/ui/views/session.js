@@ -54,7 +54,7 @@ export function render(root, ctx) {
   const exposuresBefore = new Set(Object.keys(ctx.state.seenSentences));
   const stats = { cards: 0, correct: 0, newSentences: 0, difficult: 0 };
   const carriersUsed = new Set(); // sentences an `fm` card was already shown in this session
-  const struggled = new Set(); // cards graded Hard or Again once already this session (FR-S9)
+  const struggled = new Set(); // cards answered wrong once already this session (FR-S9)
   const patternsBefore = allPatternStates(ctx.state, ctx.content, Date.now());
 
   const home = `<a class="btn secondary block" href="#/home">Home</a>`;
@@ -185,10 +185,10 @@ export function render(root, ctx) {
         const seenBefore = Object.keys(ctx.state.seenSentences).length;
         const isEr = p.type === "er";
         const units = unitsRequiredForCard(shown, ctx.content);
-        // FR-S9: Hard or wrong → back once, 3–5 cards later; a second time → off to the difficult list.
+        // FR-S9: wrong → back once, 3–5 cards later; wrong a second time → off to the difficult list. Hard is not re-queued.
         // A missed `er` waits for the ladder; its wrong parts return as single-form reviews (FR-D6).
-        const requeue = grade <= 2 && !isEr && !struggled.has(item.cardId);
-        const markHard = grade <= 2 && !isEr && struggled.has(item.cardId) && !(item.cardId in ctx.state.difficult);
+        const requeue = grade === 1 && !isEr && !struggled.has(item.cardId);
+        const markHard = grade === 1 && !isEr && struggled.has(item.cardId) && !(item.cardId in ctx.state.difficult);
         ctx.update((s) => {
           const reviewed = isEr
             ? applyErReview(s, item.cardId, grade, units, erMisses(sentence, r.diff), now, ctx.content, shown, item.composite ? item.units : null)

@@ -5,6 +5,7 @@ import { loadContent } from "./data/content.js";
 import * as tts from "./data/tts.js";
 import { showBanner } from "./ui/components/banner.js";
 import { exportReminderDue } from "./ui/models/summary.js";
+import { dailyNudge } from "./core/calibrate.js";
 import { toast } from "./ui/components/toast.js";
 
 function registerServiceWorker() {
@@ -82,6 +83,10 @@ async function boot() {
   if (ctx.state.contentVersion !== ctx.content.contentVersion) {
     ctx.update((s) => ({ ...s, contentVersion: ctx.content.contentVersion }));
   }
+
+  // EXP-11: once per local day, nudge the gap multiplier towards the target retention.
+  const nudged = dailyNudge(ctx.state.calibration, ctx.state.settings.targetRetention, Date.now());
+  if (nudged !== ctx.state.calibration) ctx.update((s) => ({ ...s, calibration: nudged }));
 
   // First run: ask the browser not to evict our storage.
   navigator.storage?.persist?.().catch?.(() => {});

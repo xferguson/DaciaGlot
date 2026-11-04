@@ -23,6 +23,9 @@ export function render(root, ctx) {
       <label for="paceTarget">Pace target (new items per 10 min)</label>
       <input id="paceTarget" type="number" min="3" max="60" inputmode="numeric">
       <label class="check"><input id="adaptiveBatch" type="checkbox"> Adapt the Learn batch to my pace and check accuracy</label>
+      <label for="retention">Target retention: <span data-retention></span>%</label>
+      <input id="retention" type="range" min="75" max="95" step="1">
+      <p class="muted">Lower = longer gaps, fewer reviews.</p>
       <label for="newPer">New sentences per session</label>
       <input id="newPer" type="number" min="1" max="30" inputmode="numeric">
       <label for="voice">Voice</label>
@@ -64,6 +67,11 @@ export function render(root, ctx) {
   q("#newPer").addEventListener("change", (e) => {
     update({ newPerSession: Math.min(30, Math.max(1, Math.round(Number(e.target.value)) || 8)) });
   });
+  const ret = q("#retention");
+  ret.value = Math.round((s0.targetRetention ?? SETTINGS_DEFAULTS.targetRetention) * 100);
+  q("[data-retention]").textContent = ret.value;
+  ret.addEventListener("input", () => { q("[data-retention]").textContent = ret.value; });
+  ret.addEventListener("change", () => update({ targetRetention: Number(ret.value) / 100 }));
   const sel = q("#voice");
   sel.append(new Option("Automatic", ""));
   for (const v of list) sel.append(new Option(`${v.name} (${v.lang})`, v.voiceURI));

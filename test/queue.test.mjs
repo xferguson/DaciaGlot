@@ -90,7 +90,7 @@ test("estimate: due + drills + new sentences by forms, cheaper per new sentence 
 test("session.js still exports every name it used to", () => {
   const names = ["dayKey", "addMinutes", "QUICK_CAP", "SEC_PER_REVIEW", "SEC_PER_NEW", "SEC_PER_NEW_FAST", "MIX_MIN_NEW", "MIX_BUDGET_SEC", "MIX_OUTSIDE",
     "COLD_START_SEEN", "newSentenceSec", "cardKeys", "spaceOut", "nextDayStart", "FAST_TRACK_DAYS", "keepStarted", "markDifficult", "mixPlan", "learnPlan",
-    "MEDIUM_LADDER_DAYS", "EASY_FACTOR", "ladderDays", "gradeFromResult", "claimForm", "unclaimForm", "dueCards", "dueCount", "interimNewSentences",
+    "gradeFromResult", "claimForm", "unclaimForm", "dueCards", "dueCount", "interimNewSentences",
     "inFocus", "dueInFocus", "focusFirst", "burySiblings", "onePerFamily", "CHECK_GAP", "placeChecks", "checkBlanks", "buildSession", "composeReviews",
     "applyReview", "erMisses", "applyErReview", "applyParadigm", "applyCheck", "requeueWrong"];
   for (const n of names) assert.ok(n in barrel, n);
