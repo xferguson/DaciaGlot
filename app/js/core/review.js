@@ -5,7 +5,7 @@ import { isFastTrackUnit } from "./select.js";
 import { startOfDayPlus } from "./time.js";
 import { unitId, parseUnitId } from "./unit-id.js";
 import { bumpDay } from "./history.js";
-import { scheduleCard } from "./schedule.js";
+import { scheduleCard, partialCredit, PRIMED_CREDIT } from "./schedule.js";
 import { recallEntry, appendRecall } from "./calibrate.js";
 import { creditProduced } from "./credit.js";
 import { exposureCredit } from "./familiarity.js";
@@ -83,14 +83,18 @@ function exposure(state, sentenceId, now, content) {
  * FSRS update (gaps from `scheduleCard`, scaled by `state.calibration.multiplier`; due `fm`/`er` reviews feed the recall log), attempts (production cards only, PRD FR-S3), `lr` exposure, day stats.
  * `unitsRequired` is `{u, lx}[]` from `unitsRequiredForCard`. `content` is only needed for `lr` exposure.
  * For an `fm` card, `presentedId` is the id it was shown as (`cz:<sid>:<i>` or `kf:<lex>:<form>`), recorded on the attempts; `unitsRequired` comes from it.
+ * `primed` (T40, FR-S14): the card tested a word that was just on screen. A correct answer then only earns `partialCredit`
+ * (`PRIMED_CREDIT`): no full review, no recall log, no `fm` credit; a wrong answer counts fully.
  * Returns a new state; the input is not mutated.
  */
-export function applyReview(state, cardId, grade, unitsRequired, now, content, presentedId = cardId) {
+export function applyReview(state, cardId, grade, unitsRequired, now, content, presentedId = cardId, { primed = false } = {}) {
   const p = parseCardId(cardId);
   const prev = state.cards[cardId];
-  const card = scheduleCard(prev, grade, now, { multiplier: state.calibration?.multiplier ?? 1 });
+  const multiplier = state.calibration?.multiplier ?? 1;
+  const partial = primed && grade >= 2 && p.type !== "lr" ? partialCredit(prev, PRIMED_CREDIT, now, { multiplier }) : null;
+  const card = partial ?? scheduleCard(prev, grade, now, { multiplier });
   const next = { ...state, cards: { ...state.cards, [cardId]: card } };
-  if (p.type !== "lr") next.calibration = appendRecall(state.calibration, recallEntry(prev, grade, now), now);
+  if (p.type !== "lr" && !partial) next.calibration = appendRecall(state.calibration, recallEntry(prev, grade, now), now);
   let isNewSentence = false;
   if (p.type === "lr") {
     isNewSentence = !(p.sentenceId in state.seenSentences);
@@ -102,7 +106,7 @@ export function applyReview(state, cardId, grade, unitsRequired, now, content, p
     }
     next.attempts = [...state.attempts, ...makeAttempts(unitsRequired, grade >= 2, now, presentedId)];
     // FR-R7: units produced in a transform / slot card count as their own review.
-    if ((p.type === "xf" || p.type === "sb") && grade >= 2) Object.assign(next, creditProduced(next, unitsRequired.map(({ u }) => u), grade, now));
+    if ((p.type === "xf" || p.type === "sb") && grade >= 2 && !partial) Object.assign(next, creditProduced(next, unitsRequired.map(({ u }) => u), grade, now));
   }
   next.history = bumpDay(state.history, now, (d) => {
     d.cards += 1;
@@ -155,12 +159,12 @@ const compositeParts = (composite, grade) => (grade === 1
  * retry); without `misses` a wrong card fails them all and any other grade passes them all. A composite on an
  * unseen sentence also marks it seen. Returns a new state.
  */
-export function applyErReview(state, cardId, grade, unitsRequired, misses, now, content, presentedId = cardId, composite = null) {
+export function applyErReview(state, cardId, grade, unitsRequired, misses, now, content, presentedId = cardId, composite = null, { primed = false } = {}) {
   const parts = misses ?? (composite ? compositeParts(composite, grade) : null);
-  if (!parts) return applyReview(state, cardId, grade, unitsRequired, now, content, presentedId);
+  if (!parts) return applyReview(state, cardId, grade, unitsRequired, now, content, presentedId, { primed });
   const clozeIds = new Set([...parts.missed, ...parts.ok]);
   const rest = unitsRequired.filter(({ u }) => !clozeIds.has(u));
-  let next = applyReview(state, cardId, grade, rest, now, content, presentedId);
+  let next = applyReview(state, cardId, grade, rest, now, content, presentedId, { primed });
   if (composite) Object.assign(next, exposure(next, parseCardId(cardId).sentenceId, now, content));
   const lxOf = new Map(unitsRequired.map(({ u, lx }) => [u, lx]));
   const missedSet = new Set(parts.missed);

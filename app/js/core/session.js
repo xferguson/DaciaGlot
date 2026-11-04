@@ -10,4 +10,5 @@ export * from "./schedule.js";
 export * from "./review.js";
 export * from "./due.js";
 export * from "./spacing.js";
+export * from "./priming.js";
 export * from "./queue.js";
