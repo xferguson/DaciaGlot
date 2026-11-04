@@ -29,7 +29,10 @@ test("on-time fm cards get a full review; Hard stays Hard", () => {
 test("early cards, claimed units and units without a Review fm card are untouched", () => {
   const s = st({ "fm:a:base": fm(4, 1), "fm:c:base": fm(4, 4) });
   s.claimed["c.base"] = NOW;
-  assert.equal(creditProduced(s, ["a.base", "c.base", "z.base"], 3, NOW), s);
+  const out = creditProduced(s, ["a.base", "c.base", "z.base"], 3, NOW);
+  assert.equal(out.cards["fm:c:base"], s.cards["fm:c:base"]);
+  assert.equal(out.cards["fm:a:base"].lastReview, s.cards["fm:a:base"].lastReview); // early: partial credit only (T39), no review
+  assert.ok(out.cards["fm:a:base"].due >= s.cards["fm:a:base"].due);
 });
 
 test("correct er reviews the on-time fm of its correct parts; a missed part still fails", () => {
@@ -37,7 +40,7 @@ test("correct er reviews the on-time fm of its correct parts; a missed part stil
   const out = applyErReview(s, "er:s", 3, units("a.base", "b.base", "c.base"), { missed: ["b.base"], ok: ["a.base", "c.base"], missedTokens: ["b"] }, NOW, null);
   assert.ok(reviewed(s.cards["fm:a:base"], out.cards["fm:a:base"]));
   assert.equal(out.cards["fm:b:base"].lastGrade, 1);
-  assert.equal(out.cards["fm:c:base"], s.cards["fm:c:base"]); // early
+  assert.equal(out.cards["fm:c:base"].lastReview, s.cards["fm:c:base"].lastReview); // early: partial credit only (T39)
 });
 
 test("composite units are reviewed once, not twice", () => {

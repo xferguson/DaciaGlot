@@ -20,7 +20,7 @@ const card = (lastReview, extra = {}) => ({
 test('defaultState has every documented field', () => {
   const s = defaultState(NOW);
   assert.deepEqual(Object.keys(s).sort(), [
-    'attempts', 'calibration', 'canDoChecked', 'cards', 'claimed', 'contentVersion', 'createdAt', 'difficult', 'flags', 'history',
+    'attempts', 'calibration', 'canDoChecked', 'cards', 'claimed', 'contentVersion', 'createdAt', 'difficult', 'familiarity', 'flags', 'history',
     'lastCompactionAt', 'lexemeSentences', 'pace', 'schemaVersion', 'seenSentences', 'settings', 'unitAggregates',
   ]);
   assert.equal(s.schemaVersion, CURRENT_SCHEMA_VERSION);
