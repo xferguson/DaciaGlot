@@ -245,3 +245,74 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
   3. Is the target (15 per 10 min) right?
 - **Rollback:** hide the pace block; fixed batch size.
 - **Observations:** _none yet_
+
+---
+
+## Check-in · 2026-11-04 · review load
+
+**Owner:** "Things don't go fast enough because of the amount of reviews, and my success rate with reviews is way too high for what would be effective." Two standing rules from the owner: **every subsequent success should lengthen the time to the next review, whatever the rating**, and the Hard/Medium/Easy spacing should fit them. A second complaint: being tested on words they already marked *I can produce this*, or on a word that was on screen a card or two earlier ("it's still in my working memory").
+
+**Causes found in the code:**
+
+- Hard on a young card loops. At the 1-day rung it comes back in 10 minutes, every session, until the owner answers Medium. At the 256-day rung, Hard shortens the gap to 250 days.
+- The Medium ladder (1 → 4 → 16 → 64 → 256 d) and Easy (3× that) are fixed, and FSRS runs on default weights that were never fitted to the owner. Under those defaults the ladder already expects about 96 %, 93 %, 90 %, 87 % and 85 % recall at the five rungs.
+- A word typed correctly inside a whole-sentence card gives its own `fm` card no credit (a miss does fail it).
+- `spaceOut` keeps related cards only 2 apart, and it only knows *tested* words, not words that were on screen.
+- A sentence of only claimed words still becomes an EN→RO card.
+
+**Research summary:**
+
+- **Default targets elsewhere.** Anki FSRS targets 90 % retention and fits weights to the user. SuperMemo defaults to about 95 % retention (forgetting index 10 %, recommended 5–14 %). Classic Anki uses ×2.5 per success, with Hard ×1.2 and Easy ×1.3.
+- **Workload.** Total review time against target retention is U-shaped (FSRS wiki).
+- **Gap and test delay.** The optimal gap shrinks from 20–40 % of the test delay at 1 week to 5–10 % at 1 year (Cepeda et al. 2008).
+- **Effortful success.** Successful retrieval after some forgetting builds more memory than easy success (Bjork's desirable difficulties; Pyc & Rawson 2009).
+- **Working backwards from success rate.** Under the FSRS forgetting curve, an observed 95 % implies gaps about 2.2× too short for a 90 % target and about 3.6× too short for 85 %; 97 % implies about 3.7× and 6×.
+- **Implicit credit.** Math Academy's FIRe gives discounted credit to items practised inside other items, because such repetitions are "often too early to count for full credit". Anki only buries siblings of the same note.
+- **Priming.** High retrieval strength means little gain in storage strength (Bjork & Bjork), so a right answer just after an exposure is weak evidence.
+
+**Decisions:**
+
+| Question | Decision |
+|---|---|
+| Spacing | Every success lengthens. Hard 2 d then ×1.5, Medium 4 d then ×3, Easy 10 d then ×6, times a personal multiplier. |
+| Hard in session | Not re-queued; next review on a later day. Only wrong answers come back in the session. |
+| Target retention | Setting, default **85 %**. The multiplier is nudged **daily** toward it (≤ ±5 %/day, 0.5×–4×). |
+| Export for a starting point | No. Start at 1.0 and let the daily nudge find it. |
+| Familiarity / priming | Split into separate tasks so they can run in parallel. A primed correct answer gets **partial** credit. |
+
+---
+
+## EXP-11 · Spacing that fits you · [T37](tasks/T37-calibrated-spacing.md)
+
+- **Status:** planned
+- **Complaint:** "My success rate with reviews is way too high for what would be effective."
+- **Hypothesis:** if every success lengthens the gap and a personal multiplier is nudged each day toward an 85 % target, reviews per day drop and each review takes some effort, with no rise in long-gap failures beyond the target.
+- **Change:** new gap rules (Hard 2 d / ×1.5, Medium 4 d / ×3, Easy 10 d / ×6, never shorter than the last gap, cap 365 d). Hard is no longer re-queued in the session. Daily nudge on due reviews with a gap of ≥ 4 d; a target-retention slider (default 85 %); a dashboard line "target vs actual · gaps ×m".
+- **Expected felt difference:** noticeably fewer reviews; reviews that sometimes make you think; a Hard answer no longer sends a card straight back.
+- **Check-in questions:**
+  1. Did the daily review count drop? By roughly how much?
+  2. What does the dashboard say your actual rate is? Does that match how it feels?
+  3. Is 85 % the right target, or do misses feel too frequent?
+  4. Did anything come back much too late?
+- **Rollback:** multiplier fixed at 1 and the old ladder restored (`baseGap` is ignored by the old code).
+- **Observations:** _none yet_
+
+## EXP-12 · Credit what you already know · [T38](tasks/T38-credit-produced-words.md)–[T42](tasks/T42-claims-shape-cards.md)
+
+- **Status:** planned
+- **Complaint:** "How often am I being tested on something that I've marked I can produce this … if the first sentence contained the second sentence's word, then it's still in my working memory."
+- **Hypothesis:** if words get credit when produced or met in other cards (T38, T39), aren't tested right after they were on screen (T40), near-identical sentences are spread apart (T41), and claimed words stop generating tests (T42), the review count drops further and the reviews that remain feel like real recall.
+- **Change:**
+  - T38: a correct part of an EN→RO, transform or slot card reviews that word's own card when it's on time.
+  - T39: a discounted bump for words met in context (25 % seen, 50 % produced early).
+  - T40: a card is moved or deferred if its word was on screen earlier in the session; a forced primed success gets 25 % credit.
+  - T41: sentences sharing ≥ 50 % of their content words count as siblings.
+  - T42: all-claimed sentences only get a 60-day claim check; all-but-one-claimed becomes one card, not two.
+- **Expected felt difference:** fewer "I just saw that" moments; fewer cards for things you've claimed; a sentence answer counts for its words.
+- **Check-in questions:**
+  1. Do you still get a word tested shortly after it was on screen?
+  2. Do claimed words still turn up as tests? When they do (the claim check), does it feel fair?
+  3. Did near-identical sentences stop coming back to back?
+  4. Does anything feel like it comes back too rarely now?
+- **Rollback:** each task is independent. Remove its hook (credit, guard, `g:` key or queue step) and the schedules stay valid.
+- **Observations:** _none yet_

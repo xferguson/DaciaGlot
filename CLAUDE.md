@@ -22,7 +22,7 @@ DaciaGlot is an offline-first PWA for learning to **speak** Romanian. It is vani
 
 ## Product check-ins
 
-When the owner asks for a product check-in (or to "check in as product designer"), read `docs/EXPERIMENTS.md` and follow its check-in protocol. Don't pick a task first. When a task that is tied to an experiment (T25–T30) merges, set that experiment's status to `live since <date>` in the same STATUS follow-up PR.
+When the owner asks for a product check-in (or to "check in as product designer"), read `docs/EXPERIMENTS.md` and follow its check-in protocol. Don't pick a task first. When a task that is tied to an experiment (T25 onward; see its **Experiment** row) merges, set that experiment's status to `live since <date>` in the same STATUS follow-up PR.
 
 ## Ground rules
 

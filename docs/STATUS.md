@@ -40,9 +40,22 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [T34](tasks/T34-romance-fast-track.md) | Romance fast-track: transparent vs divergent material | 3.6 | T33 | done | ccr-a7865a2c-9c5mkx | EXP-08. Owner speaks FR/IT/ES/PT. 95 of 281 lexemes `transparent`, 9 patterns `divergent`. `select.js` exports `isFastTrackUnit` (free for the novelty cap); `applyCheck` gained a trailing `content` arg and `FAST_TRACK_DAYS` (4). Unit-level rule: a unit any sentence uses in a divergent slot is never free. Validator rule 13; coverage shows the flags. APP_VERSION 0.19.0. Headless only. |
 | [T35](tasks/T35-faster-answers.md) | Faster answers: speak and self-grade, word tiles, lenient typing | 3.6 | none | done | ccr-99fbe8a6-kta10n | EXP-09. `checkAnswer` gained `correct-typo`/`typo` and an `{avoid}` option; `cards.js` exports `tileOptions`, `lexemeForms`. `answer-mode.js`/`tiles.js` mount the mode per `er`/`xf`/`sb` card (`onSetting` persists `answerMode`); cloze stays typed (lenient + auto-advance). Tapping the feedback cancels auto-advance, which is how to claim a word; the summary word list was not touched. APP_VERSION 0.17.0. Headless only (375 px, light + dark). Auto-advance and `autoAdvance` removed 2026-11-01 (owner preference). |
 | [T36](tasks/T36-pace-meter.md) | Show the pace, adapt the batch | 3.6 | T33 | done | ccr-1c396867-bddug8 | EXP-10. `core/pace.js` (`sessionPace`, `weeklyIntake`, `nextBatchSize`, `learnBatch`, `recordSession`); settings `paceTarget`, `adaptiveBatch`; `state.pace {batch, history}`; `history[day].newItems`. Learn reads `learnBatch(state)` (adapted size) instead of `newItemsPerLearn`. APP_VERSION 0.19.0. Headless only (375 px, light + dark). |
+| [T37](tasks/T37-calibrated-spacing.md) | Spacing that fits you: every success lengthens, daily nudge to target retention | 3.7 | none | todo | | EXP-11. Freezes `scheduleCard(prev, grade, now, {multiplier})` and `partialCredit(prev, fraction, now, {multiplier})` for T39/T40. |
+| [T38](tasks/T38-credit-produced-words.md) | A word produced correctly in a sentence counts as its review | 3.7 | none | todo | | EXP-12. New `core/credit.js`; one-call hooks in `review.js`. |
+| [T39](tasks/T39-familiarity-credit.md) | Familiarity credit for words met in context | 3.7 | T37, T38 | todo | | EXP-12. New `core/familiarity.js`. |
+| [T40](tasks/T40-priming-guard.md) | Priming guard: don't test a word just seen | 3.7 | T37 | todo | | EXP-12. New `core/priming.js`; session view tracks shown units. |
+| [T41](tasks/T41-similar-sentences.md) | Near-identical sentences are siblings | 3.7 | none | todo | | EXP-12. New `core/similar.js`; `g:` key in `cardKeys`. |
+| [T42](tasks/T42-claims-shape-cards.md) | Claims shape the cards | 3.7 | T38 | todo | | EXP-12. `dropClaimDuplicates` queue step; 60-day claim check. |
+
 **Phase 3.5 · Less repetition.** Every T25–T30 task is a product experiment logged in [`EXPERIMENTS.md`](EXPERIMENTS.md). When its PR merges, set the experiment's status to `live since <date>`.
 
 **Phase 3.6 · Pace.** From the 2026-11-01 check-in (EXPERIMENTS.md, EXP-07 to EXP-10). Same rule: when a task's PR merges, set its experiment to `live since <date>`.
+
+**Phase 3.7 · Fewer, better reviews.** From the 2026-11-04 check-in (EXPERIMENTS.md, EXP-11 and EXP-12). Built to run in parallel:
+
+- **Wave 1 (start now, 3 sessions):** T37, T38, T41. No dependencies on each other.
+- **Wave 2:** T40 once T37 is merged; T42 once T38 is merged; T39 once both T37 and T38 are merged.
+- **Overlaps:** several tasks touch `core/review.js` (each in its own function, through a one-call hook), `ui/views/session.js` (T37, T40), and `APP_VERSION` in `version.js` + `sw.js`. On a version conflict, take the higher version and bump the patch.
 
 **Code quality (Q).** From the 2026-11-01 code audit; see [Q00](tasks/Q00-code-quality-overview.md) for the rules and the waves. Q tasks don't change behavior, and each lands characterization tests before the code it rewrites. Q and T tasks are picked the same way (lowest-numbered `todo` with deps `done`), with T tasks first.
 
