@@ -76,6 +76,7 @@ test/*.test.mjs              # node --test; import from ../app/js/core/*
  * @property {Map<string, string>} familyOf          sentence id → familyId
  * @property {Map<string, Set<string>>} familyForms  familyId → the `<lex>.<form>` units its members differ in
  * @property {Map<string, string[]>} familiesOfUnit  unit → familyIds it varies in
+ * @property {Map<string, string[]>} similarOf       sentence id → its similar-sentence group (members, sorted, incl. itself); built by `similarGroups` (`core/similar.js`, T41); absent if it has no similar sentence
  */
 ```
 
@@ -326,6 +327,7 @@ erMisses(sentence, diff) → {missed, ok, missedTokens} | null  // FR-D6: cloze 
 applyErReview(state, cardId, grade, unitsRequired, misses, now, content, presentedId?, composite?) → AppState  // FR-D6: `applyReview` for the `er` card, plus part-level credit: missed units get c:0 and their `fm` Again (created due now if absent; claim dropped), correct units get c:1 and keep their `fm`. `misses` null → whole card graded. A wrong `er` is not re-queued in the session. With `composite` (the unit ids a composite was built for): its correct forms get their `fm` reviewed (Good; Easy if rated Easy; Hard after a hint or retry), missed forms Again, and an unseen sentence becomes seen (no `newSentences` count). Without `misses`, grade 1 fails every composite form and any other grade passes them all.
 composeReviews(ids, state, content, now, rng, focus?) → {ids, comps}  // FR-V1: replaces the due `fm` ids of easy forms by `er:<sid>` composites (greedy `pickComposite`, ≤ 4 forms each, none left with ≥ 2); `comps` maps sid → units. `buildSession` applies it after `onePerFamily` and before `burySiblings`, in review/quick/mix/session
 onePerFamily(cardIds, content, rng) → string[]  // FR-R5: of the due `fm` cards whose forms vary inside one family, one at random stays; `buildSession` applies it before `burySiblings`
+creditProduced(state, okUnits, grade, now) → AppState  // T38, FR-R7 (`credit.js`): each ok unit whose `fm` card is in Review state and ≥ 50 % through its gap gets `scheduleCard(card, grade, now)`; early, claimed and absent cards are left. `applyErReview` passes the correct parts not in a composite; `applyReview` passes the target units of a passed `xf`/`sb`
 applyParadigm(state, item, now, content) → AppState  // FR-R5: every `item.members` sentence becomes seen (as `lr`), counted as one card; `item.deferred` `fm` cards are created due `nextDayStart(now)`
 dueCards(state, content, now) → string[]      // due + unlocked card ids, most overdue first; `fm` cards of claimed forms are left out
 claimForm(state, unit, now) → AppState        // FR-R4: state.claimed[unit] = now (pure; creates no card)
@@ -334,7 +336,7 @@ dueCount(state, content, now) → number
 requeueWrong(queue, pos, item, rng, content?) → {queue, at}  // PRD FR-S9: pure; a new queue with a wrong card back 3–5 cards later (with content: up to 3 more, away from related cards)
 inFocus(cardId, focus, content, state?) → boolean      // FR-S8: card's sentence is in any focus topic; an `fm` is in focus if any seen carrier sentence is (needs `state`); legacy kf never; empty focus → true. `focus` is one {type,id}, a list, or null everywhere.
 dueInFocus(state, content, now, focus) → string[]  // dueCards filtered by inFocus
-cardKeys(item, content) → Set<string>          // "s:<sentence>" (also the `from` sentence of a new `fm`), "l:<target lexeme>", "new" for a new lr
+cardKeys(item, content) → Set<string>          // "s:<sentence>" (also the `from` sentence of a new `fm`), "g:<similar group>" for the sentence or `from` sentence (T41), "l:<target lexeme>", "new" for a new lr
 spaceOut(queue, content) → QueueItem[]        // PRD FR-S11; buildSession applies it to every queue
 applyCheck(state, cardId, correct, unitsRequired, now, presentedId = cardId, content = null) → AppState  // FR-R2: immediate check of a new form: `enc` attempts, creates the `fm` card due `nextDayStart(now)` whatever the answer, except (T34, FR-V3, needs `content`) a right check of a fast-track form is due `FAST_TRACK_DAYS` (4) days later; no FSRS review
 placeChecks(queue) → QueueItem[]              // FR-R2 (T31): each check ≥ CHECK_GAP (8) cards after its lr/paradigm, never next to another check; too short → end

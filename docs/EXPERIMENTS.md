@@ -299,14 +299,14 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
 
 ## EXP-12 · Credit what you already know · [T38](tasks/T38-credit-produced-words.md)–[T42](tasks/T42-claims-shape-cards.md)
 
-- **Status:** planned
+- **Status:** live since 2026-11-04 (T38, T41 merged; T39, T40, T42 still to come)
 - **Complaint:** "How often am I being tested on something that I've marked I can produce this … if the first sentence contained the second sentence's word, then it's still in my working memory."
 - **Hypothesis:** if words get credit when produced or met in other cards (T38, T39), aren't tested right after they were on screen (T40), near-identical sentences are spread apart (T41), and claimed words stop generating tests (T42), the review count drops further and the reviews that remain feel like real recall.
 - **Change:**
   - T38: a correct part of an EN→RO, transform or slot card reviews that word's own card when it's on time.
   - T39: a discounted bump for words met in context (25 % seen, 50 % produced early).
   - T40: a card is moved or deferred if its word was on screen earlier in the session; a forced primed success gets 25 % credit.
-  - T41: sentences sharing ≥ 50 % of their content words count as siblings.
+  - T41 (built, `g:` key in `cardKeys`): sentences sharing ≥ 50 % of their content words count as siblings.
   - T42: all-claimed sentences only get a 60-day claim check; all-but-one-claimed becomes one card, not two.
 - **Expected felt difference:** fewer "I just saw that" moments; fewer cards for things you've claimed; a sentence answer counts for its words.
 - **Check-in questions:**
