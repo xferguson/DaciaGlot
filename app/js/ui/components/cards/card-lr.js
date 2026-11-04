@@ -11,9 +11,10 @@ import { pickDistractors } from "../../models/card-lr.js";
 export { shuffle, pickDistractors };
 
 
-export function renderCard(root, { card, sentence, content, speak: speakIn, rate: rateIn, tts, settings = {}, onResult, claims = null, rng = Math.random }) {
+export function renderCard(root, { card, sentence, content, speak: speakIn, rate: rateIn, tts, settings = {}, onResult, claims = null, rng = Math.random, onOptions = null }) {
   const { speak, rate } = speechFor({ speak: speakIn, rate: rateIn, tts, settings });
   const options = shuffle([sentence, ...pickDistractors(sentence, content, rng)], rng);
+  onOptions?.(options);
   root.innerHTML = `
     <section class="card card-lr" data-card="${card?.id ?? card ?? ""}">
       <p class="muted">What did you hear?</p>

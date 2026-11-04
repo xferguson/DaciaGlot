@@ -31,13 +31,13 @@ afterEach(() => {
   mock.restoreAll();
 });
 
-function start(st, params = { mode: "quick" }) {
+function start(st, params = { mode: "quick" }, withContent = content) {
   const root = document.createElement("div");
   document.body.append(root);
   const saves = [];
   const ctx = {
     state: st,
-    content,
+    content: withContent,
     route: { params },
     store: { save: (s) => saves.push(s), flush: () => { ctx.flushes++; } },
     update(fn) { ctx.state = fn(ctx.state); ctx.store.save(ctx.state); return ctx.state; },
@@ -256,4 +256,35 @@ test("the × button navigates home; the empty state shows when nothing is due", 
   assert.equal(empty.root.querySelector("p.muted").textContent, "Nothing is due. Nice work.");
   const focused = start(state(), { mode: "review", f: "situation:nowhere" });
   assert.equal(focused.root.querySelector("p.muted").textContent, "Nothing in this focus right now. Clear the focus on Home or pick another topic.");
+});
+
+test("T40: a card whose word was just on screen is deferred; a forced primed success only earns partial credit", () => {
+  // The lr card for s0 puts a0 b0 and its distractors (here s1 and s6: a1 b1 x6) on screen.
+  const s6 = sentence("s6", "b0 x6", [u("b0"), u("x6")], { en: "e6" });
+  const c2 = makeContent([...sents.slice(0, 2), s6], [...lexemes.filter((l) => /^[ab][01]$/.test(l.id)), { id: "x6", lemma: "x6", pos: "noun", gloss: "g", forms: { base: "x6" } }]);
+  const st = state();
+  const old = { ...newCard(NOW - 20 * 86400000), state: 2, lastReview: NOW - 20 * 86400000, baseGap: 10 };
+  st.seenSentences = { s0: NOW, s1: NOW, s6: NOW };
+  st.cards["lr:s0"] = { ...old, due: NOW - 4000 };
+  st.cards["fm:b0:base"] = { ...old, due: NOW - 3000 };
+  st.cards["fm:a1:base"] = { ...old, due: NOW - 2000 };
+  const s = start(st, { mode: "review" }, c2);
+  s.answerLr(true);
+  // Both fm words were on screen; with no unprimed card in reach the first is left for another session...
+  assert.equal(s.card().dataset.card, "cz:s1:0", "the last card left is shown anyway");
+  for (const input of s.root.querySelectorAll("[data-card] input")) input.value = "a1";
+  s.tap("Check");
+  s.tap("Medium");
+  assert.ok(s.isSummary());
+  // The deferred card was not reviewed (T39 may still give it a small "seen" bump for the lr card).
+  const deferred = s.ctx.state.cards["fm:b0:base"];
+  assert.equal(deferred.reps, 0, "no review");
+  assert.equal(deferred.lastReview, old.lastReview);
+  assert.equal(deferred.baseGap, 10);
+  assert.ok(!s.ctx.state.attempts.some((a) => a.u === "b0.base"), "no attempt on the deferred word");
+  // ...and the forced one gets partial credit: later, but no full review.
+  const after = s.ctx.state.cards["fm:a1:base"];
+  assert.ok(after.due >= NOW - 2000, "never earlier");
+  assert.equal(after.baseGap, 10, "baseGap untouched");
+  assert.equal(after.lastCredit, NOW);
 });

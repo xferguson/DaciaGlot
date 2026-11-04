@@ -1,5 +1,5 @@
 // Study loop: Quick / Mix / Learn / Review / Focus (PRD FR-S2…S9). Renders T07 cards one after another.
-import { buildSession, gradeFromResult, applyReview, applyErReview, erMisses, applyParadigm, applyCheck, checkBlanks, addMinutes, requeueWrong, keepStarted, markDifficult, claimForm, unclaimForm } from "../../core/session.js";
+import { buildSession, gradeFromResult, applyReview, applyErReview, erMisses, applyParadigm, applyCheck, checkBlanks, addMinutes, requeueWrong, keepStarted, markDifficult, claimForm, unclaimForm, shownUnits, isPrimed, deferPrimed } from "../../core/session.js";
 import { parseCardId, unitIdOfFm, exampleSentenceFor } from "../../core/cards.js";
 import { unitsRequiredForCard } from "../../core/units.js";
 import { resolveFm } from "../../core/carrier.js";
@@ -54,6 +54,7 @@ export function render(root, ctx) {
   const exposuresBefore = new Set(Object.keys(ctx.state.seenSentences));
   const stats = { cards: 0, correct: 0, newSentences: 0, difficult: 0 };
   const carriersUsed = new Set(); // sentences an `fm` card was already shown in this session
+  const onScreen = new Set(); // word-form units already on screen this session (T40, FR-S14)
   const struggled = new Set(); // cards answered wrong once already this session (FR-S9)
   const patternsBefore = allPatternStates(ctx.state, ctx.content, Date.now());
 
@@ -133,9 +134,16 @@ export function render(root, ctx) {
     cardCleanup = null;
     const timeUp = mode === "quick" && Date.now() - startedAt >= QUICK_MS;
     if (pos >= queue.length || timeUp) return finish();
+    // T40: a card testing a word that was just on screen is swapped for a later one, or left for another day.
+    queue = deferPrimed(queue, pos, onScreen, ctx.content).queue;
+    if (pos >= queue.length) return finish();
     progress();
     const item = queue[pos];
-    if (item.members) return showParadigm(item);
+    const primed = isPrimed(item, onScreen, ctx.content);
+    if (item.members) {
+      for (const u of shownUnits(item, null, ctx.content)) onScreen.add(u);
+      return showParadigm(item);
+    }
     if (item.check) return showCheck({ ...item, forms: item.forms ?? [item.cardId] });
     // An `fm` card is the schedule of one word form; it is shown as a cloze in a fresh sentence, or as a key-form drill.
     let shown = item.cardId;
@@ -168,8 +176,10 @@ export function render(root, ctx) {
         },
       }));
     }
+    if (p.type !== "lr") for (const u of shownUnits(item, sentence, ctx.content)) onScreen.add(u);
     cardCleanup = draw(slot, {
       card: shown,
+      onOptions: (opts) => { for (const u of shownUnits(item, null, ctx.content, opts)) onScreen.add(u); },
       sentence,
       label: item.composite ? `Review · ${item.units.length} forms` : undefined,
       content: ctx.content,
@@ -191,8 +201,8 @@ export function render(root, ctx) {
         const markHard = grade === 1 && !isEr && struggled.has(item.cardId) && !(item.cardId in ctx.state.difficult);
         ctx.update((s) => {
           const reviewed = isEr
-            ? applyErReview(s, item.cardId, grade, units, erMisses(sentence, r.diff), now, ctx.content, shown, item.composite ? item.units : null)
-            : applyReview(s, item.cardId, grade, units, now, ctx.content, shown);
+            ? applyErReview(s, item.cardId, grade, units, erMisses(sentence, r.diff), now, ctx.content, shown, item.composite ? item.units : null, { primed })
+            : applyReview(s, item.cardId, grade, units, now, ctx.content, shown, { primed });
           return markHard ? markDifficult(reviewed, item.cardId, now) : reviewed;
         });
         stats.cards++;
@@ -247,6 +257,7 @@ export function render(root, ctx) {
     const slot = root.querySelector("[data-card]");
     slot.replaceChildren();
     root.querySelector("[data-flag]").replaceChildren();
+    for (const u of shownUnits(item, sentence, ctx.content)) onScreen.add(u);
     cardCleanup = renderCz(slot, {
       card: blanks[0].presentedId,
       sentence,

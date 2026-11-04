@@ -35,6 +35,9 @@ export function scheduleCard(prev, grade, now, { multiplier = 1 } = {}) {
   return { ...card, state: State.Review, step: 0, due: now + days * DAY_MS, baseGap, lastGrade: grade };
 }
 
+/** FR-S14 (T40): share of a Medium success a correct answer on a primed card (its word was just on screen) is worth. */
+export const PRIMED_CREDIT = 0.25;
+
 /**
  * FR-S13 (shared with T39/T40): credit for meeting a card in context without testing it. Moves `due` later by
  * `fraction` (0..1] of what a Medium success would add, never earlier; `baseGap`, `reps` and `lastReview` are kept and
