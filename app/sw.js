@@ -23,6 +23,7 @@ const PRECACHE = [
   "icons/icon.svg",
   "js/core/answer.js",
   "js/core/cards.js",
+  "js/core/credit.js",
   "js/core/carrier.js",
   "js/core/check.js",
   "js/core/equivalences.js",

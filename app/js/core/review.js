@@ -6,6 +6,7 @@ import { startOfDayPlus } from "./time.js";
 import { unitId, parseUnitId } from "./unit-id.js";
 import { bumpDay } from "./history.js";
 import { scheduleCard } from "./schedule.js";
+import { creditProduced } from "./credit.js";
 
 /**
  * Attempt records (ARCHITECTURE §4.3) for `units` (`{u, lx}[]`) answered right or wrong, shown as `presentedId`.
@@ -96,6 +97,8 @@ export function applyReview(state, cardId, grade, unitsRequired, now, content, p
       next.claimed = Object.fromEntries(Object.entries(state.claimed).filter(([u]) => !unitsRequired.some((r) => r.u === u)));
     }
     next.attempts = [...state.attempts, ...makeAttempts(unitsRequired, grade >= 2, now, presentedId)];
+    // FR-R7: units produced in a transform / slot card count as their own review.
+    if ((p.type === "xf" || p.type === "sb") && grade >= 2) next.cards = creditProduced(next, unitsRequired.map(({ u }) => u), grade, now).cards;
   }
   next.history = bumpDay(state.history, now, (d) => {
     d.cards += 1;
@@ -164,13 +167,16 @@ export function applyErReview(state, cardId, grade, unitsRequired, misses, now, 
     cards[fmIdForUnit(u)] = scheduleCard(cards[fmIdForUnit(u)], okGrade, now);
   }
   const claimed = Object.fromEntries(Object.entries(next.claimed ?? {}).filter(([u]) => !missedSet.has(u)));
+  // FR-R7: correct parts that no composite already reviewed credit their own `fm` card.
+  const inComposite = new Set(composite ?? []);
+  const credited = creditProduced({ ...next, cards, claimed }, parts.ok.filter((u) => !inComposite.has(u)), okGrade, now);
   const withLx = (u) => ({ u, lx: lxOf.get(u) ?? parseUnitId(u).lex });
   const attempts = [
     ...next.attempts,
     ...makeAttempts(parts.missed.map(withLx), false, now, presentedId),
     ...makeAttempts(parts.ok.map(withLx), true, now, presentedId),
   ];
-  return { ...next, cards, claimed, attempts };
+  return { ...next, cards: credited.cards, claimed, attempts };
 }
 
 /**
