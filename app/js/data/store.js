@@ -1,6 +1,7 @@
 import { CURRENT_SCHEMA_VERSION, migrate } from "./migrations.js";
 import { compactAttempts } from "../core/mastery.js";
 import { DAY_MS } from "../core/time.js";
+import { defaultCalibration } from "../core/calibrate.js";
 
 export const STATE_KEY = "dg:v1:state";
 const SAVE_DEBOUNCE_MS = 500;
@@ -26,6 +27,7 @@ export const SETTINGS_DEFAULTS = {
     lastExportAt: null,
     ttsBannerDismissed: false,
     focus: [],
+    targetRetention: 0.85,
 };
 
 /** @param {number} now ms epoch */
@@ -47,6 +49,7 @@ export function defaultState(now) {
     difficult: {},
     claimed: {},
     pace: { batch: null, history: [] },
+    calibration: defaultCalibration(),
   };
 }
 
@@ -61,6 +64,7 @@ function withDefaults(s, now) {
   for (const k of ["cards", "seenSentences", "lexemeSentences", "unitAggregates", "history", "canDoChecked", "difficult", "claimed"]) {
     if (!isObject(out[k])) out[k] = d[k];
   }
+  if (!isObject(out.calibration) || !Array.isArray(out.calibration.log)) out.calibration = d.calibration;
   for (const k of ["attempts", "flags"]) {
     if (!Array.isArray(out[k])) out[k] = d[k];
   }

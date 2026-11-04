@@ -6,7 +6,7 @@ import { barChart, lineChart } from "../components/chart.js";
 import { weeklyIntake } from "../../core/pace.js";
 import { renderCanDos } from "../components/can-dos.js";
 
-import { WEEKS, FORECAST_DAYS, currentLevelId, productionStats, weeklyHistory, dueForecast, patternTrend, dashboardModel } from "../models/dashboard.js";
+import { WEEKS, FORECAST_DAYS, currentLevelId, productionStats, weeklyHistory, dueForecast, patternTrend, dashboardModel, calibrationLine } from "../models/dashboard.js";
 import { byKey } from "../../core/sort.js";
 
 // The pure model lives in ui/models/dashboard.js (Q13); re-exported here for one release.
@@ -122,6 +122,7 @@ function chartsSection(model) {
     barChart({ data: weeks.map((w) => ({ label: w.label, value: w.minutes })), title: "Minutes studied per week", xLabel: "Week", yLabel: "Minutes" }),
     el("h3", null, "Reviews due, next 14 days"),
     barChart({ data: model.forecast, title: "Reviews due in the next 14 days", xLabel: "Day of month", yLabel: "Cards", labelEvery: 2 }),
+    el("p", "muted", calibrationLine(model.calibration)),
   );
   return s;
 }

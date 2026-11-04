@@ -2,6 +2,7 @@
 import { levelProgress, allPatternStates, masteredSentenceIds } from "../../core/mastery.js";
 import { dayKey, DAY_MS as DAY } from "../../core/time.js";
 import { weeklyIntake } from "../../core/pace.js";
+import { calibrationSummary } from "../../core/calibrate.js";
 import { parseUnitId, isPatternUnit } from "../../core/unit-id.js";
 
 export const WEEKS = 8;
@@ -87,5 +88,12 @@ export function dashboardModel(state, content, now) {
     weekly: weeklyHistory(state, now),
     intake: weeklyIntake(state.history, now),
     forecast: dueForecast(state, now),
+    calibration: calibrationSummary(state.calibration, state.settings.targetRetention, now),
   };
+}
+
+/** "Target 85 % · last 30 days 93 % (n = 41) · gaps × 1.32", or the target alone before there is any data. */
+export function calibrationLine({ target, actual, n, multiplier }) {
+  const head = `Target ${Math.round(target * 100)} %`;
+  return actual == null ? head : `${head} · last 30 days ${Math.round(actual * 100)} % (n = ${n}) · gaps × ${multiplier.toFixed(2)}`;
 }

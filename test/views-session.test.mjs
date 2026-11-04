@@ -144,19 +144,18 @@ test("Again (wrong) requeues a card once, then puts it on the difficult list", (
   assert.equal(s.root.querySelector('[data-n="cards"]').textContent, "3");
 });
 
-test("Hard on a rated card requeues it once, then puts it on the difficult list", () => {
+// T37: Hard is no longer re-queued (FR-S9); only a wrong answer is. Replaces the Q02 characterization that pinned the old behaviour.
+test("Hard on a rated card is not requeued and does not reach the difficult list", () => {
   const st = state();
   st.lexemeSentences = { a3: ["s3", "s9"] }; // unlocks a3's key forms
   due(st, "kf:a3:base", 1000);
   const s = start(st);
-  for (let k = 0; k < 2; k++) {
-    assert.equal(s.kind(), "card-keyform");
-    s.root.querySelector("[data-card] input").value = "a3";
-    s.tap("Check");
-    s.tap("Hard");
-  }
+  assert.equal(s.kind(), "card-keyform");
+  s.root.querySelector("[data-card] input").value = "a3";
+  s.tap("Check");
+  s.tap("Hard");
   assert.ok(s.isSummary());
-  assert.equal(s.ctx.state.difficult["kf:a3:base"], NOW);
+  assert.equal(s.ctx.state.difficult["kf:a3:base"], undefined);
 });
 
 test("a form claimed mid-session skips its later fm card", () => {

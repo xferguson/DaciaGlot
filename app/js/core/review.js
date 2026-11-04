@@ -6,6 +6,7 @@ import { startOfDayPlus } from "./time.js";
 import { unitId, parseUnitId } from "./unit-id.js";
 import { bumpDay } from "./history.js";
 import { scheduleCard } from "./schedule.js";
+import { recallEntry, appendRecall } from "./calibrate.js";
 import { creditProduced } from "./credit.js";
 
 /**
@@ -78,15 +79,17 @@ function exposure(state, sentenceId, now, content) {
 }
 
 /**
- * FSRS update (Medium/Easy gaps from `ladderDays`), attempts (production cards only, PRD FR-S3), `lr` exposure, day stats.
+ * FSRS update (gaps from `scheduleCard`, scaled by `state.calibration.multiplier`; due `fm`/`er` reviews feed the recall log), attempts (production cards only, PRD FR-S3), `lr` exposure, day stats.
  * `unitsRequired` is `{u, lx}[]` from `unitsRequiredForCard`. `content` is only needed for `lr` exposure.
  * For an `fm` card, `presentedId` is the id it was shown as (`cz:<sid>:<i>` or `kf:<lex>:<form>`), recorded on the attempts; `unitsRequired` comes from it.
  * Returns a new state; the input is not mutated.
  */
 export function applyReview(state, cardId, grade, unitsRequired, now, content, presentedId = cardId) {
   const p = parseCardId(cardId);
-  const card = scheduleCard(state.cards[cardId], grade, now);
+  const prev = state.cards[cardId];
+  const card = scheduleCard(prev, grade, now, { multiplier: state.calibration?.multiplier ?? 1 });
   const next = { ...state, cards: { ...state.cards, [cardId]: card } };
+  if (p.type !== "lr") next.calibration = appendRecall(state.calibration, recallEntry(prev, grade, now), now);
   let isNewSentence = false;
   if (p.type === "lr") {
     isNewSentence = !(p.sentenceId in state.seenSentences);
@@ -157,6 +160,8 @@ export function applyErReview(state, cardId, grade, unitsRequired, misses, now, 
   const lxOf = new Map(unitsRequired.map(({ u, lx }) => [u, lx]));
   const missedSet = new Set(parts.missed);
   const cards = { ...next.cards };
+  let calibration = next.calibration;
+  const multiplier = next.calibration?.multiplier ?? 1;
   for (const u of parts.missed) {
     const id = fmIdForUnit(u);
     cards[id] = cards[id] ? { ...review(cards[id], 1, now), lastGrade: 1 } : { ...newCard(now), lastGrade: 1 };
@@ -164,7 +169,9 @@ export function applyErReview(state, cardId, grade, unitsRequired, misses, now, 
   const okGrade = grade >= 3 ? grade : grade === 2 ? 2 : 3;
   for (const u of composite ?? []) {
     if (missedSet.has(u) || !clozeIds.has(u)) continue;
-    cards[fmIdForUnit(u)] = scheduleCard(cards[fmIdForUnit(u)], okGrade, now);
+    const id = fmIdForUnit(u);
+    calibration = appendRecall(calibration, recallEntry(cards[id], okGrade, now), now);
+    cards[id] = scheduleCard(cards[id], okGrade, now, { multiplier });
   }
   const claimed = Object.fromEntries(Object.entries(next.claimed ?? {}).filter(([u]) => !missedSet.has(u)));
   // FR-R7: correct parts that no composite already reviewed credit their own `fm` card.
@@ -176,7 +183,7 @@ export function applyErReview(state, cardId, grade, unitsRequired, misses, now, 
     ...makeAttempts(parts.missed.map(withLx), false, now, presentedId),
     ...makeAttempts(parts.ok.map(withLx), true, now, presentedId),
   ];
-  return { ...next, cards: credited.cards, claimed, attempts };
+  return { ...next, cards: credited.cards, claimed, attempts, ...(calibration ? { calibration } : {}) };
 }
 
 /**

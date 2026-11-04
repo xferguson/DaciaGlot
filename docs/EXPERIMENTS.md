@@ -284,7 +284,7 @@ Status values: `planned` → `live since YYYY-MM-DD` (set when the task's PR mer
 
 ## EXP-11 · Spacing that fits you · [T37](tasks/T37-calibrated-spacing.md)
 
-- **Status:** planned
+- **Status:** built in T37, goes live on merge
 - **Complaint:** "My success rate with reviews is way too high for what would be effective."
 - **Hypothesis:** if every success lengthens the gap and a personal multiplier is nudged each day toward an 85 % target, reviews per day drop and each review takes some effort, with no rise in long-gap failures beyond the target.
 - **Change:** new gap rules (Hard 2 d / ×1.5, Medium 4 d / ×3, Easy 10 d / ×6, never shorter than the last gap, cap 365 d). Hard is no longer re-queued in the session. Daily nudge on due reviews with a gap of ≥ 4 d; a target-retention slider (default 85 %); a dashboard line "target vs actual · gaps ×m".
