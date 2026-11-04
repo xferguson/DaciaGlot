@@ -1,5 +1,6 @@
 // Content loader. `indexContent` is pure so Node tests and the validator can use it without fetch.
 import { findFamilies, familyForms } from "../core/families.js";
+import { similarGroups, similarIndex } from "../core/similar.js";
 
 /**
  * Paths (relative to the content root) of every file a manifest lists.
@@ -52,14 +53,18 @@ export function indexContent(raw) {
   const familiesOfUnit = new Map();
   for (const [fid, units] of formsOfFamily) for (const u of units) pushTo(familiesOfUnit, u, fid);
 
+  const lexemes = new Map(raw.lexemes.map((l) => [l.id, l]));
+  const similarOf = similarIndex(similarGroups({ sentences, lexemes })); // T41: near-identical sentences
+
   return {
+    similarOf,
     families,
     familyOf,
     familyForms: formsOfFamily,
     familiesOfUnit,
     contentVersion: raw.manifest.contentVersion,
     sentences,
-    lexemes: new Map(raw.lexemes.map((l) => [l.id, l])),
+    lexemes,
     patterns: new Map(raw.patterns.map((p) => [p.id, p])),
     levels: new Map(raw.levels.map((l) => [l.id, l])),
     sentencesByPattern,
