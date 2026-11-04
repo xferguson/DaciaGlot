@@ -50,6 +50,7 @@ export function defaultState(now) {
     claimed: {},
     pace: { batch: null, history: [] },
     calibration: defaultCalibration(),
+    familiarity: {},
   };
 }
 
@@ -61,7 +62,7 @@ function withDefaults(s, now) {
   const out = { ...d, ...s, settings: { ...d.settings, ...(isObject(s.settings) ? s.settings : {}) } };
   delete out.activeSession; // briefly shipped in 0.7.0, now unused
   out.settings.focus = Array.isArray(out.settings.focus) ? out.settings.focus : out.settings.focus ? [out.settings.focus] : [];
-  for (const k of ["cards", "seenSentences", "lexemeSentences", "unitAggregates", "history", "canDoChecked", "difficult", "claimed"]) {
+  for (const k of ["cards", "seenSentences", "lexemeSentences", "unitAggregates", "history", "canDoChecked", "difficult", "claimed", "familiarity"]) {
     if (!isObject(out[k])) out[k] = d[k];
   }
   if (!isObject(out.calibration) || !Array.isArray(out.calibration.log)) out.calibration = d.calibration;
