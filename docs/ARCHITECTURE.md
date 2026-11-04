@@ -329,7 +329,8 @@ composeReviews(ids, state, content, now, rng, focus?) → {ids, comps}  // FR-V1
 onePerFamily(cardIds, content, rng) → string[]  // FR-R5: of the due `fm` cards whose forms vary inside one family, one at random stays; `buildSession` applies it before `burySiblings`
 creditProduced(state, okUnits, grade, now) → AppState  // T38, FR-R7 (`credit.js`): each ok unit whose `fm` card is in Review state and ≥ 50 % through its gap gets `scheduleCard(card, grade, now)`; early, claimed and absent cards are left. `applyErReview` passes the correct parts not in a composite; `applyReview` passes the target units of a passed `xf`/`sb`
 applyParadigm(state, item, now, content) → AppState  // FR-R5: every `item.members` sentence becomes seen (as `lr`), counted as one card; `item.deferred` `fm` cards are created due `nextDayStart(now)`
-dueCards(state, content, now) → string[]      // due + unlocked card ids, most overdue first; `fm` cards of claimed forms are left out
+dueCards(state, content, now) → string[]      // due + unlocked card ids, most overdue first; `fm` cards of claimed forms are left out, and so is an `er` whose cloze units are all claimed until `claimCheckDue(sid, state, now)` (≥ `CLAIM_CHECK_DAYS` = 60 d since its `lastReview`, T42)
+dropClaimDuplicates(items, {state, content}) → items  // T42 (`queue.js`, right after `selectDue`): if `er:<sid>` is queued and unit X is the sentence's only unclaimed cloze unit, `fm:X` is dropped from this queue
 claimForm(state, unit, now) → AppState        // FR-R4: state.claimed[unit] = now (pure; creates no card)
 unclaimForm(state, unit, now) → AppState      // drops the claim; the `fm` card is active again with its old schedule
 dueCount(state, content, now) → number

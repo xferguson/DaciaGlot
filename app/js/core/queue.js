@@ -1,5 +1,5 @@
 // Building a session queue: modes as data and the pipeline selectDue → trimToBudget → pickNew → groupNew → interleave → estimate (ARCHITECTURE §8). Pure.
-import { buildCardId, isCardType, cardsForSentence, newKfCards, newTransformCards, newErCards, pickPerSentence, parseCardId } from "./cards.js";
+import { buildCardId, isCardType, cardsForSentence, newKfCards, newTransformCards, newErCards, pickPerSentence, parseCardId, unitIdOfFm, clozeUnitIds } from "./cards.js";
 import { unitsForSentence, isKnown } from "./units.js";
 import { pickNewSentences, focusList, siblingsOf, newItemCount } from "./select.js";
 import { learnBatch } from "./pace.js";
@@ -93,6 +93,24 @@ export function selectDue(spec, { focus, state, content, now, rng }) {
     return units ? { cardId, isNew: false, composite: true, units } : { cardId, isNew: false };
   });
   return { items, duePicked };
+}
+
+/**
+ * Step 1b (T42). When `er:<sid>` and `fm:X` are both queued and X is the sentence's only unclaimed cloze unit, the `er`
+ * card stays and `fm:X` is dropped (a correct `er` answer credits it, T38). With no `er` queued, `fm:X` is untouched.
+ */
+export function dropClaimDuplicates(items, { state, content }) {
+  const claimed = state.claimed ?? {};
+  const drop = new Set();
+  for (const q of items) {
+    if (!isCardType(q.cardId, "er")) continue;
+    const s = content.sentences.get(parseCardId(q.cardId).sentenceId);
+    if (!s) continue;
+    const open = clozeUnitIds(s).filter((u) => !(u in claimed));
+    if (open.length === 1) drop.add(open[0]);
+  }
+  if (!drop.size) return items;
+  return items.filter((q) => !(isCardType(q.cardId, "fm") && drop.has(unitIdOfFm(q.cardId))));
 }
 
 /** Step 2 (Mix only, T33). New material has a floor; the review part is trimmed to what is left of the budget (oldest-due stay). */
@@ -235,7 +253,8 @@ function composeSession({ mode, focus: rawFocus = null, state, content, now, rng
   const spec = MODES[mode] ?? MODES.session;
   const focus = focusList(rawFocus).length ? focusList(rawFocus) : null;
   const ctx = { focus, state, content, now, rng };
-  const { items, duePicked } = selectDue(spec, ctx);
+  const { items: dueItems, duePicked } = selectDue(spec, ctx);
+  const items = dropClaimDuplicates(dueItems, ctx);
   if (!spec.newItems) {
     const queue = items.slice(0, spec.cap);
     return { queue, estimateSec: dueSec(queue) };

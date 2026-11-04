@@ -45,7 +45,7 @@ Statuses: `todo` · `in-progress` · `review` · `done` · `blocked`. Update you
 | [T39](tasks/T39-familiarity-credit.md) | Familiarity credit for words met in context | 3.7 | T37, T38 | todo | | EXP-12. New `core/familiarity.js`. |
 | [T40](tasks/T40-priming-guard.md) | Priming guard: don't test a word just seen | 3.7 | T37 | todo | | EXP-12. New `core/priming.js`; session view tracks shown units. |
 | [T41](tasks/T41-similar-sentences.md) | Near-identical sentences are siblings | 3.7 | none | done | ccr-9f091188-u2mxw7 | EXP-12. `core/similar.js` + `content.similarOf`; `g:` key in `cardKeys`. Real content: 85 groups covering 259 of 470 sentences. Golden fixture regenerated (similar due cards now buried). |
-| [T42](tasks/T42-claims-shape-cards.md) | Claims shape the cards | 3.7 | T38 | todo | | EXP-12. `dropClaimDuplicates` queue step; 60-day claim check. |
+| [T42](tasks/T42-claims-shape-cards.md) | Claims shape the cards | 3.7 | T38 | review | ccr-bfbe468e-4ocydg | EXP-12. `dropClaimDuplicates` queue step; 60-day claim check (`claimCheckDue`, gate in `dueCards`). |
 
 **Phase 3.5 · Less repetition.** Every T25–T30 task is a product experiment logged in [`EXPERIMENTS.md`](EXPERIMENTS.md). When its PR merges, set the experiment's status to `live since <date>`.
 
