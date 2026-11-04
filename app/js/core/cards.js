@@ -488,6 +488,21 @@ export function erUnlocked(sentence, state) {
   return units.length > 0 && units.every((u) => isEasy(state, u));
 }
 
+/** T42: how often an `er` card whose cloze units are all claimed is still asked, as a claim check. */
+export const CLAIM_CHECK_DAYS = 60;
+
+/** T42: every cloze unit of the sentence is claimed (FR-R4). False for a sentence without cloze units. */
+export function allClozeClaimed(sentence, state) {
+  const units = clozeUnitIds(sentence);
+  return units.length > 0 && units.every((u) => u in (state.claimed ?? {}));
+}
+
+/** T42: is a claim check due for `er:<sid>`? True when it was never reviewed or last reviewed `CLAIM_CHECK_DAYS` ago or more. */
+export function claimCheckDue(sid, state, now) {
+  const c = state.cards[buildCardId("er", sid)];
+  return !c || c.lastReview == null || now - c.lastReview >= CLAIM_CHECK_DAYS * DAY;
+}
+
 /** Units an `er` card exercises, as `{u, lx}`: every unit of each cloze token, plus the pattern of each head unit. */
 export function erUnits(sentence) {
   const out = new Map();

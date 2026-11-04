@@ -331,7 +331,8 @@ creditProduced(state, okUnits, grade, now) → AppState  // T38, FR-R7 (`credit.
 exposureCredit(state, sentence, testedUnits, kind, now, content?) → AppState  // T39, FR-R8 (`familiarity.js`): every non-tested, non-claimed, non-trivial unit of `sentence` with a Review `fm` card not yet credited today gets `partialCredit(card, FAMILIARITY[kind], now, {multiplier})`; `FAMILIARITY = {seen: 0.25, produced: 0.5}`. `applyReview` calls it with `"seen"` after an `lr`, or a correct `cz`/`er`/`xf`/`sb`; `creditProduced` gives early produced units the `produced` credit via `creditUnits`
 `state.familiarity: {[unitId]: "YYYY-MM-DD"}` (§4): the local day each unit was last credited; entries from earlier days are pruned on write
 applyParadigm(state, item, now, content) → AppState  // FR-R5: every `item.members` sentence becomes seen (as `lr`), counted as one card; `item.deferred` `fm` cards are created due `nextDayStart(now)`
-dueCards(state, content, now) → string[]      // due + unlocked card ids, most overdue first; `fm` cards of claimed forms are left out
+dueCards(state, content, now) → string[]      // due + unlocked card ids, most overdue first; `fm` cards of claimed forms are left out, and so is an `er` whose cloze units are all claimed until `claimCheckDue(sid, state, now)` (≥ `CLAIM_CHECK_DAYS` = 60 d since its `lastReview`, T42)
+dropClaimDuplicates(items, {state, content}) → items  // T42 (`queue.js`, right after `selectDue`): if `er:<sid>` is queued and unit X is the sentence's only unclaimed cloze unit, `fm:X` is dropped from this queue
 claimForm(state, unit, now) → AppState        // FR-R4: state.claimed[unit] = now (pure; creates no card)
 unclaimForm(state, unit, now) → AppState      // drops the claim; the `fm` card is active again with its old schedule
 dueCount(state, content, now) → number

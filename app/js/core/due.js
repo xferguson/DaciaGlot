@@ -1,5 +1,5 @@
 // Which cards are due, in focus and worth asking now: the review half of a session queue (ARCHITECTURE §8). Pure.
-import { parseCardId, buildCardId, isCardType, unitIdOfFm, isUnlocked, isEasy } from "./cards.js";
+import { parseCardId, buildCardId, isCardType, unitIdOfFm, isUnlocked, isEasy, allClozeClaimed, claimCheckDue } from "./cards.js";
 import { unitsRequiredForCard } from "./units.js";
 import { focusList } from "./select.js";
 import { carriersFor, pickComposite } from "./carrier.js";
@@ -30,10 +30,18 @@ export function cardKeys(item, content) {
   return keys;
 }
 
-/** Due, unlocked, unclaimed cards whose sentence still exists, most overdue first. */
+/** T42: an `er` card whose cloze units are all claimed is hidden between claim checks. */
+function hiddenByClaims(id, state, content, now) {
+  if (!isCardType(id, "er")) return false;
+  const sid = parseCardId(id).sentenceId;
+  const s = content.sentences.get(sid);
+  return !!s && allClozeClaimed(s, state) && !claimCheckDue(sid, state, now);
+}
+
+/** Due, unlocked, unclaimed cards whose sentence still exists, most overdue first. All-claimed `er` cards wait for their claim check (T42). */
 export function dueCards(state, content, now) {
   return Object.entries(state.cards)
-    .filter(([id, c]) => c.due <= now && !isClaimedCard(id, state) && isUnlocked(id, state, content))
+    .filter(([id, c]) => c.due <= now && !isClaimedCard(id, state) && isUnlocked(id, state, content) && !hiddenByClaims(id, state, content, now))
     .sort((a, b) => a[1].due - b[1].due || cmpStr(a[0], b[0]))
     .map(([id]) => id);
 }
